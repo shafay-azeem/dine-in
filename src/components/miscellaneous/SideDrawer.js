@@ -1,25 +1,27 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Text } from "@chakra-ui/layout";
-import { Avatar, Menu, MenuButton, MenuDivider, MenuItem, MenuList } from "@chakra-ui/react";
+import { Avatar, DrawerFooter, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Tooltip } from "@chakra-ui/tooltip";
-import { AddIcon, BellIcon, ChevronDownIcon, HamburgerIcon, InfoIcon, QuestionOutlineIcon, SettingsIcon, UnlockIcon } from "@chakra-ui/icons";
+import { BellIcon, ChevronDownIcon, HamburgerIcon, InfoIcon, QuestionOutlineIcon, SettingsIcon, UnlockIcon } from "@chakra-ui/icons";
 import {
     Drawer,
     DrawerBody,
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
-    Stack
+    Stack,
+    DrawerCloseButton
 } from '@chakra-ui/react'
 
-import { Link } from '@chakra-ui/react'
-import { Heading } from '@chakra-ui/react'
-import { Divider } from '@chakra-ui/react'
+
 
 
 const SideDrawer = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen: isOpenDashboardModel, onOpen: onOpenDashboardModel, onClose: onCloseDashboardModel } = useDisclosure();
+    const { isOpen: isOpenNotificationModel, onOpen: onOpenNotificationModel, onClose: onCloseNotificationModel } = useDisclosure();
+    const { isOpen: isOpenInfoModel, onOpen: onOpenInfoModel, onClose: onCloseInfoModel } = useDisclosure();
+
 
     return (
         <>
@@ -32,7 +34,7 @@ const SideDrawer = () => {
                 p="5px 10px 5px 10px"
                 borderWidth="5px">
                 <Tooltip label="Menu" hasArrow placement="bottom-end">
-                    <Button variant="ghost" onClick={onOpen}>
+                    <Button variant="ghost" onClick={onOpenDashboardModel}>
                         <HamburgerIcon fontSize="20px" m={2} />
                         <Text display={{ base: "none", md: "flex" }} px={4}>
                             Dashboard
@@ -42,13 +44,22 @@ const SideDrawer = () => {
 
                 <div>
                     <Menu>
-                        <MenuButton>
+                        <MenuButton onClick={onOpenNotificationModel}>
                             <BellIcon fontSize="20px" m={2} />
                         </MenuButton>
+                    </Menu>
+                    <Menu>
                         <MenuButton>
                             <QuestionOutlineIcon fontSize="20px" m={2} />
+                            <MenuList>
+                                <MenuItem icon={<SettingsIcon />}>Support Center</MenuItem>
+                                <MenuItem icon={<BellIcon />}>Live Chat</MenuItem>
+                            </MenuList>
                         </MenuButton>
-                        <MenuButton>
+
+                    </Menu>
+                    <Menu>
+                        <MenuButton onClick={onOpenInfoModel}>
                             <InfoIcon fontSize="20px" m={2} />
                         </MenuButton>
                     </Menu>
@@ -72,7 +83,7 @@ const SideDrawer = () => {
                 </div>
             </Box>
 
-            <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+            <Drawer placement="left" onClose={onCloseDashboardModel} isOpen={isOpenDashboardModel}>
                 <DrawerOverlay></DrawerOverlay>
                 <DrawerContent>
                     <DrawerHeader borderBottomWidth="1px" fontSize="16px">Your Resturant Name</DrawerHeader>
@@ -134,6 +145,77 @@ const SideDrawer = () => {
                 </DrawerContent>
 
 
+            </Drawer>
+            {/* Notifications */}
+            <Drawer placement="right" onClose={onCloseNotificationModel} isOpen={isOpenNotificationModel}>
+                <DrawerOverlay></DrawerOverlay>
+                <DrawerContent>
+                    <DrawerHeader borderBottomWidth="1px" fontSize="16px">Your Resturant Name</DrawerHeader>
+                    <DrawerBody>
+                        <Stack direction='column' spacing={1} align='start'>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Dashboard
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Reports
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Orders
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Customers
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Menu Management
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Feedbacks
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Translation Center
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Venue Settings
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Integrations
+                            </Button>
+
+
+                        </Stack>
+                    </DrawerBody>
+
+                </DrawerContent>
+
+
+            </Drawer>
+
+            {/* Info */}
+
+            <Drawer
+                isOpen={isOpenInfoModel}
+                placement='right'
+                onClose={onCloseInfoModel}
+                size={'md'}
+            >
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader>What New In Your Menu</DrawerHeader>
+
+                    <DrawerBody>
+                        <Input placeholder='Type here...' />
+                    </DrawerBody>
+                </DrawerContent>
             </Drawer>
         </>
     )
