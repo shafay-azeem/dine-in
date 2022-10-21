@@ -7,11 +7,10 @@ import { AddIcon, BellIcon, ChevronDownIcon, HamburgerIcon, InfoIcon, QuestionOu
 import {
     Drawer,
     DrawerBody,
-    DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
-    DrawerCloseButton,
+    Stack
 } from '@chakra-ui/react'
 
 import { Link } from '@chakra-ui/react'
@@ -78,21 +77,58 @@ const SideDrawer = () => {
                 <DrawerContent>
                     <DrawerHeader borderBottomWidth="1px" fontSize="16px">Your Resturant Name</DrawerHeader>
                     <DrawerBody>
-                        <p><Link>Dashboard</Link></p>
-                        <p><Link>Reports</Link></p>
-                        <p><Link>Orders</Link></p>
-                        <p><Link>Customers</Link></p>
-                        <p><Link>Menu Management</Link></p>
-                        <p><Link>Feedbacks</Link></p>
-                        <p><Link>Translation Center</Link></p>
-                        <p><Link>Venue Settings</Link></p>
-                        <p><Link>Integrations</Link></p>
+                        <Stack direction='column' spacing={1} align='start'>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Dashboard
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Reports
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Orders
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Customers
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Menu Management
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Feedbacks
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Translation Center
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Venue Settings
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Integrations
+                            </Button>
 
-                        <DrawerHeader borderBottomWidth="1px" fontSize="16px" mb={2}>App Configurations</DrawerHeader>
-                        <p><Link>Dine-In-OR Menu</Link></p>
-                        <p><Link>Delivery / Pick Up</Link></p>
-                        <p><Link>Tablet Menu</Link></p>
-
+                            <DrawerHeader borderBottomWidth="1px" fontSize="16px" mb={2}>App Configurations</DrawerHeader>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Dine-In-OR Menu
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Delivery / Pick Up
+                            </Button>
+                            <Button variant='link'>
+                                <HamburgerIcon fontSize="20px" m={2} />
+                                Tablet Menu
+                            </Button>
+                        </Stack>
                     </DrawerBody>
 
                 </DrawerContent>
