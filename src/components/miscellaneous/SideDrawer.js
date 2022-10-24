@@ -49,6 +49,10 @@ const SideDrawer = () => {
     history.push("/reports");
   };
 
+  const orders = () => {
+    history.push("/order");
+  };
+
   const {
     isOpen: isOpenDashboardModel,
     onOpen: onOpenDashboardModel,
@@ -150,7 +154,7 @@ const SideDrawer = () => {
                 <HamburgerIcon fontSize="20px" m={2} />
                 Reports
               </Button>
-              <Button variant="link">
+              <Button variant="link" onClick={orders}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Orders
               </Button>
