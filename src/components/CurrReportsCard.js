@@ -18,12 +18,20 @@ import {
   Text,
   Divider,
 } from "@chakra-ui/react";
+import WelcomeText from "./WelcomeText";
 
 const CurrReportsCard = () => {
   return (
     <>
+      <WelcomeText />
       <Center mt={5}>
-        <Box bg="white" border="1px" borderColor="red" borderRadius="10">
+        <Box
+          bg="white"
+          border="1px"
+          borderColor="#FAFAFA"
+          borderRadius="10"
+          w="75%"
+        >
           <Grid templateColumns="repeat(5, 1fr)" gap={4} p={1}>
             <GridItem colSpan={2} h="10" p={5}>
               <Text>Today</Text>
