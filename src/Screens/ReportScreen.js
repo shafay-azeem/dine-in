@@ -4,7 +4,7 @@ import Reports from "../components/Reports/Reports";
 
 const ReportScreen = () => {
   return (
-    <div style={{ width: "100%", marginBottom: "5%" }}>
+    <div style={{ width: "100%", marginBottom: "10%" }}>
       <SideDrawer />
       <Reports />
     </div>

@@ -1,5 +1,7 @@
 import React from "react";
-import { Grid, GridItem, Text } from "@chakra-ui/react";
+import { Divider, Grid, GridItem, Text } from "@chakra-ui/react";
+import Calender from "../miscellaneous/Calender";
+import { Button, ButtonGroup } from "@chakra-ui/react";
 
 const Reports = () => {
   return (
@@ -78,6 +80,102 @@ const Reports = () => {
           </Text>
           <Text ml="10" mt="4" fontSize="20px">
             USD0.00
+          </Text>
+        </GridItem>
+      </Grid>
+
+      <Grid templateColumns="repeat(2, 1fr)" gap={6} p={10} mt={4}>
+        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+          <Text ml="10" mt="4" mb="4" fontSize="20px">
+            Order Types
+          </Text>
+          <Divider orientation="horizontal" />
+          <Text textAlign="center" mt="4">
+            No order type data yet
+          </Text>
+        </GridItem>
+        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+          <Text ml="10" mt="4" mb="4" fontSize="20px">
+            Revenue
+          </Text>
+          <Divider orientation="horizontal" />
+          <Text textAlign="center" mt="4">
+            No revenue data yet
+          </Text>
+        </GridItem>
+      </Grid>
+
+      <Grid p={10} mt="3%">
+        <GridItem w="100%" bg="white" height="250%">
+          <Text ml="10" mt="4" mb="4" fontSize="20px">
+            Visitor Density
+          </Text>
+          <Divider orientation="horizontal" />
+          <Text textAlign="center" mt="4">
+            No visitor data yet
+          </Text>
+        </GridItem>
+      </Grid>
+
+      <Grid templateColumns="repeat(2, 1fr)" gap={6} p={10} mt="7%">
+        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+          <Text ml="10" mt="4" mb="4" fontSize="20px">
+            Revenue Share by Sections
+          </Text>
+          <Divider orientation="horizontal" />
+          <Text textAlign="center" mt="4">
+            No order type data yet
+          </Text>
+        </GridItem>
+        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+          <Text ml="10" mt="4" mb="4" fontSize="20px">
+            Revenue Share by Items
+          </Text>
+          <Divider orientation="horizontal" />
+          <Text textAlign="center" mt="4">
+            No revenue data yet
+          </Text>
+        </GridItem>
+      </Grid>
+
+      <Grid templateColumns="repeat(2, 1fr)" gap={6} p={10} mt="3%">
+        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+          <Text ml="10" mt="4" mb="4" fontSize="20px">
+            Best Sellers
+          </Text>
+          <Divider orientation="horizontal" />
+          <Text textAlign="center" mt="4">
+            No best sellers data yet
+          </Text>
+        </GridItem>
+        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+          <Text ml="10" mt="4" mb="4" fontSize="20px">
+            Worst Sellers
+          </Text>
+          <Divider orientation="horizontal" />
+          <Text textAlign="center" mt="4">
+            No worst sellers data yet
+          </Text>
+        </GridItem>
+      </Grid>
+
+      <Grid templateColumns="repeat(2, 1fr)" gap={6} p={10} mt="3%">
+        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+          <Text ml="10" mt="4" mb="4" fontSize="20px">
+            Most Viewed Items
+          </Text>
+          <Divider orientation="horizontal" />
+          <Text textAlign="center" mt="4">
+            No most viewed items data yet
+          </Text>
+        </GridItem>
+        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+          <Text ml="10" mt="4" mb="4" fontSize="20px">
+            Least Viewed Items
+          </Text>
+          <Divider orientation="horizontal" />
+          <Text textAlign="center" mt="4">
+            No least viewed items data yet
           </Text>
         </GridItem>
       </Grid>
