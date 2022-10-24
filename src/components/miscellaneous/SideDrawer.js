@@ -35,8 +35,20 @@ import {
   Tab,
   TabPanel,
 } from "@chakra-ui/react";
+import Reports from "../Reports/Reports";
+import { useHistory } from "react-router-dom";
 
 const SideDrawer = () => {
+  const history = useHistory();
+
+  const home = () => {
+    history.push("/");
+  };
+
+  const reports = () => {
+    history.push("/reports");
+  };
+
   const {
     isOpen: isOpenDashboardModel,
     onOpen: onOpenDashboardModel,
@@ -130,11 +142,11 @@ const SideDrawer = () => {
           </DrawerHeader>
           <DrawerBody>
             <Stack direction="column" spacing={1} align="start">
-              <Button variant="link">
+              <Button variant="link" onClick={home}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Dashboard
               </Button>
-              <Button variant="link">
+              <Button variant="link" onClick={reports}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Reports
               </Button>
