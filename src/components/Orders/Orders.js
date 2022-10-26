@@ -1,5 +1,17 @@
 import React from "react";
-import { Box, Divider, Grid, GridItem, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  GridItem,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Select,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import {
   Table,
@@ -13,6 +25,13 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
+import {
+  ArrowForwardIcon,
+  EmailIcon,
+  PhoneIcon,
+  RepeatIcon,
+  SearchIcon,
+} from "@chakra-ui/icons";
 
 const Orders = () => {
   const [checkedItems, setCheckedItems] = React.useState(false);
@@ -27,6 +46,63 @@ const Orders = () => {
         </GridItem>
       </Grid>
 
+      <Grid templateColumns="repeat(5, 1fr)" gap={6} m={10}>
+        <GridItem w="100%" h="10">
+          <InputGroup>
+            <InputLeftElement
+              pointerEvents="none"
+              children={<SearchIcon color="gray.300" />}
+            />
+            <Input type="text" placeholder="Search" bg="white" />
+          </InputGroup>
+        </GridItem>
+        <GridItem w="100%" h="10">
+          <Input
+            placeholder="Select Date and Time"
+            size="md"
+            type="datetime-local"
+            bg="white"
+          />
+        </GridItem>
+        <GridItem w="100%" h="10">
+          <Input
+            placeholder="Select Date and Time"
+            size="md"
+            type="datetime-local"
+            bg="white"
+          />
+        </GridItem>
+        <GridItem w="100%" h="10">
+          <Select placeholder="Edit Display" bg="white">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+          </Select>
+        </GridItem>
+        <GridItem w="100%" h="10" textAlign="center">
+          <Stack direction={["column", "row"]} spacing="24px">
+            <Box w="100px" h="40px">
+              <Button
+                leftIcon={<ArrowForwardIcon />}
+                colorScheme="teal"
+                variant="solid"
+              >
+                Export
+              </Button>
+            </Box>
+            <Box w="100px" h="40px">
+              <Button
+                leftIcon={<RepeatIcon />}
+                colorScheme="teal"
+                variant="outline"
+              >
+                Reload
+              </Button>
+            </Box>
+          </Stack>
+        </GridItem>
+      </Grid>
+
       <Box ml="10" mt={5}>
         <Tabs>
           <TabList>
@@ -37,13 +113,6 @@ const Orders = () => {
           </TabList>
 
           <TabPanels>
-            {/* <Grid templateColumns="repeat(5, 1fr)" gap={6}>
-              <GridItem w="100%" h="10" bg="blue.500" />
-              <GridItem w="100%" h="10" bg="blue.500" />
-              <GridItem w="100%" h="10" bg="blue.500" />
-              <GridItem w="100%" h="10" bg="blue.500" />
-              <GridItem w="100%" h="10" bg="blue.500" />
-            </Grid> */}
             <TabPanel backgroundColor="white">
               <TableContainer>
                 <Table variant="simple">
