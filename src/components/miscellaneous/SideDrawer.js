@@ -53,6 +53,14 @@ const SideDrawer = () => {
     history.push("/order");
   };
 
+  const customers = () => {
+    history.push("/customer");
+  };
+
+  const menu = () => {
+    history.push("/menu");
+  };
+
   const {
     isOpen: isOpenDashboardModel,
     onOpen: onOpenDashboardModel,
@@ -158,11 +166,11 @@ const SideDrawer = () => {
                 <HamburgerIcon fontSize="20px" m={2} />
                 Orders
               </Button>
-              <Button variant="link">
+              <Button variant="link" onClick={customers}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Customers
               </Button>
-              <Button variant="link">
+              <Button variant="link" onClick={menu}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Menu Management
               </Button>
