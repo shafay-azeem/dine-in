@@ -4,16 +4,40 @@ import {
   Button,
   Grid,
   GridItem,
+  HStack,
   Input,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Stack,
+  Switch,
+  Table,
+  TableContainer,
+  TabPanel,
+  TabPanels,
+  Tbody,
   Text,
+  Th,
+  Thead,
+  Tooltip,
+  Tr,
 } from "@chakra-ui/react";
 import { Tabs, TabList, Tab } from "@chakra-ui/react";
-import { ArrowForwardIcon, RepeatIcon } from "@chakra-ui/icons";
+import {
+  ArrowForwardIcon,
+  CopyIcon,
+  DeleteIcon,
+  DragHandleIcon,
+  EditIcon,
+  RepeatIcon,
+} from "@chakra-ui/icons";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import "../../App.css";
 
 const Feedbacks = () => {
   const handle = useFullScreenHandle();
+
   return (
     <>
       <FullScreen handle={handle}>
@@ -66,12 +90,11 @@ const Feedbacks = () => {
                   Reload
                 </Button>
                 <Button
-                  leftIcon={<RepeatIcon />}
                   colorScheme="teal"
                   variant="outline"
                   onClick={handle.enter}
                 >
-                  Reload
+                  FullScreen
                 </Button>
               </Box>
             </Stack>
@@ -83,6 +106,53 @@ const Feedbacks = () => {
               <Tab>Results</Tab>
               <Tab>Forms</Tab>
             </TabList>
+
+            <TabPanels>
+              <TabPanel backgroundColor="white" textAlign="right">
+                <TableContainer>
+                  <Table variant="simple">
+                    <Thead backgroundColor="#FAFAFA">
+                      <Tr>
+                        <Th>Results</Th>
+                        <Th>Date</Th>
+                        <Th>Form</Th>
+                        <Th>Actions</Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      <Text textAlign="center">No Data</Text>
+                    </Tbody>
+                  </Table>
+                </TableContainer>
+              </TabPanel>
+
+              <TabPanel>
+                <Box h="90px" bg="white" borderRadius={6}>
+                  <Grid templateColumns="repeat(5, 1fr)" gap={4}>
+                    <GridItem colSpan={2}>
+                      <Text p={8}>Sample Form</Text>
+                    </GridItem>
+                    <GridItem colStart={4} colEnd={6} h="10" align="end" p={8}>
+                      <Switch id="email-alerts" mr={4} />
+                      <Tooltip label="Edit">
+                        <EditIcon mr={4} />
+                      </Tooltip>
+                      <Menu>
+                        <MenuButton
+                          bg="none"
+                          as={Button}
+                          leftIcon={<DragHandleIcon />}
+                        ></MenuButton>
+                        <MenuList>
+                          <MenuItem icon={<CopyIcon />}>Dublicate</MenuItem>
+                          <MenuItem icon={<DeleteIcon />}>Delete</MenuItem>
+                        </MenuList>
+                      </Menu>
+                    </GridItem>
+                  </Grid>
+                </Box>
+              </TabPanel>
+            </TabPanels>
           </Tabs>
         </Box>
       </FullScreen>
