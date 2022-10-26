@@ -5,6 +5,7 @@ import ReportScreen from "./Screens/ReportScreen";
 import OrderScreen from "./Screens/OrderScreen";
 import CustomerScreen from "./Screens/CustomerScreen";
 import MenuManagementScreen from "./Screens/MenuManagementScreen";
+import FeedBacksScreen from "./Screens/FeedBacksScreen";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/order" component={OrderScreen} />
       <Route path="/customer" component={CustomerScreen} />
       <Route path="/menu" component={MenuManagementScreen} />
+      <Route path="/feedbacks" component={FeedBacksScreen} />
     </div>
   );
 }

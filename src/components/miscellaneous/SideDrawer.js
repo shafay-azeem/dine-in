@@ -61,6 +61,10 @@ const SideDrawer = () => {
     history.push("/menu");
   };
 
+  const feedbacks = () => {
+    history.push("/feedbacks");
+  };
+
   const {
     isOpen: isOpenDashboardModel,
     onOpen: onOpenDashboardModel,
@@ -174,7 +178,7 @@ const SideDrawer = () => {
                 <HamburgerIcon fontSize="20px" m={2} />
                 Menu Management
               </Button>
-              <Button variant="link">
+              <Button variant="link" onClick={feedbacks}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Feedbacks
               </Button>
