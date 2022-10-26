@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Box,
   Button,
@@ -22,6 +22,7 @@ import {
   Thead,
   Tooltip,
   Tr,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Tabs, TabList, Tab } from "@chakra-ui/react";
 import {
@@ -34,9 +35,12 @@ import {
 } from "@chakra-ui/icons";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import "../../App.css";
+import FeedbackDeleteModal from "./FeedbackDeleteModal";
 
 const Feedbacks = () => {
   const handle = useFullScreenHandle();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [showLogin, setShowLogin] = useState(false);
 
   return (
     <>
@@ -145,7 +149,22 @@ const Feedbacks = () => {
                         ></MenuButton>
                         <MenuList>
                           <MenuItem icon={<CopyIcon />}>Dublicate</MenuItem>
-                          <MenuItem icon={<DeleteIcon />}>Delete</MenuItem>
+
+                          <>
+                            <MenuItem
+                              icon={<DeleteIcon />}
+                              onClick={() => setShowLogin(true)}
+                            >
+                              Delete
+                            </MenuItem>
+                            <FeedbackDeleteModal
+                              show={showLogin}
+                              isOpen={isOpen}
+                              onOpen={onOpen}
+                              onClose={onClose}
+                              close={() => setShowLogin(false)}
+                            />
+                          </>
                         </MenuList>
                       </Menu>
                     </GridItem>
