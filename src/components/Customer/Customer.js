@@ -1,6 +1,7 @@
 import React from 'react'
-import { Box, Button, Center, Divider, Grid, GridItem, Stack, Text, useDisclosure } from "@chakra-ui/react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import {
+    Box, Button, Center, Divider, Grid, GridItem, Stack, Text, useDisclosure, Input, InputGroup, InputLeftElement,
+} from "@chakra-ui/react";
 import {
     Table,
     Thead,
@@ -22,6 +23,7 @@ import {
 
 } from "@chakra-ui/react";
 import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
+import { ArrowForwardIcon, SearchIcon } from '@chakra-ui/icons';
 
 
 const Customer = () => {
@@ -71,7 +73,13 @@ const Customer = () => {
                         <Button colorScheme='blue' mr={3} onClick={onClose}>
                             Cancel
                         </Button>
-                        <Button >Export</Button>
+                        <Button
+                            leftIcon={<ArrowForwardIcon />}
+                            colorScheme="teal"
+                            variant="solid"
+                        >
+                            Export
+                        </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
@@ -84,14 +92,33 @@ const Customer = () => {
                 </GridItem>
             </Grid>
 
-            <Grid templateColumns="repeat(5, 1fr)" gap={4} p={1}>
+            <Grid templateColumns="repeat(5, 1fr)" gap={3} p={1}>
                 <GridItem colSpan={2} h="10" p={5}>
                     <Text fontWeight={600}>0 results Listed</Text>
                 </GridItem>
+
+                <GridItem colStart={3} h="10" textAlign="end" p={5}>
+                    <InputGroup>
+                        <InputLeftElement
+                            pointerEvents="none"
+                            children={<SearchIcon color="gray.300" />}
+                        />
+                        <Input type="text" placeholder="Search" bg="white" />
+                    </InputGroup>
+                </GridItem>
                 <GridItem colStart={4} colEnd={6} h="10" textAlign="end" p={5}>
-                    <Button onClick={onOpen}>Open Modal</Button>
+
+                    <Button
+                        leftIcon={<ArrowForwardIcon />}
+                        colorScheme="teal"
+                        variant="solid"
+                        onClick={onOpen}
+                    >
+                        Export
+                    </Button>
 
                 </GridItem>
+
             </Grid>
             <Center mt={9}>
                 <Box
@@ -128,10 +155,10 @@ const Customer = () => {
                                 <Tr>
                                     <Td>inches</Td>
                                     <Td>millimetres (mm)</Td>
-                                    <Td isNumeric>25.4</Td>
+                                    <Td >25.4</Td>
                                     <Td>inches</Td>
                                     <Td>millimetres (mm)</Td>
-                                    <Td isNumeric>25.4</Td>
+                                    <Td>25.4</Td>
 
 
                                 </Tr>
@@ -143,5 +170,4 @@ const Customer = () => {
         </>
     );
 }
-
 export default Customer
