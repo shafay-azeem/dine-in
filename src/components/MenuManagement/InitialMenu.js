@@ -16,10 +16,12 @@ import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
 import { AddIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import MenuModifieModal from "./MenuModifieModal";
 import PromoModal from "./PromoModal";
+import PurchaseModal from "./PurchaseModal";
 
 const InitialMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { isOpen: promoIsOpen, onOpen: promoOnOpen, onClose: promoOnClose } = useDisclosure()
+  const { isOpen: purchaseIsOpen, onOpen: purchaseOnOpen, onClose: purchaseOnClose } = useDisclosure()
   return (
     <>
       <Grid>
@@ -116,11 +118,18 @@ const InitialMenu = () => {
                 colorScheme="teal"
                 variant="solid"
                 mb={2}
-
+                onClick={purchaseOnOpen}
               >
                 In App purchases
 
+                {purchaseIsOpen ? (
+                  <PurchaseModal
+                    isOpen={purchaseIsOpen}
+                    onOpen={purchaseOnOpen}
+                    onClose={purchaseOnClose}
 
+                  />
+                ) : (console.log("ss"))}
               </Button>
               <TableContainer>
                 <Table variant="simple">
