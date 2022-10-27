@@ -40,8 +40,6 @@ import FeedbackDeleteModal from "./FeedbackDeleteModal";
 const Feedbacks = () => {
   const handle = useFullScreenHandle();
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  console.log(isOpen, 'isOpen')
   return (
     <>
       <FullScreen handle={handle}>

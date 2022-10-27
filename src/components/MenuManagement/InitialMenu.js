@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Divider, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Button, Divider, Grid, GridItem, Text, useDisclosure } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import {
   Table,
@@ -14,8 +14,12 @@ import {
 } from "@chakra-ui/react";
 import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
 import { AddIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import MenuModifieModal from "./MenuModifieModal";
+import PromoModal from "./PromoModal";
 
 const InitialMenu = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: promoIsOpen, onOpen: promoOnOpen, onClose: promoOnClose } = useDisclosure()
   return (
     <>
       <Grid>
@@ -42,8 +46,18 @@ const InitialMenu = () => {
                 colorScheme="teal"
                 variant="solid"
                 mb={2}
+                onClick={onOpen}
               >
                 Add a Modifiers Group
+
+                {isOpen ? (
+                  <MenuModifieModal
+                    isOpen={isOpen}
+                    onOpen={onOpen}
+                    onClose={onClose}
+
+                  />
+                ) : (console.log("ss"))}
               </Button>
               <TableContainer>
                 <Table variant="simple">
@@ -67,8 +81,17 @@ const InitialMenu = () => {
                 colorScheme="teal"
                 variant="solid"
                 mb={2}
+                onClick={promoOnOpen}
               >
                 Add a Promo Code
+                {promoIsOpen ? (
+                  <PromoModal
+                    isOpen={promoIsOpen}
+                    onOpen={promoOnOpen}
+                    onClose={promoOnClose}
+
+                  />
+                ) : (console.log("ss"))}
               </Button>
               <TableContainer>
                 <Table variant="simple">
@@ -93,8 +116,11 @@ const InitialMenu = () => {
                 colorScheme="teal"
                 variant="solid"
                 mb={2}
+
               >
-                Add a Promo Code
+                In App purchases
+
+
               </Button>
               <TableContainer>
                 <Table variant="simple">
