@@ -1,27 +1,33 @@
 import React from "react";
-import { Box, Button, Divider, Grid, GridItem, Text, useDisclosure } from "@chakra-ui/react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
+  Box,
+  Button,
+  Divider,
+  Grid,
+  GridItem,
+  Text,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
-import { AddIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
+
+import { AddIcon } from "@chakra-ui/icons";
 import MenuModifieModal from "./MenuModifieModal";
 import PromoModal from "./PromoModal";
 import PurchaseModal from "./PurchaseModal";
 
 const InitialMenu = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { isOpen: promoIsOpen, onOpen: promoOnOpen, onClose: promoOnClose } = useDisclosure()
-  const { isOpen: purchaseIsOpen, onOpen: purchaseOnOpen, onClose: purchaseOnClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: promoIsOpen,
+    onOpen: promoOnOpen,
+    onClose: promoOnClose,
+  } = useDisclosure();
+  const {
+    isOpen: purchaseIsOpen,
+    onOpen: purchaseOnOpen,
+    onClose: purchaseOnClose,
+  } = useDisclosure();
   return (
     <>
       <Grid>
@@ -31,6 +37,7 @@ const InitialMenu = () => {
           </Text>
         </GridItem>
       </Grid>
+
       <Box ml="10" mt={5}>
         <Tabs>
           <TabList>
@@ -49,17 +56,18 @@ const InitialMenu = () => {
                 variant="solid"
                 mb={2}
                 onClick={onOpen}
+                size="sm"
               >
                 Add a Modifiers Group
-
                 {isOpen ? (
                   <MenuModifieModal
                     isOpen={isOpen}
                     onOpen={onOpen}
                     onClose={onClose}
-
                   />
-                ) : (console.log("ss"))}
+                ) : (
+                  console.log("ss")
+                )}
               </Button>
               <TableContainer>
                 <Table variant="simple">
@@ -84,6 +92,7 @@ const InitialMenu = () => {
                 variant="solid"
                 mb={2}
                 onClick={promoOnOpen}
+                size="sm"
               >
                 Add a Promo Code
                 {promoIsOpen ? (
@@ -91,9 +100,10 @@ const InitialMenu = () => {
                     isOpen={promoIsOpen}
                     onOpen={promoOnOpen}
                     onClose={promoOnClose}
-
                   />
-                ) : (console.log("ss"))}
+                ) : (
+                  console.log("ss")
+                )}
               </Button>
               <TableContainer>
                 <Table variant="simple">
@@ -119,17 +129,18 @@ const InitialMenu = () => {
                 variant="solid"
                 mb={2}
                 onClick={purchaseOnOpen}
+                size="sm"
               >
-                In App purchases
-
+                Add a Promotion
                 {purchaseIsOpen ? (
                   <PurchaseModal
                     isOpen={purchaseIsOpen}
                     onOpen={purchaseOnOpen}
                     onClose={purchaseOnClose}
-
                   />
-                ) : (console.log("ss"))}
+                ) : (
+                  console.log("ss")
+                )}
               </Button>
               <TableContainer>
                 <Table variant="simple">
