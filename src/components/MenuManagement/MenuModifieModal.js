@@ -15,6 +15,8 @@ import {
   FormLabel,
   FormErrorMessage,
   FormHelperText,
+  HStack,
+  Switch,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
@@ -22,6 +24,54 @@ const MenuModifieModal = (props) => {
   const [input, setInput] = useState("");
   const handleInputChange = (e) => setInput(e.target.value);
   const isError = input === "";
+  const [inputList, setInputList] = useState([]);
+
+  const onAddBtnClick = (event) => {
+    setInputList(
+      inputList.concat(
+        <HStack m={5}>
+          <Input
+            key={inputList.length}
+            size="sm"
+            borderRadius="8px"
+            width="60%"
+            placeholder="Name"
+          />
+          ,
+          <Input
+            key={inputList.length}
+            type="tel"
+            placeholder="$"
+            size="sm"
+            borderRadius="8px"
+            width="20%"
+          />
+          <Input
+            key={inputList.length}
+            type="tel"
+            placeholder="calories"
+            size="sm"
+            borderRadius="8px"
+            width="40%"
+          />
+          <Switch />
+          <Button
+            colorScheme="teal"
+            variant="solid"
+            mt={2}
+            size="xs"
+            onClick={remove}
+          >
+            remove
+          </Button>
+        </HStack>
+      )
+    );
+  };
+
+  const remove = () => {
+    setInputList(inputList.splice(inputList.length - 1));
+  };
 
   return (
     <>
@@ -55,9 +105,12 @@ const MenuModifieModal = (props) => {
               variant="solid"
               mt={2}
               size="xs"
+              onClick={onAddBtnClick}
             >
               Add more Modifier
             </Button>
+
+            {inputList}
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} size="sm">
