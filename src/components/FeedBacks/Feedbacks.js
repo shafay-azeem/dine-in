@@ -39,9 +39,9 @@ import FeedbackDeleteModal from "./FeedbackDeleteModal";
 
 const Feedbacks = () => {
   const handle = useFullScreenHandle();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [showLogin, setShowLogin] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
+  console.log(isOpen, 'isOpen')
   return (
     <>
       <FullScreen handle={handle}>
@@ -141,6 +141,21 @@ const Feedbacks = () => {
                       <Tooltip label="Edit">
                         <EditIcon mr={4} />
                       </Tooltip>
+
+                      <Button onClick={onOpen}  >
+                        <DeleteIcon />
+
+                        {isOpen ? (
+                          <FeedbackDeleteModal
+                            isOpen={isOpen}
+                            onOpen={onOpen}
+                            onClose={onClose}
+
+                          />
+                        ) : (console.log("ss"))}
+
+                      </Button>
+
                       <Menu>
                         <MenuButton
                           bg="none"
@@ -150,21 +165,15 @@ const Feedbacks = () => {
                         <MenuList>
                           <MenuItem icon={<CopyIcon />}>Dublicate</MenuItem>
 
-                          <>
-                            <MenuItem
-                              icon={<DeleteIcon />}
-                              onClick={() => setShowLogin(true)}
-                            >
-                              Delete
-                            </MenuItem>
-                            <FeedbackDeleteModal
-                              show={showLogin}
-                              isOpen={isOpen}
-                              onOpen={onOpen}
-                              onClose={onClose}
-                              close={() => setShowLogin(false)}
-                            />
-                          </>
+
+                          {/* <MenuItem
+                            icon={<DeleteIcon />}
+                            onClick={() => setShowLogin(true)}
+                          >
+                            Delete
+                          </MenuItem> */}
+
+
                         </MenuList>
                       </Menu>
                     </GridItem>

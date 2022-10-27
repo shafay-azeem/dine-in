@@ -25,7 +25,7 @@ const FeedbackDeleteModal = (props) => {
             <Button colorScheme="blue" mr={3}>
               Save
             </Button>
-            <Button>Cancel</Button>
+            <Button onClick={props.onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
