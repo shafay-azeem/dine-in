@@ -39,9 +39,9 @@ import FeedbackDeleteModal from "./FeedbackDeleteModal";
 
 const Feedbacks = () => {
   const handle = useFullScreenHandle();
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  console.log(isOpen, 'isOpen')
+  console.log(isOpen, "isOpen");
   return (
     <>
       <FullScreen handle={handle}>
@@ -142,7 +142,7 @@ const Feedbacks = () => {
                         <EditIcon mr={4} />
                       </Tooltip>
 
-                      <Button onClick={onOpen}  >
+                      <Button onClick={onOpen} bg="white">
                         <DeleteIcon />
 
                         {isOpen ? (
@@ -150,32 +150,11 @@ const Feedbacks = () => {
                             isOpen={isOpen}
                             onOpen={onOpen}
                             onClose={onClose}
-
                           />
-                        ) : (console.log("ss"))}
-
+                        ) : (
+                          console.log("ss")
+                        )}
                       </Button>
-
-                      <Menu>
-                        <MenuButton
-                          bg="none"
-                          as={Button}
-                          leftIcon={<DragHandleIcon />}
-                        ></MenuButton>
-                        <MenuList>
-                          <MenuItem icon={<CopyIcon />}>Dublicate</MenuItem>
-
-
-                          {/* <MenuItem
-                            icon={<DeleteIcon />}
-                            onClick={() => setShowLogin(true)}
-                          >
-                            Delete
-                          </MenuItem> */}
-
-
-                        </MenuList>
-                      </Menu>
                     </GridItem>
                   </Grid>
                 </Box>
