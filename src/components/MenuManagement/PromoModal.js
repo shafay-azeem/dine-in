@@ -31,12 +31,12 @@ const PromoModal = (props) => {
   const [Percentage, setPercentage] = useState(true)
 
 
-  function testfunc() {
+  function amountfunc() {
     setPercentage(false)
   }
 
 
-  function testfunc2() {
+  function percentagefunc() {
     setPercentage(true)
   }
 
@@ -74,8 +74,8 @@ const PromoModal = (props) => {
               <FormLabel fontWeight="400">Discount Off</FormLabel>
               <RadioGroup onChange={setValue} value={value}>
                 <Stack direction="row">
-                  <Radio value="1" onChange={testfunc2} >Percentage</Radio>
-                  <Radio value="2" onChange={testfunc}>Amount</Radio>
+                  <Radio value="1" onChange={percentagefunc} >Percentage</Radio>
+                  <Radio value="2" onChange={amountfunc}>Amount</Radio>
                 </Stack>
               </RadioGroup>
 
