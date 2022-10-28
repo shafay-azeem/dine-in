@@ -65,6 +65,10 @@ const SideDrawer = () => {
     history.push("/feedbacks");
   };
 
+  const translationcenter = () => {
+    history.push("/translationcenter");
+  };
+
   const {
     isOpen: isOpenDashboardModel,
     onOpen: onOpenDashboardModel,
@@ -182,7 +186,7 @@ const SideDrawer = () => {
                 <HamburgerIcon fontSize="20px" m={2} />
                 Feedbacks
               </Button>
-              <Button variant="link">
+              <Button variant="link" onClick={translationcenter}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Translation Center
               </Button>
