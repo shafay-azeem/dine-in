@@ -28,6 +28,18 @@ import {
 const PromoModal = (props) => {
   const [input, setInput] = useState("");
   const [value, setValue] = React.useState("1");
+  const [Percentage, setPercentage] = useState(true)
+
+
+  function testfunc() {
+    setPercentage(false)
+  }
+
+
+  function testfunc2() {
+    setPercentage(true)
+  }
+
   const isError = input === "";
   return (
     <>
@@ -62,19 +74,28 @@ const PromoModal = (props) => {
               <FormLabel fontWeight="400">Discount Off</FormLabel>
               <RadioGroup onChange={setValue} value={value}>
                 <Stack direction="row">
-                  <Radio value="1">Percentage</Radio>
-                  <Radio value="2">Amount</Radio>
+                  <Radio value="1" onChange={testfunc2} >Percentage</Radio>
+                  <Radio value="2" onChange={testfunc}>Amount</Radio>
                 </Stack>
               </RadioGroup>
-            </FormControl>
 
-            <NumberInput mt={5} min={2}>
-              <NumberInputField />
+            </FormControl>
+            {Percentage ? (<NumberInput mt={5} min={2}>
+              <NumberInputField placeholder="Percentage" />
               <NumberInputStepper>
                 <NumberIncrementStepper />
                 <NumberDecrementStepper />
               </NumberInputStepper>
-            </NumberInput>
+            </NumberInput>) : (
+              <NumberInput mt={5} min={3}>
+                <NumberInputField placeholder="Amount" />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            )}
+
 
             <FormControl mt={5}>
               <FormLabel fontWeight="400">Order Mode</FormLabel>
