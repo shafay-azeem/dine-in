@@ -10,10 +10,14 @@ import {
   Box,
   VStack,
   Link,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
+import LanguageModal from "./LanguageModal";
 
 const TranslationCenter = () => {
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Grid>
@@ -58,8 +62,18 @@ const TranslationCenter = () => {
                     <TabPanel>
                       <Text fontSize="md">
                         Please select the languages you want to translate into.
-                        <Link color="blue">Click </Link>here to add a new
+                        <Link color="blue" onClick={onOpen}>Click </Link>here to add a new
                         language.
+                        {isOpen ? (
+                          <LanguageModal
+                            isOpen={isOpen}
+                            onOpen={onOpen}
+                            onClose={onClose}
+
+                          ></LanguageModal>
+                        ) : (
+                          console.log("sss")
+                        )}
                       </Text>
                     </TabPanel>
                     <TabPanel>
