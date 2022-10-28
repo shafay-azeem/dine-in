@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -23,6 +23,9 @@ import {
 } from "@chakra-ui/react";
 
 const PurchaseModal = (props) => {
+
+
+  const [show, setShow] = useState(false)
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="4xl">
@@ -70,15 +73,14 @@ const PurchaseModal = (props) => {
               <FormLabel fontWeight="400">Promotion Close</FormLabel>
               <RadioGroup defaultValue="Itachi">
                 <HStack spacing="24px">
-                  <Radio value="1">
+                  <Radio value="1" onChange={() => setShow(false)}>
                     Keep the promotion open until the user closes.
                   </Radio>
-                  <Radio value="2">Close promotion after x seconds.</Radio>
+                  <Radio value="2" onChange={() => setShow(true)}>Close promotion after x seconds.</Radio>
                 </HStack>
               </RadioGroup>
             </FormControl>
-
-            <FormControl mt={5}>
+            {show ? (<FormControl mt={5}>
               <FormLabel fontWeight="400">Promotion Duration</FormLabel>
               <NumberInput size="sm" maxW={24} defaultValue={15} min={2}>
                 <NumberInputField />
@@ -87,7 +89,8 @@ const PurchaseModal = (props) => {
                   <NumberDecrementStepper />
                 </NumberInputStepper>
               </NumberInput>
-            </FormControl>
+            </FormControl>) : (console.log("Sss"))}
+
           </ModalBody>
 
           <ModalFooter>
