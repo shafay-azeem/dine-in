@@ -21,7 +21,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react";
-import Form from "react-bootstrap/Form";
+
 
 const PurchaseModal = (props) => {
   const [show, setShow] = useState(false);

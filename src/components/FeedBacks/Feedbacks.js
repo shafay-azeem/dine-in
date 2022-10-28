@@ -35,7 +35,21 @@ const Feedbacks = () => {
   const handle = useFullScreenHandle();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showform, setShowForm] = useState(false);
-  const [showresult, setShowResult] = useState(false);
+  const [showresult, setShowResult] = useState(true);
+
+
+
+  function testfucn1() {
+    setShowForm(false)
+    setShowResult(true)
+  }
+
+
+  function testfucn2() {
+    setShowForm(true)
+    setShowResult(false)
+  }
+
 
   console.log(isOpen, "isOpen");
   return (
@@ -49,7 +63,8 @@ const Feedbacks = () => {
           </GridItem>
         </Grid>
 
-        <Grid templateColumns="repeat(4, 1fr)" gap={6} m={10}>
+
+        {showresult ? (<Grid templateColumns="repeat(4, 1fr)" gap={6} m={10}>
           <GridItem w="100%" h="10" colSpan={1}>
             <Text fontWeight={600}>0 results Listed</Text>
           </GridItem>
@@ -99,7 +114,8 @@ const Feedbacks = () => {
               </Box>
             </Stack>
           </GridItem>
-        </Grid>
+        </Grid>) : (console.log('sss'))}
+
 
         {showform ? (
           <Grid templateColumns="repeat(5, 1fr)" gap={4} m={10}>
@@ -124,8 +140,8 @@ const Feedbacks = () => {
         <Box ml="10" mt={5}>
           <Tabs>
             <TabList>
-              <Tab onClick={() => setShowForm(false)}>Results</Tab>
-              <Tab onClick={() => setShowForm(true)}>Forms</Tab>
+              <Tab onClick={testfucn1}>Results</Tab>
+              <Tab onClick={testfucn2}>Forms</Tab>
             </TabList>
 
             <TabPanels>
