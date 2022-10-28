@@ -30,16 +30,9 @@ const MenuModifieModal = (props) => {
     setInputList(
       inputList.concat(
         <HStack m={5}>
-          <Input
-            key={inputList.length}
-            size="sm"
-            borderRadius="8px"
-            width="60%"
-            placeholder="Name"
-          />
+          <Input size="sm" borderRadius="8px" width="60%" placeholder="Name" />
           ,
           <Input
-            key={inputList.length}
             type="tel"
             placeholder="$"
             size="sm"
@@ -47,7 +40,6 @@ const MenuModifieModal = (props) => {
             width="20%"
           />
           <Input
-            key={inputList.length}
             type="tel"
             placeholder="calories"
             size="sm"
@@ -55,22 +47,9 @@ const MenuModifieModal = (props) => {
             width="40%"
           />
           <Switch />
-          <Button
-            colorScheme="teal"
-            variant="solid"
-            mt={2}
-            size="xs"
-            onClick={remove}
-          >
-            remove
-          </Button>
         </HStack>
       )
     );
-  };
-
-  const remove = () => {
-    setInputList(inputList.splice(inputList.length - 1));
   };
 
   return (

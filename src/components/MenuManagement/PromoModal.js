@@ -1,35 +1,118 @@
-import React from 'react'
+import React, { useState } from "react";
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  FormHelperText,
+  FormErrorMessage,
+  Stack,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Select,
+  Switch,
+  Radio,
+  RadioGroup,
 } from "@chakra-ui/react";
 
 const PromoModal = (props) => {
-    return (
-        <>
-            <Modal isOpen={props.isOpen} onClose={props.onClose}>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Create your account</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody pb={6}></ModalBody>
+  const [input, setInput] = useState("");
+  const [value, setValue] = React.useState("1");
+  const isError = input === "";
+  return (
+    <>
+      <Modal isOpen={props.isOpen} onClose={props.onClose} size="2xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Add a Promo Code</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <FormControl isInvalid={isError}>
+              <FormLabel fontWeight="400">Discount Code</FormLabel>
+              <Input
+                width="100%"
+                size="sm"
+                borderRadius="8px"
+                value={input}
+                placeholder="SUMMER30"
+              />
+              {!isError ? (
+                <FormHelperText></FormHelperText>
+              ) : (
+                <FormErrorMessage>Discount Code is required.</FormErrorMessage>
+              )}
+            </FormControl>
 
-                    <ModalFooter>
-                        <Button colorScheme="blue" mr={3}>
-                            Save
-                        </Button>
-                        <Button onClick={props.onClose}>Cancel</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-        </>
-    )
-}
+            <FormControl mt={5}>
+              <FormLabel fontWeight="400">Description</FormLabel>
+              <Input size="sm" borderRadius="8px" />
+            </FormControl>
 
-export default PromoModal
+            <FormControl mt={5}>
+              <FormLabel fontWeight="400">Discount Off</FormLabel>
+              <RadioGroup onChange={setValue} value={value}>
+                <Stack direction="row">
+                  <Radio value="1">Percentage</Radio>
+                  <Radio value="2">Amount</Radio>
+                </Stack>
+              </RadioGroup>
+            </FormControl>
+
+            <NumberInput mt={5} min={2}>
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+
+            <FormControl mt={5}>
+              <FormLabel fontWeight="400">Order Mode</FormLabel>
+              <Select>
+                <option>All</option>
+                <option>Dine In</option>
+                <option>Delivery</option>
+                <option>Pick Up</option>
+              </Select>
+            </FormControl>
+
+            <FormControl mt={5}>
+              <FormLabel fontWeight="400">Min. Order Value</FormLabel>
+              <NumberInput min={2}>
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </FormControl>
+
+            <FormControl mt={5}>
+              <FormLabel fontWeight="400">Active</FormLabel>
+              <Switch />
+            </FormControl>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3}>
+              Save Draft
+            </Button>
+            <Button onClick={props.onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+export default PromoModal;
