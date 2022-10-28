@@ -21,6 +21,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react";
+import Form from "react-bootstrap/Form";
 
 const PurchaseModal = (props) => {
   const [show, setShow] = useState(false);
@@ -98,7 +99,7 @@ const PurchaseModal = (props) => {
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3}>
-              Save
+              Save Draft
             </Button>
             <Button onClick={props.onClose}>Cancel</Button>
           </ModalFooter>

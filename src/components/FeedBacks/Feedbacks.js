@@ -4,12 +4,7 @@ import {
   Button,
   Grid,
   GridItem,
-  HStack,
   Input,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   Stack,
   Switch,
   Table,
@@ -26,10 +21,9 @@ import {
 } from "@chakra-ui/react";
 import { Tabs, TabList, Tab } from "@chakra-ui/react";
 import {
+  AddIcon,
   ArrowForwardIcon,
-  CopyIcon,
   DeleteIcon,
-  DragHandleIcon,
   EditIcon,
   RepeatIcon,
 } from "@chakra-ui/icons";
@@ -40,6 +34,8 @@ import FeedbackDeleteModal from "./FeedbackDeleteModal";
 const Feedbacks = () => {
   const handle = useFullScreenHandle();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [showform, setShowForm] = useState(false);
+  const [showresult, setShowResult] = useState(false);
 
   console.log(isOpen, "isOpen");
   return (
@@ -93,22 +89,43 @@ const Feedbacks = () => {
                 >
                   Reload
                 </Button>
-                <Button
+                {/* <Button
                   colorScheme="teal"
                   variant="outline"
                   onClick={handle.enter}
                 >
                   FullScreen
-                </Button>
+                </Button> */}
               </Box>
             </Stack>
           </GridItem>
         </Grid>
+
+        {showform ? (
+          <Grid templateColumns="repeat(5, 1fr)" gap={4} m={10}>
+            <GridItem colSpan={2} h="10">
+              <Text fontWeight={600}>0 forms listed</Text>
+            </GridItem>
+            <GridItem colStart={4} colEnd={6} h="10" textAlign="right">
+              <Button
+                leftIcon={<AddIcon />}
+                colorScheme="teal"
+                variant="solid"
+                mb={2}
+              >
+                Create Form
+              </Button>
+            </GridItem>
+          </Grid>
+        ) : (
+          console.log("Sss")
+        )}
+
         <Box ml="10" mt={5}>
           <Tabs>
             <TabList>
-              <Tab>Results</Tab>
-              <Tab>Forms</Tab>
+              <Tab onClick={() => setShowForm(false)}>Results</Tab>
+              <Tab onClick={() => setShowForm(true)}>Forms</Tab>
             </TabList>
 
             <TabPanels>
