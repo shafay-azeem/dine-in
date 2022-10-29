@@ -30,6 +30,7 @@ import {
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import "../../App.css";
 import FeedbackDeleteModal from "./FeedbackDeleteModal";
+import CreateFormModal from "./CreateFormModal";
 
 const Feedbacks = () => {
   const handle = useFullScreenHandle();
@@ -37,19 +38,21 @@ const Feedbacks = () => {
   const [showform, setShowForm] = useState(false);
   const [showresult, setShowResult] = useState(true);
 
-
+  const {
+    isOpen: formIsOpen,
+    onOpen: formOnOpen,
+    onClose: formOnClose,
+  } = useDisclosure();
 
   function testfucn1() {
-    setShowForm(false)
-    setShowResult(true)
+    setShowForm(false);
+    setShowResult(true);
   }
-
 
   function testfucn2() {
-    setShowForm(true)
-    setShowResult(false)
+    setShowForm(true);
+    setShowResult(false);
   }
-
 
   console.log(isOpen, "isOpen");
   return (
@@ -63,59 +66,61 @@ const Feedbacks = () => {
           </GridItem>
         </Grid>
 
+        {showresult ? (
+          <Grid templateColumns="repeat(4, 1fr)" gap={6} m={10}>
+            <GridItem w="100%" h="10" colSpan={1}>
+              <Text fontWeight={600}>0 results Listed</Text>
+            </GridItem>
+            <GridItem w="100%" h="10">
+              <Input
+                placeholder="Select Date and Time"
+                size="md"
+                type="datetime-local"
+                bg="white"
+              />
+            </GridItem>
+            <GridItem w="100%" h="10">
+              <Input
+                placeholder="Select Date and Time"
+                size="md"
+                type="datetime-local"
+                bg="white"
+              />
+            </GridItem>
 
-        {showresult ? (<Grid templateColumns="repeat(4, 1fr)" gap={6} m={10}>
-          <GridItem w="100%" h="10" colSpan={1}>
-            <Text fontWeight={600}>0 results Listed</Text>
-          </GridItem>
-          <GridItem w="100%" h="10">
-            <Input
-              placeholder="Select Date and Time"
-              size="md"
-              type="datetime-local"
-              bg="white"
-            />
-          </GridItem>
-          <GridItem w="100%" h="10">
-            <Input
-              placeholder="Select Date and Time"
-              size="md"
-              type="datetime-local"
-              bg="white"
-            />
-          </GridItem>
-
-          <GridItem w="100%" h="10">
-            <Stack direction={["column", "row"]} spacing="24px">
-              <Box w="100px" h="40px">
-                <Button
-                  leftIcon={<ArrowForwardIcon />}
-                  colorScheme="teal"
-                  variant="solid"
-                >
-                  Export
-                </Button>
-              </Box>
-              <Box w="100px" h="40px">
-                <Button
-                  leftIcon={<RepeatIcon />}
-                  colorScheme="teal"
-                  variant="outline"
-                >
-                  Reload
-                </Button>
-                {/* <Button
+            <GridItem w="100%" h="10">
+              <Stack direction={["column", "row"]} spacing="24px">
+                <Box w="100px" h="40px">
+                  <Button
+                    leftIcon={<ArrowForwardIcon />}
+                    colorScheme="teal"
+                    variant="solid"
+                  >
+                    Export
+                  </Button>
+                </Box>
+                <Box w="100px" h="40px">
+                  <Button
+                    leftIcon={<RepeatIcon />}
+                    colorScheme="teal"
+                    variant="outline"
+                  >
+                    Reload
+                  </Button>
+                  {/* <Button
                   colorScheme="teal"
                   variant="outline"
                   onClick={handle.enter}
                 >
                   FullScreen
                 </Button> */}
-              </Box>
-            </Stack>
-          </GridItem>
-        </Grid>) : (console.log('sss'))}
-
+                </Box>
+              </Stack>
+            </GridItem>
+          </Grid>
+        ) : (
+          console.log("sss")
+        )}
 
         {showform ? (
           <Grid templateColumns="repeat(5, 1fr)" gap={4} m={10}>
@@ -128,8 +133,18 @@ const Feedbacks = () => {
                 colorScheme="teal"
                 variant="solid"
                 mb={2}
+                onClick={formOnOpen}
               >
                 Create Form
+                {formIsOpen ? (
+                  <CreateFormModal
+                    isOpen={formIsOpen}
+                    onOpen={formOnOpen}
+                    onClose={formOnClose}
+                  />
+                ) : (
+                  console.log("create form cant open")
+                )}
               </Button>
             </GridItem>
           </Grid>
@@ -145,7 +160,7 @@ const Feedbacks = () => {
             </TabList>
 
             <TabPanels>
-              <TabPanel backgroundColor="white" textAlign="right">
+              <TabPanel backgroundColor="white" m={5}>
                 <TableContainer>
                   <Table variant="simple">
                     <Thead backgroundColor="#FAFAFA">
