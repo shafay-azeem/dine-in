@@ -24,6 +24,17 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import React from "react";
+import {
+  SiFacebook,
+  SiTiktok,
+  SiTwitter,
+  SiFoursquarecityguide,
+  SiTripadvisor,
+  SiSnapchat,
+  SiZomato,
+  SiInstagram,
+} from "react-icons/si";
+import { TbBrandInstagram, TbDeviceDesktop } from "react-icons/tb";
 
 const VenueSettings = () => {
   return (
@@ -153,7 +164,156 @@ const VenueSettings = () => {
               </Box>
             </TabPanel>
             <TabPanel>
-              <p>Social Accounts</p>
+              <Box bg="white" w="50%" p={4} borderRadius="10">
+                <Center>
+                  <Box w="70%">
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Website</FormLabel>
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          children={<TbDeviceDesktop color="gray.300" />}
+                        />
+                        <Input type="text" borderRadius="6" size="md" />
+                      </InputGroup>
+                    </FormControl>
+
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Instagram</FormLabel>
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          children={<SiInstagram color="gray.300" />}
+                        />
+                        <Input
+                          type="text"
+                          placeholder="instagram.com/"
+                          borderRadius="6"
+                          size="md"
+                        />
+                      </InputGroup>
+                    </FormControl>
+
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Facebook</FormLabel>
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          children={<SiFacebook color="gray.300" />}
+                        />
+                        <Input
+                          type="tel"
+                          placeholder="facebook.com/"
+                          borderRadius="6"
+                          size="md"
+                        />
+                      </InputGroup>
+                    </FormControl>
+
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Twitter</FormLabel>
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          children={<SiTwitter color="gray.300" />}
+                        />
+                        <Input
+                          type="tel"
+                          placeholder="twitter.com/"
+                          borderRadius="6"
+                          size="md"
+                        />
+                      </InputGroup>
+                    </FormControl>
+
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Foursquare</FormLabel>
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          children={<SiFoursquarecityguide color="gray.300" />}
+                        />
+                        <Input
+                          type="tel"
+                          placeholder="foursquare.com/"
+                          borderRadius="6"
+                          size="md"
+                        />
+                      </InputGroup>
+                    </FormControl>
+
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Trip Advisor</FormLabel>
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          children={<SiTripadvisor color="gray.300" />}
+                        />
+                        <Input
+                          type="tel"
+                          placeholder="tripadvisor.com/"
+                          borderRadius="6"
+                          size="md"
+                        />
+                      </InputGroup>
+                    </FormControl>
+
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Snapchat</FormLabel>
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          children={<SiSnapchat color="gray.300" />}
+                        />
+                        <Input
+                          type="tel"
+                          placeholder="snapchat.com/add/"
+                          borderRadius="6"
+                          size="md"
+                        />
+                      </InputGroup>
+                    </FormControl>
+
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Zomato</FormLabel>
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          children={<SiZomato color="gray.300" />}
+                        />
+                        <Input
+                          type="tel"
+                          placeholder="zomato.com/"
+                          borderRadius="6"
+                          size="md"
+                        />
+                      </InputGroup>
+                    </FormControl>
+
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Tiktok</FormLabel>
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          children={<SiTiktok color="gray.300" />}
+                        />
+                        <Input
+                          type="tel"
+                          placeholder="tiktok.com/@"
+                          borderRadius="6"
+                          size="md"
+                        />
+                      </InputGroup>
+                    </FormControl>
+
+                    <Center mt={5}>
+                      <Button colorScheme="blue" w="15%">
+                        Save
+                      </Button>
+                    </Center>
+                  </Box>
+                </Center>
+              </Box>
             </TabPanel>
             <TabPanel>
               <p>Tables</p>
