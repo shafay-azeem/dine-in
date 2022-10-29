@@ -69,6 +69,10 @@ const SideDrawer = () => {
     history.push("/translationcenter");
   };
 
+  const venueSettings = () => {
+    history.push("/venueSettings");
+  };
+
   const {
     isOpen: isOpenDashboardModel,
     onOpen: onOpenDashboardModel,
@@ -190,7 +194,7 @@ const SideDrawer = () => {
                 <HamburgerIcon fontSize="20px" m={2} />
                 Translation Center
               </Button>
-              <Button variant="link">
+              <Button variant="link" onClick={venueSettings}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Venue Settings
               </Button>

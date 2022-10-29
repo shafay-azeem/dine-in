@@ -7,6 +7,7 @@ import CustomerScreen from "./Screens/CustomerScreen";
 import MenuManagementScreen from "./Screens/MenuManagementScreen";
 import FeedBacksScreen from "./Screens/FeedBacksScreen";
 import TranslationCenterScreen from "./Screens/TranslationCenterScreen";
+import VenueSettingsScreen from "./Screens/VenueSettingsScreen";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/menu" component={MenuManagementScreen} />
       <Route path="/feedbacks" component={FeedBacksScreen} />
       <Route path="/translationcenter" component={TranslationCenterScreen} />
+      <Route path="/venuesettings" component={VenueSettingsScreen} />
     </div>
   );
 }
