@@ -388,7 +388,57 @@ const VenueSettings = () => {
             <TabPanel>
               <Box bg="white" w="50%" p={4} borderRadius="10">
                 <Center>
-                  <Box w="70%"></Box>
+                  <Box w="90%">
+                    <Box p={4}>
+                      <Text fontSize="17px" fontWeight="500">
+                        Discounts
+                      </Text>
+                      <Button
+                        leftIcon={<BsPlusLg />}
+                        colorScheme="teal"
+                        variant="outline"
+                        size="sm"
+                        mt={3}
+                      >
+                        Add Discounts
+                      </Button>
+                    </Box>
+
+                    <Box p={4}>
+                      <Text fontSize="17px" fontWeight="500">
+                        Service Charges
+                      </Text>
+                      <Button
+                        leftIcon={<BsPlusLg />}
+                        colorScheme="teal"
+                        variant="outline"
+                        size="sm"
+                        mt={3}
+                      >
+                        Add Service Charges
+                      </Button>
+                    </Box>
+
+                    <Box p={4}>
+                      <Text fontSize="17px" fontWeight="500">
+                        Taxes
+                      </Text>
+                      <Button
+                        leftIcon={<BsPlusLg />}
+                        colorScheme="teal"
+                        variant="outline"
+                        size="sm"
+                        mt={3}
+                      >
+                        Add Taxes
+                      </Button>
+                    </Box>
+                    <Center mt={5}>
+                      <Button colorScheme="blue" w="15%">
+                        Save
+                      </Button>
+                    </Center>
+                  </Box>
                 </Center>
               </Box>
             </TabPanel>
