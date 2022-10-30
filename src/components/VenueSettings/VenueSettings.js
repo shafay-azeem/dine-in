@@ -1,8 +1,9 @@
-import { CopyIcon, PhoneIcon } from "@chakra-ui/icons";
+import { AddIcon, CopyIcon, PhoneIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
   Center,
+  Checkbox,
   FormControl,
   FormHelperText,
   FormLabel,
@@ -16,12 +17,18 @@ import {
   InputRightElement,
   Select,
   Tab,
+  Table,
+  TableContainer,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
+  Tbody,
   Text,
   Textarea,
+  Th,
+  Thead,
+  Tr,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -35,6 +42,7 @@ import {
   SiInstagram,
 } from "react-icons/si";
 import { TbBrandInstagram, TbDeviceDesktop } from "react-icons/tb";
+import { BsFillPersonPlusFill, BsSearch } from "react-icons/bs";
 
 const VenueSettings = () => {
   return (
@@ -46,8 +54,9 @@ const VenueSettings = () => {
           </Text>
         </GridItem>
       </Grid>
-      <Box ml="10" mt={5}>
-        <Tabs>
+
+      <Box m="10">
+        <Tabs w="100%">
           <TabList>
             <Tab>Location Settings</Tab>
             <Tab>Social Accounts</Tab>
@@ -316,10 +325,83 @@ const VenueSettings = () => {
               </Box>
             </TabPanel>
             <TabPanel>
-              <p>Tables</p>
+              <Grid templateColumns="repeat(5, 1fr)" gap={4} mb={3}>
+                <GridItem colSpan={2} w="65%">
+                  <InputGroup>
+                    <InputLeftElement
+                      pointerEvents="none"
+                      children={<BsSearch color="gray.300" />}
+                    />
+                    <Input type="tel" placeholder="Search tables" bg="white" />
+                  </InputGroup>
+                </GridItem>
+                <GridItem colStart={4} colEnd={6} textAlign="right">
+                  <Button
+                    leftIcon={<AddIcon />}
+                    colorScheme="teal"
+                    variant="solid"
+                    size="md"
+                  >
+                    Add New Tables
+                  </Button>
+                </GridItem>
+              </Grid>
+
+              <TableContainer borderRadius={4}>
+                <Table variant="simple">
+                  <Thead backgroundColor="#FAFAFA">
+                    <Tr>
+                      <Th>
+                        <Checkbox defaultChecked mr={5} />
+                        Table Name
+                      </Th>
+                      <Th>Actions</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody></Tbody>
+                </Table>
+              </TableContainer>
             </TabPanel>
             <TabPanel>
-              <p>Staff</p>
+              <Grid templateColumns="repeat(5, 1fr)" gap={4} mb={3}>
+                <GridItem colSpan={2} w="65%">
+                  <InputGroup>
+                    <InputLeftElement
+                      pointerEvents="none"
+                      children={<BsSearch color="gray.300" />}
+                    />
+                    <Input
+                      type="tel"
+                      placeholder="Search staff members"
+                      bg="white"
+                    />
+                  </InputGroup>
+                </GridItem>
+                <GridItem colStart={4} colEnd={6} textAlign="right">
+                  <Button
+                    leftIcon={<BsFillPersonPlusFill />}
+                    colorScheme="teal"
+                    variant="solid"
+                    size="md"
+                  >
+                    Add New Staff Member
+                  </Button>
+                </GridItem>
+              </Grid>
+
+              <TableContainer borderRadius={4}>
+                <Table variant="simple">
+                  <Thead backgroundColor="#FAFAFA">
+                    <Tr>
+                      <Th>Name</Th>
+                      <Th>Check Name</Th>
+                      <Th>Pincode</Th>
+                      <Th>Actions</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody></Tbody>
+                </Table>
+              </TableContainer>
             </TabPanel>
             <TabPanel>
               <p>Extra Charges</p>
