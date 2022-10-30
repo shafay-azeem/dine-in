@@ -1,4 +1,4 @@
-import { AddIcon, CopyIcon, PhoneIcon } from "@chakra-ui/icons";
+import { CopyIcon, PhoneIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -11,9 +11,7 @@ import {
   GridItem,
   Input,
   InputGroup,
-  InputLeftAddon,
   InputLeftElement,
-  InputRightAddon,
   InputRightElement,
   Select,
   Tab,
@@ -41,8 +39,8 @@ import {
   SiZomato,
   SiInstagram,
 } from "react-icons/si";
-import { TbBrandInstagram, TbDeviceDesktop } from "react-icons/tb";
-import { BsFillPersonPlusFill, BsSearch } from "react-icons/bs";
+import { TbDeviceDesktop } from "react-icons/tb";
+import { BsFillPersonPlusFill, BsPlusLg, BsSearch } from "react-icons/bs";
 
 const VenueSettings = () => {
   return (
@@ -68,110 +66,94 @@ const VenueSettings = () => {
           <TabPanels>
             <TabPanel>
               <Box bg="white" w="50%" p={4} borderRadius="10">
-                <FormControl mt={5}>
-                  <FormLabel fontWeight="400">Venue Name</FormLabel>
-                  <Input type="Text" w="60%" size="sm" borderRadius="6" />
-                </FormControl>
-
-                <FormControl mt={5} w="60%">
-                  <FormLabel fontWeight="400">Venue ID</FormLabel>
-                  <InputGroup size="sm">
-                    <Input pr="1.5rem" borderRadius="6" />
-                    <InputRightElement width="4.5rem">
-                      <Button h="1.75rem" size="sm">
-                        <CopyIcon />
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                </FormControl>
-
-                <FormControl w="60%" mt={5}>
-                  <FormLabel fontWeight="400">Address</FormLabel>
-                  <Textarea size="sm" borderRadius="6" />
-                </FormControl>
-
-                <Grid templateColumns="repeat(5, 1fr)" gap={4} mt={5}>
-                  <GridItem colSpan={2}>
-                    <FormControl>
-                      <FormLabel fontWeight="400">City</FormLabel>
-                      <Input type="Text" w="80%" size="sm" borderRadius="6" />
+                <Center>
+                  <Box w="70%">
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Venue Name</FormLabel>
+                      <Input type="Text" borderRadius="6" />
                     </FormControl>
-                  </GridItem>
-                  <GridItem colStart={3} colEnd={7}>
-                    <FormControl>
+
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Venue ID</FormLabel>
+                      <InputGroup>
+                        <Input pr="1.5rem" borderRadius="6" />
+                        <InputRightElement width="4.5rem">
+                          <Button h="1.75rem" size="sm">
+                            <CopyIcon />
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
+                    </FormControl>
+
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Address</FormLabel>
+                      <Textarea borderRadius="6" />
+                    </FormControl>
+
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">City</FormLabel>
+                      <Input type="Text" borderRadius="6" />
+                    </FormControl>
+
+                    <FormControl mt={5}>
                       <FormLabel fontWeight="400">Country</FormLabel>
-                      <Select
-                        placeholder="Select country"
-                        w="80%"
-                        borderRadius="6"
-                        size="sm"
-                      >
+                      <Select placeholder="Select country" borderRadius="6">
                         <option>United Arab Emirates</option>
                         <option>Nigeria</option>
                       </Select>
                     </FormControl>
-                  </GridItem>
-                </Grid>
 
-                <Grid templateColumns="repeat(5, 1fr)" gap={4} mt={5}>
-                  <GridItem colSpan={2}>
-                    <FormControl>
+                    <FormControl mt={5}>
                       <FormLabel fontWeight="400">State</FormLabel>
-                      <Input type="Text" w="80%" size="sm" borderRadius="6" />
+                      <Input type="Text" borderRadius="6" />
                     </FormControl>
-                  </GridItem>
-                  <GridItem colStart={3} colEnd={7}>
-                    <FormControl>
+
+                    <FormControl mt={5}>
                       <FormLabel fontWeight="400">Zip Code</FormLabel>
-                      <Input type="Text" w="80%" size="sm" borderRadius="6" />
+                      <Input type="Text" borderRadius="6" />
                     </FormControl>
-                  </GridItem>
-                </Grid>
 
-                <FormControl mt={5}>
-                  <FormLabel fontWeight="400">Phone Number</FormLabel>
-                  <InputGroup>
-                    <InputLeftElement
-                      pointerEvents="none"
-                      children={<PhoneIcon color="gray.300" />}
-                    />
-                    <Input
-                      type="tel"
-                      placeholder="Phone number"
-                      w="60%"
-                      borderRadius="6"
-                      size="sm"
-                    />
-                  </InputGroup>
-                </FormControl>
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Phone Number</FormLabel>
+                      <InputGroup>
+                        <InputLeftElement
+                          pointerEvents="none"
+                          children={<PhoneIcon color="gray.300" />}
+                        />
+                        <Input
+                          type="tel"
+                          placeholder="Phone number"
+                          borderRadius="6"
+                        />
+                      </InputGroup>
+                    </FormControl>
 
-                <FormControl mt={5} w="60%">
-                  <FormLabel fontWeight="400">Timezone</FormLabel>
-                  <Select
-                    placeholder="Select country"
-                    size="sm"
-                    borderRadius="6"
-                  >
-                    <option>United Arab Emirates</option>
-                    <option>Nigeria</option>
-                  </Select>
-                  <FormHelperText>
-                    Current date is 29/10/2022 13:12
-                  </FormHelperText>
-                </FormControl>
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Timezone</FormLabel>
+                      <Select placeholder="Select country" borderRadius="6">
+                        <option>United Arab Emirates</option>
+                        <option>Nigeria</option>
+                      </Select>
+                      <FormHelperText>
+                        Current date is 29/10/2022 13:12
+                      </FormHelperText>
+                    </FormControl>
 
-                <FormControl mt={5}>
-                  <FormLabel fontWeight="400">Website</FormLabel>
-                  <Input type="Text" w="60%" size="sm" borderRadius="6" />
-                </FormControl>
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Website</FormLabel>
+                      <Input type="Text" borderRadius="6" />
+                    </FormControl>
 
-                <Center mt={5}>
-                  <Button colorScheme="blue" w="15%">
-                    Save
-                  </Button>
+                    <Center mt={5}>
+                      <Button colorScheme="blue" w="15%">
+                        Save
+                      </Button>
+                    </Center>
+                  </Box>
                 </Center>
               </Box>
             </TabPanel>
+
             <TabPanel>
               <Box bg="white" w="50%" p={4} borderRadius="10">
                 <Center>
@@ -337,7 +319,7 @@ const VenueSettings = () => {
                 </GridItem>
                 <GridItem colStart={4} colEnd={6} textAlign="right">
                   <Button
-                    leftIcon={<AddIcon />}
+                    leftIcon={<BsPlusLg />}
                     colorScheme="teal"
                     variant="solid"
                     size="md"
@@ -404,7 +386,11 @@ const VenueSettings = () => {
               </TableContainer>
             </TabPanel>
             <TabPanel>
-              <p>Extra Charges</p>
+              <Box bg="white" w="50%" p={4} borderRadius="10">
+                <Center>
+                  <Box w="70%"></Box>
+                </Center>
+              </Box>
             </TabPanel>
           </TabPanels>
         </Tabs>
