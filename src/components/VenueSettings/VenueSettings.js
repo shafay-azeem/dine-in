@@ -27,6 +27,7 @@ import {
   Th,
   Thead,
   Tr,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -41,8 +42,12 @@ import {
 } from "react-icons/si";
 import { TbDeviceDesktop } from "react-icons/tb";
 import { BsFillPersonPlusFill, BsPlusLg, BsSearch } from "react-icons/bs";
+import AddTableDrawer from "./AddTableDrawer";
 
 const VenueSettings = () => {
+
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Grid>
@@ -323,8 +328,14 @@ const VenueSettings = () => {
                     colorScheme="teal"
                     variant="solid"
                     size="md"
+                    onClick={onOpen}
                   >
                     Add New Tables
+                    {isOpen ? (<AddTableDrawer isOpen={isOpen}
+                      onOpen={onOpen}
+                      onClose={onClose}></AddTableDrawer>) : (
+                      console.log("sss")
+                    )}
                   </Button>
                 </GridItem>
               </Grid>
