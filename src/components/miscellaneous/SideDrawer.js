@@ -73,6 +73,10 @@ const SideDrawer = () => {
     history.push("/venueSettings");
   };
 
+  const dineinqrmenu = () => {
+    history.push("/dineinqrmenu");
+  };
+
   const {
     isOpen: isOpenDashboardModel,
     onOpen: onOpenDashboardModel,
@@ -206,7 +210,7 @@ const SideDrawer = () => {
               <DrawerHeader borderBottomWidth="1px" fontSize="16px" mb={2}>
                 App Configurations
               </DrawerHeader>
-              <Button variant="link">
+              <Button variant="link" onClick={dineinqrmenu}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Dine-In-OR Menu
               </Button>
