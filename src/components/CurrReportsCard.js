@@ -19,8 +19,14 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import WelcomeText from "./WelcomeText";
-
+import { useHistory } from "react-router-dom";
 const CurrReportsCard = () => {
+  const history = useHistory();
+
+  const reports = () => {
+    history.push("/reports");
+  };
+
   return (
     <>
       <WelcomeText />
@@ -37,7 +43,7 @@ const CurrReportsCard = () => {
               <Text>Today</Text>
             </GridItem>
             <GridItem colStart={4} colEnd={6} h="10" textAlign="end" p={5}>
-              <Text color="blue">View Reports</Text>
+              <Text color="blue" onClick={reports} cursor="pointer">View Reports</Text>
             </GridItem>
           </Grid>
           <Divider orientation="horizontal" mt={2} />

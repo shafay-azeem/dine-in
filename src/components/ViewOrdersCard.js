@@ -18,8 +18,16 @@ import {
   Text,
   Divider,
 } from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
 
 const ViewOrdersCard = () => {
+
+  const history = useHistory();
+
+
+  const orders = () => {
+    history.push("/order");
+  };
   return (
     <>
       <Center mt={5}>
@@ -35,7 +43,7 @@ const ViewOrdersCard = () => {
               <Text>Recent Orders</Text>
             </GridItem>
             <GridItem colStart={4} colEnd={6} h="10" textAlign="end" p={5}>
-              <Text color="blue">View Orders</Text>
+              <Text color="blue" onClick={orders} cursor="pointer">View Orders</Text>
             </GridItem>
           </Grid>
           <Divider orientation="horizontal" mt={2} />
