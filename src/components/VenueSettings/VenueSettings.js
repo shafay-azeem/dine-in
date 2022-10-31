@@ -9,6 +9,7 @@ import {
   FormLabel,
   Grid,
   GridItem,
+  HStack,
   Input,
   InputGroup,
   InputLeftElement,
@@ -27,8 +28,9 @@ import {
   Th,
   Thead,
   Tr,
+  Switch,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import {
   SiFacebook,
   SiTiktok,
@@ -43,6 +45,78 @@ import { TbDeviceDesktop } from "react-icons/tb";
 import { BsFillPersonPlusFill, BsPlusLg, BsSearch } from "react-icons/bs";
 
 const VenueSettings = () => {
+  const [discount, setDiscount] = useState([]);
+  const [service, setService] = useState([]);
+  const [tax, setTax] = useState([]);
+
+  const addDiscount = (event) => {
+    setDiscount(
+      discount.concat(
+        <HStack m={5}>
+          <Input size="sm" borderRadius="8px" width="60%" placeholder="Name" />,
+          <Select placeholder="Rate" size="sm" borderRadius="8px" width="40%">
+            <option value="option1">$</option>
+            <option value="option2">%</option>
+          </Select>
+          ,
+          <Input
+            type="tel"
+            placeholder=""
+            size="sm"
+            borderRadius="8px"
+            width="50%"
+          />
+          <Switch />
+        </HStack>
+      )
+    );
+  };
+
+  const addServiceCharges = (event) => {
+    setService(
+      service.concat(
+        <HStack m={5}>
+          <Input size="sm" borderRadius="8px" width="60%" placeholder="Name" />,
+          <Select placeholder="Rate" size="sm" borderRadius="8px" width="40%">
+            <option value="option1">$</option>
+            <option value="option2">%</option>
+          </Select>
+          ,
+          <Input
+            type="tel"
+            placeholder=""
+            size="sm"
+            borderRadius="8px"
+            width="50%"
+          />
+          <Switch />
+        </HStack>
+      )
+    );
+  };
+
+  const addTaxes = (event) => {
+    setTax(
+      tax.concat(
+        <HStack m={5}>
+          <Input size="sm" borderRadius="8px" width="60%" placeholder="Name" />,
+          <Select placeholder="Rate" size="sm" borderRadius="8px" width="40%">
+            <option value="option1">$</option>
+            <option value="option2">%</option>
+          </Select>
+          ,
+          <Input
+            type="tel"
+            placeholder=""
+            size="sm"
+            borderRadius="8px"
+            width="50%"
+          />
+          <Switch />
+        </HStack>
+      )
+    );
+  };
   return (
     <>
       <Grid>
@@ -399,9 +473,11 @@ const VenueSettings = () => {
                         variant="outline"
                         size="sm"
                         mt={3}
+                        onClick={addDiscount}
                       >
                         Add Discounts
                       </Button>
+                      {discount}
                     </Box>
 
                     <Box p={4}>
@@ -414,9 +490,11 @@ const VenueSettings = () => {
                         variant="outline"
                         size="sm"
                         mt={3}
+                        onClick={addServiceCharges}
                       >
                         Add Service Charges
                       </Button>
+                      {service}
                     </Box>
 
                     <Box p={4}>
@@ -429,9 +507,11 @@ const VenueSettings = () => {
                         variant="outline"
                         size="sm"
                         mt={3}
+                        onClick={addTaxes}
                       >
                         Add Taxes
                       </Button>
+                      {tax}
                     </Box>
                     <Center mt={5}>
                       <Button colorScheme="blue" w="15%">
