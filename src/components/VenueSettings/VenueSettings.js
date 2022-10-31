@@ -9,6 +9,7 @@ import {
   FormLabel,
   Grid,
   GridItem,
+  HStack,
   Input,
   InputGroup,
   InputLeftElement,
@@ -27,9 +28,10 @@ import {
   Th,
   Thead,
   Tr,
+  Switch,
   useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import {
   SiFacebook,
   SiTiktok,
@@ -45,9 +47,6 @@ import { BsFillPersonPlusFill, BsPlusLg, BsSearch } from "react-icons/bs";
 import AddTableDrawer from "./AddTableDrawer";
 
 const VenueSettings = () => {
-
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Grid>
@@ -410,9 +409,11 @@ const VenueSettings = () => {
                         variant="outline"
                         size="sm"
                         mt={3}
+                        onClick={addDiscount}
                       >
                         Add Discounts
                       </Button>
+                      {discount}
                     </Box>
 
                     <Box p={4}>
@@ -425,9 +426,11 @@ const VenueSettings = () => {
                         variant="outline"
                         size="sm"
                         mt={3}
+                        onClick={addServiceCharges}
                       >
                         Add Service Charges
                       </Button>
+                      {service}
                     </Box>
 
                     <Box p={4}>
@@ -440,9 +443,11 @@ const VenueSettings = () => {
                         variant="outline"
                         size="sm"
                         mt={3}
+                        onClick={addTaxes}
                       >
                         Add Taxes
                       </Button>
+                      {tax}
                     </Box>
                     <Center mt={5}>
                       <Button colorScheme="blue" w="15%">
