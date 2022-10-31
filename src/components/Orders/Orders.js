@@ -103,8 +103,8 @@ const Orders = () => {
         </GridItem>
       </Grid>
 
-      <Box ml="10" mt={5}>
-        <Tabs>
+      <Box m="10" mt={5}>
+        <Tabs w="100%">
           <TabList>
             <Tab>All</Tab>
             <Tab>New</Tab>
@@ -135,9 +135,7 @@ const Orders = () => {
                       <Th>Total</Th>
                     </Tr>
                   </Thead>
-                  <Tbody>
-                    <Text textAlign="center">No Data</Text>
-                  </Tbody>
+                  <Tbody></Tbody>
                 </Table>
               </TableContainer>
             </TabPanel>
@@ -146,7 +144,14 @@ const Orders = () => {
                 <Table variant="simple">
                   <Thead backgroundColor="#FAFAFA">
                     <Tr>
-                      <Th>ID</Th>
+                      <Th>
+                        <Checkbox
+                          isChecked={checkedItems}
+                          onChange={(e) => setCheckedItems(e.target.checked)}
+                        >
+                          ID
+                        </Checkbox>
+                      </Th>
                       <Th>Daily No</Th>
                       <Th>Status</Th>
                       <Th>Type</Th>
@@ -165,7 +170,14 @@ const Orders = () => {
                 <Table variant="simple">
                   <Thead backgroundColor="#FAFAFA">
                     <Tr>
-                      <Th>ID</Th>
+                      <Th>
+                        <Checkbox
+                          isChecked={checkedItems}
+                          onChange={(e) => setCheckedItems(e.target.checked)}
+                        >
+                          ID
+                        </Checkbox>
+                      </Th>
                       <Th>Daily No</Th>
                       <Th>Status</Th>
                       <Th>Type</Th>
@@ -184,7 +196,14 @@ const Orders = () => {
                 <Table variant="simple">
                   <Thead backgroundColor="#FAFAFA">
                     <Tr>
-                      <Th>ID</Th>
+                      <Th>
+                        <Checkbox
+                          isChecked={checkedItems}
+                          onChange={(e) => setCheckedItems(e.target.checked)}
+                        >
+                          ID
+                        </Checkbox>
+                      </Th>
                       <Th>Daily No</Th>
                       <Th>Status</Th>
                       <Th>Type</Th>
