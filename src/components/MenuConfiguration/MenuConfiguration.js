@@ -8,10 +8,26 @@ import {
   TabPanels,
   Tabs,
   Text,
+  Center,
+  HStack,
+  Switch,
+  Button,
+  Input,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 
 const MenuConfiguration = () => {
+  const [inputList, setInputList] = useState([]);
+
+  const onAddBtnClick = (event) => {
+    setInputList(
+      inputList.concat(
+        <HStack m={5}>
+          <Input size="md" borderRadius="8px" width="100%" placeholder="" />
+        </HStack>
+      )
+    );
+  };
   return (
     <>
       <Grid>
@@ -44,7 +60,28 @@ const MenuConfiguration = () => {
               <p>Design</p>
             </TabPanel>
             <TabPanel>
-              <p>Service Options</p>
+              <Box bg="white" w="50%" p={4} borderRadius="10">
+                <Box w="70%" m={4}>
+                  <Text fontSize="17px" fontWeight="500">
+                    Service Options
+                  </Text>
+
+                  <HStack>
+                    <p>
+                      You can add service request options below (e.g. Request
+                      checkout, wrong order). If you don’t add any options, your
+                      customers will send requests directly.
+                    </p>
+                    <Switch />
+                  </HStack>
+
+                  {inputList}
+
+                  <Button colorScheme="blue" mt={4} onClick={onAddBtnClick}>
+                    Add
+                  </Button>
+                </Box>
+              </Box>
             </TabPanel>
             <TabPanel>
               <p>Feedback Settings</p>
