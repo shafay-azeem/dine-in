@@ -81,7 +81,7 @@ const MenuModifieModal = (props) => {
             <Button
               leftIcon={<AddIcon />}
               colorScheme="teal"
-              variant="solid"
+              variant="outline"
               mt={2}
               size="xs"
               onClick={onAddBtnClick}

@@ -48,8 +48,12 @@ import AddTableDrawer from "./AddTableDrawer";
 import AddStaffDrawer from "./AddStaffDrawer";
 
 const VenueSettings = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { isOpen: isOpenStaff, onOpen: onOpenStaff, onClose: onCloseStaff } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenStaff,
+    onOpen: onOpenStaff,
+    onClose: onCloseStaff,
+  } = useDisclosure();
   const [discount, setDiscount] = useState([]);
   const [service, setService] = useState([]);
   const [tax, setTax] = useState([]);
@@ -119,7 +123,7 @@ const VenueSettings = () => {
         </HStack>
       )
     );
-  }
+  };
   return (
     <>
       <Grid>
@@ -403,9 +407,13 @@ const VenueSettings = () => {
                     onClick={onOpen}
                   >
                     Add New Tables
-                    {isOpen ? (<AddTableDrawer isOpen={isOpen}
-                      onOpen={onOpen}
-                      onClose={onClose}></AddTableDrawer>) : (
+                    {isOpen ? (
+                      <AddTableDrawer
+                        isOpen={isOpen}
+                        onOpen={onOpen}
+                        onClose={onClose}
+                      ></AddTableDrawer>
+                    ) : (
                       console.log("sss")
                     )}
                   </Button>
@@ -451,9 +459,13 @@ const VenueSettings = () => {
                     onClick={onOpenStaff}
                   >
                     Add New Staff Member
-                    {isOpenStaff ? (<AddStaffDrawer isOpen={isOpenStaff}
-                      onOpen={onOpenStaff}
-                      onClose={onCloseStaff}></AddStaffDrawer>) : (
+                    {isOpenStaff ? (
+                      <AddStaffDrawer
+                        isOpen={isOpenStaff}
+                        onOpen={onOpenStaff}
+                        onClose={onCloseStaff}
+                      ></AddStaffDrawer>
+                    ) : (
                       console.log("sss")
                     )}
                   </Button>

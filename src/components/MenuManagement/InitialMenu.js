@@ -38,8 +38,8 @@ const InitialMenu = () => {
         </GridItem>
       </Grid>
 
-      <Box ml="10" mt={5}>
-        <Tabs>
+      <Box m="10">
+        <Tabs w="100%">
           <TabList>
             <Tab>Menu</Tab>
             <Tab>Modifiers</Tab>

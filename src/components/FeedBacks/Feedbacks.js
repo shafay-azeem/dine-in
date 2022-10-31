@@ -152,8 +152,8 @@ const Feedbacks = () => {
           console.log("Sss")
         )}
 
-        <Box ml="10" mt={5}>
-          <Tabs>
+        <Box m="10">
+          <Tabs w="100%">
             <TabList>
               <Tab onClick={testfucn1}>Results</Tab>
               <Tab onClick={testfucn2}>Forms</Tab>
