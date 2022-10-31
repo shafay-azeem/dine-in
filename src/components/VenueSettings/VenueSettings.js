@@ -45,9 +45,11 @@ import {
 import { TbDeviceDesktop } from "react-icons/tb";
 import { BsFillPersonPlusFill, BsPlusLg, BsSearch } from "react-icons/bs";
 import AddTableDrawer from "./AddTableDrawer";
+import AddStaffDrawer from "./AddStaffDrawer";
 
 const VenueSettings = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isOpenStaff, onOpen: onOpenStaff, onClose: onCloseStaff } = useDisclosure()
   const [discount, setDiscount] = useState([]);
   const [service, setService] = useState([]);
   const [tax, setTax] = useState([]);
@@ -446,8 +448,14 @@ const VenueSettings = () => {
                     colorScheme="teal"
                     variant="solid"
                     size="md"
+                    onClick={onOpenStaff}
                   >
                     Add New Staff Member
+                    {isOpenStaff ? (<AddStaffDrawer isOpen={isOpenStaff}
+                      onOpen={onOpenStaff}
+                      onClose={onCloseStaff}></AddStaffDrawer>) : (
+                      console.log("sss")
+                    )}
                   </Button>
                 </GridItem>
               </Grid>
