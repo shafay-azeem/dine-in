@@ -36,6 +36,11 @@ import {
 const Orders = () => {
   const [checkedItems, setCheckedItems] = React.useState(false);
 
+  function testfunc() {
+    window.location.reload();
+    // return false;
+  }
+
   return (
     <>
       <Grid>
@@ -95,6 +100,7 @@ const Orders = () => {
                 leftIcon={<RepeatIcon />}
                 colorScheme="teal"
                 variant="outline"
+                onClick={testfunc}
               >
                 Reload
               </Button>
