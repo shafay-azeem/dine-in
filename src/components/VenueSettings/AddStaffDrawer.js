@@ -19,8 +19,24 @@ import {
 } from "@chakra-ui/react";
 import { AiTwotoneBulb } from "react-icons/ai";
 import React from "react";
+import { useState } from "react";
 
 const AddStaffDrawer = (props) => {
+  const [milliseconds, setMilliseconds] = useState(0);
+  // const [tempDate, setTempDate] = useState("");
+  var tempDate;
+  function generateNum() {
+    console.log(milliseconds);
+    setMilliseconds(new Date().getTime());
+    tempDate = milliseconds.toString().split("");
+    console.log(tempDate, "tt");
+    return tempDate;
+  }
+
+  const epochlengthconverter = () => {
+    tempDate = milliseconds.toString().split("");
+    return ` ${tempDate[0]}${tempDate[1]}${tempDate[8]}${tempDate[9]}${tempDate[10]}${tempDate[3]}${tempDate[6]}`;
+  };
   return (
     <>
       <Drawer
@@ -59,10 +75,10 @@ const AddStaffDrawer = (props) => {
                 <FormControl mt={5}>
                   <FormLabel fontWeight="400">Pincode</FormLabel>
                   <InputGroup>
-                    <Input pr="1.5rem" borderRadius="6" />
+                    <Input pr="1.5rem" borderRadius="6" value={tempDate} />
                     <InputRightElement width="4.5rem">
                       <Tooltip label="Generate" placement="top">
-                        <Button h="1.75rem" size="sm">
+                        <Button h="1.75rem" size="sm" onClick={generateNum}>
                           <AiTwotoneBulb />
                         </Button>
                       </Tooltip>
