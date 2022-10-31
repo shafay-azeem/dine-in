@@ -47,6 +47,77 @@ import { BsFillPersonPlusFill, BsPlusLg, BsSearch } from "react-icons/bs";
 import AddTableDrawer from "./AddTableDrawer";
 
 const VenueSettings = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [discount, setDiscount] = useState([]);
+  const [service, setService] = useState([]);
+  const [tax, setTax] = useState([]);
+
+  const addDiscount = (event) => {
+    setDiscount(
+      discount.concat(
+        <HStack m={5}>
+          <Input size="sm" borderRadius="8px" width="60%" placeholder="Name" />,
+          <Select placeholder="Rate" size="sm" borderRadius="8px" width="40%">
+            <option value="option1">$</option>
+            <option value="option2">%</option>
+          </Select>
+          ,
+          <Input
+            type="tel"
+            placeholder=""
+            size="sm"
+            borderRadius="8px"
+            width="50%"
+          />
+          <Switch />
+        </HStack>
+      )
+    );
+  };
+  const addServiceCharges = (event) => {
+    setService(
+      service.concat(
+        <HStack m={5}>
+          <Input size="sm" borderRadius="8px" width="60%" placeholder="Name" />,
+          <Select placeholder="Rate" size="sm" borderRadius="8px" width="40%">
+            <option value="option1">$</option>
+            <option value="option2">%</option>
+          </Select>
+          ,
+          <Input
+            type="tel"
+            placeholder=""
+            size="sm"
+            borderRadius="8px"
+            width="50%"
+          />
+          <Switch />
+        </HStack>
+      )
+    );
+  };
+  const addTaxes = (event) => {
+    setTax(
+      tax.concat(
+        <HStack m={5}>
+          <Input size="sm" borderRadius="8px" width="60%" placeholder="Name" />,
+          <Select placeholder="Rate" size="sm" borderRadius="8px" width="40%">
+            <option value="option1">$</option>
+            <option value="option2">%</option>
+          </Select>
+          ,
+          <Input
+            type="tel"
+            placeholder=""
+            size="sm"
+            borderRadius="8px"
+            width="50%"
+          />
+          <Switch />
+        </HStack>
+      )
+    );
+  }
   return (
     <>
       <Grid>
