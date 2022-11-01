@@ -9,6 +9,7 @@ import FeedBacksScreen from "./Screens/FeedBacksScreen";
 import TranslationCenterScreen from "./Screens/TranslationCenterScreen";
 import VenueSettingsScreen from "./Screens/VenueSettingsScreen";
 import DineInQRMenuScreen from "./Screens/DineInQRMenuScreen";
+import CreateMenuScreen from "./Screens/CreateMenuScreen.js";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path="/translationcenter" component={TranslationCenterScreen} />
       <Route path="/venuesettings" component={VenueSettingsScreen} />
       <Route path="/dineinqrmenu" component={DineInQRMenuScreen} />
+      <Route path="/createmenu" component={CreateMenuScreen} />
     </div>
   );
 }

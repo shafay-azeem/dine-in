@@ -1,14 +1,14 @@
 import React from "react";
-import Customer from "../components/Customer/Customer";
 import SideDrawer from "../components/miscellaneous/SideDrawer";
+import CreateMenu from "../components/MenuManagement/CreateMenu";
 
-const CustomerScreen = () => {
+const CreateMenuScreen = () => {
   return (
     <div style={{ width: "100%", marginBottom: "10%" }}>
       <SideDrawer />
-      <Customer />
+      <CreateMenu />
     </div>
   );
 };
 
-export default CustomerScreen;
+export default CreateMenuScreen;

@@ -15,8 +15,10 @@ import { AddIcon } from "@chakra-ui/icons";
 import MenuModifieModal from "./MenuModifieModal";
 import PromoModal from "./PromoModal";
 import PurchaseModal from "./PurchaseModal";
+import { useHistory } from "react-router-dom";
 
 const InitialMenu = () => {
+  const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     isOpen: promoIsOpen,
@@ -28,6 +30,11 @@ const InitialMenu = () => {
     onOpen: purchaseOnOpen,
     onClose: purchaseOnClose,
   } = useDisclosure();
+
+  const createmenu = () => {
+    history.push("/createmenu");
+  };
+
   return (
     <>
       <Grid>
@@ -48,7 +55,46 @@ const InitialMenu = () => {
           </TabList>
 
           <TabPanels>
-            <TabPanel></TabPanel>
+            <TabPanel>
+              <Grid templateColumns="repeat(5, 1fr)" gap={4} align="right">
+                <GridItem colSpan={12} h="10">
+                  <Button colorScheme="teal" size="sm" onClick={createmenu}>
+                    Create Menu
+                  </Button>
+                </GridItem>
+              </Grid>
+              {/* <Grid templateColumns="repeat(5, 1fr)" gap={4} mb={3}>
+                <GridItem colSpan={2} w="65%">
+                  <InputGroup>
+                    <InputLeftElement
+                      pointerEvents="none"
+                      children={<BsSearch color="gray.300" />}
+                    />
+                    <Input type="tel" placeholder="Search tables" bg="white" />
+                  </InputGroup>
+                </GridItem>
+                <GridItem colStart={4} colEnd={6} textAlign="right">
+                  <Button
+                    leftIcon={<BsPlusLg />}
+                    colorScheme="teal"
+                    variant="solid"
+                    size="md"
+                    onClick={onOpen}
+                  >
+                    Add New Tables
+                    {isOpen ? (
+                      <AddTableDrawer
+                        isOpen={isOpen}
+                        onOpen={onOpen}
+                        onClose={onClose}
+                      ></AddTableDrawer>
+                    ) : (
+                      console.log("sss")
+                    )}
+                  </Button>
+                </GridItem>
+              </Grid> */}
+            </TabPanel>
             <TabPanel backgroundColor="white" textAlign="right">
               <Button
                 leftIcon={<AddIcon />}
