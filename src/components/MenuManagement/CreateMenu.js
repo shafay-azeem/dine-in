@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { BsPlusLg } from "react-icons/bs";
+import ItemDrawer from "./ItemDrawer";
 import SectionDrawer from "./SectionDrawer";
 
 const CreateMenu = () => {
@@ -21,6 +22,12 @@ const CreateMenu = () => {
     isOpen: isOpenSection,
     onOpen: onOpenSection,
     onClose: onCloseSection,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenItem,
+    onOpen: onOpenItem,
+    onClose: onCloseItem,
   } = useDisclosure();
   return (
     <>
@@ -64,7 +71,18 @@ const CreateMenu = () => {
                         console.log("sss")
                       )}
                     </MenuItem>
-                    <MenuItem>Item</MenuItem>
+                    <MenuItem onClick={onOpenItem}>
+                      Items
+                      {isOpenItem ? (
+                        <ItemDrawer
+                          isOpen={isOpenItem}
+                          onOpen={onOpenItem}
+                          onClose={onCloseItem}
+                        ></ItemDrawer>
+                      ) : (
+                        console.log("sss")
+                      )}
+                    </MenuItem>
                   </MenuList>
                 </Portal>
               </Menu>
