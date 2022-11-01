@@ -9,12 +9,19 @@ import {
   MenuItem,
   MenuList,
   Portal,
+  useDisclosure,
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
 import { BsPlusLg } from "react-icons/bs";
+import SectionDrawer from "./SectionDrawer";
 
 const CreateMenu = () => {
+  const {
+    isOpen: isOpenSection,
+    onOpen: onOpenSection,
+    onClose: onCloseSection,
+  } = useDisclosure();
   return (
     <>
       <Grid
@@ -45,7 +52,18 @@ const CreateMenu = () => {
                 </MenuButton>
                 <Portal>
                   <MenuList>
-                    <MenuItem>Section</MenuItem>
+                    <MenuItem onClick={onOpenSection}>
+                      Section
+                      {isOpenSection ? (
+                        <SectionDrawer
+                          isOpen={isOpenSection}
+                          onOpen={onOpenSection}
+                          onClose={onCloseSection}
+                        ></SectionDrawer>
+                      ) : (
+                        console.log("sss")
+                      )}
+                    </MenuItem>
                     <MenuItem>Item</MenuItem>
                   </MenuList>
                 </Portal>
