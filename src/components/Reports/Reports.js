@@ -119,34 +119,42 @@ const Reports = () => {
       </Grid>
 
       <Grid templateColumns="repeat(2, 1fr)" gap={6} p={10} mt="7%">
-        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+        <GridItem w="100%" bg="white" borderRadius="10px">
           <Text ml="10" mt="4" mb="4" fontSize="20px">
             Revenue Share by Sections
           </Text>
           <Divider orientation="horizontal" />
-          <Box>
-            <PieChart
-              data={[
-                { title: "One", value: 10, color: "#E38627" },
-                { title: "Two", value: 15, color: "#C13C37" },
-                { title: "Three", value: 20, color: "#6A2135" },
-              ]}
-            />
-          </Box>
+          <PieChart
+            center={[72, 72]}
+            viewBoxSize={[156, 156]}
+            paddingAngle={[1]}
+            data={[
+              { title: "One", value: 10, color: "#E38627" },
+              { title: "Two", value: 15, color: "#C13C37" },
+              { title: "Three", value: 20, color: "#6A2135" },
+            ]}
+          />
         </GridItem>
-        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+        <GridItem w="100%" bg="white" borderRadius="10px">
           <Text ml="10" mt="4" mb="4" fontSize="20px">
             Revenue Share by Items
           </Text>
           <Divider orientation="horizontal" />
-          <Text textAlign="center" mt="4">
-            No revenue data yet
-          </Text>
+          <PieChart
+            center={[72, 72]}
+            viewBoxSize={[156, 156]}
+            paddingAngle={[1]}
+            data={[
+              { title: "One", value: 10, color: "#E38627" },
+              { title: "Two", value: 15, color: "#C13C37" },
+              { title: "Three", value: 20, color: "#6A2135" },
+            ]}
+          />
         </GridItem>
       </Grid>
 
       <Grid templateColumns="repeat(2, 1fr)" gap={6} p={10} mt="3%">
-        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+        <GridItem w="100%" bg="white" borderRadius="10px">
           <Text ml="10" mt="4" mb="4" fontSize="20px">
             Best Sellers
           </Text>
@@ -155,7 +163,7 @@ const Reports = () => {
             No best sellers data yet
           </Text>
         </GridItem>
-        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+        <GridItem w="100%" bg="white" borderRadius="10px">
           <Text ml="10" mt="4" mb="4" fontSize="20px">
             Worst Sellers
           </Text>
@@ -167,7 +175,7 @@ const Reports = () => {
       </Grid>
 
       <Grid templateColumns="repeat(2, 1fr)" gap={6} p={10} mt="3%">
-        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+        <GridItem w="100%" bg="white" borderRadius="10px">
           <Text ml="10" mt="4" mb="4" fontSize="20px">
             Most Viewed Items
           </Text>
@@ -176,7 +184,7 @@ const Reports = () => {
             No most viewed items data yet
           </Text>
         </GridItem>
-        <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
+        <GridItem w="100%" bg="white" borderRadius="10px">
           <Text ml="10" mt="4" mb="4" fontSize="20px">
             Least Viewed Items
           </Text>
