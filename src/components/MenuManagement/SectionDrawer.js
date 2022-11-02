@@ -28,6 +28,9 @@ import React from "react";
 import { BsFillGridFill, BsListTask } from "react-icons/bs";
 
 const SectionDrawer = (props) => {
+
+  const [checkedItems, setCheckedItems] = React.useState(false)
+  console.log(checkedItems)
   return (
     <>
       <Drawer
@@ -71,8 +74,13 @@ const SectionDrawer = (props) => {
                   </FormControl>
 
                   <FormControl mt={3}>
-                    <Checkbox defaultChecked>Use as a sub-section</Checkbox>
-                    <Input type="text" mt={2} />
+                    <Checkbox isChecked={checkedItems}
+                      onChange={(e) => setCheckedItems(e.target.checked)}>Use as a sub-section</Checkbox>
+
+                    {checkedItems ? (<Input type="text" mt={2} ></Input>) : (
+                      <Input isDisabled type="text" mt={2} bg="grey"></Input>
+                    )}
+
                   </FormControl>
                 </TabPanel>
                 <TabPanel>

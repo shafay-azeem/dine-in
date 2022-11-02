@@ -26,6 +26,29 @@ const MenuModifieModal = (props) => {
   const isError = input === "";
   const [inputList, setInputList] = useState([]);
 
+
+  const removebt = (x) => {
+    // console.log(x)
+    // // /
+    // var z = inputList.length
+    // var k = inputList.length + 1
+    // console.log(z, 'zz')
+    // console.log(k, 'kkk')
+    var y = (inputList.splice(0, inputList.length))
+    setInputList(y)
+    // // }
+    // let position = inputList.length
+    // for (let i = 0; i < inputList.length - 1; i++) {
+    //   console.log(inputList[i], 'ssss')
+    // }
+
+
+    // console.log(inputList.length)
+    // console.log(inputList.values)
+    // console.log(inputList.pop)
+
+  }
+
   const onAddBtnClick = (event) => {
     setInputList(
       inputList.concat(
@@ -33,6 +56,7 @@ const MenuModifieModal = (props) => {
           <Input size="sm" borderRadius="8px" width="60%" placeholder="Name" />
           ,
           <Input
+            key={inputList + 1}
             type="tel"
             placeholder="$"
             size="sm"
@@ -47,6 +71,15 @@ const MenuModifieModal = (props) => {
             width="40%"
           />
           <Switch />
+          <Button
+            colorScheme="teal"
+            variant="solid"
+            mt={2}
+            size="xs"
+            onClick={removebt}
+          >
+            Remove
+          </Button>
         </HStack>
       )
     );
