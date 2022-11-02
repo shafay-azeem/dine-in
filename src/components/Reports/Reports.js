@@ -1,7 +1,8 @@
 import React from "react";
-import { Divider, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Divider, Grid, GridItem, Text } from "@chakra-ui/react";
 import Calender from "../miscellaneous/Calender";
 import { Button, ButtonGroup } from "@chakra-ui/react";
+import { PieChart } from "react-minimal-pie-chart";
 
 const Reports = () => {
   return (
@@ -123,9 +124,15 @@ const Reports = () => {
             Revenue Share by Sections
           </Text>
           <Divider orientation="horizontal" />
-          <Text textAlign="center" mt="4">
-            No order type data yet
-          </Text>
+          <Box>
+            <PieChart
+              data={[
+                { title: "One", value: 10, color: "#E38627" },
+                { title: "Two", value: 15, color: "#C13C37" },
+                { title: "Three", value: 20, color: "#6A2135" },
+              ]}
+            />
+          </Box>
         </GridItem>
         <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
           <Text ml="10" mt="4" mb="4" fontSize="20px">
