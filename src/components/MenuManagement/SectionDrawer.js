@@ -31,20 +31,17 @@ import { BsFillGridFill, BsListTask } from "react-icons/bs";
 const SectionDrawer = (props) => {
   const [checkedItems, setCheckedItems] = React.useState(false);
 
-
-
-  const [value, setValue] = React.useState('1')
-  const [valuetrue, setValueTrue] = React.useState()
+  const [value, setValue] = React.useState("1");
+  const [valuetrue, setValueTrue] = React.useState();
 
   function enabelDisable() {
-    console.log(value, 'vvv')
     if (value === "1") {
-      setValueTrue(true)
-    }
-    else {
-      setValueTrue(false)
+      setValueTrue(true);
+    } else {
+      setValueTrue(false);
     }
   }
+
   return (
     <>
       <Drawer
@@ -127,19 +124,21 @@ const SectionDrawer = (props) => {
                   </FormControl>
 
                   <RadioGroup mt={5} onChange={setValue} value={value}>
-                    <Stack direction="row" >
-                      <Radio value="1" onChange={enabelDisable}>List</Radio>
-                      <Radio value="2" onChange={enabelDisable}>Grid</Radio>
-
-
-
-
+                    <Stack direction="row">
+                      <Radio value="1" onChange={enabelDisable}>
+                        List
+                      </Radio>
+                      <Radio value="2" onChange={enabelDisable}>
+                        Grid
+                      </Radio>
                     </Stack>
 
                     {valuetrue ? (
                       <FormControl mt={5}>
-                        <FormLabel fontWeight="400">Number of Columns</FormLabel>
-                        <Select >
+                        <FormLabel fontWeight="400">
+                          Number of Columns
+                        </FormLabel>
+                        <Select>
                           <option>1</option>
                           <option>2</option>
                           <option>3</option>
@@ -148,7 +147,9 @@ const SectionDrawer = (props) => {
                       </FormControl>
                     ) : (
                       <FormControl mt={5}>
-                        <FormLabel fontWeight="400">Number of Columns</FormLabel>
+                        <FormLabel fontWeight="400">
+                          Number of Columns
+                        </FormLabel>
                         <Select isDisabled>
                           <option>1</option>
                           <option>2</option>
@@ -157,19 +158,19 @@ const SectionDrawer = (props) => {
                         </Select>
                       </FormControl>
                     )}
-
                   </RadioGroup>
 
-
-
-                  {valuetrue ? (<FormControl mt={5}>
-                    <FormLabel fontWeight="400">Hide grid titles</FormLabel>
-                    <Switch />
-                  </FormControl>) : (<FormControl mt={5}>
-                    <FormLabel fontWeight="400">Hide grid titles</FormLabel>
-                    <Switch isDisabled />
-                  </FormControl>)}
-
+                  {valuetrue ? (
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Hide grid titles</FormLabel>
+                      <Switch />
+                    </FormControl>
+                  ) : (
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Hide grid titles</FormLabel>
+                      <Switch isDisabled />
+                    </FormControl>
+                  )}
                 </TabPanel>
               </TabPanels>
             </Tabs>
