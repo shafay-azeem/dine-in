@@ -32,9 +32,26 @@ import {
   RepeatIcon,
   SearchIcon,
 } from "@chakra-ui/icons";
+import * as FileSaver from "file-saver";
+import XLSX from 'sheetjs-style'
+import excelData from "./Export.json"
 
 const Orders = () => {
   const [checkedItems, setCheckedItems] = React.useState(false);
+
+  const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  const fileExtension = '.xlsx';
+  const fileName = "Excel Export"
+  const exportToExcel = async () => {
+    console.log("king")
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const data = new Blob([excelBuffer], { type: fileType });
+    FileSaver.saveAs(data, fileName + fileExtension);
+
+
+  }
 
   function testfunc() {
     window.location.reload();
@@ -91,6 +108,7 @@ const Orders = () => {
                 leftIcon={<ArrowForwardIcon />}
                 colorScheme="teal"
                 variant="solid"
+                onClick={(e) => exportToExcel(fileName)}
               >
                 Export
               </Button>
