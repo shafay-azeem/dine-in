@@ -57,6 +57,11 @@ const VenueSettings = () => {
   const [discount, setDiscount] = useState([]);
   const [service, setService] = useState([]);
   const [tax, setTax] = useState([]);
+  const [textArea, setTextArea] = useState("This");
+
+  const copyText = () => {
+    navigator.clipboard.writeText(textArea);
+  };
 
   const addDiscount = (event) => {
     setDiscount(
@@ -159,7 +164,7 @@ const VenueSettings = () => {
                       <InputGroup>
                         <Input pr="1.5rem" borderRadius="6" />
                         <InputRightElement width="4.5rem">
-                          <Button h="1.75rem" size="sm">
+                          <Button h="1.75rem" size="sm" onClick={copyText}>
                             <CopyIcon />
                           </Button>
                         </InputRightElement>
