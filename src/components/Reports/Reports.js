@@ -1,13 +1,10 @@
 import React from "react";
-import { Box, Divider, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Divider, Grid, GridItem, Input, Text } from "@chakra-ui/react";
 import Calender from "../miscellaneous/Calender";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { PieChart } from "react-minimal-pie-chart";
 
-
 const Reports = () => {
-
-
   return (
     <>
       <Grid>
@@ -17,6 +14,29 @@ const Reports = () => {
           </Text>
         </GridItem>
       </Grid>
+
+      <Box align="end">
+        <Input
+          placeholder="Select Date and Time"
+          size="sm"
+          type="datetime-local"
+          w="20%"
+          bg="white"
+          mt={4}
+          mr={10}
+          borderRadius={5}
+        />
+        <Input
+          placeholder="Select Date and Time"
+          size="sm"
+          type="datetime-local"
+          w="20%"
+          bg="white"
+          mt={4}
+          mr={10}
+          borderRadius={5}
+        />
+      </Box>
 
       <Grid templateColumns="repeat(4, 1fr)" gap={6} p={10}>
         <GridItem w="100%" bg="white" height="200%" borderRadius="10px">
@@ -138,7 +158,6 @@ const Reports = () => {
               { title: "four", value: 15, color: "#C13C88" },
               { title: "five", value: 20, color: "#6A2197" },
             ]}
-
           />
         </GridItem>
         <GridItem w="100%" bg="white" borderRadius="10px">
