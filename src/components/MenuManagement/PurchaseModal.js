@@ -22,7 +22,6 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 
-
 const PurchaseModal = (props) => {
   const [show, setShow] = useState(false);
   return (
@@ -59,8 +58,8 @@ const PurchaseModal = (props) => {
 
             <FormControl mt={5}>
               <FormLabel fontWeight="400">Display After</FormLabel>
-              <NumberInput size="sm" maxW={24} defaultValue={15} min={2}>
-                <NumberInputField />
+              <NumberInput size="sm" maxW={24} min={2}>
+                <NumberInputField placeholder="sec" />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
                   <NumberDecrementStepper />
@@ -84,8 +83,8 @@ const PurchaseModal = (props) => {
             {show ? (
               <FormControl mt={5}>
                 <FormLabel fontWeight="400">Promotion Duration</FormLabel>
-                <NumberInput size="sm" maxW={24} defaultValue={15} min={2}>
-                  <NumberInputField />
+                <NumberInput size="sm" maxW={24} min={2}>
+                  <NumberInputField placeholder="sec" />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
                     <NumberDecrementStepper />

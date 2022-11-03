@@ -28,16 +28,14 @@ import {
 const PromoModal = (props) => {
   const [input, setInput] = useState("");
   const [value, setValue] = React.useState("1");
-  const [Percentage, setPercentage] = useState(true)
-
+  const [Percentage, setPercentage] = useState(true);
 
   function amountfunc() {
-    setPercentage(false)
+    setPercentage(false);
   }
 
-
   function percentagefunc() {
-    setPercentage(true)
+    setPercentage(true);
   }
 
   const isError = input === "";
@@ -74,19 +72,24 @@ const PromoModal = (props) => {
               <FormLabel fontWeight="400">Discount Off</FormLabel>
               <RadioGroup onChange={setValue} value={value}>
                 <Stack direction="row">
-                  <Radio value="1" onChange={percentagefunc} >Percentage</Radio>
-                  <Radio value="2" onChange={amountfunc}>Amount</Radio>
+                  <Radio value="1" onChange={percentagefunc}>
+                    Percentage
+                  </Radio>
+                  <Radio value="2" onChange={amountfunc}>
+                    Amount
+                  </Radio>
                 </Stack>
               </RadioGroup>
-
             </FormControl>
-            {Percentage ? (<NumberInput mt={5} min={2}>
-              <NumberInputField placeholder="Percentage" />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>) : (
+            {Percentage ? (
+              <NumberInput mt={5} min={2}>
+                <NumberInputField placeholder="Percentage" />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            ) : (
               <NumberInput mt={5} min={3}>
                 <NumberInputField placeholder="Amount" />
                 <NumberInputStepper>
@@ -95,7 +98,6 @@ const PromoModal = (props) => {
                 </NumberInputStepper>
               </NumberInput>
             )}
-
 
             <FormControl mt={5}>
               <FormLabel fontWeight="400">Order Mode</FormLabel>
@@ -110,7 +112,7 @@ const PromoModal = (props) => {
             <FormControl mt={5}>
               <FormLabel fontWeight="400">Min. Order Value</FormLabel>
               <NumberInput min={2}>
-                <NumberInputField />
+                <NumberInputField placeholder="$" />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
                   <NumberDecrementStepper />

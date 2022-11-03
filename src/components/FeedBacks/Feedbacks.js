@@ -54,6 +54,11 @@ const Feedbacks = () => {
     setShowResult(false);
   }
 
+  function reload() {
+    window.location.reload();
+    // return false;
+  }
+
   console.log(isOpen, "isOpen");
   return (
     <>
@@ -104,6 +109,7 @@ const Feedbacks = () => {
                     leftIcon={<RepeatIcon />}
                     colorScheme="teal"
                     variant="outline"
+                    onClick={reload}
                   >
                     Reload
                   </Button>
