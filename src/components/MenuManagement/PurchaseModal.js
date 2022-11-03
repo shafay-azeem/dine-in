@@ -24,6 +24,17 @@ import {
 
 const PurchaseModal = (props) => {
   const [show, setShow] = useState(false);
+
+
+  const hiddenFileInput = React.useRef(null);
+
+  const handleClick = event => {
+    hiddenFileInput.current.click();
+  };
+  const handleChange = event => {
+    const fileUploaded = event.target.files[0];
+    // props.handleFile(fileUplooaded);
+  };
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="4xl">
@@ -55,6 +66,17 @@ const PurchaseModal = (props) => {
                 </FormHelperText> */}
               </RadioGroup>
             </FormControl>
+
+
+
+            <Button onClick={handleClick}>
+              Upload a file
+            </Button>
+            <input type="file"
+              ref={hiddenFileInput}
+              onChange={handleChange}
+              style={{ display: 'none' }}
+            />
 
             <FormControl mt={5}>
               <FormLabel fontWeight="400">Display After</FormLabel>
