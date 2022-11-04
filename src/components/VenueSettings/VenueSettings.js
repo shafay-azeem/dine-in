@@ -50,7 +50,7 @@ import AddStaffDrawer from "./AddStaffDrawer";
 
 const VenueSettings = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast()
+  const toast = useToast();
   const {
     isOpen: isOpenStaff,
     onOpen: onOpenStaff,
@@ -61,21 +61,19 @@ const VenueSettings = () => {
   const [tax, setTax] = useState([]);
   const [textArea, setTextArea] = useState("");
 
-
-
   const handleChange = (event) => {
     setTextArea(event.target.value);
-  }
+  };
 
   const copyText = () => {
     navigator.clipboard.writeText(textArea);
     toast({
-      title: 'Copied.',
+      title: "Copied.",
       description: "Your Text Has been Copied.",
-      status: 'success',
+      status: "success",
       duration: 9000,
       isClosable: true,
-    })
+    });
   };
 
   const addDiscount = (event) => {
@@ -177,7 +175,11 @@ const VenueSettings = () => {
                     <FormControl mt={5}>
                       <FormLabel fontWeight="400">Venue ID</FormLabel>
                       <InputGroup>
-                        <Input pr="1.5rem" borderRadius="6" onChange={handleChange} />
+                        <Input
+                          pr="1.5rem"
+                          borderRadius="6"
+                          onChange={handleChange}
+                        />
                         <InputRightElement width="4.5rem">
                           <Button h="1.75rem" size="sm" onClick={copyText}>
                             <CopyIcon />
