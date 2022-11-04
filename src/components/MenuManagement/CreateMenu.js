@@ -21,12 +21,16 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
+import { faTruckMonster } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
 import { BsPlusLg, BsThreeDotsVertical } from "react-icons/bs";
 import ItemDrawer from "./ItemDrawer";
 import SectionDrawer from "./SectionDrawer";
 
 const CreateMenu = () => {
+
+  const [toggle, setToggle] = useState(false)
+  const [show, setShow] = useState(true)
   const {
     isOpen: isOpenSection,
     onOpen: onOpenSection,
@@ -38,6 +42,16 @@ const CreateMenu = () => {
     onOpen: onOpenItem,
     onClose: onCloseItem,
   } = useDisclosure();
+
+
+  function test() {
+    setToggle(true)
+    setShow(false)
+  }
+  function test2() {
+    setToggle(false)
+    setShow(true)
+  }
   return (
     <>
       <Grid
@@ -114,15 +128,19 @@ const CreateMenu = () => {
               <GridItem colStart={4} colEnd={6}>
                 <HStack>
                   <Switch p={5} pl="55%" />
-                  <Button colorScheme="teal" size="sm">
+                  {show ? (<Button colorScheme="teal" size="sm" onClick={test}>
                     Show
-                  </Button>
+                  </Button>) : (<Button colorScheme="teal" size="sm" onClick={test2}>
+                    hide
+                  </Button>)}
+
                 </HStack>
               </GridItem>
             </Grid>
           </Box>
 
-          <Box bg="white" borderRadius={6} p={5} mt={3}>
+
+          {toggle ? (<Box bg="white" borderRadius={6} p={5} mt={3}>
             <Grid templateColumns="repeat(5, 1fr)" gap={4}>
               <GridItem colSpan={2}>
                 <HStack>
@@ -132,7 +150,7 @@ const CreateMenu = () => {
                     src="https://bit.ly/dan-abramov"
                     alt="Dan Abramov"
                   />
-                  <Text pl={2}>Your Section Name</Text>
+                  <Text pl={2}>Your Item Name</Text>
                 </HStack>
               </GridItem>
               <GridItem colStart={4} colEnd={6}>
@@ -159,7 +177,8 @@ const CreateMenu = () => {
                 </HStack>
               </GridItem>
             </Grid>
-          </Box>
+          </Box>) : (console.log("sss"))}
+
         </GridItem>
       </Grid>
     </>
