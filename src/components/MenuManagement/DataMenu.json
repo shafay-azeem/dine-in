@@ -1,0 +1,19 @@
+{
+  "menu": [
+    {
+      "id": 1,
+      "menuId": 101,
+      "name": "Alfredo Paste"
+    },
+    {
+      "id": 2,
+      "menuId": 102,
+      "name": "Sushi"
+    },
+    {
+      "id": 3,
+      "menuId": 103,
+      "name": "Zinger "
+    }
+  ]
+}
