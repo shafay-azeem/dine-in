@@ -140,7 +140,7 @@ const InitialMenu = () => {
                   console.log("ss")
                 )}
               </Button>
-              <ConditionalTable />
+              <ConditionalTable number={1} />
             </TabPanel>
 
             <TabPanel backgroundColor="white" textAlign="right">
@@ -163,21 +163,7 @@ const InitialMenu = () => {
                   console.log("ss")
                 )}
               </Button>
-              <TableContainer>
-                <Table variant="simple">
-                  <Thead backgroundColor="#FAFAFA">
-                    <Tr>
-                      <Th>Promotion Name</Th>
-                      <Th>Description</Th>
-                      <Th>Status</Th>
-                      <Th>Actions</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    <Text textAlign="center">No Data</Text>
-                  </Tbody>
-                </Table>
-              </TableContainer>
+              <ConditionalTable number={2} />
             </TabPanel>
           </TabPanels>
         </Tabs>

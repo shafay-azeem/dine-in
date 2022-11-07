@@ -9,10 +9,10 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const ConditionalTable = () => {
+const ConditionalTable = (props) => {
   return (
     <>
-      <TableContainer>
+      {props.number == 1 ? (<TableContainer>
         <Table variant="simple">
           <Thead backgroundColor="#FAFAFA">
             <Tr>
@@ -26,7 +26,22 @@ const ConditionalTable = () => {
             <Text textAlign="center">No Data</Text>
           </Tbody>
         </Table>
-      </TableContainer>
+      </TableContainer>) : (<TableContainer>
+        <Table variant="simple">
+          <Thead backgroundColor="#FAFAFA">
+            <Tr>
+              <Th>Promotion Name</Th>
+              <Th>Description</Th>
+              <Th>Status</Th>
+              <Th>Actions</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            <Text textAlign="center">No Data</Text>
+          </Tbody>
+        </Table>
+      </TableContainer>)}
+
     </>
   );
 };
