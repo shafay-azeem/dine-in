@@ -19,11 +19,10 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
+import OrderTable from "./Partials/CustomTables/OrderTable";
 
 const ViewOrdersCard = () => {
-
   const history = useHistory();
-
 
   const orders = () => {
     history.push("/order");
@@ -43,39 +42,13 @@ const ViewOrdersCard = () => {
               <Text>Recent Orders</Text>
             </GridItem>
             <GridItem colStart={4} colEnd={6} h="10" textAlign="end" p={5}>
-              <Text color="blue" onClick={orders} cursor="pointer">View Orders</Text>
+              <Text color="blue" onClick={orders} cursor="pointer">
+                View Orders
+              </Text>
             </GridItem>
           </Grid>
           <Divider orientation="horizontal" mt={2} />
-
-          <TableContainer>
-            <Table variant="simple">
-              <Thead backgroundColor="#FAFAFA">
-                <Tr>
-                  <Th>ID</Th>
-                  <Th>Daily No</Th>
-                  <Th>Status</Th>
-                  <Th>Type</Th>
-                  <Th>Customer/Table</Th>
-                  <Th>Waiter</Th>
-                  <Th>Update Time</Th>
-                  <Th>Total</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  <Td>inches</Td>
-                  <Td>millimetres (mm)</Td>
-                  <Td isNumeric>25.4</Td>
-                  <Td>inches</Td>
-                  <Td>millimetres (mm)</Td>
-                  <Td isNumeric>25.4</Td>
-                  <Td>inches</Td>
-                  <Td>millimetres (mm)</Td>
-                </Tr>
-              </Tbody>
-            </Table>
-          </TableContainer>
+          <OrderTable />
         </Box>
       </Center>
     </>
