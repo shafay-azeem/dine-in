@@ -31,6 +31,7 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import "../../App.css";
 import FeedbackDeleteModal from "./FeedbackDeleteModal";
 import CreateFormModal from "./CreateFormModal";
+import ResultTable from "../Partials/CustomTables/ResultTable";
 
 const Feedbacks = () => {
   const handle = useFullScreenHandle();
@@ -167,21 +168,7 @@ const Feedbacks = () => {
 
             <TabPanels>
               <TabPanel backgroundColor="white" m={5}>
-                <TableContainer>
-                  <Table variant="simple">
-                    <Thead backgroundColor="#FAFAFA">
-                      <Tr>
-                        <Th>Results</Th>
-                        <Th>Date</Th>
-                        <Th>Form</Th>
-                        <Th>Actions</Th>
-                      </Tr>
-                    </Thead>
-                    <Tbody>
-                      <Text textAlign="center">No Data</Text>
-                    </Tbody>
-                  </Table>
-                </TableContainer>
+                <ResultTable />
               </TabPanel>
 
               <TabPanel>
