@@ -28,6 +28,7 @@ const OrderTable = () => {
               <Th>Daily No</Th>
               <Th>Status</Th>
               <Th>Type</Th>
+              <Th>Customer</Th>
               <Th>Table</Th>
               <Th>Update Time </Th>
               <Th>Sent Time </Th>
