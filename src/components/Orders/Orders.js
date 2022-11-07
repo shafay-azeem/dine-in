@@ -35,6 +35,7 @@ import {
 import * as FileSaver from "file-saver";
 import XLSX from "sheetjs-style";
 import excelData from "./Export.json";
+import OrderTable from "../Partials/CustomTables/OrderTable";
 
 const Orders = () => {
   const [checkedItems, setCheckedItems] = React.useState(false);
@@ -137,108 +138,16 @@ const Orders = () => {
 
           <TabPanels>
             <TabPanel backgroundColor="white">
-              <TableContainer>
-                <Table variant="simple">
-                  <Thead backgroundColor="#FAFAFA">
-                    <Tr>
-                      <Th>
-                        <Checkbox
-                          isChecked={checkedItems}
-                          onChange={(e) => setCheckedItems(e.target.checked)}
-                        >
-                          ID
-                        </Checkbox>
-                      </Th>
-                      <Th>Daily No</Th>
-                      <Th>Status</Th>
-                      <Th>Type</Th>
-                      <Th>Table</Th>
-                      <Th>Update Time </Th>
-                      <Th>Sent Time </Th>
-                      <Th>Total</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody></Tbody>
-                </Table>
-              </TableContainer>
+              <OrderTable />
             </TabPanel>
             <TabPanel backgroundColor="white">
-              <TableContainer>
-                <Table variant="simple">
-                  <Thead backgroundColor="#FAFAFA">
-                    <Tr>
-                      <Th>
-                        <Checkbox
-                          isChecked={checkedItems}
-                          onChange={(e) => setCheckedItems(e.target.checked)}
-                        >
-                          ID
-                        </Checkbox>
-                      </Th>
-                      <Th>Daily No</Th>
-                      <Th>Status</Th>
-                      <Th>Type</Th>
-                      <Th>Table</Th>
-                      <Th>Update Time </Th>
-                      <Th>Sent Time </Th>
-                      <Th>Total</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody></Tbody>
-                </Table>
-              </TableContainer>
+              <OrderTable />
             </TabPanel>
             <TabPanel backgroundColor="white">
-              <TableContainer>
-                <Table variant="simple">
-                  <Thead backgroundColor="#FAFAFA">
-                    <Tr>
-                      <Th>
-                        <Checkbox
-                          isChecked={checkedItems}
-                          onChange={(e) => setCheckedItems(e.target.checked)}
-                        >
-                          ID
-                        </Checkbox>
-                      </Th>
-                      <Th>Daily No</Th>
-                      <Th>Status</Th>
-                      <Th>Type</Th>
-                      <Th>Table</Th>
-                      <Th>Update Time </Th>
-                      <Th>Sent Time </Th>
-                      <Th>Total</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody></Tbody>
-                </Table>
-              </TableContainer>
+              <OrderTable />
             </TabPanel>
             <TabPanel backgroundColor="white">
-              <TableContainer>
-                <Table variant="simple">
-                  <Thead backgroundColor="#FAFAFA">
-                    <Tr>
-                      <Th>
-                        <Checkbox
-                          isChecked={checkedItems}
-                          onChange={(e) => setCheckedItems(e.target.checked)}
-                        >
-                          ID
-                        </Checkbox>
-                      </Th>
-                      <Th>Daily No</Th>
-                      <Th>Status</Th>
-                      <Th>Type</Th>
-                      <Th>Table</Th>
-                      <Th>Update Time </Th>
-                      <Th>Sent Time </Th>
-                      <Th>Total</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody></Tbody>
-                </Table>
-              </TableContainer>
+              <OrderTable />
             </TabPanel>
           </TabPanels>
         </Tabs>
