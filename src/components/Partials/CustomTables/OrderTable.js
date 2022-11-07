@@ -3,14 +3,22 @@ import {
   Table,
   TableContainer,
   Tbody,
+  Td,
   Th,
   Thead,
   Tr,
 } from "@chakra-ui/react";
 import React from "react";
+import { useState } from "react";
 
-const OrderTable = () => {
+const OrderTable = (props) => {
   const [checkedItems, setCheckedItems] = React.useState(false);
+
+  // setArr(props.data)
+  // console.log(props.data[2])
+
+
+
   return (
     <>
       <TableContainer>
@@ -34,7 +42,15 @@ const OrderTable = () => {
               <Th>Total</Th>
             </Tr>
           </Thead>
-          <Tbody></Tbody>
+          <Tbody>
+            {props.data.map((x, index) => (<Tr key={index}>
+              <Td>{x.DailyNo}</Td>
+              <Td>millimetres (mm)</Td>
+              <Td isNumeric>25.4</Td>
+            </Tr>))}
+          </Tbody>
+
+
         </Table>
       </TableContainer>
     </>
