@@ -91,8 +91,6 @@ const OrderTable = () => {
               <Td>{x.UpdateTime}</Td>
               <Td>{x.SentTime}</Td>
               <Td>{x.Total}</Td>
-
-
             </Tr>))}
           </Tbody>
 

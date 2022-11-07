@@ -19,7 +19,8 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
-import OrderTable from "./Partials/CustomTables/OrderTable";
+import OrderTable from "../Partials/CustomTables/OrderTable";
+
 
 const ViewOrdersCard = () => {
   const history = useHistory();
