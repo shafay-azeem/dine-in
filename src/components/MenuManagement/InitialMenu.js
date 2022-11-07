@@ -16,6 +16,8 @@ import MenuModifieModal from "./MenuModifieModal";
 import PromoModal from "./PromoModal";
 import PurchaseModal from "./PurchaseModal";
 import { useHistory } from "react-router-dom";
+import ModifiersTable from "../Partials/CustomTables/ModifiersTable";
+import ConditionalTable from "../Partials/CustomTables/ConditionalTable";
 
 const InitialMenu = () => {
   const history = useHistory();
@@ -115,20 +117,7 @@ const InitialMenu = () => {
                   console.log("ss")
                 )}
               </Button>
-              <TableContainer>
-                <Table variant="simple">
-                  <Thead backgroundColor="#FAFAFA">
-                    <Tr>
-                      <Th>Group Name</Th>
-                      <Th>Modifiers</Th>
-                      <Th>Actions</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    <Text textAlign="center">No Data</Text>
-                  </Tbody>
-                </Table>
-              </TableContainer>
+              <ModifiersTable />
             </TabPanel>
 
             <TabPanel backgroundColor="white" textAlign="right">
@@ -151,21 +140,7 @@ const InitialMenu = () => {
                   console.log("ss")
                 )}
               </Button>
-              <TableContainer>
-                <Table variant="simple">
-                  <Thead backgroundColor="#FAFAFA">
-                    <Tr>
-                      <Th>Discount Code</Th>
-                      <Th>Description</Th>
-                      <Th>Status</Th>
-                      <Th>Actions</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    <Text textAlign="center">No Data</Text>
-                  </Tbody>
-                </Table>
-              </TableContainer>
+              <ConditionalTable />
             </TabPanel>
 
             <TabPanel backgroundColor="white" textAlign="right">
