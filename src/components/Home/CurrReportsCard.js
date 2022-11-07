@@ -18,8 +18,9 @@ import {
   Text,
   Divider,
 } from "@chakra-ui/react";
-import WelcomeText from "./WelcomeText";
+
 import { useHistory } from "react-router-dom";
+import WelcomeText from "./WelcomeText";
 const CurrReportsCard = () => {
   const history = useHistory();
 
