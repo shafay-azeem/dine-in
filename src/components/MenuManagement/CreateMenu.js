@@ -22,6 +22,7 @@ import {
 
 import React, { useState } from "react";
 import { BsPlusLg, BsThreeDotsVertical } from "react-icons/bs";
+import SectionCard from "../Partials/MenuCards/SectionCard";
 import ItemDrawer from "./ItemDrawer";
 import SectionDrawer from "./SectionDrawer";
 
@@ -50,23 +51,23 @@ const CreateMenu = () => {
     setShow(true);
   }
 
-  const data = [
-    {
-      id: 1,
-      menuId: 101,
-      name: "Alfredo Paste",
-    },
-    {
-      id: 2,
-      menuId: 102,
-      name: "Sushi",
-    },
-    {
-      id: 3,
-      menuId: 103,
-      name: "Zinger ",
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     menuId: 101,
+  //     name: "Alfredo Paste",
+  //   },
+  //   {
+  //     id: 2,
+  //     menuId: 102,
+  //     name: "Sushi",
+  //   },
+  //   {
+  //     id: 3,
+  //     menuId: 103,
+  //     name: "Zinger ",
+  //   },
+  // ];
 
   return (
     <>
@@ -128,6 +129,8 @@ const CreateMenu = () => {
             </VStack>
           </Box>
 
+          <SectionCard />
+          {/* 
           {data.map((x) => (
             <Box bg="white" borderRadius={6} p={5} mt={3} key={x.menuId}>
               <Grid templateColumns="repeat(5, 1fr)" gap={4}>
@@ -158,7 +161,7 @@ const CreateMenu = () => {
                 </GridItem>
               </Grid>
             </Box>
-          ))}
+          ))} */}
 
           {toggle ? (
             <Box bg="white" borderRadius={6} p={5} mt={3}>
