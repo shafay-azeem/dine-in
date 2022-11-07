@@ -52,7 +52,6 @@ const ModifiersTable = () => {
               <Td>{x.GroupName}</Td>
               <Td>{x.Modifier}</Td>
               <Td>{x.Action}</Td>
-
             </Tr>))}
           </Tbody>
         </Table>
