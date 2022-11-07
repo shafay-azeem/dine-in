@@ -5,9 +5,17 @@ import {
   GridItem,
   HStack,
   Image,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Switch,
   Text,
 } from "@chakra-ui/react";
+import { BsPlusLg, BsThreeDotsVertical } from "react-icons/bs";
 import React from "react";
 
 const ItemCard = () => {
