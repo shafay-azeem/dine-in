@@ -21,12 +21,10 @@ const OrderTable = () => {
       Status: "Approved",
       Type: "Order",
       Customer: "Shafay",
-      Table: 'xyz',
-      UpdateTime: '8:00',
+      Table: "xyz",
+      UpdateTime: "8:00",
       SentTime: "9:00",
-      Total: 2000
-
-
+      Total: 2000,
     },
     {
       ID: 2,
@@ -34,12 +32,10 @@ const OrderTable = () => {
       Status: "Approved",
       Type: "Order",
       Customer: "Faizan",
-      Table: 'xyz',
-      UpdateTime: '8:00',
+      Table: "xyz",
+      UpdateTime: "8:00",
       SentTime: "9:00",
-      Total: 2000
-
-
+      Total: 2000,
     },
     {
       ID: 3,
@@ -47,13 +43,12 @@ const OrderTable = () => {
       Status: "Approved",
       Type: "Order",
       Customer: "Maisam",
-      Table: 'xyz',
-      UpdateTime: '8:00',
+      Table: "xyz",
+      UpdateTime: "8:00",
       SentTime: "9:00",
-      Total: 2000
-    }
-  ]
-
+      Total: 2000,
+    },
+  ];
 
   return (
     <>
@@ -81,20 +76,20 @@ const OrderTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((x, index) => (<Tr key={index}>
-              <Td>{x.ID}</Td>
-              <Td>{x.DailyNo}</Td>
-              <Td>{x.Status}</Td>
-              <Td>{x.Type}</Td>
-              <Td>{x.Customer}</Td>
-              <Td>{x.Table}</Td>
-              <Td>{x.UpdateTime}</Td>
-              <Td>{x.SentTime}</Td>
-              <Td>{x.Total}</Td>
-            </Tr>))}
+            {data.map((x, index) => (
+              <Tr key={index}>
+                <Td>{x.ID}</Td>
+                <Td>{x.DailyNo}</Td>
+                <Td>{x.Status}</Td>
+                <Td>{x.Type}</Td>
+                <Td>{x.Customer}</Td>
+                <Td>{x.Table}</Td>
+                <Td>{x.UpdateTime}</Td>
+                <Td>{x.SentTime}</Td>
+                <Td>{x.Total}</Td>
+              </Tr>
+            ))}
           </Tbody>
-
-
         </Table>
       </TableContainer>
     </>
