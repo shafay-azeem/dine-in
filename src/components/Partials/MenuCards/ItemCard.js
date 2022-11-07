@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Divider,
   Grid,
   GridItem,
   HStack,
@@ -17,12 +18,33 @@ import {
 } from "@chakra-ui/react";
 import { BsPlusLg, BsThreeDotsVertical } from "react-icons/bs";
 import React from "react";
+import { useState } from "react";
 
 const ItemCard = () => {
+  const [data, setData] = useState([
+    {
+      id: 0,
+      menuId: 101,
+      name: "Alfredo Paste",
+      active: false,
+    },
+    {
+      id: 1,
+      menuId: 102,
+      name: "Sushi",
+      active: false,
+    },
+    {
+      id: 2,
+      menuId: 103,
+      name: "Zinger ",
+      active: false,
+    },
+  ]);
   return (
     <>
-      <Box bg="white" borderRadius={6} p={5} mt={3}>
-        <Grid templateColumns="repeat(5, 1fr)" gap={4}>
+      {data.map((x, index) => (
+        <Grid templateColumns="repeat(5, 1fr)" gap={4} mt={3}>
           <GridItem colSpan={2}>
             <HStack>
               <Image
@@ -31,7 +53,7 @@ const ItemCard = () => {
                 src="https://bit.ly/dan-abramov"
                 alt="Dan Abramov"
               />
-              <Text pl={2}>Your Item Name</Text>
+              <Text pl={2}>{x.name}</Text>
             </HStack>
           </GridItem>
           <GridItem colStart={4} colEnd={6}>
@@ -58,7 +80,7 @@ const ItemCard = () => {
             </HStack>
           </GridItem>
         </Grid>
-      </Box>
+      ))}
     </>
   );
 };

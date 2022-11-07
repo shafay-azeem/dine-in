@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Divider,
   Grid,
   GridItem,
   HStack,
@@ -11,25 +12,26 @@ import {
 import React from "react";
 import { useState } from "react";
 import ItemCard from "./ItemCard";
+import { AiOutlineDown } from "react-icons/ai";
 
 const SectionCard = () => {
   const [data, setData] = useState([
     {
       id: 0,
       menuId: 101,
-      name: "Alfredo Paste",
+      name: "Menu One",
       active: false,
     },
     {
       id: 1,
       menuId: 102,
-      name: "Sushi",
+      name: "Menu Two",
       active: false,
     },
     {
       id: 2,
       menuId: 103,
-      name: "Zinger ",
+      name: "Menu Three",
       active: false,
     },
   ]);
@@ -60,14 +62,17 @@ const SectionCard = () => {
               <HStack>
                 <Switch p={5} pl="55%" />
 
-                <Button
+                <AiOutlineDown onClick={() => sectionClick(index)} />
+
+                {/* <Button
                   colorScheme="teal"
                   size="sm"
                   onClick={() => sectionClick(index)}
-                ></Button>
+                ></Button> */}
               </HStack>
             </GridItem>
           </Grid>
+
           {x.active ? <ItemCard /> : console.log("ss")}
         </Box>
       ))}
