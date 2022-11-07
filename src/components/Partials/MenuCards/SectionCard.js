@@ -9,20 +9,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { useState } from "react";
 
 const SectionCard = () => {
-  const [toggle, setToggle] = useState(false);
-  const [show, setShow] = useState(true);
-  function test() {
-    setToggle(true);
-    setShow(false);
-  }
-
-  function test2() {
-    setToggle(false);
-    setShow(true);
-  }
   const data = [
     {
       id: 1,
@@ -59,15 +47,14 @@ const SectionCard = () => {
             <GridItem colStart={4} colEnd={6}>
               <HStack>
                 <Switch p={5} pl="55%" />
-                {show ? (
-                  <Button colorScheme="teal" size="sm" onClick={test}>
-                    Show
-                  </Button>
-                ) : (
-                  <Button colorScheme="teal" size="sm" onClick={test2}>
-                    Hide
-                  </Button>
-                )}
+
+                <Button colorScheme="teal" size="sm">
+                  Show
+                </Button>
+
+                <Button colorScheme="teal" size="sm">
+                  Hide
+                </Button>
               </HStack>
             </GridItem>
           </Grid>
