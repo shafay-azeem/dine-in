@@ -58,46 +58,7 @@ const Orders = () => {
     // return false;
   }
 
-  const data = [
-    {
-      ID: 1,
-      DailyNo: 101,
-      Status: "Approved",
-      Type: "Order",
-      Customer: "Shafay",
-      Table: 'xyz',
-      UpdateTime: '8:00',
-      SentTime: "9:00",
-      Total: 2000
 
-
-    },
-    {
-      ID: 2,
-      DailyNo: 101,
-      Status: "Approved",
-      Type: "Order",
-      Customer: "Shafay",
-      Table: 'xyz',
-      UpdateTime: '8:00',
-      SentTime: "9:00",
-      Total: 2000
-
-
-    },
-    {
-      ID: 3,
-      DailyNo: 101,
-      Status: "Approved",
-      Type: "Order",
-      Customer: "Shafay",
-      Table: 'xyz',
-      UpdateTime: '8:00',
-      SentTime: "9:00",
-      Total: 2000
-
-
-    }]
 
   return (
     <>
@@ -179,7 +140,7 @@ const Orders = () => {
 
           <TabPanels>
             <TabPanel backgroundColor="white">
-              <OrderTable data={data} />
+              <OrderTable />
             </TabPanel>
             <TabPanel backgroundColor="white">
               <OrderTable />

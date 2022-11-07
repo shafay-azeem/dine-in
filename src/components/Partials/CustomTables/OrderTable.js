@@ -11,12 +11,48 @@ import {
 import React from "react";
 import { useState } from "react";
 
-const OrderTable = (props) => {
+const OrderTable = () => {
   const [checkedItems, setCheckedItems] = React.useState(false);
 
-  // setArr(props.data)
-  // console.log(props.data[2])
+  const data = [
+    {
+      ID: 1,
+      DailyNo: 101,
+      Status: "Approved",
+      Type: "Order",
+      Customer: "Shafay",
+      Table: 'xyz',
+      UpdateTime: '8:00',
+      SentTime: "9:00",
+      Total: 2000
 
+
+    },
+    {
+      ID: 2,
+      DailyNo: 101,
+      Status: "Approved",
+      Type: "Order",
+      Customer: "Faizan",
+      Table: 'xyz',
+      UpdateTime: '8:00',
+      SentTime: "9:00",
+      Total: 2000
+
+
+    },
+    {
+      ID: 3,
+      DailyNo: 101,
+      Status: "Approved",
+      Type: "Order",
+      Customer: "Maisam",
+      Table: 'xyz',
+      UpdateTime: '8:00',
+      SentTime: "9:00",
+      Total: 2000
+    }
+  ]
 
 
   return (
@@ -26,12 +62,13 @@ const OrderTable = (props) => {
           <Thead backgroundColor="#FAFAFA">
             <Tr>
               <Th>
-                <Checkbox
+                ID
+                {/* <Checkbox
                   isChecked={checkedItems}
                   onChange={(e) => setCheckedItems(e.target.checked)}
                 >
                   ID
-                </Checkbox>
+                </Checkbox> */}
               </Th>
               <Th>Daily No</Th>
               <Th>Status</Th>
@@ -44,10 +81,18 @@ const OrderTable = (props) => {
             </Tr>
           </Thead>
           <Tbody>
-            {props.data.map((x, index) => (<Tr key={index}>
+            {data.map((x, index) => (<Tr key={index}>
+              <Td>{x.ID}</Td>
               <Td>{x.DailyNo}</Td>
-              <Td>millimetres (mm)</Td>
-              <Td isNumeric>25.4</Td>
+              <Td>{x.Status}</Td>
+              <Td>{x.Type}</Td>
+              <Td>{x.Customer}</Td>
+              <Td>{x.Table}</Td>
+              <Td>{x.UpdateTime}</Td>
+              <Td>{x.SentTime}</Td>
+              <Td>{x.Total}</Td>
+
+
             </Tr>))}
           </Tbody>
 
