@@ -23,6 +23,7 @@ import {
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import CustomerModal from "./CustomerModal";
 import { BsSearch } from "react-icons/bs";
+import CustomerTable from "../Partials/CustomTables/CustomerTable";
 
 const Customer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -72,24 +73,7 @@ const Customer = () => {
       </Grid>
 
       <Box m="10">
-        <TableContainer borderRadius={4}>
-          <Table variant="simple">
-            <Thead backgroundColor="#FAFAFA">
-              <Tr>
-                <Th>
-                  <Checkbox defaultChecked mr={5} />
-                  Customer
-                </Th>
-                <Th>Tags</Th>
-                <Th>Email</Th>
-                <Th>Phone</Th>
-                <Th>Total Orders</Th>
-                <Th>Last Visit</Th>
-              </Tr>
-            </Thead>
-            <Tbody></Tbody>
-          </Table>
-        </TableContainer>
+        <CustomerTable />
       </Box>
     </>
   );
