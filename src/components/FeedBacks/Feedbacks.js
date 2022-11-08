@@ -98,10 +98,11 @@ const Feedbacks = () => {
             <GridItem w="100%" h="10">
               <Stack direction={["column", "row"]} spacing="24px">
                 <Box w="100px" h="40px">
-                  <CustomButton btnText={"Export"} />
+                  <CustomButton btnText={"Export"} leftIcon={<ArrowForwardIcon />} />
                 </Box>
                 <Box w="100px" h="40px">
-                  <CustomButton btnText={"Reload"} />
+
+                  <CustomButton btnText={"Reload"} variant={"outline"} leftIcon={< RepeatIcon />} />
                 </Box>
               </Stack>
             </GridItem>

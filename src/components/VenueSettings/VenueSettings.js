@@ -249,7 +249,7 @@ const VenueSettings = () => {
                     </FormControl>
 
                     <Center mt={5}>
-                      <CustomButton btnText={" Save"} />
+                      <CustomButton btnText={" Save"} size={"sm"} />
                     </Center>
                   </Box>
                 </Center>
@@ -400,7 +400,7 @@ const VenueSettings = () => {
                     </FormControl>
 
                     <Center mt={5}>
-                      <CustomButton btnText={" Save"} />
+                      <CustomButton btnText={" Save"} size={"sm"} />
                     </Center>
                   </Box>
                 </Center>
@@ -419,7 +419,7 @@ const VenueSettings = () => {
                 </GridItem>
                 <GridItem colStart={4} colEnd={6} textAlign="right">
 
-                  <CustomButton click={onOpen} btnText={" Add New Tables"} />
+                  <CustomButton click={onOpen} btnText={" Add New Tables"} size={"sm"} leftIcon={<BsPlusLg />} />
 
                   {isOpen ? (
                     <AddTableDrawer
@@ -467,7 +467,7 @@ const VenueSettings = () => {
                 <GridItem colStart={4} colEnd={6} textAlign="right">
 
 
-                  <CustomButton click={onOpenStaff} btnText={" Add New Staff Member"} />
+                  <CustomButton click={onOpenStaff} btnText={" Add New Staff Member"} size={"sm"} leftIcon={<BsPlusLg />} />
 
                   {isOpenStaff ? (
                     <AddStaffDrawer
@@ -505,7 +505,7 @@ const VenueSettings = () => {
                         Discounts
                       </Text>
 
-                      <CustomButton click={addDiscount} btnText={" Add Discounts"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} />
+                      <CustomButton click={addDiscount} btnText={" Add Discounts"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} size={"sm"} />
 
                       {discount}
                     </Box>
@@ -517,7 +517,7 @@ const VenueSettings = () => {
 
 
 
-                      <CustomButton click={addServiceCharges} btnText={"Add Service Charges"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} />
+                      <CustomButton click={addServiceCharges} btnText={"Add Service Charges"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} size={"sm"} />
 
                       {service}
                     </Box>
@@ -527,14 +527,14 @@ const VenueSettings = () => {
                         Taxes
                       </Text>
 
-                      <CustomButton click={addTaxes} btnText={"Add Taxes"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} />
+                      <CustomButton click={addTaxes} btnText={"Add Taxes"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} size={"sm"} />
 
 
                       {tax}
                     </Box>
                     <Center mt={5}>
 
-                      <CustomButton btnText={" Save"} />
+                      <CustomButton btnText={" Save"} size={"sm"} />
                     </Center>
                   </Box>
                 </Center>

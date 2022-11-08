@@ -36,6 +36,7 @@ import * as FileSaver from "file-saver";
 import XLSX from "sheetjs-style";
 import excelData from "./Export.json";
 import OrderTable from "../Partials/CustomTables/OrderTable";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const Orders = () => {
   const [checkedItems, setCheckedItems] = React.useState(false);
@@ -106,24 +107,15 @@ const Orders = () => {
         <GridItem w="100%" h="10" textAlign="center">
           <Stack direction={["column", "row"]} spacing="24px">
             <Box w="100px" h="40px">
-              <Button
-                leftIcon={<ArrowForwardIcon />}
-                colorScheme="teal"
-                variant="solid"
-                onClick={(e) => exportToExcel(fileName)}
-              >
-                Export
-              </Button>
+
+              <CustomButton click={(e) => exportToExcel(fileName)} btnText={"Export"} leftIcon={<ArrowForwardIcon />} />
+
             </Box>
             <Box w="100px" h="40px">
-              <Button
-                leftIcon={<RepeatIcon />}
-                colorScheme="teal"
-                variant="outline"
-                onClick={testfunc}
-              >
-                Reload
-              </Button>
+
+
+              <CustomButton click={testfunc} btnText={"Reload"} variant={"outline"} leftIcon={< RepeatIcon />} />
+
             </Box>
           </Stack>
         </GridItem>

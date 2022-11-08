@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const CustomerModal = (props) => {
   return (
@@ -68,12 +69,10 @@ const CustomerModal = (props) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={props.onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="teal" variant="solid">
-              Export
-            </Button>
+
+            <CustomButton click={props.onClose} btnText={"Cancel"} variant={"outline"} mr={3} size={"sm"} />
+            <CustomButton btnText={"Export"} leftIcon={<ArrowForwardIcon />} size={"sm"} />
+
           </ModalFooter>
         </ModalContent>
       </Modal>

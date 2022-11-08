@@ -108,11 +108,10 @@ const AddStaffDrawer = (props) => {
           </DrawerBody>
 
           <DrawerFooter borderTopWidth="1px">
-            <Button variant="outline" mr={3} onClick={props.onClose}>
-              Cancel
-            </Button>
+            <CustomButton click={props.onClose} btnText={"Cancel"} variant={"outline"} mr={3} size={"sm"} />
 
-            <CustomButton btnText={"Create Tables"} />
+
+            <CustomButton btnText={"Create Tables"} size={"sm"} />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

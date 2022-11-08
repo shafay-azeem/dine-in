@@ -53,7 +53,8 @@ const Customer = () => {
         </GridItem>
 
         <GridItem colStart={6} h="10">
-          <CustomButton click={onOpen} btnText={"Export"} />
+          <CustomButton click={onOpen} btnText={"Export"} leftIcon={<ArrowForwardIcon />} />
+
           {isOpen ? (
             <CustomerModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
           ) : (
