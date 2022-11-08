@@ -19,6 +19,8 @@ import {
   Switch,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
+import CustomButton from "../../CustomElements/CustomButton";
+import { BsPlusLg } from "react-icons/bs";
 
 const MenuModifieModal = (props) => {
   const [input, setInput] = useState("");
@@ -111,26 +113,17 @@ const MenuModifieModal = (props) => {
               </FormControl>
             </Center>
             <Text mt={6}>Modifiers</Text>
-            <Button
-              leftIcon={<AddIcon />}
-              colorScheme="teal"
-              variant="outline"
-              mt={2}
-              size="xs"
-              onClick={onAddBtnClick}
-            >
-              Add more Modifier
-            </Button>
+
+            <CustomButton click={onAddBtnClick} btnText={" Add more Modifier"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} size={"xs"} />
+
+
 
             {inputList}
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} size="sm">
-              Save
-            </Button>
-            <Button onClick={props.onClose} size="sm">
-              Cancel
-            </Button>
+            <CustomButton btnText={"Save"} mr={3} size={"sm"} />
+
+            <CustomButton click={props.onClose} btnText={"Cancel"} variant={"outline"} mr={3} size={"sm"} />
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -24,6 +24,7 @@ import {
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const PromoModal = (props) => {
   const [input, setInput] = useState("");
@@ -127,10 +128,9 @@ const PromoModal = (props) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Save Draft
-            </Button>
-            <Button onClick={props.onClose}>Cancel</Button>
+            <CustomButton btnText={"Save Draft"} mr={3} size={"sm"} />
+
+            <CustomButton click={props.onClose} btnText={"Cancel"} variant={"outline"} mr={3} size={"sm"} />
           </ModalFooter>
         </ModalContent>
       </Modal>

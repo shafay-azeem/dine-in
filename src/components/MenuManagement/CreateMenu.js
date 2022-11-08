@@ -22,6 +22,7 @@ import {
 
 import React, { useState } from "react";
 import { BsPlusLg, BsThreeDotsVertical } from "react-icons/bs";
+import CustomButton from "../../CustomElements/CustomButton";
 import ItemCard from "../Partials/MenuCards/ItemCard";
 import SectionCard from "../Partials/MenuCards/SectionCard";
 import ItemDrawer from "./ItemDrawer";
@@ -61,15 +62,11 @@ const CreateMenu = () => {
           <Box bg="white" borderRadius={6} display="flex" p={5}>
             <VStack>
               <Menu>
-                <MenuButton
-                  as={Button}
-                  colorScheme="teal"
-                  size="sm"
-                  variant="outline"
-                  leftIcon={<BsPlusLg />}
-                >
-                  Add
+                <MenuButton>
+                  <CustomButton btnText={" Add"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} size={"sm"} />
                 </MenuButton>
+
+
                 <Portal>
                   <MenuList>
                     <MenuItem onClick={onOpenSection}>
