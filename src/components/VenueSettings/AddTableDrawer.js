@@ -25,6 +25,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import React from "react";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const AddTableDrawer = (props) => {
   return (
@@ -87,7 +88,8 @@ const AddTableDrawer = (props) => {
             <Button variant="outline" mr={3} onClick={props.onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue">Create Tables</Button>
+            <CustomButton btnText={"Create Tables"} />
+
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

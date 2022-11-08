@@ -20,6 +20,7 @@ import {
 import { AiTwotoneBulb } from "react-icons/ai";
 import React from "react";
 import { useState } from "react";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const AddStaffDrawer = (props) => {
   const [milliseconds, setMilliseconds] = useState(0);
@@ -110,7 +111,8 @@ const AddStaffDrawer = (props) => {
             <Button variant="outline" mr={3} onClick={props.onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue">Create Tables</Button>
+
+            <CustomButton btnText={"Create Tables"} />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

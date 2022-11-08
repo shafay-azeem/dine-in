@@ -47,6 +47,7 @@ import { TbDeviceDesktop } from "react-icons/tb";
 import { BsFillPersonPlusFill, BsPlusLg, BsSearch } from "react-icons/bs";
 import AddTableDrawer from "./AddTableDrawer";
 import AddStaffDrawer from "./AddStaffDrawer";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const VenueSettings = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -248,9 +249,7 @@ const VenueSettings = () => {
                     </FormControl>
 
                     <Center mt={5}>
-                      <Button colorScheme="blue" w="15%">
-                        Save
-                      </Button>
+                      <CustomButton btnText={" Save"} />
                     </Center>
                   </Box>
                 </Center>
@@ -401,9 +400,7 @@ const VenueSettings = () => {
                     </FormControl>
 
                     <Center mt={5}>
-                      <Button colorScheme="blue" w="15%">
-                        Save
-                      </Button>
+                      <CustomButton btnText={" Save"} />
                     </Center>
                   </Box>
                 </Center>
@@ -421,24 +418,19 @@ const VenueSettings = () => {
                   </InputGroup>
                 </GridItem>
                 <GridItem colStart={4} colEnd={6} textAlign="right">
-                  <Button
-                    leftIcon={<BsPlusLg />}
-                    colorScheme="teal"
-                    variant="solid"
-                    size="md"
-                    onClick={onOpen}
-                  >
-                    Add New Tables
-                    {isOpen ? (
-                      <AddTableDrawer
-                        isOpen={isOpen}
-                        onOpen={onOpen}
-                        onClose={onClose}
-                      ></AddTableDrawer>
-                    ) : (
-                      console.log("sss")
-                    )}
-                  </Button>
+
+                  <CustomButton click={onOpen} btnText={" Add New Tables"} />
+
+                  {isOpen ? (
+                    <AddTableDrawer
+                      isOpen={isOpen}
+                      onOpen={onOpen}
+                      onClose={onClose}
+                    ></AddTableDrawer>
+                  ) : (
+                    console.log("sss")
+                  )}
+
                 </GridItem>
               </Grid>
 
@@ -473,24 +465,20 @@ const VenueSettings = () => {
                   </InputGroup>
                 </GridItem>
                 <GridItem colStart={4} colEnd={6} textAlign="right">
-                  <Button
-                    leftIcon={<BsFillPersonPlusFill />}
-                    colorScheme="teal"
-                    variant="solid"
-                    size="md"
-                    onClick={onOpenStaff}
-                  >
-                    Add New Staff Member
-                    {isOpenStaff ? (
-                      <AddStaffDrawer
-                        isOpen={isOpenStaff}
-                        onOpen={onOpenStaff}
-                        onClose={onCloseStaff}
-                      ></AddStaffDrawer>
-                    ) : (
-                      console.log("sss")
-                    )}
-                  </Button>
+
+
+                  <CustomButton click={onOpenStaff} btnText={" Add New Staff Member"} />
+
+                  {isOpenStaff ? (
+                    <AddStaffDrawer
+                      isOpen={isOpenStaff}
+                      onOpen={onOpenStaff}
+                      onClose={onCloseStaff}
+                    ></AddStaffDrawer>
+                  ) : (
+                    console.log("sss")
+                  )}
+
                 </GridItem>
               </Grid>
 
@@ -563,9 +551,8 @@ const VenueSettings = () => {
                       {tax}
                     </Box>
                     <Center mt={5}>
-                      <Button colorScheme="blue" w="15%">
-                        Save
-                      </Button>
+
+                      <CustomButton btnText={" Save"} />
                     </Center>
                   </Box>
                 </Center>
