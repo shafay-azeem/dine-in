@@ -32,6 +32,7 @@ import "../../App.css";
 import FeedbackDeleteModal from "./FeedbackDeleteModal";
 import CreateFormModal from "./CreateFormModal";
 import ResultTable from "../Partials/CustomTables/ResultTable";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const Feedbacks = () => {
   const handle = useFullScreenHandle();
@@ -97,30 +98,10 @@ const Feedbacks = () => {
             <GridItem w="100%" h="10">
               <Stack direction={["column", "row"]} spacing="24px">
                 <Box w="100px" h="40px">
-                  <Button
-                    leftIcon={<ArrowForwardIcon />}
-                    colorScheme="teal"
-                    variant="solid"
-                  >
-                    Export
-                  </Button>
+                  <CustomButton btnText={"Export"} />
                 </Box>
                 <Box w="100px" h="40px">
-                  <Button
-                    leftIcon={<RepeatIcon />}
-                    colorScheme="teal"
-                    variant="outline"
-                    onClick={reload}
-                  >
-                    Reload
-                  </Button>
-                  {/* <Button
-                  colorScheme="teal"
-                  variant="outline"
-                  onClick={handle.enter}
-                >
-                  FullScreen
-                </Button> */}
+                  <CustomButton btnText={"Reload"} />
                 </Box>
               </Stack>
             </GridItem>
@@ -135,24 +116,16 @@ const Feedbacks = () => {
               <Text fontWeight={600}>0 forms listed</Text>
             </GridItem>
             <GridItem colStart={4} colEnd={6} h="10" textAlign="right">
-              <Button
-                leftIcon={<AddIcon />}
-                colorScheme="teal"
-                variant="solid"
-                mb={2}
-                onClick={formOnOpen}
-              >
-                Create Form
-                {formIsOpen ? (
-                  <CreateFormModal
-                    isOpen={formIsOpen}
-                    onOpen={formOnOpen}
-                    onClose={formOnClose}
-                  />
-                ) : (
-                  console.log("create form cant open")
-                )}
-              </Button>
+              <CustomButton click={formOnOpen} btnText={"Create Form"} />
+              {formIsOpen ? (
+                <CreateFormModal
+                  isOpen={formIsOpen}
+                  onOpen={formOnOpen}
+                  onClose={formOnClose}
+                />
+              ) : (
+                console.log("create form cant open")
+              )}
             </GridItem>
           </Grid>
         ) : (
