@@ -12,8 +12,8 @@ import {
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import CustomerModal from "./CustomerModal";
 import { BsSearch } from "react-icons/bs";
-import CustomerTable from "../Partials/CustomTables/CustomerTable";
 import CustomButton from "../../CustomElements/CustomButton";
+import CustomTable from "../../CustomElements/CustomTable";
 
 const Customer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -57,7 +57,14 @@ const Customer = () => {
       </Grid>
 
       <Box m="10">
-        <CustomerTable />
+        <CustomTable
+          Customer={"Customer"}
+          Tags={"Tags"}
+          Email={"Email"}
+          Phone={"Phone"}
+          TotalOrders={"Total Orders"}
+          LastVisit={"Last Visit"}
+        />
       </Box>
     </>
   );

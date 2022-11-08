@@ -34,6 +34,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const ItemDrawer = (props) => {
   const [price, setPrice] = useState([]);
@@ -172,29 +173,25 @@ const ItemDrawer = (props) => {
                   </FormControl>
                 </TabPanel>
                 <TabPanel>
-                  <Button
+                  <CustomButton
+                    click={addPriceOption}
+                    btnText={"Add Price Option"}
+                    variant={"outline"}
                     leftIcon={<BsPlusLg />}
-                    colorScheme="teal"
-                    variant="outline"
-                    size="sm"
                     mt={3}
-                    onClick={addPriceOption}
-                  >
-                    Add Price Option
-                  </Button>
+                    size={"sm"}
+                  />
                   {price}
                 </TabPanel>
                 <TabPanel>
-                  <Button
+                  <CustomButton
+                    click={addModifiersOption}
+                    btnText={"Add Modifiers Option"}
+                    variant={"outline"}
                     leftIcon={<BsPlusLg />}
-                    colorScheme="teal"
-                    variant="outline"
-                    size="sm"
                     mt={3}
-                    onClick={addModifiersOption}
-                  >
-                    Add Modifiers Option
-                  </Button>
+                    size={"sm"}
+                  />
                   {modifiers}
                 </TabPanel>
                 <TabPanel>
@@ -541,10 +538,18 @@ const ItemDrawer = (props) => {
             <Checkbox defaultChecked mr="46%">
               Save and add more
             </Checkbox>
-            <Button variant="outline" mr={3} onClick={props.onClose}>
+            {/* <Button variant="outline" mr={3} onClick={props.onClose}>
               Cancel
-            </Button>
-            <Button colorScheme="blue">Save</Button>
+            </Button> */}
+            <CustomButton
+              click={props.onClose}
+              btnText={"Cancel"}
+              variant={"outline"}
+              mr={3}
+              size={"sm"}
+            />
+            <CustomButton btnText={"Save"} size={"sm"} />
+            {/* <Button colorScheme="blue">Save</Button> */}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
