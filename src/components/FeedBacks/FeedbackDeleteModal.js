@@ -10,6 +10,7 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const FeedbackDeleteModal = (props) => {
   console.log(props);
@@ -28,12 +29,16 @@ const FeedbackDeleteModal = (props) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} size="sm">
-              Delete
-            </Button>
-            <Button onClick={props.onClose} size="sm">
+            {/* <Button onClick={props.onClose} size="sm">
               Cancel
-            </Button>
+            </Button> */}
+            <CustomButton btnText={"Delete"} mr={3} size={"sm"} />
+            <CustomButton
+              click={props.onClose}
+              btnText={"Cancel"}
+              variant={"outline"}
+              size={"sm"}
+            />
           </ModalFooter>
         </ModalContent>
       </Modal>
