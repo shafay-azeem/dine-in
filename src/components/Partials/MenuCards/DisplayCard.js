@@ -19,9 +19,12 @@ import { AiTwotoneEdit } from "react-icons/ai";
 import { AiFillSetting } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const DisplayCard = () => {
 
+
+  const history = useHistory();
   const [data, setData] = useState([
     {
       id: 0,
@@ -51,6 +54,11 @@ const DisplayCard = () => {
       active: false,
     },
   ]);
+
+
+  const createmenu = () => {
+    history.push("/createmenu");
+  };
   return (
     <>
       {data.map((x, index) => (
@@ -75,6 +83,7 @@ const DisplayCard = () => {
               <HStack mt={2} gap={4} ml="38%">
                 <Switch />
                 <CustomButton
+                  click={createmenu}
                   size={"sm"}
                   btnText={"Edit Menu"}
                   leftIcon={<AiTwotoneEdit />}
