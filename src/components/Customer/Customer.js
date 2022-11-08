@@ -24,6 +24,7 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 import CustomerModal from "./CustomerModal";
 import { BsSearch } from "react-icons/bs";
 import CustomerTable from "../Partials/CustomTables/CustomerTable";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const Customer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -51,24 +52,13 @@ const Customer = () => {
           </InputGroup>
         </GridItem>
 
-        <GridItem colStart={6} h="10" bg="papayawhip">
-          <Button
-            leftIcon={<ArrowForwardIcon />}
-            colorScheme="teal"
-            variant="solid"
-            onClick={onOpen}
-          >
-            Export
-            {isOpen ? (
-              <CustomerModal
-                isOpen={isOpen}
-                onOpen={onOpen}
-                onClose={onClose}
-              />
-            ) : (
-              console.log("ss")
-            )}
-          </Button>
+        <GridItem colStart={6} h="10">
+          <CustomButton click={onOpen} btnText={"Export"} />
+          {isOpen ? (
+            <CustomerModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+          ) : (
+            console.log("ss")
+          )}
         </GridItem>
       </Grid>
 

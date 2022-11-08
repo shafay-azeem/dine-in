@@ -18,6 +18,7 @@ import PurchaseModal from "./PurchaseModal";
 import { useHistory } from "react-router-dom";
 import ModifiersTable from "../Partials/CustomTables/ModifiersTable";
 import ConditionalTable from "../Partials/CustomTables/ConditionalTable";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const InitialMenu = () => {
   const history = useHistory();
@@ -60,9 +61,7 @@ const InitialMenu = () => {
             <TabPanel>
               <Grid templateColumns="repeat(5, 1fr)" gap={4} align="right">
                 <GridItem colSpan={12} h="10">
-                  <Button colorScheme="teal" size="sm" onClick={createmenu}>
-                    Create Menu
-                  </Button>
+                  <CustomButton click={createmenu} btnText={"create menu"} />
                 </GridItem>
               </Grid>
               {/* <Grid templateColumns="repeat(5, 1fr)" gap={4} mb={3}>
@@ -98,71 +97,50 @@ const InitialMenu = () => {
               </Grid> */}
             </TabPanel>
             <TabPanel backgroundColor="white" textAlign="right">
-              <Button
-                leftIcon={<AddIcon />}
-                colorScheme="teal"
-                variant="solid"
-                mb={2}
-                onClick={onOpen}
-                size="sm"
-              >
-                Add a Modifiers Group
-                {isOpen ? (
-                  <MenuModifieModal
-                    isOpen={isOpen}
-                    onOpen={onOpen}
-                    onClose={onClose}
-                  />
-                ) : (
-                  console.log("ss")
-                )}
-              </Button>
+              <CustomButton click={onOpen} btnText={"Add a Modifiers Group"} />
+              {isOpen ? (
+                <MenuModifieModal
+                  isOpen={isOpen}
+                  onOpen={onOpen}
+                  onClose={onClose}
+                />
+              ) : (
+                console.log("ss")
+              )}
+
               <ModifiersTable />
             </TabPanel>
 
             <TabPanel backgroundColor="white" textAlign="right">
-              <Button
-                leftIcon={<AddIcon />}
-                colorScheme="teal"
-                variant="solid"
-                mb={2}
-                onClick={promoOnOpen}
-                size="sm"
-              >
-                Add a Promo Code
-                {promoIsOpen ? (
-                  <PromoModal
-                    isOpen={promoIsOpen}
-                    onOpen={promoOnOpen}
-                    onClose={promoOnClose}
-                  />
-                ) : (
-                  console.log("ss")
-                )}
-              </Button>
+              <CustomButton click={promoOnOpen} btnText={"Add a Promo Code"} />
+              {promoIsOpen ? (
+                <PromoModal
+                  isOpen={promoIsOpen}
+                  onOpen={promoOnOpen}
+                  onClose={promoOnClose}
+                />
+              ) : (
+                console.log("ss")
+              )}
               <ConditionalTable number={1} />
             </TabPanel>
 
             <TabPanel backgroundColor="white" textAlign="right">
-              <Button
-                leftIcon={<AddIcon />}
-                colorScheme="teal"
-                variant="solid"
-                mb={2}
-                onClick={purchaseOnOpen}
-                size="sm"
-              >
-                Add a Promotion
-                {purchaseIsOpen ? (
-                  <PurchaseModal
-                    isOpen={purchaseIsOpen}
-                    onOpen={purchaseOnOpen}
-                    onClose={purchaseOnClose}
-                  />
-                ) : (
-                  console.log("ss")
-                )}
-              </Button>
+              <CustomButton
+                click={purchaseOnOpen}
+                btnText={"Add a Promotion"}
+              />
+
+              {purchaseIsOpen ? (
+                <PurchaseModal
+                  isOpen={purchaseIsOpen}
+                  onOpen={purchaseOnOpen}
+                  onClose={purchaseOnClose}
+                />
+              ) : (
+                console.log("ss")
+              )}
+
               <ConditionalTable number={2} />
             </TabPanel>
           </TabPanels>
