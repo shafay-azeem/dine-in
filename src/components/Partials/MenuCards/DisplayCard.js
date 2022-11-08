@@ -1,4 +1,5 @@
 import {
+  Badge,
   Box,
   Button,
   Grid,
@@ -24,7 +25,18 @@ const DisplayCard = () => {
       <Box bg="white" w="100%" p={4} borderRadius={5}>
         <Grid templateColumns="repeat(5, 1fr)" gap={4}>
           <GridItem colSpan={2}>
-            <Text p={2}>Menu</Text>
+            <Text fontSize="20" fontWeight="500">
+              Menu
+              <Badge
+                ml="2"
+                colorScheme="green"
+                borderRadius={5}
+                fontWeight="500"
+                fontSize="11"
+              >
+                Live
+              </Badge>
+            </Text>
           </GridItem>
           <GridItem colStart={4} colEnd={6}>
             <HStack mt={2} gap={4} ml="38%">
