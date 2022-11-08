@@ -15,14 +15,15 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import CustomButton from "../../../CustomElements/CustomButton";
+import { useHistory } from "react-router-dom";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { AiFillSetting } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+
 
 const DisplayCard = () => {
-
+  const history = useHistory();
   const [data, setData] = useState([
     {
       id: 0,
