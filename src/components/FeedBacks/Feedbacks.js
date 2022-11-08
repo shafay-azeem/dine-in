@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -7,21 +7,14 @@ import {
   Input,
   Stack,
   Switch,
-  Table,
-  TableContainer,
   TabPanel,
   TabPanels,
-  Tbody,
   Text,
-  Th,
-  Thead,
   Tooltip,
-  Tr,
   useDisclosure,
 } from "@chakra-ui/react";
 import { Tabs, TabList, Tab } from "@chakra-ui/react";
 import {
-  AddIcon,
   ArrowForwardIcon,
   DeleteIcon,
   EditIcon,

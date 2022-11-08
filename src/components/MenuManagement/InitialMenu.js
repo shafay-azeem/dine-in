@@ -9,9 +9,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
 
-import { AddIcon } from "@chakra-ui/icons";
 import MenuModifieModal from "./MenuModifieModal";
 import PromoModal from "./PromoModal";
 import PurchaseModal from "./PurchaseModal";
@@ -61,7 +59,12 @@ const InitialMenu = () => {
             <TabPanel>
               <Grid templateColumns="repeat(5, 1fr)" gap={4} align="right">
                 <GridItem colSpan={12} h="10">
-                  <CustomButton click={createmenu} btnText={"create menu"} size={"sm"} mb={2} />
+                  <CustomButton
+                    click={createmenu}
+                    btnText={"create menu"}
+                    size={"sm"}
+                    mb={2}
+                  />
                 </GridItem>
               </Grid>
               {/* <Grid templateColumns="repeat(5, 1fr)" gap={4} mb={3}>
@@ -97,7 +100,12 @@ const InitialMenu = () => {
               </Grid> */}
             </TabPanel>
             <TabPanel backgroundColor="white" textAlign="right">
-              <CustomButton click={onOpen} btnText={"Add a Modifiers Group"} size={"sm"} mb={2} />
+              <CustomButton
+                click={onOpen}
+                btnText={"Add a Modifiers Group"}
+                size={"sm"}
+                mb={2}
+              />
               {isOpen ? (
                 <MenuModifieModal
                   isOpen={isOpen}
@@ -112,7 +120,12 @@ const InitialMenu = () => {
             </TabPanel>
 
             <TabPanel backgroundColor="white" textAlign="right">
-              <CustomButton click={promoOnOpen} btnText={"Add a Promo Code"} size={"sm"} mb={2} />
+              <CustomButton
+                click={promoOnOpen}
+                btnText={"Add a Promo Code"}
+                size={"sm"}
+                mb={2}
+              />
               {promoIsOpen ? (
                 <PromoModal
                   isOpen={promoIsOpen}
@@ -129,7 +142,8 @@ const InitialMenu = () => {
               <CustomButton
                 click={purchaseOnOpen}
                 btnText={"Add a Promotion"}
-                size={"sm"} mb={2}
+                size={"sm"}
+                mb={2}
               />
 
               {purchaseIsOpen ? (

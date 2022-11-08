@@ -7,7 +7,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
   Text,
 } from "@chakra-ui/react";
 import CustomButton from "../../CustomElements/CustomButton";
@@ -29,9 +28,6 @@ const FeedbackDeleteModal = (props) => {
           </ModalBody>
 
           <ModalFooter>
-            {/* <Button onClick={props.onClose} size="sm">
-              Cancel
-            </Button> */}
             <CustomButton btnText={"Delete"} mr={3} size={"sm"} />
             <CustomButton
               click={props.onClose}

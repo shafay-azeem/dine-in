@@ -5,7 +5,16 @@ const CustomButton = (props) => {
   console.log(props.num, "num");
   return (
     <>
-      <Button colorScheme="yellow" size={props.size} onClick={props.click} variant={props.variant} leftIcon={props.leftIcon} mt={props.mt} mr={props.mr} mb={props.mb}>
+      <Button
+        colorScheme="teal"
+        size={props.size}
+        onClick={props.click}
+        variant={props.variant}
+        leftIcon={props.leftIcon}
+        mt={props.mt}
+        mr={props.mr}
+        mb={props.mb}
+      >
         {props.btnText}
       </Button>
     </>

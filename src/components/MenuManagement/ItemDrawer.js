@@ -1,4 +1,3 @@
-import { PhoneIcon } from "@chakra-ui/icons";
 import {
   Button,
   Drawer,
@@ -20,15 +19,9 @@ import {
   Switch,
   Checkbox,
   Select,
-  RadioGroup,
-  Stack,
-  Radio,
   HStack,
   InputGroup,
-  InputLeftElement,
   InputLeftAddon,
-  Box,
-  Center,
   Grid,
   GridItem,
   NumberIncrementStepper,
@@ -40,7 +33,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { BsFillPersonPlusFill, BsPlusLg, BsSearch } from "react-icons/bs";
+import { BsPlusLg } from "react-icons/bs";
 
 const ItemDrawer = (props) => {
   const [price, setPrice] = useState([]);

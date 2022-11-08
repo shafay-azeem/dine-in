@@ -1,21 +1,12 @@
-import { CheckIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Button,
   Grid,
   GridItem,
-  HStack,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
   Portal,
-  Switch,
-  Text,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
@@ -23,7 +14,7 @@ import {
 import React, { useState } from "react";
 import { BsPlusLg, BsThreeDotsVertical } from "react-icons/bs";
 import CustomButton from "../../CustomElements/CustomButton";
-import ItemCard from "../Partials/MenuCards/ItemCard";
+
 import SectionCard from "../Partials/MenuCards/SectionCard";
 import ItemDrawer from "./ItemDrawer";
 import SectionDrawer from "./SectionDrawer";
@@ -63,9 +54,14 @@ const CreateMenu = () => {
             <VStack>
               <Menu>
                 <MenuButton>
-                  <CustomButton btnText={" Add"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} size={"sm"} />
+                  <CustomButton
+                    btnText={" Add"}
+                    variant={"outline"}
+                    leftIcon={<BsPlusLg />}
+                    mt={3}
+                    size={"sm"}
+                  />
                 </MenuButton>
-
 
                 <Portal>
                   <MenuList>

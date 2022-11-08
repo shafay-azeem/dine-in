@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Button,
   Stack,
   Text,
   Modal,
@@ -69,10 +68,18 @@ const CustomerModal = (props) => {
           </ModalBody>
 
           <ModalFooter>
-
-            <CustomButton click={props.onClose} btnText={"Cancel"} variant={"outline"} mr={3} size={"sm"} />
-            <CustomButton btnText={"Export"} leftIcon={<ArrowForwardIcon />} size={"sm"} />
-
+            <CustomButton
+              click={props.onClose}
+              btnText={"Cancel"}
+              variant={"outline"}
+              mr={3}
+              size={"sm"}
+            />
+            <CustomButton
+              btnText={"Export"}
+              leftIcon={<ArrowForwardIcon />}
+              size={"sm"}
+            />
           </ModalFooter>
         </ModalContent>
       </Modal>

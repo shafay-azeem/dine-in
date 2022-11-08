@@ -8,7 +8,6 @@ import {
   TabPanels,
   Tabs,
   Text,
-  Center,
   HStack,
   Switch,
   Button,

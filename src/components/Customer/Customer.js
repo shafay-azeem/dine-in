@@ -1,9 +1,6 @@
 import React from "react";
 import {
   Box,
-  Button,
-  Center,
-  Divider,
   Grid,
   GridItem,
   Text,
@@ -11,14 +8,6 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Checkbox,
-  TableContainer,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import CustomerModal from "./CustomerModal";
@@ -53,7 +42,11 @@ const Customer = () => {
         </GridItem>
 
         <GridItem colStart={6} h="10">
-          <CustomButton click={onOpen} btnText={"Export"} leftIcon={<ArrowForwardIcon />} />
+          <CustomButton
+            click={onOpen}
+            btnText={"Export"}
+            leftIcon={<ArrowForwardIcon />}
+          />
 
           {isOpen ? (
             <CustomerModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
