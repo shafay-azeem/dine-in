@@ -13,6 +13,7 @@ import {
   Button,
   Checkbox,
 } from "@chakra-ui/react";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const CreateFormModal = (props) => {
   return (
@@ -39,10 +40,15 @@ const CreateFormModal = (props) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Create a Form
-            </Button>
-            <Button onClick={props.onClose}>Cancel</Button>
+            <CustomButton btnText={"Create a Form"} mr={3} size={"sm"} />
+
+            <CustomButton
+              click={props.onClose}
+              btnText={"Cancel"}
+              variant={"outline"}
+              mr={3}
+              size={"sm"}
+            />
           </ModalFooter>
         </ModalContent>
       </Modal>

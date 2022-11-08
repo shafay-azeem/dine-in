@@ -33,12 +33,32 @@ import FeedbackDeleteModal from "./FeedbackDeleteModal";
 import CreateFormModal from "./CreateFormModal";
 import ResultTable from "../Partials/CustomTables/ResultTable";
 import CustomButton from "../../CustomElements/CustomButton";
+import * as FileSaver from "file-saver";
+import XLSX from "sheetjs-style";
+import excelData from "../Orders/Export.json";
 
 const Feedbacks = () => {
   const handle = useFullScreenHandle();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showform, setShowForm] = useState(false);
   const [showresult, setShowResult] = useState(true);
+
+  const fileType =
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+  const fileExtension = ".xlsx";
+  const fileName = "Excel Export";
+  const exportToExcel = async () => {
+    console.log("king");
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    const data = new Blob([excelBuffer], { type: fileType });
+    FileSaver.saveAs(data, fileName + fileExtension);
+  };
+
+  function reload() {
+    window.location.reload();
+  }
 
   const {
     isOpen: formIsOpen,
@@ -98,11 +118,19 @@ const Feedbacks = () => {
             <GridItem w="100%" h="10">
               <Stack direction={["column", "row"]} spacing="24px">
                 <Box w="100px" h="40px">
-                  <CustomButton btnText={"Export"} leftIcon={<ArrowForwardIcon />} />
+                  <CustomButton
+                    btnText={"Export"}
+                    leftIcon={<ArrowForwardIcon />}
+                    click={(e) => exportToExcel(fileName)}
+                  />
                 </Box>
                 <Box w="100px" h="40px">
-
-                  <CustomButton btnText={"Reload"} variant={"outline"} leftIcon={< RepeatIcon />} />
+                  <CustomButton
+                    click={reload}
+                    btnText={"Reload"}
+                    variant={"outline"}
+                    leftIcon={<RepeatIcon />}
+                  />
                 </Box>
               </Stack>
             </GridItem>

@@ -38,18 +38,14 @@ import excelData from "./Export.json";
 import OrderTable from "../Partials/CustomTables/OrderTable";
 import CustomButton from "../../CustomElements/CustomButton";
 
-
 const Orders = () => {
   const [checkedItems, setCheckedItems] = React.useState(false);
-
-
 
   const fileType =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
   const fileExtension = ".xlsx";
   const fileName = "Excel Export";
   const exportToExcel = async () => {
-
     console.log("king");
     const ws = XLSX.utils.json_to_sheet(excelData);
     const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
@@ -113,7 +109,6 @@ const Orders = () => {
                 click={(e) => exportToExcel(fileName)}
                 btnText={"Export"}
                 leftIcon={<ArrowForwardIcon />}
-
               />
             </Box>
             <Box w="100px" h="40px">
