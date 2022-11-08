@@ -504,16 +504,9 @@ const VenueSettings = () => {
                       <Text fontSize="17px" fontWeight="500">
                         Discounts
                       </Text>
-                      <Button
-                        leftIcon={<BsPlusLg />}
-                        colorScheme="teal"
-                        variant="outline"
-                        size="sm"
-                        mt={3}
-                        onClick={addDiscount}
-                      >
-                        Add Discounts
-                      </Button>
+
+                      <CustomButton click={addDiscount} btnText={" Add Discounts"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} />
+
                       {discount}
                     </Box>
 
@@ -521,16 +514,11 @@ const VenueSettings = () => {
                       <Text fontSize="17px" fontWeight="500">
                         Service Charges
                       </Text>
-                      <Button
-                        leftIcon={<BsPlusLg />}
-                        colorScheme="teal"
-                        variant="outline"
-                        size="sm"
-                        mt={3}
-                        onClick={addServiceCharges}
-                      >
-                        Add Service Charges
-                      </Button>
+
+
+
+                      <CustomButton click={addServiceCharges} btnText={"Add Service Charges"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} />
+
                       {service}
                     </Box>
 
@@ -538,16 +526,10 @@ const VenueSettings = () => {
                       <Text fontSize="17px" fontWeight="500">
                         Taxes
                       </Text>
-                      <Button
-                        leftIcon={<BsPlusLg />}
-                        colorScheme="teal"
-                        variant="outline"
-                        size="sm"
-                        mt={3}
-                        onClick={addTaxes}
-                      >
-                        Add Taxes
-                      </Button>
+
+                      <CustomButton click={addTaxes} btnText={"Add Taxes"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} />
+
+
                       {tax}
                     </Box>
                     <Center mt={5}>
