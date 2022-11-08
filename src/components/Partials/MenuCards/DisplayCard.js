@@ -23,8 +23,6 @@ import { useHistory } from "react-router-dom";
 
 const DisplayCard = () => {
 
-
-  const history = useHistory();
   const [data, setData] = useState([
     {
       id: 0,
@@ -77,7 +75,9 @@ const DisplayCard = () => {
                   {x.status}
                 </Badge>
               </Text>
-
+              <Text fontSize="13" fontWeight="400" p={2}>
+                {x.item} item, last updated on {x.date}
+              </Text>
             </GridItem>
             <GridItem colStart={4} colEnd={6}>
               <HStack mt={2} gap={4} ml="38%">
@@ -103,7 +103,6 @@ const DisplayCard = () => {
           </Grid>
         </Box>
       ))}
-
     </>
   );
 };
