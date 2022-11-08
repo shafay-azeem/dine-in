@@ -37,30 +37,26 @@ import XLSX from "sheetjs-style";
 import excelData from "./Export.json";
 import OrderTable from "../Partials/CustomTables/OrderTable";
 import CustomButton from "../../CustomElements/CustomButton";
-import GlobalFunction from "../../global/GlobalFunction";
+
 
 const Orders = () => {
   const [checkedItems, setCheckedItems] = React.useState(false);
 
-  function myfunc() {
-    // console.log('test')
-    <GlobalFunction fileName={fileName} fileExtension={fileName} fileType={fileName} />
 
-  }
 
   const fileType =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
   const fileExtension = ".xlsx";
   const fileName = "Excel Export";
-  // const exportToExcel = async () => {
-  // // <GlobalFunction fileName={x} fileExtension={z} fileType={y} />
-  //   console.log("king");
-  //   const ws = XLSX.utils.json_to_sheet(excelData);
-  //   const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
-  //   const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
-  //   const data = new Blob([excelBuffer], { type: fileType });
-  //   FileSaver.saveAs(data, fileName + fileExtension);
-  // };
+  const exportToExcel = async () => {
+
+    console.log("king");
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    const data = new Blob([excelBuffer], { type: fileType });
+    FileSaver.saveAs(data, fileName + fileExtension);
+  };
 
   function testfunc() {
     window.location.reload();
@@ -114,7 +110,7 @@ const Orders = () => {
           <Stack direction={["column", "row"]} spacing="24px">
             <Box w="100px" h="40px">
               <CustomButton
-                click={() => myfunc}
+                click={(e) => exportToExcel(fileName)}
                 btnText={"Export"}
                 leftIcon={<ArrowForwardIcon />}
 
