@@ -43,7 +43,9 @@ const Orders = () => {
   const [checkedItems, setCheckedItems] = React.useState(false);
 
   function myfunc() {
-    GlobalFunction();
+    // console.log('test')
+    <GlobalFunction fileName={fileName} fileExtension={fileName} fileType={fileName} />
+
   }
 
   const fileType =
@@ -51,6 +53,7 @@ const Orders = () => {
   const fileExtension = ".xlsx";
   const fileName = "Excel Export";
   // const exportToExcel = async () => {
+  // // <GlobalFunction fileName={x} fileExtension={z} fileType={y} />
   //   console.log("king");
   //   const ws = XLSX.utils.json_to_sheet(excelData);
   //   const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
@@ -111,12 +114,10 @@ const Orders = () => {
           <Stack direction={["column", "row"]} spacing="24px">
             <Box w="100px" h="40px">
               <CustomButton
-                // click={(e) => exportToExcel(fileName)}
+                click={() => myfunc}
                 btnText={"Export"}
                 leftIcon={<ArrowForwardIcon />}
-                fileType={fileType}
-                fileName={fileName}
-                fileExtension={fileExtension}
+
               />
             </Box>
             <Box w="100px" h="40px">

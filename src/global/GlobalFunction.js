@@ -3,6 +3,7 @@ import * as FileSaver from "file-saver";
 import XLSX from "sheetjs-style";
 
 const GlobalFunction = (props) => {
+  console.log("hello")
   const exportToExcel = async () => {
     const ws = XLSX.utils.json_to_sheet(props.excelData);
     const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
