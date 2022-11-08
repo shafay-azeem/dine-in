@@ -6,7 +6,7 @@ const CustomButton = (props) => {
   return (
     <>
       <Button
-        colorScheme="yellow"
+        colorScheme="teal"
         size={props.size}
         onClick={props.click}
         variant={props.variant}

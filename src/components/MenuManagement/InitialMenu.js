@@ -17,6 +17,7 @@ import { useHistory } from "react-router-dom";
 import ModifiersTable from "../Partials/CustomTables/ModifiersTable";
 import ConditionalTable from "../Partials/CustomTables/ConditionalTable";
 import CustomButton from "../../CustomElements/CustomButton";
+import DisplayCard from "../Partials/MenuCards/DisplayCard";
 
 const InitialMenu = () => {
   const history = useHistory();
@@ -67,37 +68,7 @@ const InitialMenu = () => {
                   />
                 </GridItem>
               </Grid>
-              {/* <Grid templateColumns="repeat(5, 1fr)" gap={4} mb={3}>
-                <GridItem colSpan={2} w="65%">
-                  <InputGroup>
-                    <InputLeftElement
-                      pointerEvents="none"
-                      children={<BsSearch color="gray.300" />}
-                    />
-                    <Input type="tel" placeholder="Search tables" bg="white" />
-                  </InputGroup>
-                </GridItem>
-                <GridItem colStart={4} colEnd={6} textAlign="right">
-                  <Button
-                    leftIcon={<BsPlusLg />}
-                    colorScheme="teal"
-                    variant="solid"
-                    size="md"
-                    onClick={onOpen}
-                  >
-                    Add New Tables
-                    {isOpen ? (
-                      <AddTableDrawer
-                        isOpen={isOpen}
-                        onOpen={onOpen}
-                        onClose={onClose}
-                      ></AddTableDrawer>
-                    ) : (
-                      console.log("sss")
-                    )}
-                  </Button>
-                </GridItem>
-              </Grid> */}
+              <DisplayCard />
             </TabPanel>
             <TabPanel backgroundColor="white" textAlign="right">
               <CustomButton
