@@ -56,6 +56,7 @@ const SettingDrawer = (props) => {
             </TabList>
 
             <TabPanels>
+              {/* Overview */}
               <TabPanel>
                 <FormControl isRequired>
                   <FormLabel fontWeight="400">Name</FormLabel>
@@ -77,6 +78,9 @@ const SettingDrawer = (props) => {
                   <Switch />
                 </FormControl>
               </TabPanel>
+              {/* Overview */}
+
+              {/* Customize View */}
               <TabPanel>
                 <SimpleGrid columns={2} spacing={10}>
                   <Box>
@@ -125,6 +129,9 @@ const SettingDrawer = (props) => {
                   </Box>
                 </SimpleGrid>
               </TabPanel>
+              {/* Customize View */}
+
+              {/* Visibility */}
 
               <TabPanel>
                 <Text>
@@ -145,43 +152,25 @@ const SettingDrawer = (props) => {
                   </Checkbox>
                 </VStack>
               </TabPanel>
+              {/* Visibility */}
+
+              {/* Availability */}
               <TabPanel>
                 <RadioGroup onChange={setValue} value={value}>
-                  <FormControl>
-                    <Radio value="1">Always</Radio>
-                    <FormHelperText>
-                      The menu will always be shown
-                    </FormHelperText>
-                  </FormControl>
-                  <FormControl mt={5}>
-                    <Radio value="2">Specific Dates & Times</Radio>
-                    <FormHelperText>
-                      The menu will be visible between specific dates.
-                    </FormHelperText>
-                  </FormControl>
-                  <Text>
+                  <Radio value="1">Always</Radio>
+                  <Text ml={6} fontSize="13px" color="gray">
+                    The menu will always be shown
+                  </Text>
+
+                  <Radio value="2" mt={3}>
+                    Specific Dates & Times
+                  </Radio>
+                  <Text ml={6} fontSize="13px" color="gray" mt={3}>
+                    The menu will be visible between specific dates.
+                  </Text>
+                  <Text ml={6} fontSize="14px" color="gray">
                     Current Time: Wednesday, November 9th 2022, 01:38:25
                   </Text>
-                  <FormControl mt={5}>
-                    <FormLabel fontWeight="400">Start Date</FormLabel>
-                    <Input
-                      placeholder="Select Date and Time"
-                      size="sm"
-                      type="date"
-                    />
-                  </FormControl>
-                  <FormControl mt={5}>
-                    <FormLabel fontWeight="400">End Date</FormLabel>
-                    <Input
-                      placeholder="Select Date and Time"
-                      size="sm"
-                      type="date"
-                    />
-                  </FormControl>
-
-                  <FormControl mt={5}>
-                    <Radio value="3">All Day</Radio>
-                  </FormControl>
 
                   <FormControl mt={5}>
                     <FormLabel fontWeight="400">Start Date</FormLabel>
@@ -191,6 +180,7 @@ const SettingDrawer = (props) => {
                       type="date"
                     />
                   </FormControl>
+
                   <FormControl mt={5}>
                     <FormLabel fontWeight="400">End Date</FormLabel>
                     <Input
@@ -200,15 +190,86 @@ const SettingDrawer = (props) => {
                     />
                   </FormControl>
 
-                  <FormControl mt={5} mb={4}>
-                    <Radio value="4">Periodic</Radio>
+                  <Radio value="3" mt={5}>
+                    All Day
+                  </Radio>
+
+                  <FormControl mt={5}>
+                    <FormLabel fontWeight="400">Start Date</FormLabel>
+                    <Input
+                      placeholder="Select Date and Time"
+                      size="sm"
+                      type="date"
+                    />
                   </FormControl>
+
+                  <FormControl mt={5}>
+                    <FormLabel fontWeight="400">End Date</FormLabel>
+                    <Input
+                      placeholder="Select Date and Time"
+                      size="sm"
+                      type="date"
+                    />
+                  </FormControl>
+
+                  <Radio value="4" mt={5} mb={4}>
+                    Periodic
+                  </Radio>
 
                   <SimpleGrid columns={3} spacing={10} ml={5}>
                     <Box>
+                      <Radio mt={1}>Sunday</Radio>
+                    </Box>
+
+                    <Box>
                       <FormControl mt={1}>
-                        <Radio>Sunday</Radio>
+                        <FormLabel fontWeight="400">Start Time</FormLabel>
+                        <Input
+                          placeholder="Select Date and Time"
+                          size="sm"
+                          type="time"
+                        />
                       </FormControl>
+                    </Box>
+
+                    <Box>
+                      <FormControl mt={1}>
+                        <FormLabel fontWeight="400">End Time</FormLabel>
+                        <Input
+                          placeholder="Select Date and Time"
+                          size="sm"
+                          type="time"
+                        />
+                      </FormControl>
+                    </Box>
+
+                    <Box>
+                      <Radio mt={1}>Monday</Radio>
+                    </Box>
+
+                    <Box>
+                      <FormControl mt={1}>
+                        <FormLabel fontWeight="400">Start Time</FormLabel>
+                        <Input
+                          placeholder="Select Date and Time"
+                          size="sm"
+                          type="time"
+                        />
+                      </FormControl>
+                    </Box>
+                    <Box>
+                      <FormControl mt={1}>
+                        <FormLabel fontWeight="400">End Time</FormLabel>
+                        <Input
+                          placeholder="Select Date and Time"
+                          size="sm"
+                          type="time"
+                        />
+                      </FormControl>
+                    </Box>
+
+                    <Box>
+                      <Radio mt={1}>Tuesday</Radio>
                     </Box>
                     <Box>
                       <FormControl mt={1}>
@@ -232,10 +293,9 @@ const SettingDrawer = (props) => {
                     </Box>
 
                     <Box>
-                      <FormControl mt={1}>
-                        <Radio>Monday</Radio>
-                      </FormControl>
+                      <Radio mt={1}>Wednesday</Radio>
                     </Box>
+
                     <Box>
                       <FormControl mt={1}>
                         <FormLabel fontWeight="400">Start Time</FormLabel>
@@ -258,10 +318,9 @@ const SettingDrawer = (props) => {
                     </Box>
 
                     <Box>
-                      <FormControl mt={1}>
-                        <Radio>Tuesday</Radio>
-                      </FormControl>
+                      <Radio mt={1}>Thursday</Radio>
                     </Box>
+
                     <Box>
                       <FormControl mt={1}>
                         <FormLabel fontWeight="400">Start Time</FormLabel>
@@ -284,10 +343,9 @@ const SettingDrawer = (props) => {
                     </Box>
 
                     <Box>
-                      <FormControl mt={1}>
-                        <Radio>Wednesday</Radio>
-                      </FormControl>
+                      <Radio mt={1}>Friday</Radio>
                     </Box>
+
                     <Box>
                       <FormControl mt={1}>
                         <FormLabel fontWeight="400">Start Time</FormLabel>
@@ -310,62 +368,9 @@ const SettingDrawer = (props) => {
                     </Box>
 
                     <Box>
-                      <FormControl mt={1}>
-                        <Radio>Thursday</Radio>
-                      </FormControl>
-                    </Box>
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">Start Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">End Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
+                      <Radio mt={1}>Saturday</Radio>
                     </Box>
 
-                    <Box>
-                      <FormControl mt={1}>
-                        <Radio>Friday</Radio>
-                      </FormControl>
-                    </Box>
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">Start Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">End Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-
-                    <Box>
-                      <FormControl mt={1}>
-                        <Radio>Saturday</Radio>
-                      </FormControl>
-                    </Box>
                     <Box>
                       <FormControl mt={1}>
                         <FormLabel fontWeight="400">Start Time</FormLabel>
@@ -389,6 +394,7 @@ const SettingDrawer = (props) => {
                   </SimpleGrid>
                 </RadioGroup>
               </TabPanel>
+              {/* Availability */}
             </TabPanels>
           </Tabs>
         </DrawerBody>
