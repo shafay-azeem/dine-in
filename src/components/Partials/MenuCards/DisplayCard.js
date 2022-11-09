@@ -12,6 +12,7 @@ import {
   SimpleGrid,
   Switch,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import CustomButton from "../../../CustomElements/CustomButton";
@@ -20,10 +21,13 @@ import { AiTwotoneEdit } from "react-icons/ai";
 import { AiFillSetting } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
+import SettingDrawer from "../../MenuManagement/SettingDrawer";
 
 
 const DisplayCard = () => {
   const history = useHistory();
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const [data, setData] = useState([
     {
       id: 0,
@@ -89,7 +93,16 @@ const DisplayCard = () => {
                   btnText={"Edit Menu"}
                   leftIcon={<AiTwotoneEdit />}
                 />
-                <AiFillSetting />
+                <AiFillSetting onClick={onOpen} />
+                {isOpen ? (
+                  <SettingDrawer
+                    isOpen={isOpen}
+                    onOpen={onOpen}
+                    onClose={onClose}
+                  ></SettingDrawer>
+                ) : (
+                  console.log("sss")
+                )}
                 <Menu>
                   <MenuButton>
                     <BsThreeDotsVertical as={Button} />
