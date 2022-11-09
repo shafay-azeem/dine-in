@@ -200,11 +200,11 @@ const SettingDrawer = (props) => {
                     />
                   </FormControl>
 
-                  <FormControl mt={5}>
-                    <Radio>Periodic</Radio>
+                  <FormControl mt={5} mb={4}>
+                    <Radio value="4">Periodic</Radio>
                   </FormControl>
 
-                  <SimpleGrid columns={3} spacing={10}>
+                  <SimpleGrid columns={3} spacing={10} ml={5}>
                     <Box>
                       <FormControl mt={1}>
                         <Radio>Sunday</Radio>
