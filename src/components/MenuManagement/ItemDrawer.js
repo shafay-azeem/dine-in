@@ -119,12 +119,18 @@ const ItemDrawer = (props) => {
                 <TabPanel>
                   <FormControl>
                     <FormLabel fontWeight="400">Name</FormLabel>
-                    <Input type="text" />
+                    <Input
+                      type="text"
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Description</FormLabel>
-                    <Textarea placeholder="Here is a sample placeholder" />
+                    <Textarea
+                      placeholder="Here is a sample placeholder"
+                      onChange={(e) => setDescription(e.target.value)}
+                    />
                   </FormControl>
 
                   <FormControl mt={3}>
