@@ -34,6 +34,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
+import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 
 const ItemDrawer = (props) => {
@@ -45,10 +46,64 @@ const ItemDrawer = (props) => {
 
   const [name, setName] = useState();
   const [description, setDescription] = useState();
-  const [note, setNote] = useState();
-  const [searchSection, setsearchSection] = useState();
   const [select, setSelect] = useState();
+  const [ingredient, setIngredient] = useState();
+  const [time, setTime] = useState();
+  const [calories, setCalories] = useState();
+  const [recommendedItem, setRecommendedItem] = useState();
 
+
+
+  const { data } = MenuState()
+
+
+  let didi = {
+    id: 0,
+    menuId: "01",
+    menuName: "menu one",
+    menuDescription: "i am menu",
+    discountNote: "10%",
+    createdDate: "10/11/2022",
+    createdTime: "12:00",
+    endDate: "11/11/2022",
+    endTime: "12:00",
+    sectionActive: false,
+
+    section: [
+      {
+        sectionId: 101,
+        sectionName: "Pasta",
+        sectionDescription: "i am section",
+        label: ["New", "Signature"],
+        active: false,
+        subSection: false,
+        itemActive: false,
+        item: [
+          {
+            itemId: 201,
+            itemName: name,
+            itemDescription: description,
+            label: [select],
+            itemPrice: [
+              { size: "large", price: 2.0, calories: calories },
+              { size: "medium", price: 4.0, calories: calories },
+              { size: "small", price: 6.0, calories: calories },
+            ],
+            calories: calories,
+            ingredient: [ingredient],
+            recommendedItems: [recommendedItem],
+            preparationTime: time,
+          },
+        ],
+      },
+    ],
+  };
+
+  const testfunc = () => {
+    data.push(didi);
+    console.log(data, 'context vala datta')
+
+  };
 
   const addPriceOption = (event) => {
     setPrice(
@@ -176,7 +231,7 @@ const ItemDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Recommended Items</FormLabel>
-                    <Input type="text" placeholder="Type to search items" onChange={(e) => setIngredient(e.target.value)} />
+                    <Input type="text" placeholder="Type to search items" onChange={(e) => setRecommendedItem(e.target.value)} />
                   </FormControl>
 
                   <FormControl mt={3}>
@@ -563,8 +618,7 @@ const ItemDrawer = (props) => {
               mr={3}
               size={"sm"}
             />
-            <CustomButton btnText={"Save"} size={"sm"} />
-            {/* <Button colorScheme="blue">Save</Button> */}
+            <CustomButton btnText={"Save"} click={() => testfunc()} size={"sm"} />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

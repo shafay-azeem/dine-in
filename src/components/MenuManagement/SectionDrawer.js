@@ -256,7 +256,7 @@ const SectionDrawer = (props) => {
             <Button colorScheme="blue" onClick={() => testfunc()}>
               Save
             </Button>
-            {pass ? <SectionCard menu={menu} /> : console.log("sssss")}
+
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
