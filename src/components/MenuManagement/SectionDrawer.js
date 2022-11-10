@@ -27,6 +27,7 @@ import {
 import React from "react";
 import { useState } from "react";
 import { BsFillGridFill, BsListTask } from "react-icons/bs";
+import SectionCard from "../Partials/MenuCards/SectionCard";
 
 const SectionDrawer = (props) => {
   const [checkedItems, setCheckedItems] = React.useState(false);
@@ -34,7 +35,11 @@ const SectionDrawer = (props) => {
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
   const [name, setName] = useState()
-
+  const [description, setDescription] = useState()
+  const [note, setNote] = useState()
+  const [searchSection, setsearchSection] = useState()
+  const [select, setSelect] = useState()
+  const [pass, setPass] = useState(false)
 
   function enabelDisable() {
     if (value === "1") {
@@ -87,15 +92,12 @@ const SectionDrawer = (props) => {
     },
   ]);
 
-  function handleChange(event) {
-    setName(event.target.value);
-  }
 
 
   let data = {
     id: 0,
     menuId: "01",
-    menuName: name,
+    menuName: "menu one",
     menuDescription: "i am menu",
     discountNote: "10%",
     createdDate: "10/11/2022",
@@ -106,10 +108,11 @@ const SectionDrawer = (props) => {
 
     section: [
       {
-        sectionId: 101,
-        sectionName: "Pasta",
-        sectionDescription: "i am section",
-        label: ["New", "Signature"],
+        sectionId: Date.now(),
+        sectionName: name,
+        sectionDescription: description,
+        sectionNote: note,
+        label: [select],
         active: false,
         subSection: false,
         itemActive: false,
@@ -118,7 +121,7 @@ const SectionDrawer = (props) => {
             itemId: 201,
             itemName: "Pasta",
             itemDescription: "i am section",
-            label: ["New", "Signature"],
+            // label: ["New", "Signature"],
             itemPrice: [
               { size: "large", price: 2.0, calories: 356 },
               { size: "medium", price: 4.0, calories: 315 },
@@ -134,8 +137,12 @@ const SectionDrawer = (props) => {
     ],
   }
 
+  const testfunc = () => {
+    menu.push(data)
+    setPass(true)
+  }
 
-  console.log(data.menuName, 'menu')
+
 
   return (
     <>
@@ -176,7 +183,7 @@ const SectionDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Display the section</FormLabel>
-                    <Switch onChange={(e) => setSwitch(e.target.value)} />
+                    <Switch />
                   </FormControl>
 
                   <FormControl mt={3}>
@@ -279,7 +286,8 @@ const SectionDrawer = (props) => {
             <Button variant="outline" mr={3} onClick={props.onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue">Save</Button>
+            <Button colorScheme="blue" onClick={() => testfunc()}>Save</Button>
+            {pass ? (<SectionCard menu={menu} />) : (console.log('sssss'))}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

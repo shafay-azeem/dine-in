@@ -14,7 +14,10 @@ import { useState } from "react";
 import ItemCard from "./ItemCard";
 import { AiOutlineDown } from "react-icons/ai";
 
-const SectionCard = () => {
+const SectionCard = (props) => {
+  // console.log(props.menu, "props")
+  // var passs = props.menu.section
+  console.log(props.menu)
   const [menu, setMenu] = useState([
     {
       id: 0,
