@@ -35,6 +35,7 @@ const SectionDrawer = (props) => {
   const [valuetrue, setValueTrue] = React.useState();
   const [name, setName] = useState()
 
+
   function enabelDisable() {
     if (value === "1") {
       setValueTrue(true);
@@ -165,17 +166,17 @@ const SectionDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Description</FormLabel>
-                    <Textarea placeholder="Here is a sample placeholder" />
+                    <Textarea placeholder="Here is a sample placeholder" onChange={(e) => setDescription(e.target.value)} />
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Note</FormLabel>
-                    <Input type="text" />
+                    <Input type="text" onChange={(e) => setNote(e.target.value)} />
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Display the section</FormLabel>
-                    <Switch />
+                    <Switch onChange={(e) => setSwitch(e.target.value)} />
                   </FormControl>
 
                   <FormControl mt={3}>
@@ -191,6 +192,7 @@ const SectionDrawer = (props) => {
                         type="text"
                         mt={2}
                         placeholder="Type to search sections"
+                        onChange={(e) => setsearchSection(e.target.value)}
                       ></Input>
                     ) : (
                       <Input
@@ -206,9 +208,9 @@ const SectionDrawer = (props) => {
                 <TabPanel>
                   <FormControl>
                     <FormLabel fontWeight="400">Labels</FormLabel>
-                    <Select>
-                      <option>New</option>
-                      <option>Signature</option>
+                    <Select onChange={(e) => setSelect(e.target.value)} >
+                      <option value="new">New</option>
+                      <option value="signature" >Signature</option>
                     </Select>
                   </FormControl>
 
