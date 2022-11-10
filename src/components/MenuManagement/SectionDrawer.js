@@ -25,9 +25,11 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import React from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import { BsFillGridFill, BsListTask } from "react-icons/bs";
 import SectionCard from "../Partials/MenuCards/SectionCard";
+import { MenuState } from "../../context/MenuContext";
 
 const SectionDrawer = (props) => {
   const [checkedItems, setCheckedItems] = React.useState(false);
@@ -91,8 +93,9 @@ const SectionDrawer = (props) => {
       ],
     },
   ]);
+  const { data } = MenuState()
 
-  let data = {
+  let didi = {
     id: 0,
     menuId: "01",
     menuName: "menu one",
@@ -136,8 +139,9 @@ const SectionDrawer = (props) => {
   };
 
   const testfunc = () => {
-    menu.push(data);
-    setPass(true);
+    data.push(didi);
+    console.log(data, 'context vala datta')
+
   };
 
   return (

@@ -13,11 +13,12 @@ import React from "react";
 import { useState } from "react";
 import ItemCard from "./ItemCard";
 import { AiOutlineDown } from "react-icons/ai";
+import { MenuState } from "../../../context/MenuContext";
 
 const SectionCard = (props) => {
-  // console.log(props.menu, "props")
-  // var passs = props.menu.section
-  console.log(props.menu);
+
+  const { data } = MenuState()
+  console.log(data, "data in section card 2 anat chahyte")
   const [menu, setMenu] = useState([
     {
       id: 0,
@@ -62,7 +63,7 @@ const SectionCard = (props) => {
     },
   ]);
 
-  const [data, setData] = useState([
+  const [data1, setData] = useState([
     {
       id: 0,
       menuId: 101,
@@ -84,12 +85,12 @@ const SectionCard = (props) => {
   ]);
 
   function sectionClick(id) {
-    setData([...data], (data[id].active = !data[id].active));
+    setData([...data1], (data1[id].active = !data1[id].active));
   }
 
   return (
     <>
-      {data.map((x, index) => (
+      {data1.map((x, index) => (
         <Box bg="white" borderRadius={6} p={5} mt={3} key={index}>
           <Grid templateColumns="repeat(5, 1fr)" gap={4}>
             <GridItem colSpan={2}>
