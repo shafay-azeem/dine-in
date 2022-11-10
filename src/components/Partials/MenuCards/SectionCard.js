@@ -17,7 +17,7 @@ import { AiOutlineDown } from "react-icons/ai";
 const SectionCard = (props) => {
   // console.log(props.menu, "props")
   // var passs = props.menu.section
-  console.log(props.menu)
+  console.log(props.menu);
   const [menu, setMenu] = useState([
     {
       id: 0,

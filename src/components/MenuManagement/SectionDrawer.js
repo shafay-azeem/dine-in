@@ -34,12 +34,12 @@ const SectionDrawer = (props) => {
 
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
-  const [name, setName] = useState()
-  const [description, setDescription] = useState()
-  const [note, setNote] = useState()
-  const [searchSection, setsearchSection] = useState()
-  const [select, setSelect] = useState()
-  const [pass, setPass] = useState(false)
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [note, setNote] = useState();
+  const [searchSection, setsearchSection] = useState();
+  const [select, setSelect] = useState();
+  const [pass, setPass] = useState(false);
 
   function enabelDisable() {
     if (value === "1") {
@@ -92,8 +92,6 @@ const SectionDrawer = (props) => {
     },
   ]);
 
-
-
   let data = {
     id: 0,
     menuId: "01",
@@ -135,14 +133,12 @@ const SectionDrawer = (props) => {
         ],
       },
     ],
-  }
+  };
 
   const testfunc = () => {
-    menu.push(data)
-    setPass(true)
-  }
-
-
+    menu.push(data);
+    setPass(true);
+  };
 
   return (
     <>
@@ -168,17 +164,26 @@ const SectionDrawer = (props) => {
                 <TabPanel>
                   <FormControl>
                     <FormLabel fontWeight="400">Name</FormLabel>
-                    <Input type="text" onChange={(e) => setName(e.target.value)} />
+                    <Input
+                      type="text"
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Description</FormLabel>
-                    <Textarea placeholder="Here is a sample placeholder" onChange={(e) => setDescription(e.target.value)} />
+                    <Textarea
+                      placeholder="Here is a sample placeholder"
+                      onChange={(e) => setDescription(e.target.value)}
+                    />
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Note</FormLabel>
-                    <Input type="text" onChange={(e) => setNote(e.target.value)} />
+                    <Input
+                      type="text"
+                      onChange={(e) => setNote(e.target.value)}
+                    />
                   </FormControl>
 
                   <FormControl mt={3}>
@@ -215,9 +220,9 @@ const SectionDrawer = (props) => {
                 <TabPanel>
                   <FormControl>
                     <FormLabel fontWeight="400">Labels</FormLabel>
-                    <Select onChange={(e) => setSelect(e.target.value)} >
+                    <Select onChange={(e) => setSelect(e.target.value)}>
                       <option value="new">New</option>
-                      <option value="signature" >Signature</option>
+                      <option value="signature">Signature</option>
                     </Select>
                   </FormControl>
 
@@ -286,8 +291,10 @@ const SectionDrawer = (props) => {
             <Button variant="outline" mr={3} onClick={props.onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue" onClick={() => testfunc()}>Save</Button>
-            {pass ? (<SectionCard menu={menu} />) : (console.log('sssss'))}
+            <Button colorScheme="blue" onClick={() => testfunc()}>
+              Save
+            </Button>
+            {pass ? <SectionCard menu={menu} /> : console.log("sssss")}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
