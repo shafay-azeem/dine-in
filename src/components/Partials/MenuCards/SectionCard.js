@@ -18,7 +18,7 @@ import { MenuState } from "../../../context/MenuContext";
 const SectionCard = (props) => {
 
   const { data } = MenuState()
-  console.log(data, "data in section card 2 anat chahyte")
+  console.log(data[0].section, "section display")
   const [menu, setMenu] = useState([
     {
       id: 0,
@@ -90,7 +90,7 @@ const SectionCard = (props) => {
 
   return (
     <>
-      {data1.map((x, index) => (
+      {data.map((x, index) => (
         <Box bg="white" borderRadius={6} p={5} mt={3} key={index}>
           <Grid templateColumns="repeat(5, 1fr)" gap={4}>
             <GridItem colSpan={2}>
@@ -102,7 +102,7 @@ const SectionCard = (props) => {
                   alt="Dan Abramov"
                 />
                 <Text pl={2}>
-                  {x.name} {x.active}
+                  {x.section[0].sectionName} {x.active}
                 </Text>
               </HStack>
             </GridItem>

@@ -13,6 +13,7 @@ import {
 
 import React, { useState } from "react";
 import { BsPlusLg, BsThreeDotsVertical } from "react-icons/bs";
+import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 
 import SectionCard from "../Partials/MenuCards/SectionCard";
@@ -20,6 +21,8 @@ import ItemDrawer from "./ItemDrawer";
 import SectionDrawer from "./SectionDrawer";
 
 const CreateMenu = () => {
+  const { data } = MenuState()
+  console.log(data, "create menu")
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
   const {
