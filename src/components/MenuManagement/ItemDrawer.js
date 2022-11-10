@@ -40,6 +40,16 @@ const ItemDrawer = (props) => {
   const [price, setPrice] = useState([]);
   const [modifiers, setModifiers] = useState([]);
 
+
+
+
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [note, setNote] = useState();
+  const [searchSection, setsearchSection] = useState();
+  const [select, setSelect] = useState();
+
+
   const addPriceOption = (event) => {
     setPrice(
       price.concat(
@@ -150,31 +160,30 @@ const ItemDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Labels</FormLabel>
-                    <Select placeholder="Search Labels">
-                      <option>New</option>
-                      <option>Signature</option>
-                      <option>Special Presentation</option>
+                    <Select placeholder="Search Labels" onChange={(e) => setSelect(e.target.value)}>
+                      <option value="new">New</option>
+                      <option value="signature">Signature</option>
                     </Select>
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Ingredient Warnings</FormLabel>
-                    <Select placeholder="Select ingredient warnings">
-                      <option>Alcohol</option>
-                      <option>Alcohol Free</option>
+                    <Select placeholder="Select ingredient warnings" onChange={(e) => setIngredient(e.target.value)}>
+                      <option value="Alcohol">Alcohol</option>
+                      <option value="Alcohol Free">Alcohol Free</option>
                     </Select>
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Recommended Items</FormLabel>
-                    <Input type="text" placeholder="Type to search items" />
+                    <Input type="text" placeholder="Type to search items" onChange={(e) => setIngredient(e.target.value)} />
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Preparation Time</FormLabel>
                     <InputGroup>
                       <InputLeftAddon children="min(s)" />
-                      <Input type="number" placeholder="0" w="30%" />
+                      <Input type="number" placeholder="0" w="30%" onChange={(e) => setTime(e.target.value)} />
                     </InputGroup>
                   </FormControl>
                 </TabPanel>
@@ -218,7 +227,7 @@ const ItemDrawer = (props) => {
                       <FormControl mt={3}>
                         <FormLabel fontWeight="400">Calories</FormLabel>
                         <NumberInput>
-                          <NumberInputField placeholder="cal" />
+                          <NumberInputField placeholder="cal" onChange={(e) => setCalories(e.target.value)} />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
                             <NumberDecrementStepper />
