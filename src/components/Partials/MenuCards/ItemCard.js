@@ -41,6 +41,13 @@ const ItemCard = () => {
       active: false,
     },
   ]);
+
+  function handleRemove(index) {
+    console.log(index);
+
+    setData([...data.slice(0, index), ...data.slice(index + 1, data.length)]);
+  }
+
   return (
     <>
       {data.map((x, index) => (
@@ -74,7 +81,9 @@ const ItemCard = () => {
                 </MenuButton>
                 <MenuList>
                   <MenuItem>Duplicate</MenuItem>
-                  <MenuItem>Delete</MenuItem>
+                  <MenuItem onClick={() => handleRemove(index)}>
+                    Delete
+                  </MenuItem>
                 </MenuList>
               </Menu>
             </HStack>
