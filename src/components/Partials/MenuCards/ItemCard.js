@@ -22,7 +22,11 @@ import { useState } from "react";
 import { MenuState } from "../../../context/MenuContext";
 
 const ItemCard = () => {
-  const { item } = MenuState()
+  const { item, setItem } = MenuState()
+
+  function handleRemove(index) {
+    setItem([item.slice(0, index), ...item.slice(index + 1, item.length)])
+  }
   return (
     <>
       {item.map((x, index) => (
@@ -56,13 +60,11 @@ const ItemCard = () => {
                 </MenuButton>
                 <MenuList>
                   <MenuItem>Duplicate</MenuItem>
-                  <MenuItem >
+
+
+                  <MenuItem onClick={() => handleRemove(index)}>
                     Delete
                   </MenuItem>
-
-                  {/* <MenuItem onClick={() => handleRemove(index)}>
-                    Delete
-                  </MenuItem> */}
                 </MenuList>
               </Menu>
             </HStack>

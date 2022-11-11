@@ -33,9 +33,7 @@ export const MenuProvider = ({ children }) => {
       itemDescription: "i am item",
       label: ["New", "Signature"],
       itemPrice: [
-        { size: "large", price: 2.0, calories: 356 },
-        { size: "medium", price: 4.0, calories: 315 },
-        { size: "small", price: 6.0, calories: 215 },
+        { size: "large", price: 2.0, calories: 356 }
       ],
       calories: 355,
       ingredient: ["milk", "cheese"],

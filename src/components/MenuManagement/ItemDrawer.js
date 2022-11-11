@@ -51,6 +51,9 @@ const ItemDrawer = (props) => {
   const [time, setTime] = useState();
   const [calories, setCalories] = useState();
   const [recommendedItem, setRecommendedItem] = useState();
+  const [priceConcat, setPriceConcat] = useState();
+  const [caloriesConcat, setCaloriesConcat] = useState();
+  const [size, setSize] = useState();
 
 
 
@@ -63,20 +66,24 @@ const ItemDrawer = (props) => {
     itemDescription: description,
     label: [select],
     itemPrice: [
-      { size: "large", price: 2.0, calories: calories },
-      { size: "medium", price: 4.0, calories: calories },
-      { size: "small", price: 6.0, calories: calories },
+      { size: size, price: priceConcat, calories: caloriesConcat },
     ],
     calories: calories,
     ingredient: [ingredient],
     recommendedItems: [recommendedItem],
     preparationTime: time,
   }
-
+  // let pusher = {
+  //   itemPrice: [
+  //     { size: size, price: priceConcat, calories: caloriesConcat },
+  //   ],
+  // }
 
   const testfunc = () => {
     item.push(itemPusher);
-    console.log(item, 'context vala datta')
+    // item[0].itemPrice.push(pusher);
+
+    // console.log(item, 'context vala datta')
 
   };
 
@@ -85,15 +92,17 @@ const ItemDrawer = (props) => {
       price.concat(
         <HStack m={5}>
           <FormControl>
-            <FormLabel fontWeight="400">Name</FormLabel>
-            <Input borderRadius="8px" placeholder="Name" />
+            <FormLabel fontWeight="400">Size</FormLabel>
+            <Input borderRadius="8px" placeholder="Size"
+              onChange={(e) => setSize(e.target.value)} />
           </FormControl>
           ,
           <FormControl mt={3}>
             <FormLabel fontWeight="400">Price</FormLabel>
             <InputGroup>
               <InputLeftAddon children="$" />
-              <Input type="number" placeholder="0" />
+              <Input type="number" placeholder="0"
+                onChange={(e) => setPriceConcat(e.target.value)} />
             </InputGroup>
           </FormControl>
           ,
@@ -101,7 +110,8 @@ const ItemDrawer = (props) => {
             <FormLabel fontWeight="400">Calories</FormLabel>
             <InputGroup>
               <InputLeftAddon children="cal" />
-              <Input type="number" placeholder="0" />
+              <Input type="number" placeholder="0"
+                onChange={(e) => setCaloriesConcat(e.target.value)} />
             </InputGroup>
           </FormControl>
         </HStack>

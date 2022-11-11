@@ -51,7 +51,7 @@ const SectionDrawer = (props) => {
     }
   }
 
-  const { section } = MenuState()
+  const { section, menu, setMenu } = MenuState()
 
   let didi = {
     sectionId: Date.now(),
@@ -68,6 +68,7 @@ const SectionDrawer = (props) => {
 
   const testfunc = () => {
     section.push(didi);
+    menu.push(menu[0])
     // console.log(data, 'context vala datta')
 
   };
