@@ -54,54 +54,29 @@ const ItemDrawer = (props) => {
 
 
 
-  const { data } = MenuState()
+  const { item, setItem } = MenuState()
 
 
-  let didi = {
-    id: 0,
-    menuId: "01",
-    menuName: "menu one",
-    menuDescription: "i am menu",
-    discountNote: "10%",
-    createdDate: "10/11/2022",
-    createdTime: "12:00",
-    endDate: "11/11/2022",
-    endTime: "12:00",
-    sectionActive: false,
-
-    section: [
-      {
-        sectionId: 101,
-        sectionName: "Pasta",
-        sectionDescription: "i am section",
-        label: ["New", "Signature"],
-        active: false,
-        subSection: false,
-        itemActive: false,
-        item: [
-          {
-            itemId: 201,
-            itemName: name,
-            itemDescription: description,
-            label: [select],
-            itemPrice: [
-              { size: "large", price: 2.0, calories: calories },
-              { size: "medium", price: 4.0, calories: calories },
-              { size: "small", price: 6.0, calories: calories },
-            ],
-            calories: calories,
-            ingredient: [ingredient],
-            recommendedItems: [recommendedItem],
-            preparationTime: time,
-          },
-        ],
-      },
+  let itemPusher = {
+    itemId: 201,
+    itemName: name,
+    itemDescription: description,
+    label: [select],
+    itemPrice: [
+      { size: "large", price: 2.0, calories: calories },
+      { size: "medium", price: 4.0, calories: calories },
+      { size: "small", price: 6.0, calories: calories },
     ],
-  };
+    calories: calories,
+    ingredient: [ingredient],
+    recommendedItems: [recommendedItem],
+    preparationTime: time,
+  }
+
 
   const testfunc = () => {
-    data.push(didi);
-    console.log(data, 'context vala datta')
+    item.push(itemPusher);
+    console.log(item, 'context vala datta')
 
   };
 

@@ -21,7 +21,7 @@ const SectionCard = (props) => {
   console.log(section)
 
   function sectionClick(index) {
-    section[index].itemActive = true
+    section[index].itemActive = !(section[index].itemActive)
     setSection([...section]);
     console.log(section, 'menu in sectiom')
   }

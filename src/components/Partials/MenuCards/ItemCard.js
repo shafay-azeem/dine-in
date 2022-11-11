@@ -47,7 +47,7 @@ const ItemCard = () => {
                   fontSize="1.2em"
                   children="$"
                 />
-                <Input placeholder="Enter amount" />
+                <Input placeholder="Enter amount" value={x.itemName} />
               </InputGroup>
               <Switch p={5} />
               <Menu>
