@@ -15,39 +15,35 @@ export const MenuProvider = ({ children }) => {
       endDate: "11/11/2022",
       endTime: "12:00",
       sectionActive: false,
-
-      section: [
-        {
-          sectionId: 101,
-          sectionName: "Pasta",
-          sectionDescription: "i am section",
-          label: ["New", "Signature"],
-          active: false,
-          subSection: false,
-          itemActive: false,
-          item: [
-            {
-              itemId: 201,
-              itemName: "Pasta",
-              itemDescription: "i am section",
-              label: ["New", "Signature"],
-              itemPrice: [
-                { size: "large", price: 2.0, calories: 356 },
-                { size: "medium", price: 4.0, calories: 315 },
-                { size: "small", price: 6.0, calories: 215 },
-              ],
-              calories: 355,
-              ingredient: ["milk", "cheese"],
-              recommendedItems: ["tomoto", "potato"],
-              preparationTime: 20,
-            },
-          ],
-        },
+    }])
+  const [section, setSection] = useState([
+    {
+      sectionId: 101,
+      sectionName: "Pasta",
+      sectionDescription: "i am section",
+      label: ["New", "Signature"],
+      active: false,
+      subSection: false,
+      itemActive: false,
+    }])
+  const [item, setItem] = useState([
+    {
+      itemId: 201,
+      itemName: "Pasta",
+      itemDescription: "i am item",
+      label: ["New", "Signature"],
+      itemPrice: [
+        { size: "large", price: 2.0, calories: 356 },
+        { size: "medium", price: 4.0, calories: 315 },
+        { size: "small", price: 6.0, calories: 215 },
       ],
+      calories: 355,
+      ingredient: ["milk", "cheese"],
+      recommendedItems: ["tomoto", "potato"],
+      preparationTime: 20,
     },
-  ]);
-
-  return <MenuContext.Provider value={{ data: menu }} >{children}</MenuContext.Provider>;
+  ])
+  return <MenuContext.Provider value={{ menu, setMenu, section, setSection, item, setItem }} >{children}</MenuContext.Provider>;
 };
 export const MenuState = () => {
   return useContext(MenuContext);

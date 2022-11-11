@@ -51,54 +51,24 @@ const SectionDrawer = (props) => {
     }
   }
 
-  const { data } = MenuState()
+  const { section } = MenuState()
 
   let didi = {
-    id: 0,
-    menuId: "01",
-    menuName: "menu one",
-    menuDescription: "i am menu",
-    discountNote: "10%",
-    createdDate: "10/11/2022",
-    createdTime: "12:00",
-    endDate: "11/11/2022",
-    endTime: "12:00",
-    sectionActive: false,
+    sectionId: Date.now(),
+    sectionName: name,
+    sectionDescription: description,
+    sectionNote: note,
+    label: [select],
+    active: false,
+    subSection: false,
+    itemActive: false,
+  }
 
-    section: [
-      {
-        sectionId: Date.now(),
-        sectionName: name,
-        sectionDescription: description,
-        sectionNote: note,
-        label: [select],
-        active: false,
-        subSection: false,
-        itemActive: false,
-        item: [
-          {
-            itemId: 201,
-            itemName: "Pasta",
-            itemDescription: "i am section",
-            // label: ["New", "Signature"],
-            itemPrice: [
-              { size: "large", price: 2.0, calories: 356 },
-              { size: "medium", price: 4.0, calories: 315 },
-              { size: "small", price: 6.0, calories: 215 },
-            ],
-            calories: 355,
-            ingredient: ["milk", "cheese"],
-            recommendedItems: ["tomoto", "potato"],
-            preparationTime: 20,
-          },
-        ],
-      },
-    ],
-  };
+
 
   const testfunc = () => {
-    data.push(didi);
-    console.log(data, 'context vala datta')
+    section.push(didi);
+    // console.log(data, 'context vala datta')
 
   };
 

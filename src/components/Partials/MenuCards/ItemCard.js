@@ -22,39 +22,10 @@ import { useState } from "react";
 import { MenuState } from "../../../context/MenuContext";
 
 const ItemCard = () => {
-
-
-  const { data } = MenuState()
-  // const [data, setData] = useState([
-  //   {
-  //     id: 0,
-  //     menuId: 101,
-  //     name: "Alfredo Paste",
-  //     active: false,
-  //   },
-  //   {
-  //     id: 1,
-  //     menuId: 102,
-  //     name: "Sushi",
-  //     active: false,
-  //   },
-  //   {
-  //     id: 2,
-  //     menuId: 103,
-  //     name: "Zinger ",
-  //     active: false,
-  //   },
-  // ]);
-
-  // function handleRemove(index) {
-  //   console.log(index);
-
-  //   setData([...data.slice(0, index), ...data.slice(index + 1, data.length)]);
-  // }
-
+  const { item } = MenuState()
   return (
     <>
-      {data.map((x, index) => (
+      {item.map((x, index) => (
         <Grid templateColumns="repeat(5, 1fr)" gap={4} mt={3}>
           <GridItem colSpan={2}>
             <HStack>
@@ -64,7 +35,7 @@ const ItemCard = () => {
                 src="https://bit.ly/dan-abramov"
                 alt="Dan Abramov"
               />
-              <Text pl={2}> {x.section[0].item[0].itemName}</Text>
+              <Text pl={2}> {x.itemName} {x.itemDescription}</Text>
             </HStack>
           </GridItem>
           <GridItem colStart={4} colEnd={6}>
