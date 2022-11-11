@@ -41,9 +41,6 @@ const ItemDrawer = (props) => {
   const [price, setPrice] = useState([]);
   const [modifiers, setModifiers] = useState([]);
 
-
-
-
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [select, setSelect] = useState();
@@ -55,24 +52,19 @@ const ItemDrawer = (props) => {
   const [caloriesConcat, setCaloriesConcat] = useState();
   const [size, setSize] = useState();
 
+  const { item, setItem } = MenuState();
 
-
-  const { item, setItem } = MenuState()
-
-
-  let itemPusher = {
+  let itemData = {
     itemId: 201,
     itemName: name,
     itemDescription: description,
     label: [select],
-    itemPrice: [
-      { size: size, price: priceConcat, calories: caloriesConcat },
-    ],
+    itemPrice: [{ size: size, price: priceConcat, calories: caloriesConcat }],
     calories: calories,
     ingredient: [ingredient],
     recommendedItems: [recommendedItem],
     preparationTime: time,
-  }
+  };
   // let pusher = {
   //   itemPrice: [
   //     { size: size, price: priceConcat, calories: caloriesConcat },
@@ -80,11 +72,9 @@ const ItemDrawer = (props) => {
   // }
 
   const testfunc = () => {
-    item.push(itemPusher);
+    item.push(itemData);
     // item[0].itemPrice.push(pusher);
-
-    // console.log(item, 'context vala datta')
-
+    // console.log(item, 'item data')
   };
 
   const addPriceOption = (event) => {
@@ -93,16 +83,22 @@ const ItemDrawer = (props) => {
         <HStack m={5}>
           <FormControl>
             <FormLabel fontWeight="400">Size</FormLabel>
-            <Input borderRadius="8px" placeholder="Size"
-              onChange={(e) => setSize(e.target.value)} />
+            <Input
+              borderRadius="8px"
+              placeholder="Size"
+              onChange={(e) => setSize(e.target.value)}
+            />
           </FormControl>
           ,
           <FormControl mt={3}>
             <FormLabel fontWeight="400">Price</FormLabel>
             <InputGroup>
               <InputLeftAddon children="$" />
-              <Input type="number" placeholder="0"
-                onChange={(e) => setPriceConcat(e.target.value)} />
+              <Input
+                type="number"
+                placeholder="0"
+                onChange={(e) => setPriceConcat(e.target.value)}
+              />
             </InputGroup>
           </FormControl>
           ,
@@ -110,8 +106,11 @@ const ItemDrawer = (props) => {
             <FormLabel fontWeight="400">Calories</FormLabel>
             <InputGroup>
               <InputLeftAddon children="cal" />
-              <Input type="number" placeholder="0"
-                onChange={(e) => setCaloriesConcat(e.target.value)} />
+              <Input
+                type="number"
+                placeholder="0"
+                onChange={(e) => setCaloriesConcat(e.target.value)}
+              />
             </InputGroup>
           </FormControl>
         </HStack>
@@ -200,7 +199,10 @@ const ItemDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Labels</FormLabel>
-                    <Select placeholder="Search Labels" onChange={(e) => setSelect(e.target.value)}>
+                    <Select
+                      placeholder="Search Labels"
+                      onChange={(e) => setSelect(e.target.value)}
+                    >
                       <option value="new">New</option>
                       <option value="signature">Signature</option>
                     </Select>
@@ -208,7 +210,10 @@ const ItemDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Ingredient Warnings</FormLabel>
-                    <Select placeholder="Select ingredient warnings" onChange={(e) => setIngredient(e.target.value)}>
+                    <Select
+                      placeholder="Select ingredient warnings"
+                      onChange={(e) => setIngredient(e.target.value)}
+                    >
                       <option value="Alcohol">Alcohol</option>
                       <option value="Alcohol Free">Alcohol Free</option>
                     </Select>
@@ -216,14 +221,23 @@ const ItemDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Recommended Items</FormLabel>
-                    <Input type="text" placeholder="Type to search items" onChange={(e) => setRecommendedItem(e.target.value)} />
+                    <Input
+                      type="text"
+                      placeholder="Type to search items"
+                      onChange={(e) => setRecommendedItem(e.target.value)}
+                    />
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Preparation Time</FormLabel>
                     <InputGroup>
                       <InputLeftAddon children="min(s)" />
-                      <Input type="number" placeholder="0" w="30%" onChange={(e) => setTime(e.target.value)} />
+                      <Input
+                        type="number"
+                        placeholder="0"
+                        w="30%"
+                        onChange={(e) => setTime(e.target.value)}
+                      />
                     </InputGroup>
                   </FormControl>
                 </TabPanel>
@@ -267,7 +281,10 @@ const ItemDrawer = (props) => {
                       <FormControl mt={3}>
                         <FormLabel fontWeight="400">Calories</FormLabel>
                         <NumberInput>
-                          <NumberInputField placeholder="cal" onChange={(e) => setCalories(e.target.value)} />
+                          <NumberInputField
+                            placeholder="cal"
+                            onChange={(e) => setCalories(e.target.value)}
+                          />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
                             <NumberDecrementStepper />
@@ -603,7 +620,11 @@ const ItemDrawer = (props) => {
               mr={3}
               size={"sm"}
             />
-            <CustomButton btnText={"Save"} click={() => testfunc()} size={"sm"} />
+            <CustomButton
+              btnText={"Save"}
+              click={() => testfunc()}
+              size={"sm"}
+            />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

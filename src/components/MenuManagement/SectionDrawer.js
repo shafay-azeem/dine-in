@@ -22,13 +22,9 @@ import {
   RadioGroup,
   Stack,
   Radio,
-  HStack,
 } from "@chakra-ui/react";
 import React from "react";
-import { useContext } from "react";
 import { useState } from "react";
-import { BsFillGridFill, BsListTask } from "react-icons/bs";
-import SectionCard from "../Partials/MenuCards/SectionCard";
 import { MenuState } from "../../context/MenuContext";
 
 const SectionDrawer = (props) => {
@@ -51,9 +47,9 @@ const SectionDrawer = (props) => {
     }
   }
 
-  const { section, menu, setMenu } = MenuState()
+  const { section, menu, setMenu } = MenuState();
 
-  let didi = {
+  let sectionData = {
     sectionId: Date.now(),
     sectionName: name,
     sectionDescription: description,
@@ -62,15 +58,12 @@ const SectionDrawer = (props) => {
     active: false,
     subSection: false,
     itemActive: false,
-  }
-
-
+  };
 
   const testfunc = () => {
-    section.push(didi);
-    menu.push(menu[0])
-    // console.log(data, 'context vala datta')
-
+    section.push(sectionData);
+    menu.push(menu[0]);
+    // console.log(data, 'section data')
   };
 
   return (
@@ -227,7 +220,6 @@ const SectionDrawer = (props) => {
             <Button colorScheme="blue" onClick={() => testfunc()}>
               Save
             </Button>
-
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

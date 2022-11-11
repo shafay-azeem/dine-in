@@ -22,10 +22,10 @@ import { useState } from "react";
 import { MenuState } from "../../../context/MenuContext";
 
 const ItemCard = () => {
-  const { item, setItem } = MenuState()
+  const { item, setItem } = MenuState();
 
   function handleRemove(index) {
-    setItem([item.slice(0, index), ...item.slice(index + 1, item.length)])
+    setItem([item.slice(0, index), ...item.slice(index + 1, item.length)]);
   }
   return (
     <>
@@ -39,7 +39,7 @@ const ItemCard = () => {
                 src="https://bit.ly/dan-abramov"
                 alt="Dan Abramov"
               />
-              <Text pl={2}> {x.itemName} {x.itemDescription}</Text>
+              <Text pl={2}> {x.itemName}</Text>
             </HStack>
           </GridItem>
           <GridItem colStart={4} colEnd={6}>
@@ -51,7 +51,7 @@ const ItemCard = () => {
                   fontSize="1.2em"
                   children="$"
                 />
-                <Input placeholder="Enter amount" value={x.itemName} />
+                <Input placeholder="Enter amount" />
               </InputGroup>
               <Switch p={5} />
               <Menu>
@@ -60,7 +60,6 @@ const ItemCard = () => {
                 </MenuButton>
                 <MenuList>
                   <MenuItem>Duplicate</MenuItem>
-
 
                   <MenuItem onClick={() => handleRemove(index)}>
                     Delete

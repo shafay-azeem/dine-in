@@ -16,14 +16,13 @@ import { AiOutlineDown } from "react-icons/ai";
 import { MenuState } from "../../../context/MenuContext";
 
 const SectionCard = (props) => {
-
-  const { section, setSection, menu, setMenu } = MenuState()
-  console.log(section)
+  const { section, setSection, menu, setMenu } = MenuState();
+  console.log(section);
 
   function sectionClick(index) {
-    section[index].itemActive = !(section[index].itemActive)
+    section[index].itemActive = !section[index].itemActive;
     setSection([...section]);
-    console.log(section, 'menu in sectiom')
+    console.log(section, "menu in sectiom");
   }
 
   return (
@@ -39,9 +38,7 @@ const SectionCard = (props) => {
                   src="https://bit.ly/dan-abramov"
                   alt="Dan Abramov"
                 />
-                <Text pl={2}>
-                  {x.sectionName} {x.sectionDescription}
-                </Text>
+                <Text pl={2}>{x.sectionName}</Text>
               </HStack>
             </GridItem>
             <GridItem colStart={4} colEnd={6}>
