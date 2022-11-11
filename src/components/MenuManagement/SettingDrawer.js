@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Drawer,
   DrawerBody,
@@ -30,10 +30,12 @@ import {
   RadioGroup,
 } from "@chakra-ui/react";
 import CustomButton from "../../CustomElements/CustomButton";
+import { MenuState } from "../../context/MenuContext";
 
 const SettingDrawer = (props) => {
   const [value, setValue] = React.useState("1");
-
+  console.log(props.index, 'index')
+  const { menu } = MenuState()
   return (
     <Drawer
       isOpen={props.isOpen}
@@ -60,17 +62,17 @@ const SettingDrawer = (props) => {
               <TabPanel>
                 <FormControl isRequired>
                   <FormLabel fontWeight="400">Name</FormLabel>
-                  <Input type="text" />
+                  <Input type="text" value={menu[0].menuName} />
                 </FormControl>
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight="400">Description</FormLabel>
-                  <Textarea />
+                  <Textarea value={menu[0].menuDescription} />
                 </FormControl>
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight="400">Note</FormLabel>
-                  <Input type="text" placeholder="E.g: 20% VAT included" />
+                  <Input type="text" placeholder="E.g: 20% VAT included" value={menu[0].discountNote} />
                 </FormControl>
 
                 <FormControl mt={4}>

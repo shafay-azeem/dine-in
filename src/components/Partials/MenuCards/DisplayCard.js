@@ -69,6 +69,7 @@ const DisplayCard = () => {
                 <AiFillSetting onClick={onOpen} />
                 {isOpen ? (
                   <SettingDrawer
+                    index={index}
                     isOpen={isOpen}
                     onOpen={onOpen}
                     onClose={onClose}
