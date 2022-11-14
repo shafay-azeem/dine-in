@@ -22,6 +22,7 @@ import React from "react";
 import { useState } from "react";
 import { MenuState } from "../../../context/MenuContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useEffect } from "react";
 
 const ItemCard = () => {
   const { item, setItem } = MenuState();
@@ -30,6 +31,11 @@ const ItemCard = () => {
 
   function handleRemove(index) {
     setItem([item.slice(0, index), ...item.slice(index + 1, item.length)]);
+  }
+
+
+  function duplicate(x) {
+    item.push(x);
   }
 
   const handleDrop = (droppedItem) => {
@@ -86,7 +92,9 @@ const ItemCard = () => {
                                   <BsThreeDotsVertical as={Button} />
                                 </MenuButton>
                                 <MenuList>
-                                  <MenuItem>Duplicate</MenuItem>
+
+                                  <MenuItem onClick={() => duplicate(x)}
+                                  >Duplicate </MenuItem>
                                   <MenuItem onClick={() => handleRemove(index)}>
                                     Delete
                                   </MenuItem>
