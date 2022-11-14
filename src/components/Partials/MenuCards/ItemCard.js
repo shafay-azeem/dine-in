@@ -25,17 +25,21 @@ const ItemCard = () => {
   const { item, setItem } = MenuState();
   const [itemList, setItemList] = useState(item);
 
-  function handleRemove(index) {
-    setItemList([
-      itemList.slice(0, index),
-      ...itemList.slice(index + 1, itemList.length),
-    ]);
-  }
+
+  const handleRemove = ((index) => {
+    itemList.splice(index, 1)
+    var updatedList = [...itemList];
+    setItemList(updatedList);
+    setItem(updatedList)
+  })
 
 
-  function duplicate(x) {
-    item.push(x);
-  }
+  const duplicate = ((x) => {
+    item.push(x)
+    var updatedList = [...item];
+    setItemList(updatedList);
+    setItem(updatedList);
+  })
 
   const handleDrop = (droppedItem) => {
     if (!droppedItem.destination) return;
