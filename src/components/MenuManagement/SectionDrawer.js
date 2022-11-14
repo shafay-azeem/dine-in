@@ -22,6 +22,7 @@ import {
   RadioGroup,
   Stack,
   Radio,
+  Alert,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -38,6 +39,7 @@ const SectionDrawer = (props) => {
   const [searchSection, setsearchSection] = useState();
   const [select, setSelect] = useState();
   const [pass, setPass] = useState(false);
+  const [close, setClose] = useState(false);
 
   function enabelDisable() {
     if (value === "1") {
@@ -63,8 +65,10 @@ const SectionDrawer = (props) => {
   const testfunc = () => {
     section.push(sectionData);
     menu.push(menu[0]);
-    // console.log(data, 'section data')
-  };
+    alert("data has been added")
+
+
+  }
 
   return (
     <>
@@ -217,9 +221,10 @@ const SectionDrawer = (props) => {
             <Button variant="outline" mr={3} onClick={props.onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue" onClick={() => testfunc()}>
+            <Button colorScheme="blue" onClick={() => { testfunc() }} >
               Save
             </Button>
+
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

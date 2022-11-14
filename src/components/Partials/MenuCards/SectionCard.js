@@ -16,6 +16,20 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 const SectionCard = () => {
   const { section, setSection } = MenuState();
   const [sectionList, setSectionList] = useState(section);
+  const [status, setSatus] = useState()
+  const [index, setIndex] = useState()
+
+
+  function online(index) {
+    if (status === status) {
+      section[index].active = true;
+      setSection([...section]);
+
+    } else {
+      console.log("if not woks", index)
+    }
+  }
+
 
   function sectionClick(index) {
     section[index].itemActive = !section[index].itemActive;
@@ -72,7 +86,7 @@ const SectionCard = () => {
                           </GridItem>
                           <GridItem colStart={4} colEnd={6}>
                             <HStack>
-                              <Switch p={5} pl="55%" />
+                              <Switch p={5} pl="55%" onChange={(e) => { setSatus(e.target.checked); online(index) }} />
                               <AiOutlineDown
                                 onClick={() => sectionClick(index)}
                               />
