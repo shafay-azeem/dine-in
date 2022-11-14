@@ -1,5 +1,8 @@
+import { AddIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Button,
+  ButtonGroup,
   Grid,
   GridItem,
   Menu,
@@ -7,6 +10,7 @@ import {
   MenuItem,
   MenuList,
   Portal,
+  SimpleGrid,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
@@ -21,8 +25,8 @@ import ItemDrawer from "./ItemDrawer";
 import SectionDrawer from "./SectionDrawer";
 
 const CreateMenu = () => {
-  const { data } = MenuState()
-  console.log(data, "create menu")
+  const { data } = MenuState();
+  console.log(data, "create menu");
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
   const {
@@ -45,11 +49,22 @@ const CreateMenu = () => {
         gap={4}
         m={10}
       >
-        <GridItem rowSpan={2} colSpan={1} bg="white" borderRadius={6} h="20%">
+        <GridItem rowSpan={2} colSpan={1} bg="white" borderRadius={6} h="90%">
           <Grid templateColumns="repeat(5, 1fr)" gap={4} p={5}>
             <GridItem colSpan={2}>Section</GridItem>
-            <GridItem colStart={4} colEnd={6}></GridItem>
+            <GridItem colStart={4} colEnd={6}>
+              <AddIcon ml={9} onClick={onOpenSection} />
+            </GridItem>
           </Grid>
+          <SimpleGrid>
+            <Box textAlign="center">
+              <ButtonGroup variant="outline" spacing="0" size="sm">
+                <Button>All</Button>
+                <Button>Active</Button>
+                <Button>InActive</Button>
+              </ButtonGroup>
+            </Box>
+          </SimpleGrid>
         </GridItem>
 
         <GridItem colSpan={4}>
