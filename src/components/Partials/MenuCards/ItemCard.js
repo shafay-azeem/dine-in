@@ -1,8 +1,6 @@
 import {
   Box,
   Button,
-  Divider,
-  Flex,
   Grid,
   GridItem,
   HStack,
@@ -17,23 +15,23 @@ import {
   Switch,
   Text,
 } from "@chakra-ui/react";
-import { BsPlusLg, BsThreeDotsVertical } from "react-icons/bs";
-import React from "react";
-import { useState } from "react";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import React, { useState } from "react";
 import { MenuState } from "../../../context/MenuContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const ItemCard = () => {
   const { item, setItem } = MenuState();
-
   const [itemList, setItemList] = useState(item);
 
   function handleRemove(index) {
-    setItem([item.slice(0, index), ...item.slice(index + 1, item.length)]);
+    setItemList([
+      itemList.slice(0, index),
+      ...itemList.slice(index + 1, itemList.length),
+    ]);
   }
 
   const handleDrop = (droppedItem) => {
-
     if (!droppedItem.destination) return;
     var updatedList = [...itemList];
 
@@ -42,21 +40,31 @@ const ItemCard = () => {
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
 
     setItemList(updatedList);
-    setItem(updatedList)
+    setItem(updatedList);
   };
-
 
   return (
     <>
       <DragDropContext onDragEnd={handleDrop}>
         <Droppable droppableId="droppable-1">
           {(provided) => (
-            <Box {...provided.droppableProps} ref={provided.innerRef}  >
+            <Box {...provided.droppableProps} ref={provided.innerRef}>
               {itemList.map((x, index) => {
                 return (
-                  <Draggable key={x.itemName} draggableId={x.itemName} index={index}>
+                  <Draggable
+                    key={x.itemName}
+                    draggableId={x.itemName}
+                    index={index}
+                  >
                     {(provided) => (
-                      <Box {...provided.draggableProps} {...provided.dragHandleProps} m={9} ref={provided.innerRef} border='1px' borderColor='grey'>
+                      <Box
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        m={9}
+                        ref={provided.innerRef}
+                        border="1px"
+                        borderColor="grey"
+                      >
                         <Grid templateColumns="repeat(5, 1fr)" gap={4} mt={3}>
                           <GridItem colSpan={2}>
                             <HStack>
@@ -97,11 +105,9 @@ const ItemCard = () => {
                         </Grid>
                       </Box>
                     )}
-
                   </Draggable>
-                )
-              })
-              }
+                );
+              })}
               {provided.placeholder}
             </Box>
           )}
