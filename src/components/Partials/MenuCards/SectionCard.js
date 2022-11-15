@@ -14,14 +14,13 @@ import { MenuState } from "../../../context/MenuContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const SectionCard = (props) => {
-  console.log(props.menu_index, "in section")
+  console.log(props.menu_index, "in section");
   const { section, setSection, response, setRespone } = MenuState();
   const [sectionList, setSectionList] = useState(response);
-  const [status, setSatus] = useState()
-  const [index, setIndex] = useState()
+  const [status, setSatus] = useState();
+  const [index, setIndex] = useState();
 
   // console.log(response[1].section, "section")
-
 
   // function online(index) {
   //   if (status === status) {
@@ -32,7 +31,6 @@ const SectionCard = (props) => {
   //     console.log("if not woks", index)
   //   }
   // }
-
 
   // function sectionClick(index) {
   //   section[index].itemActive = !section[index].itemActive;
@@ -57,8 +55,7 @@ const SectionCard = (props) => {
         <Droppable droppableId="droppable-1">
           {(provided) => (
             <Box {...provided.droppableProps} ref={provided.innerRef}>
-              { }
-              {response[props.menu_index].section.map((x, index) => {
+              {response[props?.menu_index]?.section?.map((x, index) => {
                 return (
                   <Draggable
                     key={x.sectionId}
