@@ -144,6 +144,7 @@ const CreateMenu = () => {
                       Section
                       {isOpenSection ? (
                         <SectionDrawer
+                          menu_index={menu_index}
                           isOpen={isOpenSection}
                           onOpen={onOpenSection}
                           onClose={onCloseSection}

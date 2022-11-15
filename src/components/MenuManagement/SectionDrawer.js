@@ -29,6 +29,8 @@ import { useState } from "react";
 import { MenuState } from "../../context/MenuContext";
 
 const SectionDrawer = (props) => {
+
+
   const [checkedItems, setCheckedItems] = React.useState(false);
 
   const [value, setValue] = React.useState("1");
@@ -41,30 +43,35 @@ const SectionDrawer = (props) => {
   const [pass, setPass] = useState(false);
   const [close, setClose] = useState(false);
 
-  function enabelDisable() {
-    if (value === "1") {
-      setValueTrue(true);
-    } else {
-      setValueTrue(false);
-    }
-  }
 
-  const { section, menu, setMenu } = MenuState();
+
+
+
+  // function enabelDisable() {
+  //   if (value === "1") {
+  //     setValueTrue(true);
+  //   } else {
+  //     setValueTrue(false);
+  //   }
+  // }
+
+  const { response, setResponse } = MenuState();
 
   let sectionData = {
-    sectionId: Date.now(),
+    sectionId: name,
     sectionName: name,
     sectionDescription: description,
-    sectionNote: note,
-    label: [select],
-    active: false,
-    subSection: false,
-    itemActive: false,
+
   };
 
   const testfunc = () => {
-    section.push(sectionData);
-    menu.push(menu[0]);
+    var section = []
+    section.push(sectionData)
+    console.log(section, 'section')
+    setResponse([...response.slice(0, props.menu_index), section, ...response.slice(props.menu_index)]);
+    console.log(response, 'section')
+    // // response[props?.menu_index]?.push(section);
+    // console.log(response, "response in section drawer")
     alert("data has been added");
   };
 
@@ -161,12 +168,12 @@ const SectionDrawer = (props) => {
 
                   <RadioGroup mt={5} onChange={setValue} value={value}>
                     <Stack direction="row">
-                      <Radio value="1" onChange={enabelDisable}>
+                      {/* <Radio value="1" onChange={enabelDisable}>
                         List
                       </Radio>
                       <Radio value="2" onChange={enabelDisable}>
                         Grid
-                      </Radio>
+                      </Radio> */}
                     </Stack>
 
                     {valuetrue ? (
