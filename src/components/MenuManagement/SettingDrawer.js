@@ -46,6 +46,7 @@ const SettingDrawer = (props) => {
     id: getTimestampInSeconds(),
     menuName: name,
     menuDescription: description,
+    section: []
   };
 
   const testfunc = () => {

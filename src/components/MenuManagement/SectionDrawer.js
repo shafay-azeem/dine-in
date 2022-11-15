@@ -65,13 +65,15 @@ const SectionDrawer = (props) => {
   };
 
   const testfunc = () => {
-    var section = []
-    section.push(sectionData)
-    console.log(section, 'section')
-    setResponse([...response.slice(0, props.menu_index), section, ...response.slice(props.menu_index)]);
-    console.log(response, 'section')
-    // // response[props?.menu_index]?.push(section);
-    // console.log(response, "response in section drawer")
+    // var section = []
+    // section.push(sectionData)
+    // // console.log(response, 'rrrr')
+    response[props.menu_index].section.push(sectionData)
+    // response.splice(1, 0, section);
+    // setResponse([...response[props.menu_index].slice(0, props.menu_index), section, ...response[props.menu_index].slice(props.menu_index)]);
+    // console.log(response, 'section')
+    // // // response[props?.menu_index]?.push(section);
+    // // console.log(response, "response in section drawer")
     alert("data has been added");
   };
 
