@@ -24,14 +24,12 @@ import SettingDrawer from "../../MenuManagement/SettingDrawer";
 import { MenuState } from "../../../context/MenuContext";
 import { useNavigate, createSearchParams } from "react-router-dom";
 
-
 const DisplayCard = () => {
   const navigate = useNavigate();
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { menu } = MenuState()
-  const { response } = MenuState()
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { menu } = MenuState();
+  const { response } = MenuState();
 
   const myfun = (id) => {
     navigate({
@@ -46,7 +44,7 @@ const DisplayCard = () => {
           <Grid templateColumns="repeat(5, 1fr)" gap={4}>
             <GridItem colSpan={2}>
               <Text fontSize="17" fontWeight="500">
-                {x.menuName}  {x.menuDescription}
+                {x.menuName}
                 <Badge
                   ml="2"
                   colorScheme="green"
@@ -70,10 +68,7 @@ const DisplayCard = () => {
                   btnText={"Edit Menu"}
                   leftIcon={<AiTwotoneEdit />}
                 /> */}
-                <Button onClick={() => myfun(index)}>
-                  EDIT MENU
-
-                </Button>
+                <Button onClick={() => myfun(index)}>EDIT MENU</Button>
                 <AiFillSetting onClick={onOpen} />
                 {isOpen ? (
                   <SettingDrawer

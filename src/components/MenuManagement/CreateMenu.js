@@ -39,18 +39,12 @@ const CreateMenu = () => {
   const navigate = useNavigate();
   const [searchparams] = useSearchParams();
 
-  let menu_index = searchparams.get("id")
+  let menu_index = searchparams.get("id");
 
   const {
     isOpen: isOpenSection,
     onOpen: onOpenSection,
     onClose: onCloseSection,
-  } = useDisclosure();
-
-  const {
-    isOpen: isOpenItem,
-    onOpen: onOpenItem,
-    onClose: onCloseItem,
   } = useDisclosure();
 
   const handleDrop = (droppedItem) => {
@@ -149,18 +143,6 @@ const CreateMenu = () => {
                           onOpen={onOpenSection}
                           onClose={onCloseSection}
                         ></SectionDrawer>
-                      ) : (
-                        console.log("sss")
-                      )}
-                    </MenuItem>
-                    <MenuItem onClick={onOpenItem}>
-                      Items
-                      {isOpenItem ? (
-                        <ItemDrawer
-                          isOpen={isOpenItem}
-                          onOpen={onOpenItem}
-                          onClose={onCloseItem}
-                        ></ItemDrawer>
                       ) : (
                         console.log("sss")
                       )}
