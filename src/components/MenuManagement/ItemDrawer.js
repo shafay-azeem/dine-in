@@ -38,6 +38,8 @@ import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 
 const ItemDrawer = (props) => {
+  console.log(props.menu_index, 'mmmmmmmm')
+  console.log(props.section_index, 'ssssssss')
   const [price, setPrice] = useState([]);
   const [modifiers, setModifiers] = useState([]);
 
@@ -52,18 +54,12 @@ const ItemDrawer = (props) => {
   const [caloriesConcat, setCaloriesConcat] = useState();
   const [size, setSize] = useState();
 
-  const { item, setItem } = MenuState();
+  const { item, setItem, response } = MenuState();
 
   let itemData = {
-    itemId: 201,
+    itemId: name,
     itemName: name,
     itemDescription: description,
-    label: [select],
-    itemPrice: [{ size: size, price: priceConcat, calories: caloriesConcat }],
-    calories: calories,
-    ingredient: [ingredient],
-    recommendedItems: [recommendedItem],
-    preparationTime: time,
   };
   // let pusher = {
   //   itemPrice: [
@@ -71,8 +67,12 @@ const ItemDrawer = (props) => {
   //   ],
   // }
 
+
+
   const testfunc = () => {
-    item.push(itemData);
+    response[props.menu_index].section[props.section_index].item.push(itemData)
+    console.log(response)
+    alert("data has been added");
     // item[0].itemPrice.push(pusher);
     // console.log(item, 'item data')
   };

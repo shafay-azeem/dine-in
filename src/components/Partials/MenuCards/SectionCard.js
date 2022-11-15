@@ -22,6 +22,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import ItemDrawer from "../../MenuManagement/ItemDrawer";
 
 const SectionCard = (props) => {
+
+  let menu_index = props?.menu_index
   console.log(props.menu_index, "in section");
   const { section, setSection, response, setRespone } = MenuState();
   const [sectionList, setSectionList] = useState(response);
@@ -119,6 +121,8 @@ const SectionCard = (props) => {
                                     Items
                                     {isOpenItem ? (
                                       <ItemDrawer
+                                        menu_index={menu_index}
+                                        section_index={index}
                                         isOpen={isOpenItem}
                                         onOpen={onOpenItem}
                                         onClose={onCloseItem}
