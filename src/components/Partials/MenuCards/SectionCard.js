@@ -25,7 +25,7 @@ const SectionCard = (props) => {
 
   let menu_index = props?.menu_index
   console.log(props.menu_index, "in section");
-  const { section, setSection, response, setRespone } = MenuState();
+  const { section, setSection, response, setResponse } = MenuState();
   const [sectionList, setSectionList] = useState(response);
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
@@ -48,10 +48,10 @@ const SectionCard = (props) => {
   //   }
   // }
 
-  // function sectionClick(index) {
-  //   section[index].itemActive = !section[index].itemActive;
-  //   setSection([...section]);
-  // }
+  function sectionClick(index) {
+    response[props.menu_index].section[index].active = !response[props.menu_index].section[index].active
+    setResponse([...response]);
+  }
 
   const handleDrop = (droppedItem) => {
     if (!droppedItem.destination) return;
@@ -62,7 +62,7 @@ const SectionCard = (props) => {
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
 
     setSectionList(updatedList);
-    setRespone(updatedList);
+    setResponse(updatedList);
   };
 
   return (
@@ -105,7 +105,7 @@ const SectionCard = (props) => {
                             <HStack>
                               <Switch p={5} pl="55%" />
                               <AiOutlineDown
-                              // onClick={() => sectionClick(index)}
+                                onClick={() => sectionClick(index)}
                               />
                               {/* <Button
                   colorScheme="teal"
@@ -139,7 +139,9 @@ const SectionCard = (props) => {
                           </GridItem>
                         </Grid>
 
-                        {/* {x.itemActive ? <ItemCard /> : console.log("false sss")} */}
+                        {x.active ? <ItemCard
+                          menu_index={menu_index}
+                          section_index={index} /> : console.log("false sss")}
                       </Box>
                     )}
                   </Draggable>

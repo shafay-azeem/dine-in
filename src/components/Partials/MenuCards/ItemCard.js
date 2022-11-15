@@ -21,8 +21,10 @@ import { MenuState } from "../../../context/MenuContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useEffect } from "react";
 
-const ItemCard = () => {
-  const { item, setItem } = MenuState();
+const ItemCard = (props) => {
+  console.log(props.menu_index, 'shafay')
+  console.log(props.section_index, 'faizan')
+  const { item, setItem, response, setResponse } = MenuState();
   const [itemList, setItemList] = useState(item);
 
   const handleRemove = (index) => {
@@ -57,7 +59,7 @@ const ItemCard = () => {
         <Droppable droppableId="droppable-1">
           {(provided) => (
             <Box {...provided.droppableProps} ref={provided.innerRef}>
-              {itemList.map((x, index) => {
+              {response[props.menu_index].section[props.section_index].item.map((x, index) => {
                 return (
                   <Draggable
                     key={x.itemName}
