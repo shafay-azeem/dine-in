@@ -18,6 +18,7 @@ import ModifiersTable from "../Partials/CustomTables/ModifiersTable";
 import ConditionalTable from "../Partials/CustomTables/ConditionalTable";
 import CustomButton from "../../CustomElements/CustomButton";
 import DisplayCard from "../Partials/MenuCards/DisplayCard";
+import SettingDrawer from "./SettingDrawer";
 
 const InitialMenu = () => {
   const history = useHistory();
@@ -31,6 +32,12 @@ const InitialMenu = () => {
     isOpen: purchaseIsOpen,
     onOpen: purchaseOnOpen,
     onClose: purchaseOnClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: menuIsOpen,
+    onOpen: menuOnOpen,
+    onClose: menuOnClose,
   } = useDisclosure();
 
   const createmenu = () => {
@@ -61,27 +68,36 @@ const InitialMenu = () => {
               <Grid templateColumns="repeat(5, 1fr)" gap={4} align="right">
                 <GridItem colSpan={12} h="10">
                   <CustomButton
-                    click={createmenu}
+                    click={onOpen}
                     btnText={"create menu"}
                     size={"sm"}
                     mb={2}
                   />
                 </GridItem>
+                {isOpen ? (
+                  <SettingDrawer
+                    isOpen={isOpen}
+                    onOpen={onOpen}
+                    onClose={onClose}
+                  ></SettingDrawer>
+                ) : (
+                  console.log("sss")
+                )}
               </Grid>
               <DisplayCard />
             </TabPanel>
             <TabPanel backgroundColor="white" textAlign="right">
               <CustomButton
-                click={onOpen}
+                click={menuOnOpen}
                 btnText={"Add a Modifiers Group"}
                 size={"sm"}
                 mb={2}
               />
               {isOpen ? (
                 <MenuModifieModal
-                  isOpen={isOpen}
-                  onOpen={onOpen}
-                  onClose={onClose}
+                  isOpen={menuIsOpen}
+                  onOpen={menuOnOpen}
+                  onClose={menuOnClose}
                 />
               ) : (
                 console.log("ss")

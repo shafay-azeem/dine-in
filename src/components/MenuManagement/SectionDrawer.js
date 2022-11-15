@@ -65,10 +65,8 @@ const SectionDrawer = (props) => {
   const testfunc = () => {
     section.push(sectionData);
     menu.push(menu[0]);
-    alert("data has been added")
-
-
-  }
+    alert("data has been added");
+  };
 
   return (
     <>
@@ -221,10 +219,14 @@ const SectionDrawer = (props) => {
             <Button variant="outline" mr={3} onClick={props.onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue" onClick={() => { testfunc() }} >
+            <Button
+              colorScheme="blue"
+              onClick={() => {
+                testfunc();
+              }}
+            >
               Save
             </Button>
-
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

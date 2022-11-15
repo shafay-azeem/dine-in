@@ -31,11 +31,30 @@ import {
 } from "@chakra-ui/react";
 import CustomButton from "../../CustomElements/CustomButton";
 import { MenuState } from "../../context/MenuContext";
+import { useState } from "react";
 
 const SettingDrawer = (props) => {
-  const [value, setValue] = React.useState("1");
-  console.log(props.index, 'index')
-  const { menu } = MenuState()
+  function getTimestampInSeconds() {
+    return Math.floor(Date.now() / 1000);
+  }
+  const [value, setValue] = useState("1");
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const { menu } = MenuState();
+
+  let menuData = {
+    id: getTimestampInSeconds(),
+    menuName: name,
+    menuDescription: description,
+  };
+
+  // const testfunc = () => {
+  //   newmenu.push(menuData);
+  //   // menu.push(menu[0]);
+  //   alert("data has been added");
+  //   console.log(newmenu);
+  // };
+
   return (
     <Drawer
       isOpen={props.isOpen}
@@ -62,17 +81,24 @@ const SettingDrawer = (props) => {
               <TabPanel>
                 <FormControl isRequired>
                   <FormLabel fontWeight="400">Name</FormLabel>
-                  <Input type="text" value={menu[0].menuName} />
+                  <Input
+                    type="text"
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </FormControl>
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight="400">Description</FormLabel>
-                  <Textarea value={menu[0].menuDescription} />
+                  <Textarea onChange={(e) => setDescription(e.target.value)} />
                 </FormControl>
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight="400">Note</FormLabel>
-                  <Input type="text" placeholder="E.g: 20% VAT included" value={menu[0].discountNote} />
+                  <Input
+                    type="text"
+                    placeholder="E.g: 20% VAT included"
+                    value={menu[0].discountNote}
+                  />
                 </FormControl>
 
                 <FormControl mt={4}>
@@ -409,7 +435,15 @@ const SettingDrawer = (props) => {
             mr={3}
             size={"sm"}
           />
-          <CustomButton btnText={"Save"} mr={3} size={"sm"} />
+          <Button
+            colorScheme="blue"
+            // onClick={() => {
+            //   testfunc();
+            // }}
+          >
+            Save
+          </Button>
+          {/* <CustomButton btnText={"Save"} mr={3} size={"sm"} /> */}
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

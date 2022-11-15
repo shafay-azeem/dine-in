@@ -3,6 +3,35 @@ import { useState } from "react";
 const MenuContext = createContext();
 
 export const MenuProvider = ({ children }) => {
+  function getTimestampInSeconds() {
+    return Math.floor(Date.now() / 1000);
+  }
+
+  const [response, setResponse] = useState([
+    {
+      id: 1,
+      menuName: "demomenu",
+      menuDescription: "demodescription",
+      status: false,
+      section: [
+        {
+          sectionId: 1,
+          sectionName: "demosection",
+          sectionDescription: "sectiondescription",
+          active: false,
+          item: [
+            {
+              itemId: 1,
+              itemName: "demoitem",
+              itemDescription: "itemdescription",
+              active: false,
+            },
+          ],
+        },
+      ],
+    },
+  ]);
+
   const [menu, setMenu] = useState([
     {
       id: 0,
@@ -47,7 +76,16 @@ export const MenuProvider = ({ children }) => {
   ]);
   return (
     <MenuContext.Provider
-      value={{ menu, setMenu, section, setSection, item, setItem }}
+      value={{
+        menu,
+        setMenu,
+        section,
+        setSection,
+        item,
+        setItem,
+        response,
+        setResponse,
+      }}
     >
       {children}
     </MenuContext.Provider>
