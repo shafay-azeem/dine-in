@@ -73,16 +73,6 @@ const DisplayCard = () => {
                   leftIcon={<AiTwotoneEdit />}
                 />
                 <AiFillSetting onClick={onOpen} />
-                {isOpen ? (
-                  <SettingDrawer
-                    index={index}
-                    isOpen={isOpen}
-                    onOpen={onOpen}
-                    onClose={onClose}
-                  ></SettingDrawer>
-                ) : (
-                  console.log("sss")
-                )}
                 <Menu>
                   <MenuButton>
                     <BsThreeDotsVertical as={Button} />

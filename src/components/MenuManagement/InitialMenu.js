@@ -40,14 +40,6 @@ const InitialMenu = () => {
     onClose: menuOnClose,
   } = useDisclosure();
 
-  const createmenu = () => {
-
-
-    navigate({
-      pathname: "/createmenu",
-
-    });
-  };
 
   return (
     <>
