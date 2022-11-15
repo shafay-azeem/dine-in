@@ -18,15 +18,20 @@ import {
   Text,
   Divider,
 } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import OrderTable from "../Partials/CustomTables/OrderTable";
 
 
 const ViewOrdersCard = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const orders = () => {
-    history.push("/order");
+
+
+    navigate({
+      pathname: "/order",
+      // search: createSearchParams({ id }).toString(),
+    });
   };
   return (
     <>

@@ -16,33 +16,39 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import CustomButton from "../../../CustomElements/CustomButton";
-import { useHistory } from "react-router-dom";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { AiFillSetting } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
 import SettingDrawer from "../../MenuManagement/SettingDrawer";
 import { MenuState } from "../../../context/MenuContext";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 
 const DisplayCard = () => {
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { menu } = MenuState()
+  const { response } = MenuState()
 
 
-  const createmenu = () => {
-    history.push("/createmenu");
+  const createmenu = (id) => {
+    navigate({
+      pathname: "/createmenu",
+      // search: createSearchParams({ id }).toString(),
+    });
+
   };
   return (
     <>
-      {menu.map((x, index) => (
+      {response.map((x, index) => (
         <Box bg="white" w="100%" p={4} borderRadius={5} mb={4}>
           <Grid templateColumns="repeat(5, 1fr)" gap={4}>
             <GridItem colSpan={2}>
               <Text fontSize="17" fontWeight="500">
-                {x.menuName}
+                {x.menuName}  {x.menuDescription}
                 <Badge
                   ml="2"
                   colorScheme="green"
@@ -61,7 +67,7 @@ const DisplayCard = () => {
               <HStack mt={2} gap={4} ml="38%">
                 <Switch />
                 <CustomButton
-                  click={createmenu}
+                  click={createmenu(index)}
                   size={"sm"}
                   btnText={"Edit Menu"}
                   leftIcon={<AiTwotoneEdit />}

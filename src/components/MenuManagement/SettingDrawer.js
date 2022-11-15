@@ -40,7 +40,7 @@ const SettingDrawer = (props) => {
   const [value, setValue] = useState("1");
   const [name, setName] = useState();
   const [description, setDescription] = useState();
-  const { menu } = MenuState();
+  const { response, setResponse } = MenuState();
 
   let menuData = {
     id: getTimestampInSeconds(),
@@ -48,12 +48,11 @@ const SettingDrawer = (props) => {
     menuDescription: description,
   };
 
-  // const testfunc = () => {
-  //   newmenu.push(menuData);
-  //   // menu.push(menu[0]);
-  //   alert("data has been added");
-  //   console.log(newmenu);
-  // };
+  const testfunc = () => {
+    response.push(menuData);
+    alert("data has been added");
+
+  };
 
   return (
     <Drawer
@@ -97,7 +96,7 @@ const SettingDrawer = (props) => {
                   <Input
                     type="text"
                     placeholder="E.g: 20% VAT included"
-                    value={menu[0].discountNote}
+
                   />
                 </FormControl>
 
@@ -437,9 +436,9 @@ const SettingDrawer = (props) => {
           />
           <Button
             colorScheme="blue"
-            // onClick={() => {
-            //   testfunc();
-            // }}
+            onClick={() => {
+              testfunc();
+            }}
           >
             Save
           </Button>

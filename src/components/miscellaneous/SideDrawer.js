@@ -36,45 +36,83 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import Reports from "../Reports/Reports";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SideDrawer = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const home = () => {
-    history.push("/");
+
+    navigate({
+      pathname: "/",
+
+    });
   };
 
   const reports = () => {
-    history.push("/reports");
+
+    navigate({
+      pathname: "/reports",
+
+    });
   };
 
   const orders = () => {
-    history.push("/order");
+
+    navigate({
+      pathname: "/order",
+
+    });
   };
 
   const customers = () => {
-    history.push("/customer");
+
+
+    navigate({
+      pathname: "/customer",
+
+    });
   };
 
   const menu = () => {
-    history.push("/menu");
+
+    navigate({
+      pathname: "/menu",
+
+    });
   };
 
   const feedbacks = () => {
-    history.push("/feedbacks");
+
+    navigate({
+      pathname: "/feedbacks",
+
+    });
   };
 
   const translationcenter = () => {
-    history.push("/translationcenter");
+
+
+    navigate({
+      pathname: "/translationcenter",
+
+    });
   };
 
   const venueSettings = () => {
-    history.push("/venueSettings");
+
+    navigate({
+      pathname: "/venueSettings",
+
+    });
   };
 
   const dineinqrmenu = () => {
-    history.push("/dineinqrmenu");
+
+    navigate({
+      pathname: "/dineinqrmenu",
+
+    });
   };
 
   const {

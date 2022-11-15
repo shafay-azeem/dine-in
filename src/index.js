@@ -8,11 +8,11 @@ import MenuProvider from "./context/MenuContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <ChakraProvider>
-      <MenuProvider>
-        <App />
-      </MenuProvider>
-    </ChakraProvider>
-  </BrowserRouter>
+
+  <ChakraProvider>
+    <MenuProvider>
+      <App />
+    </MenuProvider>
+  </ChakraProvider>
+
 );

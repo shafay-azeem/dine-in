@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ReportScreen from "./Screens/ReportScreen";
 import OrderScreen from "./Screens/OrderScreen";
 import CustomerScreen from "./Screens/CustomerScreen";
@@ -14,16 +14,20 @@ import HomeScreen from "./Screens/HomeScreen.js";
 function App() {
   return (
     <div className="App">
-      <Route path="/" component={HomeScreen} exact />
-      <Route path="/reports" component={ReportScreen} />
-      <Route path="/order" component={OrderScreen} />
-      <Route path="/customer" component={CustomerScreen} />
-      <Route path="/menu" component={MenuManagementScreen} />
-      <Route path="/feedbacks" component={FeedBacksScreen} />
-      <Route path="/translationcenter" component={TranslationCenterScreen} />
-      <Route path="/venuesettings" component={VenueSettingsScreen} />
-      <Route path="/dineinqrmenu" component={DineInQRMenuScreen} />
-      <Route path="/createmenu" component={CreateMenuScreen} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomeScreen />} exact />
+          <Route path="/reports" element={<ReportScreen />} />
+          <Route path="/order" element={<OrderScreen />} />
+          <Route path="/customer" element={<CustomerScreen />} />
+          <Route path="/menu" element={<MenuManagementScreen />} />
+          <Route path="/feedbacks" element={<FeedBacksScreen />} />
+          <Route path="/translationcenter" element={<TranslationCenterScreen />} />
+          <Route path="/venuesettings" element={<VenueSettingsScreen />} />
+          <Route path="/dineinqrmenu" element={<DineInQRMenuScreen />} />
+          <Route path="/createmenu" element={<CreateMenuScreen />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

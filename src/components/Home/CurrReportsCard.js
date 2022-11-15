@@ -19,13 +19,17 @@ import {
   Divider,
 } from "@chakra-ui/react";
 
-import { useHistory } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import WelcomeText from "./WelcomeText";
 const CurrReportsCard = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const reports = () => {
-    history.push("/reports");
+
+    navigate({
+      pathname: "/reports",
+
+    })
   };
 
   return (

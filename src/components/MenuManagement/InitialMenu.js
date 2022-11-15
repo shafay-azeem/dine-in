@@ -13,7 +13,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import MenuModifieModal from "./MenuModifieModal";
 import PromoModal from "./PromoModal";
 import PurchaseModal from "./PurchaseModal";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ModifiersTable from "../Partials/CustomTables/ModifiersTable";
 import ConditionalTable from "../Partials/CustomTables/ConditionalTable";
 import CustomButton from "../../CustomElements/CustomButton";
@@ -21,7 +21,7 @@ import DisplayCard from "../Partials/MenuCards/DisplayCard";
 import SettingDrawer from "./SettingDrawer";
 
 const InitialMenu = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     isOpen: promoIsOpen,
@@ -41,7 +41,9 @@ const InitialMenu = () => {
   } = useDisclosure();
 
   const createmenu = () => {
-    history.push("/createmenu");
+    navigate({
+      pathname: "/createmenu",
+    });
   };
 
   return (
@@ -68,7 +70,7 @@ const InitialMenu = () => {
               <Grid templateColumns="repeat(5, 1fr)" gap={4} align="right">
                 <GridItem colSpan={12} h="10">
                   <CustomButton
-                    click={onOpen}
+                    click={menuOnOpen}
                     btnText={"create menu"}
                     size={"sm"}
                     mb={2}
@@ -76,9 +78,9 @@ const InitialMenu = () => {
                 </GridItem>
                 {isOpen ? (
                   <SettingDrawer
-                    isOpen={isOpen}
-                    onOpen={onOpen}
-                    onClose={onClose}
+                    isOpen={menuIsOpen}
+                    onOpen={menuOnOpen}
+                    onClose={menuOnClose}
                   ></SettingDrawer>
                 ) : (
                   console.log("sss")
