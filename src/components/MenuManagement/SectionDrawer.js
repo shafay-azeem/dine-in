@@ -61,6 +61,7 @@ const SectionDrawer = (props) => {
     sectionId: name,
     sectionName: name,
     sectionDescription: description,
+    item: []
 
   };
 
