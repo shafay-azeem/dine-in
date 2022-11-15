@@ -41,8 +41,11 @@ const InitialMenu = () => {
   } = useDisclosure();
 
   const createmenu = () => {
+
+
     navigate({
       pathname: "/createmenu",
+
     });
   };
 
@@ -76,7 +79,7 @@ const InitialMenu = () => {
                     mb={2}
                   />
                 </GridItem>
-                {isOpen ? (
+                {menuIsOpen ? (
                   <SettingDrawer
                     isOpen={menuIsOpen}
                     onOpen={menuOnOpen}
@@ -90,16 +93,16 @@ const InitialMenu = () => {
             </TabPanel>
             <TabPanel backgroundColor="white" textAlign="right">
               <CustomButton
-                click={menuOnOpen}
+                click={onOpen}
                 btnText={"Add a Modifiers Group"}
                 size={"sm"}
                 mb={2}
               />
               {isOpen ? (
                 <MenuModifieModal
-                  isOpen={menuIsOpen}
-                  onOpen={menuOnOpen}
-                  onClose={menuOnClose}
+                  isOpen={isOpen}
+                  onOpen={onOpen}
+                  onClose={onClose}
                 />
               ) : (
                 console.log("ss")
