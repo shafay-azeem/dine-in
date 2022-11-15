@@ -26,7 +26,6 @@ import { useNavigate, createSearchParams } from "react-router-dom";
 
 
 const DisplayCard = () => {
-  // const history = useHistory();
   const navigate = useNavigate();
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -34,12 +33,11 @@ const DisplayCard = () => {
   const { response } = MenuState()
 
 
-  const createmenu = (id) => {
+  const myfun = (id) => {
     navigate({
       pathname: "/createmenu",
-      // search: createSearchParams({ id }).toString(),
+      search: createSearchParams({ id }).toString(),
     });
-
   };
   return (
     <>
@@ -66,13 +64,27 @@ const DisplayCard = () => {
             <GridItem colStart={4} colEnd={6}>
               <HStack mt={2} gap={4} ml="38%">
                 <Switch />
-                <CustomButton
-                  click={createmenu(index)}
+                {/* <CustomButton
+                  // click={createmenu(index)}
                   size={"sm"}
                   btnText={"Edit Menu"}
                   leftIcon={<AiTwotoneEdit />}
-                />
+                /> */}
+                <Button onClick={() => myfun(index)}>
+                  EDIT MENU
+
+                </Button>
                 <AiFillSetting onClick={onOpen} />
+                {isOpen ? (
+                  <SettingDrawer
+                    index={index}
+                    isOpen={isOpen}
+                    onOpen={onOpen}
+                    onClose={onClose}
+                  ></SettingDrawer>
+                ) : (
+                  console.log("sss")
+                )}
                 <Menu>
                   <MenuButton>
                     <BsThreeDotsVertical as={Button} />

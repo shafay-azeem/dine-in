@@ -13,28 +13,31 @@ import { AiOutlineDown } from "react-icons/ai";
 import { MenuState } from "../../../context/MenuContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const SectionCard = () => {
-  const { section, setSection } = MenuState();
-  const [sectionList, setSectionList] = useState(section);
+const SectionCard = (props) => {
+  console.log(props.menu_index, "in section")
+  const { section, setSection, response, setRespone } = MenuState();
+  const [sectionList, setSectionList] = useState(response);
   const [status, setSatus] = useState()
   const [index, setIndex] = useState()
 
-
-  function online(index) {
-    if (status === status) {
-      section[index].active = true;
-      setSection([...section]);
-
-    } else {
-      console.log("if not woks", index)
-    }
-  }
+  // console.log(response[1].section, "section")
 
 
-  function sectionClick(index) {
-    section[index].itemActive = !section[index].itemActive;
-    setSection([...section]);
-  }
+  // function online(index) {
+  //   if (status === status) {
+  //     section[index].active = true;
+  //     setSection([...section]);
+
+  //   } else {
+  //     console.log("if not woks", index)
+  //   }
+  // }
+
+
+  // function sectionClick(index) {
+  //   section[index].itemActive = !section[index].itemActive;
+  //   setSection([...section]);
+  // }
 
   const handleDrop = (droppedItem) => {
     if (!droppedItem.destination) return;
@@ -45,7 +48,7 @@ const SectionCard = () => {
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
 
     setSectionList(updatedList);
-    setSection(updatedList);
+    setRespone(updatedList);
   };
 
   return (
@@ -54,11 +57,12 @@ const SectionCard = () => {
         <Droppable droppableId="droppable-1">
           {(provided) => (
             <Box {...provided.droppableProps} ref={provided.innerRef}>
-              {section.map((x, index) => {
+              { }
+              {response[props.menu_index].section.map((x, index) => {
                 return (
                   <Draggable
-                    key={x.sectionName}
-                    draggableId={x.sectionName}
+                    key={x.sectionId}
+                    draggableId={x.sectionId}
                     index={index}
                   >
                     {(provided) => (
@@ -86,9 +90,9 @@ const SectionCard = () => {
                           </GridItem>
                           <GridItem colStart={4} colEnd={6}>
                             <HStack>
-                              <Switch p={5} pl="55%" onChange={(e) => { setSatus(e.target.checked); online(index) }} />
+                              {/* <Switch p={5} pl="55%" onChange={(e) => { setSatus(e.target.checked); online(index) }} /> */}
                               <AiOutlineDown
-                                onClick={() => sectionClick(index)}
+                              // onClick={() => sectionClick(index)}
                               />
                               {/* <Button
                   colorScheme="teal"
@@ -99,7 +103,7 @@ const SectionCard = () => {
                           </GridItem>
                         </Grid>
 
-                        {x.itemActive ? <ItemCard /> : console.log("false sss")}
+                        {/* {x.itemActive ? <ItemCard /> : console.log("false sss")} */}
                       </Box>
                     )}
                   </Draggable>

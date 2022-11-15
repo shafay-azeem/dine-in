@@ -26,6 +26,7 @@ import SectionCard from "../Partials/MenuCards/SectionCard";
 import ItemDrawer from "./ItemDrawer";
 import SectionDrawer from "./SectionDrawer";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const CreateMenu = () => {
   const { data } = MenuState();
@@ -34,6 +35,12 @@ const CreateMenu = () => {
 
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
+
+  const navigate = useNavigate();
+  const [searchparams] = useSearchParams();
+
+  let menu_index = searchparams.get("id")
+
   const {
     isOpen: isOpenSection,
     onOpen: onOpenSection,
@@ -163,7 +170,7 @@ const CreateMenu = () => {
             </VStack>
           </Box>
 
-          <SectionCard />
+          <SectionCard menu_index={menu_index} />
         </GridItem>
       </Grid>
     </>
