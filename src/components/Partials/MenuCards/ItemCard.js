@@ -25,21 +25,19 @@ const ItemCard = () => {
   const { item, setItem } = MenuState();
   const [itemList, setItemList] = useState(item);
 
-
-  const handleRemove = ((index) => {
-    itemList.splice(index, 1)
+  const handleRemove = (index) => {
+    itemList.splice(index, 1);
     var updatedList = [...itemList];
     setItemList(updatedList);
-    setItem(updatedList)
-  })
+    setItem(updatedList);
+  };
 
-
-  const duplicate = ((x) => {
-    item.push(x)
+  const duplicate = (x) => {
+    item.push(x);
     var updatedList = [...item];
     setItemList(updatedList);
     setItem(updatedList);
-  })
+  };
 
   const handleDrop = (droppedItem) => {
     if (!droppedItem.destination) return;
@@ -104,9 +102,9 @@ const ItemCard = () => {
                                   <BsThreeDotsVertical as={Button} />
                                 </MenuButton>
                                 <MenuList>
-
-                                  <MenuItem onClick={() => duplicate(x)}
-                                  >Duplicate </MenuItem>
+                                  <MenuItem onClick={() => duplicate(x)}>
+                                    Duplicate{" "}
+                                  </MenuItem>
                                   <MenuItem onClick={() => handleRemove(index)}>
                                     Delete
                                   </MenuItem>
