@@ -85,44 +85,6 @@ const ItemCard = (props) => {
         <Droppable droppableId="droppable-1">
           {(provided) => (
             <Box {...provided.droppableProps} ref={provided.innerRef}>
-<<<<<<< HEAD
-              {response[props.menu_index].section[props.section_index].item.map((x, index) => {
-                return (
-                  <Draggable
-                    key={x.itemId}
-                    draggableId={x.itemName}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <Box
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        m={9}
-                        ref={provided.innerRef}
-                        border="1px"
-                        borderColor="grey"
-                      >
-                        <Grid templateColumns="repeat(5, 1fr)" gap={4} mt={3}>
-                          <GridItem colSpan={2}>
-                            <HStack>
-                              <Image
-                                boxSize="60px"
-                                objectFit="cover"
-                                src="https://bit.ly/dan-abramov"
-                                alt="Dan Abramov"
-                              />
-                              <Text pl={2}> {x.itemName}</Text>
-                            </HStack>
-                          </GridItem>
-                          <GridItem colStart={4} colEnd={6}>
-                            <HStack>
-                              <InputGroup>
-                                <InputLeftElement
-                                  pointerEvents="none"
-                                  color="gray.500"
-                                  fontSize="1.2em"
-                                  children="$"
-=======
               {response[props.menu_index].section[props.section_index].item.map(
                 (x, index) => {
                   return (
@@ -148,7 +110,6 @@ const ItemCard = (props) => {
                                   objectFit="cover"
                                   src="https://bit.ly/dan-abramov"
                                   alt="Dan Abramov"
->>>>>>> 52f01f155862c87fd0a26d52fa386689954a2348
                                 />
                                 <Text pl={2}> {x.itemName}</Text>
                               </HStack>
