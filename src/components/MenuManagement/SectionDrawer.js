@@ -56,9 +56,12 @@ const SectionDrawer = (props) => {
   // }
 
   const { response, setResponse } = MenuState();
+  function getTimestampInSeconds() {
+    return Math.floor(Date.now() / 1000);
+  }
 
   let sectionData = {
-    sectionId: name,
+    sectionId: getTimestampInSeconds(),
     sectionName: name,
     sectionDescription: description,
     item: []
@@ -70,6 +73,10 @@ const SectionDrawer = (props) => {
     // section.push(sectionData)
     // // console.log(response, 'rrrr')
     response[props.menu_index].section.push(sectionData)
+    setResponse([...response])
+    // (...response)
+
+    // var updatedList = [...response[props.menu_index].section.push(sectionData)];
     // response.splice(1, 0, section);
     // setResponse([...response[props.menu_index].slice(0, props.menu_index), section, ...response[props.menu_index].slice(props.menu_index)]);
     // console.log(response, 'section')

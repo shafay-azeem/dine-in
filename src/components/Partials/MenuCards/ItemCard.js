@@ -25,32 +25,60 @@ const ItemCard = (props) => {
   console.log(props.menu_index, 'shafay')
   console.log(props.section_index, 'faizan')
   const { item, setItem, response, setResponse } = MenuState();
-  const [itemList, setItemList] = useState(item);
+  const [itemList, setItemList] = useState(response);
 
   const handleRemove = (index) => {
-    itemList.splice(index, 1);
-    var updatedList = [...itemList];
-    setItemList(updatedList);
-    setItem(updatedList);
+    // console.log(index, 'handle remove')
+    response[props.menu_index].section[props.section_index].item.splice(index, 1)
+    setResponse([...response]);
+    // itemList.splice(index, 1);
+    // var updatedList = [...itemList];
+    // setItemList(updatedList);
+    // setItem(updatedList);
   };
 
+  // const duplicate = (x) => {
+  //   item.push(x);
+  //   var updatedList = [...item];
+  //   setItemList(updatedList);
+  //   setItem(updatedList);
+  // };
+
   const duplicate = (x) => {
-    item.push(x);
-    var updatedList = [...item];
-    setItemList(updatedList);
-    setItem(updatedList);
+
+    function getTimestampInSeconds() {
+      return Math.floor(Date.now() / 1000);
+    }
+
+
+    let itemData = {
+      itemId: getTimestampInSeconds(),
+      itemName: x.itemName,
+      itemDescription: x.itemDescription,
+    };
+
+    console.log(response[props.menu_index].section[props.section_index].item.push(itemData), "section array")
+    setResponse([...response]);
+    // console.log(response[props?.menu_index]?.section, "kkk")
+    // sectionList.push(x)
+    // response[props.menu_index].section?.push(x)
+    // var updatedList = [...response[props?.menu_index]?.section];
+    // setSectionList(updatedList);
+
+
+    // console.log(response[menu_index].section, 'sectionlist')
+    // setResponse(sectionList);
   };
+
 
   const handleDrop = (droppedItem) => {
     if (!droppedItem.destination) return;
     var updatedList = [...itemList];
-
     const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
-
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
 
     setItemList(updatedList);
-    setItem(updatedList);
+    setResponse(updatedList);
   };
 
   return (
@@ -62,7 +90,7 @@ const ItemCard = (props) => {
               {response[props.menu_index].section[props.section_index].item.map((x, index) => {
                 return (
                   <Draggable
-                    key={x.itemName}
+                    key={x.itemId}
                     draggableId={x.itemName}
                     index={index}
                   >

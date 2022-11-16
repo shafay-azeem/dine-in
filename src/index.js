@@ -8,12 +8,12 @@ import MenuProvider from "./context/MenuContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <MenuProvider>
-        <App />
-      </MenuProvider>
-    </ChakraProvider>
-  </React.StrictMode>
+
+  <ChakraProvider>
+    <MenuProvider>
+      <App />
+    </MenuProvider>
+  </ChakraProvider>
+
 
 );

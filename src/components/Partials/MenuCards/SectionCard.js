@@ -26,7 +26,7 @@ const SectionCard = (props) => {
   let menu_index = props?.menu_index
   console.log(props.menu_index, "in section");
   const { section, setSection, response, setResponse } = MenuState();
-  const [sectionList, setSectionList] = useState(response);
+  const [sectionList, setSectionList] = useState(response[props?.menu_index]?.section);
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
 
@@ -48,6 +48,44 @@ const SectionCard = (props) => {
   //   }
   // }
 
+
+  const handleRemove = (index) => {
+    // console.log(index, 'handle remove')
+    response[menu_index]?.section.splice(index, 1)
+    setResponse([...response]);
+    // itemList.splice(index, 1);
+    // var updatedList = [...itemList];
+    // setItemList(updatedList);
+    // setItem(updatedList);
+  };
+
+  const duplicate = (x) => {
+
+    function getTimestampInSeconds() {
+      return Math.floor(Date.now() / 1000);
+    }
+
+    let sectionData = {
+      sectionId: getTimestampInSeconds(),
+      sectionName: x.sectionName,
+      sectionDescription: x.sectionDescription,
+      item: []
+
+    };
+    console.log(menu_index)
+    console.log(response[menu_index].section.push(sectionData), "section array")
+    setResponse([...response]);
+    // console.log(response[props?.menu_index]?.section, "kkk")
+    // sectionList.push(x)
+    // response[props.menu_index].section?.push(x)
+    // var updatedList = [...response[props?.menu_index]?.section];
+    // setSectionList(updatedList);
+
+
+    console.log(response[menu_index].section, 'sectionlist')
+    // setResponse(sectionList);
+  };
+
   function sectionClick(index) {
     response[props.menu_index].section[index].active = !response[props.menu_index].section[index].active
     setResponse([...response]);
@@ -56,13 +94,11 @@ const SectionCard = (props) => {
   const handleDrop = (droppedItem) => {
     if (!droppedItem.destination) return;
     var updatedList = [...sectionList];
-
     const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
-
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
-
     setSectionList(updatedList);
-    setResponse(updatedList);
+    // setResponse(updatedList);
+    // console.log(response, 'rrrrr')
   };
 
   return (
@@ -75,7 +111,7 @@ const SectionCard = (props) => {
                 return (
                   <Draggable
                     key={x.sectionId}
-                    draggableId={x.sectionId}
+                    draggableId={x.sectionName}
                     index={index}
                   >
                     {(provided) => (
@@ -131,8 +167,9 @@ const SectionCard = (props) => {
                                       console.log("sss")
                                     )}
                                   </MenuItem>
-                                  <MenuItem>Duplicate</MenuItem>
-                                  <MenuItem>Delete</MenuItem>
+
+                                  <MenuItem onClick={() => duplicate(x)}>Duplicate</MenuItem>
+                                  <MenuItem onClick={() => handleRemove(index)} >Delete</MenuItem>
                                 </MenuList>
                               </Menu>
                             </HStack>

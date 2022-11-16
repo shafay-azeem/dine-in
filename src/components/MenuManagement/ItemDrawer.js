@@ -54,10 +54,13 @@ const ItemDrawer = (props) => {
   const [caloriesConcat, setCaloriesConcat] = useState();
   const [size, setSize] = useState();
 
-  const { item, setItem, response } = MenuState();
+  const { item, setItem, response, setResponse } = MenuState();
 
+  function getTimestampInSeconds() {
+    return Math.floor(Date.now() / 1000);
+  }
   let itemData = {
-    itemId: name,
+    itemId: getTimestampInSeconds(),
     itemName: name,
     itemDescription: description,
   };
@@ -71,7 +74,7 @@ const ItemDrawer = (props) => {
 
   const testfunc = () => {
     response[props.menu_index].section[props.section_index].item.push(itemData)
-    console.log(response)
+    setResponse([...response])
     alert("data has been added");
     // item[0].itemPrice.push(pusher);
     // console.log(item, 'item data')
