@@ -43,8 +43,8 @@ const DisplayCard = () => {
 
   function myfun2(id) {
     setIndivisualId(id)
-    setOpen(true)
-    console.log(open)
+    console.log(id)
+
 
 
   };
@@ -81,13 +81,15 @@ const DisplayCard = () => {
                   leftIcon={<AiTwotoneEdit />}
                 /> */}
                 <Button onClick={() => myfun(index)}>EDIT MENU</Button>
-                <AiFillSetting onClick={{ myfun2(index) }, { onOpen }} />
-                {open ? (
+                <Button onClick={() => myfun2(index)}>
+                  <AiFillSetting onClick={onOpen} size="xm" />
+                </Button>
+                {isOpen ? (
                   <SettingDrawer
                     index={indivisualId}
-                  // isOpen={open}
-                  // onOpen={onOpen}
-                  // onClose={onClose}
+                    isOpen={isOpen}
+                    onOpen={onOpen}
+                    onClose={onClose}
                   ></SettingDrawer>
                 ) : (
                   console.log("sss")

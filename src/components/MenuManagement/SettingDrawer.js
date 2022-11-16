@@ -39,10 +39,11 @@ const SettingDrawer = (props) => {
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
-  const [value, setValue] = useState("1");
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
   const { response, setResponse } = MenuState();
+  const [value, setValue] = useState("1");
+  const [name, setName] = useState(response[props.index].menuName);
+  const [description, setDescription] = useState();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   // console.log(response[props.index].menuName, "menuname");
 
@@ -87,7 +88,7 @@ const SettingDrawer = (props) => {
                   <Input
                     type="text"
                     onChange={(e) => setName(e.target.value)}
-                    value={response[props.index].menuName}
+                    value={name}
                   />
                 </FormControl>
 
@@ -429,7 +430,7 @@ const SettingDrawer = (props) => {
 
         <DrawerFooter>
           <CustomButton
-            click={onClose}
+            click={props.onClose}
             btnText={"Cancel"}
             variant={"outline"}
             mr={3}
