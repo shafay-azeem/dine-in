@@ -12,7 +12,6 @@ import {
 import CustomButton from "../../CustomElements/CustomButton";
 
 const FeedbackDeleteModal = (props) => {
-  console.log(props);
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose}>

@@ -41,7 +41,6 @@ const Feedbacks = () => {
   const fileExtension = ".xlsx";
   const fileName = "Excel Export";
   const exportToExcel = async () => {
-    console.log("king");
     const ws = XLSX.utils.json_to_sheet(excelData);
     const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
     const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
@@ -74,7 +73,6 @@ const Feedbacks = () => {
     // return false;
   }
 
-  console.log(isOpen, "isOpen");
   return (
     <>
       <FullScreen handle={handle}>
