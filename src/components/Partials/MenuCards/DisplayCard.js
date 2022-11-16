@@ -29,6 +29,8 @@ const DisplayCard = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { menu } = MenuState();
+  const [open, setOpen] = useState(false)
+  const [indivisualId, setIndivisualId] = useState();
   const { response } = MenuState();
 
   const myfun = (id) => {
@@ -36,6 +38,15 @@ const DisplayCard = () => {
       pathname: "/createmenu",
       search: createSearchParams({ id }).toString(),
     });
+  };
+
+
+  function myfun2(id) {
+    setIndivisualId(id)
+    setOpen(true)
+    console.log(open)
+
+
   };
 
   return (
@@ -70,13 +81,13 @@ const DisplayCard = () => {
                   leftIcon={<AiTwotoneEdit />}
                 /> */}
                 <Button onClick={() => myfun(index)}>EDIT MENU</Button>
-                <AiFillSetting onClick={onOpen} />
-                {isOpen ? (
+                <AiFillSetting onClick={{ myfun2(index) }, { onOpen }} />
+                {open ? (
                   <SettingDrawer
-                    index={index}
-                    isOpen={isOpen}
-                    onOpen={onOpen}
-                    onClose={onClose}
+                    index={indivisualId}
+                  // isOpen={open}
+                  // onOpen={onOpen}
+                  // onClose={onClose}
                   ></SettingDrawer>
                 ) : (
                   console.log("sss")

@@ -28,12 +28,14 @@ import {
   Radio,
   ButtonGroup,
   RadioGroup,
+  useDisclosure,
 } from "@chakra-ui/react";
 import CustomButton from "../../CustomElements/CustomButton";
 import { MenuState } from "../../context/MenuContext";
 import { useState } from "react";
 
 const SettingDrawer = (props) => {
+  console.log(props.index, 'props.index')
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
@@ -41,8 +43,8 @@ const SettingDrawer = (props) => {
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const { response, setResponse } = MenuState();
-
-  console.log(response[props.index].menuName, "menuname");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  // console.log(response[props.index].menuName, "menuname");
 
   let menuData = {
     id: getTimestampInSeconds(),
@@ -85,6 +87,7 @@ const SettingDrawer = (props) => {
                   <Input
                     type="text"
                     onChange={(e) => setName(e.target.value)}
+                    value={response[props.index].menuName}
                   />
                 </FormControl>
 
@@ -426,7 +429,7 @@ const SettingDrawer = (props) => {
 
         <DrawerFooter>
           <CustomButton
-            click={props.onClose}
+            click={onClose}
             btnText={"Cancel"}
             variant={"outline"}
             mr={3}
