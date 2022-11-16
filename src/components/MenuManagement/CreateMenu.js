@@ -70,7 +70,6 @@ const CreateMenu = () => {
           setFilter([updatedlist]);
         }
       }
-      console.log("2");
     } else {
       for (let i = 0; i < response[menu_index].section.length; i++) {
         if (response[menu_index].section[i].sectionStatus == false) {
