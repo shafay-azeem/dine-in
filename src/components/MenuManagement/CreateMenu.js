@@ -5,6 +5,7 @@ import {
   ButtonGroup,
   Grid,
   GridItem,
+  list,
   ListItem,
   Menu,
   MenuButton,
@@ -63,7 +64,8 @@ const CreateMenu = () => {
   const myfunc = (event) => {
     if (event.target.value === "All") {
       setFilter(response[menu_index].section);
-    } else if (event.target.value === "Active") {
+    }
+    if (event.target.value === "Active") {
       for (let i = 0; i < response[menu_index].section.length; i++) {
         console.log(response[menu_index].section.length, 'console.log')
         if (response[menu_index].section[i].sectionStatus == true) {
@@ -75,9 +77,11 @@ const CreateMenu = () => {
           setFilter(null)
         }
       }
-    } else {
+    } if (event.target.value === "InActive") {
       for (let i = 0; i < response[menu_index].section.length; i++) {
+        console.log(response[menu_index].section.length, 'console.log')
         if (response[menu_index].section[i].sectionStatus == false) {
+          console.log(i, 'count')
           var updatedlist = { ...response[menu_index].section[i] };
           setFilter([updatedlist]);
         }
@@ -86,6 +90,7 @@ const CreateMenu = () => {
         }
       }
     }
+
   };
 
   return (
