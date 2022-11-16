@@ -29,8 +29,6 @@ import { useState } from "react";
 import { MenuState } from "../../context/MenuContext";
 
 const SectionDrawer = (props) => {
-
-
   const [checkedItems, setCheckedItems] = React.useState(false);
 
   const [value, setValue] = React.useState("1");
@@ -42,10 +40,6 @@ const SectionDrawer = (props) => {
   const [select, setSelect] = useState();
   const [pass, setPass] = useState(false);
   const [close, setClose] = useState(false);
-
-
-
-
 
   // function enabelDisable() {
   //   if (value === "1") {
@@ -64,16 +58,16 @@ const SectionDrawer = (props) => {
     sectionId: getTimestampInSeconds(),
     sectionName: name,
     sectionDescription: description,
-    item: []
-
+    sectionStatus: false,
+    item: [],
   };
 
   const testfunc = () => {
     // var section = []
     // section.push(sectionData)
     // // console.log(response, 'rrrr')
-    response[props.menu_index].section.push(sectionData)
-    setResponse([...response])
+    response[props.menu_index].section.push(sectionData);
+    setResponse([...response]);
     // (...response)
 
     // var updatedList = [...response[props.menu_index].section.push(sectionData)];

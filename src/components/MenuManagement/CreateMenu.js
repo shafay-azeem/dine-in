@@ -29,17 +29,21 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const CreateMenu = () => {
+  const [searchparams] = useSearchParams();
+  let menu_index = searchparams.get("id");
+
   const { data } = MenuState();
-  const { section, setSection } = MenuState();
+  const { section, setSection, response, setResponse } = MenuState();
   const [sectionList, setSectionList] = useState(section);
 
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
-
   const navigate = useNavigate();
-  const [searchparams] = useSearchParams();
 
-  let menu_index = searchparams.get("id");
+  const [filter, setFilter] = useState(response[menu_index].section);
+
+  // console.log(menu_index, "menu_index");
+  // console.log(response[menu_index].section, "section menu");
 
   const {
     isOpen: isOpenSection,
@@ -50,13 +54,31 @@ const CreateMenu = () => {
   const handleDrop = (droppedItem) => {
     if (!droppedItem.destination) return;
     var updatedList = [...sectionList];
-
     const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
-
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
-
     setSectionList(updatedList);
     setSection(updatedList);
+  };
+
+  const myfunc = (event) => {
+    if (event.target.value === "All") {
+      setFilter(response[menu_index].section);
+    } else if (event.target.value === "Active") {
+      for (let i = 0; i < response[menu_index].section.length; i++) {
+        if (response[menu_index].section[i].sectionStatus == true) {
+          var updatedlist = { ...response[menu_index].section[i] };
+          setFilter([updatedlist]);
+        }
+      }
+      console.log("2");
+    } else {
+      for (let i = 0; i < response[menu_index].section.length; i++) {
+        if (response[menu_index].section[i].sectionStatus == false) {
+          var updatedlist = { ...response[menu_index].section[i] };
+          setFilter([updatedlist]);
+        }
+      }
+    }
   };
 
   return (
@@ -76,17 +98,22 @@ const CreateMenu = () => {
           </Grid>
           <SimpleGrid>
             <Box textAlign="center">
-              <ButtonGroup variant="outline" spacing="0" size="sm">
-                <Button>All</Button>
-                <Button>Active</Button>
-                <Button>InActive</Button>
+              <ButtonGroup
+                variant="outline"
+                spacing="0"
+                size="sm"
+                onClick={(e) => myfunc(e)}
+              >
+                <Button value="All">All</Button>
+                <Button value="Active">Active</Button>
+                <Button value="InActive">InActive</Button>
               </ButtonGroup>
             </Box>
             <DragDropContext onDragEnd={handleDrop}>
               <Droppable droppableId="droppable-1">
                 {(provided) => (
                   <Box {...provided.droppableProps} ref={provided.innerRef}>
-                    {section.map((x, index) => {
+                    {filter?.map((x, index) => {
                       return (
                         <Draggable
                           key={x.sectionName}
