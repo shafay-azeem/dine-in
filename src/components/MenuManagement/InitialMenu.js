@@ -19,6 +19,7 @@ import ConditionalTable from "../Partials/CustomTables/ConditionalTable";
 import CustomButton from "../../CustomElements/CustomButton";
 import DisplayCard from "../Partials/MenuCards/DisplayCard";
 import SettingDrawer from "./SettingDrawer";
+import CreateMenuDrawer from "./CreateMenuDrawer";
 
 const InitialMenu = () => {
   const navigate = useNavigate();
@@ -39,7 +40,6 @@ const InitialMenu = () => {
     onOpen: menuOnOpen,
     onClose: menuOnClose,
   } = useDisclosure();
-
 
   return (
     <>
@@ -72,11 +72,11 @@ const InitialMenu = () => {
                   />
                 </GridItem>
                 {menuIsOpen ? (
-                  <SettingDrawer
+                  <CreateMenuDrawer
                     isOpen={menuIsOpen}
                     onOpen={menuOnOpen}
                     onClose={menuOnClose}
-                  ></SettingDrawer>
+                  ></CreateMenuDrawer>
                 ) : (
                   console.log("sss")
                 )}

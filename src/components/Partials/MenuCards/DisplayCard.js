@@ -37,6 +37,7 @@ const DisplayCard = () => {
       search: createSearchParams({ id }).toString(),
     });
   };
+
   return (
     <>
       {response.map((x, index) => (

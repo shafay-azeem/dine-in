@@ -42,17 +42,18 @@ const SettingDrawer = (props) => {
   const [description, setDescription] = useState();
   const { response, setResponse } = MenuState();
 
+  console.log(response[props.index].menuName, "menuname");
+
   let menuData = {
     id: getTimestampInSeconds(),
     menuName: name,
     menuDescription: description,
-    section: []
+    section: [],
   };
 
   const testfunc = () => {
     response.push(menuData);
     alert("data has been added");
-
   };
 
   return (
@@ -94,11 +95,7 @@ const SettingDrawer = (props) => {
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight="400">Note</FormLabel>
-                  <Input
-                    type="text"
-                    placeholder="E.g: 20% VAT included"
-
-                  />
+                  <Input type="text" placeholder="E.g: 20% VAT included" />
                 </FormControl>
 
                 <FormControl mt={4}>

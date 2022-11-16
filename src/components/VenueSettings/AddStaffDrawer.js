@@ -27,10 +27,9 @@ const AddStaffDrawer = (props) => {
   // const [tempDate, setTempDate] = useState("");
   var tempDate;
   function generateNum() {
-    console.log(milliseconds);
     setMilliseconds(new Date().getTime());
     tempDate = milliseconds.toString().split("");
-    console.log(tempDate, "tt");
+
     return tempDate;
   }
 
@@ -108,8 +107,13 @@ const AddStaffDrawer = (props) => {
           </DrawerBody>
 
           <DrawerFooter borderTopWidth="1px">
-            <CustomButton click={props.onClose} btnText={"Cancel"} variant={"outline"} mr={3} size={"sm"} />
-
+            <CustomButton
+              click={props.onClose}
+              btnText={"Cancel"}
+              variant={"outline"}
+              mr={3}
+              size={"sm"}
+            />
 
             <CustomButton btnText={"Create Tables"} size={"sm"} />
           </DrawerFooter>
