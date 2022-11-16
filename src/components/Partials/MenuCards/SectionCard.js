@@ -22,11 +22,12 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import ItemDrawer from "../../MenuManagement/ItemDrawer";
 
 const SectionCard = (props) => {
-
-  let menu_index = props?.menu_index
+  let menu_index = props?.menu_index;
   console.log(props.menu_index, "in section");
   const { section, setSection, response, setResponse } = MenuState();
-  const [sectionList, setSectionList] = useState(response[props?.menu_index]?.section);
+  const [sectionList, setSectionList] = useState(
+    response[props?.menu_index]?.section
+  );
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
 
@@ -48,10 +49,9 @@ const SectionCard = (props) => {
   //   }
   // }
 
-
   const handleRemove = (index) => {
     // console.log(index, 'handle remove')
-    response[menu_index]?.section.splice(index, 1)
+    response[menu_index]?.section.splice(index, 1);
     setResponse([...response]);
     // itemList.splice(index, 1);
     // var updatedList = [...itemList];
@@ -60,7 +60,6 @@ const SectionCard = (props) => {
   };
 
   const duplicate = (x) => {
-
     function getTimestampInSeconds() {
       return Math.floor(Date.now() / 1000);
     }
@@ -69,11 +68,13 @@ const SectionCard = (props) => {
       sectionId: getTimestampInSeconds(),
       sectionName: x.sectionName,
       sectionDescription: x.sectionDescription,
-      item: []
-
+      item: [],
     };
-    console.log(menu_index)
-    console.log(response[menu_index].section.push(sectionData), "section array")
+    console.log(menu_index);
+    console.log(
+      response[menu_index].section.push(sectionData),
+      "section array"
+    );
     setResponse([...response]);
     // console.log(response[props?.menu_index]?.section, "kkk")
     // sectionList.push(x)
@@ -81,13 +82,13 @@ const SectionCard = (props) => {
     // var updatedList = [...response[props?.menu_index]?.section];
     // setSectionList(updatedList);
 
-
-    console.log(response[menu_index].section, 'sectionlist')
+    console.log(response[menu_index].section, "sectionlist");
     // setResponse(sectionList);
   };
 
   function sectionClick(index) {
-    response[props.menu_index].section[index].active = !response[props.menu_index].section[index].active
+    response[props.menu_index].section[index].active =
+      !response[props.menu_index].section[index].active;
     setResponse([...response]);
   }
 
@@ -168,17 +169,26 @@ const SectionCard = (props) => {
                                     )}
                                   </MenuItem>
 
-                                  <MenuItem onClick={() => duplicate(x)}>Duplicate</MenuItem>
-                                  <MenuItem onClick={() => handleRemove(index)} >Delete</MenuItem>
+                                  <MenuItem onClick={() => duplicate(x)}>
+                                    Duplicate
+                                  </MenuItem>
+                                  <MenuItem onClick={() => handleRemove(index)}>
+                                    Delete
+                                  </MenuItem>
                                 </MenuList>
                               </Menu>
                             </HStack>
                           </GridItem>
                         </Grid>
 
-                        {x.active ? <ItemCard
-                          menu_index={menu_index}
-                          section_index={index} /> : console.log("false sss")}
+                        {x.active ? (
+                          <ItemCard
+                            menu_index={menu_index}
+                            section_index={index}
+                          />
+                        ) : (
+                          console.log("false sss")
+                        )}
                       </Box>
                     )}
                   </Draggable>

@@ -62,35 +62,27 @@ const CreateMenu = () => {
   };
 
   const myfunc = (event) => {
+    let responseSec = response[menu_index].section;
+    let filterSec = [];
+
     if (event.target.value === "All") {
-      setFilter(response[menu_index].section);
+      filterSec = responseSec;
     }
     if (event.target.value === "Active") {
-      for (let i = 0; i < response[menu_index].section.length; i++) {
-        console.log(response[menu_index].section.length, 'console.log')
-        if (response[menu_index].section[i].sectionStatus == true) {
-          console.log(i, 'count')
-          var updatedlist = { ...response[menu_index].section[i] };
-          setFilter([updatedlist]);
-        }
-        else {
-          setFilter(null)
-        }
-      }
-    } if (event.target.value === "InActive") {
-      for (let i = 0; i < response[menu_index].section.length; i++) {
-        console.log(response[menu_index].section.length, 'console.log')
-        if (response[menu_index].section[i].sectionStatus == false) {
-          console.log(i, 'count')
-          var updatedlist = { ...response[menu_index].section[i] };
-          setFilter([updatedlist]);
-        }
-        else {
-          setFilter(null)
+      for (let i = 0; i < responseSec.length; i++) {
+        if (responseSec[i].sectionStatus == true) {
+          filterSec.push(responseSec[i]);
         }
       }
     }
-
+    if (event.target.value === "InActive") {
+      for (let i = 0; i < responseSec.length; i++) {
+        if (responseSec[i].sectionStatus == false) {
+          filterSec.push(responseSec[i]);
+        }
+      }
+    }
+    setFilter(filterSec);
   };
 
   return (
