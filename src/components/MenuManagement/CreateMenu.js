@@ -65,9 +65,14 @@ const CreateMenu = () => {
       setFilter(response[menu_index].section);
     } else if (event.target.value === "Active") {
       for (let i = 0; i < response[menu_index].section.length; i++) {
+        console.log(response[menu_index].section.length, 'console.log')
         if (response[menu_index].section[i].sectionStatus == true) {
+          console.log(i, 'count')
           var updatedlist = { ...response[menu_index].section[i] };
           setFilter([updatedlist]);
+        }
+        else {
+          setFilter(null)
         }
       }
     } else {
@@ -75,6 +80,9 @@ const CreateMenu = () => {
         if (response[menu_index].section[i].sectionStatus == false) {
           var updatedlist = { ...response[menu_index].section[i] };
           setFilter([updatedlist]);
+        }
+        else {
+          setFilter(null)
         }
       }
     }
@@ -115,7 +123,7 @@ const CreateMenu = () => {
                     {filter?.map((x, index) => {
                       return (
                         <Draggable
-                          key={x.sectionName}
+                          key={x.sectionId}
                           draggableId={x.sectionName}
                           index={index}
                         >

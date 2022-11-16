@@ -48,7 +48,9 @@ const DisplayCard = () => {
   return (
     <>
       {response.map((x, index) => (
-        <Box bg="white" w="100%" p={4} borderRadius={5} mb={4}>
+
+        <Box bg="white" w="100%" p={4} borderRadius={5} mb={4}
+          key={index}>
           <Grid templateColumns="repeat(5, 1fr)" gap={4}>
             <GridItem colSpan={2}>
               <Text fontSize="17" fontWeight="500">
@@ -103,7 +105,8 @@ const DisplayCard = () => {
             </GridItem>
           </Grid>
         </Box>
-      ))}
+      ))
+      }
     </>
   );
 };
