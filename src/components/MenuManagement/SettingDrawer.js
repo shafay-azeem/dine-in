@@ -35,17 +35,25 @@ import { MenuState } from "../../context/MenuContext";
 import { useState } from "react";
 
 const SettingDrawer = (props) => {
-  console.log(props.index, 'props.index')
+  // console.log(props.index, "props.index");
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
   const { response, setResponse } = MenuState();
   const [value, setValue] = useState("1");
   const [name, setName] = useState(response[props.index].menuName);
-  const [description, setDescription] = useState();
+  const [description, setDescription] = useState(
+    response[props.index].menuDescription
+  );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // console.log(response[props.index].menuName, "menuname");
+
+  const updatedMenu = () => {
+    response[props.index].menuName = name;
+    response[props.index].menuDescription = description;
+    setResponse([...response]);
+    alert("Menu Updated Successfully");
+  };
 
   let menuData = {
     id: getTimestampInSeconds(),
@@ -94,7 +102,10 @@ const SettingDrawer = (props) => {
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight="400">Description</FormLabel>
-                  <Textarea onChange={(e) => setDescription(e.target.value)} />
+                  <Textarea
+                    onChange={(e) => setDescription(e.target.value)}
+                    value={description}
+                  />
                 </FormControl>
 
                 <FormControl mt={4}>
@@ -439,7 +450,7 @@ const SettingDrawer = (props) => {
           <Button
             colorScheme="blue"
             onClick={() => {
-              testfunc();
+              updatedMenu();
             }}
           >
             Save
