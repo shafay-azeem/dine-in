@@ -58,7 +58,7 @@ const SectionDrawer = (props) => {
     sectionId: getTimestampInSeconds(),
     sectionName: name,
     sectionDescription: description,
-    sectionStatus: true,
+    sectionStatus: false,
     item: [],
   };
 
