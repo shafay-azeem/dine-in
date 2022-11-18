@@ -74,7 +74,7 @@ const ItemDrawer = (props) => {
 
   const testfunc = () => {
     response[props.menu_index].section[props.section_index].item.push(itemData)
-    setResponse([...response])
+    // setResponse([...response])
     alert("data has been added");
     // item[0].itemPrice.push(pusher);
     // console.log(item, 'item data')

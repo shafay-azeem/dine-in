@@ -210,7 +210,6 @@ const SectionCard = (props) => {
                                   <Box onClick={() => getIndex(index)}>
                                     <MenuItem onClick={onOpenItem}>
                                       Items
-
                                     </MenuItem>
                                   </Box>
                                   {isOpenItem ? (
@@ -240,7 +239,7 @@ const SectionCard = (props) => {
                         {x.active ? (
                           <ItemCard
                             menu_index={menu_index}
-                            section_index={status}
+                            section_index={index}
                           />
                         ) : (
                           console.log("false sss")
