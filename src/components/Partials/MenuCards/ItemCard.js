@@ -24,12 +24,13 @@ import { useEffect } from "react";
 const ItemCard = (props) => {
   console.log(props.menu_index, "pp", props.section_index, "qq")
   const { item, setItem, response, setResponse } = MenuState();
-  const [itemList, setItemList] = useState(response);
+  const [itemList, setItemList] = useState(response[props?.menu_index]?.section[props?.section_index]?.item);
 
   const handleRemove = (index) => {
     // console.log(index, 'handle remove')
     response[props.menu_index].section[props.section_index].item.splice(index, 1)
     setResponse([...response]);
+    setItemList(response[props.menu_index].section[props.section_index].item);
     // itemList.splice(index, 1);
     // var updatedList = [...itemList];
     // setItemList(updatedList);
@@ -77,7 +78,13 @@ const ItemCard = (props) => {
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
 
     setItemList(updatedList);
-    setResponse(updatedList);
+
+
+    response[props.menu_index].section[props.section_index].item.length = 0;
+    response[props?.menu_index]?.section[props?.section_index]?.item.push.apply(
+      response[props?.menu_index]?.section[props?.section_index]?.item,
+      updatedList
+    );
   };
 
   return (
@@ -86,12 +93,12 @@ const ItemCard = (props) => {
         <Droppable droppableId="droppable-1">
           {(provided) => (
             <Box {...provided.droppableProps} ref={provided.innerRef}>
-              {response[props.menu_index].section[props.section_index].item.map(
+              {itemList?.map(
                 (x, index) => {
                   return (
                     <Draggable
-                      key={x.itemName}
-                      draggableId={x.itemName}
+                      key={x.itemId}
+                      draggableId={x.itemId.toString()}
                       index={index}
                     >
                       {(provided) => (
