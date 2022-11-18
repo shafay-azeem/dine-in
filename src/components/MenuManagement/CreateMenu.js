@@ -1,10 +1,14 @@
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
   ButtonGroup,
   Grid,
   GridItem,
+  HStack,
+  Input,
+  InputGroup,
+  InputLeftElement,
   list,
   ListItem,
   Menu,
@@ -151,7 +155,7 @@ const CreateMenu = () => {
 
         <GridItem colSpan={4}>
           <Box bg="white" borderRadius={6} display="flex" p={5}>
-            <VStack>
+            <HStack>
               <Menu>
                 <MenuButton>
                   <CustomButton
@@ -161,7 +165,10 @@ const CreateMenu = () => {
                     mt={3}
                     size={"sm"}
                   />
+
                 </MenuButton>
+
+
 
                 <Portal>
                   <MenuList>
@@ -181,7 +188,17 @@ const CreateMenu = () => {
                   </MenuList>
                 </Portal>
               </Menu>
-            </VStack>
+
+              <Box>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<SearchIcon color="gray.300" />}
+                  />
+                  <Input type="text" placeholder="Search" bg="white" />
+                </InputGroup>
+              </Box>
+            </HStack>
           </Box>
 
           <SectionCard menu_index={menu_index} />
