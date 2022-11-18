@@ -244,22 +244,31 @@ const SectionDrawer = (props) => {
             <Button variant="outline" mr={3} onClick={props.onClose}>
               Cancel
             </Button>
-            <Button
-              colorScheme="blue"
-              onClick={() => {
-                testfunc();
-              }}
-            >
-              Save
-            </Button>
-            <Button
-              colorScheme="blue"
-              onClick={() => {
-                updatedSection();
-              }}
-            >
-              Update
-            </Button>
+            {Number.isInteger(props?.section_index) ? (
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  updatedSection();
+                }}
+              >
+                Update
+              </Button>
+            )
+
+              : (
+                <Button
+                  colorScheme="blue"
+                  onClick={() => {
+                    testfunc();
+                  }}
+                >
+                  Save
+                </Button>
+
+              )
+
+            }
+
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
