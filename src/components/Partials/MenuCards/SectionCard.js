@@ -30,6 +30,7 @@ const SectionCard = (props) => {
   );
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
+  const [count, setCount] = useState();
 
   const {
     isOpen: isOpenItem,
@@ -107,6 +108,7 @@ const SectionCard = (props) => {
   };
 
   function sectionClick(index) {
+    setSatus(index)
     response[props.menu_index].section[index].active =
       !response[props.menu_index].section[index].active;
     setResponse([...response]);
@@ -133,6 +135,11 @@ const SectionCard = (props) => {
     // setResponse(updatedList);
     // console.log(response, 'rrrrr')
   };
+
+  const getIndex = (index) => {
+    console.log(index, 'index=========')
+    setCount(index)
+  }
 
   return (
     <>
@@ -188,6 +195,7 @@ const SectionCard = (props) => {
                               )}
                               <AiOutlineDown
                                 onClick={() => sectionClick(index)}
+
                               />
                               {/* <Button
                   colorScheme="teal"
@@ -199,20 +207,23 @@ const SectionCard = (props) => {
                                   <BsThreeDotsVertical as={Button} />
                                 </MenuButton>
                                 <MenuList>
-                                  <MenuItem onClick={onOpenItem}>
-                                    Items
-                                    {isOpenItem ? (
-                                      <ItemDrawer
-                                        menu_index={menu_index}
-                                        section_index={index}
-                                        isOpen={isOpenItem}
-                                        onOpen={onOpenItem}
-                                        onClose={onCloseItem}
-                                      ></ItemDrawer>
-                                    ) : (
-                                      console.log("sss")
-                                    )}
-                                  </MenuItem>
+                                  <Box onClick={() => getIndex(index)}>
+                                    <MenuItem onClick={onOpenItem}>
+                                      Items
+
+                                    </MenuItem>
+                                  </Box>
+                                  {isOpenItem ? (
+                                    <ItemDrawer
+                                      menu_index={menu_index}
+                                      section_index={count}
+                                      isOpen={isOpenItem}
+                                      onOpen={onOpenItem}
+                                      onClose={onCloseItem}
+                                    ></ItemDrawer>
+                                  ) : (
+                                    console.log("sss")
+                                  )}
 
                                   <MenuItem onClick={() => duplicate(x)}>
                                     Duplicate
@@ -229,7 +240,7 @@ const SectionCard = (props) => {
                         {x.active ? (
                           <ItemCard
                             menu_index={menu_index}
-                            section_index={index}
+                            section_index={status}
                           />
                         ) : (
                           console.log("false sss")

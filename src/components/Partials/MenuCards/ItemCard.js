@@ -22,6 +22,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useEffect } from "react";
 
 const ItemCard = (props) => {
+  console.log(props.menu_index, "pp", props.section_index, "qq")
   const { item, setItem, response, setResponse } = MenuState();
   const [itemList, setItemList] = useState(response);
 
