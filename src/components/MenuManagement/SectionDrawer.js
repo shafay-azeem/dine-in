@@ -33,8 +33,13 @@ const SectionDrawer = (props) => {
 
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
+  const { response, setResponse } = MenuState();
+  const [name, setName] = useState(
+    response[props.menu_index].section[props?.section_index]?.sectionName
+  );
+  const [description, setDescription] = useState(
+    response[props.menu_index].section[props?.section_index]?.sectionDescription
+  );
   const [note, setNote] = useState();
   const [searchSection, setsearchSection] = useState();
   const [select, setSelect] = useState();
@@ -49,7 +54,6 @@ const SectionDrawer = (props) => {
   //   }
   // }
 
-  const { response, setResponse } = MenuState();
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
@@ -79,6 +83,14 @@ const SectionDrawer = (props) => {
     alert("data has been added");
   };
 
+  const updatedSection = () => {
+    response[props.menu_index].section[props.section_index].sectionName = name;
+    response[props.menu_index].section[props.section_index].sectionDescription =
+      description;
+    setResponse([...response]);
+    alert("Section Updated Successfully");
+  };
+
   return (
     <>
       <Drawer
@@ -106,6 +118,7 @@ const SectionDrawer = (props) => {
                     <Input
                       type="text"
                       onChange={(e) => setName(e.target.value)}
+                      value={name}
                     />
                   </FormControl>
 
@@ -114,6 +127,7 @@ const SectionDrawer = (props) => {
                     <Textarea
                       placeholder="Here is a sample placeholder"
                       onChange={(e) => setDescription(e.target.value)}
+                      value={description}
                     />
                   </FormControl>
 
@@ -237,6 +251,14 @@ const SectionDrawer = (props) => {
               }}
             >
               Save
+            </Button>
+            <Button
+              colorScheme="blue"
+              onClick={() => {
+                updatedSection();
+              }}
+            >
+              Update
             </Button>
           </DrawerFooter>
         </DrawerContent>
