@@ -121,7 +121,11 @@ const SectionCard = (props) => {
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
     // console.log(updatedList, 'updatedList')
     setSectionList(updatedList);
+    // setResponse([...response])
     console.log(updatedList, 'kng')
+
+    response[props?.menu_index].section.length = 0;
+    response[props?.menu_index]?.section.push.apply(response[props?.menu_index]?.section, updatedList);
     // let Array1 = response[props?.menu_index]?.section
     // let Array2 = updatedList
     // Array1.splice(0, Array1.length, ...Array2);
@@ -168,7 +172,20 @@ const SectionCard = (props) => {
                           </GridItem>
                           <GridItem colStart={4} colEnd={6}>
                             <HStack>
-                              <Switch p={5} pl="55%" onChange={() => switchStatus(index)} />
+                              {x.sectionStatus ? (
+                                <Switch
+                                  p={5}
+                                  pl="55%"
+                                  isChecked
+                                  onChange={() => switchStatus(index)}
+                                />
+                              ) : (
+                                <Switch
+                                  p={5}
+                                  pl="55%"
+                                  onChange={() => switchStatus(index)}
+                                />
+                              )}
                               <AiOutlineDown
                                 onClick={() => sectionClick(index)}
                               />
