@@ -5,6 +5,9 @@ import {
   GridItem,
   HStack,
   Image,
+  Input,
+  InputGroup,
+  InputLeftElement,
   Menu,
   MenuButton,
   MenuItem,
@@ -21,6 +24,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import ItemDrawer from "../../MenuManagement/ItemDrawer";
 import SectionDrawer from "../../MenuManagement/SectionDrawer";
+import { SearchIcon } from "@chakra-ui/icons";
 
 const SectionCard = (props) => {
   let menu_index = props?.menu_index;
@@ -149,6 +153,15 @@ const SectionCard = (props) => {
 
   return (
     <>
+      <Box mt={2}>
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.300" />}
+          />
+          <Input type="text" placeholder="Search" bg="white" />
+        </InputGroup>
+      </Box>
       <DragDropContext onDragEnd={handleDrop}>
         <Droppable droppableId="droppable-1">
           {(provided) => (

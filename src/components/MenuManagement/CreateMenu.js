@@ -165,10 +165,7 @@ const CreateMenu = () => {
                     mt={3}
                     size={"sm"}
                   />
-
                 </MenuButton>
-
-
 
                 <Portal>
                   <MenuList>
@@ -188,16 +185,6 @@ const CreateMenu = () => {
                   </MenuList>
                 </Portal>
               </Menu>
-
-              <Box>
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<SearchIcon color="gray.300" />}
-                  />
-                  <Input type="text" placeholder="Search" bg="white" />
-                </InputGroup>
-              </Box>
             </HStack>
           </Box>
 
