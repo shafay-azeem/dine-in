@@ -38,13 +38,18 @@ import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 
 const ItemDrawer = (props) => {
-  console.log(props.menu_index, 'mmmmmmmm')
-  console.log(props.section_index, 'ssssssss')
+  console.log(props.menu_index, 'menu----------')
+  console.log(props.section_index, 'section---------')
+  console.log(props?.item_index, 'item----------')
+  const { item, setItem, response, setResponse } = MenuState();
   const [price, setPrice] = useState([]);
   const [modifiers, setModifiers] = useState([]);
-
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
+  const [name, setName] = useState(
+    response[props.menu_index].section[props?.section_index]?.item[props?.item_index]?.itemName
+  );
+  const [description, setDescription] = useState(
+    response[props.menu_index].section[props?.section_index]?.item[props?.item_index]?.itemDescription
+  );
   const [select, setSelect] = useState();
   const [ingredient, setIngredient] = useState();
   const [time, setTime] = useState();
@@ -54,7 +59,7 @@ const ItemDrawer = (props) => {
   const [caloriesConcat, setCaloriesConcat] = useState();
   const [size, setSize] = useState();
 
-  const { item, setItem, response, setResponse } = MenuState();
+
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -70,7 +75,13 @@ const ItemDrawer = (props) => {
   //   ],
   // }
 
-
+  const updateItem = () => {
+    response[props.menu_index].section[props.section_index].item[props.item_index].itemName = name;
+    response[props.menu_index].section[props.section_index].item[props.item_index].itemDescription =
+      description;
+    setResponse([...response]);
+    alert("Item Updated Successfully");
+  };
 
   const testfunc = () => {
     response[props.menu_index].section[props.section_index].item.push(itemData)
@@ -174,6 +185,7 @@ const ItemDrawer = (props) => {
                     <Input
                       type="text"
                       onChange={(e) => setName(e.target.value)}
+                      value={name}
                     />
                   </FormControl>
 
@@ -182,6 +194,7 @@ const ItemDrawer = (props) => {
                     <Textarea
                       placeholder="Here is a sample placeholder"
                       onChange={(e) => setDescription(e.target.value)}
+                      value={description}
                     />
                   </FormControl>
 
@@ -623,11 +636,36 @@ const ItemDrawer = (props) => {
               mr={3}
               size={"sm"}
             />
-            <CustomButton
+            {/* <CustomButton
               btnText={"Save"}
               click={() => testfunc()}
               size={"sm"}
-            />
+            /> */}
+
+            {Number.isInteger(props?.item_index) ? (
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  updateItem();
+                }}
+              >
+                Update
+              </Button>
+            )
+
+              : (
+                <Button
+                  colorScheme="blue"
+                  onClick={() => {
+                    testfunc();
+                  }}
+                >
+                  Save
+                </Button>
+
+              )
+
+            }
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

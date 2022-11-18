@@ -14,17 +14,35 @@ import {
   MenuList,
   Switch,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import React, { useState } from "react";
 import { MenuState } from "../../../context/MenuContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useEffect } from "react";
+import ItemDrawer from "../../MenuManagement/ItemDrawer";
 
 const ItemCard = (props) => {
   console.log(props.menu_index, "pp", props.section_index, "qq")
   const { item, setItem, response, setResponse } = MenuState();
   const [itemList, setItemList] = useState(response[props?.menu_index]?.section[props?.section_index]?.item);
+  const [count, setCount] = useState();
+
+
+  const {
+    isOpen: isOpenItem,
+    onOpen: onOpenItem,
+    onClose: onCloseItem,
+  } = useDisclosure();
+
+
+  const getIndex = (index) => {
+
+    console.log(index, 'index-------------')
+    setCount(index);
+  };
+
 
   const handleRemove = (index) => {
     // console.log(index, 'handle remove')
@@ -138,7 +156,25 @@ const ItemCard = (props) => {
                                   <MenuButton>
                                     <BsThreeDotsVertical as={Button} />
                                   </MenuButton>
+
                                   <MenuList>
+                                    <Box onClick={() => getIndex(index)}>
+                                      <MenuItem onClick={onOpenItem}>
+                                        Edit
+                                      </MenuItem>
+                                    </Box>
+                                    {isOpenItem ? (
+                                      <ItemDrawer
+                                        menu_index={props.menu_index}
+                                        section_index={props.section_index}
+                                        item_index={count}
+                                        isOpen={isOpenItem}
+                                        onOpen={onOpenItem}
+                                        onClose={onCloseItem}
+                                      ></ItemDrawer>
+                                    ) : (
+                                      console.log("sss")
+                                    )}
                                     <MenuItem onClick={() => duplicate(x)}>
                                       Duplicate{" "}
                                     </MenuItem>
