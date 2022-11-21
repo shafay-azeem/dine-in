@@ -32,7 +32,7 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
@@ -41,6 +41,10 @@ const ItemDrawer = (props) => {
   console.log(props.menu_index, 'menu----------')
   console.log(props.section_index, 'section---------')
   console.log(props?.item_index, 'item----------')
+  console.log(props?.ItemInMenu, '------------itemInMenu---------')
+
+
+
   const { item, setItem, response, setResponse } = MenuState();
   const [price, setPrice] = useState([]);
   const [modifiers, setModifiers] = useState([]);
@@ -60,6 +64,11 @@ const ItemDrawer = (props) => {
   const [size, setSize] = useState();
 
 
+  useEffect(() => {
+    if (props?.ItemInMenu === "ItemInMenu") {
+      setName()
+    }
+  },)
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -83,10 +92,19 @@ const ItemDrawer = (props) => {
     alert("Item Updated Successfully");
   };
 
-  const testfunc = () => {
-    response[props.menu_index].section[props.section_index].item.push(itemData)
+  const testfunc = (x) => {
+    console.log(x, 'conditonal parameter')
+
+    if (x === "ItemInMenu") {
+      response[props.menu_index].itemMenu.push(itemData)
+      alert("SIngle Push")
+      console.log(response[props.menu_index].itemMenu)
+    } else {
+      response[props.menu_index].section[props.section_index].item.push(itemData)
+      alert("data has been added");
+    }
     // setResponse([...response])
-    alert("data has been added");
+
     // item[0].itemPrice.push(pusher);
     // console.log(item, 'item data')
   };
@@ -657,7 +675,7 @@ const ItemDrawer = (props) => {
                 <Button
                   colorScheme="blue"
                   onClick={() => {
-                    testfunc();
+                    testfunc(props?.ItemInMenu);
                   }}
                 >
                   Save

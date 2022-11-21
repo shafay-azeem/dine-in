@@ -31,6 +31,7 @@ const CreateMenuDrawer = (props) => {
     menuName: name,
     menuDescription: description,
     section: [],
+    itemMenu: []
   };
 
   const menuCreate = () => {
