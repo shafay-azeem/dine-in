@@ -194,7 +194,7 @@ const CreateMenu = () => {
                       {isOpenItem ? (
                         <ItemDrawer
                           menu_index={menu_index}
-                          ItemInMenu={"ItemInMenu"}
+                          ItemInMenu={true}
                           isOpen={isOpenItem}
                           onOpen={onOpenItem}
                           onClose={onCloseItem}

@@ -42,14 +42,14 @@ const ItemDrawer = (props) => {
   console.log(props.section_index, 'section---------')
   console.log(props?.item_index, 'item----------')
   console.log(props?.ItemInMenu, '------------itemInMenu---------')
-
-
-
   const { item, setItem, response, setResponse } = MenuState();
+  const initialState = props.ItemInMenu ? "" : response[props.menu_index].section[props?.section_index]?.item[props?.item_index]?.itemName
+
+
   const [price, setPrice] = useState([]);
   const [modifiers, setModifiers] = useState([]);
   const [name, setName] = useState(
-    response[props.menu_index].section[props?.section_index]?.item[props?.item_index]?.itemName
+    initialState
   );
   const [description, setDescription] = useState(
     response[props.menu_index].section[props?.section_index]?.item[props?.item_index]?.itemDescription
@@ -64,11 +64,12 @@ const ItemDrawer = (props) => {
   const [size, setSize] = useState();
 
 
-  useEffect(() => {
-    if (props?.ItemInMenu === "ItemInMenu") {
-      setName()
-    }
-  },)
+  // useEffect(() => {
+  //   if (props?.ItemInMenu === "ItemInMenu") {
+  //     console.log(name, 'nameeee')
+  //     setName(name)
+  //   }
+  // },)
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -95,9 +96,9 @@ const ItemDrawer = (props) => {
   const testfunc = (x) => {
     console.log(x, 'conditonal parameter')
 
-    if (x === "ItemInMenu") {
+    if (x === true) {
       response[props.menu_index].itemMenu.push(itemData)
-      alert("SIngle Push")
+      alert("Single Push On basis Of Conditional Parameters")
       console.log(response[props.menu_index].itemMenu)
     } else {
       response[props.menu_index].section[props.section_index].item.push(itemData)
