@@ -59,9 +59,6 @@ const ItemCard = (props) => {
       setResponse([...response]);
       setItemList(response[props.menu_index].itemMenu);
     }
-
-
-
   };
 
 

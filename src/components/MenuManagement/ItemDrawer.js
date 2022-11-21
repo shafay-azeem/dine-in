@@ -39,11 +39,12 @@ import CustomButton from "../../CustomElements/CustomButton";
 
 const ItemDrawer = (props) => {
   console.log(props.menu_index, 'menu----------')
-  console.log(props.section_index, 'section---------')
+  console.log(props?.section_index, 'section---------')
   console.log(props?.item_index, 'item----------')
   console.log(props?.ItemInMenu, '------------itemInMenu---------')
   const { item, setItem, response, setResponse } = MenuState();
-  const initialState = props.ItemInMenu ? "" : response[props.menu_index].section[props?.section_index]?.item[props?.item_index]?.itemName
+  const forwardState = Number.isInteger(props?.section_index) ? response[props.menu_index].section[props?.section_index]?.item[props?.item_index]?.itemName : response[props.menu_index].itemMenu[props?.item_index]?.itemName
+  const initialState = props.ItemInMenu ? "" : forwardState
 
 
   const [price, setPrice] = useState([]);
@@ -75,12 +76,23 @@ const ItemDrawer = (props) => {
   };
 
 
-  const updateItem = () => {
-    response[props.menu_index].section[props.section_index].item[props.item_index].itemName = name;
-    response[props.menu_index].section[props.section_index].item[props.item_index].itemDescription =
-      description;
-    setResponse([...response]);
-    alert("Item Updated Successfully");
+  const updateItem = (x) => {
+    if (x == null) {
+      response[props.menu_index].itemMenu[props.item_index].itemName = name;
+      // response[props.menu_index].item[props.item_index].itemDescription =
+      // description;
+      setResponse([...response]);
+      alert("Item with out section Updated Successfully");
+
+    } else {
+      response[props.menu_index].section[props.section_index].item[props.item_index].itemName = name;
+      response[props.menu_index].section[props.section_index].item[props.item_index].itemDescription =
+        description;
+      setResponse([...response]);
+      alert("Item Updated Successfully");
+
+    }
+
   };
 
   const testfunc = (x) => {
@@ -652,7 +664,7 @@ const ItemDrawer = (props) => {
               <Button
                 colorScheme="blue"
                 onClick={() => {
-                  updateItem();
+                  updateItem(props?.section_index);
                 }}
               >
                 Update
