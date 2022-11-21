@@ -27,9 +27,10 @@ const ItemCard = (props) => {
   console.log(props.menu_index, "pp", props.section_index, "qq")
   const { item, setItem, response, setResponse } = MenuState();
 
+  const initialState = Number.isInteger(props?.section_index) ? (response[props?.menu_index]?.section[props?.section_index]?.item) : (response[props?.menu_index]?.itemMenu)
 
 
-  const [itemList, setItemList] = useState(response[props?.menu_index]?.section[props?.section_index]?.item);
+  const [itemList, setItemList] = useState(initialState);
   const [count, setCount] = useState();
 
 
@@ -49,14 +50,23 @@ const ItemCard = (props) => {
 
   const handleRemove = (index) => {
 
-    response[props.menu_index].section[props.section_index].item.splice(index, 1)
-    setResponse([...response]);
-    setItemList(response[props.menu_index].section[props.section_index].item);
+    if (Number.isInteger(props?.section_index) == true) {
+      response[props.menu_index].section[props.section_index].item.splice(index, 1)
+      setResponse([...response]);
+      setItemList(response[props.menu_index].section[props.section_index].item);
+    } else {
+      response[props.menu_index].itemMenu.splice(index, 1)
+      setResponse([...response]);
+      setItemList(response[props.menu_index].itemMenu);
+    }
+
+
 
   };
 
 
-  const duplicate = (x) => {
+  const duplicate = (x, y) => {
+    console.log(y, '======y=========')
 
     function getTimestampInSeconds() {
       return Math.floor(Date.now() / 1000);
@@ -69,9 +79,13 @@ const ItemCard = (props) => {
       itemDescription: x.itemDescription,
     };
 
-    console.log(response[props.menu_index].section[props.section_index].item.push(itemData), "section array")
-    setResponse([...response]);
-
+    if (y == null) {
+      console.log(response[props.menu_index].itemMenu.push(itemData), "itemMenu array")
+      setResponse([...response]);
+    } else {
+      console.log(response[props.menu_index].section[props.section_index].item.push(itemData), "section array")
+      setResponse([...response]);
+    }
   };
 
 
@@ -161,7 +175,7 @@ const ItemCard = (props) => {
                                     ) : (
                                       console.log("sss")
                                     )}
-                                    <MenuItem onClick={() => duplicate(x)}>
+                                    <MenuItem onClick={() => duplicate(x, props?.section_index)}>
                                       Duplicate{" "}
                                     </MenuItem>
                                     <MenuItem
