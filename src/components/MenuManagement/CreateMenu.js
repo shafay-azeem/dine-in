@@ -32,6 +32,7 @@ import ItemDrawer from "./ItemDrawer";
 import SectionDrawer from "./SectionDrawer";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import ItemCard from "../Partials/MenuCards/ItemCard";
 
 const CreateMenu = () => {
   const [searchparams] = useSearchParams();
@@ -47,8 +48,6 @@ const CreateMenu = () => {
 
   const [filter, setFilter] = useState(response[menu_index].section);
 
-  // console.log(menu_index, "menu_index");
-  // console.log(response[menu_index].section, "section menu");
 
   const {
     isOpen: isOpenSection,
@@ -210,6 +209,7 @@ const CreateMenu = () => {
           </Box>
 
           <SectionCard menu_index={menu_index} />
+          <ItemCard menu_index={menu_index}></ItemCard>
         </GridItem>
       </Grid>
     </>

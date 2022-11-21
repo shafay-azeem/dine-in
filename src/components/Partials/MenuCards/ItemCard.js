@@ -26,6 +26,9 @@ import ItemDrawer from "../../MenuManagement/ItemDrawer";
 const ItemCard = (props) => {
   console.log(props.menu_index, "pp", props.section_index, "qq")
   const { item, setItem, response, setResponse } = MenuState();
+
+
+
   const [itemList, setItemList] = useState(response[props?.menu_index]?.section[props?.section_index]?.item);
   const [count, setCount] = useState();
 
@@ -45,22 +48,13 @@ const ItemCard = (props) => {
 
 
   const handleRemove = (index) => {
-    // console.log(index, 'handle remove')
+
     response[props.menu_index].section[props.section_index].item.splice(index, 1)
     setResponse([...response]);
     setItemList(response[props.menu_index].section[props.section_index].item);
-    // itemList.splice(index, 1);
-    // var updatedList = [...itemList];
-    // setItemList(updatedList);
-    // setItem(updatedList);
+
   };
 
-  // const duplicate = (x) => {
-  //   item.push(x);
-  //   var updatedList = [...item];
-  //   setItemList(updatedList);
-  //   setItem(updatedList);
-  // };
 
   const duplicate = (x) => {
 
@@ -77,15 +71,7 @@ const ItemCard = (props) => {
 
     console.log(response[props.menu_index].section[props.section_index].item.push(itemData), "section array")
     setResponse([...response]);
-    // console.log(response[props?.menu_index]?.section, "kkk")
-    // sectionList.push(x)
-    // response[props.menu_index].section?.push(x)
-    // var updatedList = [...response[props?.menu_index]?.section];
-    // setSectionList(updatedList);
 
-
-    // console.log(response[menu_index].section, 'sectionlist')
-    // setResponse(sectionList);
   };
 
 

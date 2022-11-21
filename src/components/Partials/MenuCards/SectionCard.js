@@ -49,28 +49,15 @@ const SectionCard = (props) => {
     onClose: onCloseItem,
   } = useDisclosure();
 
-  // console.log(response[1].section, "section")
 
-  // function online(index) {
-  //   if (status === status) {
-  //     section[index].active = true;
-  //     setSection([...section]);
-
-  //   } else {
-  //     console.log("if not woks", index)
-  //   }
-  // }
 
   const handleRemove = (index) => {
-    // console.log(index, 'handle remove')
+
 
     response[menu_index]?.section.splice(index, 1);
     setResponse([...response]);
     setSectionList(response[props?.menu_index]?.section);
-    // itemList.splice(index, 1);
-    // var updatedList = [...itemList];
-    // setItemList(updatedList);
-    // setItem(updatedList);
+
   };
 
   function switchStatus(index) {
@@ -83,7 +70,7 @@ const SectionCard = (props) => {
 
   const duplicate = (x) => {
     let filterSec = [];
-    // let responseSec = response[props?.menu_index]?.section
+
     function getTimestampInSeconds() {
       return Math.floor(Date.now() / 1000);
     }
@@ -101,18 +88,7 @@ const SectionCard = (props) => {
       "section array"
     );
     setResponse([...response]);
-    // filterSec = (response[props?.menu_index]?.section)
-    // // setSectionList(filterSec);
-    // setSectionList([...response[props?.menu_index]?.section])
 
-    // console.log(response[props?.menu_index]?.section, "kkk")
-    // sectionList.push(x)
-    // response[props.menu_index].section?.push(x)
-    // var updatedList = [...response[props?.menu_index]?.section];
-    // setSectionList(updatedList);
-
-    // console.log(response[menu_index].section, "sectionlist");
-    // setResponse(sectionList);
   };
 
   function sectionClick(index) {
@@ -127,11 +103,11 @@ const SectionCard = (props) => {
     var updatedList = [...sectionList];
     console.log(updatedList, "updatedList");
     const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
-    // // console.log([reorderedItem], '[reorderedItem]')
+
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
-    // console.log(updatedList, 'updatedList')
+
     setSectionList(updatedList);
-    // setResponse([...response])
+
     console.log(updatedList, "kng");
 
     response[props?.menu_index].section.length = 0;
@@ -139,12 +115,7 @@ const SectionCard = (props) => {
       response[props?.menu_index]?.section,
       updatedList
     );
-    // let Array1 = response[props?.menu_index]?.section
-    // let Array2 = updatedList
-    // Array1.splice(0, Array1.length, ...Array2);
-    // setResponse([...Array1])
-    // setResponse(updatedList);
-    // console.log(response, 'rrrrr')
+
   };
 
   const getIndex = (index) => {

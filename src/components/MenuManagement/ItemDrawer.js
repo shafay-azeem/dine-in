@@ -64,12 +64,6 @@ const ItemDrawer = (props) => {
   const [size, setSize] = useState();
 
 
-  // useEffect(() => {
-  //   if (props?.ItemInMenu === "ItemInMenu") {
-  //     console.log(name, 'nameeee')
-  //     setName(name)
-  //   }
-  // },)
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -79,11 +73,7 @@ const ItemDrawer = (props) => {
     itemName: name,
     itemDescription: description,
   };
-  // let pusher = {
-  //   itemPrice: [
-  //     { size: size, price: priceConcat, calories: caloriesConcat },
-  //   ],
-  // }
+
 
   const updateItem = () => {
     response[props.menu_index].section[props.section_index].item[props.item_index].itemName = name;
@@ -104,10 +94,7 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item.push(itemData)
       alert("data has been added");
     }
-    // setResponse([...response])
 
-    // item[0].itemPrice.push(pusher);
-    // console.log(item, 'item data')
   };
 
   const addPriceOption = (event) => {
