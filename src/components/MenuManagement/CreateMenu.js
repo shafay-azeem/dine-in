@@ -56,6 +56,12 @@ const CreateMenu = () => {
     onClose: onCloseSection,
   } = useDisclosure();
 
+  const {
+    isOpen: isOpenItem,
+    onOpen: onOpenItem,
+    onClose: onCloseItem,
+  } = useDisclosure();
+
   const handleDrop = (droppedItem) => {
     if (!droppedItem.destination) return;
     var updatedList = [...sectionList];
@@ -178,6 +184,20 @@ const CreateMenu = () => {
                           onOpen={onOpenSection}
                           onClose={onCloseSection}
                         ></SectionDrawer>
+                      ) : (
+                        console.log("sss")
+                      )}
+                    </MenuItem>
+
+                    <MenuItem onClick={onOpenItem}>
+                      Item
+                      {isOpenItem ? (
+                        <ItemDrawer
+                          menu_index={menu_index}
+                          isOpen={isOpenItem}
+                          onOpen={onOpenItem}
+                          onClose={onCloseItem}
+                        ></ItemDrawer>
                       ) : (
                         console.log("sss")
                       )}

@@ -152,25 +152,19 @@ const SectionCard = (props) => {
   };
 
   const filterBySearch = (event) => {
-
     const query = event.target.value;
-
     var updatedList = [...sectionList];
-
-
     if (query === "") {
-      setSectionList(response[props?.menu_index]?.section)
-      return
-
+      setSectionList(response[props?.menu_index]?.section);
+      return;
     } else {
       updatedList = updatedList.filter((item) => {
-        return item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+        return (
+          item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1
+        );
       });
-      console.log(updatedList, 'after filter')
-
       setSectionList(updatedList);
     }
-
   };
 
   return (
@@ -181,7 +175,12 @@ const SectionCard = (props) => {
             pointerEvents="none"
             children={<SearchIcon color="gray.300" />}
           />
-          <Input type="text" placeholder="Search" bg="white" onChange={filterBySearch} />
+          <Input
+            type="text"
+            placeholder="Search"
+            bg="white"
+            onChange={filterBySearch}
+          />
         </InputGroup>
       </Box>
       <DragDropContext onDragEnd={handleDrop}>
