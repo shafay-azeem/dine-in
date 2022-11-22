@@ -1,9 +1,11 @@
 import {
+  Badge,
   Box,
   Button,
   Grid,
   GridItem,
   HStack,
+  IconButton,
   Image,
   Input,
   InputGroup,
@@ -18,13 +20,21 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import ItemCard from "./ItemCard";
-import { AiOutlineDown } from "react-icons/ai";
+import {
+  AiFillDelete,
+  AiFillEdit,
+  AiFillFileAdd,
+  AiOutlineArrowDown,
+  AiOutlineDown,
+  AiOutlineUp,
+} from "react-icons/ai";
 import { MenuState } from "../../../context/MenuContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import ItemDrawer from "../../MenuManagement/ItemDrawer";
 import SectionDrawer from "../../MenuManagement/SectionDrawer";
-import { SearchIcon } from "@chakra-ui/icons";
+import { AddIcon, SearchIcon } from "@chakra-ui/icons";
+import { AiFillCopy } from "react-icons/ai";
 
 const SectionCard = (props) => {
   let menu_index = props?.menu_index;
@@ -49,15 +59,10 @@ const SectionCard = (props) => {
     onClose: onCloseItem,
   } = useDisclosure();
 
-
-
   const handleRemove = (index) => {
-
-
     response[menu_index]?.section.splice(index, 1);
     setResponse([...response]);
     setSectionList(response[props?.menu_index]?.section);
-
   };
 
   function switchStatus(index) {
@@ -88,7 +93,6 @@ const SectionCard = (props) => {
       "section array"
     );
     setResponse([...response]);
-
   };
 
   function sectionClick(index) {
@@ -115,7 +119,6 @@ const SectionCard = (props) => {
       response[props?.menu_index]?.section,
       updatedList
     );
-
   };
 
   const getIndex = (index) => {
@@ -167,110 +170,163 @@ const SectionCard = (props) => {
                   >
                     {(provided) => (
                       <Box
-                        bg="white"
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
-                        borderRadius={6}
-                        p={5}
-                        mt={3}
                         key={index}
                       >
-                        <Grid templateColumns="repeat(5, 1fr)" gap={4}>
-                          <GridItem colSpan={2}>
-                            <HStack>
-                              <Image
-                                boxSize="60px"
-                                objectFit="cover"
-                                src="https://bit.ly/dan-abramov"
-                                alt="Dan Abramov"
-                              />
-                              <Text pl={2}>{x.sectionName}</Text>
-                            </HStack>
-                          </GridItem>
-                          <GridItem colStart={4} colEnd={6}>
-                            <HStack>
-                              {x.sectionStatus ? (
-                                <Switch
-                                  p={5}
-                                  pl="55%"
-                                  isChecked
-                                  onChange={() => switchStatus(index)}
+                        <Box bg="white" w="100%" p={4} borderRadius={6} mt={2}>
+                          <Grid templateColumns="repeat(5, 1fr)" gap={4}>
+                            <GridItem colSpan={2} h="10">
+                              <HStack>
+                                <Image
+                                  boxSize="43px"
+                                  objectFit="cover"
+                                  borderRadius={3}
+                                  src="https://bit.ly/dan-abramov"
+                                  alt="Dan Abramov"
                                 />
-                              ) : (
-                                <Switch
-                                  p={5}
-                                  pl="55%"
-                                  onChange={() => switchStatus(index)}
-                                />
-                              )}
-                              <AiOutlineDown
-                                onClick={() => sectionClick(index)}
-                              />
-                              {/* <Button
-                  colorScheme="teal"
-                  size="sm"
-                  onClick={() => sectionClick(index)}
-                ></Button> */}
-                              <Menu>
-                                <MenuButton>
-                                  <BsThreeDotsVertical as={Button} />
-                                </MenuButton>
-                                <MenuList>
-                                  <Box onClick={() => getIndex(index)}>
-                                    <MenuItem onClick={onOpenItem}>
-                                      Items
-                                    </MenuItem>
-                                  </Box>
-                                  {isOpenItem ? (
-                                    <ItemDrawer
-                                      menu_index={menu_index}
-                                      section_index={count}
-                                      isOpen={isOpenItem}
-                                      onOpen={onOpenItem}
-                                      onClose={onCloseItem}
-                                    ></ItemDrawer>
+                                <Text pl={2}>
+                                  {x.sectionName}
+                                  {x.sectionStatus ? (
+                                    <Badge
+                                      ml="3"
+                                      mb="3"
+                                      p={1}
+                                      fontSize="9"
+                                      borderRadius={6}
+                                      colorScheme="green"
+                                    >
+                                      Active
+                                    </Badge>
                                   ) : (
-                                    console.log("sss")
+                                    <Badge
+                                      ml="3"
+                                      mb="3"
+                                      p={1}
+                                      fontSize="9"
+                                      borderRadius={6}
+                                      colorScheme="red"
+                                    >
+                                      InActive
+                                    </Badge>
                                   )}
-
-                                  <Box onClick={() => getIndex(index)}>
-                                    <MenuItem onClick={onOpenSection}>
-                                      Edit
-                                    </MenuItem>
+                                </Text>
+                              </HStack>
+                            </GridItem>
+                            <GridItem colStart={4} colEnd={6} h="10" ml="auto">
+                              <HStack>
+                                {x.sectionStatus ? (
+                                  <Box py={2}>
+                                    <Switch
+                                      size="sm"
+                                      isChecked
+                                      onChange={() => switchStatus(index)}
+                                    />
                                   </Box>
-                                  {isOpenSection ? (
-                                    <SectionDrawer
-                                      section_index={count}
-                                      menu_index={menu_index}
-                                      isOpen={isOpenSection}
-                                      onOpen={onOpenSection}
-                                      onClose={onCloseSection}
-                                    ></SectionDrawer>
+                                ) : (
+                                  <Box py={2}>
+                                    <Switch
+                                      size="sm"
+                                      onChange={() => switchStatus(index)}
+                                    />
+                                  </Box>
+                                )}
+                                <Box>
+                                  <Menu>
+                                    <MenuButton
+                                      as={IconButton}
+                                      aria-label="Options"
+                                      border="none"
+                                      icon={<BsThreeDotsVertical />}
+                                      variant="outline"
+                                    />
+
+                                    <MenuList>
+                                      <Box onClick={() => getIndex(index)}>
+                                        <MenuItem
+                                          icon={<AiFillFileAdd />}
+                                          onClick={onOpenItem}
+                                        >
+                                          Items
+                                        </MenuItem>
+                                      </Box>
+                                      {isOpenItem ? (
+                                        <ItemDrawer
+                                          menu_index={menu_index}
+                                          section_index={count}
+                                          isOpen={isOpenItem}
+                                          onOpen={onOpenItem}
+                                          onClose={onCloseItem}
+                                        ></ItemDrawer>
+                                      ) : (
+                                        console.log("Cant Open Item Drawer")
+                                      )}
+
+                                      <Box onClick={() => getIndex(index)}>
+                                        <MenuItem
+                                          icon={<AiFillEdit />}
+                                          onClick={onOpenSection}
+                                        >
+                                          Edit
+                                        </MenuItem>
+                                      </Box>
+
+                                      {isOpenSection ? (
+                                        <SectionDrawer
+                                          section_index={count}
+                                          menu_index={menu_index}
+                                          isOpen={isOpenSection}
+                                          onOpen={onOpenSection}
+                                          onClose={onCloseSection}
+                                        ></SectionDrawer>
+                                      ) : (
+                                        console.log(
+                                          "Cant Open Section Drawer For Edit"
+                                        )
+                                      )}
+
+                                      <MenuItem
+                                        onClick={() => duplicate(x)}
+                                        icon={<AiFillCopy />}
+                                      >
+                                        Duplicate
+                                      </MenuItem>
+                                      <MenuItem
+                                        onClick={() => handleRemove(index)}
+                                        icon={<AiFillDelete />}
+                                      >
+                                        Delete
+                                      </MenuItem>
+                                    </MenuList>
+                                  </Menu>
+                                </Box>
+                                <Box>
+                                  {x.active ? (
+                                    <AiOutlineUp
+                                      onClick={() => sectionClick(index)}
+                                    />
                                   ) : (
-                                    console.log("sss")
+                                    <AiOutlineDown
+                                      onClick={() => sectionClick(index)}
+                                    />
                                   )}
+                                </Box>
+                              </HStack>
+                            </GridItem>
+                          </Grid>
+                        </Box>
 
-                                  <MenuItem onClick={() => duplicate(x)}>
-                                    Duplicate
-                                  </MenuItem>
-                                  <MenuItem onClick={() => handleRemove(index)}>
-                                    Delete
-                                  </MenuItem>
-                                </MenuList>
-                              </Menu>
-                            </HStack>
-                          </GridItem>
-                        </Grid>
-
-                        {x.active ? (
-                          <ItemCard
-                            menu_index={menu_index}
-                            section_index={index}
-                          />
-                        ) : (
-                          console.log("false sss")
-                        )}
+                        <Box ml="55px">
+                          {x.active ? (
+                            <ItemCard
+                              menu_index={menu_index}
+                              section_index={index}
+                            />
+                          ) : (
+                            console.log("Cant Open Items")
+                          )}
+                        </Box>
                       </Box>
                     )}
                   </Draggable>
