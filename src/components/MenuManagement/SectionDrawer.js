@@ -40,7 +40,9 @@ const SectionDrawer = (props) => {
   const [description, setDescription] = useState(
     response[props.menu_index].section[props?.section_index]?.sectionDescription
   );
-  const [note, setNote] = useState();
+  const [note, setNote] = useState(
+    response[props.menu_index].section[props?.section_index]?.sectionNote
+  );
   const [searchSection, setsearchSection] = useState();
   const [select, setSelect] = useState();
   const [pass, setPass] = useState(false);
@@ -62,6 +64,7 @@ const SectionDrawer = (props) => {
     sectionId: getTimestampInSeconds(),
     sectionName: name,
     sectionDescription: description,
+    sectionNote: note,
     sectionStatus: false,
     item: [],
   };
@@ -87,6 +90,7 @@ const SectionDrawer = (props) => {
     response[props.menu_index].section[props.section_index].sectionName = name;
     response[props.menu_index].section[props.section_index].sectionDescription =
       description;
+    response[props.menu_index].section[props.section_index].sectionNote = note;
     setResponse([...response]);
     alert("Section Updated Successfully");
   };
@@ -136,6 +140,7 @@ const SectionDrawer = (props) => {
                     <Input
                       type="text"
                       onChange={(e) => setNote(e.target.value)}
+                      value={note}
                     />
                   </FormControl>
 
@@ -253,22 +258,16 @@ const SectionDrawer = (props) => {
               >
                 Update
               </Button>
-            )
-
-              : (
-                <Button
-                  colorScheme="blue"
-                  onClick={() => {
-                    testfunc();
-                  }}
-                >
-                  Save
-                </Button>
-
-              )
-
-            }
-
+            ) : (
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  testfunc();
+                }}
+              >
+                Save
+              </Button>
+            )}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

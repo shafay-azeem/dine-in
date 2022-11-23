@@ -18,6 +18,7 @@ export const MenuProvider = ({ children }) => {
           sectionId: 1,
           sectionName: "demosection",
           sectionDescription: "sectiondescription",
+          sectionNote: "20%",
           active: false,
           sectionStatus: false,
           item: [
