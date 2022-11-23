@@ -88,6 +88,7 @@ const SectionCard = (props) => {
       sectionDescription: x.sectionDescription,
       sectionStatus: x.sectionStatus,
       item: [],
+      subSection: [],
     };
     console.log(menu_index);
     console.log(

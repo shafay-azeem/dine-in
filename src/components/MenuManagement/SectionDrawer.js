@@ -47,9 +47,10 @@ const SectionDrawer = (props) => {
   const [searchSection, setsearchSection] = useState();
   const [select, setSelect] = useState();
   const [pass, setPass] = useState(false);
-  const [close, setClose] = useState(false);
+  const [close, setClose] = useState();
 
   const [checked, setChecked] = useState(false);
+  const [val, setVal] = useState();
 
   // function enabelDisable() {
   //   if (value === "1") {
@@ -78,8 +79,25 @@ const SectionDrawer = (props) => {
     // var section = []
     // section.push(sectionData)
     // // console.log(response, 'rrrr')
-    response[props.menu_index].section.push(sectionData);
-    setResponse([...response]);
+    if (checkedItems === true) {
+      let initialArray = [...response[props.menu_index].section]
+      console.log(initialArray, "initial Array", "----------")
+      let updatedListTemp = initialArray.find((x, i) => {
+        console.log(x.sectionName, 'section Name')
+        if (x.sectionName === "pasta") {
+          return (
+            x
+          );
+        }
+      })
+      console.log(updatedListTemp, "updatedListTemp")
+
+
+    } else {
+      response[props.menu_index].section.push(sectionData);
+      setResponse([...response]);
+    }
+
     // (...response)
 
     // var updatedList = [...response[props.menu_index].section.push(sectionData)];
@@ -167,11 +185,11 @@ const SectionDrawer = (props) => {
                       </Checkbox>
 
                       {checkedItems ? (
-                        <Select placeholder="Select option">
+                        <Select placeholder="Select option" onChange={(e) => setVal(e.target.value)}>
                           {response[props.menu_index].section.map(
                             (x, index) => {
                               return (
-                                <option value={x.sectionName}>
+                                <option value={x.sectionName} >
                                   {x.sectionName}
                                 </option>
                               );
@@ -293,6 +311,8 @@ const SectionDrawer = (props) => {
             <Button variant="outline" mr={3} onClick={props.onClose}>
               Cancel
             </Button>
+
+
             {Number.isInteger(props?.section_index) ? (
               <Button
                 colorScheme="blue"
@@ -312,6 +332,7 @@ const SectionDrawer = (props) => {
                 Save
               </Button>
             )}
+
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
