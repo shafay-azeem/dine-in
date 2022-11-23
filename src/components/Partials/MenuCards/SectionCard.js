@@ -10,6 +10,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   Menu,
   MenuButton,
   MenuItem,
@@ -30,7 +31,7 @@ import {
 } from "react-icons/ai";
 import { MenuState } from "../../../context/MenuContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsThreeDotsVertical, BsXCircleFill } from "react-icons/bs";
 import ItemDrawer from "../../MenuManagement/ItemDrawer";
 import SectionDrawer from "../../MenuManagement/SectionDrawer";
 import { AddIcon, SearchIcon } from "@chakra-ui/icons";
@@ -46,6 +47,7 @@ const SectionCard = (props) => {
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
   const [count, setCount] = useState();
+  const [search, setSearch] = useState('');
 
   const {
     isOpen: isOpenSection,
@@ -125,20 +127,37 @@ const SectionCard = (props) => {
     setCount(index);
   };
 
+  const clearMessage = () => {
+
+    console.log(search, "searc")
+
+    setSearch("")
+    setSectionList(response[props?.menu_index]?.section)
+
+  }
+
   const filterBySearch = (event) => {
-    const query = event.target.value;
+    setSearch(event.target.value)
+    const query = event.target.value
+
     var updatedList = [...sectionList];
     if (query === "") {
       setSectionList(response[props?.menu_index]?.section);
+      const ErrorMessage = "NO DATA FOUND";
       return;
     } else {
-      updatedList = updatedList.filter((item) => {
+      let updatedListTemp = updatedList.filter((item) => {
         return (
           item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1
         );
       });
-      setSectionList(updatedList);
+      console.log(updatedList, "updatedList")
+
+      setSectionList(updatedListTemp);
+
     }
+
+
   };
 
   return (
@@ -154,7 +173,11 @@ const SectionCard = (props) => {
             placeholder="Search"
             bg="white"
             onChange={filterBySearch}
+            value={search}
           />
+          <InputRightElement width="4.5rem">
+            <BsXCircleFill fontSize="13px" cursor="pointer" onClick={clearMessage} />
+          </InputRightElement>
         </InputGroup>
       </Box>
       <DragDropContext onDragEnd={handleDrop}>
@@ -186,32 +209,41 @@ const SectionCard = (props) => {
                                   src="https://bit.ly/dan-abramov"
                                   alt="Dan Abramov"
                                 />
-                                <Text pl={2}>
-                                  {x.sectionName}
-                                  {x.sectionStatus ? (
-                                    <Badge
-                                      ml="3"
-                                      mb="3"
-                                      p={1}
-                                      fontSize="9"
-                                      borderRadius={6}
-                                      colorScheme="green"
-                                    >
-                                      Active
-                                    </Badge>
-                                  ) : (
-                                    <Badge
-                                      ml="3"
-                                      mb="3"
-                                      p={1}
-                                      fontSize="9"
-                                      borderRadius={6}
-                                      colorScheme="red"
-                                    >
-                                      InActive
-                                    </Badge>
-                                  )}
-                                </Text>
+                                {sectionList?.length == 0 ? (
+                                  <Text>
+                                    "NO DATA FOUND"
+                                  </Text>
+                                ) : (
+                                  <Text pl={2}>
+                                    {x.sectionName}
+                                    {x.sectionStatus ? (
+                                      <Badge
+                                        ml="3"
+                                        mb="3"
+                                        p={1}
+                                        fontSize="9"
+                                        borderRadius={6}
+                                        colorScheme="green"
+                                      >
+                                        Active
+                                      </Badge>
+                                    ) : (
+                                      <Badge
+                                        ml="3"
+                                        mb="3"
+                                        p={1}
+                                        fontSize="9"
+                                        borderRadius={6}
+                                        colorScheme="red"
+                                      >
+                                        InActive
+                                      </Badge>
+                                    )}
+                                  </Text>
+                                )
+
+                                }
+
                               </HStack>
                             </GridItem>
                             <GridItem colStart={4} colEnd={6} h="10" ml="auto">
