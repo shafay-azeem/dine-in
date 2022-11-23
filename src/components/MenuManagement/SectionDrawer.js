@@ -81,21 +81,27 @@ const SectionDrawer = (props) => {
     // // console.log(response, 'rrrr')
     if (checkedItems === true) {
       let initialArray = [...response[props.menu_index].section]
-      console.log(initialArray, "initial Array", "----------")
-      let updatedListTemp = initialArray.find((x, i) => {
-        console.log(x.sectionName, 'section Name')
-        if (x.sectionName === "pasta") {
-          return (
-            x
-          );
+      for (var i = 0; i < initialArray.length; i++) {
+        if (initialArray[i].sectionName == val) {
+          response[props.menu_index].section[i].subSection.push(sectionData);
+          setResponse([...response]);
+          console.log(response)
+          alert("SubSection has been has been added");
         }
-      })
-      console.log(updatedListTemp, "updatedListTemp")
 
+      }
+      // let updatedListTemp = initialArray.find((x, i) => {
+      //   if (initialArray[i].sectionName === val) {
+      //     return setClose(i)
+      //   }
+      // })
+      // console.log(close, "updatedListTemp")
+      // alert("=++++++=");
 
     } else {
       response[props.menu_index].section.push(sectionData);
       setResponse([...response]);
+      alert("data has been added");
     }
 
     // (...response)
@@ -106,7 +112,7 @@ const SectionDrawer = (props) => {
     // console.log(response, 'section')
     // // // response[props?.menu_index]?.push(section);
     // // console.log(response, "response in section drawer")
-    alert("data has been added");
+
   };
 
   const updatedSection = () => {
