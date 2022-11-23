@@ -36,6 +36,7 @@ import ItemDrawer from "../../MenuManagement/ItemDrawer";
 import SectionDrawer from "../../MenuManagement/SectionDrawer";
 import { AddIcon, SearchIcon } from "@chakra-ui/icons";
 import { AiFillCopy } from "react-icons/ai";
+import SubSectionCard from "./SubSectionCard";
 
 const SectionCard = (props) => {
   let menu_index = props?.menu_index;
@@ -347,6 +348,17 @@ const SectionCard = (props) => {
                         <Box ml="55px">
                           {x.active ? (
                             <ItemCard
+                              menu_index={menu_index}
+                              section_index={index}
+                            />
+                          ) : (
+                            console.log("Cant Open Items")
+                          )}
+                        </Box>
+
+                        <Box ml="55px">
+                          {x.active ? (
+                            <SubSectionCard
                               menu_index={menu_index}
                               section_index={index}
                             />

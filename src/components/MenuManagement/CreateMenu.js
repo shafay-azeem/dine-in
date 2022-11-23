@@ -34,6 +34,7 @@ import SectionDrawer from "./SectionDrawer";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ItemCard from "../Partials/MenuCards/ItemCard";
+import SubSectionCard from "../Partials/MenuCards/SubSectionCard";
 
 const CreateMenu = () => {
   const [searchparams] = useSearchParams();
