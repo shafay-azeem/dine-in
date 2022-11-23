@@ -27,6 +27,7 @@ import {
 import React from "react";
 import { useState } from "react";
 import { MenuState } from "../../context/MenuContext";
+import SelectSearch from 'react-select-search';
 
 const SectionDrawer = (props) => {
   const [checkedItems, setCheckedItems] = React.useState(false);
@@ -153,22 +154,40 @@ const SectionDrawer = (props) => {
                     <Switch checked={checked} onChange={e => setChecked(e.target.checked)} />
                   </FormControl>
 
-                  <FormControl mt={3}>
-                    <Checkbox
-                      isChecked={checkedItems}
-                      onChange={(e) => setCheckedItems(e.target.checked)}
-                    >
-                      Use as a sub-section
-                    </Checkbox>
 
-                    {checkedItems ? (
-                      <Input
-                        type="text"
-                        mt={2}
-                        placeholder="Type to search sections"
-                        onChange={(e) => setsearchSection(e.target.value)}
-                      ></Input>
-                    ) : (
+                  {response[props.menu_index].section.length > 0 ? (
+                    <FormControl mt={3}>
+                      <Checkbox
+                        isChecked={checkedItems}
+                        onChange={(e) => setCheckedItems(e.target.checked)}
+                      >
+                        Use as a sub-section
+                      </Checkbox>
+
+                      {checkedItems ? (
+                        <Input
+                          type="text"
+                          mt={2}
+                          placeholder="Type to search sections"
+                          onChange={(e) => setsearchSection(e.target.value)}
+                        ></Input>
+                      ) : (
+                        <Input
+                          isDisabled
+                          type="text"
+                          mt={2}
+                          bg="grey.300"
+                          placeholder="Type to search sections"
+                        ></Input>
+                      )}
+                    </FormControl>
+                  ) : (
+                    <FormControl mt={3}>
+                      <Checkbox
+                        isDisabled
+                      >
+                        Use as a sub-section
+                      </Checkbox>
                       <Input
                         isDisabled
                         type="text"
@@ -176,8 +195,10 @@ const SectionDrawer = (props) => {
                         bg="grey.300"
                         placeholder="Type to search sections"
                       ></Input>
-                    )}
-                  </FormControl>
+
+                    </FormControl>
+                  )}
+
                 </TabPanel>
                 <TabPanel>
                   <FormControl>
