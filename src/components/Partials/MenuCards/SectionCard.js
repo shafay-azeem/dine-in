@@ -47,7 +47,7 @@ const SectionCard = (props) => {
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
   const [count, setCount] = useState();
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const {
     isOpen: isOpenSection,
@@ -129,17 +129,15 @@ const SectionCard = (props) => {
   };
 
   const clearMessage = () => {
+    console.log(search, "searc");
 
-    console.log(search, "searc")
-
-    setSearch("")
-    setSectionList(response[props?.menu_index]?.section)
-
-  }
+    setSearch("");
+    setSectionList(response[props?.menu_index]?.section);
+  };
 
   const filterBySearch = (event) => {
-    setSearch(event.target.value)
-    const query = event.target.value
+    setSearch(event.target.value);
+    const query = event.target.value;
 
     var updatedList = [...sectionList];
     if (query === "") {
@@ -152,13 +150,10 @@ const SectionCard = (props) => {
           item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1
         );
       });
-      console.log(updatedList, "updatedList")
+      console.log(updatedList, "updatedList");
 
       setSectionList(updatedListTemp);
-
     }
-
-
   };
 
   return (
@@ -177,7 +172,11 @@ const SectionCard = (props) => {
             value={search}
           />
           <InputRightElement width="4.5rem">
-            <BsXCircleFill fontSize="13px" cursor="pointer" onClick={clearMessage} />
+            <BsXCircleFill
+              fontSize="13px"
+              cursor="pointer"
+              onClick={clearMessage}
+            />
           </InputRightElement>
         </InputGroup>
       </Box>
@@ -211,9 +210,7 @@ const SectionCard = (props) => {
                                   alt="Dan Abramov"
                                 />
                                 {sectionList?.length == 0 ? (
-                                  <Text>
-                                    "NO DATA FOUND"
-                                  </Text>
+                                  <Text>"NO DATA FOUND"</Text>
                                 ) : (
                                   <Text pl={2}>
                                     {x.sectionName}
@@ -241,10 +238,7 @@ const SectionCard = (props) => {
                                       </Badge>
                                     )}
                                   </Text>
-                                )
-
-                                }
-
+                                )}
                               </HStack>
                             </GridItem>
                             <GridItem colStart={4} colEnd={6} h="10" ml="auto">

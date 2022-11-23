@@ -17,6 +17,7 @@ import {
   MenuList,
   Portal,
   SimpleGrid,
+  Text,
   UnorderedList,
   useDisclosure,
   VStack,
@@ -47,7 +48,6 @@ const CreateMenu = () => {
   const navigate = useNavigate();
 
   const [filter, setFilter] = useState(response[menu_index].section);
-
 
   const {
     isOpen: isOpenSection,
@@ -142,9 +142,33 @@ const CreateMenu = () => {
                               ref={provided.innerRef}
                               key={index}
                             >
-                              <UnorderedList>
-                                <ListItem>{x.sectionName}</ListItem>
-                              </UnorderedList>
+                              {x.sectionStatus ? (
+                                <Box>
+                                  <HStack>
+                                    <Box
+                                      bg="#28B463"
+                                      width="7px"
+                                      borderRadius={8}
+                                      height="7px"
+                                      mt={1}
+                                    ></Box>
+                                    <Text>{x.sectionName}</Text>
+                                  </HStack>
+                                </Box>
+                              ) : (
+                                <Box>
+                                  <HStack>
+                                    <Box
+                                      bg="#D7DBDD"
+                                      width="7px"
+                                      borderRadius={8}
+                                      height="7px"
+                                      mt={1}
+                                    ></Box>
+                                    <Text>{x.sectionName}</Text>
+                                  </HStack>
+                                </Box>
+                              )}
                             </Box>
                           )}
                         </Draggable>
