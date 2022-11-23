@@ -51,6 +51,7 @@ const SectionDrawer = (props) => {
   const [close, setClose] = useState();
 
   const [checked, setChecked] = useState(false);
+  const [alphabetical, setalphabetical] = useState(false);
   const [val, setVal] = useState();
 
   // function enabelDisable() {
@@ -60,7 +61,6 @@ const SectionDrawer = (props) => {
   //     setValueTrue(false);
   //   }
   // }
-  console.log(checked, "============");
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -79,7 +79,7 @@ const SectionDrawer = (props) => {
 
   const testfunc = () => {
     if (checkedItems === true) {
-      let initialArray = [...response[props.menu_index].section]
+      let initialArray = [...response[props.menu_index].section];
       for (var i = 0; i < initialArray.length; i++) {
         if (initialArray[i].sectionName == val) {
           response[props.menu_index].section[i].subSection.push(sectionData);
@@ -87,16 +87,24 @@ const SectionDrawer = (props) => {
           alert("SubSection has been has been added");
         }
       }
-
-
     } else {
       response[props.menu_index].section.push(sectionData);
+      let initialArray = [...response[props.menu_index].section];
+      function compare(a, b) {
+        if (a.sectionName < b.sectionName) {
+          return -1;
+        }
+        if (a.sectionName > b.sectionName) {
+          return 1;
+        }
+        return 0;
+      }
+      response[props.menu_index].section.sort(compare);
+
       setResponse([...response]);
-      console.log(response)
+      console.log(response);
       alert("data has been added");
     }
-
-
   };
 
   const updatedSection = () => {
@@ -104,16 +112,29 @@ const SectionDrawer = (props) => {
     response[props.menu_index].section[props.section_index].sectionDescription =
       description;
     response[props.menu_index].section[props.section_index].sectionNote = note;
+    function compare(a, b) {
+      if (a.sectionName < b.sectionName) {
+        return -1;
+      }
+      if (a.sectionName > b.sectionName) {
+        return 1;
+      }
+      return 0;
+    }
+    response[props.menu_index].section.sort(compare);
+
     setResponse([...response]);
     alert("Section Updated Successfully");
   };
 
-
-
   const selectionMultiSelect = (event) => {
-    setSelect(event)
-    console.log(select, "select event")
-  }
+    setSelect(event);
+    console.log(select, "select event");
+  };
+
+  const handleAlphabetically = (event) => {
+    console.log(event, "event");
+  };
 
   return (
     <>
@@ -182,11 +203,14 @@ const SectionDrawer = (props) => {
                       </Checkbox>
 
                       {checkedItems ? (
-                        <Select placeholder="Select option" onChange={(e) => setVal(e.target.value)}>
+                        <Select
+                          placeholder="Select option"
+                          onChange={(e) => setVal(e.target.value)}
+                        >
                           {response[props.menu_index].section.map(
                             (x, index) => {
                               return (
-                                <option value={x.sectionName} >
+                                <option value={x.sectionName}>
                                   {x.sectionName}
                                 </option>
                               );
@@ -243,7 +267,7 @@ const SectionDrawer = (props) => {
                         console.log(event);
                       }}
                       onSelect={(event) => {
-                        selectionMultiSelect(event)
+                        selectionMultiSelect(event);
                       }}
                       options={food}
                       showCheckbox
@@ -252,7 +276,10 @@ const SectionDrawer = (props) => {
 
                   <FormControl mt={5}>
                     <FormLabel fontWeight="400">Alphabetical Order</FormLabel>
-                    <Switch />
+                    <Switch
+                      checked={alphabetical}
+                      onChange={(e) => handleAlphabetically(e.target.checked)}
+                    />
                   </FormControl>
 
                   <RadioGroup mt={5} onChange={setValue} value={value}>
@@ -316,7 +343,6 @@ const SectionDrawer = (props) => {
               Cancel
             </Button>
 
-
             {Number.isInteger(props?.section_index) ? (
               <Button
                 colorScheme="blue"
@@ -336,7 +362,6 @@ const SectionDrawer = (props) => {
                 Save
               </Button>
             )}
-
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
