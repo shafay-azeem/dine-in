@@ -48,6 +48,8 @@ const SectionDrawer = (props) => {
   const [pass, setPass] = useState(false);
   const [close, setClose] = useState(false);
 
+  const [checked, setChecked] = useState(false)
+
   // function enabelDisable() {
   //   if (value === "1") {
   //     setValueTrue(true);
@@ -55,6 +57,8 @@ const SectionDrawer = (props) => {
   //     setValueTrue(false);
   //   }
   // }
+  console.log(checked, "============")
+
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -65,7 +69,7 @@ const SectionDrawer = (props) => {
     sectionName: name,
     sectionDescription: description,
     sectionNote: note,
-    sectionStatus: false,
+    sectionStatus: checked,
     item: [],
   };
 
@@ -146,7 +150,7 @@ const SectionDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Display the section</FormLabel>
-                    <Switch />
+                    <Switch checked={checked} onChange={e => setChecked(e.target.checked)} />
                   </FormControl>
 
                   <FormControl mt={3}>
