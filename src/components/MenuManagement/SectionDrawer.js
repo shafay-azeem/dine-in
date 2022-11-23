@@ -28,10 +28,11 @@ import React from "react";
 import { useState } from "react";
 import { MenuState } from "../../context/MenuContext";
 import SelectSearch from "react-select-search";
+import Multiselect from "multiselect-react-dropdown";
 
 const SectionDrawer = (props) => {
   const [checkedItems, setCheckedItems] = React.useState(false);
-
+  const [food, setFood] = useState(["New", "Signature"]);
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
   const { response, setResponse } = MenuState();
@@ -71,47 +72,30 @@ const SectionDrawer = (props) => {
     sectionDescription: description,
     sectionNote: note,
     sectionStatus: checked,
+    sectionLabel: select,
     item: [],
     subSection: [],
   };
 
   const testfunc = () => {
-    // var section = []
-    // section.push(sectionData)
-    // // console.log(response, 'rrrr')
     if (checkedItems === true) {
       let initialArray = [...response[props.menu_index].section]
       for (var i = 0; i < initialArray.length; i++) {
         if (initialArray[i].sectionName == val) {
           response[props.menu_index].section[i].subSection.push(sectionData);
           setResponse([...response]);
-          console.log(response)
           alert("SubSection has been has been added");
         }
-
       }
-      // let updatedListTemp = initialArray.find((x, i) => {
-      //   if (initialArray[i].sectionName === val) {
-      //     return setClose(i)
-      //   }
-      // })
-      // console.log(close, "updatedListTemp")
-      // alert("=++++++=");
+
 
     } else {
       response[props.menu_index].section.push(sectionData);
       setResponse([...response]);
+      console.log(response)
       alert("data has been added");
     }
 
-    // (...response)
-
-    // var updatedList = [...response[props.menu_index].section.push(sectionData)];
-    // response.splice(1, 0, section);
-    // setResponse([...response[props.menu_index].slice(0, props.menu_index), section, ...response[props.menu_index].slice(props.menu_index)]);
-    // console.log(response, 'section')
-    // // // response[props?.menu_index]?.push(section);
-    // // console.log(response, "response in section drawer")
 
   };
 
@@ -123,6 +107,13 @@ const SectionDrawer = (props) => {
     setResponse([...response]);
     alert("Section Updated Successfully");
   };
+
+
+
+  const selectionMultiSelect = (event) => {
+    setSelect(event)
+    console.log(select, "select event")
+  }
 
   return (
     <>
@@ -246,10 +237,17 @@ const SectionDrawer = (props) => {
                 <TabPanel>
                   <FormControl>
                     <FormLabel fontWeight="400">Labels</FormLabel>
-                    <Select onChange={(e) => setSelect(e.target.value)}>
-                      <option value="new">New</option>
-                      <option value="signature">Signature</option>
-                    </Select>
+                    <Multiselect
+                      isObject={false}
+                      onRemove={(event) => {
+                        console.log(event);
+                      }}
+                      onSelect={(event) => {
+                        selectionMultiSelect(event)
+                      }}
+                      options={food}
+                      showCheckbox
+                    />
                   </FormControl>
 
                   <FormControl mt={5}>

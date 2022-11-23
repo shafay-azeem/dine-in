@@ -136,25 +136,27 @@ const SectionCard = (props) => {
     setSectionList(response[props?.menu_index]?.section);
   };
 
+  var updatedList = [...sectionList];
+  let updatedListTemp
   const filterBySearch = (event) => {
     setSearch(event.target.value);
     const query = event.target.value;
 
-    var updatedList = [...sectionList];
     if (query === "") {
       setSectionList(response[props?.menu_index]?.section);
-      const ErrorMessage = "NO DATA FOUND";
       return;
     } else {
-      let updatedListTemp = updatedList.filter((item) => {
+      updatedListTemp = updatedList.filter((item) => {
         return (
           item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1
         );
       });
-      console.log(updatedList, "updatedList");
+      console.log(updatedList, "updatedList")
 
       setSectionList(updatedListTemp);
     }
+
+
   };
 
   return (
@@ -184,7 +186,9 @@ const SectionCard = (props) => {
       <DragDropContext onDragEnd={handleDrop}>
         <Droppable droppableId="droppable-1">
           {(provided) => (
+
             <Box {...provided.droppableProps} ref={provided.innerRef}>
+
               {sectionList?.map((x, index) => {
                 return (
                   <Draggable
@@ -351,8 +355,10 @@ const SectionCard = (props) => {
                               menu_index={menu_index}
                               section_index={index}
                             />
+
                           ) : (
                             console.log("Cant Open Items")
+
                           )}
                         </Box>
 
