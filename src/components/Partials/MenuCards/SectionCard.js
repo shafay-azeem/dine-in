@@ -137,26 +137,27 @@ const SectionCard = (props) => {
 
   }
 
+  var updatedList = [...sectionList];
+  let updatedListTemp
   const filterBySearch = (event) => {
     setSearch(event.target.value)
     const query = event.target.value
 
-    var updatedList = [...sectionList];
     if (query === "") {
       setSectionList(response[props?.menu_index]?.section);
-      const ErrorMessage = "NO DATA FOUND";
       return;
     } else {
-      let updatedListTemp = updatedList.filter((item) => {
+      updatedListTemp = updatedList.filter((item) => {
         return (
           item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1
         );
       });
-      console.log(updatedList, "updatedList")
+
 
       setSectionList(updatedListTemp);
 
     }
+    console.log(updatedListTemp.length, "updatedListTemp-----------")
 
 
   };
@@ -184,7 +185,9 @@ const SectionCard = (props) => {
       <DragDropContext onDragEnd={handleDrop}>
         <Droppable droppableId="droppable-1">
           {(provided) => (
+
             <Box {...provided.droppableProps} ref={provided.innerRef}>
+
               {sectionList?.map((x, index) => {
                 return (
                   <Draggable
@@ -210,40 +213,36 @@ const SectionCard = (props) => {
                                   src="https://bit.ly/dan-abramov"
                                   alt="Dan Abramov"
                                 />
-                                {sectionList?.length == 0 ? (
-                                  <Text>
-                                    "NO DATA FOUND"
-                                  </Text>
-                                ) : (
-                                  <Text pl={2}>
-                                    {x.sectionName}
-                                    {x.sectionStatus ? (
-                                      <Badge
-                                        ml="3"
-                                        mb="3"
-                                        p={1}
-                                        fontSize="9"
-                                        borderRadius={6}
-                                        colorScheme="green"
-                                      >
-                                        Active
-                                      </Badge>
-                                    ) : (
-                                      <Badge
-                                        ml="3"
-                                        mb="3"
-                                        p={1}
-                                        fontSize="9"
-                                        borderRadius={6}
-                                        colorScheme="red"
-                                      >
-                                        InActive
-                                      </Badge>
-                                    )}
-                                  </Text>
-                                )
 
-                                }
+                                <Text pl={2}>
+                                  {x.sectionName}
+                                  {x.sectionStatus ? (
+                                    <Badge
+                                      ml="3"
+                                      mb="3"
+                                      p={1}
+                                      fontSize="9"
+                                      borderRadius={6}
+                                      colorScheme="green"
+                                    >
+                                      Active
+                                    </Badge>
+                                  ) : (
+                                    <Badge
+                                      ml="3"
+                                      mb="3"
+                                      p={1}
+                                      fontSize="9"
+                                      borderRadius={6}
+                                      colorScheme="red"
+                                    >
+                                      InActive
+                                    </Badge>
+                                  )}
+                                </Text>
+
+
+
 
                               </HStack>
                             </GridItem>
@@ -356,8 +355,10 @@ const SectionCard = (props) => {
                               menu_index={menu_index}
                               section_index={index}
                             />
+
                           ) : (
                             console.log("Cant Open Items")
+
                           )}
                         </Box>
                       </Box>
