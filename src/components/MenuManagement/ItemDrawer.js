@@ -40,24 +40,27 @@ import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 
 const ItemDrawer = (props) => {
-  console.log(props.menu_index, 'menu----------')
-  console.log(props?.section_index, 'section---------')
-  console.log(props?.item_index, 'item----------')
-  console.log(props?.ItemInMenu, '------------itemInMenu---------')
+  console.log(props.menu_index, "menu----------");
+  console.log(props?.section_index, "section---------");
+  console.log(props?.item_index, "item----------");
+  console.log(props?.ItemInMenu, "------------itemInMenu---------");
   const { item, setItem, response, setResponse } = MenuState();
-  const forwardState = Number.isInteger(props?.section_index) ? response[props.menu_index].section[props?.section_index]?.item[props?.item_index]?.itemName : response[props.menu_index].itemMenu[props?.item_index]?.itemName
-  const initialState = props.ItemInMenu ? "" : forwardState
-
+  const forwardState = Number.isInteger(props?.section_index)
+    ? response[props.menu_index].section[props?.section_index]?.item[
+        props?.item_index
+      ]?.itemName
+    : response[props.menu_index].itemMenu[props?.item_index]?.itemName;
+  const initialState = props.ItemInMenu ? "" : forwardState;
 
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
 
   const [modifiers, setModifiers] = useState([]);
-  const [name, setName] = useState(
-    initialState
-  );
+  const [name, setName] = useState(initialState);
   const [description, setDescription] = useState(
-    response[props.menu_index].section[props?.section_index]?.item[props?.item_index]?.itemDescription
+    response[props.menu_index].section[props?.section_index]?.item[
+      props?.item_index
+    ]?.itemDescription
   );
   const [select, setSelect] = useState();
   const [ingredient, setIngredient] = useState();
@@ -69,7 +72,6 @@ const ItemDrawer = (props) => {
   const [size, setSize] = useState();
   const [push, setPush] = useState(false);
 
-
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
@@ -79,55 +81,50 @@ const ItemDrawer = (props) => {
     itemDescription: description,
   };
 
-
   const updateItem = (x) => {
     if (x == null) {
       response[props.menu_index].itemMenu[props.item_index].itemName = name;
       setResponse([...response]);
       alert("Item with out section Updated Successfully");
-
     } else {
-      response[props.menu_index].section[props.section_index].item[props.item_index].itemName = name;
-      response[props.menu_index].section[props.section_index].item[props.item_index].itemDescription =
-        description;
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemName = name;
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemDescription = description;
       setResponse([...response]);
       alert("Item Updated Successfully");
-
     }
-
   };
-
 
   const testfunc = (x) => {
-    console.log(x, 'conditonal parameter')
+    console.log(x, "conditonal parameter");
 
     if (x === true) {
-      response[props.menu_index].itemMenu.push(itemData)
-      alert("Single Push On basis Of Conditional Parameters")
-      console.log(response[props.menu_index].itemMenu)
+      response[props.menu_index].itemMenu.push(itemData);
+      alert("Single Push On basis Of Conditional Parameters");
+      console.log(response[props.menu_index].itemMenu);
     } else {
-      response[props.menu_index].section[props.section_index].item.push(itemData)
+      response[props.menu_index].section[props.section_index].item.push(
+        itemData
+      );
       alert("data has been added");
     }
-
   };
   // console.log(caloriesConcat, "caloriesConcat", priceConcat, "setPriceConcat", "-------------", size, "soze")
-
 
   const myfuncresponse = () => {
     // console.log(a, b, c, "==================")
     var info = {
       Cal: caloriesConcat,
       money: priceConcat,
-      siz: size
+      siz: size,
+    };
+    rrr.push(info);
 
-    }
-    rrr.push(info)
-
-    console.log(rrr, "+_+_+_+_")
-
-  }
-
+    console.log(rrr, "+_+_+_+_");
+  };
 
   // const potatoes = (x) => {
   //   console.log(x, "x=====================")
@@ -151,8 +148,9 @@ const ItemDrawer = (props) => {
               borderRadius="8px"
               placeholder="Size"
               type="text"
-              onChange={(e) => { setSize(e.target.value) }}
-
+              onChange={(e) => {
+                setSize(e.target.value);
+              }}
             />
           </FormControl>
           ,
@@ -164,7 +162,6 @@ const ItemDrawer = (props) => {
                 type="number"
                 placeholder="0"
                 onChange={(e) => setPriceConcat(e.target.value)}
-
               />
             </InputGroup>
           </FormControl>
@@ -179,22 +176,20 @@ const ItemDrawer = (props) => {
                 onChange={(e) => setCaloriesConcat(e.target.value)}
               />
             </InputGroup>
-
           </FormControl>
           <Box marginTop={20}>
             <Switch
               size="sm"
               checked={push}
-              onChange={() => myfuncresponse(caloriesConcat, priceConcat, size)}>
-            </Switch>
-
+              onChange={() => myfuncresponse(caloriesConcat, priceConcat, size)}
+            ></Switch>
           </Box>
         </HStack>
       )
     );
   };
 
-  console.log(size, "+_+_+_+_+_+_+_+_+_+")
+  console.log(size, "+_+_+_+_+_+_+_+_+_+");
   const addModifiersOption = (event) => {
     setModifiers(
       modifiers.concat(
@@ -329,8 +324,7 @@ const ItemDrawer = (props) => {
                     mt={3}
                     size={"sm"}
                   /> */}
-                  <Button
-                    onClick={() => addPriceOption()}>
+                  <Button onClick={() => addPriceOption()}>
                     Add Price Option
                   </Button>
                   {price}
@@ -718,21 +712,16 @@ const ItemDrawer = (props) => {
               >
                 Update
               </Button>
-            )
-
-              : (
-                <Button
-                  colorScheme="blue"
-                  onClick={() => {
-                    testfunc(props?.ItemInMenu);
-                  }}
-                >
-                  Save
-                </Button>
-
-              )
-
-            }
+            ) : (
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  testfunc(props?.ItemInMenu);
+                }}
+              >
+                Save
+              </Button>
+            )}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

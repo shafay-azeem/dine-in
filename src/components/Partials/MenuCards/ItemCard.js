@@ -41,6 +41,7 @@ const ItemCard = (props) => {
 
   const [itemList, setItemList] = useState(initialState);
   const [count, setCount] = useState();
+  const [checked, setChecked] = useState(false);
 
   const {
     isOpen: isOpenItem,
@@ -79,6 +80,7 @@ const ItemCard = (props) => {
       itemId: getTimestampInSeconds(),
       itemName: x.itemName,
       itemDescription: x.itemDescription,
+      active: x.active,
     };
 
     if (y == null) {
@@ -113,6 +115,16 @@ const ItemCard = (props) => {
     );
   };
 
+  function switchStatus(index) {
+    response[props.menu_index].section[props.section_index].item[index].active =
+      !response[props.menu_index].section[props.section_index].item[index]
+        .active;
+    setResponse([...response]);
+    setItemList(
+      response[props?.menu_index]?.section[props?.section_index]?.item
+    );
+  }
+
   return (
     <>
       <DragDropContext onDragEnd={handleDrop}>
@@ -144,17 +156,33 @@ const ItemCard = (props) => {
                                   alt="Dan Abramov"
                                 />
                                 <Text pl={2}>
-                                  {x.itemName}
-                                  <Badge
-                                    ml="3"
-                                    mb="3"
-                                    p={1}
-                                    fontSize="9"
-                                    borderRadius={6}
-                                    colorScheme="red"
-                                  >
-                                    InActive
-                                  </Badge>
+                                  {x.active ? (
+                                    <Box>
+                                      <HStack>
+                                        <Box
+                                          bg="#28B463"
+                                          width="7px"
+                                          borderRadius={8}
+                                          height="7px"
+                                          mt={1}
+                                        ></Box>
+                                        <Text>{x.itemName}</Text>
+                                      </HStack>
+                                    </Box>
+                                  ) : (
+                                    <Box>
+                                      <HStack>
+                                        <Box
+                                          bg="#D7DBDD"
+                                          width="7px"
+                                          borderRadius={8}
+                                          height="7px"
+                                          mt={1}
+                                        ></Box>
+                                        <Text>{x.itemName}</Text>
+                                      </HStack>
+                                    </Box>
+                                  )}
                                 </Text>
                               </HStack>
                             </GridItem>
@@ -179,9 +207,23 @@ const ItemCard = (props) => {
                                     />
                                   </InputGroup>
                                 </Box>
-                                <Box py={2}>
-                                  <Switch size="sm" isChecked />
-                                </Box>
+                                {x.active ? (
+                                  <Box py={2}>
+                                    <Switch
+                                      size="sm"
+                                      isChecked
+                                      onChange={() => switchStatus(index)}
+                                    />
+                                  </Box>
+                                ) : (
+                                  <Box py={2}>
+                                    <Switch
+                                      size="sm"
+                                      onChange={() => switchStatus(index)}
+                                    />
+                                  </Box>
+                                )}
+
                                 <Box>
                                   <Menu>
                                     <MenuButton
