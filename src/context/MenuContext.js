@@ -12,7 +12,8 @@ export const MenuProvider = ({ children }) => {
       id: 1,
       menuName: "demomenu",
       menuDescription: "demodescription",
-      status: false,
+      menuNote: "demonote",
+      menuStatus: false,
       section: [
         {
           sectionId: 1,

@@ -15,8 +15,6 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
-import CustomButton from "../../../CustomElements/CustomButton";
-import { AiTwotoneEdit } from "react-icons/ai";
 import { AiFillSetting } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
@@ -31,7 +29,7 @@ const DisplayCard = () => {
   const { menu } = MenuState();
   const [open, setOpen] = useState(false);
   const [indivisualId, setIndivisualId] = useState();
-  const { response } = MenuState();
+  const { response, setResponse } = MenuState();
 
   const myfun = (id) => {
     navigate({
@@ -45,12 +43,16 @@ const DisplayCard = () => {
     console.log(id);
   }
 
+  function switchStatus(index) {
+    console.log("helloo je");
+    response[index].menuStatus = !response[index].menuStatus;
+    setResponse([...response]);
+  }
+
   return (
     <>
       {response.map((x, index) => (
-
-        <Box bg="white" w="100%" p={4} borderRadius={5} mb={4}
-          key={index}>
+        <Box bg="white" w="100%" p={4} borderRadius={5} mb={4} key={index}>
           <Grid templateColumns="repeat(5, 1fr)" gap={4}>
             <GridItem colSpan={2}>
               <Text fontSize="17" fontWeight="500">
@@ -71,7 +73,16 @@ const DisplayCard = () => {
             </GridItem>
             <GridItem colStart={4} colEnd={6}>
               <HStack mt={2} gap={4} ml="38%">
-                <Switch />
+                {x.menuStatus ? (
+                  <Switch
+                    size="sm"
+                    isChecked
+                    onChange={() => switchStatus(index)}
+                  />
+                ) : (
+                  <Switch size="sm" onChange={() => switchStatus(index)} />
+                )}
+
                 {/* <CustomButton
                   // click={createmenu(index)}
                   size={"sm"}
@@ -105,8 +116,7 @@ const DisplayCard = () => {
             </GridItem>
           </Grid>
         </Box>
-      ))
-      }
+      ))}
     </>
   );
 };

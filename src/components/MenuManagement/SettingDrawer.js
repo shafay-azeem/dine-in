@@ -45,12 +45,16 @@ const SettingDrawer = (props) => {
   const [description, setDescription] = useState(
     response[props.index].menuDescription
   );
+  const [note, setNote] = useState(response[props.index].menuNote);
+  const [active, setActive] = useState(response[props.index].menuStatus);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const updatedMenu = () => {
     response[props.index].menuName = name;
     response[props.index].menuDescription = description;
+    response[props.index].menuNote = note;
+    response[props.index].menuStatus = active;
     setResponse([...response]);
     alert("Menu Updated Successfully");
   };
@@ -59,6 +63,8 @@ const SettingDrawer = (props) => {
     id: getTimestampInSeconds(),
     menuName: name,
     menuDescription: description,
+    menuNote: note,
+    menuStatus: active,
     section: [],
   };
 
@@ -110,12 +116,20 @@ const SettingDrawer = (props) => {
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight="400">Note</FormLabel>
-                  <Input type="text" placeholder="E.g: 20% VAT included" />
+                  <Input
+                    type="text"
+                    placeholder="E.g: 20% VAT included"
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                  />
                 </FormControl>
 
                 <FormControl mt={4}>
                   <FormLabel fontWeight="400">Display the section</FormLabel>
-                  <Switch />
+                  <Switch
+                    checked={active}
+                    onChange={(e) => setActive(e.target.checked)}
+                  />
                 </FormControl>
               </TabPanel>
               {/* Overview */}
