@@ -32,19 +32,22 @@ import {
   SimpleGrid,
   Text,
   Box,
+  InputLeftElement,
 } from "@chakra-ui/react";
 import { faXRay } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
+import Multiselect from "multiselect-react-dropdown";
 
 const ItemDrawer = (props) => {
   console.log(props.menu_index, "menu----------");
   console.log(props?.section_index, "section---------");
   console.log(props?.item_index, "item----------");
   console.log(props?.ItemInMenu, "------------itemInMenu---------");
-  const { item, setItem, response, setResponse } = MenuState();
+
+  const { response, setResponse } = MenuState();
   const forwardState = Number.isInteger(props?.section_index)
     ? response[props.menu_index].section[props?.section_index]?.item[
         props?.item_index
@@ -62,15 +65,46 @@ const ItemDrawer = (props) => {
       props?.item_index
     ]?.itemDescription
   );
-  const [select, setSelect] = useState();
-  const [ingredient, setIngredient] = useState();
-  const [time, setTime] = useState();
-  const [calories, setCalories] = useState();
+  const [select, setSelect] = useState(
+    response[props.menu_index].section[props?.section_index]?.item[
+      props?.item_index
+    ]?.itemLabel
+  );
+
+  const [time, setTime] = useState(
+    response[props.menu_index].section[props?.section_index]?.item[
+      props?.item_index
+    ]?.itemPrepTime
+  );
+  const [calories, setCalories] = useState(
+    response[props.menu_index].section[props?.section_index]?.item[
+      props?.item_index
+    ]?.itemCalories
+  );
+
+  const [itemprice, setItemPrice] = useState(
+    response[props.menu_index].section[props?.section_index]?.item[
+      props?.item_index
+    ]?.itemPrice
+  );
+
   const [recommendedItem, setRecommendedItem] = useState();
   const [priceConcat, setPriceConcat] = useState();
   const [caloriesConcat, setCaloriesConcat] = useState();
   const [size, setSize] = useState();
   const [push, setPush] = useState(false);
+  const [food, setFood] = useState([
+    "New",
+    "Signature",
+    "Special Presentation",
+  ]);
+  const [warning, setWarning] = useState(["Alcohol", "AlcoholFree"]);
+  const [warningState, setWarningState] = useState(
+    response[props.menu_index].section[props?.section_index]?.item[
+      props?.item_index
+    ]?.itemWarning
+  );
+  const [checked, setChecked] = useState(false);
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -79,6 +113,12 @@ const ItemDrawer = (props) => {
     itemId: getTimestampInSeconds(),
     itemName: name,
     itemDescription: description,
+    active: checked,
+    itemLabel: select,
+    itemWarning: warningState,
+    itemPrepTime: time,
+    itemPrice: itemprice,
+    itemCalories: calories,
   };
 
   const updateItem = (x) => {
@@ -93,9 +133,34 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemDescription = description;
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemPrepTime = time;
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemLabel = select;
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemWarning = warningState;
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemPrice = itemprice;
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemCalories = calories;
+
       setResponse([...response]);
       alert("Item Updated Successfully");
     }
+  };
+
+  const selectionMultiSelect = (event) => {
+    setSelect(event);
+    console.log(select, "select event");
+  };
+
+  const selectionMultiSelectwarning = (event) => {
+    setWarningState(event);
   };
 
   const testfunc = (x) => {
@@ -258,7 +323,33 @@ const ItemDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Display the section</FormLabel>
-                    <Switch />
+                    <Switch
+                      checked={checked}
+                      onChange={(e) => setChecked(e.target.checked)}
+                    />
+                  </FormControl>
+
+                  <FormControl mt={3}>
+                    <HStack>
+                      <FormLabel fontWeight="400">Price</FormLabel>
+                      <Input
+                        placeholder="Price"
+                        borderRadius={6}
+                        width="160px"
+                        mr={4}
+                        value={itemprice}
+                        onChange={(e) => setItemPrice(e.target.value)}
+                      />
+                      <FormLabel fontWeight="400">Calories</FormLabel>
+                      <Input
+                        placeholder="Calories"
+                        borderRadius={6}
+                        width="160px"
+                        mr={4}
+                        value={calories}
+                        onChange={(e) => setCalories(e.target.value)}
+                      />
+                    </HStack>
                   </FormControl>
 
                   <FormControl mt={3}>
@@ -273,24 +364,35 @@ const ItemDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Labels</FormLabel>
-                    <Select
-                      placeholder="Search Labels"
-                      onChange={(e) => setSelect(e.target.value)}
-                    >
-                      <option value="new">New</option>
-                      <option value="signature">Signature</option>
-                    </Select>
+                    <Multiselect
+                      isObject={false}
+                      onRemove={(event) => {
+                        console.log(event);
+                      }}
+                      onSelect={(event) => {
+                        selectionMultiSelect(event);
+                      }}
+                      options={food}
+                      selectedValues={select}
+                      showCheckbox
+                    />
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Ingredient Warnings</FormLabel>
-                    <Select
-                      placeholder="Select ingredient warnings"
-                      onChange={(e) => setIngredient(e.target.value)}
-                    >
-                      <option value="Alcohol">Alcohol</option>
-                      <option value="Alcohol Free">Alcohol Free</option>
-                    </Select>
+                    <Multiselect
+                      isObject={false}
+                      value={warningState}
+                      onRemove={(event) => {
+                        console.log(event);
+                      }}
+                      onSelect={(event) => {
+                        selectionMultiSelectwarning(event);
+                      }}
+                      options={warning}
+                      selectedValues={warningState}
+                      showCheckbox
+                    />
                   </FormControl>
 
                   <FormControl mt={3}>
@@ -310,6 +412,7 @@ const ItemDrawer = (props) => {
                         type="number"
                         placeholder="0"
                         w="30%"
+                        value={time}
                         onChange={(e) => setTime(e.target.value)}
                       />
                     </InputGroup>

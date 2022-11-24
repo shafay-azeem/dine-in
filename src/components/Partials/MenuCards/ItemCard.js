@@ -81,6 +81,12 @@ const ItemCard = (props) => {
       itemName: x.itemName,
       itemDescription: x.itemDescription,
       active: x.active,
+      itemDescription: x.description,
+      itemLabel: x.select,
+      itemWarning: x.warningState,
+      itemPrepTime: x.time,
+      itemPrice: x.itemprice,
+      itemCalories: x.calories,
     };
 
     if (y == null) {

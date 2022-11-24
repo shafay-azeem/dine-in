@@ -270,6 +270,7 @@ const SectionDrawer = (props) => {
                         selectionMultiSelect(event);
                       }}
                       options={food}
+                      selectedValues={select}
                       showCheckbox
                     />
                   </FormControl>
