@@ -10,6 +10,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Switch,
   Textarea,
 } from "@chakra-ui/react";
 import React from "react";
@@ -20,6 +21,8 @@ import CustomButton from "../../CustomElements/CustomButton";
 const CreateMenuDrawer = (props) => {
   const [name, setName] = useState();
   const [description, setDescription] = useState();
+  const [note, setNote] = useState();
+  const [active, setActive] = useState(false);
   const { response, setResponse } = MenuState();
 
   function getTimestampInSeconds() {
@@ -30,12 +33,15 @@ const CreateMenuDrawer = (props) => {
     id: getTimestampInSeconds(),
     menuName: name,
     menuDescription: description,
+    menuNote: note,
+    menuStatus: active,
     section: [],
-    itemMenu: []
+    itemMenu: [],
   };
 
   const menuCreate = () => {
     response.push(menuResponse);
+    //console.log(menuResponse, "menuResponse");
     alert("Menu Created Successfully");
   };
 
@@ -61,6 +67,19 @@ const CreateMenuDrawer = (props) => {
             <FormControl mt={4}>
               <FormLabel fontWeight="400">Description</FormLabel>
               <Textarea onChange={(e) => setDescription(e.target.value)} />
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel fontWeight="400">Note</FormLabel>
+              <Input onChange={(e) => setNote(e.target.value)} />
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel fontWeight="400">Display the section</FormLabel>
+              <Switch
+                checked={active}
+                onChange={(e) => setActive(e.target.checked)}
+              />
             </FormControl>
           </DrawerBody>
 
