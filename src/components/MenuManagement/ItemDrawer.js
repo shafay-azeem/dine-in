@@ -31,7 +31,9 @@ import {
   NumberInputStepper,
   SimpleGrid,
   Text,
+  Box,
 } from "@chakra-ui/react";
+import { faXRay } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { MenuState } from "../../context/MenuContext";
@@ -48,6 +50,8 @@ const ItemDrawer = (props) => {
 
 
   const [price, setPrice] = useState([]);
+  const [rrr, setRrr] = useState([]);
+
   const [modifiers, setModifiers] = useState([]);
   const [name, setName] = useState(
     initialState
@@ -63,7 +67,7 @@ const ItemDrawer = (props) => {
   const [priceConcat, setPriceConcat] = useState();
   const [caloriesConcat, setCaloriesConcat] = useState();
   const [size, setSize] = useState();
-
+  const [push, setPush] = useState(false);
 
 
   function getTimestampInSeconds() {
@@ -79,8 +83,6 @@ const ItemDrawer = (props) => {
   const updateItem = (x) => {
     if (x == null) {
       response[props.menu_index].itemMenu[props.item_index].itemName = name;
-      // response[props.menu_index].item[props.item_index].itemDescription =
-      // description;
       setResponse([...response]);
       alert("Item with out section Updated Successfully");
 
@@ -95,6 +97,7 @@ const ItemDrawer = (props) => {
 
   };
 
+
   const testfunc = (x) => {
     console.log(x, 'conditonal parameter')
 
@@ -108,8 +111,37 @@ const ItemDrawer = (props) => {
     }
 
   };
+  // console.log(caloriesConcat, "caloriesConcat", priceConcat, "setPriceConcat", "-------------", size, "soze")
+
+
+  const myfuncresponse = () => {
+    // console.log(a, b, c, "==================")
+    var info = {
+      Cal: caloriesConcat,
+      money: priceConcat,
+      siz: size
+
+    }
+    rrr.push(info)
+
+    console.log(rrr, "+_+_+_+_")
+
+  }
+
+
+  // const potatoes = (x) => {
+  //   console.log(x, "x=====================")
+  //   setCaloriesConcat(x)
+  //   return x
+
+  // }
+
+  // console.log(() => potatoes(), "potatoes")
 
   const addPriceOption = (event) => {
+    // if (caloriesConcat !== undefined || priceConcat !== undefined || size !== undefined) {
+    //   myfuncresponse(caloriesConcat, priceConcat, size)
+    // }
     setPrice(
       price.concat(
         <HStack m={5}>
@@ -118,7 +150,9 @@ const ItemDrawer = (props) => {
             <Input
               borderRadius="8px"
               placeholder="Size"
-              onChange={(e) => setSize(e.target.value)}
+              type="text"
+              onChange={(e) => { setSize(e.target.value) }}
+
             />
           </FormControl>
           ,
@@ -130,6 +164,7 @@ const ItemDrawer = (props) => {
                 type="number"
                 placeholder="0"
                 onChange={(e) => setPriceConcat(e.target.value)}
+
               />
             </InputGroup>
           </FormControl>
@@ -144,12 +179,22 @@ const ItemDrawer = (props) => {
                 onChange={(e) => setCaloriesConcat(e.target.value)}
               />
             </InputGroup>
+
           </FormControl>
+          <Box marginTop={20}>
+            <Switch
+              size="sm"
+              checked={push}
+              onChange={() => myfuncresponse(caloriesConcat, priceConcat, size)}>
+            </Switch>
+
+          </Box>
         </HStack>
       )
     );
   };
 
+  console.log(size, "+_+_+_+_+_+_+_+_+_+")
   const addModifiersOption = (event) => {
     setModifiers(
       modifiers.concat(
@@ -276,14 +321,18 @@ const ItemDrawer = (props) => {
                   </FormControl>
                 </TabPanel>
                 <TabPanel>
-                  <CustomButton
+                  {/* <CustomButton
                     click={addPriceOption}
                     btnText={"Add Price Option"}
                     variant={"outline"}
                     leftIcon={<BsPlusLg />}
                     mt={3}
                     size={"sm"}
-                  />
+                  /> */}
+                  <Button
+                    onClick={() => addPriceOption()}>
+                    Add Price Option
+                  </Button>
                   {price}
                 </TabPanel>
                 <TabPanel>
