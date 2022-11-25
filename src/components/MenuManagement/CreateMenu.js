@@ -39,13 +39,12 @@ import SubSectionCard from "../Partials/MenuCards/SubSectionCard";
 const CreateMenu = () => {
   const [searchparams] = useSearchParams();
   let menu_index = searchparams.get("id");
-
-  const { data } = MenuState();
   const { section, setSection, response, setResponse } = MenuState();
   const [sectionList, setSectionList] = useState(section);
 
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
+  const [hit, setHit] = useState(false);
   const navigate = useNavigate();
 
   const [filter, setFilter] = useState(response[menu_index].section);
@@ -94,6 +93,15 @@ const CreateMenu = () => {
     }
     setFilter(filterSec);
   };
+
+
+  const hitMe = (x) => {
+    setHit(true)
+    console.log(x, "++++++++++x++++++++++++")
+    setToggle(x)
+    console.log(hit, "+++hit+++")
+    console.log(toggle, "+++toggle+++")
+  }
 
   return (
     <>
@@ -153,7 +161,21 @@ const CreateMenu = () => {
                                       height="7px"
                                       mt={1}
                                     ></Box>
-                                    <Text>{x.sectionName}</Text>
+                                    <HStack>
+                                      <Button onClick={() => hitMe(index)}>
+                                        HIT ME
+                                      </Button>
+                                      <Text>{x.sectionName}</Text>
+                                      {hit ? (
+                                        filter[toggle]?.item.map((x, index) => {
+                                          return (
+                                            <Text>
+                                              {x.itemName}
+                                            </Text>
+                                          )
+                                        })
+                                      ) : (console.log("heheh"))}
+                                    </HStack>
                                   </HStack>
                                 </Box>
                               ) : (
@@ -166,7 +188,19 @@ const CreateMenu = () => {
                                       height="7px"
                                       mt={1}
                                     ></Box>
+                                    <Button onClick={() => hitMe(index)}>
+                                      HIT ME
+                                    </Button>
                                     <Text>{x.sectionName}</Text>
+                                    {hit ? (
+                                      filter[toggle]?.item.map((x, index) => {
+                                        return (
+                                          <Text>
+                                            {x.itemName}
+                                          </Text>
+                                        )
+                                      })
+                                    ) : (console.log("heheh"))}
                                   </HStack>
                                 </Box>
                               )}
