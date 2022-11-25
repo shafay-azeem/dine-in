@@ -253,17 +253,12 @@ const ItemDrawer = (props) => {
   // console.log(caloriesConcat, "caloriesConcat", priceConcat, "setPriceConcat", "-------------", size, "soze")
 
   const pictureCapture = (event) => {
-
-    setImage(event)
-
-  }
+    setImage(event);
+  };
 
   const videoCapture = (event) => {
-
-    setVideo(event)
-
-  }
-
+    setVideo(event);
+  };
 
   const myfuncresponse = () => {
     // console.log(a, b, c, "==================")
@@ -339,7 +334,6 @@ const ItemDrawer = (props) => {
       )
     );
   };
-
 
   const addModifiersOption = (event) => {
     setModifiers(
@@ -446,11 +440,9 @@ const ItemDrawer = (props) => {
                     />
                   </FormControl>
 
-
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Upload Your Image</FormLabel>
                     <Input
-
                       size="sm"
                       type="file"
                       onChange={(e) => pictureCapture(e.target.files[0].name)}
@@ -466,10 +458,10 @@ const ItemDrawer = (props) => {
                     />
                   </FormControl>
 
-                  <FormControl mt={3}>
+                  {/* <FormControl mt={3}>
                     <FormLabel fontWeight="400">Section</FormLabel>
                     <Select></Select>
-                  </FormControl>
+                  </FormControl> */}
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Labels</FormLabel>

@@ -45,30 +45,37 @@ const SectionDrawer = (props) => {
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionName
+        props?.subsection_index
+      ]?.sectionName
     : response[props.menu_index].section[props?.section_index]?.sectionName;
   const [name, setName] = useState(initialState);
 
   const descriptionState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionDescription
+        props?.subsection_index
+      ]?.sectionDescription
     : response[props.menu_index].section[props?.section_index]
-      ?.sectionDescription;
+        ?.sectionDescription;
 
   const [description, setDescription] = useState(descriptionState);
 
   const noteState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionNote
+        props?.subsection_index
+      ]?.sectionNote
     : response[props.menu_index].section[props?.section_index]?.sectionNote;
 
   const [note, setNote] = useState(noteState);
 
   const [searchSection, setsearchSection] = useState();
-  const [select, setSelect] = useState();
+
+  const labelState = Number.isInteger(props?.subsection_index)
+    ? response[props.menu_index].section[props?.section_index]?.subSection[
+        props?.subsection_index
+      ]?.sectionLabel
+    : response[props.menu_index].section[props?.section_index]?.sectionLabel;
+
+  const [select, setSelect] = useState(labelState);
   const [pass, setPass] = useState(false);
   const [close, setClose] = useState();
 
@@ -137,6 +144,8 @@ const SectionDrawer = (props) => {
       ].sectionDescription = description;
       response[props.menu_index].section[props.section_index].sectionNote =
         note;
+      response[props.menu_index].section[props.section_index].sectionLabel =
+        select;
       function compare(a, b) {
         if (a.sectionName < b.sectionName) {
           return -1;
@@ -163,9 +172,17 @@ const SectionDrawer = (props) => {
         props.subsection_index
       ].sectionNote = note;
 
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].sectionLabel = select;
+
       setResponse([...response]);
       alert("SubSection Updated Successfully");
     }
+  };
+
+  const removalMultiSelect = (event) => {
+    setSelect(event);
   };
 
   const selectionMultiSelect = (event) => {
@@ -234,9 +251,9 @@ const SectionDrawer = (props) => {
                     />
                   </FormControl> */}
 
-                  {response[props.menu_index].section.length > 1 && (props?.subsection_index) == undefined ? (
-
-                    <FormControl >
+                  {response[props.menu_index].section.length > 1 &&
+                  props?.subsection_index == undefined ? (
+                    <FormControl>
                       <Checkbox
                         isChecked={checkedItems}
                         onChange={(e) => setCheckedItems(e.target.checked)}
@@ -292,7 +309,7 @@ const SectionDrawer = (props) => {
                     <Multiselect
                       isObject={false}
                       onRemove={(event) => {
-                        console.log(event);
+                        removalMultiSelect(event);
                       }}
                       onSelect={(event) => {
                         selectionMultiSelect(event);
