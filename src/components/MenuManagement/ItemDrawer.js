@@ -60,6 +60,8 @@ const ItemDrawer = (props) => {
   console.log(forwardState, "forwardStates")
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
+  const [image, setImage] = useState();
+  const [video, setVideo] = useState();
 
   const [modifiers, setModifiers] = useState([]);
   const [name, setName] = useState(initialState);
@@ -191,6 +193,19 @@ const ItemDrawer = (props) => {
   };
   // console.log(caloriesConcat, "caloriesConcat", priceConcat, "setPriceConcat", "-------------", size, "soze")
 
+  const pictureCapture = (event) => {
+
+    setImage(event)
+
+  }
+
+  const videoCapture = (event) => {
+
+    setVideo(event)
+
+  }
+
+
   const myfuncresponse = () => {
     // console.log(a, b, c, "==================")
     var info = {
@@ -266,7 +281,7 @@ const ItemDrawer = (props) => {
     );
   };
 
-  console.log(size, "+_+_+_+_+_+_+_+_+_+");
+
   const addModifiersOption = (event) => {
     setModifiers(
       modifiers.concat(
@@ -369,6 +384,26 @@ const ItemDrawer = (props) => {
                     <Switch
                       checked={sold}
                       onChange={(e) => setSold(e.target.checked)}
+                    />
+                  </FormControl>
+
+
+                  <FormControl mt={3}>
+                    <FormLabel fontWeight="400">Upload Your Image</FormLabel>
+                    <Input
+
+                      size="sm"
+                      type="file"
+                      onChange={(e) => pictureCapture(e.target.files[0].name)}
+                    />
+                  </FormControl>
+
+                  <FormControl mt={3}>
+                    <FormLabel fontWeight="400">Upload Your Video</FormLabel>
+                    <Input
+                      size="sm"
+                      type="file"
+                      onChange={(e) => videoCapture(e.target.files[0].name)}
                     />
                   </FormControl>
 
