@@ -189,6 +189,20 @@ const ItemCard = (props) => {
                                       </HStack>
                                     </Box>
                                   )}
+                                  {x.itemTag ? (
+                                    <Badge
+                                      ml="3"
+                                      mb="3"
+                                      p={1}
+                                      fontSize="9"
+                                      borderRadius={6}
+                                      colorScheme="green"
+                                    >
+                                      Sold Out
+                                    </Badge>
+                                  ) : (
+                                    console.log("sold tag err")
+                                  )}
                                 </Text>
                               </HStack>
                             </GridItem>
@@ -210,6 +224,7 @@ const ItemCard = (props) => {
                                       borderRadius={6}
                                       width="160px"
                                       mr={4}
+                                      value={x.itemPrice}
                                     />
                                   </InputGroup>
                                 </Box>

@@ -105,6 +105,7 @@ const ItemDrawer = (props) => {
     ]?.itemWarning
   );
   const [checked, setChecked] = useState(false);
+  const [sold, setSold] = useState(false);
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -119,6 +120,7 @@ const ItemDrawer = (props) => {
     itemPrepTime: time,
     itemPrice: itemprice,
     itemCalories: calories,
+    itemTag: sold,
   };
 
   const updateItem = (x) => {
@@ -148,6 +150,9 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemCalories = calories;
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemTag = sold;
 
       setResponse([...response]);
       alert("Item Updated Successfully");
@@ -354,7 +359,10 @@ const ItemDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Mark as Sold Out</FormLabel>
-                    <Switch />
+                    <Switch
+                      checked={sold}
+                      onChange={(e) => setSold(e.target.checked)}
+                    />
                   </FormControl>
 
                   <FormControl mt={3}>
