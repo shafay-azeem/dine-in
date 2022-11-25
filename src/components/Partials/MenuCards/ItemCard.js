@@ -33,12 +33,12 @@ import {
 
 const ItemCard = (props) => {
   console.log(props.menu_index, "pp", props.section_index, "qq");
-  const { item, setItem, response, setResponse } = MenuState();
+  const { response, setResponse } = MenuState();
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ].item
+      props?.subsection_index
+    ].item
     : response[props?.menu_index]?.section[props?.section_index]?.item;
 
   const [itemList, setItemList] = useState(initialState);
@@ -72,7 +72,7 @@ const ItemCard = (props) => {
   };
 
   const duplicate = (x, y) => {
-    console.log(y, "======y=========");
+    console.log(y, "=======y=========");
 
     function getTimestampInSeconds() {
       return Math.floor(Date.now() / 1000);
@@ -271,6 +271,7 @@ const ItemCard = (props) => {
                                         <ItemDrawer
                                           menu_index={props.menu_index}
                                           section_index={props.section_index}
+                                          subsection_index={props.subsection_index}
                                           item_index={count}
                                           isOpen={isOpenItem}
                                           onOpen={onOpenItem}

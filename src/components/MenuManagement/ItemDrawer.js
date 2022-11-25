@@ -51,12 +51,13 @@ const ItemDrawer = (props) => {
   const forwardState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
       props?.subsection_index
-    ]?.sectionName
+    ]?.item[props?.item_index]?.itemName
     : response[props.menu_index].section[props?.section_index]?.item[
       props?.item_index
     ]?.itemName;
   const initialState = props.subsection_push ? "" : forwardState;
 
+  console.log(forwardState, "forwardStates")
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
 
@@ -126,8 +127,11 @@ const ItemDrawer = (props) => {
   };
 
   const updateItem = (x) => {
-    if (x == null) {
-      response[props.menu_index].itemMenu[props.item_index].itemName = name;
+    console.log(x, "_____________________________")
+    if (x != undefined) {
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemName = name;
       setResponse([...response]);
       alert("Item with out section Updated Successfully");
     } else {
@@ -821,7 +825,7 @@ const ItemDrawer = (props) => {
               <Button
                 colorScheme="blue"
                 onClick={() => {
-                  updateItem(props?.section_index);
+                  updateItem(props?.subsection_index);
                 }}
               >
                 Update
