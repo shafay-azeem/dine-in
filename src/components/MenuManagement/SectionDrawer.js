@@ -101,6 +101,7 @@ const SectionDrawer = (props) => {
     sectionDescription: description,
     sectionNote: note,
     sectionLabel: select,
+    sectionStatus: false,
     item: [],
     subSection: [],
   };
