@@ -35,6 +35,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ItemCard from "../Partials/MenuCards/ItemCard";
 import SubSectionCard from "../Partials/MenuCards/SubSectionCard";
+import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 
 const CreateMenu = () => {
   const [searchparams] = useSearchParams();
@@ -94,14 +95,13 @@ const CreateMenu = () => {
     setFilter(filterSec);
   };
 
-
   const hitMe = (x) => {
-    setHit(true)
-    console.log(x, "++++++++++x++++++++++++")
-    setToggle(x)
-    console.log(hit, "+++hit+++")
-    console.log(toggle, "+++toggle+++")
-  }
+    setHit(true);
+    console.log(x, "++++++++++x++++++++++++");
+    setToggle(x);
+    console.log(hit, "+++hit+++");
+    console.log(toggle, "+++toggle+++");
+  };
 
   return (
     <>
@@ -161,22 +161,28 @@ const CreateMenu = () => {
                                       height="7px"
                                       mt={1}
                                     ></Box>
-                                    <HStack>
-                                      <Button onClick={() => hitMe(index)}>
-                                        HIT ME
-                                      </Button>
-                                      <Text>{x.sectionName}</Text>
-                                      {hit ? (
-                                        filter[toggle]?.item.map((x, index) => {
-                                          return (
-                                            <Text>
-                                              {x.itemName}
-                                            </Text>
-                                          )
-                                        })
-                                      ) : (console.log("heheh"))}
-                                    </HStack>
+
+                                    <Text onClick={() => hitMe(index)}>
+                                      {x.sectionName}
+                                    </Text>
                                   </HStack>
+                                  {/* {hit
+                                    ? filter[toggle]?.item.map((x, index) => {
+                                        return (
+                                          <HStack ml={5}>
+                                            <Box
+                                              bg="#28B463"
+                                              width="7px"
+                                              borderRadius={8}
+                                              height="7px"
+                                              mt={1}
+                                            ></Box>
+
+                                            <Text>{x.itemName}</Text>
+                                          </HStack>
+                                        );
+                                      })
+                                    : console.log("error")} */}
                                 </Box>
                               ) : (
                                 <Box>
@@ -188,19 +194,8 @@ const CreateMenu = () => {
                                       height="7px"
                                       mt={1}
                                     ></Box>
-                                    <Button onClick={() => hitMe(index)}>
-                                      HIT ME
-                                    </Button>
+
                                     <Text>{x.sectionName}</Text>
-                                    {hit ? (
-                                      filter[toggle]?.item.map((x, index) => {
-                                        return (
-                                          <Text>
-                                            {x.itemName}
-                                          </Text>
-                                        )
-                                      })
-                                    ) : (console.log("heheh"))}
                                   </HStack>
                                 </Box>
                               )}
