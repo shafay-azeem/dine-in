@@ -89,7 +89,7 @@ const CreateMenu = () => {
       for (let i = 0; i < responseSec.length; i++) {
         if (responseSec[i].sectionStatus == false) {
           filterSec.push(responseSec[i]);
-          console.log(filterSec, "filterSec")
+          console.log(filterSec, "filterSec");
         }
       }
     }
@@ -163,9 +163,7 @@ const CreateMenu = () => {
                                       mt={1}
                                     ></Box>
 
-                                    <Text >
-                                      {x.sectionName}
-                                    </Text>
+                                    <Text>{x.sectionName}</Text>
                                   </HStack>
                                   {/* {hit
                                   onClick={() => hitMe(index)
@@ -243,21 +241,6 @@ const CreateMenu = () => {
                         console.log("sss")
                       )}
                     </MenuItem>
-
-                    <MenuItem onClick={onOpenItem}>
-                      Item
-                      {isOpenItem ? (
-                        <ItemDrawer
-                          menu_index={menu_index}
-                          ItemInMenu={true}
-                          isOpen={isOpenItem}
-                          onOpen={onOpenItem}
-                          onClose={onCloseItem}
-                        ></ItemDrawer>
-                      ) : (
-                        console.log("sss")
-                      )}
-                    </MenuItem>
                   </MenuList>
                 </Portal>
               </Menu>
@@ -265,7 +248,6 @@ const CreateMenu = () => {
           </Box>
 
           <SectionCard menu_index={menu_index} />
-          <ItemCard menu_index={menu_index}></ItemCard>
         </GridItem>
       </Grid>
     </>
