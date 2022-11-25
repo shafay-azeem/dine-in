@@ -31,6 +31,8 @@ import SectionDrawer from "../../MenuManagement/SectionDrawer";
 const SubSectionCard = (props) => {
   const { response, setResponse } = MenuState();
   let menu_index = props.menu_index;
+  let section_index = props.section_index;
+  console.log(menu_index, section_index, "+_+_+_+_________________")
   let subSecRes =
     response[props?.menu_index]?.section[props?.section_index]?.subSection;
 
@@ -185,7 +187,8 @@ const SubSectionCard = (props) => {
 
                         {isOpenSection ? (
                           <SectionDrawer
-                            section_index={count}
+                            subsection_index={count}
+                            section_index={section_index}
                             menu_index={menu_index}
                             isOpen={isOpenSection}
                             onOpen={onOpenSection}

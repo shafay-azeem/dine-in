@@ -31,13 +31,25 @@ import SelectSearch from "react-select-search";
 import Multiselect from "multiselect-react-dropdown";
 
 const SectionDrawer = (props) => {
+  let menu_index = props.menu_index;
+  let section_index = props?.section_index;
+  let subsection_index = props?.subsection_index
+
+  console.log(subsection_index, "subsection_index",)
   const [checkedItems, setCheckedItems] = React.useState(false);
   const [food, setFood] = useState(["New", "Signature"]);
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
   const { response, setResponse } = MenuState();
+
+
+  const initialState = Number.isInteger(props?.subsection_index)
+    ? response[props.menu_index].section[props?.section_index]?.subSection[
+      props?.subsection_index
+    ]?.sectionName
+    : response[props.menu_index].section[props?.section_index]?.sectionName;
   const [name, setName] = useState(
-    response[props.menu_index].section[props?.section_index]?.sectionName
+    initialState
   );
   const [description, setDescription] = useState(
     response[props.menu_index].section[props?.section_index]?.sectionDescription
@@ -107,24 +119,33 @@ const SectionDrawer = (props) => {
     }
   };
 
-  const updatedSection = () => {
-    response[props.menu_index].section[props.section_index].sectionName = name;
-    response[props.menu_index].section[props.section_index].sectionDescription =
-      description;
-    response[props.menu_index].section[props.section_index].sectionNote = note;
-    function compare(a, b) {
-      if (a.sectionName < b.sectionName) {
-        return -1;
+  const updatedSection = (x) => {
+    if (x == null) {
+      response[props.menu_index].section[props.section_index].sectionName = name;
+      response[props.menu_index].section[props.section_index].sectionDescription =
+        description;
+      response[props.menu_index].section[props.section_index].sectionNote = note;
+      function compare(a, b) {
+        if (a.sectionName < b.sectionName) {
+          return -1;
+        }
+        if (a.sectionName > b.sectionName) {
+          return 1;
+        }
+        return 0;
       }
-      if (a.sectionName > b.sectionName) {
-        return 1;
-      }
-      return 0;
-    }
-    response[props.menu_index].section.sort(compare);
+      response[props.menu_index].section.sort(compare);
 
+      setResponse([...response]);
+      alert("Section Updated Successfully");
+
+    } else {
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].sectionName = name
+    }
     setResponse([...response]);
-    alert("Section Updated Successfully");
+    alert("SubSection Updated Successfully");
   };
 
   const selectionMultiSelect = (event) => {
@@ -348,7 +369,7 @@ const SectionDrawer = (props) => {
               <Button
                 colorScheme="blue"
                 onClick={() => {
-                  updatedSection();
+                  updatedSection(props?.subsection_index);
                 }}
               >
                 Update
