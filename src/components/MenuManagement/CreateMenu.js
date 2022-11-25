@@ -89,6 +89,7 @@ const CreateMenu = () => {
       for (let i = 0; i < responseSec.length; i++) {
         if (responseSec[i].sectionStatus == false) {
           filterSec.push(responseSec[i]);
+          console.log(filterSec, "filterSec")
         }
       }
     }
@@ -162,11 +163,12 @@ const CreateMenu = () => {
                                       mt={1}
                                     ></Box>
 
-                                    <Text onClick={() => hitMe(index)}>
+                                    <Text >
                                       {x.sectionName}
                                     </Text>
                                   </HStack>
                                   {/* {hit
+                                  onClick={() => hitMe(index)
                                     ? filter[toggle]?.item.map((x, index) => {
                                         return (
                                           <HStack ml={5}>
