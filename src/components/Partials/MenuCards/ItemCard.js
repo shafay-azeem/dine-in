@@ -35,9 +35,11 @@ const ItemCard = (props) => {
   console.log(props.menu_index, "pp", props.section_index, "qq");
   const { item, setItem, response, setResponse } = MenuState();
 
-  const initialState = Number.isInteger(props?.section_index)
-    ? response[props?.menu_index]?.section[props?.section_index]?.item
-    : response[props?.menu_index]?.itemMenu;
+  const initialState = Number.isInteger(props?.subsection_index)
+    ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
+        props?.subsection_index
+      ].item
+    : response[props?.menu_index]?.section[props?.section_index]?.item;
 
   const [itemList, setItemList] = useState(initialState);
   const [count, setCount] = useState();
@@ -311,103 +313,6 @@ const ItemCard = (props) => {
           )}
         </Droppable>
       </DragDropContext>
-
-      {/* <DragDropContext onDragEnd={handleDrop}>
-        <Droppable droppableId="droppable-1">
-          {(provided) => (
-            <Box
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              bg="white"
-              borderRadius={6}
-              mt={3}
-              p={2}
-            >
-              {itemList?.map((x, index) => {
-                return (
-                  <Draggable
-                    key={x.itemId}
-                    draggableId={x.itemId.toString()}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <Box
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                      >
-                        <Grid templateColumns="repeat(5, 1fr)" gap={4} mt={3}>
-                          <GridItem colSpan={2}>
-                            <HStack>
-                              <Image
-                                boxSize="50px"
-                                objectFit="contain"
-                                src="https://bit.ly/dan-abramov"
-                                alt="Dan Abramov"
-                              />
-                              <Text pl={2}> {x.itemName}</Text>
-                            </HStack>
-                          </GridItem>
-                          <GridItem colStart={4} colEnd={6}>
-                            <HStack>
-                              <InputGroup>
-                                <InputLeftElement
-                                  pointerEvents="none"
-                                  color="gray.500"
-                                  fontSize="1.2em"
-                                  children="$"
-                                />
-                                <Input placeholder="Enter amount" />
-                              </InputGroup>
-                              <Switch p={5} />
-                              <Menu>
-                                <MenuButton>
-                                  <BsThreeDotsVertical as={Button} />
-                                </MenuButton>
-
-                                <MenuList>
-                                  <Box onClick={() => getIndex(index)}>
-                                    <MenuItem onClick={onOpenItem}>
-                                      Edit
-                                    </MenuItem>
-                                  </Box>
-                                  {isOpenItem ? (
-                                    <ItemDrawer
-                                      menu_index={props.menu_index}
-                                      section_index={props.section_index}
-                                      item_index={count}
-                                      isOpen={isOpenItem}
-                                      onOpen={onOpenItem}
-                                      onClose={onCloseItem}
-                                    ></ItemDrawer>
-                                  ) : (
-                                    console.log("sss")
-                                  )}
-                                  <MenuItem
-                                    onClick={() =>
-                                      duplicate(x, props?.section_index)
-                                    }
-                                  >
-                                    Duplicate{" "}
-                                  </MenuItem>
-                                  <MenuItem onClick={() => handleRemove(index)}>
-                                    Delete
-                                  </MenuItem>
-                                </MenuList>
-                              </Menu>
-                            </HStack>
-                          </GridItem>
-                        </Grid>
-                      </Box>
-                    )}
-                  </Draggable>
-                );
-              })}
-              {provided.placeholder}
-            </Box>
-          )}
-        </Droppable>
-      </DragDropContext> */}
     </>
   );
 };
