@@ -48,48 +48,60 @@ const ItemDrawer = (props) => {
   console.log(props?.ItemInMenu, "------------itemInMenu---------");
 
   const { response, setResponse } = MenuState();
-  const forwardState = Number.isInteger(props?.subsection_index)
-    ? response[props.menu_index].section[props?.section_index]?.subSection[
+  let subSectionArr =
+    response[props.menu_index].section[props?.section_index]?.subSection[
       props?.subsection_index
-    ]?.item[props?.item_index]?.itemName
-    : response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
-    ]?.itemName;
-  const initialState = props.subsection_push ? "" : forwardState;
+    ]?.item[props?.item_index];
 
-  console.log(forwardState, "forwardStates")
+  let sectionArr =
+    response[props.menu_index].section[props?.section_index]?.item[
+      props?.item_index
+    ];
+  const itemCondtionState = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemName
+    : sectionArr?.itemName;
+  const initialState = props.subsection_push ? "" : itemCondtionState;
+
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
 
   const [modifiers, setModifiers] = useState([]);
   const [name, setName] = useState(initialState);
-  const [description, setDescription] = useState(
-    response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
-    ]?.itemDescription
-  );
-  const [select, setSelect] = useState(
-    response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
-    ]?.itemLabel
-  );
 
-  const [time, setTime] = useState(
-    response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
-    ]?.itemPrepTime
-  );
-  const [calories, setCalories] = useState(
-    response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
-    ]?.itemCalories
-  );
+  const itemCondtionState2 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemDescription
+    : sectionArr?.itemDescription;
+  const initialState2 = props.subsection_push ? "" : itemCondtionState2;
 
-  const [itemprice, setItemPrice] = useState(
-    response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
-    ]?.itemPrice
-  );
+  const [description, setDescription] = useState(initialState2);
+
+  const itemCondtionState7 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemLabel
+    : sectionArr?.itemLabel;
+  const initialState7 = props.subsection_push ? "" : itemCondtionState7;
+
+  const [select, setSelect] = useState(initialState7);
+
+  const itemCondtionState3 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemPrepTime
+    : sectionArr?.itemPrepTime;
+  const initialState3 = props.subsection_push ? "" : itemCondtionState3;
+
+  const [time, setTime] = useState(initialState3);
+
+  const itemCondtionState4 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemCalories
+    : sectionArr?.itemCalories;
+  const initialState4 = props.subsection_push ? "" : itemCondtionState4;
+
+  const [calories, setCalories] = useState(initialState4);
+
+  const itemCondtionState5 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemPrice
+    : sectionArr?.itemPrice;
+  const initialState5 = props.subsection_push ? "" : itemCondtionState5;
+
+  const [itemprice, setItemPrice] = useState(initialState5);
 
   const [recommendedItem, setRecommendedItem] = useState();
   const [priceConcat, setPriceConcat] = useState();
@@ -101,12 +113,17 @@ const ItemDrawer = (props) => {
     "Signature",
     "Special Presentation",
   ]);
+
   const [warning, setWarning] = useState(["Alcohol", "AlcoholFree"]);
-  const [warningState, setWarningState] = useState(
-    response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
-    ]?.itemWarning
-  );
+
+  const itemCondtionState6 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemWarning
+    : sectionArr?.itemWarning;
+  const initialState6 = props.subsection_push ? "" : itemCondtionState6;
+  console.log(initialState6, "initialState6");
+
+  const [warningState, setWarningState] = useState(initialState6);
+
   const [checked, setChecked] = useState(false);
   const [sold, setSold] = useState(false);
 
@@ -127,11 +144,36 @@ const ItemDrawer = (props) => {
   };
 
   const updateItem = (x) => {
-    console.log(x, "_____________________________")
+    console.log(warningState, "====warning state====");
     if (x != undefined) {
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].item[props.item_index].itemName = name;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemDescription = description;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemPrepTime = time;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemCalories = calories;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemPrice = itemprice;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemWarning = warningState;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemLabel = select;
+
       setResponse([...response]);
       alert("Item with out section Updated Successfully");
     } else {
@@ -158,6 +200,9 @@ const ItemDrawer = (props) => {
       ].itemCalories = calories;
       response[props.menu_index].section[props.section_index].item[
         props.item_index
+      ].itemLabel = select;
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
       ].itemTag = sold;
 
       setResponse([...response]);
@@ -167,21 +212,35 @@ const ItemDrawer = (props) => {
 
   const selectionMultiSelect = (event) => {
     setSelect(event);
-    console.log(select, "select event");
+  };
+
+  const removalMultiSelect = (event) => {
+    setSelect(event);
   };
 
   const selectionMultiSelectwarning = (event) => {
     setWarningState(event);
+    console.log(warningState, "infunc");
+  };
+
+  const removalMultiSelectwarning = (event) => {
+    setWarningState(event);
+    console.log(warningState, "inremoval");
   };
 
   const testfunc = (x) => {
     console.log(x, "conditonal parameter");
 
     if (x === true) {
-      response[props.menu_index].section[props.section_index].subSection[props.subsection_index].item.push(itemData);
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item.push(itemData);
       alert("Single Push On basis Of Conditional Parameters");
-      console.log(response, 'orig')
-      console.log(response[props.menu_index].section[props.section_index].subSection, 'subsec');
+      console.log(response, "orig");
+      console.log(
+        response[props.menu_index].section[props.section_index].subSection,
+        "subsec"
+      );
     } else {
       response[props.menu_index].section[props.section_index].item.push(
         itemData
@@ -382,7 +441,7 @@ const ItemDrawer = (props) => {
                     <Multiselect
                       isObject={false}
                       onRemove={(event) => {
-                        console.log(event);
+                        removalMultiSelect(event);
                       }}
                       onSelect={(event) => {
                         selectionMultiSelect(event);
@@ -399,7 +458,7 @@ const ItemDrawer = (props) => {
                       isObject={false}
                       value={warningState}
                       onRemove={(event) => {
-                        console.log(event);
+                        removalMultiSelectwarning(event);
                       }}
                       onSelect={(event) => {
                         selectionMultiSelectwarning(event);

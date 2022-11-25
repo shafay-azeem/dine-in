@@ -37,8 +37,8 @@ const ItemCard = (props) => {
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ].item
+        props?.subsection_index
+      ].item
     : response[props?.menu_index]?.section[props?.section_index]?.item;
 
   const [itemList, setItemList] = useState(initialState);
@@ -57,21 +57,28 @@ const ItemCard = (props) => {
   };
 
   const handleRemove = (index) => {
-    if (Number.isInteger(props?.section_index) == true) {
+    if (Number.isInteger(props?.subsection_index) == true) {
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item.splice(index, 1);
+      setResponse([...response]);
+      setItemList(
+        response[props.menu_index].section[props.section_index].subSection[
+          props.subsection_index
+        ].item
+      );
+    } else {
       response[props.menu_index].section[props.section_index].item.splice(
         index,
         1
       );
       setResponse([...response]);
       setItemList(response[props.menu_index].section[props.section_index].item);
-    } else {
-      response[props.menu_index].itemMenu.splice(index, 1);
-      setResponse([...response]);
-      setItemList(response[props.menu_index].itemMenu);
     }
   };
 
   const duplicate = (x, y) => {
+    console.log(x.itemPrice, "ffff");
     console.log(y, "=======y=========");
 
     function getTimestampInSeconds() {
@@ -83,17 +90,19 @@ const ItemCard = (props) => {
       itemName: x.itemName,
       itemDescription: x.itemDescription,
       active: x.active,
-      itemDescription: x.description,
-      itemLabel: x.select,
-      itemWarning: x.warningState,
-      itemPrepTime: x.time,
-      itemPrice: x.itemprice,
-      itemCalories: x.calories,
+      itemDescription: x.itemDescription,
+      itemLabel: x.itemLabel,
+      itemWarning: x.itemWarning,
+      itemPrepTime: x.itemPrepTime,
+      itemPrice: x.itemPrice,
+      itemCalories: x.itemCalories,
     };
 
-    if (y == null) {
+    if (y != null) {
       console.log(
-        response[props.menu_index].itemMenu.push(itemData),
+        response[props.menu_index].section[props.section_index].subSection[
+          props.subsection_index
+        ].item.push(itemData),
         "itemMenu array"
       );
       setResponse([...response]);
@@ -271,7 +280,9 @@ const ItemCard = (props) => {
                                         <ItemDrawer
                                           menu_index={props.menu_index}
                                           section_index={props.section_index}
-                                          subsection_index={props.subsection_index}
+                                          subsection_index={
+                                            props.subsection_index
+                                          }
                                           item_index={count}
                                           isOpen={isOpenItem}
                                           onOpen={onOpenItem}
@@ -285,7 +296,7 @@ const ItemCard = (props) => {
 
                                       <MenuItem
                                         onClick={() =>
-                                          duplicate(x, props?.section_index)
+                                          duplicate(x, props?.subsection_index)
                                         }
                                         icon={<AiFillCopy />}
                                       >
