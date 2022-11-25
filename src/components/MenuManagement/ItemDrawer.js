@@ -48,12 +48,14 @@ const ItemDrawer = (props) => {
   console.log(props?.ItemInMenu, "------------itemInMenu---------");
 
   const { response, setResponse } = MenuState();
-  const forwardState = Number.isInteger(props?.section_index)
-    ? response[props.menu_index].section[props?.section_index]?.item[
-        props?.item_index
-      ]?.itemName
-    : response[props.menu_index].itemMenu[props?.item_index]?.itemName;
-  const initialState = props.ItemInMenu ? "" : forwardState;
+  const forwardState = Number.isInteger(props?.subsection_index)
+    ? response[props.menu_index].section[props?.section_index]?.subSection[
+      props?.subsection_index
+    ]?.sectionName
+    : response[props.menu_index].section[props?.section_index]?.item[
+      props?.item_index
+    ]?.itemName;
+  const initialState = props.subsection_push ? "" : forwardState;
 
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
@@ -172,9 +174,10 @@ const ItemDrawer = (props) => {
     console.log(x, "conditonal parameter");
 
     if (x === true) {
-      response[props.menu_index].itemMenu.push(itemData);
+      response[props.menu_index].section[props.section_index].subSection[props.subsection_index].item.push(itemData);
       alert("Single Push On basis Of Conditional Parameters");
-      console.log(response[props.menu_index].itemMenu);
+      console.log(response, 'orig')
+      console.log(response[props.menu_index].section[props.section_index].subSection, 'subsec');
     } else {
       response[props.menu_index].section[props.section_index].item.push(
         itemData
@@ -827,7 +830,7 @@ const ItemDrawer = (props) => {
               <Button
                 colorScheme="blue"
                 onClick={() => {
-                  testfunc(props?.ItemInMenu);
+                  testfunc(props?.subsection_push);
                 }}
               >
                 Save

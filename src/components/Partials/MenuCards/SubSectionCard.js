@@ -166,8 +166,10 @@ const SubSectionCard = (props) => {
                         </Box>
                         {isOpenItem ? (
                           <ItemDrawer
+                            subsection_index={count}
+                            section_index={section_index}
                             menu_index={menu_index}
-                            section_index={count}
+                            subsection_push={true}
                             isOpen={isOpenItem}
                             onOpen={onOpenItem}
                             onClose={onCloseItem}

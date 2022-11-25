@@ -23,6 +23,7 @@ import {
   Stack,
   Radio,
   Alert,
+  Box,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -44,24 +45,24 @@ const SectionDrawer = (props) => {
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.sectionName
+      props?.subsection_index
+    ]?.sectionName
     : response[props.menu_index].section[props?.section_index]?.sectionName;
   const [name, setName] = useState(initialState);
 
   const descriptionState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.sectionDescription
+      props?.subsection_index
+    ]?.sectionDescription
     : response[props.menu_index].section[props?.section_index]
-        ?.sectionDescription;
+      ?.sectionDescription;
 
   const [description, setDescription] = useState(descriptionState);
 
   const noteState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.sectionNote
+      props?.subsection_index
+    ]?.sectionNote
     : response[props.menu_index].section[props?.section_index]?.sectionNote;
 
   const [note, setNote] = useState(noteState);
@@ -233,8 +234,9 @@ const SectionDrawer = (props) => {
                     />
                   </FormControl> */}
 
-                  {response[props.menu_index].section.length > 0 ? (
-                    <FormControl mt={3}>
+                  {response[props.menu_index].section.length > 1 && (props?.subsection_index) == undefined ? (
+
+                    <FormControl >
                       <Checkbox
                         isChecked={checkedItems}
                         onChange={(e) => setCheckedItems(e.target.checked)}
