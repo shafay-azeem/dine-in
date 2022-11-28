@@ -40,6 +40,8 @@ import { BsPlusLg } from "react-icons/bs";
 import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 import Multiselect from "multiselect-react-dropdown";
+import { SwitchComponent } from '@syncfusion/ej2-react-buttons';
+import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 
 const ItemDrawer = (props) => {
   console.log(props.menu_index, "menu----------");
@@ -55,7 +57,7 @@ const ItemDrawer = (props) => {
 
   let sectionArr =
     response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
+    props?.item_index
     ];
   const itemCondtionState = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemName
@@ -126,8 +128,62 @@ const ItemDrawer = (props) => {
 
   const [warningState, setWarningState] = useState(initialState6);
 
-  const [checked, setChecked] = useState(false);
-  const [sold, setSold] = useState(false);
+  const conditonMade = Number.isInteger(props?.subsection_index) ? "subSection" : "section"
+
+  let TOGGLE
+  if (conditonMade == "subSection") {
+
+    if (typeof subSectionArr?.active === "undefined") {
+      TOGGLE = false
+    }
+    else if (subSectionArr?.active === false) {
+      TOGGLE = false
+    }
+    else {
+      TOGGLE = true
+    }
+  }
+  else {
+    if (typeof sectionArr?.active === "undefined") {
+      TOGGLE = false
+    }
+    else if (sectionArr?.active === false) {
+      TOGGLE = false
+    }
+    else {
+      TOGGLE = true
+    }
+  }
+
+  const [checked, setChecked] = useState(TOGGLE);
+
+  let soldTag
+  if (conditonMade == "subSection") {
+
+    if (typeof subSectionArr?.itemTag === "undefined") {
+      soldTag = false
+    }
+    else if (subSectionArr?.itemTag === false) {
+      soldTag = false
+    }
+    else {
+      soldTag = true
+    }
+  }
+  else {
+    if (typeof sectionArr?.itemTag === "undefined") {
+      soldTag = false
+    }
+    else if (sectionArr?.itemTag === false) {
+      soldTag = false
+    }
+    else {
+      soldTag = true
+    }
+  }
+
+  const [sold, setSold] = useState(soldTag);
+
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -158,6 +214,10 @@ const ItemDrawer = (props) => {
 
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
+      ].item[props.item_index].active = checked;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
       ].item[props.item_index].itemPrepTime = time;
 
       response[props.menu_index].section[props.section_index].subSection[
@@ -176,8 +236,12 @@ const ItemDrawer = (props) => {
         props.subsection_index
       ].item[props.item_index].itemLabel = select;
 
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemTag = sold;
+
       setResponse([...response]);
-      alert("Item with out section Updated Successfully");
+      alert("Item With-In SubSection Updated Successfully");
     } else {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
@@ -188,6 +252,11 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemPrepTime = time;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].active = checked
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemLabel = select;
@@ -222,16 +291,16 @@ const ItemDrawer = (props) => {
 
   const selectionMultiSelectwarning = (event) => {
     setWarningState(event);
-    console.log(warningState, "infunc");
+
   };
 
   const removalMultiSelectwarning = (event) => {
     setWarningState(event);
-    console.log(warningState, "inremoval");
+
   };
 
   const testfunc = (x) => {
-    console.log(x, "conditonal parameter");
+
 
     if (x === true) {
       response[props.menu_index].section[props.section_index].subSection[
@@ -403,10 +472,9 @@ const ItemDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Display the section</FormLabel>
-                    <Switch
-                      checked={checked}
-                      onChange={(e) => setChecked(e.target.checked)}
-                    />
+
+                    <SwitchComponent id="switch1" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
+
                   </FormControl>
 
                   <FormControl mt={3}>
@@ -434,10 +502,8 @@ const ItemDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Mark as Sold Out</FormLabel>
-                    <Switch
-                      checked={sold}
-                      onChange={(e) => setSold(e.target.checked)}
-                    />
+                    <SwitchComponent id="switch1" checked={sold} onChange={(e) => setSold(e.target.checked)} />
+
                   </FormControl>
 
                   <FormControl mt={3}>
@@ -549,7 +615,8 @@ const ItemDrawer = (props) => {
                     <FormLabel fontWeight="400">
                       Display the Nutrition Info on the menu
                     </FormLabel>
-                    <Switch />
+                    <Switch></Switch>
+
                   </FormControl>
 
                   <FormControl mt={3}>
