@@ -33,6 +33,7 @@ import {
   Text,
   Box,
   InputLeftElement,
+  IconButton,
 } from "@chakra-ui/react";
 import { faXRay } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
@@ -41,6 +42,7 @@ import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 import Multiselect from "multiselect-react-dropdown";
 import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
+import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 
 const ItemDrawer = (props) => {
   console.log(props.menu_index, "menu----------");
@@ -64,20 +66,21 @@ const ItemDrawer = (props) => {
     : sectionArr?.itemName;
   const initialState = props.subsection_push ? "" : itemCondtionState;
 
-  // const XX = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemPriceOption
-  //   : sectionArr?.itemPriceOption;
-  // const YY = props.subsection_push ? "" : XX;
-  // console.log(YY, "++++++++++++++++++++++++++++++++++++++++")
+  const XX = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemPriceOption
+    : sectionArr?.itemPriceOption;
+  let A;
+  if (typeof XX === "undefined") {
+    A = [{ name: "", price: "", calories: "" }];
+  } else {
+    A = XX;
+  }
+  const [inputList, setInputList] = useState(A);
 
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
   const [image, setImage] = useState();
   const [video, setVideo] = useState();
-
-  const [inputList, setInputList] = useState([
-    { name: "", price: "", calories: "" },
-  ]);
 
   const [modifiers, setModifiers] = useState([]);
   const [name, setName] = useState(initialState);
@@ -983,47 +986,55 @@ const ItemDrawer = (props) => {
                   <Box>
                     {inputList?.map((x, index) => {
                       return (
-                        <Box key={index}>
+                        <Box key={index} mt={5}>
                           <HStack>
                             <Input
+                              borderRadius="8px"
                               placeholder="Name"
                               name="name"
                               size="sm"
                               type="text"
                               value={x.name}
+                              width="30%"
                               onChange={(e) => handleChange(e, index)}
                             />
                             <Input
+                              borderRadius="8px"
                               placeholder="Price"
                               size="sm"
                               name="price"
                               type="text"
                               value={x.price}
+                              width="30%"
                               onChange={(e) => handleChange(e, index)}
                             />
                             <Input
+                              borderRadius="8px"
                               placeholder="Calories"
                               size="sm"
                               name="calories"
                               type="text"
+                              width="30%"
                               value={x.calories}
                               onChange={(e) => handleChange(e, index)}
                             />
                             {inputList.length !== 1 && (
-                              <Button
+                              <IconButton
+                                size="xs"
+                                variant="outline"
                                 colorScheme="blue"
                                 onClick={handleRemoveInput}
-                              >
-                                Remove
-                              </Button>
+                                icon={<CloseIcon />}
+                              />
                             )}
                             {inputList.length - 1 === index && (
-                              <Button
+                              <IconButton
+                                size="xs"
+                                variant="outline"
                                 colorScheme="blue"
                                 onClick={() => handleAddInput(index)}
-                              >
-                                ADD
-                              </Button>
+                                icon={<AddIcon />}
+                              />
                             )}
                           </HStack>
                         </Box>

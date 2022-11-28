@@ -88,6 +88,8 @@ const SectionCard = (props) => {
       sectionName: x.sectionName,
       sectionDescription: x.sectionDescription,
       sectionStatus: x.sectionStatus,
+      sectionNote: x.sectionNote,
+      sectionLabel: x.sectionLabel,
       item: [],
       subSection: [],
     };
