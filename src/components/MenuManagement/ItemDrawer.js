@@ -193,6 +193,121 @@ const ItemDrawer = (props) => {
 
   const [transfatpercentage, setTransFatPercentage] = useState(initialState16);
 
+  const itemCondtionState17 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemCholesterol
+    : sectionArr?.itemCholesterol;
+  const initialState17 = props.subsection_push ? "" : itemCondtionState17;
+
+  const [cholesterol, setCholesterol] = useState(initialState17);
+
+  const itemCondtionState18 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemCholesterolPercentage
+    : sectionArr?.itemCholesterolPercentage;
+  const initialState18 = props.subsection_push ? "" : itemCondtionState18;
+
+  const [cholesterolpercentage, setCholesterolPercentage] =
+    useState(initialState18);
+
+  const itemCondtionState19 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemSodiumPercentage
+    : sectionArr?.itemSodiumPercentage;
+  const initialState19 = props.subsection_push ? "" : itemCondtionState19;
+
+  const [sodiumPercentage, setSodiumPercentage] = useState(initialState19);
+
+  const itemCondtionState20 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemSodium
+    : sectionArr?.itemSodium;
+  const initialState20 = props.subsection_push ? "" : itemCondtionState20;
+
+  const [sodium, setSodium] = useState(initialState20);
+
+  const itemCondtionState21 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemTotalCarbs
+    : sectionArr?.itemTotalCarbs;
+  const initialState21 = props.subsection_push ? "" : itemCondtionState21;
+
+  const [totalCarbs, setTotalCarbs] = useState(initialState21);
+
+  const itemCondtionState22 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemTotalCarbsPercentage
+    : sectionArr?.itemTotalCarbsPercentage;
+  const initialState22 = props.subsection_push ? "" : itemCondtionState22;
+
+  const [totalCarbsPercentage, setTotalCarbsPercentage] =
+    useState(initialState22);
+
+  const itemCondtionState23 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemDietaryFiber
+    : sectionArr?.itemDietaryFiber;
+  const initialState23 = props.subsection_push ? "" : itemCondtionState23;
+
+  const [dietaryFiber, setDietaryFiber] = useState(initialState23);
+
+  const itemCondtionState24 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemDietaryFiberPercentage
+    : sectionArr?.itemDietaryFiberPercentage;
+  const initialState24 = props.subsection_push ? "" : itemCondtionState24;
+
+  const [dietaryFiberPercentage, setDietaryFiberPercentage] =
+    useState(initialState24);
+
+  const itemCondtionState25 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemSugar
+    : sectionArr?.itemSugar;
+  const initialState25 = props.subsection_push ? "" : itemCondtionState25;
+
+  const [sugar, setSugar] = useState(initialState25);
+
+  const itemCondtionState26 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemSugarPercentage
+    : sectionArr?.itemSugarPercentage;
+  const initialState26 = props.subsection_push ? "" : itemCondtionState26;
+
+  const [sugarPercentage, setSugarPercentage] = useState(initialState26);
+
+  const itemCondtionState27 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemProtein
+    : sectionArr?.itemProtein;
+  const initialState27 = props.subsection_push ? "" : itemCondtionState25;
+
+  const [protein, setProtein] = useState(initialState27);
+
+  const itemCondtionState28 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemProteinPercentage
+    : sectionArr?.itemProteinPercentage;
+  const initialState28 = props.subsection_push ? "" : itemCondtionState28;
+
+  const [proteinPercentage, setProteinPercentage] = useState(initialState28);
+
+  const itemCondtionState29 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemVitaminA
+    : sectionArr?.itemVitaminA;
+  const initialState29 = props.subsection_push ? "" : itemCondtionState29;
+
+  const [vitaminA, setVitaminA] = useState(initialState29);
+
+  const itemCondtionState30 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemVitaminC
+    : sectionArr?.itemVitaminC;
+  const initialState30 = props.subsection_push ? "" : itemCondtionState30;
+
+  const [vitaminC, setVitaminC] = useState(initialState30);
+
+  const itemCondtionState31 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemCalcium
+    : sectionArr?.itemCalcium;
+  const initialState31 = props.subsection_push ? "" : itemCondtionState31;
+
+  const [calcium, setCalcium] = useState(initialState31);
+
+  const itemCondtionState32 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemIron
+    : sectionArr?.itemIron;
+  const initialState32 = props.subsection_push ? "" : itemCondtionState32;
+
+  const [iron, setIron] = useState(initialState32);
+
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
@@ -216,6 +331,22 @@ const ItemDrawer = (props) => {
     itemSaturatedFatPercentage: saturatedfatpercentage,
     itemTransFat: transfat,
     itemTransFatPercentage: transfatpercentage,
+    itemCholesterol: cholesterol,
+    itemCholesterolPercentage: cholesterolpercentage,
+    itemSodium: sodium,
+    itemSodiumPercentage: sodiumPercentage,
+    itemTotalCarbs: totalCarbs,
+    itemTotalCarbsPercentage: totalCarbsPercentage,
+    itemDietaryFiber: dietaryFiber,
+    itemDietaryFiberPercentage: dietaryFiberPercentage,
+    itemSugar: sugar,
+    itemSugarPercentage: sugarPercentage,
+    itemProtein: protein,
+    itemProteinPercentage: proteinPercentage,
+    itemVitaminA: vitaminA,
+    itemVitaminC: vitaminC,
+    itemIron: iron,
+    itemCalcium: calcium,
   };
 
   const updateItem = (x) => {
@@ -282,6 +413,72 @@ const ItemDrawer = (props) => {
         props.subsection_index
       ].item[props.item_index].itemTransFatPercentage = transfatpercentage;
 
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemCholesterol = cholesterol;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemCholesterolPercentage =
+        cholesterolpercentage;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemSodium = sodium;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemSodiumPercentage = sodiumPercentage;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemTotalCarbs = totalCarbs;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemTotalCarbsPercentage = totalCarbsPercentage;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemDietaryFiber = dietaryFiber;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemDietaryFiberPercentage =
+        dietaryFiberPercentage;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemSugar = sugar;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemSugarPercentage = sugarPercentage;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemProtein = protein;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemProteinPercentage = proteinPercentage;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemVitaminA = vitaminA;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemVitaminC = vitaminC;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemCalcium = calcium;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemIron = iron;
+
       setResponse([...response]);
       alert("Item with out section Updated Successfully");
     } else {
@@ -345,6 +542,70 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemTransFatPercentage = transfatpercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemCholesterol = cholesterol;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemCholesterolPercentage = cholesterolpercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemSodium = sodium;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemSodiumPercentage = sodiumPercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemTotalCarbs = totalCarbs;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemTotalCarbsPercentage = totalCarbsPercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemDietaryFiber = dietaryFiber;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemDietaryFiberPercentage = dietaryFiberPercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemSugar = sugar;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemSugarPercentage = sugarPercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemProtein = protein;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemProteinPercentage = proteinPercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemVitaminA = vitaminA;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemVitaminC = vitaminC;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemCalcium = calcium;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemIron = iron;
 
       setResponse([...response]);
       alert("Item Updated Successfully");
@@ -851,7 +1112,10 @@ const ItemDrawer = (props) => {
                       <Text fontWeight="500">Cholesterol</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={cholesterol}
+                        onChange={(cholesterol) => setCholesterol(cholesterol)}
+                      >
                         <NumberInputField placeholder="mg" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -861,7 +1125,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={cholesterolpercentage}
+                          onChange={(cholesterolpercentage) =>
+                            setCholesterolPercentage(cholesterolpercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -877,7 +1146,10 @@ const ItemDrawer = (props) => {
                       <Text fontWeight="500">Sodium</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={sodium}
+                        onChange={(sodium) => setSodium(sodium)}
+                      >
                         <NumberInputField placeholder="mg" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -887,7 +1159,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={sodiumPercentage}
+                          onChange={(sodiumPercentage) =>
+                            setSodiumPercentage(sodiumPercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -903,7 +1180,10 @@ const ItemDrawer = (props) => {
                       <Text fontWeight="500">Total Carbs</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={totalCarbs}
+                        onChange={(totalCarbs) => setTotalCarbs(totalCarbs)}
+                      >
                         <NumberInputField placeholder="gr" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -913,7 +1193,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={totalCarbsPercentage}
+                          onChange={(totalCarbsPercentage) =>
+                            setTotalCarbsPercentage(totalCarbsPercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -929,7 +1214,12 @@ const ItemDrawer = (props) => {
                       <Text>Dietary Fiber</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={dietaryFiber}
+                        onChange={(dietaryFiber) =>
+                          setDietaryFiber(dietaryFiber)
+                        }
+                      >
                         <NumberInputField placeholder="gr" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -939,7 +1229,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={dietaryFiberPercentage}
+                          onChange={(dietaryFiberPercentage) =>
+                            setDietaryFiberPercentage(dietaryFiberPercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -955,7 +1250,10 @@ const ItemDrawer = (props) => {
                       <Text>Sugars</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={sugar}
+                        onChange={(sugar) => setSugar(sugar)}
+                      >
                         <NumberInputField placeholder="gr" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -965,7 +1263,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={sugarPercentage}
+                          onChange={(sugarPercentage) =>
+                            setSugarPercentage(sugarPercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -981,7 +1284,10 @@ const ItemDrawer = (props) => {
                       <Text fontWeight="500">Protein</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={protein}
+                        onChange={(protein) => setProtein(protein)}
+                      >
                         <NumberInputField placeholder="mg" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -991,7 +1297,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={proteinPercentage}
+                          onChange={(proteinPercentage) =>
+                            setProteinPercentage(proteinPercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -1007,7 +1318,10 @@ const ItemDrawer = (props) => {
                       <Text>Vitamin A</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={vitaminA}
+                        onChange={(vitaminA) => setVitaminA(vitaminA)}
+                      >
                         <NumberInputField placeholder="%" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -1022,7 +1336,10 @@ const ItemDrawer = (props) => {
                       <Text>Vitamin C</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={vitaminC}
+                        onChange={(vitaminC) => setVitaminC(vitaminC)}
+                      >
                         <NumberInputField placeholder="%" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -1037,7 +1354,10 @@ const ItemDrawer = (props) => {
                       <Text>Calcium</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={calcium}
+                        onChange={(calcium) => setCalcium(calcium)}
+                      >
                         <NumberInputField placeholder="%" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -1052,7 +1372,10 @@ const ItemDrawer = (props) => {
                       <Text>Iron</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={iron}
+                        onChange={(iron) => setIron(iron)}
+                      >
                         <NumberInputField placeholder="%" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
