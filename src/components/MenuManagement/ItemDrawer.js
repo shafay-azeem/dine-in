@@ -40,8 +40,8 @@ import { BsPlusLg } from "react-icons/bs";
 import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 import Multiselect from "multiselect-react-dropdown";
-import { SwitchComponent } from '@syncfusion/ej2-react-buttons';
-import BootstrapSwitchButton from 'bootstrap-switch-button-react'
+import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 const ItemDrawer = (props) => {
   console.log(props.menu_index, "menu----------");
@@ -107,11 +107,11 @@ const ItemDrawer = (props) => {
   const [time, setTime] = useState(initialState3);
 
   const itemCondtionState4 = Number.isInteger(props?.subsection_index)
-    ? subSectionArr?.itemCalories
-    : sectionArr?.itemCalories;
+    ? subSectionArr?.itemCalorie
+    : sectionArr?.itemCalorie;
   const initialState4 = props.subsection_push ? "" : itemCondtionState4;
 
-  const [calories, setCalories] = useState(initialState4);
+  const [calorie, setCalorie] = useState(initialState4);
 
   const itemCondtionState5 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemPrice
@@ -141,62 +141,51 @@ const ItemDrawer = (props) => {
 
   const [warningState, setWarningState] = useState(initialState6);
 
-  const conditonMade = Number.isInteger(props?.subsection_index) ? "subSection" : "section"
+  const conditonMade = Number.isInteger(props?.subsection_index)
+    ? "subSection"
+    : "section";
 
-  let TOGGLE
+  let TOGGLE;
   if (conditonMade == "subSection") {
-
     if (typeof subSectionArr?.active === "undefined") {
-      TOGGLE = false
+      TOGGLE = false;
+    } else if (subSectionArr?.active === false) {
+      TOGGLE = false;
+    } else {
+      TOGGLE = true;
     }
-    else if (subSectionArr?.active === false) {
-      TOGGLE = false
-    }
-    else {
-      TOGGLE = true
-    }
-  }
-  else {
+  } else {
     if (typeof sectionArr?.active === "undefined") {
-      TOGGLE = false
-    }
-    else if (sectionArr?.active === false) {
-      TOGGLE = false
-    }
-    else {
-      TOGGLE = true
+      TOGGLE = false;
+    } else if (sectionArr?.active === false) {
+      TOGGLE = false;
+    } else {
+      TOGGLE = true;
     }
   }
 
   const [checked, setChecked] = useState(TOGGLE);
 
-  let soldTag
+  let soldTag;
   if (conditonMade == "subSection") {
-
     if (typeof subSectionArr?.itemTag === "undefined") {
-      soldTag = false
+      soldTag = false;
+    } else if (subSectionArr?.itemTag === false) {
+      soldTag = false;
+    } else {
+      soldTag = true;
     }
-    else if (subSectionArr?.itemTag === false) {
-      soldTag = false
-    }
-    else {
-      soldTag = true
-    }
-  }
-  else {
+  } else {
     if (typeof sectionArr?.itemTag === "undefined") {
-      soldTag = false
-    }
-    else if (sectionArr?.itemTag === false) {
-      soldTag = false
-    }
-    else {
-      soldTag = true
+      soldTag = false;
+    } else if (sectionArr?.itemTag === false) {
+      soldTag = false;
+    } else {
+      soldTag = true;
     }
   }
 
   const [sold, setSold] = useState(soldTag);
-
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -206,13 +195,15 @@ const ItemDrawer = (props) => {
     itemName: name,
     itemDescription: description,
     active: checked,
+    itemPrice: itemprice,
+    itemCalorie: calorie,
+    itemTag: sold,
     itemLabel: select,
     itemWarning: warningState,
     itemPrepTime: time,
     itemPrice: itemprice,
     itemCalories: calories,
     itemTag: sold,
-    itemPriceOption: inputList
   };
 
   const updateItem = (x) => {
@@ -225,6 +216,18 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].item[props.item_index].itemDescription = description;
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemPrice = itemprice;
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemCalorie = calorie;
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemLabel = select;
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemWarning = warningState;
 
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
@@ -236,26 +239,23 @@ const ItemDrawer = (props) => {
 
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
-      ].item[props.item_index].itemCalories = calories;
+      ].item[props.item_index].itemServingSize = servingsize;
 
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
-      ].item[props.item_index].itemPrice = itemprice;
+      ].item[props.item_index].itemNutritionCalories = nutcalories;
 
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
-      ].item[props.item_index].itemWarning = warningState;
+      ].item[props.item_index].itemCaloriesFat = caloriesfat;
 
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
-      ].item[props.item_index].itemLabel = select;
+      ].item[props.item_index].itemTotalFat = totalfat;
 
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].item[props.item_index].itemTag = sold;
-      response[props.menu_index].section[props.section_index].subSection[
-        props.subsection_index
-      ].item[props.item_index].itemPriceOption = inputList;
 
       setResponse([...response]);
       alert("Item With-In SubSection Updated Successfully");
@@ -269,30 +269,106 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemPrepTime = time;
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].active = checked
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
-      ].itemLabel = select;
+      ].itemNutritionCalories = nutcalories;
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
-      ].itemWarning = warningState;
+      ].itemCaloriesFat = caloriesfat;
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
-      ].itemPrice = itemprice;
+      ].itemTotalFat = totalfat;
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
-      ].itemCalories = calories;
+      ].itemTotalFatPercentage = totalfatpercentage;
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
-      ].itemLabel = select;
+      ].itemSaturatedFat = saturatedFat;
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemTag = sold;
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
-      ].itemPriceOption = inputList;
+      ].itemTransFat = transfat;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemTransFatPercentage = transfatpercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemCholesterol = cholesterol;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemCholesterolPercentage = cholesterolpercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemSodium = sodium;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemSodiumPercentage = sodiumPercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemTotalCarbs = totalCarbs;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemTotalCarbsPercentage = totalCarbsPercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemDietaryFiber = dietaryFiber;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemDietaryFiberPercentage = dietaryFiberPercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemSugar = sugar;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemSugarPercentage = sugarPercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemProtein = protein;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemProteinPercentage = proteinPercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemVitaminA = vitaminA;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemVitaminC = vitaminC;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemCalcium = calcium;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemIron = iron;
 
       setResponse([...response]);
       alert("Item Updated Successfully");
@@ -309,32 +385,27 @@ const ItemDrawer = (props) => {
 
   const selectionMultiSelectwarning = (event) => {
     setWarningState(event);
-
   };
 
   const removalMultiSelectwarning = (event) => {
     setWarningState(event);
-
   };
 
   const testfunc = (x) => {
-
-
     if (x === true) {
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].item.push(itemData);
       alert("Single Push On basis Of Conditional Parameters");
-      console.log(response, "orig");
-      console.log(
-        response[props.menu_index].section[props.section_index].subSection,
-        "subsec"
-      );
+      // console.log(response, "orig");
+      // console.log(
+      //   response[props.menu_index].section[props.section_index].subSection,
+      //   "subsec"
+      // );
     } else {
       response[props.menu_index].section[props.section_index].item.push(
         itemData
       );
-      console.log(response, "orig");
       alert("data has been added");
     }
   };
@@ -515,8 +586,11 @@ const ItemDrawer = (props) => {
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Display the section</FormLabel>
 
-                    <SwitchComponent id="switch1" checked={checked} onChange={(e) => setChecked(e.target.checked)} />
-
+                    <SwitchComponent
+                      id="switch1"
+                      checked={checked}
+                      onChange={(e) => setChecked(e.target.checked)}
+                    />
                   </FormControl>
 
                   <FormControl mt={3}>
@@ -530,22 +604,25 @@ const ItemDrawer = (props) => {
                         value={itemprice}
                         onChange={(e) => setItemPrice(e.target.value)}
                       />
-                      <FormLabel fontWeight="400">Calories</FormLabel>
+                      <FormLabel fontWeight="400">Calorie</FormLabel>
                       <Input
-                        placeholder="Calories"
+                        placeholder="Calorie"
                         borderRadius={6}
                         width="160px"
                         mr={4}
-                        value={calories}
-                        onChange={(e) => setCalories(e.target.value)}
+                        value={calorie}
+                        onChange={(e) => setCalorie(e.target.value)}
                       />
                     </HStack>
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Mark as Sold Out</FormLabel>
-                    <SwitchComponent id="switch1" checked={sold} onChange={(e) => setSold(e.target.checked)} />
-
+                    <SwitchComponent
+                      id="switch1"
+                      checked={sold}
+                      onChange={(e) => setSold(e.target.checked)}
+                    />
                   </FormControl>
 
                   <FormControl mt={3}>
@@ -668,23 +745,29 @@ const ItemDrawer = (props) => {
                       Display the Nutrition Info on the menu
                     </FormLabel>
                     <Switch></Switch>
-
                   </FormControl>
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Serving Size</FormLabel>
-                    <Input type="text" />
+                    <Input
+                      type="text"
+                      value={servingsize}
+                      onChange={(e) => setServingSize(e.target.value)}
+                    />
                   </FormControl>
 
                   <Grid templateColumns="repeat(5, 1fr)" gap={4} mt={3}>
                     <GridItem colSpan={2} h="10">
                       <FormControl mt={3}>
                         <FormLabel fontWeight="400">Calories</FormLabel>
-                        <NumberInput>
-                          <NumberInputField
-                            placeholder="cal"
-                            onChange={(e) => setCalories(e.target.value)}
-                          />
+
+                        <NumberInput
+                          value={nutcalories}
+                          onChange={(nutcalories) =>
+                            setNutCalories(nutcalories)
+                          }
+                        >
+                          <NumberInputField />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
                             <NumberDecrementStepper />
@@ -697,8 +780,14 @@ const ItemDrawer = (props) => {
                         <FormLabel fontWeight="400">
                           Calories From Fat
                         </FormLabel>
-                        <NumberInput>
-                          <NumberInputField placeholder="cal" />
+
+                        <NumberInput
+                          value={caloriesfat}
+                          onChange={(caloriesfat) =>
+                            setCaloriesFat(caloriesfat)
+                          }
+                        >
+                          <NumberInputField />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
                             <NumberDecrementStepper />
@@ -713,7 +802,10 @@ const ItemDrawer = (props) => {
                       <Text fontWeight="500">Total Fat</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={totalfat}
+                        onChange={(totalfat) => setTotalFat(totalfat)}
+                      >
                         <NumberInputField placeholder="gr" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -723,7 +815,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={totalfatpercentage}
+                          onChange={(totalfatpercentage) =>
+                            setTotalFatPercentage(totalfatpercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -739,7 +836,12 @@ const ItemDrawer = (props) => {
                       <Text>Saturated Fat</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={saturatedFat}
+                        onChange={(saturatedFat) =>
+                          setSaturatedFat(saturatedFat)
+                        }
+                      >
                         <NumberInputField placeholder="gr" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -749,7 +851,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={saturatedfatpercentage}
+                          onChange={(saturatedfatpercentage) =>
+                            setSaturatedFatPercentage(saturatedfatpercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -765,7 +872,10 @@ const ItemDrawer = (props) => {
                       <Text>Trans Fat</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={transfat}
+                        onChange={(transfat) => setTransFat(transfat)}
+                      >
                         <NumberInputField placeholder="gr" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -775,7 +885,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={transfatpercentage}
+                          onChange={(transfatpercentage) =>
+                            setTransFatPercentage(transfatpercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -791,7 +906,10 @@ const ItemDrawer = (props) => {
                       <Text fontWeight="500">Cholesterol</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={cholesterol}
+                        onChange={(cholesterol) => setCholesterol(cholesterol)}
+                      >
                         <NumberInputField placeholder="mg" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -801,7 +919,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={cholesterolpercentage}
+                          onChange={(cholesterolpercentage) =>
+                            setCholesterolPercentage(cholesterolpercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -817,7 +940,10 @@ const ItemDrawer = (props) => {
                       <Text fontWeight="500">Sodium</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={sodium}
+                        onChange={(sodium) => setSodium(sodium)}
+                      >
                         <NumberInputField placeholder="mg" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -827,7 +953,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={sodiumPercentage}
+                          onChange={(sodiumPercentage) =>
+                            setSodiumPercentage(sodiumPercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -843,7 +974,10 @@ const ItemDrawer = (props) => {
                       <Text fontWeight="500">Total Carbs</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={totalCarbs}
+                        onChange={(totalCarbs) => setTotalCarbs(totalCarbs)}
+                      >
                         <NumberInputField placeholder="gr" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -853,7 +987,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={totalCarbsPercentage}
+                          onChange={(totalCarbsPercentage) =>
+                            setTotalCarbsPercentage(totalCarbsPercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -869,7 +1008,12 @@ const ItemDrawer = (props) => {
                       <Text>Dietary Fiber</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={dietaryFiber}
+                        onChange={(dietaryFiber) =>
+                          setDietaryFiber(dietaryFiber)
+                        }
+                      >
                         <NumberInputField placeholder="gr" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -879,7 +1023,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={dietaryFiberPercentage}
+                          onChange={(dietaryFiberPercentage) =>
+                            setDietaryFiberPercentage(dietaryFiberPercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -895,7 +1044,10 @@ const ItemDrawer = (props) => {
                       <Text>Sugars</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={sugar}
+                        onChange={(sugar) => setSugar(sugar)}
+                      >
                         <NumberInputField placeholder="gr" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -905,7 +1057,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={sugarPercentage}
+                          onChange={(sugarPercentage) =>
+                            setSugarPercentage(sugarPercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -921,7 +1078,10 @@ const ItemDrawer = (props) => {
                       <Text fontWeight="500">Protein</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={protein}
+                        onChange={(protein) => setProtein(protein)}
+                      >
                         <NumberInputField placeholder="mg" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -931,7 +1091,12 @@ const ItemDrawer = (props) => {
                     </GridItem>
                     <GridItem h="10">
                       <GridItem>
-                        <NumberInput>
+                        <NumberInput
+                          value={proteinPercentage}
+                          onChange={(proteinPercentage) =>
+                            setProteinPercentage(proteinPercentage)
+                          }
+                        >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -947,7 +1112,10 @@ const ItemDrawer = (props) => {
                       <Text>Vitamin A</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={vitaminA}
+                        onChange={(vitaminA) => setVitaminA(vitaminA)}
+                      >
                         <NumberInputField placeholder="%" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -962,7 +1130,10 @@ const ItemDrawer = (props) => {
                       <Text>Vitamin C</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={vitaminC}
+                        onChange={(vitaminC) => setVitaminC(vitaminC)}
+                      >
                         <NumberInputField placeholder="%" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -977,7 +1148,10 @@ const ItemDrawer = (props) => {
                       <Text>Calcium</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={calcium}
+                        onChange={(calcium) => setCalcium(calcium)}
+                      >
                         <NumberInputField placeholder="%" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
@@ -992,7 +1166,10 @@ const ItemDrawer = (props) => {
                       <Text>Iron</Text>
                     </GridItem>
                     <GridItem>
-                      <NumberInput>
+                      <NumberInput
+                        value={iron}
+                        onChange={(iron) => setIron(iron)}
+                      >
                         <NumberInputField placeholder="%" />
                         <NumberInputStepper>
                           <NumberIncrementStepper />
