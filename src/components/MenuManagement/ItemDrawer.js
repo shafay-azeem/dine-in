@@ -41,7 +41,6 @@ import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 import Multiselect from "multiselect-react-dropdown";
 import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
-import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 const ItemDrawer = (props) => {
   console.log(props.menu_index, "menu----------");
@@ -59,6 +58,7 @@ const ItemDrawer = (props) => {
     response[props.menu_index].section[props?.section_index]?.item[
       props?.item_index
     ];
+
   const itemCondtionState = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemName
     : sectionArr?.itemName;
@@ -93,29 +93,7 @@ const ItemDrawer = (props) => {
     ? subSectionArr?.itemLabel
     : sectionArr?.itemLabel;
   const initialState7 = props.subsection_push ? "" : itemCondtionState7;
-
   const [select, setSelect] = useState(initialState7);
-
-  const itemCondtionState3 = Number.isInteger(props?.subsection_index)
-    ? subSectionArr?.itemPrepTime
-    : sectionArr?.itemPrepTime;
-  const initialState3 = props.subsection_push ? "" : itemCondtionState3;
-
-  const [time, setTime] = useState(initialState3);
-
-  const itemCondtionState4 = Number.isInteger(props?.subsection_index)
-    ? subSectionArr?.itemCalorie
-    : sectionArr?.itemCalorie;
-  const initialState4 = props.subsection_push ? "" : itemCondtionState4;
-
-  const [calorie, setCalorie] = useState(initialState4);
-
-  const itemCondtionState5 = Number.isInteger(props?.subsection_index)
-    ? subSectionArr?.itemPrice
-    : sectionArr?.itemPrice;
-  const initialState5 = props.subsection_push ? "" : itemCondtionState5;
-
-  const [itemprice, setItemPrice] = useState(initialState5);
 
   const [recommendedItem, setRecommendedItem] = useState();
   const [priceConcat, setPriceConcat] = useState();
@@ -130,12 +108,29 @@ const ItemDrawer = (props) => {
 
   const [warning, setWarning] = useState(["Alcohol", "AlcoholFree"]);
 
+  const itemCondtionState3 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemPrepTime
+    : sectionArr?.itemPrepTime;
+  const initialState3 = props.subsection_push ? "" : itemCondtionState3;
+  const [time, setTime] = useState(initialState3);
+
+  const itemCondtionState4 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemCalorie
+    : sectionArr?.itemCalorie;
+  const initialState4 = props.subsection_push ? "" : itemCondtionState4;
+  const [calorie, setCalorie] = useState(initialState4);
+
+  const itemCondtionState5 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemPrice
+    : sectionArr?.itemPrice;
+  const initialState5 = props.subsection_push ? "" : itemCondtionState5;
+  const [itemprice, setItemPrice] = useState(initialState5);
+
   const itemCondtionState6 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemWarning
     : sectionArr?.itemWarning;
   const initialState6 = props.subsection_push ? "" : itemCondtionState6;
   console.log(initialState6, "initialState6");
-
   const [warningState, setWarningState] = useState(initialState6);
 
   const itemCondtionState8 = Number.isInteger(props?.subsection_index)
@@ -143,135 +138,154 @@ const ItemDrawer = (props) => {
     : sectionArr?.itemServingSize;
   const initialState8 = props.subsection_push ? "" : itemCondtionState8;
   const [servingsize, setServingSize] = useState(initialState8);
+
   const itemCondtionState9 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemNutritionCalories
     : sectionArr?.itemNutritionCalories;
   const initialState9 = props.subsection_push ? "" : itemCondtionState9;
   const [nutcalories, setNutCalories] = useState(initialState9);
+
   const itemCondtionState10 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemCaloriesFat
     : sectionArr?.itemCaloriesFat;
   const initialState10 = props.subsection_push ? "" : itemCondtionState10;
   const [caloriesfat, setCaloriesFat] = useState(initialState10);
+
   const itemCondtionState11 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemTotalFat
     : sectionArr?.itemTotalFat;
   const initialState11 = props.subsection_push ? "" : itemCondtionState11;
   const [totalfat, setTotalFat] = useState(initialState11);
+
   const itemCondtionState12 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemTotalFatPercentage
     : sectionArr?.itemTotalFatPercentage;
   const initialState12 = props.subsection_push ? "" : itemCondtionState12;
   const [totalfatpercentage, setTotalFatPercentage] = useState(initialState12);
+
   const itemCondtionState13 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemSaturatedFat
     : sectionArr?.itemSaturatedFat;
   const initialState13 = props.subsection_push ? "" : itemCondtionState13;
   const [saturatedFat, setSaturatedFat] = useState(initialState13);
+
   const itemCondtionState14 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemSaturatedFatPercentage
     : sectionArr?.itemSaturatedFatPercentage;
   const initialState14 = props.subsection_push ? "" : itemCondtionState14;
   const [saturatedfatpercentage, setSaturatedFatPercentage] =
     useState(initialState14);
+
   const itemCondtionState15 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemTransFat
     : sectionArr?.itemTransFat;
   const initialState15 = props.subsection_push ? "" : itemCondtionState15;
   const [transfat, setTransFat] = useState(initialState15);
+
   const itemCondtionState16 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemTransFatPercentage
     : sectionArr?.itemTransFatPercentage;
   const initialState16 = props.subsection_push ? "" : itemCondtionState16;
   const [transfatpercentage, setTransFatPercentage] = useState(initialState16);
+
   const itemCondtionState17 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemCholesterol
     : sectionArr?.itemCholesterol;
   const initialState17 = props.subsection_push ? "" : itemCondtionState17;
   const [cholesterol, setCholesterol] = useState(initialState17);
+
   const itemCondtionState18 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemCholesterolPercentage
     : sectionArr?.itemCholesterolPercentage;
   const initialState18 = props.subsection_push ? "" : itemCondtionState18;
   const [cholesterolpercentage, setCholesterolPercentage] =
     useState(initialState18);
+
   const itemCondtionState19 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemSodiumPercentage
     : sectionArr?.itemSodiumPercentage;
   const initialState19 = props.subsection_push ? "" : itemCondtionState19;
   const [sodiumPercentage, setSodiumPercentage] = useState(initialState19);
+
   const itemCondtionState20 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemSodium
     : sectionArr?.itemSodium;
   const initialState20 = props.subsection_push ? "" : itemCondtionState20;
   const [sodium, setSodium] = useState(initialState20);
+
   const itemCondtionState21 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemTotalCarbs
     : sectionArr?.itemTotalCarbs;
   const initialState21 = props.subsection_push ? "" : itemCondtionState21;
   const [totalCarbs, setTotalCarbs] = useState(initialState21);
+
   const itemCondtionState22 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemTotalCarbsPercentage
     : sectionArr?.itemTotalCarbsPercentage;
   const initialState22 = props.subsection_push ? "" : itemCondtionState22;
   const [totalCarbsPercentage, setTotalCarbsPercentage] =
     useState(initialState22);
+
   const itemCondtionState23 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemDietaryFiber
     : sectionArr?.itemDietaryFiber;
   const initialState23 = props.subsection_push ? "" : itemCondtionState23;
   const [dietaryFiber, setDietaryFiber] = useState(initialState23);
+
   const itemCondtionState24 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemDietaryFiberPercentage
     : sectionArr?.itemDietaryFiberPercentage;
   const initialState24 = props.subsection_push ? "" : itemCondtionState24;
   const [dietaryFiberPercentage, setDietaryFiberPercentage] =
     useState(initialState24);
+
   const itemCondtionState25 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemSugar
     : sectionArr?.itemSugar;
   const initialState25 = props.subsection_push ? "" : itemCondtionState25;
   const [sugar, setSugar] = useState(initialState25);
+
   const itemCondtionState26 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemSugarPercentage
     : sectionArr?.itemSugarPercentage;
   const initialState26 = props.subsection_push ? "" : itemCondtionState26;
   const [sugarPercentage, setSugarPercentage] = useState(initialState26);
+
   const itemCondtionState27 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemProtein
     : sectionArr?.itemProtein;
-  const initialState27 = props.subsection_push ? "" : itemCondtionState25;
+  const initialState27 = props.subsection_push ? "" : itemCondtionState27;
   const [protein, setProtein] = useState(initialState27);
+
   const itemCondtionState28 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemProteinPercentage
     : sectionArr?.itemProteinPercentage;
   const initialState28 = props.subsection_push ? "" : itemCondtionState28;
   const [proteinPercentage, setProteinPercentage] = useState(initialState28);
+
   const itemCondtionState29 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemVitaminA
     : sectionArr?.itemVitaminA;
   const initialState29 = props.subsection_push ? "" : itemCondtionState29;
   const [vitaminA, setVitaminA] = useState(initialState29);
+
   const itemCondtionState30 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemVitaminC
     : sectionArr?.itemVitaminC;
   const initialState30 = props.subsection_push ? "" : itemCondtionState30;
   const [vitaminC, setVitaminC] = useState(initialState30);
+
   const itemCondtionState31 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemCalcium
     : sectionArr?.itemCalcium;
   const initialState31 = props.subsection_push ? "" : itemCondtionState31;
+  const [calcium, setCalcium] = useState(initialState31);
 
   const itemCondtionState32 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemIron
     : sectionArr?.itemIron;
   const initialState32 = props.subsection_push ? "" : itemCondtionState32;
   const [iron, setIron] = useState(initialState32);
-
-  response[props.menu_index].section[props.section_index].subSection[
-    props.subsection_index
-  ].item[props.item_index].itemCalcium = calcium;
-  const [calcium, setCalcium] = useState(initialState31);
 
   const conditonMade = Number.isInteger(props?.subsection_index)
     ? "subSection"
@@ -334,8 +348,33 @@ const ItemDrawer = (props) => {
     itemWarning: warningState,
     itemPrepTime: time,
     itemPrice: itemprice,
-    itemCalories: calories,
-    itemTag: sold,
+    itemCalories: nutcalories,
+    itemPriceOption: inputList,
+    itemSaturatedFatPercentage: saturatedfatpercentage,
+    itemTransFat: transfat,
+    itemTransFatPercentage: transfatpercentage,
+    itemCholesterol: cholesterol,
+    itemCholesterolPercentage: cholesterolpercentage,
+    itemSodium: sodium,
+    itemSodiumPercentage: sodiumPercentage,
+    itemTotalCarbs: totalCarbs,
+    itemTotalCarbsPercentage: totalCarbsPercentage,
+    itemDietaryFiber: dietaryFiber,
+    itemDietaryFiberPercentage: dietaryFiberPercentage,
+    itemSugar: sugar,
+    itemSugarPercentage: sugarPercentage,
+    itemProtein: protein,
+    itemProteinPercentage: proteinPercentage,
+    itemVitaminA: vitaminA,
+    itemVitaminC: vitaminC,
+    itemIron: iron,
+    itemCalcium: calcium,
+    itemTotalFat: totalfat,
+    itemTotalFatPercentage: totalfatpercentage,
+    itemSaturatedFat: saturatedFat,
+    itemNutritionCalories: nutcalories,
+    itemCaloriesFat: caloriesfat,
+    itemServingSize: servingsize,
   };
 
   const updateItem = (x) => {
@@ -348,15 +387,19 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].item[props.item_index].itemDescription = description;
+
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].item[props.item_index].itemPrice = itemprice;
+
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].item[props.item_index].itemCalorie = calorie;
+
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].item[props.item_index].itemLabel = select;
+
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].item[props.item_index].itemWarning = warningState;
@@ -476,6 +519,10 @@ const ItemDrawer = (props) => {
         props.subsection_index
       ].item[props.item_index].itemTag = sold;
 
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemPriceOption = inputList;
+
       setResponse([...response]);
       alert("Item With-In SubSection Updated Successfully");
     } else {
@@ -589,6 +636,18 @@ const ItemDrawer = (props) => {
         props.item_index
       ].itemIron = iron;
 
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemServingSize = servingsize;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemSaturatedFatPercentage = saturatedfatpercentage;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemPriceOption = inputList;
+
       setResponse([...response]);
       alert("Item Updated Successfully");
     }
@@ -616,7 +675,7 @@ const ItemDrawer = (props) => {
         props.subsection_index
       ].item.push(itemData);
       alert("Single Push On basis Of Conditional Parameters");
-      // console.log(response, "orig");
+      console.log(response, "orig");
       // console.log(
       //   response[props.menu_index].section[props.section_index].subSection,
       //   "subsec"
@@ -625,6 +684,7 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item.push(
         itemData
       );
+      console.log(response, "orig");
       alert("data has been added");
     }
   };
@@ -962,7 +1022,7 @@ const ItemDrawer = (props) => {
                                 colorScheme="blue"
                                 onClick={() => handleAddInput(index)}
                               >
-                                ADD{" "}
+                                ADD
                               </Button>
                             )}
                           </HStack>
