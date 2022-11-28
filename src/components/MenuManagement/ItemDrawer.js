@@ -64,10 +64,23 @@ const ItemDrawer = (props) => {
     : sectionArr?.itemName;
   const initialState = props.subsection_push ? "" : itemCondtionState;
 
+  // const XX = Number.isInteger(props?.subsection_index)
+  //   ? subSectionArr?.itemPriceOption
+  //   : sectionArr?.itemPriceOption;
+  // const YY = props.subsection_push ? "" : XX;
+  // console.log(YY, "++++++++++++++++++++++++++++++++++++++++")
+
+
+
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
   const [image, setImage] = useState();
   const [video, setVideo] = useState();
+
+
+  const [inputList, setInputList] = useState([
+    { name: "", price: "", calories: "" },
+  ])
 
   const [modifiers, setModifiers] = useState([]);
   const [name, setName] = useState(initialState);
@@ -199,6 +212,7 @@ const ItemDrawer = (props) => {
     itemPrice: itemprice,
     itemCalories: calories,
     itemTag: sold,
+    itemPriceOption: inputList
   };
 
   const updateItem = (x) => {
@@ -239,6 +253,9 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].item[props.item_index].itemTag = sold;
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemPriceOption = inputList;
 
       setResponse([...response]);
       alert("Item With-In SubSection Updated Successfully");
@@ -252,11 +269,9 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemPrepTime = time;
-
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].active = checked
-
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemLabel = select;
@@ -275,6 +290,9 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemTag = sold;
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemPriceOption = inputList;
 
       setResponse([...response]);
       alert("Item Updated Successfully");
@@ -316,10 +334,34 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item.push(
         itemData
       );
+      console.log(response, "orig");
       alert("data has been added");
     }
   };
-  // console.log(caloriesConcat, "caloriesConcat", priceConcat, "setPriceConcat", "-------------", size, "soze")
+
+
+
+
+  const handleChange = (e, index) => {
+    const { name, value } = e.target
+
+    const list = [...inputList]
+    list[index][name] = value
+    setInputList(list)
+  }
+
+  const handleAddInput = () => {
+    setInputList([...inputList, { name: "", price: "", calories: "" }])
+    // const list = [...inputList]
+    // list.push({ firstName: "", lastName: "" })
+    // setInputList(list)
+  }
+  const handleRemoveInput = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1)
+    setInputList(list)
+
+  }
 
   const pictureCapture = (event) => {
     setImage(event);
@@ -586,18 +628,28 @@ const ItemDrawer = (props) => {
                   </FormControl>
                 </TabPanel>
                 <TabPanel>
-                  {/* <CustomButton
-                    click={addPriceOption}
-                    btnText={"Add Price Option"}
-                    variant={"outline"}
-                    leftIcon={<BsPlusLg />}
-                    mt={3}
-                    size={"sm"}
-                  /> */}
-                  <Button onClick={() => addPriceOption()}>
-                    Add Price Option
-                  </Button>
-                  {price}
+                  <Box>
+                    {inputList?.map((x, index) => {
+                      return (
+                        <Box key={index}>
+                          <HStack>
+                            <Input placeholder='Name' name="name" size='sm' type="text" value={x.name} onChange={e => handleChange(e, index)} />
+                            <Input placeholder='Price' size='sm' name="price" type="text" value={x.price} onChange={e => handleChange(e, index)} />
+                            <Input placeholder='Calories' size='sm' name="calories" type="text" value={x.calories} onChange={e => handleChange(e, index)} />
+                            {inputList.length !== 1 && <Button colorScheme='blue' onClick={handleRemoveInput} >Remove</Button>}
+                            {inputList.length - 1 === index && <Button colorScheme='blue' onClick={() => handleAddInput(index)}>ADD </Button>}
+                          </HStack>
+                        </Box>
+                      )
+
+                    })}
+                  </Box>
+                  {/* <Box>
+                    <Text>
+                      {JSON.stringify(inputList, null, 2)}
+                    </Text>
+
+                  </Box> */}
                 </TabPanel>
                 <TabPanel>
                   <CustomButton
