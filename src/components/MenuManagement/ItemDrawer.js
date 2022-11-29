@@ -863,7 +863,6 @@ const ItemDrawer = (props) => {
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Display the section</FormLabel>
-
                     <SwitchComponent
                       id="switch1"
                       checked={checked}

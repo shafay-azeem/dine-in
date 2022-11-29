@@ -30,6 +30,7 @@ import { useState } from "react";
 import { MenuState } from "../../context/MenuContext";
 import SelectSearch from "react-select-search";
 import Multiselect from "multiselect-react-dropdown";
+import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
 
 const SectionDrawer = (props) => {
   let menu_index = props.menu_index;
@@ -79,7 +80,36 @@ const SectionDrawer = (props) => {
   const [pass, setPass] = useState(false);
   const [close, setClose] = useState();
 
-  // const [checked, setChecked] = useState(false);
+  let x =
+    response[props.menu_index].section[props?.section_index]?.subSection[
+      props?.subsection_index
+    ];
+  let y = response[props.menu_index].section[props?.section_index];
+  const conditonMade = Number.isInteger(props?.subsection_index)
+    ? "subSection"
+    : "section";
+  let TOGGLE;
+
+  if (conditonMade == "subSection") {
+    if (typeof x?.sectionStatus === "undefined") {
+      TOGGLE = false;
+    } else if (x?.sectionStatus === false) {
+      TOGGLE = false;
+    } else {
+      TOGGLE = true;
+    }
+  } else {
+    if (typeof y?.sectionStatus === "undefined") {
+      TOGGLE = false;
+    } else if (y?.sectionStatus === false) {
+      TOGGLE = false;
+    } else {
+      TOGGLE = true;
+    }
+  }
+
+  const [checked, setChecked] = useState(TOGGLE);
+
   const [alphabetical, setalphabetical] = useState(false);
   const [val, setVal] = useState();
 
@@ -101,7 +131,7 @@ const SectionDrawer = (props) => {
     sectionDescription: description,
     sectionNote: note,
     sectionLabel: select,
-    sectionStatus: false,
+    sectionStatus: checked,
     item: [],
     subSection: [],
   };
@@ -147,6 +177,9 @@ const SectionDrawer = (props) => {
         note;
       response[props.menu_index].section[props.section_index].sectionLabel =
         select;
+
+      response[props.menu_index].section[props.section_index].sectionStatus =
+        checked;
       function compare(a, b) {
         if (a.sectionName < b.sectionName) {
           return -1;
@@ -176,6 +209,10 @@ const SectionDrawer = (props) => {
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].sectionLabel = select;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].sectionStatus = checked;
 
       setResponse([...response]);
       alert("SubSection Updated Successfully");
@@ -251,6 +288,15 @@ const SectionDrawer = (props) => {
                       onChange={(e) => setChecked(e.target.checked)}
                     />
                   </FormControl> */}
+
+                  <FormControl mt={3}>
+                    <FormLabel fontWeight="400">Display the section</FormLabel>
+                    <SwitchComponent
+                      id="switch1"
+                      checked={checked}
+                      onChange={(e) => setChecked(e.target.checked)}
+                    />
+                  </FormControl>
 
                   {response[props.menu_index].section.length > 1 &&
                   props?.subsection_index == undefined ? (

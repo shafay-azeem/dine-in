@@ -33,6 +33,8 @@ import {
 import CustomButton from "../../CustomElements/CustomButton";
 import { MenuState } from "../../context/MenuContext";
 import { useState } from "react";
+import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 const SettingDrawer = (props) => {
   // console.log(props.index, "props.index");
@@ -46,8 +48,15 @@ const SettingDrawer = (props) => {
     response[props.index].menuDescription
   );
   const [note, setNote] = useState(response[props.index].menuNote);
-  const [active, setActive] = useState(response[props.index].menuStatus);
 
+  let TOGGLE;
+
+  if (response[props.index].menuStatus === true) {
+    TOGGLE = true;
+  } else {
+    TOGGLE = false;
+  }
+  const [active, setActive] = useState(TOGGLE);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const updatedMenu = () => {
@@ -68,6 +77,14 @@ const SettingDrawer = (props) => {
     section: [],
   };
 
+  // function myfun(){
+
+  // }
+
+  // if (value == "2") {
+  //   document.getElementById("always").setAttribute("isDisabled");
+  // }
+
   const testfunc = () => {
     response.push(menuData);
     alert("data has been added");
@@ -83,7 +100,8 @@ const SettingDrawer = (props) => {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>Your Menu Name</DrawerHeader>
+
+        <DrawerHeader>{response[props.index].menuName}</DrawerHeader>
 
         <DrawerBody>
           <Tabs>
@@ -124,9 +142,11 @@ const SettingDrawer = (props) => {
                   />
                 </FormControl>
 
-                <FormControl mt={4}>
+                <FormControl mt={3}>
                   <FormLabel fontWeight="400">Display the section</FormLabel>
-                  <Switch
+
+                  <SwitchComponent
+                    id="switch1"
                     checked={active}
                     onChange={(e) => setActive(e.target.checked)}
                   />
@@ -211,7 +231,9 @@ const SettingDrawer = (props) => {
               {/* Availability */}
               <TabPanel>
                 <RadioGroup onChange={setValue} value={value}>
-                  <Radio value="1">Always</Radio>
+                  <Radio value="1" id="always">
+                    Always
+                  </Radio>
                   <Text ml={6} fontSize="13px" color="gray">
                     The menu will always be shown
                   </Text>
