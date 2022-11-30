@@ -76,12 +76,14 @@ const SectionCard = (props) => {
     setSectionList(response[props?.menu_index]?.section);
   }
 
-  const duplicate = (x) => {
+  const duplicate = (x, index) => {
     let filterSec = [];
+    console.log(index, "index=================")
 
     function getTimestampInSeconds() {
       return Math.floor(Date.now() / 1000);
     }
+    console.log(response[menu_index]?.section[index].item, "=========+_+==========")
 
     let sectionData = {
       sectionId: getTimestampInSeconds(),
@@ -90,8 +92,8 @@ const SectionCard = (props) => {
       sectionStatus: x.sectionStatus,
       sectionNote: x.sectionNote,
       sectionLabel: x.sectionLabel,
-      item: [],
-      subSection: [],
+      item: response[menu_index]?.section[index].item,
+      subSection: response[menu_index]?.section[index].subSection,
     };
     console.log(menu_index);
     console.log(
@@ -317,7 +319,7 @@ const SectionCard = (props) => {
                                       )}
 
                                       <MenuItem
-                                        onClick={() => duplicate(x)}
+                                        onClick={() => duplicate(x, index)}
                                         icon={<AiFillCopy />}
                                       >
                                         Duplicate
