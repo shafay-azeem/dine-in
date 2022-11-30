@@ -77,12 +77,22 @@ const ItemDrawer = (props) => {
   }
   const [inputList, setInputList] = useState(A);
 
+  const yy = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemModifierOptions
+    : sectionArr?.itemModifierOptions;
+  let B;
+  if (typeof yy === "undefined") {
+    B = [{ modifiergroup: "", min: "", max: "" }];
+  } else {
+    B = yy;
+  }
+  const [modifier, setModifier] = useState(B);
+
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
   const [image, setImage] = useState();
   const [video, setVideo] = useState();
 
-  const [modifiers, setModifiers] = useState([]);
   const [name, setName] = useState(initialState);
 
   const itemCondtionState2 = Number.isInteger(props?.subsection_index)
@@ -353,6 +363,7 @@ const ItemDrawer = (props) => {
     itemPrice: itemprice,
     itemCalories: nutcalories,
     itemPriceOption: inputList,
+    itemModifierOptions: modifier,
     itemSaturatedFatPercentage: saturatedfatpercentage,
     itemTransFat: transfat,
     itemTransFatPercentage: transfatpercentage,
@@ -526,6 +537,10 @@ const ItemDrawer = (props) => {
         props.subsection_index
       ].item[props.item_index].itemPriceOption = inputList;
 
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].itemModifierOptions = modifier;
+
       setResponse([...response]);
       alert("Item With-In SubSection Updated Successfully");
     } else {
@@ -651,7 +666,13 @@ const ItemDrawer = (props) => {
         props.item_index
       ].itemPriceOption = inputList;
 
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemModifierOptions = modifier;
+
       setResponse([...response]);
+
+      console.log(response, "xxxxxx");
       alert("Item Updated Successfully");
     }
   };
@@ -706,10 +727,32 @@ const ItemDrawer = (props) => {
     // list.push({ firstName: "", lastName: "" })
     // setInputList(list)
   };
+
   const handleRemoveInput = (index) => {
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
+  };
+
+  const handleModifierInput = () => {
+    setModifier([...modifier, { modifiergroup: "", min: "", max: "" }]);
+    // const list = [...inputList]
+    // list.push({ firstName: "", lastName: "" })
+    // setInputList(list)
+  };
+
+  const handleRemoveModifier = (index) => {
+    const x = [...modifier];
+    x.splice(index, 1);
+    setModifier(x);
+  };
+
+  const ModifierOptions = (e, index) => {
+    const { name, value } = e.target;
+
+    const x = [...modifier];
+    x[index][name] = value;
+    setModifier(x);
   };
 
   const pictureCapture = (event) => {
@@ -795,29 +838,29 @@ const ItemDrawer = (props) => {
     );
   };
 
-  const addModifiersOption = (event) => {
-    setModifiers(
-      modifiers.concat(
-        <HStack m={5}>
-          <FormControl>
-            <FormLabel fontWeight="400">Modifier Group</FormLabel>
-            <Input borderRadius="8px" placeholder="Type to search" />
-          </FormControl>
-          ,
-          <FormControl mt={3}>
-            <FormLabel fontWeight="400">Min</FormLabel>
-            <Input borderRadius="8px" placeholder="0" type="number" />
-          </FormControl>
-          ,
-          <FormControl mt={3}>
-            <FormLabel fontWeight="400">Max</FormLabel>
-            <Input borderRadius="8px" placeholder="0" type="number" />
-          </FormControl>
-          ,<Checkbox defaultChecked>Required</Checkbox>
-        </HStack>
-      )
-    );
-  };
+  // const addModifiersOption = (event) => {
+  //   setModifiers(
+  //     modifiers.concat(
+  //       <HStack m={5}>
+  //         <FormControl>
+  //           <FormLabel fontWeight="400">Modifier Group</FormLabel>
+  //           <Input borderRadius="8px" placeholder="Type to search" />
+  //         </FormControl>
+  //         ,
+  //         <FormControl mt={3}>
+  //           <FormLabel fontWeight="400">Min</FormLabel>
+  //           <Input borderRadius="8px" placeholder="0" type="number" />
+  //         </FormControl>
+  //         ,
+  //         <FormControl mt={3}>
+  //           <FormLabel fontWeight="400">Max</FormLabel>
+  //           <Input borderRadius="8px" placeholder="0" type="number" />
+  //         </FormControl>
+  //         ,<Checkbox defaultChecked>Required</Checkbox>
+  //       </HStack>
+  //     )
+  //   );
+  // };
 
   return (
     <>
@@ -1048,7 +1091,66 @@ const ItemDrawer = (props) => {
                   </Box> */}
                 </TabPanel>
                 <TabPanel>
-                  <CustomButton
+                  <Box>
+                    {modifier?.map((y, index) => {
+                      return (
+                        <Box key={index} mt={5}>
+                          <HStack>
+                            <Input
+                              borderRadius="8px"
+                              placeholder="Modifier Group"
+                              name="modifiergroup"
+                              size="sm"
+                              type="text"
+                              value={y.modifiergroup}
+                              width="30%"
+                              onChange={(e) => ModifierOptions(e, index)}
+                            />
+                            <Input
+                              borderRadius="8px"
+                              placeholder="Min"
+                              size="sm"
+                              name="min"
+                              type="text"
+                              value={y.min}
+                              width="30%"
+                              onChange={(e) => ModifierOptions(e, index)}
+                            />
+                            <Input
+                              borderRadius="8px"
+                              placeholder="Max"
+                              size="sm"
+                              name="max"
+                              type="text"
+                              width="30%"
+                              value={y.max}
+                              onChange={(e) => ModifierOptions(e, index)}
+                            />
+                            <Checkbox>Required</Checkbox>
+                            {modifier.length !== 1 && (
+                              <IconButton
+                                size="xs"
+                                variant="outline"
+                                colorScheme="blue"
+                                onClick={handleRemoveModifier}
+                                icon={<CloseIcon />}
+                              />
+                            )}
+                            {modifier.length - 1 === index && (
+                              <IconButton
+                                size="xs"
+                                variant="outline"
+                                colorScheme="blue"
+                                onClick={() => handleModifierInput(index)}
+                                icon={<AddIcon />}
+                              />
+                            )}
+                          </HStack>
+                        </Box>
+                      );
+                    })}
+                  </Box>
+                  {/* <CustomButton
                     click={addModifiersOption}
                     btnText={"Add Modifiers Option"}
                     variant={"outline"}
@@ -1056,7 +1158,7 @@ const ItemDrawer = (props) => {
                     mt={3}
                     size={"sm"}
                   />
-                  {modifiers}
+                  {modifiers} */}
                 </TabPanel>
                 <TabPanel>
                   <FormControl>
