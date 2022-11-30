@@ -1126,7 +1126,7 @@ const ItemDrawer = (props) => {
                               value={y.max}
                               onChange={(e) => ModifierOptions(e, index)}
                             />
-                            <Checkbox>Required</Checkbox>
+                            {/* <Checkbox>Required</Checkbox> */}
                             {modifier.length !== 1 && (
                               <IconButton
                                 size="xs"
