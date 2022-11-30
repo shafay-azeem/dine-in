@@ -28,7 +28,6 @@ const MenuModifieModal = (props) => {
   const isError = input === "";
   const [inputList, setInputList] = useState([]);
 
-
   const removebt = (x) => {
     // console.log(x)
     // // /
@@ -36,20 +35,18 @@ const MenuModifieModal = (props) => {
     // var k = inputList.length + 1
     // console.log(z, 'zz')
     // console.log(k, 'kkk')
-    var y = (inputList.splice(0, inputList.length))
-    setInputList(y)
+    var y = inputList.splice(0, inputList.length);
+    setInputList(y);
     // // }
     // let position = inputList.length
     // for (let i = 0; i < inputList.length - 1; i++) {
     //   console.log(inputList[i], 'ssss')
     // }
 
-
     // console.log(inputList.length)
     // console.log(inputList.values)
     // console.log(inputList.pop)
-
-  }
+  };
 
   const onAddBtnClick = (event) => {
     setInputList(
@@ -89,7 +86,11 @@ const MenuModifieModal = (props) => {
 
   return (
     <>
-      <Modal isOpen={props.isOpen} onClose={props.onClose} size="4xl">
+      <Modal
+        isOpen={props.menumodifierIsOpen}
+        onClose={props.menumodifierOnClose}
+        size="4xl"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add a Modifier Group</ModalHeader>
@@ -114,16 +115,27 @@ const MenuModifieModal = (props) => {
             </Center>
             <Text mt={6}>Modifiers</Text>
 
-            <CustomButton click={onAddBtnClick} btnText={" Add more Modifier"} variant={"outline"} leftIcon={<BsPlusLg />} mt={3} size={"xs"} />
-
-
+            <CustomButton
+              click={onAddBtnClick}
+              btnText={" Add more Modifier"}
+              variant={"outline"}
+              leftIcon={<BsPlusLg />}
+              mt={3}
+              size={"xs"}
+            />
 
             {inputList}
           </ModalBody>
           <ModalFooter>
             <CustomButton btnText={"Save"} mr={3} size={"sm"} />
 
-            <CustomButton click={props.onClose} btnText={"Cancel"} variant={"outline"} mr={3} size={"sm"} />
+            <CustomButton
+              click={props.menumodifierOnClose}
+              btnText={"Cancel"}
+              variant={"outline"}
+              mr={3}
+              size={"sm"}
+            />
           </ModalFooter>
         </ModalContent>
       </Modal>

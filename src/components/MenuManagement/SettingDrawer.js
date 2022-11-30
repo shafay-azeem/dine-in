@@ -37,25 +37,60 @@ import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 const SettingDrawer = (props) => {
-  // console.log(props.index, "props.index");
+  console.log(props.menuCreate, "props.menuCreate");
+
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
   const { response, setResponse } = MenuState();
   const [value, setValue] = useState("1");
-  const [name, setName] = useState(response[props.index].menuName);
-  const [description, setDescription] = useState(
-    response[props.index].menuDescription
-  );
-  const [note, setNote] = useState(response[props.index].menuNote);
 
+  const nameState = props?.menuCreate ? "" : response[props?.index]?.menuName;
+  const [name, setName] = useState(nameState);
+
+  const descriptionState = props?.menuCreate
+    ? ""
+    : response[props?.index]?.menuDescription;
+  const [description, setDescription] = useState(descriptionState);
+
+  // const [description, setDescription] = useState(
+  //   response[props?.index]?.menuDescription
+  // );
+
+  const noteState = props?.menuCreate ? "" : response[props?.index]?.menuNote;
+  const [note, setNote] = useState(noteState);
+
+  const conditonMade = props?.menuCreate ? "menuCreate" : "section";
+
+  let y = response[props.index];
   let TOGGLE;
 
-  if (response[props.index].menuStatus === true) {
-    TOGGLE = true;
+  if (conditonMade == "menuCreate") {
+    if (typeof response?.menuStatus === "undefined") {
+      TOGGLE = false;
+    } else if (response?.menuStatus === false) {
+      TOGGLE = false;
+    } else {
+      TOGGLE = true;
+    }
   } else {
-    TOGGLE = false;
+    if (typeof y?.menuStatus === "undefined") {
+      TOGGLE = false;
+    } else if (y?.menuStatus === false) {
+      TOGGLE = false;
+    } else {
+      TOGGLE = true;
+    }
   }
+
+  // let TOGGLE;
+
+  // if (response[props?.index]?.menuStatus === true) {
+  //   TOGGLE = true;
+  // } else {
+  //   TOGGLE = false;
+  // }
+
   const [active, setActive] = useState(TOGGLE);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -85,9 +120,11 @@ const SettingDrawer = (props) => {
   //   document.getElementById("always").setAttribute("isDisabled");
   // }
 
-  const testfunc = () => {
+  const menuCreate = () => {
     response.push(menuData);
-    alert("data has been added");
+    // console.log(response);
+    alert("Menu Created");
+    setResponse([...response]);
   };
 
   return (
@@ -101,7 +138,7 @@ const SettingDrawer = (props) => {
       <DrawerContent>
         <DrawerCloseButton />
 
-        <DrawerHeader>{response[props.index].menuName}</DrawerHeader>
+        <DrawerHeader>{response[props?.index]?.menuName}</DrawerHeader>
 
         <DrawerBody>
           <Tabs>
@@ -476,21 +513,40 @@ const SettingDrawer = (props) => {
         </DrawerBody>
 
         <DrawerFooter>
-          <CustomButton
+          {props?.menuCreate ? (
+            <Button
+              colorScheme="blue"
+              onClick={() => {
+                menuCreate();
+              }}
+            >
+              Save
+            </Button>
+          ) : (
+            <Button
+              colorScheme="blue"
+              onClick={() => {
+                updatedMenu();
+              }}
+            >
+              Update
+            </Button>
+          )}
+          {/* <CustomButton
             click={props.onClose}
             btnText={"Cancel"}
             variant={"outline"}
             mr={3}
             size={"sm"}
-          />
-          <Button
+          /> */}
+          {/* <Button
             colorScheme="blue"
             onClick={() => {
               updatedMenu();
             }}
           >
             Save
-          </Button>
+          </Button> */}
           {/* <CustomButton btnText={"Save"} mr={3} size={"sm"} /> */}
         </DrawerFooter>
       </DrawerContent>

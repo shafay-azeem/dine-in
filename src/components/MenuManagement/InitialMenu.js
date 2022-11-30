@@ -36,9 +36,9 @@ const InitialMenu = () => {
   } = useDisclosure();
 
   const {
-    isOpen: menuIsOpen,
-    onOpen: menuOnOpen,
-    onClose: menuOnClose,
+    isOpen: menumodifierIsOpen,
+    onOpen: menumodifierOnOpen,
+    onClose: menumodifierOnClose,
   } = useDisclosure();
 
   return (
@@ -65,18 +65,19 @@ const InitialMenu = () => {
               <Grid templateColumns="repeat(5, 1fr)" gap={4} align="right">
                 <GridItem colSpan={12} h="10">
                   <CustomButton
-                    click={menuOnOpen}
+                    click={onOpen}
                     btnText={"create menu"}
                     size={"sm"}
                     mb={2}
                   />
                 </GridItem>
-                {menuIsOpen ? (
-                  <CreateMenuDrawer
-                    isOpen={menuIsOpen}
-                    onOpen={menuOnOpen}
-                    onClose={menuOnClose}
-                  ></CreateMenuDrawer>
+                {isOpen ? (
+                  <SettingDrawer
+                    menuCreate={true}
+                    isOpen={isOpen}
+                    onOpen={onOpen}
+                    onClose={onClose}
+                  ></SettingDrawer>
                 ) : (
                   console.log("sss")
                 )}
@@ -85,16 +86,16 @@ const InitialMenu = () => {
             </TabPanel>
             <TabPanel backgroundColor="white" textAlign="right">
               <CustomButton
-                click={onOpen}
+                click={menumodifierOnOpen}
                 btnText={"Add a Modifiers Group"}
                 size={"sm"}
                 mb={2}
               />
               {isOpen ? (
                 <MenuModifieModal
-                  isOpen={isOpen}
-                  onOpen={onOpen}
-                  onClose={onClose}
+                  isOpen={menumodifierIsOpen}
+                  onOpen={menumodifierOnOpen}
+                  onClose={menumodifierOnClose}
                 />
               ) : (
                 console.log("ss")
