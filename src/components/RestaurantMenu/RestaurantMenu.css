@@ -1,0 +1,35 @@
+.slick-slide.slick-center img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slick-slide {
+  padding: 0 15px;
+}
+
+.slick-list {
+  margin: 0 2em;
+}
+
+.slick-prev {
+  left: 0;
+}
+.slick-prev:before,
+.slick-next:before {
+  color: #000;
+}
+.slick-next {
+  right: 0;
+}
+
+.slick-slide img {
+  display: block;
+  margin-top: 20px;
+  border-radius: 3px;
+}
+.fooditem .title {
+  font-size: 16px;
+}
+.fooditem .text {
+  font-size: 15px;
+}

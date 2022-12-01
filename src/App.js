@@ -10,6 +10,7 @@ import VenueSettingsScreen from "./Screens/VenueSettingsScreen";
 import DineInQRMenuScreen from "./Screens/DineInQRMenuScreen";
 import CreateMenuScreen from "./Screens/CreateMenuScreen.js";
 import HomeScreen from "./Screens/HomeScreen.js";
+import MenuDisplayScreen from "./Screens/MenuDisplayScreen";
 
 function App() {
   return (
@@ -22,10 +23,14 @@ function App() {
           <Route path="/customer" element={<CustomerScreen />} />
           <Route path="/menu" element={<MenuManagementScreen />} />
           <Route path="/feedbacks" element={<FeedBacksScreen />} />
-          <Route path="/translationcenter" element={<TranslationCenterScreen />} />
+          <Route
+            path="/translationcenter"
+            element={<TranslationCenterScreen />}
+          />
           <Route path="/venuesettings" element={<VenueSettingsScreen />} />
           <Route path="/dineinqrmenu" element={<DineInQRMenuScreen />} />
           <Route path="/createmenu" element={<CreateMenuScreen />} />
+          <Route path="/menudisplay" element={<MenuDisplayScreen />} />
         </Routes>
       </BrowserRouter>
     </div>

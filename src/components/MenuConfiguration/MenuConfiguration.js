@@ -1,3 +1,4 @@
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 import {
   Box,
   Grid,
@@ -12,6 +13,7 @@ import {
   Switch,
   Button,
   Input,
+  Link,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
@@ -50,7 +52,12 @@ const MenuConfiguration = () => {
 
           <TabPanels>
             <TabPanel>
-              <p>QR Settings</p>
+              <Box bg="white" w="60%" p={4} borderRadius="6">
+                <Text>Link</Text>
+                <Link href="http://localhost:3000/menudisplay" isExternal>
+                  Your Restaurant Menu <ExternalLinkIcon mx="2px" />
+                </Link>
+              </Box>
             </TabPanel>
             <TabPanel>
               <p>Display Options</p>
