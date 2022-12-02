@@ -55,7 +55,7 @@ const RestaurantMenu = () => {
   };
   return (
     <>
-      <div class="menu">
+      <div className="menu">
         <p className="heading">Your Menu Name</p>
       </div>
 

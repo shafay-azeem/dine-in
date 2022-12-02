@@ -3,7 +3,7 @@ import MenuDetail from '../components/RestaurantMenu/MenuDetail'
 
 const MenuDetailScreen = () => {
     return (
-        <div>
+        <div style={{ width: "70%", margin: "0 auto" }}>
             <MenuDetail />
         </div>
     )
