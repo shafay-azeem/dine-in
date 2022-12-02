@@ -1,8 +1,16 @@
 import React from "react";
 import "./MenuStartModal.css";
-import { Button, ListGroup, Modal } from "react-bootstrap";
+import { ListGroup, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const MenuStartModal = (props) => {
+  const navigate = useNavigate();
+  const reports = () => {
+    navigate({
+      pathname: "/menudisplay",
+    });
+  };
+
   return (
     <>
       <Modal
@@ -12,11 +20,15 @@ const MenuStartModal = (props) => {
         centered
       >
         <Modal.Header closeButton></Modal.Header>
-        <ListGroup className="text-center">
-          <ListGroup.Item>Menu One</ListGroup.Item>
-          <ListGroup.Item>Menu Two</ListGroup.Item>
-          <ListGroup.Item>Sample Menu</ListGroup.Item>
-        </ListGroup>
+        <Modal.Body>
+          <ListGroup className="text-center">
+            <ListGroup.Item onClick={reports} className="item">
+              Menu One
+            </ListGroup.Item>
+            <ListGroup.Item>Menu Two</ListGroup.Item>
+            <ListGroup.Item>Sample Menu</ListGroup.Item>
+          </ListGroup>
+        </Modal.Body>
       </Modal>
     </>
   );

@@ -1,3 +1,14 @@
 .modal-header .btn-close {
   font-size: 10px;
 }
+.modal-dialog {
+  overflow-y: initial;
+}
+
+.modal-body {
+  max-height: 40vh;
+  overflow-y: auto;
+}
+.item {
+  cursor: pointer;
+}
