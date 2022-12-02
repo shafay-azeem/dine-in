@@ -13,6 +13,7 @@ import HomeScreen from "./Screens/HomeScreen.js";
 import MenuDisplayScreen from "./Screens/MenuDisplayScreen";
 import MenuDetail from "./components/RestaurantMenu/MenuDetail";
 import MenuDetailScreen from "./Screens/MenuDetailScreen";
+import MenuStartScreen from "./Screens/MenuStartScreen";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/createmenu" element={<CreateMenuScreen />} />
           <Route path="/menudisplay" element={<MenuDisplayScreen />} />
           <Route path="/menudetail" element={<MenuDetailScreen />} />
+          <Route path="/menustart" element={<MenuStartScreen />} />
         </Routes>
       </BrowserRouter>
     </div>
