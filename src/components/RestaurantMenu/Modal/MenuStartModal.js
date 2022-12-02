@@ -21,7 +21,7 @@ const MenuStartModal = (props) => {
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
-          <ListGroup className="text-center">
+          <ListGroup className="text-center list-group-flush">
             <ListGroup.Item onClick={reports} className="item">
               Menu One
             </ListGroup.Item>
