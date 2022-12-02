@@ -13,6 +13,7 @@ const RestaurantMenu = () => {
   const navigate = useNavigate();
 
   const menuDetail = () => {
+    console.log("menudetails")
     navigate({
       pathname: "/menudetail",
     });

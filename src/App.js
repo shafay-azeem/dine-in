@@ -12,6 +12,7 @@ import CreateMenuScreen from "./Screens/CreateMenuScreen.js";
 import HomeScreen from "./Screens/HomeScreen.js";
 import MenuDisplayScreen from "./Screens/MenuDisplayScreen";
 import MenuDetail from "./components/RestaurantMenu/MenuDetail";
+import MenuDetailScreen from "./Screens/MenuDetailScreen";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
           <Route path="/dineinqrmenu" element={<DineInQRMenuScreen />} />
           <Route path="/createmenu" element={<CreateMenuScreen />} />
           <Route path="/menudisplay" element={<MenuDisplayScreen />} />
-          <Route path="/menudetail" element={<MenuDetail />} />
+          <Route path="/menudetail" element={<MenuDetailScreen />} />
         </Routes>
       </BrowserRouter>
     </div>
