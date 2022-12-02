@@ -6,10 +6,18 @@ import "./RestaurantMenu.css";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { BsChevronDown } from "react-icons/bs";
 import { Accordion } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const RestaurantMenu = () => {
+  const navigate = useNavigate();
+
+  const menuDetail = () => {
+    navigate({
+      pathname: "/menudetail",
+    });
+  };
+
   var settings = {
     dots: false,
     infinite: true,
@@ -166,7 +174,7 @@ const RestaurantMenu = () => {
       <div className="mx-auto mt-3">
         <Row>
           <Col lg={4} md={4} sm={6} xs={12}>
-            <Card className="mx-auto mb-1 fooditem">
+            <Card className="mx-auto mb-1 fooditem" onClick={menuDetail}>
               <Card.Body>
                 <Row>
                   <Col lg={4} className="p-0">
