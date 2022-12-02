@@ -16,9 +16,29 @@ import {
   Link,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import QRCode from 'qrcode'
 
 const MenuConfiguration = () => {
   const [inputList, setInputList] = useState([]);
+  const [url, setUrl] = useState('')
+  const [qr, setQr] = useState('')
+
+  const GenerateQRCode = () => {
+    QRCode.toDataURL(url, {
+      width: 800,
+      margin: 2,
+      color: {
+        dark: '#335383FF',
+        light: '#EEEEEEFF'
+      }
+    }, (err, url) => {
+      if (err) return console.error(err)
+
+      console.log(url)
+      setQr(url)
+    })
+  }
+
 
   const onAddBtnClick = (event) => {
     setInputList(
@@ -57,7 +77,20 @@ const MenuConfiguration = () => {
                 <Link href="http://localhost:3000/menudisplay" isExternal>
                   Your Restaurant Menu <ExternalLinkIcon mx="2px" />
                 </Link>
+
+                <h1>QR Generator</h1>
+                <input
+                  type="text"
+                  placeholder="e.g. https://google.com"
+                  value={url}
+                  onChange={e => setUrl(e.target.value)} />
+                <button onClick={GenerateQRCode}>Generate</button>
+                {qr && <>
+                  <img src={qr} />
+                  <a href={qr} download="qrcode.png">Download</a>
+                </>}
               </Box>
+
             </TabPanel>
             <TabPanel>
               <p>Display Options</p>
