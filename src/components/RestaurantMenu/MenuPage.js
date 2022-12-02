@@ -18,9 +18,9 @@ const MenuPage = () => {
   return (
     <div>
       <Row className="align-items-center" style={{ height: "100vh" }}>
-        <Col lg={6} md={12} sm={12} className="d-flex justify-content-center">
-          <Stack className="mx-auto text-center" gap={3}>
-            <p>Your Restaurant Name</p>
+        <Col lg={5} md={12} sm={12} className="d-flex justify-content-center">
+          <Stack className="mx-auto text-center" gap={4}>
+            <p className="restaurant-name">Your Restaurant Name</p>
             <Button
               onClick={() => setModalShow(true)}
               className="btn-start mx-auto"
@@ -34,15 +34,25 @@ const MenuPage = () => {
             >
               Tap To Start
             </Button>
-            <p onClick={menuFeedback}>Give Feedback</p>
+            <p onClick={menuFeedback} className="feedback-text">
+              Give Feedback
+            </p>
           </Stack>
           <MenuStartModal show={modalShow} onHide={() => setModalShow(false)} />
         </Col>
         <Col
-          lg={6}
-          className="d-flex justify-content-center d-none d-lg-block d-xl-block"
+          lg={2}
+          className="d-none d-lg-block d-xl-block d-flex justify-content-center"
         >
-          Your Restaurant Name
+          <div
+            className="d-flex justify-content-center"
+            style={{ height: "100vh" }}
+          >
+            <div className="vr"></div>
+          </div>
+        </Col>
+        <Col lg={5} className="text-center d-none d-lg-block d-xl-block">
+          <p className="restaurant-name">Your Restaurant Name</p>
         </Col>
       </Row>
     </div>

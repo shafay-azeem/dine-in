@@ -1,1 +1,9 @@
-
+.feedback-text {
+  text-decoration: underline;
+  color: red;
+  cursor: pointer;
+}
+.restaurant-name {
+  font-size: 20px;
+  font-weight: 600;
+}

@@ -12,7 +12,7 @@ const MenuStartModal = (props) => {
         centered
       >
         <Modal.Header closeButton></Modal.Header>
-        <ListGroup>
+        <ListGroup className="text-center">
           <ListGroup.Item>Menu One</ListGroup.Item>
           <ListGroup.Item>Menu Two</ListGroup.Item>
           <ListGroup.Item>Sample Menu</ListGroup.Item>
