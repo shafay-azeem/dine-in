@@ -6,10 +6,12 @@ import "./RestaurantMenu.css";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { BsChevronDown } from "react-icons/bs";
+import { Accordion } from "react-bootstrap";
 
 const RestaurantMenu = () => {
   var settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
@@ -44,35 +46,134 @@ const RestaurantMenu = () => {
   };
   return (
     <>
-      <Slider {...settings}>
+      <div class="menu">
+        <p className="heading">Your Menu Name</p>
+      </div>
+
+      <Slider {...settings} className="slider">
         <div>
           <img src={require("../Assets/burger.jpg")} />
+          <p>Burger</p>
         </div>
         <div>
           <img src={require("../Assets/burger.jpg")} />
+          <p>Burger</p>
         </div>
         <div>
           <img src={require("../Assets/burger.jpg")} />
+          <p>Burger</p>
         </div>
         <div>
           <img src={require("../Assets/burger.jpg")} />
+          <p>Burger</p>
         </div>
         <div>
           <img src={require("../Assets/burger.jpg")} />
+          <p>Burger</p>
         </div>
         <div>
           <img src={require("../Assets/burger.jpg")} />
+          <p>Burger</p>
         </div>
       </Slider>
 
-      <div className="mx-auto mt-5">
+      <div className="subsection">
+        <Accordion>
+          <Accordion.Item eventKey="1">
+            <Accordion.Header>SubSection Name</Accordion.Header>
+            <Accordion.Body>
+              <Row>
+                <Col lg={4} md={4} sm={6} xs={12}>
+                  <Card className="mx-auto mb-1 fooditem">
+                    <Card.Body>
+                      <Row className="align-items-start">
+                        <Col lg={4} className="p-0">
+                          <img
+                            src={require("../Assets/burger.jpg")}
+                            className="image mx-auto d-block w-100"
+                          />
+                        </Col>
+                        <Col lg={8}>
+                          <Card.Title className="title">
+                            Your Item Name
+                          </Card.Title>
+                          <Card.Text className="text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                          </Card.Text>
+                          <Card.Text className="pricetext">$795.00</Card.Text>
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                </Col>
+
+                <Col lg={4} md={4} sm={6} xs={12}>
+                  <Card className="mx-auto mb-1 fooditem">
+                    <Card.Body>
+                      <Row className="align-items-start">
+                        <Col lg={4} className="p-0">
+                          <img
+                            src={require("../Assets/burger.jpg")}
+                            className="image mx-auto d-block w-100"
+                          />
+                        </Col>
+                        <Col lg={8}>
+                          <Card.Title className="title">
+                            Your Item Name
+                          </Card.Title>
+                          <Card.Text className="text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                          </Card.Text>
+                          <Card.Text className="pricetext">$795.00</Card.Text>
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                </Col>
+
+                <Col lg={4} md={4} sm={6} xs={12}>
+                  <Card className="mx-auto mb-1 fooditem">
+                    <Card.Body>
+                      <Row className="align-items-start">
+                        <Col lg={4} className="p-0">
+                          <img
+                            src={require("../Assets/burger.jpg")}
+                            className="image mx-auto d-block w-100"
+                          />
+                        </Col>
+                        <Col lg={8}>
+                          <Card.Title className="title">
+                            Your Item Name
+                          </Card.Title>
+                          <Card.Text className="text">
+                            Some quick example text to build on the card title
+                            and make up the bulk of the card's content.
+                          </Card.Text>
+                          <Card.Text className="pricetext">$795.00</Card.Text>
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </div>
+
+      <div className="mx-auto mt-3">
         <Row>
-          <Col lg={4}>
-            <Card className="mx-auto mb-3 fooditem">
+          <Col lg={4} md={4} sm={6} xs={12}>
+            <Card className="mx-auto mb-1 fooditem">
               <Card.Body>
-                <Row className="align-items-start">
+                <Row>
                   <Col lg={4} className="p-0">
-                    <img src={require("../Assets/burger.jpg")} />
+                    <img
+                      src={require("../Assets/burger.jpg")}
+                      className="image mx-auto d-block w-100"
+                    />
                   </Col>
                   <Col lg={8}>
                     <Card.Title className="title">Your Item Name</Card.Title>
@@ -80,18 +181,22 @@ const RestaurantMenu = () => {
                       Some quick example text to build on the card title and
                       make up the bulk of the card's content.
                     </Card.Text>
+                    <Card.Text className="pricetext">$795.00</Card.Text>
                   </Col>
                 </Row>
               </Card.Body>
             </Card>
           </Col>
 
-          <Col lg={4}>
+          <Col lg={4} md={4} sm={6} xs={12}>
             <Card className="mx-auto mb-3 fooditem">
               <Card.Body>
                 <Row className="align-items-start">
                   <Col lg={4} className="p-0">
-                    <img src={require("../Assets/burger.jpg")} />
+                    <img
+                      src={require("../Assets/burger.jpg")}
+                      className="image mx-auto d-block w-100"
+                    />
                   </Col>
                   <Col lg={8}>
                     <Card.Title className="title">Your Item Name</Card.Title>
@@ -99,18 +204,22 @@ const RestaurantMenu = () => {
                       Some quick example text to build on the card title and
                       make up the bulk of the card's content.
                     </Card.Text>
+                    <Card.Text className="pricetext">$795.00</Card.Text>
                   </Col>
                 </Row>
               </Card.Body>
             </Card>
           </Col>
 
-          <Col lg={4}>
+          <Col lg={4} md={4} sm={6} xs={12}>
             <Card className="mx-auto mb-3 fooditem">
               <Card.Body>
                 <Row className="align-items-start">
                   <Col lg={4} className="p-0">
-                    <img src={require("../Assets/burger.jpg")} />
+                    <img
+                      src={require("../Assets/burger.jpg")}
+                      className="image mx-auto d-block w-100"
+                    />
                   </Col>
                   <Col lg={8}>
                     <Card.Title className="title">Your Item Name</Card.Title>
@@ -118,6 +227,7 @@ const RestaurantMenu = () => {
                       Some quick example text to build on the card title and
                       make up the bulk of the card's content.
                     </Card.Text>
+                    <Card.Text className="pricetext">$795.00</Card.Text>
                   </Col>
                 </Row>
               </Card.Body>
