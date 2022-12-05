@@ -122,9 +122,9 @@ const SettingDrawer = (props) => {
 
   const menuCreate = () => {
     response.push(menuData);
-    // console.log(response);
     alert("Menu Created");
     setResponse([...response]);
+    //console.log(response, "create menu");
   };
 
   return (

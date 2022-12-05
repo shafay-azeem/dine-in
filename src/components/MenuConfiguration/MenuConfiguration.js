@@ -17,11 +17,19 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import QRCode from "qrcode";
+import { useNavigate } from "react-router-dom";
 
 const MenuConfiguration = () => {
   const [inputList, setInputList] = useState([]);
   const [url, setUrl] = useState("");
   const [qr, setQr] = useState("");
+  const navigate = useNavigate();
+
+  const myfun = () => {
+    navigate({
+      pathname: "/menustart",
+    });
+  };
 
   const GenerateQRCode = () => {
     QRCode.toDataURL(
@@ -77,9 +85,10 @@ const MenuConfiguration = () => {
             <TabPanel>
               <Box bg="white" w="60%" p={4} borderRadius="6">
                 <Text>Link</Text>
-                <Link href="http://localhost:3000/menustart" isExternal>
+                {/* <Link href="http://localhost:3000/menustart" isExternal>
                   Your Restaurant Menu <ExternalLinkIcon mx="2px" />
-                </Link>
+                </Link> */}
+                <Text onClick={myfun}>Your Restaurant Menu</Text>
 
                 <h1>QR Generator</h1>
                 <input

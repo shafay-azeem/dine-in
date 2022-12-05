@@ -1,13 +1,18 @@
 import React from "react";
 import "./MenuStartModal.css";
 import { ListGroup, Modal } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
+import { MenuState } from "../../../context/MenuContext";
 
 const MenuStartModal = (props) => {
+  const { response, setResponse } = MenuState();
+  // console.log(response, "menu response");
+
   const navigate = useNavigate();
-  const reports = () => {
+  const myfun = (index, menuname) => {
     navigate({
       pathname: "/menudisplay",
+      search: createSearchParams({ index, menuname }).toString(),
     });
   };
 
@@ -21,13 +26,18 @@ const MenuStartModal = (props) => {
       >
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
-          <ListGroup className="text-center list-group-flush">
-            <ListGroup.Item onClick={reports} className="item">
-              Menu One
-            </ListGroup.Item>
-            <ListGroup.Item>Menu Two</ListGroup.Item>
-            <ListGroup.Item>Sample Menu</ListGroup.Item>
-          </ListGroup>
+          {response.map((x, index) => {
+            return (
+              <ListGroup className="text-center list-group-flush">
+                <ListGroup.Item
+                  onClick={() => myfun(index, x.menuName)}
+                  className="item"
+                >
+                  {x.menuName}
+                </ListGroup.Item>
+              </ListGroup>
+            );
+          })}
         </Modal.Body>
       </Modal>
     </>
