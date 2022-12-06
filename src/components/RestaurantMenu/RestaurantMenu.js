@@ -117,7 +117,7 @@ const RestaurantMenu = (props) => {
         })}
       </div>
 
-      <div className="mx-auto mt-3">
+      <div className="mx-auto mt-3 mb-3">
         <DisplayItemCard item_response={item_response} />
       </div>
     </>
