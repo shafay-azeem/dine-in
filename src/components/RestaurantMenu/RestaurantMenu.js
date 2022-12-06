@@ -3,9 +3,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "./RestaurantMenu.css";
-import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { Accordion } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { MenuState } from "../../context/MenuContext";
@@ -82,14 +79,18 @@ const RestaurantMenu = (props) => {
     <>
       <div className="menu">
         <p className="heading">{props.menuName}</p>
+        <p className="description">{props.menuDescription}</p>
       </div>
 
       <Slider {...settings} className="slider">
         {sectionList?.map((x, index) => {
           return (
-            <div>
-              <img src={require("../Assets/burger.jpg")} />
-              <p onClick={() => getIndex(index)}>{x.sectionName}</p>
+            <div onClick={() => getIndex(index)}>
+              <img
+                src={require("../Assets/burger.jpg")}
+                style={{ cursor: "pointer" }}
+              />
+              <p>{x.sectionName}</p>
             </div>
           );
         })}

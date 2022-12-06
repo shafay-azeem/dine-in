@@ -54,10 +54,24 @@
   font-size: 20px;
   font-weight: 600;
 }
+.menu .description {
+  text-align: center;
+}
 .subsection {
   margin-top: 12px;
 }
 .subsection p {
   font-size: 16px;
   margin: 10px 0px 20px 0px;
+}
+.accordion-button:not(.collapsed)::after {
+  border-color: red;
+}
+.accordion-collapse {
+  border: 1px solid red;
+}
+
+.form-control:focus {
+  border-color: black !important;
+  box-shadow: none !important;
 }

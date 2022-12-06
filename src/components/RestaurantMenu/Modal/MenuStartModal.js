@@ -9,10 +9,14 @@ const MenuStartModal = (props) => {
   // console.log(response, "menu response");
 
   const navigate = useNavigate();
-  const myfun = (index, menuname) => {
+  const myfun = (index, menuname, menuDescription) => {
     navigate({
       pathname: "/menudisplay",
-      search: createSearchParams({ index, menuname }).toString(),
+      search: createSearchParams({
+        index,
+        menuname,
+        menuDescription,
+      }).toString(),
     });
   };
 
@@ -30,7 +34,7 @@ const MenuStartModal = (props) => {
             return (
               <ListGroup className="text-center list-group-flush">
                 <ListGroup.Item
-                  onClick={() => myfun(index, x.menuName)}
+                  onClick={() => myfun(index, x.menuName, x.menuDescription)}
                   className="item"
                 >
                   {x.menuName}

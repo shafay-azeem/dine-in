@@ -12,6 +12,7 @@ const MenuDisplayScreen = () => {
       <RestaurantMenu
         menu_index={searchparams.get("index")}
         menuName={searchparams.get("menuname")}
+        menuDescription={searchparams.get("menuDescription")}
       />
     </div>
   );
