@@ -100,7 +100,13 @@ const MenuConfiguration = () => {
                 <button onClick={GenerateQRCode}>Generate</button>
                 {qr && (
                   <>
-                    <img src={qr} />
+                    <img
+                      src={qr}
+                      style={{
+                        width: "200px",
+                        height: "200px",
+                      }}
+                    />
                     <a href={qr} download="qrcode.png">
                       Download
                     </a>

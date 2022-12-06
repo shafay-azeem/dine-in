@@ -57,6 +57,7 @@
 .subsection {
   margin-top: 12px;
 }
-.subsection .Accordion {
-  border-color: red;
+.subsection p {
+  font-size: 16px;
+  margin: 10px 0px 20px 0px;
 }

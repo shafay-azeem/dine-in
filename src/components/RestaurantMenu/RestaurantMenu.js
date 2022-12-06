@@ -98,11 +98,17 @@ const RestaurantMenu = (props) => {
       <div className="subsection">
         {subSection_response?.map((x, index) => {
           return (
-            <Accordion>
+            <Accordion className="mb-2">
               <Accordion.Item eventKey="1">
                 <Accordion.Header>{x.sectionName}</Accordion.Header>
                 <Accordion.Body>
-                  <SubSecItemCard />
+                  <div className="text-center">
+                    <p>{x.sectionDescription}</p>
+                  </div>
+                  <SubSecItemCard
+                    subSection_response={subSection_response}
+                    subSection_index={index}
+                  />
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
