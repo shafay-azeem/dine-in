@@ -27,15 +27,6 @@ const RestaurantMenu = (props) => {
 
   console.log(item_response, "item_response");
 
-  const navigate = useNavigate();
-
-  const menuDetail = () => {
-    console.log("menudetails");
-    navigate({
-      pathname: "/menudetail",
-    });
-  };
-
   const getIndex = (index) => {
     setCount(index);
     // console.log(index, "33");
@@ -118,7 +109,11 @@ const RestaurantMenu = (props) => {
       </div>
 
       <div className="mx-auto mt-3 mb-3">
-        <DisplayItemCard item_response={item_response} />
+        <DisplayItemCard
+          item_response={item_response}
+          menu_index={menu_index}
+          section_index={count}
+        />
       </div>
     </>
   );

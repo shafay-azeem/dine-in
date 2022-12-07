@@ -1,9 +1,23 @@
 import React, { useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import "../RestaurantMenu.css";
 
 const DisplayItemCard = (props) => {
-  console.log(props.item_response, "props.item_response");
+  let menu_index = props.menu_index;
+  let section_index = props.section_index;
+  const navigate = useNavigate();
+
+  const menuDetail = (index) => {
+    navigate({
+      pathname: "/menudetail",
+      search: createSearchParams({
+        index,
+        menu_index,
+        section_index,
+      }).toString(),
+    });
+  };
 
   return (
     <div className="mx-auto mt-3">
@@ -11,7 +25,10 @@ const DisplayItemCard = (props) => {
         {props.item_response?.map((x, index) => {
           return (
             <Col lg={4} md={4} sm={6} xs={12}>
-              <Card className="mx-auto mb-1 fooditem">
+              <Card
+                className="mx-auto mb-1 fooditem"
+                style={{ cursor: "pointer" }}
+              >
                 <Card.Body>
                   <Row>
                     <Col lg={4} className="p-0">
@@ -21,7 +38,12 @@ const DisplayItemCard = (props) => {
                       />
                     </Col>
                     <Col lg={8}>
-                      <Card.Title className="title">{x.itemName}</Card.Title>
+                      <Card.Title
+                        className="title"
+                        onClick={() => menuDetail(index)}
+                      >
+                        {x.itemName}
+                      </Card.Title>
                       <Card.Text className="text">
                         {x.itemDescription}
                       </Card.Text>

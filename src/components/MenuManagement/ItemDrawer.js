@@ -45,10 +45,10 @@ import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 
 const ItemDrawer = (props) => {
-  console.log(props.menu_index, "menu----------");
-  console.log(props?.section_index, "section---------");
-  console.log(props?.item_index, "item----------");
-  console.log(props?.ItemInMenu, "------------itemInMenu---------");
+  // console.log(props.menu_index, "menu----------");
+  // console.log(props?.section_index, "section---------");
+  // console.log(props?.item_index, "item----------");
+  // console.log(props?.ItemInMenu, "------------itemInMenu---------");
 
   const { response, setResponse } = MenuState();
   let subSectionArr =
