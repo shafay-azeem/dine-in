@@ -14,8 +14,34 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import CustomButton from "../../CustomElements/CustomButton";
+import { MenuState } from "../../context/MenuContext";
+import { useState } from "react";
+import { Form } from "react-bootstrap";
 
 const CreateFormModal = (props) => {
+  const { createfeedback, setCreateFeedback } = MenuState();
+  const [formName, setFormName] = useState();
+  const [welcomeMessage, setWelcomeMessage] = useState();
+  const [active, setActive] = useState(false);
+
+  function getTimestampInSeconds() {
+    return Math.floor(Date.now() / 1000);
+  }
+
+  let feedbackFormData = {
+    id: getTimestampInSeconds(),
+    formName: formName,
+    welcomeMessage: welcomeMessage,
+    active: false,
+  };
+
+  const formCreate = () => {
+    createfeedback.push(feedbackFormData);
+    console.log(createfeedback, "createfeedback");
+    alert("FeedBack Form Created Successfully");
+    document.getElementById("myForm").reset();
+  };
+
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="2xl">
@@ -24,23 +50,41 @@ const CreateFormModal = (props) => {
           <ModalHeader>Create a Feedback Form</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl mt={6} isRequired>
-              <FormLabel fontWeight="400">Form Name</FormLabel>
-              <Input placeholder="Customer Satisfaction" />
-            </FormControl>
+            <Form id="myForm">
+              <FormControl mt={6} isRequired>
+                <FormLabel fontWeight="400">Form Name</FormLabel>
+                <Input
+                  placeholder="Customer Satisfaction"
+                  onChange={(e) => setFormName(e.target.value)}
+                />
+              </FormControl>
 
-            <FormControl mt={6}>
-              <FormLabel fontWeight="400">Welcome Message (Optional)</FormLabel>
-              <Input placeholder="Could you give us 60 secs?" />
-            </FormControl>
-            <Checkbox mt={6}>
-              I agree to FineDine Privacy Policy terms on the data I collect for
-              this feedback.
-            </Checkbox>
+              <FormControl mt={6}>
+                <FormLabel fontWeight="400">
+                  Welcome Message (Optional)
+                </FormLabel>
+                <Input
+                  placeholder="Could you give us 60 secs?"
+                  onChange={(e) => setWelcomeMessage(e.target.value)}
+                />
+              </FormControl>
+
+              <Checkbox mt={6}>
+                I agree to FineDine Privacy Policy terms on the data I collect
+                for this feedback.
+              </Checkbox>
+            </Form>
           </ModalBody>
 
           <ModalFooter>
-            <CustomButton btnText={"Create a Form"} mr={3} size={"sm"} />
+            <CustomButton
+              btnText={"Create a Form"}
+              mr={3}
+              size={"sm"}
+              click={() => {
+                formCreate();
+              }}
+            />
 
             <CustomButton
               click={props.onClose}
