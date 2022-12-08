@@ -22,6 +22,8 @@ import SettingDrawer from "../../MenuManagement/SettingDrawer";
 import { MenuState } from "../../../context/MenuContext";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import BootstrapSwitchButton from 'bootstrap-switch-button-react'
+
 
 const DisplayCard = () => {
   const navigate = useNavigate();
@@ -140,25 +142,16 @@ const DisplayCard = () => {
                             </GridItem>
                             <GridItem colStart={4} colEnd={6}>
                               <HStack mt={2} gap={4} ml="38%">
-                                {x.menuStatus ? (
-                                  <Switch
-                                    size="sm"
-                                    isChecked
-                                    onChange={() => switchStatus(index)}
-                                  />
-                                ) : (
-                                  <Switch
-                                    size="sm"
-                                    onChange={() => switchStatus(index)}
-                                  />
-                                )}
 
-                                {/* <CustomButton
-                  // click={createmenu(index)}
-                  size={"sm"}
-                  btnText={"Edit Menu"}
-                  leftIcon={<AiTwotoneEdit />}
-                /> */}
+                                <BootstrapSwitchButton
+                                  checked={x.menuStatus}
+                                  onChange={() => switchStatus(index)}
+                                  data-size="xs"
+
+                                />
+
+
+
                                 <Button onClick={() => myfun(index)}>
                                   EDIT MENU
                                 </Button>
