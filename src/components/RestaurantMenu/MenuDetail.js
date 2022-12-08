@@ -5,32 +5,71 @@ import Col from "react-bootstrap/Col";
 import "./MenuDetail.css";
 import { Button, Card } from "react-bootstrap";
 import { MenuState } from "../../context/MenuContext";
+import { useState } from "react";
 
 const MenuDetail = (props) => {
   const { response, setResponse } = MenuState();
-  // console.log(props.item_index, "index");
-  // console.log(props.menu_index, "menu_index");
-  // console.log(props.section_index, "section_index");
-
-  let menu_index = props.menu_index;
-  let section_index = props.section_index;
-  let item_index = props.item_index;
-
-  let itemDetailResponse =
-    response[menu_index]?.section[section_index]?.item[item_index];
-  //console.log([itemDetailResponse], "itemDetailResponse");
+  let menu_index = props?.menu_index;
+  // console.log(menu_index, "menu_index");
+  let menu_index_refSub = props?.menu_index_refSub;
+  // console.log(menu_index_refSub, "menu_index_refSub");
+  let section_index_refSub = props?.section_index_refSub;
+  // console.log(section_index_refSub, "section_index_refSub");
+  let section_index = props?.section_index;
+  // console.log(section_index, "section_index");
+  let item_index = props?.item_index;
+  // console.log(item_index, "item_index");
+  let subsection_index = props?.subsection_index;
+  // console.log(subsection_index, "subsection_index");
+  let subsectionitem_index = props?.subsectionitem_index;
+  // console.log(subsectionitem_index, "subsectionitem_index");
 
   let itemPriceOptionResponse =
     response[menu_index]?.section[section_index]?.item[item_index]
       .itemPriceOption;
-  //console.log(itemPriceOptionResponse, "itemPriceOptionResponse");
+
+  let subItemPriceOptionResponse =
+    response[menu_index_refSub]?.section[section_index_refSub]?.subSection[
+      subsection_index
+    ]?.item[subsectionitem_index].itemPriceOption;
+
+  const priceInitialState =
+    typeof subsectionitem_index === "string"
+      ? subItemPriceOptionResponse
+      : itemPriceOptionResponse;
+
+  const [itemPriceList, setPriceItemList] = useState(priceInitialState);
+
+  let subSecItemDetailResponse =
+    response[menu_index_refSub]?.section[section_index_refSub]?.subSection[
+      subsection_index
+    ]?.item[subsectionitem_index];
+  //console.log(subSecItemDetailResponse, "subSecItemDetailResponse");
+
+  let secItemDetailResponse =
+    response[menu_index]?.section[section_index]?.item[item_index];
+  //console.log(secItemDetailResponse, "secItemDetailResponse");
+
+  const initialState =
+    typeof subsectionitem_index === "string"
+      ? subSecItemDetailResponse
+      : secItemDetailResponse;
+
+  const [itemList, setItemList] = useState(initialState);
+
+  // console.log(props.subsection_index, "subsection_index");
+  // console.log(props.subsectionitem_index, "subsectionitem_index");
+
+  // let itemDetailResponse =
+  //   response[menu_index]?.section[section_index]?.item[item_index];
+  //console.log([itemDetailResponse], "itemDetailResponse");
 
   return (
     <div>
       <Container className="mt-5">
         <Row>
           <Col lg={12} md={12} sm={12} xs={12}>
-            {[itemDetailResponse]?.map((x) => {
+            {[itemList]?.map((x) => {
               return (
                 <Card className="mx-auto mb-1">
                   <Card.Body>
@@ -53,7 +92,7 @@ const MenuDetail = (props) => {
                           ${x.itemPrice}
                         </Card.Text>
 
-                        {itemPriceOptionResponse?.map((y) => {
+                        {itemPriceList?.map((y) => {
                           return (
                             <div class=" my-4">
                               <Row className="align-items-start">

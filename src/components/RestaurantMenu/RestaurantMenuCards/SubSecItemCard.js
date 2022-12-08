@@ -1,9 +1,11 @@
 import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { MenuState } from "../../../context/MenuContext";
 import "../RestaurantMenu.css";
 
 const SubSecItemCard = (props) => {
+  const navigate = useNavigate();
   const { response, setResponse } = MenuState();
 
   //console.log(props.subSection_response, "subSection_response");
@@ -11,7 +13,26 @@ const SubSecItemCard = (props) => {
 
   let subSectionList =
     props?.subSection_response[props?.subSection_index]?.item;
-  //   console.log(x, "subsection response");
+  // console.log(subSectionList, "subsection list response");
+
+  let menu_index_refSub = props?.menu_index;
+  let section_index_refSub = props?.section_index;
+  let subsectionIndex = props?.subSection_index;
+
+  // console.log(menu_index_refSub, section_index_refSub, subsectionIndex , 'subsection');
+  // console.log(menu_index_refSub, section_index_refSub, subsectionIndex , 'subsection');
+
+  const myFunc = (subsecitemindex) => {
+    navigate({
+      pathname: "/menudetail",
+      search: createSearchParams({
+        subsecitemindex,
+        subsectionIndex,
+        menu_index_refSub,
+        section_index_refSub,
+      }).toString(),
+    });
+  };
 
   return (
     <div>
@@ -29,7 +50,12 @@ const SubSecItemCard = (props) => {
                       />
                     </Col>
                     <Col lg={8}>
-                      <Card.Title className="title">{x.itemName}</Card.Title>
+                      <Card.Title
+                        className="title"
+                        onClick={() => myFunc(index)}
+                      >
+                        {x.itemName}
+                      </Card.Title>
                       <Card.Text className="text">
                         {x.itemDescription}
                       </Card.Text>

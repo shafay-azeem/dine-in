@@ -25,7 +25,7 @@ const RestaurantMenu = (props) => {
   let subSection_response =
     response[props.menu_index]?.section[count]?.subSection;
 
-  console.log(item_response, "item_response");
+  //console.log(item_response, "item_response");
 
   const getIndex = (index) => {
     setCount(index);
@@ -98,6 +98,8 @@ const RestaurantMenu = (props) => {
                     <p>{x.sectionDescription}</p>
                   </div>
                   <SubSecItemCard
+                    menu_index={menu_index}
+                    section_index={count}
                     subSection_response={subSection_response}
                     subSection_index={index}
                   />

@@ -13,9 +13,13 @@ const MenuDetailScreen = () => {
   return (
     <div style={{ width: "70%", margin: "0 auto" }}>
       <MenuDetail
+        menu_index_refSub={searchparams.get("menu_index_refSub")}
+        section_index_refSub={searchparams.get("section_index_refSub")}
         menu_index={searchparams.get("menu_index")}
         section_index={searchparams.get("section_index")}
         item_index={searchparams.get("index")}
+        subsectionitem_index={searchparams.get("subsecitemindex")}
+        subsection_index={searchparams.get("subsectionIndex")}
       />
     </div>
   );
