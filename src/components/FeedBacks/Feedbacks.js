@@ -29,9 +29,11 @@ import CustomButton from "../../CustomElements/CustomButton";
 import * as FileSaver from "file-saver";
 import XLSX from "sheetjs-style";
 import excelData from "../Orders/Export.json";
+import { MenuState } from "../../context/MenuContext";
 
 const Feedbacks = () => {
   const handle = useFullScreenHandle();
+  const { createfeedback, setCreateFeedback } = MenuState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showform, setShowForm] = useState(false);
   const [showresult, setShowResult] = useState(true);
@@ -165,33 +167,43 @@ const Feedbacks = () => {
               </TabPanel>
 
               <TabPanel>
-                <Box h="90px" bg="white" borderRadius={6}>
-                  <Grid templateColumns="repeat(5, 1fr)" gap={4}>
-                    <GridItem colSpan={2}>
-                      <Text p={8}>Sample Form</Text>
-                    </GridItem>
-                    <GridItem colStart={4} colEnd={6} h="10" align="end" p={8}>
-                      <Switch id="email-alerts" mr={4} />
-                      <Tooltip label="Edit">
-                        <EditIcon mr={4} />
-                      </Tooltip>
+                {createfeedback?.map((x, index) => {
+                  return (
+                    <Box h="90px" bg="white" borderRadius={6} mt={2}>
+                      <Grid templateColumns="repeat(5, 1fr)" gap={4}>
+                        <GridItem colSpan={2}>
+                          <Text p={8}>{x.formName}</Text>
+                        </GridItem>
+                        <GridItem
+                          colStart={4}
+                          colEnd={6}
+                          h="10"
+                          align="end"
+                          p={8}
+                        >
+                          <Switch id="email-alerts" mr={4} />
+                          <Tooltip label="Edit">
+                            <EditIcon mr={4} />
+                          </Tooltip>
 
-                      <Button onClick={onOpen} bg="white">
-                        <DeleteIcon />
+                          <Button onClick={onOpen} bg="white">
+                            <DeleteIcon />
 
-                        {isOpen ? (
-                          <FeedbackDeleteModal
-                            isOpen={isOpen}
-                            onOpen={onOpen}
-                            onClose={onClose}
-                          />
-                        ) : (
-                          console.log("ss")
-                        )}
-                      </Button>
-                    </GridItem>
-                  </Grid>
-                </Box>
+                            {isOpen ? (
+                              <FeedbackDeleteModal
+                                isOpen={isOpen}
+                                onOpen={onOpen}
+                                onClose={onClose}
+                              />
+                            ) : (
+                              console.log("ss")
+                            )}
+                          </Button>
+                        </GridItem>
+                      </Grid>
+                    </Box>
+                  );
+                })}
               </TabPanel>
             </TabPanels>
           </Tabs>
