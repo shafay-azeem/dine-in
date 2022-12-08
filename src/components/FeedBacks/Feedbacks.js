@@ -37,6 +37,7 @@ const Feedbacks = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showform, setShowForm] = useState(false);
   const [showresult, setShowResult] = useState(true);
+  const [feedbackFormList, setFeedbackFormList] = useState(createfeedback);
 
   const fileType =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
@@ -74,6 +75,12 @@ const Feedbacks = () => {
     window.location.reload();
     // return false;
   }
+
+  const handleRemove = (index) => {
+    createfeedback.splice(index, 1);
+    setCreateFeedback([...createfeedback]);
+    setFeedbackFormList(createfeedback);
+  };
 
   return (
     <>
@@ -167,7 +174,7 @@ const Feedbacks = () => {
               </TabPanel>
 
               <TabPanel>
-                {createfeedback?.map((x, index) => {
+                {feedbackFormList?.map((x, index) => {
                   return (
                     <Box h="90px" bg="white" borderRadius={6} mt={2}>
                       <Grid templateColumns="repeat(5, 1fr)" gap={4}>
@@ -187,13 +194,14 @@ const Feedbacks = () => {
                           </Tooltip>
 
                           <Button onClick={onOpen} bg="white">
-                            <DeleteIcon />
+                            <DeleteIcon onClick={() => handleRemove(index)} />
 
                             {isOpen ? (
                               <FeedbackDeleteModal
                                 isOpen={isOpen}
                                 onOpen={onOpen}
                                 onClose={onClose}
+                                index={index}
                               />
                             ) : (
                               console.log("ss")
