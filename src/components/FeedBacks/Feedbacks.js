@@ -38,6 +38,7 @@ const Feedbacks = () => {
   const [showform, setShowForm] = useState(false);
   const [showresult, setShowResult] = useState(true);
   const [feedbackFormList, setFeedbackFormList] = useState(createfeedback);
+  const [count, setCount] = useState();
 
   const fileType =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
@@ -81,6 +82,12 @@ const Feedbacks = () => {
     setCreateFeedback([...createfeedback]);
     setFeedbackFormList(createfeedback);
   };
+
+  const getIndex = (index) => {
+    setCount(index)
+    setCreateFeedback([...createfeedback]);
+    setFeedbackFormList(createfeedback);
+  }
 
   return (
     <>
@@ -194,14 +201,14 @@ const Feedbacks = () => {
                           </Tooltip>
 
                           <Button onClick={onOpen} bg="white">
-                            <DeleteIcon onClick={() => handleRemove(index)} />
-
+                            <DeleteIcon onClick={() => getIndex(index)} />
+                            {/* onClick={() => handleRemove(index)} */}
                             {isOpen ? (
                               <FeedbackDeleteModal
                                 isOpen={isOpen}
                                 onOpen={onOpen}
                                 onClose={onClose}
-                                index={index}
+                                index={count}
                               />
                             ) : (
                               console.log("ss")

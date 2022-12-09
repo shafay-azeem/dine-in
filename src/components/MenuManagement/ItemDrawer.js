@@ -354,6 +354,7 @@ const ItemDrawer = (props) => {
     itemName: name,
     itemDescription: description,
     active: checked,
+    image: image,
     itemPrice: itemprice,
     itemCalorie: calorie,
     itemTag: sold,
@@ -756,7 +757,10 @@ const ItemDrawer = (props) => {
   };
 
   const pictureCapture = (event) => {
-    setImage(event);
+    let value = URL.createObjectURL(event.target.files[0]);
+    setImage(value);
+
+
   };
 
   const videoCapture = (event) => {
@@ -950,7 +954,8 @@ const ItemDrawer = (props) => {
                     <Input
                       size="sm"
                       type="file"
-                      onChange={(e) => pictureCapture(e.target.files[0].name)}
+                      accept=".jpg,.png"
+                      onChange={pictureCapture}
                     />
                   </FormControl>
 

@@ -37,8 +37,8 @@ const ItemCard = (props) => {
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ].item
+      props?.subsection_index
+    ].item
     : response[props?.menu_index]?.section[props?.section_index]?.item;
 
   const [itemList, setItemList] = useState(initialState);
@@ -192,13 +192,15 @@ const ItemCard = (props) => {
                           <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                             <GridItem colSpan={2} h="10">
                               <HStack>
+
                                 <Image
                                   boxSize="43px"
                                   objectFit="cover"
                                   borderRadius={3}
-                                  src="https://bit.ly/dan-abramov"
+                                  src={x.image}
                                   alt="Dan Abramov"
                                 />
+
                                 <Text pl={2}>
                                   {x.active ? (
                                     <Box>

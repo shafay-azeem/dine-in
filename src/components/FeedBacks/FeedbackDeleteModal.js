@@ -10,8 +10,26 @@ import {
   Text,
 } from "@chakra-ui/react";
 import CustomButton from "../../CustomElements/CustomButton";
+import { MenuState } from "../../context/MenuContext";
+import { useState } from "react";
+import { Button } from "bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const FeedbackDeleteModal = (props) => {
+  console.log(props.index, "props index")
+  const navigate = useNavigate();
+  const { createfeedback, setCreateFeedback } = MenuState();
+  const [feedbackFormList, setFeedbackFormList] = useState(createfeedback);
+
+  const handleRemove = () => {
+    createfeedback.splice(props.index, 1);
+    setCreateFeedback([...createfeedback]);
+    setFeedbackFormList(createfeedback);
+    navigate({
+      pathname: "/feedbacks",
+
+    });
+  };
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose}>
@@ -27,7 +45,8 @@ const FeedbackDeleteModal = (props) => {
           </ModalBody>
 
           <ModalFooter>
-            <CustomButton btnText={"Delete"} mr={3} size={"sm"} />
+            <CustomButton btnText={"Delete"} click={() => handleRemove()} mr={3} size={"sm"} />
+
             <CustomButton
               click={props.onClose}
               btnText={"Cancel"}
