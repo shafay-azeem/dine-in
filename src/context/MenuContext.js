@@ -37,6 +37,8 @@ export const MenuProvider = ({ children }) => {
 
   const [feedback, setFeedback] = useState([]);
   const [createfeedback, setCreateFeedback] = useState([]);
+  const [editFeedback, setEditFeedback] = useState([]);
+
 
   return (
     <MenuContext.Provider
@@ -47,6 +49,8 @@ export const MenuProvider = ({ children }) => {
         setFeedback,
         createfeedback,
         setCreateFeedback,
+        editFeedback,
+        setEditFeedback
       }}
     >
       {children}
