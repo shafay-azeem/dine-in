@@ -37,7 +37,7 @@ export const MenuProvider = ({ children }) => {
 
   const [feedback, setFeedback] = useState([]);
   const [createfeedback, setCreateFeedback] = useState([]);
-  const [editFeedback, setEditFeedback] = useState();
+  const [activeForm, setActiveForm] = useState();
 
 
   return (
@@ -49,8 +49,8 @@ export const MenuProvider = ({ children }) => {
         setFeedback,
         createfeedback,
         setCreateFeedback,
-        editFeedback,
-        setEditFeedback
+        activeForm,
+        setActiveForm
       }}
     >
       {children}
