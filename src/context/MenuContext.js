@@ -37,7 +37,7 @@ export const MenuProvider = ({ children }) => {
 
   const [feedback, setFeedback] = useState([]);
   const [createfeedback, setCreateFeedback] = useState([]);
-  const [editFeedback, setEditFeedback] = useState([]);
+  const [editFeedback, setEditFeedback] = useState();
 
 
   return (
