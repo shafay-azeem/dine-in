@@ -15,6 +15,7 @@ import MenuDetail from "./components/RestaurantMenu/MenuDetail";
 import MenuDetailScreen from "./Screens/MenuDetailScreen";
 import MenuStartScreen from "./Screens/MenuStartScreen";
 import MenuFeedbackScreen from "./Screens/MenuFeedbackScreen";
+import FormQuestions from "./components/FeedBacks/FormQuestions";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/menudetail" element={<MenuDetailScreen />} />
           <Route path="/menustart" element={<MenuStartScreen />} />
           <Route path="/menufeedback" element={<MenuFeedbackScreen />} />
+          <Route path="/editform" element={<FormQuestions />} />
         </Routes>
       </BrowserRouter>
     </div>

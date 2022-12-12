@@ -58,7 +58,7 @@ const ItemDrawer = (props) => {
 
   let sectionArr =
     response[props.menu_index].section[props?.section_index]?.item[
-    props?.item_index
+      props?.item_index
     ];
 
   const itemCondtionState = Number.isInteger(props?.subsection_index)
@@ -759,8 +759,6 @@ const ItemDrawer = (props) => {
   const pictureCapture = (event) => {
     let value = URL.createObjectURL(event.target.files[0]);
     setImage(value);
-
-
   };
 
   const videoCapture = (event) => {

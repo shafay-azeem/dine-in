@@ -30,8 +30,10 @@ import * as FileSaver from "file-saver";
 import XLSX from "sheetjs-style";
 import excelData from "../Orders/Export.json";
 import { MenuState } from "../../context/MenuContext";
+import { useNavigate } from "react-router-dom";
 
 const Feedbacks = () => {
+  const navigate = useNavigate();
   const handle = useFullScreenHandle();
   const { createfeedback, setCreateFeedback } = MenuState();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -84,10 +86,16 @@ const Feedbacks = () => {
   };
 
   const getIndex = (index) => {
-    setCount(index)
+    setCount(index);
     setCreateFeedback([...createfeedback]);
     setFeedbackFormList(createfeedback);
-  }
+  };
+
+  const editForm = () => {
+    navigate({
+      pathname: "/editform",
+    });
+  };
 
   return (
     <>
@@ -197,7 +205,7 @@ const Feedbacks = () => {
                         >
                           <Switch id="email-alerts" mr={4} />
                           <Tooltip label="Edit">
-                            <EditIcon mr={4} />
+                            <EditIcon mr={4} onClick={editForm} />
                           </Tooltip>
 
                           <Button onClick={onOpen} bg="white">
