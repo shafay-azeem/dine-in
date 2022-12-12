@@ -95,7 +95,6 @@ const Feedbacks = () => {
     navigate({
       pathname: "/editform",
       search: createSearchParams({ index }).toString(),
-
     });
   };
 
@@ -207,9 +206,7 @@ const Feedbacks = () => {
                         >
                           <Switch id="email-alerts" mr={4} />
                           <Tooltip label="Edit">
-
                             <EditIcon mr={4} onClick={() => editForm(index)} />
-
                           </Tooltip>
 
                           <Button onClick={onOpen} bg="white">
