@@ -104,8 +104,13 @@ const Feedbacks = () => {
       if (index === i) {
         createfeedback[index].active = !createfeedback[i].active;
         setCreateFeedback([...createfeedback]);
-        setActiveForm("")
-        setActiveForm(index)
+        if (createfeedback[index].active == false) {
+          setActiveForm("")
+        }
+        else {
+          setActiveForm(index)
+        }
+
       }
       else {
         createfeedback[i].active = false;

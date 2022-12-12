@@ -8,7 +8,7 @@ import "./RestaurantMenu.css";
 const MenuFeedBackForm = () => {
   const { feedback, setFeedback, activeForm, createfeedback, setCreateFeedback } =
     MenuState();
-  const [demo, setDemo] = useState(createfeedback[activeForm].formQuestions);
+  const [demo, setDemo] = useState(createfeedback[activeForm]?.formQuestions);
   const [question, setQuestion] = useState();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -17,6 +17,13 @@ const MenuFeedBackForm = () => {
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
+  let A = []
+  const handleInputChange = (e, index) => {
+    const { value } = e.target;
+    console.log(value, "vvvvv")
+    A[index] = value;
+    console.log(A, "===A=====")
+  };
 
   let feedbackData = {
     id: getTimestampInSeconds(),
@@ -26,11 +33,15 @@ const MenuFeedBackForm = () => {
   };
 
   const feedbackSubmit = () => {
-    feedback.push(feedbackData);
+    var jsonObj = {};
+    for (var i = 0; i < A.length; i++) {
+      jsonObj["position" + (i + 1)] = A[i];
+    }
+    feedback.push(jsonObj);
     alert("feedback Submitted");
     document.getElementById("myForm").reset();
     setFeedback([...feedback]);
-    //console.log(feedback, "feedback Submitted");
+    console.log(feedback, "feedback Submitted");
   };
 
   return (
@@ -42,12 +53,12 @@ const MenuFeedBackForm = () => {
               {demo?.map((x, index) => {
 
                 return (
-                  <Form id="myForm">
+                  <Form id="myForm" key={index}>
                     <Form.Group>
                       <Form.Label>{x.question}</Form.Label>
                       <Form.Control
                         type="text"
-                        onChange={(e) => setQuestion(e.target.value)}
+                        onChange={e => handleInputChange(e, index)}
                       />
                     </Form.Group>
                   </Form>
