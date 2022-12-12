@@ -11,24 +11,34 @@ const FormQuestions = () => {
   let feedback_index = searchparams.get("index");
   let A
   let FormQuestions = createfeedback[feedback_index].formQuestions
-  if (FormQuestions.length > 0) {
-    A = FormQuestions
+
+
+  if (createfeedback[feedback_index].formQuestions.length > 0) {
+
+    A = createfeedback[feedback_index].formQuestions
+    console.log(A, "====A=====")
   } else {
     A = [{ question: "", questionType: "" }]
+    console.log(A, "====B=====")
   }
   const [inputList, setInputList] = useState(A);
 
 
 
   const testfunc = (x, y) => {
+    console.log(x, "x")
     if (x > 0) {
-      FormQuestions[y] = inputList
-      console.log(createfeedback, "createfeedback")
+
+      createfeedback[feedback_index].formQuestions = inputList
+      console.log(createfeedback[feedback_index].formQuestions, "update")
 
     } else {
-      FormQuestions.push(inputList[0])
-      console.log(createfeedback, "createfeedback")
+      createfeedback[feedback_index].formQuestions.push(inputList[y])
+      console.log(createfeedback[feedback_index].formQuestions, "create")
+
     }
+
+    console.log(createfeedback, "cccc")
 
   }
 
@@ -113,13 +123,12 @@ const FormQuestions = () => {
                 <Col>
                   <Button
                     variant="primary"
-                    onClick={() => testfunc(FormQuestions.length, i)}
+                    onClick={() => testfunc(createfeedback[feedback_index].formQuestions.length, i)}
                   >
                     SAVE
                   </Button>
                 </Col>
               </Row>
-              <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>
             </Card.Body>
 
           );
