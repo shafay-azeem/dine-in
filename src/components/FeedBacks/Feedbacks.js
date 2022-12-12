@@ -207,9 +207,9 @@ const Feedbacks = () => {
                         >
                           <Switch id="email-alerts" mr={4} />
                           <Tooltip label="Edit">
-                            <Button onClick={() => getIndex(index)}>
-                              <EditIcon mr={4} onClick={editForm(index)} />
-                            </Button>
+
+                            <EditIcon mr={4} onClick={() => editForm(index)} />
+
                           </Tooltip>
 
                           <Button onClick={onOpen} bg="white">
