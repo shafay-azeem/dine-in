@@ -4,6 +4,7 @@ import { Card } from "react-bootstrap";
 import { useState } from "react";
 import { MenuState } from "../../context/MenuContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { List } from "@chakra-ui/react";
 
 const FormQuestions = () => {
   const { createfeedback, setCreateFeedback } = MenuState();
@@ -56,6 +57,7 @@ const FormQuestions = () => {
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
+    createfeedback[feedback_index].formQuestions = list
 
   };
 
@@ -72,6 +74,7 @@ const FormQuestions = () => {
       >
         {inputList?.map((x, i) => {
           return (
+
             <Card.Body>
               <Row>
                 <Col>
