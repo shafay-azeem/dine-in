@@ -109,24 +109,20 @@ const FormQuestions = () => {
                     </Button>
                   )}
                 </Col>
-                <Col>
-                  <Button
-                    variant="primary"
-                    onClick={() =>
-                      testfunc(
-                        createfeedback[feedback_index].formQuestions.length,
-                        i
-                      )
-                    }
-                  >
-                    SAVE
-                  </Button>
-                </Col>
               </Row>
             </Card.Body>
           );
         })}
       </Card>
+
+      <Button
+        variant="primary"
+        onClick={() =>
+          testfunc(createfeedback[feedback_index].formQuestions.length)
+        }
+      >
+        SAVE
+      </Button>
     </div>
   );
 };
