@@ -33,6 +33,7 @@ const CreateFormModal = (props) => {
     formName: formName,
     welcomeMessage: welcomeMessage,
     active: false,
+    formQuestions: []
   };
 
   const formCreate = () => {
