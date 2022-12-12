@@ -10,38 +10,30 @@ const FormQuestions = () => {
   const { createfeedback, setCreateFeedback } = MenuState();
   const [searchparams] = useSearchParams();
   let feedback_index = searchparams.get("index");
-  let A
-  let FormQuestions = createfeedback[feedback_index].formQuestions
-
+  let A;
+  let FormQuestions = createfeedback[feedback_index].formQuestions;
 
   if (createfeedback[feedback_index].formQuestions.length > 0) {
-
-    A = createfeedback[feedback_index].formQuestions
-    console.log(A, "====A=====")
+    A = createfeedback[feedback_index].formQuestions;
+    console.log(A, "====A=====");
   } else {
-    A = [{ question: "", questionType: "" }]
-    console.log(A, "====B=====")
+    A = [{ question: "", questionType: "" }];
+    console.log(A, "====B=====");
   }
   const [inputList, setInputList] = useState(A);
 
-
-
   const testfunc = (x, y) => {
-    console.log(x, "x")
     if (x > 0) {
-
-      createfeedback[feedback_index].formQuestions = inputList
-      console.log(createfeedback[feedback_index].formQuestions, "update")
-
+      createfeedback[feedback_index].formQuestions = inputList;
+      console.log(createfeedback[feedback_index].formQuestions, "update");
     } else {
-      createfeedback[feedback_index].formQuestions.push(inputList[y])
-      console.log(createfeedback[feedback_index].formQuestions, "create")
-
+      // createfeedback[feedback_index].formQuestions.push(inputList[y]);
+      createfeedback[feedback_index].formQuestions = inputList;
+      console.log(createfeedback[feedback_index].formQuestions, "create");
     }
 
-    console.log(createfeedback, "cccc")
-
-  }
+    //console.log(createfeedback, "cccc");
+  };
 
   // handle input change
   const handleInputChange = (e, index) => {
@@ -49,7 +41,6 @@ const FormQuestions = () => {
     const list = [...inputList];
     list[index][name] = value;
     setInputList(list);
-
   };
 
   // handle click event of the Remove button
@@ -57,8 +48,8 @@ const FormQuestions = () => {
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
-    createfeedback[feedback_index].formQuestions = list
-
+    createfeedback[feedback_index].formQuestions = list;
+    //testfunc(createfeedback[feedback_index].formQuestions.length, index);
   };
 
   // handle click event of the Add button
@@ -74,7 +65,6 @@ const FormQuestions = () => {
       >
         {inputList?.map((x, i) => {
           return (
-
             <Card.Body>
               <Row>
                 <Col>
@@ -82,8 +72,6 @@ const FormQuestions = () => {
                     <Form.Group className="mb-3">
                       <Form.Label>Question {i + 1}</Form.Label>
                       <Form.Control
-
-
                         type="text"
                         name="question"
                         placeholder="Add Your Question"
@@ -101,7 +89,6 @@ const FormQuestions = () => {
                         onChange={(e) => handleInputChange(e, i)}
                       />
                     </Form.Group>
-
                   </Form>
                 </Col>
               </Row>
@@ -123,24 +110,22 @@ const FormQuestions = () => {
                     </Button>
                   )}
                 </Col>
-                <Col>
-                  <Button
-                    variant="primary"
-                    onClick={() => testfunc(createfeedback[feedback_index].formQuestions.length, i)}
-                  >
-                    SAVE
-                  </Button>
-                </Col>
               </Row>
             </Card.Body>
-
           );
         })}
       </Card>
+
+      <Button
+        variant="primary"
+        onClick={() =>
+          testfunc(createfeedback[feedback_index].formQuestions.length)
+        }
+      >
+        SAVE
+      </Button>
     </div>
   );
-
-
 };
 
 export default FormQuestions;
