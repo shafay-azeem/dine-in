@@ -40,18 +40,23 @@ import { Col, Form, FormCheck, Row } from "react-bootstrap";
 const SettingDrawer = (props) => {
   console.log(props.menuCreate, "props.menuCreate");
 
-
   // DATA AND TIME
-  const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const weekday = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
   var date_time = new Date().toLocaleString();
 
   //DAY
   const d = new Date();
   let day = weekday[d.getDay()];
 
-
   // const dateInput = document.getElementById('date');
-
 
   // dateInput.value = new Date().toISOString().split('T')[0];
 
@@ -59,18 +64,15 @@ const SettingDrawer = (props) => {
 
   ///
 
-
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
   const { response, setResponse } = MenuState();
   const [value, setValue] = useState("1");
 
-
-
   const nameState = props?.menuCreate ? "" : response[props?.index]?.menuName;
   const [name, setName] = useState(nameState);
-  const [availability, setAvailability] = useState("All Day")
+  const [availability, setAvailability] = useState("All Day");
 
   const descriptionState = props?.menuCreate
     ? ""
@@ -112,9 +114,8 @@ const SettingDrawer = (props) => {
     }
   }
   const handleChange = (e) => {
-    setFormChecked(e.target.checked)
-
-  }
+    setFormChecked(e.target.checked);
+  };
 
   const [active, setActive] = useState(TOGGLE);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -128,35 +129,30 @@ const SettingDrawer = (props) => {
     alert("Menu Updated Successfully");
   };
 
-  console.log(startTime)
+  console.log(startTime);
   const menuCreate = () => {
-
-    let SpecificDate
+    let SpecificDate;
     if (value == 2) {
       if (formChecked == false) {
         SpecificDate = {
           startDate: startDate,
           startTime: startTime,
           endDate: endDate,
-          endTime: endTime
-        }
-      }
-      else {
+          endTime: endTime,
+        };
+      } else {
         SpecificDate = {
           startDate: startDate,
           endDate: endDate,
-
-        }
+        };
       }
-
     } else {
       SpecificDate = {
-        availability: availability
-      }
+        availability: availability,
+      };
     }
 
     let menuData = {
-
       id: getTimestampInSeconds(),
       menuName: name,
       menuDescription: description,
@@ -310,6 +306,7 @@ const SettingDrawer = (props) => {
               {/* Visibility */}
 
               {/* Availability */}
+
               <TabPanel>
                 <RadioGroup onChange={setValue} value={value}>
                   <Radio value="1" id="always">
@@ -336,47 +333,81 @@ const SettingDrawer = (props) => {
                         <Col>
                           <FormControl mt={5}>
                             <FormLabel fontWeight="400">Start Date</FormLabel>
-                            <input id='date' type='date' onChange={(e) => setStartDate(e.target.value)} ></input>
+                            <input
+                              id="date"
+                              type="date"
+                              onChange={(e) => setStartDate(e.target.value)}
+                            ></input>
                           </FormControl>
                         </Col>
                         <Col>
                           <FormControl mt={5}>
                             <FormLabel fontWeight="400">End Date</FormLabel>
-                            <input id='date-input' type='date' onChange={(e) => setEndDate(e.target.value)}></input>
+                            <input
+                              id="date-input"
+                              type="date"
+                              onChange={(e) => setEndDate(e.target.value)}
+                            ></input>
                           </FormControl>
                         </Col>
                       </Row>
 
                       <Box mt={3}>
-                        <Form.Check type="checkbox" label="All Day" onChange={(e) => handleChange(e)} checked={formChecked} />
+                        <Form.Check
+                          type="checkbox"
+                          label="All Day"
+                          onChange={(e) => handleChange(e)}
+                          checked={formChecked}
+                        />
                       </Box>
                       {formChecked == false ? (
                         <Box>
                           <Row>
                             <Col>
                               <FormControl mt={5}>
-                                <FormLabel fontWeight="400">Start Time</FormLabel>
-                                <input type='time' onChange={(e) => setStartTime(e.target.value)} ></input>
+                                <FormLabel fontWeight="400">
+                                  Start Time
+                                </FormLabel>
+                                <input
+                                  type="time"
+                                  onChange={(e) => setStartTime(e.target.value)}
+                                ></input>
                               </FormControl>
                             </Col>
                             <Col>
                               <FormControl mt={5}>
                                 <FormLabel fontWeight="400">End Time</FormLabel>
-                                <input type='time' onChange={(e) => setEndTime(e.target.value)}></input>
+                                <input
+                                  type="time"
+                                  onChange={(e) => setEndTime(e.target.value)}
+                                ></input>
                               </FormControl>
                             </Col>
                           </Row>
                         </Box>
-
-                      ) : (null)}
-
-                    </Box>) : (
-                    null
-                  )}
-
-
-
+                      ) : null}
+                    </Box>
+                  ) : null}
                 </RadioGroup>
+
+                <Box>
+                  {weekday?.map((x, index) => {
+                    return (
+                      <Row key={index}>
+                        <Col>
+                          <Form.Check type="checkbox" />
+                        </Col>
+                        <Col>{x}</Col>
+                        <Col>
+                          <input type="time"></input>
+                        </Col>
+                        <Col>
+                          <input type="time"></input>
+                        </Col>
+                      </Row>
+                    );
+                  })}
+                </Box>
               </TabPanel>
               {/* Availability */}
             </TabPanels>
@@ -421,7 +452,7 @@ const SettingDrawer = (props) => {
           {/* <CustomButton btnText={"Save"} mr={3} size={"sm"} /> */}
         </DrawerFooter>
       </DrawerContent>
-    </Drawer >
+    </Drawer>
   );
 };
 
