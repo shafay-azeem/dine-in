@@ -70,6 +70,7 @@ const SettingDrawer = (props) => {
 
   const nameState = props?.menuCreate ? "" : response[props?.index]?.menuName;
   const [name, setName] = useState(nameState);
+  const [availability, setAvailability] = useState("All Day")
 
   const descriptionState = props?.menuCreate
     ? ""
@@ -127,28 +128,47 @@ const SettingDrawer = (props) => {
     alert("Menu Updated Successfully");
   };
 
-  let menuData = {
-    id: getTimestampInSeconds(),
-    menuName: name,
-    menuDescription: description,
-    menuNote: note,
-    menuStatus: active,
-    section: [],
-  };
-
-  // function myfun(){
-
-  // }
-
-  // if (value == "2") {
-  //   document.getElementById("always").setAttribute("isDisabled");
-  // }
-
+  console.log(startTime)
   const menuCreate = () => {
+
+    let SpecificDate
+    if (value == 2) {
+      if (formChecked == false) {
+        SpecificDate = {
+          startDate: startDate,
+          startTime: startTime,
+          endDate: endDate,
+          endTime: endTime
+        }
+      }
+      else {
+        SpecificDate = {
+          startDate: startDate,
+          endDate: endDate,
+
+        }
+      }
+
+    } else {
+      SpecificDate = {
+        availability: availability
+      }
+    }
+
+    let menuData = {
+
+      id: getTimestampInSeconds(),
+      menuName: name,
+      menuDescription: description,
+      menuNote: note,
+      menuStatus: active,
+      availaibility: [SpecificDate],
+      section: [],
+    };
     response.push(menuData);
     alert("Menu Created");
     setResponse([...response]);
-    //console.log(response, "create menu");
+    console.log(response, "create menu");
   };
 
   return (
@@ -342,7 +362,7 @@ const SettingDrawer = (props) => {
                             <Col>
                               <FormControl mt={5}>
                                 <FormLabel fontWeight="400">End Time</FormLabel>
-                                <input type='time' onChange={(e) => setEndDate(e.target.value)}></input>
+                                <input type='time' onChange={(e) => setEndTime(e.target.value)}></input>
                               </FormControl>
                             </Col>
                           </Row>
