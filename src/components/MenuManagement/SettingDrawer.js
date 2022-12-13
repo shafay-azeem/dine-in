@@ -35,15 +35,38 @@ import { MenuState } from "../../context/MenuContext";
 import { useState } from "react";
 import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
 import { isDisabled } from "@testing-library/user-event/dist/utils";
+import { Col, Form, FormCheck, Row } from "react-bootstrap";
 
 const SettingDrawer = (props) => {
   console.log(props.menuCreate, "props.menuCreate");
+
+
+  // DATA AND TIME
+  const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var date_time = new Date().toLocaleString();
+
+  //DAY
+  const d = new Date();
+  let day = weekday[d.getDay()];
+
+
+  // const dateInput = document.getElementById('date');
+
+
+  // dateInput.value = new Date().toISOString().split('T')[0];
+
+  // console.log(new Date().toISOString().split('T')[0]);
+
+  ///
+
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
   const { response, setResponse } = MenuState();
   const [value, setValue] = useState("1");
+
+
 
   const nameState = props?.menuCreate ? "" : response[props?.index]?.menuName;
   const [name, setName] = useState(nameState);
@@ -59,6 +82,11 @@ const SettingDrawer = (props) => {
 
   const noteState = props?.menuCreate ? "" : response[props?.index]?.menuNote;
   const [note, setNote] = useState(noteState);
+  const [formChecked, setFormChecked] = useState(true);
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [startTime, setStartTime] = useState();
+  const [endTime, setEndTime] = useState();
 
   const conditonMade = props?.menuCreate ? "menuCreate" : "section";
 
@@ -82,14 +110,10 @@ const SettingDrawer = (props) => {
       TOGGLE = true;
     }
   }
+  const handleChange = (e) => {
+    setFormChecked(e.target.checked)
 
-  // let TOGGLE;
-
-  // if (response[props?.index]?.menuStatus === true) {
-  //   TOGGLE = true;
-  // } else {
-  //   TOGGLE = false;
-  // }
+  }
 
   const [active, setActive] = useState(TOGGLE);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -278,233 +302,60 @@ const SettingDrawer = (props) => {
                   <Radio value="2" mt={3}>
                     Specific Dates & Times
                   </Radio>
+
                   <Text ml={6} fontSize="13px" color="gray" mt={3}>
                     The menu will be visible between specific dates.
                   </Text>
                   <Text ml={6} fontSize="14px" color="gray">
-                    Current Time: Wednesday, November 9th 2022, 01:38:25
+                    Current Time : {day} {date_time}
                   </Text>
 
-                  <FormControl mt={5}>
-                    <FormLabel fontWeight="400">Start Date</FormLabel>
-                    <Input
-                      placeholder="Select Date and Time"
-                      size="sm"
-                      type="date"
-                    />
-                  </FormControl>
+                  {value == 2 ? (
+                    <Box>
+                      <Row>
+                        <Col>
+                          <FormControl mt={5}>
+                            <FormLabel fontWeight="400">Start Date</FormLabel>
+                            <input id='date' type='date' onChange={(e) => setStartDate(e.target.value)} ></input>
+                          </FormControl>
+                        </Col>
+                        <Col>
+                          <FormControl mt={5}>
+                            <FormLabel fontWeight="400">End Date</FormLabel>
+                            <input id='date-input' type='date' onChange={(e) => setEndDate(e.target.value)}></input>
+                          </FormControl>
+                        </Col>
+                      </Row>
 
-                  <FormControl mt={5}>
-                    <FormLabel fontWeight="400">End Date</FormLabel>
-                    <Input
-                      placeholder="Select Date and Time"
-                      size="sm"
-                      type="date"
-                    />
-                  </FormControl>
+                      <Box mt={3}>
+                        <Form.Check type="checkbox" label="All Day" onChange={(e) => handleChange(e)} checked={formChecked} />
+                      </Box>
+                      {formChecked == false ? (
+                        <Box>
+                          <Row>
+                            <Col>
+                              <FormControl mt={5}>
+                                <FormLabel fontWeight="400">Start Time</FormLabel>
+                                <input type='time' onChange={(e) => setStartTime(e.target.value)} ></input>
+                              </FormControl>
+                            </Col>
+                            <Col>
+                              <FormControl mt={5}>
+                                <FormLabel fontWeight="400">End Time</FormLabel>
+                                <input type='time' onChange={(e) => setEndDate(e.target.value)}></input>
+                              </FormControl>
+                            </Col>
+                          </Row>
+                        </Box>
 
-                  <Radio value="3" mt={5}>
-                    All Day
-                  </Radio>
+                      ) : (null)}
 
-                  <FormControl mt={5}>
-                    <FormLabel fontWeight="400">Start Date</FormLabel>
-                    <Input
-                      placeholder="Select Date and Time"
-                      size="sm"
-                      type="date"
-                    />
-                  </FormControl>
+                    </Box>) : (
+                    null
+                  )}
 
-                  <FormControl mt={5}>
-                    <FormLabel fontWeight="400">End Date</FormLabel>
-                    <Input
-                      placeholder="Select Date and Time"
-                      size="sm"
-                      type="date"
-                    />
-                  </FormControl>
 
-                  <Radio value="4" mt={5} mb={4}>
-                    Periodic
-                  </Radio>
 
-                  <SimpleGrid columns={3} spacing={10} ml={5}>
-                    <Box>
-                      <Radio mt={1}>Sunday</Radio>
-                    </Box>
-
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">Start Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">End Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-
-                    <Box>
-                      <Radio mt={1}>Monday</Radio>
-                    </Box>
-
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">Start Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">End Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-
-                    <Box>
-                      <Radio mt={1}>Tuesday</Radio>
-                    </Box>
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">Start Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">End Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-
-                    <Box>
-                      <Radio mt={1}>Wednesday</Radio>
-                    </Box>
-
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">Start Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">End Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-
-                    <Box>
-                      <Radio mt={1}>Thursday</Radio>
-                    </Box>
-
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">Start Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">End Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-
-                    <Box>
-                      <Radio mt={1}>Friday</Radio>
-                    </Box>
-
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">Start Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">End Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-
-                    <Box>
-                      <Radio mt={1}>Saturday</Radio>
-                    </Box>
-
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">Start Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-                    <Box>
-                      <FormControl mt={1}>
-                        <FormLabel fontWeight="400">End Time</FormLabel>
-                        <Input
-                          placeholder="Select Date and Time"
-                          size="sm"
-                          type="time"
-                        />
-                      </FormControl>
-                    </Box>
-                  </SimpleGrid>
                 </RadioGroup>
               </TabPanel>
               {/* Availability */}
@@ -550,7 +401,7 @@ const SettingDrawer = (props) => {
           {/* <CustomButton btnText={"Save"} mr={3} size={"sm"} /> */}
         </DrawerFooter>
       </DrawerContent>
-    </Drawer>
+    </Drawer >
   );
 };
 
