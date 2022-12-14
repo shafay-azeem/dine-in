@@ -90,7 +90,7 @@ const ItemDrawer = (props) => {
 
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
-  const [image, setImage] = useState();
+
   const [video, setVideo] = useState();
 
   const [name, setName] = useState(initialState);
@@ -299,6 +299,13 @@ const ItemDrawer = (props) => {
     : sectionArr?.itemIron;
   const initialState32 = props.subsection_push ? "" : itemCondtionState32;
   const [iron, setIron] = useState(initialState32);
+
+  const itemCondtionState33 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.image
+    : sectionArr?.image;
+  const initialState33 = props.subsection_push ? "" : itemCondtionState33;
+
+  const [image, setImage] = useState(initialState33);
 
   const conditonMade = Number.isInteger(props?.subsection_index)
     ? "subSection"
@@ -542,6 +549,10 @@ const ItemDrawer = (props) => {
         props.subsection_index
       ].item[props.item_index].itemModifierOptions = modifier;
 
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[props.item_index].image = image;
+
       setResponse([...response]);
       alert("Item With-In SubSection Updated Successfully");
     } else {
@@ -670,6 +681,10 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemModifierOptions = modifier;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].image = image;
 
       setResponse([...response]);
 
@@ -954,6 +969,7 @@ const ItemDrawer = (props) => {
                       type="file"
                       accept=".jpg,.png"
                       onChange={pictureCapture}
+                      alt={image}
                     />
                   </FormControl>
 

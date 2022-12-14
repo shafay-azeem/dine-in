@@ -68,6 +68,14 @@ const SectionDrawer = (props) => {
 
   const [note, setNote] = useState(noteState);
 
+  const imageState = Number.isInteger(props?.subsection_index)
+    ? response[props.menu_index].section[props?.section_index]?.subSection[
+        props?.subsection_index
+      ]?.image
+    : response[props.menu_index].section[props?.section_index]?.image;
+
+  const [image, setImage] = useState(imageState);
+
   const [searchSection, setsearchSection] = useState();
 
   const labelState = Number.isInteger(props?.subsection_index)
@@ -120,6 +128,10 @@ const SectionDrawer = (props) => {
   //     setValueTrue(false);
   //   }
   // }
+  const pictureCapture = (event) => {
+    let value = URL.createObjectURL(event.target.files[0]);
+    setImage(value);
+  };
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -132,6 +144,7 @@ const SectionDrawer = (props) => {
     sectionNote: note,
     sectionLabel: select,
     sectionStatus: checked,
+    image: image,
     item: [],
     subSection: [],
   };
@@ -180,6 +193,9 @@ const SectionDrawer = (props) => {
 
       response[props.menu_index].section[props.section_index].sectionStatus =
         checked;
+
+      response[props.menu_index].section[props.section_index].image = image;
+
       function compare(a, b) {
         if (a.sectionName < b.sectionName) {
           return -1;
@@ -213,6 +229,10 @@ const SectionDrawer = (props) => {
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].sectionStatus = checked;
+
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].image = image;
 
       setResponse([...response]);
       alert("SubSection Updated Successfully");
@@ -278,6 +298,17 @@ const SectionDrawer = (props) => {
                       type="text"
                       onChange={(e) => setNote(e.target.value)}
                       value={note}
+                    />
+                  </FormControl>
+
+                  <FormControl mt={3}>
+                    <FormLabel fontWeight="400">Upload Your Image</FormLabel>
+                    <Input
+                      size="sm"
+                      type="file"
+                      accept=".jpg,.png"
+                      onChange={pictureCapture}
+                      alt={image}
                     />
                   </FormControl>
 

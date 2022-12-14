@@ -30,6 +30,7 @@ import {
   AiFillEdit,
   AiFillFileAdd,
 } from "react-icons/ai";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 const ItemCard = (props) => {
   console.log(props.menu_index, "pp", props.section_index, "qq");
@@ -37,8 +38,8 @@ const ItemCard = (props) => {
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ].item
+        props?.subsection_index
+      ].item
     : response[props?.menu_index]?.section[props?.section_index]?.item;
 
   const [itemList, setItemList] = useState(initialState);
@@ -192,13 +193,11 @@ const ItemCard = (props) => {
                           <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                             <GridItem colSpan={2} h="10">
                               <HStack>
-
                                 <Image
                                   boxSize="43px"
                                   objectFit="cover"
                                   borderRadius={3}
                                   src={x.image}
-                                  alt="Dan Abramov"
                                 />
 
                                 <Text pl={2}>
@@ -268,7 +267,12 @@ const ItemCard = (props) => {
                                     />
                                   </InputGroup>
                                 </Box>
-                                {x.active ? (
+                                <BootstrapSwitchButton
+                                  checked={x.active}
+                                  onChange={() => switchStatus(index)}
+                                  data-size="xs"
+                                />
+                                {/* {x.active ? (
                                   <Box py={2}>
                                     <Switch
                                       size="sm"
@@ -283,7 +287,7 @@ const ItemCard = (props) => {
                                       onChange={() => switchStatus(index)}
                                     />
                                   </Box>
-                                )}
+                                )} */}
 
                                 <Box>
                                   <Menu>

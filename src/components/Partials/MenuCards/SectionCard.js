@@ -37,6 +37,7 @@ import SectionDrawer from "../../MenuManagement/SectionDrawer";
 import { AddIcon, SearchIcon } from "@chakra-ui/icons";
 import { AiFillCopy } from "react-icons/ai";
 import SubSectionCard from "./SubSectionCard";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 const SectionCard = (props) => {
   let menu_index = props?.menu_index;
@@ -78,12 +79,16 @@ const SectionCard = (props) => {
 
   const duplicate = (x, index) => {
     let filterSec = [];
-    console.log(index, "index=================")
+    console.log(index, "index=================");
 
     function getTimestampInSeconds() {
       return Math.floor(Date.now() / 1000);
     }
-    console.log(response[menu_index]?.section[index].item, "=========+_+==========")
+
+    console.log(
+      response[menu_index]?.section[index].item,
+      "=========+_+=========="
+    );
 
     let sectionData = {
       sectionId: getTimestampInSeconds(),
@@ -211,8 +216,7 @@ const SectionCard = (props) => {
                                   boxSize="43px"
                                   objectFit="cover"
                                   borderRadius={3}
-                                  src="https://bit.ly/dan-abramov"
-                                  alt="Dan Abramov"
+                                  src={x.image}
                                 />
                                 {sectionList?.length == 0 ? (
                                   <Text>"NO DATA FOUND"</Text>
@@ -248,22 +252,12 @@ const SectionCard = (props) => {
                             </GridItem>
                             <GridItem colStart={4} colEnd={6} h="10" ml="auto">
                               <HStack>
-                                {x.sectionStatus ? (
-                                  <Box py={2}>
-                                    <Switch
-                                      size="sm"
-                                      isChecked
-                                      onChange={() => switchStatus(index)}
-                                    />
-                                  </Box>
-                                ) : (
-                                  <Box py={2}>
-                                    <Switch
-                                      size="sm"
-                                      onChange={() => switchStatus(index)}
-                                    />
-                                  </Box>
-                                )}
+                                <BootstrapSwitchButton
+                                  checked={x.sectionStatus}
+                                  onChange={() => switchStatus(index)}
+                                  data-size="xs"
+                                />
+
                                 <Box>
                                   <Menu>
                                     <MenuButton
