@@ -38,6 +38,7 @@ export const MenuProvider = ({ children }) => {
   const [feedback, setFeedback] = useState([]);
   const [createfeedback, setCreateFeedback] = useState([]);
   const [activeForm, setActiveForm] = useState();
+  const [notification, setNotification] = useState();
 
 
   return (
@@ -50,7 +51,9 @@ export const MenuProvider = ({ children }) => {
         createfeedback,
         setCreateFeedback,
         activeForm,
-        setActiveForm
+        setActiveForm,
+        notification,
+        setNotification
       }}
     >
       {children}

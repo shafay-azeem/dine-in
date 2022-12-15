@@ -6,7 +6,7 @@ import { MenuState } from "../../context/MenuContext";
 import "./RestaurantMenu.css";
 
 const MenuFeedBackForm = () => {
-  const { feedback, setFeedback, activeForm, createfeedback, setCreateFeedback } =
+  const { feedback, setFeedback, activeForm, createfeedback, setCreateFeedback, setNotification, notification } =
     MenuState();
   const [demo, setDemo] = useState(createfeedback[activeForm]?.formQuestions);
   const [question, setQuestion] = useState();
@@ -38,6 +38,7 @@ const MenuFeedBackForm = () => {
       jsonObj["position" + (i + 1)] = A[i];
     }
     feedback.push(jsonObj);
+    setNotification(true)
     alert("feedback Submitted");
     document.getElementById("myForm").reset();
     setFeedback([...feedback]);

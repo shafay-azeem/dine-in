@@ -37,9 +37,42 @@ import {
 } from "@chakra-ui/react";
 import Reports from "../Reports/Reports";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { MenuState } from "../../context/MenuContext";
 
 const SideDrawer = () => {
+  const { setNotification, notification } = MenuState();
   const navigate = useNavigate();
+
+  const createNotification = (type) => {
+
+    switch (type) {
+      case 'success':
+
+        NotificationManager.success('Success message', 'Title here');
+        break;
+
+      case 'error':
+        NotificationManager.error('Error message', 'Click me!', 5000, () => {
+          alert('callback');
+        });
+        break;
+    }
+
+  };
+
+
+  useEffect(() => {
+    if (notification == true) {
+      createNotification("success")
+      setNotification(false)
+      console.log(notification, "notifivstiom")
+    }
+
+  });
+
 
   const home = () => {
 
@@ -192,7 +225,10 @@ const SideDrawer = () => {
               <MenuItem icon={<UnlockIcon />}>Sign Out</MenuItem>
             </MenuList>
           </Menu>
+
         </div>
+
+
       </Box>
 
       <Drawer
@@ -317,6 +353,7 @@ const SideDrawer = () => {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
+      <NotificationContainer />
     </>
   );
 };
