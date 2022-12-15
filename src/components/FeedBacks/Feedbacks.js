@@ -31,12 +31,13 @@ import XLSX from "sheetjs-style";
 import excelData from "../Orders/Export.json";
 import { MenuState } from "../../context/MenuContext";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import BootstrapSwitchButton from 'bootstrap-switch-button-react'
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 const Feedbacks = () => {
   const navigate = useNavigate();
   const handle = useFullScreenHandle();
-  const { createfeedback, setCreateFeedback, activeForm, setActiveForm } = MenuState();
+  const { createfeedback, setCreateFeedback, activeForm, setActiveForm } =
+    MenuState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showform, setShowForm] = useState(false);
   const [showresult, setShowResult] = useState(true);
@@ -99,26 +100,22 @@ const Feedbacks = () => {
     });
   };
   const switchStatus = (index) => {
-    console.log(index, "index")
+    console.log(index, "index");
     for (let i = 0; i < createfeedback.length; i++) {
       if (index === i) {
         createfeedback[index].active = !createfeedback[i].active;
         setCreateFeedback([...createfeedback]);
         if (createfeedback[index].active == false) {
-          setActiveForm("")
+          setActiveForm("");
+        } else {
+          setActiveForm(index);
         }
-        else {
-          setActiveForm(index)
-        }
-
-      }
-      else {
+      } else {
         createfeedback[i].active = false;
         setCreateFeedback([...createfeedback]);
       }
     }
-
-  }
+  };
 
   return (
     <>
@@ -214,7 +211,13 @@ const Feedbacks = () => {
               <TabPanel>
                 {feedbackFormList?.map((x, index) => {
                   return (
-                    <Box h="90px" bg="white" borderRadius={6} mt={2} key={index}>
+                    <Box
+                      h="90px"
+                      bg="white"
+                      borderRadius={6}
+                      mt={2}
+                      key={index}
+                    >
                       <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                         <GridItem colSpan={2}>
                           <Text p={8}>{x.formName}</Text>
@@ -230,7 +233,6 @@ const Feedbacks = () => {
                             checked={x.active}
                             onChange={() => switchStatus(index)}
                             data-size="xs"
-
                           />
                           <Tooltip label="Edit">
                             <EditIcon mr={4} onClick={() => editForm(index)} />

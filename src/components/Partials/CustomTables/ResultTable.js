@@ -1,4 +1,6 @@
+import { ViewIcon } from "@chakra-ui/icons";
 import {
+  Icon,
   Table,
   TableContainer,
   Tbody,
@@ -9,37 +11,39 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import React from "react";
+import { MenuState } from "../../../context/MenuContext";
 
 const ResultTable = () => {
-  const data = [
-    {
-      ID: 1,
-      Result: "Passed",
-      Date: "12-01-22",
-      Form: "I am form",
-      Action: "Result",
-    },
-    {
-      ID: 2,
-      Result: "Failed",
-      Date: "13-01-22",
-      Form: "I am form",
-      Action: "Result",
-    },
-    {
-      ID: 3,
-      Result: "Passed",
-      Date: "11-01-22",
-      Form: "I am form",
-      Action: "Result",
-    },
-  ];
+  const { createfeedback, setCreateFeedback } = MenuState();
+  // const data = [
+  //   {
+  //     ID: 1,
+  //     Result: "Passed",
+  //     Date: "12-01-22",
+  //     Form: "I am form",
+  //     Action: "Result",
+  //   },
+  //   {
+  //     ID: 2,
+  //     Result: "Failed",
+  //     Date: "13-01-22",
+  //     Form: "I am form",
+  //     Action: "Result",
+  //   },
+  //   {
+  //     ID: 3,
+  //     Result: "Passed",
+  //     Date: "11-01-22",
+  //     Form: "I am form",
+  //     Action: "Result",
+  //   },
+  // ];
   return (
     <>
       <TableContainer>
         <Table variant="simple">
           <Thead backgroundColor="#FAFAFA">
-            <Tr>
+            <Tr style={{ textAlign: "center" }}>
               <Th>Results</Th>
               <Th>Date</Th>
               <Th>Form</Th>
@@ -47,14 +51,20 @@ const ResultTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((x, index) => (
-              <Tr key={index}>
-                <Td>{x.Result}</Td>
-                <Td>{x.Date}</Td>
-                <Td>{x.Form}</Td>
-                <Td>{x.Action}</Td>
-              </Tr>
-            ))}
+            {createfeedback?.map((x, index) => {
+              return (
+                <Tr key={index}>
+                  <Td>Form {x.id}</Td>
+                  <Td>
+                    {x.createdDate} {x.createdTime}
+                  </Td>
+                  <Td>{x.formName}</Td>
+                  <Td style={{ textAlign: "center", cursor: "pointer" }}>
+                    <Icon as={ViewIcon} />
+                  </Td>
+                </Tr>
+              );
+            })}
           </Tbody>
         </Table>
       </TableContainer>

@@ -33,14 +33,16 @@ const CreateFormModal = (props) => {
     formName: formName,
     welcomeMessage: welcomeMessage,
     active: false,
-    formQuestions: []
+    formQuestions: [],
+    createdDate: new Date().toLocaleDateString(),
+    createdTime: new Date().toTimeString().slice(0, 8),
   };
 
   const formCreate = () => {
     createfeedback.push(feedbackFormData);
     console.log(createfeedback, "createfeedback");
     alert("FeedBack Form Created Successfully");
-    document.getElementById("myForm").reset();
+    //document.getElementById("myForm").reset();
   };
 
   return (

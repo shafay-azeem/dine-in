@@ -26,10 +26,12 @@ const FormQuestions = () => {
     if (x > 0) {
       createfeedback[feedback_index].formQuestions = inputList;
       console.log(createfeedback[feedback_index].formQuestions, "update");
+      alert("Your Question Updated");
     } else {
       // createfeedback[feedback_index].formQuestions.push(inputList[y]);
       createfeedback[feedback_index].formQuestions = inputList;
       console.log(createfeedback[feedback_index].formQuestions, "create");
+      alert("Your Question Has Been Submitted");
     }
 
     //console.log(createfeedback, "cccc");
