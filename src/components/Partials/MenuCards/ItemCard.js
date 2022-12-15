@@ -124,6 +124,7 @@ const ItemCard = (props) => {
       itemNutritionCalories: x.itemNutritionCalories,
       itemCaloriesFat: x.itemCaloriesFat,
       itemServingSize: x.itemServingSize,
+      image: x.image,
     };
 
     if (y != null) {

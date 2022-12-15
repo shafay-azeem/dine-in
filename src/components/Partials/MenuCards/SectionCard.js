@@ -79,7 +79,7 @@ const SectionCard = (props) => {
 
   const duplicate = (x, index) => {
     let filterSec = [];
-    console.log(index, "index=================");
+    // console.log(index, "index=================");
 
     function getTimestampInSeconds() {
       return Math.floor(Date.now() / 1000);
@@ -97,6 +97,7 @@ const SectionCard = (props) => {
       sectionStatus: x.sectionStatus,
       sectionNote: x.sectionNote,
       sectionLabel: x.sectionLabel,
+      image: x.image,
       item: response[menu_index]?.section[index].item,
       subSection: response[menu_index]?.section[index].subSection,
     };
