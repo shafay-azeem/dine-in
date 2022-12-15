@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 
 const MenuConfiguration = () => {
   const [inputList, setInputList] = useState([]);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState("http://localhost:3000/menustart");
   const [qr, setQr] = useState("");
   const navigate = useNavigate();
 
@@ -96,8 +96,11 @@ const MenuConfiguration = () => {
                   placeholder="e.g. https://google.com"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
+                  style={{ width: "10rem" }}
                 />
-                <button onClick={GenerateQRCode}>Generate</button>
+                <button onClick={GenerateQRCode} style={{ marginLeft: "10px" }}>
+                  Generate
+                </button>
                 {qr && (
                   <>
                     <img
