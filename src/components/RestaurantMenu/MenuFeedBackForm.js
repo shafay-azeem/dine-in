@@ -35,13 +35,15 @@ const MenuFeedBackForm = () => {
   const feedbackSubmit = () => {
     var jsonObj = {};
     for (var i = 0; i < A.length; i++) {
-      jsonObj["position" + (i + 1)] = A[i];
+      jsonObj["answer" + (i + 1)] = A[i];
     }
     feedback.push(jsonObj);
     setNotification(true)
     alert("feedback Submitted");
     document.getElementById("myForm").reset();
     setFeedback([...feedback]);
+    console.log(demo, "demo")
+    console.log(createfeedback, "createfeedback")
     console.log(feedback, "feedback Submitted");
   };
 

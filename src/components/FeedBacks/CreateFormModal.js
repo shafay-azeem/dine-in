@@ -34,6 +34,7 @@ const CreateFormModal = (props) => {
     welcomeMessage: welcomeMessage,
     active: false,
     formQuestions: [],
+    formAnswers: [],
     createdDate: new Date().toLocaleDateString(),
     createdTime: new Date().toTimeString().slice(0, 8),
   };
