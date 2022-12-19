@@ -19,6 +19,8 @@ const DisplayItemCard = (props) => {
     });
   };
 
+  // console.log(props.item_response, "props.item_response");
+
   return (
     <div className="mx-auto mt-3">
       <Row>
@@ -33,7 +35,7 @@ const DisplayItemCard = (props) => {
                   <Row>
                     <Col lg={4} className="p-0">
                       <img
-                        // src={require(".../Assets/burger.jpg")}
+                        src={x.image}
                         className="image mx-auto d-block w-100"
                       />
                     </Col>

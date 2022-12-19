@@ -70,7 +70,7 @@ const ItemDrawer = (props) => {
 
   let sectionArr =
     response[props.menu_index].section[props?.section_index]?.item[
-    props?.item_index
+      props?.item_index
     ];
 
   const itemCondtionState = Number.isInteger(props?.subsection_index)
@@ -374,7 +374,6 @@ const ItemDrawer = (props) => {
     itemDescription: description,
     active: checked,
     image: image,
-    itemPrice: itemprice,
     itemCalorie: calorie,
     itemTag: sold,
     itemLabel: select,
@@ -570,6 +569,10 @@ const ItemDrawer = (props) => {
     } else {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
+      ].itemPrice = itemprice;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
       ].itemLabel = select;
 
       response[props.menu_index].section[props.section_index].item[
@@ -579,9 +582,11 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemName = name;
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemDescription = description;
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemPrepTime = time;
@@ -705,6 +710,10 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].image = image;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemCalorie = calorie;
 
       setResponse([...response]);
 
@@ -1023,10 +1032,6 @@ const ItemDrawer = (props) => {
                         </ModalBody>
                       </ModalContent>
                     </Modal>
-
-
-
-
                   </FormControl>
 
                   <FormControl mt={3}>

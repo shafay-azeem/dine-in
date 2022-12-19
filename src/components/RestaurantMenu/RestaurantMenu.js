@@ -38,6 +38,7 @@ const RestaurantMenu = (props) => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    rtl: true,
 
     responsive: [
       {
@@ -78,8 +79,8 @@ const RestaurantMenu = (props) => {
           return (
             <div onClick={() => getIndex(index)}>
               <img
-                src={require("../Assets/burger.jpg")}
-                style={{ cursor: "pointer" }}
+                src={x.image}
+                style={{ cursor: "pointer", width: "250px", height: "150px" }}
               />
               <p>{x.sectionName}</p>
             </div>

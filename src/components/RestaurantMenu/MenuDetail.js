@@ -3,9 +3,10 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./MenuDetail.css";
-import { Button, Card } from "react-bootstrap";
+import { Badge, Button, Card } from "react-bootstrap";
 import { MenuState } from "../../context/MenuContext";
 import { useState } from "react";
+import { BsStopwatch } from "react-icons/bs";
 
 const MenuDetail = (props) => {
   const { response, setResponse } = MenuState();
@@ -76,7 +77,7 @@ const MenuDetail = (props) => {
                     <Row>
                       <Col lg={4} className="p-0 d-flex align-items-center">
                         <img
-                          src={require("../Assets/burger.jpg")}
+                          src={x.image}
                           className="image mx-auto d-block w-100 align-items-center "
                         />
                       </Col>
@@ -88,8 +89,42 @@ const MenuDetail = (props) => {
                         <Card.Text className="d-flex align-items-center justify-content-center">
                           {x.itemDescription}
                         </Card.Text>
+
                         <Card.Text className="pricetext">
-                          ${x.itemPrice}
+                          {x.itemPrice == "" ? null : (
+                            <div className="d-flex align-items-center">
+                              ${x.itemPrice}
+                            </div>
+                          )}
+
+                          {x.itemPrepTime == "" ? null : (
+                            <div className="d-flex align-items-center">
+                              {x.itemPrepTime} Min
+                            </div>
+                          )}
+                          {x.itemCalorie == "" ? null : (
+                            <div className="d-flex align-items-center">
+                              {x.itemCalorie} Calories
+                            </div>
+                          )}
+                          <div className="d-flex align-items-center">
+                            {x.itemLabel?.map((y, index) => {
+                              return (
+                                <Badge pill bg="primary" key={index}>
+                                  {y}
+                                </Badge>
+                              );
+                            })}
+                          </div>
+                          <div className="d-flex align-items-center">
+                            {x.itemWarning?.map((z, index) => {
+                              return (
+                                <Badge pill bg="primary" key={index}>
+                                  {z}
+                                </Badge>
+                              );
+                            })}
+                          </div>
                         </Card.Text>
 
                         {itemPriceList?.map((y) => {
