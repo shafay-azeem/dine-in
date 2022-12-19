@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Badge, Card, Col, Row } from "react-bootstrap";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import "../RestaurantMenu.css";
 
@@ -45,6 +45,12 @@ const DisplayItemCard = (props) => {
                         onClick={() => menuDetail(index)}
                       >
                         {x.itemName}
+
+                        {x.itemTag ? (
+                          <Badge pill bg="primary">
+                            Sold Out
+                          </Badge>
+                        ) : null}
                       </Card.Title>
                       <Card.Text className="text">
                         {x.itemDescription}
@@ -52,6 +58,25 @@ const DisplayItemCard = (props) => {
                       <Card.Text className="pricetext">
                         ${x.itemPrice}
                       </Card.Text>
+
+                      <div className="d-flex align-items-center">
+                        {x.itemLabel?.map((y, index) => {
+                          return (
+                            <Badge pill bg="primary" key={index}>
+                              {y}
+                            </Badge>
+                          );
+                        })}
+                      </div>
+                      <div className="d-flex align-items-center">
+                        {x.itemWarning?.map((z, index) => {
+                          return (
+                            <Badge pill bg="primary" key={index}>
+                              {z}
+                            </Badge>
+                          );
+                        })}
+                      </div>
                     </Col>
                   </Row>
                 </Card.Body>
