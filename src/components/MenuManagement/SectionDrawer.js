@@ -30,6 +30,7 @@ import {
   ModalContent,
   ModalCloseButton,
   ModalBody,
+  Center,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -53,32 +54,32 @@ const SectionDrawer = (props) => {
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionName
+        props?.subsection_index
+      ]?.sectionName
     : response[props.menu_index].section[props?.section_index]?.sectionName;
   const [name, setName] = useState(initialState);
 
   const descriptionState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionDescription
+        props?.subsection_index
+      ]?.sectionDescription
     : response[props.menu_index].section[props?.section_index]
-      ?.sectionDescription;
+        ?.sectionDescription;
 
   const [description, setDescription] = useState(descriptionState);
 
   const noteState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionNote
+        props?.subsection_index
+      ]?.sectionNote
     : response[props.menu_index].section[props?.section_index]?.sectionNote;
 
   const [note, setNote] = useState(noteState);
 
   const imageState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.image
+        props?.subsection_index
+      ]?.image
     : response[props.menu_index].section[props?.section_index]?.image;
 
   const [image, setImage] = useState(imageState);
@@ -87,8 +88,8 @@ const SectionDrawer = (props) => {
 
   const labelState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionLabel
+        props?.subsection_index
+      ]?.sectionLabel
     : response[props.menu_index].section[props?.section_index]?.sectionLabel;
 
   const [select, setSelect] = useState(labelState);
@@ -97,7 +98,7 @@ const SectionDrawer = (props) => {
 
   let x =
     response[props.menu_index].section[props?.section_index]?.subSection[
-    props?.subsection_index
+      props?.subsection_index
     ];
   let y = response[props.menu_index].section[props?.section_index];
   const conditonMade = Number.isInteger(props?.subsection_index)
@@ -128,7 +129,11 @@ const SectionDrawer = (props) => {
   const [alphabetical, setalphabetical] = useState(false);
   const [val, setVal] = useState();
 
-  const { isOpen: ModalOpen, onOpen: ModalOnOpen, onClose: ModalOnClose } = useDisclosure()
+  const {
+    isOpen: ModalOpen,
+    onOpen: ModalOnOpen,
+    onClose: ModalOnClose,
+  } = useDisclosure();
   // function enabelDisable() {
   //   if (value === "1") {
   //     setValueTrue(true);
@@ -318,35 +323,40 @@ const SectionDrawer = (props) => {
                       type="file"
                       accept=".jpg,.png"
                       onChange={pictureCapture}
-
                     />
                     {image && (
                       <div>
-                        <img className="preview" src={image} alt="" onClick={ModalOnOpen} />
-
+                        <img
+                          className="preview mt-4 mx-auto"
+                          src={image}
+                          alt=""
+                          width="200px"
+                          height="200px"
+                          onClick={ModalOnOpen}
+                        />
                       </div>
                     )}
+
                     <Modal isOpen={ModalOpen} onClose={ModalOnClose}>
                       <ModalOverlay />
                       <ModalContent>
                         <ModalCloseButton />
-                        <ModalBody>
-                          <div>
-                            <img className="preview" src={image} alt="" />
 
-                          </div>
+                        <ModalBody>
+                          <Center>
+                            <div>
+                              <img className="preview p-5" src={image} alt="" />
+                            </div>
+                          </Center>
                         </ModalBody>
-                        {/* <ModalFooter>
-                          <Button colorScheme='blue' mr={3} onClick={ModalOnClose}>
-                            Close
-                          </Button>
-                          <Button variant='ghost'>Secondary Action</Button>
-                        </ModalFooter> */}
                       </ModalContent>
                     </Modal>
 
-                    <ImagePreviewModal show={modalShow} onHide={() => setModalShow(false)} image={image} />
-
+                    <ImagePreviewModal
+                      show={modalShow}
+                      onHide={() => setModalShow(false)}
+                      image={image}
+                    />
                   </FormControl>
 
                   {/* <FormControl mt={3}>
@@ -367,7 +377,7 @@ const SectionDrawer = (props) => {
                   </FormControl>
 
                   {response[props.menu_index].section.length > 1 &&
-                    props?.subsection_index == undefined ? (
+                  props?.subsection_index == undefined ? (
                     <FormControl>
                       <Checkbox
                         isChecked={checkedItems}
