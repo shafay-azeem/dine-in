@@ -10,6 +10,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   Menu,
   MenuButton,
   MenuItem,
@@ -79,8 +80,8 @@ const ItemCard = (props) => {
   };
 
   const duplicate = (x, y) => {
-    console.log(x.itemPrice, "ffff");
-    console.log(y, "=======y=========");
+    // console.log(x.itemPrice, "ffff");
+    // console.log(y, "=======y=========");
 
     function getTimestampInSeconds() {
       return Math.floor(Date.now() / 1000);
@@ -266,29 +267,24 @@ const ItemCard = (props) => {
                                       mr={4}
                                       value={x.itemPrice}
                                     />
+
+                                    <InputRightElement width="4.5rem">
+                                      <Button
+                                        h="1.75rem"
+                                        size="xs"
+                                        marginBottom="8px"
+                                      >
+                                        Ok
+                                      </Button>
+                                    </InputRightElement>
                                   </InputGroup>
                                 </Box>
+
                                 <BootstrapSwitchButton
                                   checked={x.active}
                                   onChange={() => switchStatus(index)}
                                   data-size="xs"
                                 />
-                                {/* {x.active ? (
-                                  <Box py={2}>
-                                    <Switch
-                                      size="sm"
-                                      isChecked
-                                      onChange={() => switchStatus(index)}
-                                    />
-                                  </Box>
-                                ) : (
-                                  <Box py={2}>
-                                    <Switch
-                                      size="sm"
-                                      onChange={() => switchStatus(index)}
-                                    />
-                                  </Box>
-                                )} */}
 
                                 <Box>
                                   <Menu>
