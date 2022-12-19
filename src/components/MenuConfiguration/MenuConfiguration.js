@@ -11,13 +11,15 @@ import {
   Text,
   HStack,
   Switch,
-  Button,
   Input,
   Link,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import QRCode from "qrcode";
 import { useNavigate } from "react-router-dom";
+import Card from 'react-bootstrap/Card';
+import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
 
 const MenuConfiguration = () => {
   const [inputList, setInputList] = useState([]);
@@ -83,39 +85,42 @@ const MenuConfiguration = () => {
 
           <TabPanels>
             <TabPanel>
-              <Box bg="white" w="60%" p={4} borderRadius="6">
-                <Text>Link</Text>
-                {/* <Link href="http://localhost:3000/menustart" isExternal>
-                  Your Restaurant Menu <ExternalLinkIcon mx="2px" />
-                </Link> */}
-                <Text onClick={myfun}>Your Restaurant Menu</Text>
 
-                <h1>QR Generator</h1>
-                <input
-                  type="text"
-                  placeholder="e.g. https://google.com"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  style={{ width: "10rem" }}
-                />
-                <button onClick={GenerateQRCode} style={{ marginLeft: "10px" }}>
-                  Generate
-                </button>
-                {qr && (
-                  <>
-                    <img
-                      src={qr}
-                      style={{
-                        width: "200px",
-                        height: "200px",
-                      }}
-                    />
-                    <a href={qr} download="qrcode.png">
-                      Download
-                    </a>
-                  </>
-                )}
-              </Box>
+              <Card style={{ width: '48rem' }}>
+
+                <Card.Body>
+
+
+
+                  <Nav.Link onClick={myfun}>Your Restaurant Menu</Nav.Link>
+                  <Card.Title>QR Generator</Card.Title>
+
+
+                  <Card.Text>
+                    <text
+                    >http://localhost:3000/menustart </text>
+                    <Button onClick={GenerateQRCode} variant="info">Generate</Button>
+                    <div className="margin-left:auto">
+                      {qr && (
+                        <>
+                          <img
+                            src={qr}
+                            style={{
+                              width: "200px",
+                              height: "200px",
+                            }}
+                          />
+                          <a href={qr} download="qrcode.png">
+                            Download
+                          </a>
+                        </>
+                      )}
+                    </div>
+                  </Card.Text>
+
+                </Card.Body>
+              </Card>
+
             </TabPanel>
             <TabPanel>
               <p>Display Options</p>

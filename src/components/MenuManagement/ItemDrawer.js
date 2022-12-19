@@ -34,6 +34,13 @@ import {
   Box,
   InputLeftElement,
   IconButton,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalBody,
+  Center,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { faXRay } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
@@ -50,6 +57,11 @@ const ItemDrawer = (props) => {
   // console.log(props?.item_index, "item----------");
   // console.log(props?.ItemInMenu, "------------itemInMenu---------");
 
+  const {
+    isOpen: ModalOpen,
+    onOpen: ModalOnOpen,
+    onClose: ModalOnClose,
+  } = useDisclosure();
   const { response, setResponse } = MenuState();
   let subSectionArr =
     response[props.menu_index].section[props?.section_index]?.subSection[
@@ -58,7 +70,7 @@ const ItemDrawer = (props) => {
 
   let sectionArr =
     response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
+    props?.item_index
     ];
 
   const itemCondtionState = Number.isInteger(props?.subsection_index)
@@ -783,6 +795,10 @@ const ItemDrawer = (props) => {
     let value = URL.createObjectURL(event.target.files[0]);
     setImage(value);
   };
+  function deleteimg() {
+    setImage(null);
+    document.getElementById("img").value = "";
+  }
 
   const videoCapture = (event) => {
     setVideo(event);
@@ -977,8 +993,40 @@ const ItemDrawer = (props) => {
                       type="file"
                       accept=".jpg,.png"
                       onChange={pictureCapture}
-                      alt={image}
+                      id="img"
                     />
+                    {image && (
+                      <div>
+                        <img
+                          className="preview mt-4 mx-auto"
+                          src={image}
+                          alt=""
+                          width="200px"
+                          height="200px"
+                          onClick={ModalOnOpen}
+                        />
+                        <Button onClick={deleteimg}>DElete</Button>
+                      </div>
+                    )}
+
+                    <Modal isOpen={ModalOpen} onClose={ModalOnClose}>
+                      <ModalOverlay />
+                      <ModalContent>
+                        <ModalCloseButton />
+
+                        <ModalBody>
+                          <Center>
+                            <div>
+                              <img className="preview p-5" src={image} alt="" />
+                            </div>
+                          </Center>
+                        </ModalBody>
+                      </ModalContent>
+                    </Modal>
+
+
+
+
                   </FormControl>
 
                   <FormControl mt={3}>

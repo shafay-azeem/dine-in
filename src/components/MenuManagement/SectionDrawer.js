@@ -55,32 +55,32 @@ const SectionDrawer = (props) => {
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.sectionName
+      props?.subsection_index
+    ]?.sectionName
     : response[props.menu_index].section[props?.section_index]?.sectionName;
   const [name, setName] = useState(initialState);
 
   const descriptionState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.sectionDescription
+      props?.subsection_index
+    ]?.sectionDescription
     : response[props.menu_index].section[props?.section_index]
-        ?.sectionDescription;
+      ?.sectionDescription;
 
   const [description, setDescription] = useState(descriptionState);
 
   const noteState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.sectionNote
+      props?.subsection_index
+    ]?.sectionNote
     : response[props.menu_index].section[props?.section_index]?.sectionNote;
 
   const [note, setNote] = useState(noteState);
 
   const imageState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.image
+      props?.subsection_index
+    ]?.image
     : response[props.menu_index].section[props?.section_index]?.image;
 
   const [image, setImage] = useState(imageState);
@@ -89,8 +89,8 @@ const SectionDrawer = (props) => {
 
   const labelState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.sectionLabel
+      props?.subsection_index
+    ]?.sectionLabel
     : response[props.menu_index].section[props?.section_index]?.sectionLabel;
 
   const [select, setSelect] = useState(labelState);
@@ -99,7 +99,7 @@ const SectionDrawer = (props) => {
 
   let x =
     response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
+    props?.subsection_index
     ];
   let y = response[props.menu_index].section[props?.section_index];
   const conditonMade = Number.isInteger(props?.subsection_index)
@@ -359,11 +359,8 @@ const SectionDrawer = (props) => {
                       </ModalContent>
                     </Modal>
 
-                    <ImagePreviewModal
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                      image={image}
-                    />
+
+
                   </FormControl>
 
                   {/* <FormControl mt={3}>
@@ -384,7 +381,7 @@ const SectionDrawer = (props) => {
                   </FormControl>
 
                   {response[props.menu_index].section.length > 1 &&
-                  props?.subsection_index == undefined ? (
+                    props?.subsection_index == undefined ? (
                     <FormControl>
                       <Checkbox
                         isChecked={checkedItems}
