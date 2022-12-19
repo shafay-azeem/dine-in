@@ -33,7 +33,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { MenuState } from "../../context/MenuContext";
 import SelectSearch from "react-select-search";
 import Multiselect from "multiselect-react-dropdown";
@@ -51,35 +51,36 @@ const SectionDrawer = (props) => {
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
   const { response, setResponse } = MenuState();
+  const inputElement = useRef();
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionName
+        props?.subsection_index
+      ]?.sectionName
     : response[props.menu_index].section[props?.section_index]?.sectionName;
   const [name, setName] = useState(initialState);
 
   const descriptionState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionDescription
+        props?.subsection_index
+      ]?.sectionDescription
     : response[props.menu_index].section[props?.section_index]
-      ?.sectionDescription;
+        ?.sectionDescription;
 
   const [description, setDescription] = useState(descriptionState);
 
   const noteState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionNote
+        props?.subsection_index
+      ]?.sectionNote
     : response[props.menu_index].section[props?.section_index]?.sectionNote;
 
   const [note, setNote] = useState(noteState);
 
   const imageState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.image
+        props?.subsection_index
+      ]?.image
     : response[props.menu_index].section[props?.section_index]?.image;
 
   const [image, setImage] = useState(imageState);
@@ -88,8 +89,8 @@ const SectionDrawer = (props) => {
 
   const labelState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionLabel
+        props?.subsection_index
+      ]?.sectionLabel
     : response[props.menu_index].section[props?.section_index]?.sectionLabel;
 
   const [select, setSelect] = useState(labelState);
@@ -98,7 +99,7 @@ const SectionDrawer = (props) => {
 
   let x =
     response[props.menu_index].section[props?.section_index]?.subSection[
-    props?.subsection_index
+      props?.subsection_index
     ];
   let y = response[props.menu_index].section[props?.section_index];
   const conditonMade = Number.isInteger(props?.subsection_index)
@@ -267,6 +268,10 @@ const SectionDrawer = (props) => {
     console.log(event, "event");
   };
 
+  function deleteimg() {
+    setImage(null);
+    document.getElementById("img").value = "";
+  }
   return (
     <>
       <Drawer
@@ -323,6 +328,7 @@ const SectionDrawer = (props) => {
                       type="file"
                       accept=".jpg,.png"
                       onChange={pictureCapture}
+                      id="img"
                     />
                     {image && (
                       <div>
@@ -333,11 +339,8 @@ const SectionDrawer = (props) => {
                           width="200px"
                           height="200px"
                           onClick={ModalOnOpen}
-
                         />
-                        <Button onClick={() => setImage(null)}>
-                          DElete
-                        </Button>
+                        <Button onClick={deleteimg}>DElete</Button>
                       </div>
                     )}
 
@@ -381,7 +384,7 @@ const SectionDrawer = (props) => {
                   </FormControl>
 
                   {response[props.menu_index].section.length > 1 &&
-                    props?.subsection_index == undefined ? (
+                  props?.subsection_index == undefined ? (
                     <FormControl>
                       <Checkbox
                         isChecked={checkedItems}
