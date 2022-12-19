@@ -558,6 +558,14 @@ const ItemDrawer = (props) => {
     } else {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
+      ].itemLabel = select;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemWarning = warningState;
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
       ].itemName = name;
       response[props.menu_index].section[props.section_index].item[
         props.item_index
@@ -725,7 +733,7 @@ const ItemDrawer = (props) => {
         itemData
       );
       console.log(response, "orig");
-      alert("data has been added");
+      alert("Item Created Successfully");
     }
   };
 

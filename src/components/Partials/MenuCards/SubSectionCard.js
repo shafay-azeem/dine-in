@@ -29,6 +29,7 @@ import { MenuState } from "../../../context/MenuContext";
 import ItemDrawer from "../../MenuManagement/ItemDrawer";
 import SectionDrawer from "../../MenuManagement/SectionDrawer";
 import ItemCard from "./ItemCard";
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 const SubSectionCard = (props) => {
   const { response, setResponse } = MenuState();
@@ -74,6 +75,7 @@ const SubSectionCard = (props) => {
       sectionName: x.sectionName,
       sectionDescription: x.sectionDescription,
       sectionStatus: x.sectionStatus,
+      image: x.image,
       item: [],
       subSection: [],
     };
@@ -112,8 +114,7 @@ const SubSectionCard = (props) => {
                       boxSize="43px"
                       objectFit="cover"
                       borderRadius={3}
-                      src="https://bit.ly/dan-abramov"
-                      alt="Dan Abramov"
+                      src={x.image}
                     />
 
                     <Text pl={2}>
@@ -146,22 +147,11 @@ const SubSectionCard = (props) => {
                 </GridItem>
                 <GridItem colStart={4} colEnd={6} h="10" ml="auto">
                   <HStack>
-                    {x.sectionStatus ? (
-                      <Box py={2}>
-                        <Switch
-                          size="sm"
-                          isChecked
-                          onChange={() => switchStatus(index)}
-                        />
-                      </Box>
-                    ) : (
-                      <Box py={2}>
-                        <Switch
-                          size="sm"
-                          onChange={() => switchStatus(index)}
-                        />
-                      </Box>
-                    )}
+                    <BootstrapSwitchButton
+                      checked={x.sectionStatus}
+                      onChange={() => switchStatus(index)}
+                      data-size="xs"
+                    />
 
                     <Box>
                       <Menu>

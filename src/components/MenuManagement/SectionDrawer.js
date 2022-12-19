@@ -185,7 +185,7 @@ const SectionDrawer = (props) => {
 
       setResponse([...response]);
       console.log(response);
-      alert("data has been added");
+      alert("Section Created Successfully");
     }
   };
 
