@@ -21,101 +21,127 @@ import {
 import { AddIcon } from "@chakra-ui/icons";
 import CustomButton from "../../CustomElements/CustomButton";
 import { BsPlusLg } from "react-icons/bs";
+import { MenuState } from "../../context/MenuContext";
 
 const MenuModifieModal = (props) => {
   const [input, setInput] = useState("");
-  const handleInputChange = (e) => setInput(e.target.value);
-  const isError = input === "";
-  const [inputList, setInputList] = useState([]);
+  //const handleInputChange = (e) => setInput(e.target.value);
+  const { modifier, setModifier } = MenuState();
+  const [groupName, setGroupName] = useState();
+  // console.log(groupName, "groupName");
 
-  const removebt = (x) => {
-    // console.log(x)
-    // // /
-    // var z = inputList.length
-    // var k = inputList.length + 1
-    // console.log(z, 'zz')
-    // console.log(k, 'kkk')
-    var y = inputList.splice(0, inputList.length);
-    setInputList(y);
-    // // }
-    // let position = inputList.length
-    // for (let i = 0; i < inputList.length - 1; i++) {
-    //   console.log(inputList[i], 'ssss')
-    // }
+  // const isError = input === "";
 
-    // console.log(inputList.length)
-    // console.log(inputList.values)
-    // console.log(inputList.pop)
+  const [inputList, setInputList] = useState([
+    { Name: "", Price: "", Calorie: "" },
+  ]);
+
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
   };
 
-  const onAddBtnClick = (event) => {
-    setInputList(
-      inputList.concat(
-        <HStack m={5}>
-          <Input size="sm" borderRadius="8px" width="60%" placeholder="Name" />
-          ,
-          <Input
-            key={inputList + 1}
-            type="tel"
-            placeholder="$"
-            size="sm"
-            borderRadius="8px"
-            width="20%"
-          />
-          <Input
-            type="tel"
-            placeholder="calories"
-            size="sm"
-            borderRadius="8px"
-            width="40%"
-          />
-          <Switch />
-          <Button
-            colorScheme="teal"
-            variant="solid"
-            mt={2}
-            size="xs"
-            onClick={removebt}
-          >
-            Remove
-          </Button>
-        </HStack>
-      )
-    );
+  const handleRemoveClick = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  const handleAddClick = () => {
+    setInputList([...inputList, { Name: "", Price: "", Calorie: "" }]);
+  };
+
+  let modifierData = {
+    Groupname: groupName,
+    modifiers: inputList,
+  };
+
+  const modifierCreate = () => {
+    modifier.push(modifierData);
+    console.log(modifier, "modifier data");
+    alert("modifier Form Created Successfully");
   };
 
   return (
     <>
-      <Modal
-        isOpen={props.menumodifierIsOpen}
-        onClose={props.menumodifierOnClose}
-        size="4xl"
-      >
+      <Modal isOpen={props.isOpen} onClose={props.onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add a Modifier Group</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Center>
-              <FormControl isInvalid={isError}>
+              <FormControl mt={3}>
+                <FormLabel fontWeight="400">Group Name</FormLabel>
+                <Input
+                  type="text"
+                  width="50%"
+                  size="sm"
+                  borderRadius="8px"
+                  onChange={(e) => setGroupName(e.target.value)}
+                />
+              </FormControl>
+              {/* <FormControl isInvalid={isError}>
                 <FormLabel fontWeight="400">Group Name</FormLabel>
                 <Input
                   width="50%"
                   size="sm"
                   borderRadius="8px"
                   value={input}
-                  onChange={handleInputChange}
+                  onChange={(e) => setGroupName(e.target.value)}
                 />
                 {!isError ? (
                   <FormHelperText></FormHelperText>
                 ) : (
                   <FormErrorMessage>Group Name is required.</FormErrorMessage>
                 )}
-              </FormControl>
+              </FormControl> */}
             </Center>
-            <Text mt={6}>Modifiers</Text>
+            {inputList.map((x, i) => {
+              return (
+                <div className="box">
+                  <input
+                    name="Name"
+                    placeholder="Name"
+                    value={x.Name}
+                    onChange={(e) => handleInputChange(e, i)}
+                  />
+                  <input
+                    className="ml10"
+                    name="Price"
+                    placeholder="Price"
+                    value={x.Price}
+                    onChange={(e) => handleInputChange(e, i)}
+                  />
+                  <input
+                    className="ml10"
+                    name="Calorie"
+                    placeholder="Calorie"
+                    value={x.Calorie}
+                    onChange={(e) => handleInputChange(e, i)}
+                  />
+                  <div className="btn-box">
+                    {inputList.length !== 1 && (
+                      <button
+                        className="mr10"
+                        onClick={() => handleRemoveClick(i)}
+                      >
+                        Remove
+                      </button>
+                    )}
+                    {inputList.length - 1 === i && (
+                      <button onClick={handleAddClick}>Add</button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+            <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>
+            {/* <Text mt={6}>Modifiers</Text> */}
 
-            <CustomButton
+            {/* <CustomButton
               click={onAddBtnClick}
               btnText={" Add more Modifier"}
               variant={"outline"}
@@ -124,13 +150,18 @@ const MenuModifieModal = (props) => {
               size={"xs"}
             />
 
-            {inputList}
+            {inputList} */}
           </ModalBody>
           <ModalFooter>
-            <CustomButton btnText={"Save"} mr={3} size={"sm"} />
+            <CustomButton
+              btnText={"Save"}
+              mr={3}
+              size={"sm"}
+              click={modifierCreate}
+            />
 
             <CustomButton
-              click={props.menumodifierOnClose}
+              click={props.onClose}
               btnText={"Cancel"}
               variant={"outline"}
               mr={3}

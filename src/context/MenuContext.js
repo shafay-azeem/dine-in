@@ -40,6 +40,7 @@ export const MenuProvider = ({ children }) => {
   const [activeForm, setActiveForm] = useState();
   const [notification, setNotification] = useState();
 
+  const [modifier, setModifier] = useState([]);
 
   return (
     <MenuContext.Provider
@@ -53,7 +54,9 @@ export const MenuProvider = ({ children }) => {
         activeForm,
         setActiveForm,
         notification,
-        setNotification
+        setNotification,
+        modifier,
+        setModifier,
       }}
     >
       {children}
