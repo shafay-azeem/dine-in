@@ -39,8 +39,8 @@ const ItemCard = (props) => {
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ].item
+      props?.subsection_index
+    ].item
     : response[props?.menu_index]?.section[props?.section_index]?.item;
 
   const [itemList, setItemList] = useState(initialState);
@@ -252,21 +252,32 @@ const ItemCard = (props) => {
                               <HStack>
                                 <Box>
                                   <InputGroup>
-                                    <InputLeftElement
+                                    {/* <InputLeftElement
                                       pointerEvents="none"
                                       color="gray.500"
                                       children="$"
                                       size="sm"
                                       mt="-4px"
-                                    />
-                                    <Input
+                                    /> */}
+                                    {/* <Input
                                       placeholder="Price"
                                       size="sm"
                                       borderRadius={6}
                                       width="160px"
                                       mr={4}
                                       value={x.itemPrice}
-                                    />
+                                    /> */}
+                                    {x.itemPriceOption[0].price == x.itemPriceOption[x.itemPriceOption.length - 1].price ? (
+                                      <Text>
+                                        {x.itemPriceOption[0].price}
+                                      </Text>
+
+                                    ) : (
+                                      <Text>
+                                        {x.itemPriceOption[0].price}---{x.itemPriceOption[x.itemPriceOption.length - 1].price}
+                                      </Text>
+                                    )}
+
                                     {/* 
                                     <InputRightElement width="4.5rem">
                                       <Button

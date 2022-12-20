@@ -12,12 +12,14 @@ const FormQuestions = () => {
   let feedback_index = searchparams.get("index");
   let A;
   let FormQuestions = createfeedback[feedback_index].formQuestions;
-
+  function getTimestampInSeconds() {
+    return Math.floor(Date.now() / 1000);
+  }
   if (createfeedback[feedback_index].formQuestions.length > 0) {
     A = createfeedback[feedback_index].formQuestions;
     console.log(A, "====A=====");
   } else {
-    A = [{ question: "", questionType: "" }];
+    A = [{ question: "", questionType: "", questionId: getTimestampInSeconds() }];
     console.log(A, "====B=====");
   }
   const [inputList, setInputList] = useState(A);
@@ -43,6 +45,7 @@ const FormQuestions = () => {
     const list = [...inputList];
     list[index][name] = value;
     setInputList(list);
+    console.log(list, "list")
   };
 
   // handle click event of the Remove button
@@ -56,7 +59,7 @@ const FormQuestions = () => {
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { question: "", questionType: "" }]);
+    setInputList([...inputList, { question: "", questionType: "", questionId: getTimestampInSeconds() }]);
   };
 
   return (

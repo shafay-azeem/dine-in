@@ -18,11 +18,23 @@ const MenuFeedBackForm = () => {
     return Math.floor(Date.now() / 1000);
   }
   let A = []
-  const handleInputChange = (e, index) => {
-    const { value } = e.target;
+  let B = []
+  const handleInputChange = (e, index, y) => {
+    console.log(y, "-------")
+    const { value } = e.target
     console.log(value, "vvvvv")
     A[index] = value;
-    console.log(A, "===A=====")
+    B[index] = y;
+
+    // var C = {};
+    // let count = 0
+    // for (var i = 0; i < A.length; i++) {
+    //   C["answer" + (count + 1)] = A[i];
+    //   C["questionId" + (count + 2)] = B[i];
+    //   count = count + 2
+    // }
+    // console.log([C], "===C+++====")
+
   };
 
   let feedbackData = {
@@ -34,8 +46,11 @@ const MenuFeedBackForm = () => {
 
   const feedbackSubmit = () => {
     var jsonObj = {};
+    let count = 0
     for (var i = 0; i < A.length; i++) {
-      jsonObj["answer" + (i + 1)] = A[i];
+      jsonObj["answer" + (count + 1)] = A[i];
+      jsonObj["questionId" + (count + 2)] = B[i];
+      count = count + 2
     }
     feedback.push(jsonObj);
     setNotification(true)
@@ -61,7 +76,7 @@ const MenuFeedBackForm = () => {
                       <Form.Label>{x.question}</Form.Label>
                       <Form.Control
                         type="text"
-                        onChange={e => handleInputChange(e, index)}
+                        onChange={e => handleInputChange(e, index, x.questionId)}
                       />
                     </Form.Group>
                   </Form>
