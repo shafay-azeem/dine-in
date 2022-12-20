@@ -62,7 +62,7 @@ const ItemDrawer = (props) => {
     onOpen: ModalOnOpen,
     onClose: ModalOnClose,
   } = useDisclosure();
-  const { response, setResponse } = MenuState();
+  const { response, setResponse, modifier, setModifier } = MenuState();
   let subSectionArr =
     response[props.menu_index].section[props?.section_index]?.subSection[
       props?.subsection_index
@@ -84,16 +84,19 @@ const ItemDrawer = (props) => {
   const initialState5 = props.subsection_push ? "" : itemCondtionState5;
   const [itemprice, setItemPrice] = useState(initialState5);
 
-
   const XX = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemPriceOption
     : sectionArr?.itemPriceOption;
   let A;
   if (typeof XX === "undefined") {
     if (itemprice != null) {
+      console.log("iff");
+      console.log(itemprice, "itemprice====");
       A = [{ name: "", price: itemprice, calories: "" }];
+      console.log(A, "=======");
 
     } else {
+      console.log("iff else");
 
       A = [{ name: "", price: "", calories: "" }];
     }
@@ -111,6 +114,8 @@ const ItemDrawer = (props) => {
     A = XX;
     // }
   }
+  console.log(typeof A[0].price, "A+++++");
+  // console.log(typeof (itemprice), "itemprice type")
 
   const [inputList, setInputList] = useState(A);
 
@@ -118,17 +123,18 @@ const ItemDrawer = (props) => {
     setInputList(A);
   }, [A]);
 
-  console.log(inputList, "inputList+++++")
+  console.log(inputList, "inputList+++++");
   const yy = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemModifierOptions
     : sectionArr?.itemModifierOptions;
+
   let B;
   if (typeof yy === "undefined") {
     B = [{ modifiergroup: "", min: "", max: "" }];
   } else {
     B = yy;
   }
-  const [modifier, setModifier] = useState(B);
+  const [demoModifier, setDemoModifier] = useState(B);
 
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
@@ -406,7 +412,7 @@ const ItemDrawer = (props) => {
     itemPrice: itemprice,
     itemCalories: nutcalories,
     itemPriceOption: inputList,
-    itemModifierOptions: modifier,
+    itemModifierOptions: demoModifier,
     itemSaturatedFatPercentage: saturatedfatpercentage,
     itemTransFat: transfat,
     itemTransFatPercentage: transfatpercentage,
@@ -582,7 +588,7 @@ const ItemDrawer = (props) => {
 
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
-      ].item[props.item_index].itemModifierOptions = modifier;
+      ].item[props.item_index].itemModifierOptions = demoModifier;
 
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
@@ -736,7 +742,7 @@ const ItemDrawer = (props) => {
 
       response[props.menu_index].section[props.section_index].item[
         props.item_index
-      ].itemModifierOptions = modifier;
+      ].itemModifierOptions = demoModifier;
 
       response[props.menu_index].section[props.section_index].item[
         props.item_index
@@ -777,7 +783,6 @@ const ItemDrawer = (props) => {
       alert("Single Push On basis Of Conditional Parameters");
       console.log(response, "orig");
     } else {
-
       response[props.menu_index].section[props.section_index].item.push(
         itemData
       );
@@ -808,24 +813,24 @@ const ItemDrawer = (props) => {
   };
 
   const handleModifierInput = () => {
-    setModifier([...modifier, { modifiergroup: "", min: "", max: "" }]);
+    setDemoModifier([...demoModifier, { modifiergroup: "", min: "", max: "" }]);
     // const list = [...inputList]
     // list.push({ firstName: "", lastName: "" })
     // setInputList(list)
   };
 
   const handleRemoveModifier = (index) => {
-    const x = [...modifier];
+    const x = [...demoModifier];
     x.splice(index, 1);
-    setModifier(x);
+    setDemoModifier(x);
   };
 
   const ModifierOptions = (e, index) => {
     const { name, value } = e.target;
 
-    const x = [...modifier];
+    const x = [...demoModifier];
     x[index][name] = value;
-    setModifier(x);
+    setDemoModifier(x);
   };
 
   const pictureCapture = (event) => {
@@ -915,30 +920,6 @@ const ItemDrawer = (props) => {
       )
     );
   };
-
-  // const addModifiersOption = (event) => {
-  //   setModifiers(
-  //     modifiers.concat(
-  //       <HStack m={5}>
-  //         <FormControl>
-  //           <FormLabel fontWeight="400">Modifier Group</FormLabel>
-  //           <Input borderRadius="8px" placeholder="Type to search" />
-  //         </FormControl>
-  //         ,
-  //         <FormControl mt={3}>
-  //           <FormLabel fontWeight="400">Min</FormLabel>
-  //           <Input borderRadius="8px" placeholder="0" type="number" />
-  //         </FormControl>
-  //         ,
-  //         <FormControl mt={3}>
-  //           <FormLabel fontWeight="400">Max</FormLabel>
-  //           <Input borderRadius="8px" placeholder="0" type="number" />
-  //         </FormControl>
-  //         ,<Checkbox defaultChecked>Required</Checkbox>
-  //       </HStack>
-  //     )
-  //   );
-  // };
 
   return (
     <>
@@ -1205,20 +1186,28 @@ const ItemDrawer = (props) => {
                 </TabPanel>
                 <TabPanel>
                   <Box>
-                    {modifier?.map((y, index) => {
+                    {demoModifier?.map((y, index) => {
                       return (
                         <Box key={index} mt={5}>
                           <HStack>
-                            <Input
-                              borderRadius="8px"
-                              placeholder="Modifier Group"
-                              name="modifiergroup"
-                              size="sm"
-                              type="text"
-                              value={y.modifiergroup}
+                            <Select
+                              placeholder="Select Group"
                               width="30%"
+                              size="sm"
+                              borderRadius="8px"
+                              name="groupname"
+                              value={y.groupname}
                               onChange={(e) => ModifierOptions(e, index)}
-                            />
+                            >
+                              {modifier?.map((a, index) => {
+                                return (
+                                  <option value={a.Groupname}>
+                                    {a.Groupname}
+                                  </option>
+                                );
+                              })}
+                            </Select>
+
                             <Input
                               borderRadius="8px"
                               placeholder="Min"
@@ -1240,7 +1229,7 @@ const ItemDrawer = (props) => {
                               onChange={(e) => ModifierOptions(e, index)}
                             />
                             {/* <Checkbox>Required</Checkbox> */}
-                            {modifier.length !== 1 && (
+                            {demoModifier.length !== 1 && (
                               <IconButton
                                 size="xs"
                                 variant="outline"
@@ -1249,7 +1238,7 @@ const ItemDrawer = (props) => {
                                 icon={<CloseIcon />}
                               />
                             )}
-                            {modifier.length - 1 === index && (
+                            {demoModifier.length - 1 === index && (
                               <IconButton
                                 size="xs"
                                 variant="outline"
