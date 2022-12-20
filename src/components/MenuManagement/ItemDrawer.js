@@ -91,20 +91,27 @@ const ItemDrawer = (props) => {
   let A;
   if (typeof XX === "undefined") {
     if (itemprice != null) {
-      console.log("iff")
-      console.log(itemprice, "itemprice====")
       A = [{ name: "", price: itemprice, calories: "" }];
-      console.log(A, "=======")
+
     } else {
-      console.log("iff else")
+
       A = [{ name: "", price: "", calories: "" }];
     }
   } else {
-    console.log("else")
+    // if (itemprice != null) {
+    //   let initialArray = XX;
+    //   for (var i = 0; i < initialArray.length; i++) {
+    //     if (initialArray[0].price != itemprice) {
+    //       initialArray[0].price = itemprice
+    //       A = initialArray
+    //     }
+    //   }
+
+    // } else {
     A = XX;
+    // }
   }
-  console.log(typeof (A[0].price), "A+++++")
-  // console.log(typeof (itemprice), "itemprice type")
+
   const [inputList, setInputList] = useState(A);
 
   useEffect(() => {
@@ -584,6 +591,13 @@ const ItemDrawer = (props) => {
       setResponse([...response]);
       alert("Item With-In SubSection Updated Successfully");
     } else {
+      if (itemprice != null) {
+        let initialArray = inputList;
+        if (inputList[0].price != itemprice) {
+          inputList[0].price = itemprice
+          setInputList(initialArray)
+        }
+      }
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemPrice = itemprice;
