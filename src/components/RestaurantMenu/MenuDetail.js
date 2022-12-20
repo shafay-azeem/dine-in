@@ -91,39 +91,45 @@ const MenuDetail = (props) => {
                         </Card.Text>
 
                         <Card.Text className="pricetext">
-                          {x.itemPrice == "" ? null : (
-                            <div className="d-flex align-items-center">
-                              ${x.itemPrice}
-                            </div>
-                          )}
+                          <div className="d-flex gap-3">
+                            {x.itemPrice === undefined ? null : (
+                              <div className="d-flex align-items-center">
+                                ${x.itemPrice}
+                              </div>
+                            )}
 
-                          {x.itemPrepTime == "" ? null : (
-                            <div className="d-flex align-items-center">
-                              {x.itemPrepTime} Min
-                            </div>
-                          )}
-                          {x.itemCalorie == "" ? null : (
-                            <div className="d-flex align-items-center">
-                              {x.itemCalorie} Calories
-                            </div>
-                          )}
-                          <div className="d-flex align-items-center">
-                            {x.itemLabel?.map((y, index) => {
-                              return (
-                                <Badge pill bg="primary" key={index}>
-                                  {y}
-                                </Badge>
-                              );
-                            })}
+                            {x.itemPrepTime == undefined ? null : (
+                              <div className="d-flex align-items-center">
+                                {x.itemPrepTime} Min
+                              </div>
+                            )}
+                            {x.itemCalorie == undefined ? null : (
+                              <div className="d-flex align-items-center">
+                                {x.itemCalorie} Calories
+                              </div>
+                            )}
                           </div>
-                          <div className="d-flex align-items-center">
-                            {x.itemWarning?.map((z, index) => {
-                              return (
-                                <Badge pill bg="primary" key={index}>
-                                  {z}
-                                </Badge>
-                              );
-                            })}
+
+                          <div className="d-flex gap-3">
+                            <div className="d-flex align-items-center gap-1">
+                              {x.itemLabel?.map((y, index) => {
+                                return (
+                                  <Badge pill bg="primary" key={index}>
+                                    {y}
+                                  </Badge>
+                                );
+                              })}
+                            </div>
+
+                            <div className="d-flex align-items-center gap-1">
+                              {x.itemWarning?.map((z, index) => {
+                                return (
+                                  <Badge pill bg="primary" key={index}>
+                                    {z}
+                                  </Badge>
+                                );
+                              })}
+                            </div>
                           </div>
                         </Card.Text>
 
