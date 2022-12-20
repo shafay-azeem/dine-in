@@ -267,7 +267,7 @@ const ItemCard = (props) => {
                                       mr={4}
                                       value={x.itemPrice}
                                     />
-
+                                    {/* 
                                     <InputRightElement width="4.5rem">
                                       <Button
                                         h="1.75rem"
@@ -276,7 +276,7 @@ const ItemCard = (props) => {
                                       >
                                         Ok
                                       </Button>
-                                    </InputRightElement>
+                                    </InputRightElement> */}
                                   </InputGroup>
                                 </Box>
 

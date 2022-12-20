@@ -36,7 +36,7 @@ const RestaurantMenu = (props) => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: sectionList?.length > 3 ? 4 : sectionList?.length,
     slidesToScroll: 1,
     rtl: true,
 

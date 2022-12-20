@@ -31,6 +31,7 @@ import {
   ModalCloseButton,
   ModalBody,
   Center,
+  IconButton,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState, useRef } from "react";
@@ -39,6 +40,7 @@ import SelectSearch from "react-select-search";
 import Multiselect from "multiselect-react-dropdown";
 import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
 import ImagePreviewModal from "./ImagePreviewModal";
+import { BsFillTrashFill } from "react-icons/bs";
 
 const SectionDrawer = (props) => {
   let menu_index = props.menu_index;
@@ -46,7 +48,7 @@ const SectionDrawer = (props) => {
   let subsection_index = props?.subsection_index;
 
   console.log(subsection_index, "subsection_index");
-  const [checkedItems, setCheckedItems] = React.useState(false);
+  const [checkedItems, setCheckedItems] = useState(false);
   const [food, setFood] = useState(["New", "Signature"]);
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
@@ -55,32 +57,32 @@ const SectionDrawer = (props) => {
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionName
+        props?.subsection_index
+      ]?.sectionName
     : response[props.menu_index].section[props?.section_index]?.sectionName;
   const [name, setName] = useState(initialState);
 
   const descriptionState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionDescription
+        props?.subsection_index
+      ]?.sectionDescription
     : response[props.menu_index].section[props?.section_index]
-      ?.sectionDescription;
+        ?.sectionDescription;
 
   const [description, setDescription] = useState(descriptionState);
 
   const noteState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionNote
+        props?.subsection_index
+      ]?.sectionNote
     : response[props.menu_index].section[props?.section_index]?.sectionNote;
 
   const [note, setNote] = useState(noteState);
 
   const imageState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.image
+        props?.subsection_index
+      ]?.image
     : response[props.menu_index].section[props?.section_index]?.image;
 
   const [image, setImage] = useState(imageState);
@@ -89,8 +91,8 @@ const SectionDrawer = (props) => {
 
   const labelState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionLabel
+        props?.subsection_index
+      ]?.sectionLabel
     : response[props.menu_index].section[props?.section_index]?.sectionLabel;
 
   const [select, setSelect] = useState(labelState);
@@ -99,7 +101,7 @@ const SectionDrawer = (props) => {
 
   let x =
     response[props.menu_index].section[props?.section_index]?.subSection[
-    props?.subsection_index
+      props?.subsection_index
     ];
   let y = response[props.menu_index].section[props?.section_index];
   const conditonMade = Number.isInteger(props?.subsection_index)
@@ -195,8 +197,8 @@ const SectionDrawer = (props) => {
     }
   };
 
-  const updatedSection = (x) => {
-    if (x == undefined) {
+  const updatedSection = (x, y) => {
+    if (x == undefined && checkedItems == false) {
       response[props.menu_index].section[props.section_index].sectionName =
         name;
       response[props.menu_index].section[
@@ -225,7 +227,7 @@ const SectionDrawer = (props) => {
 
       setResponse([...response]);
       alert("Section Updated Successfully");
-    } else {
+    } else if (x > -1) {
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
       ].sectionName = name;
@@ -252,6 +254,16 @@ const SectionDrawer = (props) => {
 
       setResponse([...response]);
       alert("SubSection Updated Successfully");
+    } else {
+      let initialArray = [...response[props.menu_index].section];
+      for (var i = 0; i < initialArray.length; i++) {
+        if (initialArray[i].sectionName == val) {
+          response[props.menu_index].section[i].subSection.push(sectionData);
+          response[props.menu_index]?.section.splice(y, 1);
+          setResponse([...response]);
+          alert("SubSection has been has been updated");
+        }
+      }
     }
   };
 
@@ -340,7 +352,13 @@ const SectionDrawer = (props) => {
                           height="200px"
                           onClick={ModalOnOpen}
                         />
-                        <Button onClick={deleteimg}>DElete</Button>
+
+                        <IconButton
+                          onClick={deleteimg}
+                          variant="outline"
+                          colorScheme="teal"
+                          icon={<BsFillTrashFill />}
+                        />
                       </div>
                     )}
 
@@ -358,9 +376,6 @@ const SectionDrawer = (props) => {
                         </ModalBody>
                       </ModalContent>
                     </Modal>
-
-
-
                   </FormControl>
 
                   {/* <FormControl mt={3}>
@@ -381,7 +396,7 @@ const SectionDrawer = (props) => {
                   </FormControl>
 
                   {response[props.menu_index].section.length > 1 &&
-                    props?.subsection_index == undefined ? (
+                  props?.subsection_index == undefined ? (
                     <FormControl>
                       <Checkbox
                         isChecked={checkedItems}
@@ -522,7 +537,7 @@ const SectionDrawer = (props) => {
               <Button
                 colorScheme="blue"
                 onClick={() => {
-                  updatedSection(props?.subsection_index);
+                  updatedSection(props?.subsection_index, props?.section_index);
                 }}
               >
                 Update

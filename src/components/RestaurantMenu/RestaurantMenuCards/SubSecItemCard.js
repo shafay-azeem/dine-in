@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Badge, Card, Col, Row } from "react-bootstrap";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { MenuState } from "../../../context/MenuContext";
 import "../RestaurantMenu.css";
@@ -45,7 +45,7 @@ const SubSecItemCard = (props) => {
                   <Row className="align-items-start">
                     <Col lg={4} className="p-0">
                       <img
-                        // src={require("../Assets/burger.jpg")}
+                        src={x.image}
                         className="image mx-auto d-block w-100"
                       />
                     </Col>
@@ -62,6 +62,25 @@ const SubSecItemCard = (props) => {
                       <Card.Text className="pricetext">
                         ${x.itemPrice}
                       </Card.Text>
+
+                      <div className="d-flex align-items-center">
+                        {x.itemLabel?.map((y, index) => {
+                          return (
+                            <Badge pill bg="primary" key={index}>
+                              {y}
+                            </Badge>
+                          );
+                        })}
+                      </div>
+                      <div className="d-flex align-items-center">
+                        {x.itemWarning?.map((z, index) => {
+                          return (
+                            <Badge pill bg="primary" key={index}>
+                              {z}
+                            </Badge>
+                          );
+                        })}
+                      </div>
                     </Col>
                   </Row>
                 </Card.Body>

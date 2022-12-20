@@ -44,7 +44,7 @@ import {
 } from "@chakra-ui/react";
 import { faXRay } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
+import { BsFillTrashFill, BsPlusLg } from "react-icons/bs";
 import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 import Multiselect from "multiselect-react-dropdown";
@@ -1014,7 +1014,12 @@ const ItemDrawer = (props) => {
                           height="200px"
                           onClick={ModalOnOpen}
                         />
-                        <Button onClick={deleteimg}>DElete</Button>
+                        <IconButton
+                          onClick={deleteimg}
+                          variant="outline"
+                          colorScheme="teal"
+                          icon={<BsFillTrashFill />}
+                        />
                       </div>
                     )}
 

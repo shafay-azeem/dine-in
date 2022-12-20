@@ -65,6 +65,7 @@ const SectionCard = (props) => {
 
   const handleRemove = (index) => {
     response[menu_index]?.section.splice(index, 1);
+
     setResponse([...response]);
     setSectionList(response[props?.menu_index]?.section);
   };
