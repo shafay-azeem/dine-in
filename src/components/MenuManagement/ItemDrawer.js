@@ -70,7 +70,7 @@ const ItemDrawer = (props) => {
 
   let sectionArr =
     response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
+    props?.item_index
     ];
 
   const itemCondtionState = Number.isInteger(props?.subsection_index)
@@ -78,17 +78,40 @@ const ItemDrawer = (props) => {
     : sectionArr?.itemName;
   const initialState = props.subsection_push ? "" : itemCondtionState;
 
+  const itemCondtionState5 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemPrice
+    : sectionArr?.itemPrice;
+  const initialState5 = props.subsection_push ? "" : itemCondtionState5;
+  const [itemprice, setItemPrice] = useState(initialState5);
+
+
   const XX = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemPriceOption
     : sectionArr?.itemPriceOption;
   let A;
   if (typeof XX === "undefined") {
-    A = [{ name: "", price: "", calories: "" }];
+    if (itemprice != null) {
+      console.log("iff")
+      console.log(itemprice, "itemprice====")
+      A = [{ name: "", price: itemprice, calories: "" }];
+      console.log(A, "=======")
+    } else {
+      console.log("iff else")
+      A = [{ name: "", price: "", calories: "" }];
+    }
   } else {
+    console.log("else")
     A = XX;
   }
+  console.log(typeof (A[0].price), "A+++++")
+  // console.log(typeof (itemprice), "itemprice type")
   const [inputList, setInputList] = useState(A);
 
+  useEffect(() => {
+    setInputList(A);
+  }, [A]);
+
+  console.log(inputList, "inputList+++++")
   const yy = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemModifierOptions
     : sectionArr?.itemModifierOptions;
@@ -144,12 +167,6 @@ const ItemDrawer = (props) => {
     : sectionArr?.itemCalorie;
   const initialState4 = props.subsection_push ? "" : itemCondtionState4;
   const [calorie, setCalorie] = useState(initialState4);
-
-  const itemCondtionState5 = Number.isInteger(props?.subsection_index)
-    ? subSectionArr?.itemPrice
-    : sectionArr?.itemPrice;
-  const initialState5 = props.subsection_push ? "" : itemCondtionState5;
-  const [itemprice, setItemPrice] = useState(initialState5);
 
   const itemCondtionState6 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemWarning
@@ -745,11 +762,8 @@ const ItemDrawer = (props) => {
       ].item.push(itemData);
       alert("Single Push On basis Of Conditional Parameters");
       console.log(response, "orig");
-      // console.log(
-      //   response[props.menu_index].section[props.section_index].subSection,
-      //   "subsec"
-      // );
     } else {
+
       response[props.menu_index].section[props.section_index].item.push(
         itemData
       );
