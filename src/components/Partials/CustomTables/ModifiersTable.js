@@ -9,28 +9,12 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import React from "react";
+import { Row } from "react-bootstrap";
+import { MenuState } from "../../../context/MenuContext";
 
 const ModifiersTable = () => {
-  const data = [
-    {
-      ID: 1,
-      GroupName: "Modifier 1",
-      Modifier: "I am Modifier",
-      Action: "Modifier",
-    },
-    {
-      ID: 2,
-      GroupName: "Modifier 2",
-      Modifier: "I am Modifier",
-      Action: "Modifier",
-    },
-    {
-      ID: 3,
-      GroupName: "Modifier 3",
-      Modifier: "I am Modifier",
-      Action: "Modifier",
-    },
-  ];
+  const { modifier, setModifier } = MenuState();
+
   return (
     <>
       <TableContainer>
@@ -43,13 +27,18 @@ const ModifiersTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((x, index) => (
-              <Tr key={index}>
-                <Td>{x.GroupName}</Td>
-                <Td>{x.Modifier}</Td>
-                <Td>{x.Action}</Td>
-              </Tr>
-            ))}
+            {modifier?.map((x, index) => {
+              return (
+                <Tr key={index}>
+                  <Td>{x.Groupname}</Td>
+                  {x.modifiers?.map((y, index) => (
+                    <Tr>
+                      <Text>{y.Name},</Text>
+                    </Tr>
+                  ))}
+                </Tr>
+              );
+            })}
           </Tbody>
         </Table>
       </TableContainer>

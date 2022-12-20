@@ -36,9 +36,9 @@ const InitialMenu = () => {
   } = useDisclosure();
 
   const {
-    isOpen: menumodifierIsOpen,
-    onOpen: menumodifierOnOpen,
-    onClose: menumodifierOnClose,
+    isOpen: modifierIsOpen,
+    onOpen: modifierOnOpen,
+    onClose: modifierOnClose,
   } = useDisclosure();
 
   return (
@@ -86,16 +86,16 @@ const InitialMenu = () => {
             </TabPanel>
             <TabPanel backgroundColor="white" textAlign="right">
               <CustomButton
-                click={menumodifierOnOpen}
+                click={modifierOnOpen}
                 btnText={"Add a Modifiers Group"}
                 size={"sm"}
                 mb={2}
               />
-              {isOpen ? (
+              {modifierIsOpen ? (
                 <MenuModifieModal
-                  isOpen={menumodifierIsOpen}
-                  onOpen={menumodifierOnOpen}
-                  onClose={menumodifierOnClose}
+                  isOpen={modifierIsOpen}
+                  onOpen={modifierOnOpen}
+                  onClose={modifierOnClose}
                 />
               ) : (
                 console.log("ss")
