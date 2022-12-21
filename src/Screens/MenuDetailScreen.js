@@ -11,7 +11,7 @@ const MenuDetailScreen = () => {
   //   console.log(searchparams.get("section_index"), "section_index");
 
   return (
-    <div style={{ width: "70%", margin: "0 auto" }}>
+    <div style={{ width: "100%", margin: "0 auto" }}>
       <MenuDetail
         menu_index_refSub={searchparams.get("menu_index_refSub")}
         section_index_refSub={searchparams.get("section_index_refSub")}

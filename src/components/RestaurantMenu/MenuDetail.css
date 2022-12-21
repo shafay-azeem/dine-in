@@ -1,3 +1,9 @@
 .pricetext {
   color: red;
 }
+.backarrow {
+  background-color: white;
+  border: none;
+  position: absolute;
+  z-index: 1;
+}
