@@ -14,30 +14,15 @@ import React from "react";
 import { MenuState } from "../../../context/MenuContext";
 
 const ResultTable = () => {
-  const { createfeedback, setCreateFeedback } = MenuState();
-  // const data = [
-  //   {
-  //     ID: 1,
-  //     Result: "Passed",
-  //     Date: "12-01-22",
-  //     Form: "I am form",
-  //     Action: "Result",
-  //   },
-  //   {
-  //     ID: 2,
-  //     Result: "Failed",
-  //     Date: "13-01-22",
-  //     Form: "I am form",
-  //     Action: "Result",
-  //   },
-  //   {
-  //     ID: 3,
-  //     Result: "Passed",
-  //     Date: "11-01-22",
-  //     Form: "I am form",
-  //     Action: "Result",
-  //   },
-  // ];
+  const {
+    createfeedback,
+    setCreateFeedback,
+    feedback,
+    setFeedback,
+    activeForm,
+    setActiveForm,
+  } = MenuState();
+
   return (
     <>
       <TableContainer>
@@ -51,12 +36,12 @@ const ResultTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {createfeedback?.map((x, index) => {
+            {feedback?.map((x, index) => {
               return (
                 <Tr key={index}>
-                  <Td>Form {x.id}</Td>
+                  <Td>{x.formId}</Td>
                   <Td>
-                    {x.createdDate} {x.createdTime}
+                    {x.createdDate}
                   </Td>
                   <Td>{x.formName}</Td>
                   <Td style={{ textAlign: "center", cursor: "pointer" }}>

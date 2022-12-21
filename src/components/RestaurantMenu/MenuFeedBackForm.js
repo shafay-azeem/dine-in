@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -6,6 +6,7 @@ import { MenuState } from "../../context/MenuContext";
 import "./RestaurantMenu.css";
 
 const MenuFeedBackForm = () => {
+  const ref = useRef(null);
   const { feedback, setFeedback, activeForm, createfeedback, setCreateFeedback, setNotification, notification } =
     MenuState();
   const [demo, setDemo] = useState(createfeedback[activeForm]?.formQuestions);
@@ -19,12 +20,24 @@ const MenuFeedBackForm = () => {
   }
   let A = []
   let B = []
-  const handleInputChange = (e, index, y) => {
-    console.log(y, "-------")
+  let C = []
+  let D = []
+  let H = []
+  let F = []
+
+
+  const handleInputChange = (e, index, c, d, h, f, g) => {
+
     const { value } = e.target
-    console.log(value, "vvvvv")
+
     A[index] = value;
-    B[index] = y;
+    B[index] = c;
+    C[index] = d
+    D[index] = h;
+    H[index] = f;
+    F[index] = g
+
+
 
     // var C = {};
     // let count = 0
@@ -45,14 +58,22 @@ const MenuFeedBackForm = () => {
   };
 
   const feedbackSubmit = () => {
-    var jsonObj = {};
-    let count = 0
-    for (var i = 0; i < A.length; i++) {
-      jsonObj["answer" + (count + 1)] = A[i];
-      jsonObj["questionId" + (count + 2)] = B[i];
-      count = count + 2
+    let formBody = {
+      formId: getTimestampInSeconds(),
+      formName: createfeedback[activeForm].formName,
+      createdDate: new Date().toLocaleDateString(),
+      createdTime: new Date().toTimeString().slice(0, 8),
+      responses: []
     }
-    feedback.push(jsonObj);
+
+    for (var i = 0; i < A.length; i++) {
+      var jsonObj = {};
+      let count = 0
+      jsonObj["q" + (count + 1)] = A[i];
+      jsonObj["q" + (count + 2)] = B[i];
+      formBody.responses.push(jsonObj);
+    }
+    feedback.push(formBody);
     setNotification(true)
     alert("feedback Submitted");
     document.getElementById("myForm").reset();
@@ -75,8 +96,17 @@ const MenuFeedBackForm = () => {
                     <Form.Group>
                       <Form.Label>{x.question}</Form.Label>
                       <Form.Control
+                        ref={ref}
+                        id={index}
                         type="text"
-                        onChange={e => handleInputChange(e, index, x.questionId)}
+                        onChange={e => handleInputChange(
+                          e,
+                          index,
+                          x.question,
+                          createfeedback[activeForm].formName,
+                          createfeedback[activeForm].createdDate,
+                          createfeedback[activeForm].id,
+                          createfeedback[activeForm].createdTime)}
                       />
                     </Form.Group>
                   </Form>
