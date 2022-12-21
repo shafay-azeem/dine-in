@@ -14,30 +14,30 @@ import React from "react";
 import { MenuState } from "../../../context/MenuContext";
 
 const ResultTable = () => {
-  const { createfeedback, setCreateFeedback } = MenuState();
-  // const data = [
-  //   {
-  //     ID: 1,
-  //     Result: "Passed",
-  //     Date: "12-01-22",
-  //     Form: "I am form",
-  //     Action: "Result",
-  //   },
-  //   {
-  //     ID: 2,
-  //     Result: "Failed",
-  //     Date: "13-01-22",
-  //     Form: "I am form",
-  //     Action: "Result",
-  //   },
-  //   {
-  //     ID: 3,
-  //     Result: "Passed",
-  //     Date: "11-01-22",
-  //     Form: "I am form",
-  //     Action: "Result",
-  //   },
-  // ];
+  const {
+    createfeedback,
+    setCreateFeedback,
+    feedback,
+    setFeedback,
+    activeForm,
+    setActiveForm,
+  } = MenuState();
+
+  // console.log(activeForm, "activeForm");
+  // console.log(feedback, "feedback");
+  // console.log(createfeedback[activeForm]?.formQuestions, "createfeedback");
+
+  // let feedbackgg = createfeedback[activeForm]?.formQuestions;
+
+  // for (let i = 0; i <= feedbackgg.length; i++) {
+  //   console.log(feedbackgg[i].id, "ff");
+  //   // let's divide the value by 2
+  //   // if the remainder is zero then it's an even number
+  //   if (i % 2 == 0) {
+  //     console.log(i, "even");
+  //   }
+  // }
+
   return (
     <>
       <TableContainer>
