@@ -67,6 +67,7 @@ const RestaurantMenu = (props) => {
       },
     ],
   };
+
   return (
     <>
       <div className="menu">
@@ -91,7 +92,7 @@ const RestaurantMenu = (props) => {
       <div className="subsection">
         {subSection_response?.map((x, index) => {
           return (
-            <Accordion className="mb-2">
+            <Accordion className="mb-2 accordion">
               <Accordion.Item eventKey="1">
                 <Accordion.Header>{x.sectionName}</Accordion.Header>
                 <Accordion.Body>

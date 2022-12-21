@@ -29,9 +29,19 @@ const DisplayItemCard = (props) => {
             <Col lg={4} md={4} sm={6} xs={12}>
               <Card
                 className="mx-auto mb-1 fooditem"
-                style={{ cursor: "pointer" }}
+                style={{
+                  cursor: "pointer",
+                }}
               >
-                <Card.Body>
+                <div className="Soldout-Badge">
+                  {x.itemTag ? (
+                    <Badge pill bg="danger">
+                      Sold Out
+                    </Badge>
+                  ) : null}
+                </div>
+
+                <Card.Body style={{ opacity: x.itemTag ? "0.5" : "none" }}>
                   <Row>
                     <Col lg={4} className="p-0">
                       <img
@@ -45,16 +55,12 @@ const DisplayItemCard = (props) => {
                         onClick={() => menuDetail(index)}
                       >
                         {x.itemName}
-
-                        {x.itemTag ? (
-                          <Badge pill bg="primary">
-                            Sold Out
-                          </Badge>
-                        ) : null}
                       </Card.Title>
+
                       <Card.Text className="text">
                         {x.itemDescription}
                       </Card.Text>
+
                       <Card.Text className="pricetext">
                         ${x.itemPrice}
                       </Card.Text>

@@ -70,7 +70,7 @@ const ItemDrawer = (props) => {
 
   let sectionArr =
     response[props.menu_index].section[props?.section_index]?.item[
-    props?.item_index
+      props?.item_index
     ];
 
   const itemCondtionState = Number.isInteger(props?.subsection_index)
@@ -94,7 +94,6 @@ const ItemDrawer = (props) => {
       console.log(itemprice, "itemprice====");
       A = [{ name: "", price: itemprice, calories: "" }];
       console.log(A, "=======");
-
     } else {
       console.log("iff else");
 
@@ -600,8 +599,8 @@ const ItemDrawer = (props) => {
       if (itemprice != null) {
         let initialArray = inputList;
         if (inputList[0].price != itemprice) {
-          inputList[0].price = itemprice
-          setInputList(initialArray)
+          inputList[0].price = itemprice;
+          setInputList(initialArray);
         }
       }
       response[props.menu_index].section[props.section_index].item[
@@ -1251,6 +1250,9 @@ const ItemDrawer = (props) => {
                         </Box>
                       );
                     })}
+                    <div style={{ marginTop: 20 }}>
+                      {JSON.stringify(demoModifier)}
+                    </div>
                   </Box>
                   {/* <CustomButton
                     click={addModifiersOption}
