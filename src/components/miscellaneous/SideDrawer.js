@@ -51,7 +51,11 @@ const SideDrawer = () => {
     switch (type) {
       case 'success':
 
-        NotificationManager.success('Success message', 'Title here');
+        NotificationManager.success('Success message', 'Title here', 1000, () => {
+          navigate({
+            pathname: "/feedbacks",
+          });
+        });
         break;
 
       case 'error':
