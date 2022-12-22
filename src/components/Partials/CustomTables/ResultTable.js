@@ -9,9 +9,11 @@ import {
   Th,
   Thead,
   Tr,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import { MenuState } from "../../../context/MenuContext";
+import ViewFeedBacks from "../../FeedBacks/ViewFeedBacks";
 
 const ResultTable = () => {
   const {
@@ -22,6 +24,12 @@ const ResultTable = () => {
     activeForm,
     setActiveForm,
   } = MenuState();
+
+  const {
+    isOpen: ViewFeedBackIsOpen,
+    onOpen: ViewFeedBackOnOpen,
+    onClose: ViewFeedBackOnClose,
+  } = useDisclosure();
 
   return (
     <>
@@ -40,13 +48,22 @@ const ResultTable = () => {
               return (
                 <Tr key={index}>
                   <Td>{x.formId}</Td>
-                  <Td>
-                    {x.createdDate}
-                  </Td>
+                  <Td>{x.createdDate}</Td>
                   <Td>{x.formName}</Td>
+
                   <Td style={{ textAlign: "center", cursor: "pointer" }}>
-                    <Icon as={ViewIcon} />
+                    <Icon onClick={ViewFeedBackOnOpen} as={ViewIcon} />
                   </Td>
+                  {ViewFeedBackIsOpen ? (
+                    <ViewFeedBacks
+                      isOpen={ViewFeedBackIsOpen}
+                      onOpen={ViewFeedBackOnOpen}
+                      onClose={ViewFeedBackOnClose}
+                      index={index}
+                    />
+                  ) : (
+                    console.log("ss")
+                  )}
                 </Tr>
               );
             })}
