@@ -29,6 +29,8 @@ import {
   ButtonGroup,
   RadioGroup,
   useDisclosure,
+  Select,
+  IconButton,
 } from "@chakra-ui/react";
 import CustomButton from "../../CustomElements/CustomButton";
 import { MenuState } from "../../context/MenuContext";
@@ -36,6 +38,7 @@ import { useState } from "react";
 import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { Col, Form, FormCheck, Row } from "react-bootstrap";
+import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 
 const SettingDrawer = (props) => {
   console.log(props.menuCreate, "props.menuCreate");
@@ -146,6 +149,8 @@ const SettingDrawer = (props) => {
           endDate: endDate,
         };
       }
+    } else if (value == 3) {
+      SpecificDate = inputList;
     } else {
       SpecificDate = {
         availability: availability,
@@ -158,13 +163,36 @@ const SettingDrawer = (props) => {
       menuDescription: description,
       menuNote: note,
       menuStatus: active,
-      availaibility: [SpecificDate],
+      availaibility: value == 3 ? SpecificDate : [SpecificDate],
       section: [],
     };
+
     response.push(menuData);
     alert("Menu Created");
     setResponse([...response]);
     console.log(response, "create menu");
+  };
+
+  const [inputList, setInputList] = useState([{ StartTime: "", EndTime: "" }]);
+
+  // handle input change
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
+
+  // handle click event of the Remove button
+  const handleRemoveClick = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([...inputList, { StartTime: "", EndTime: "" }]);
   };
 
   return (
@@ -388,26 +416,80 @@ const SettingDrawer = (props) => {
                       ) : null}
                     </Box>
                   ) : null}
-                </RadioGroup>
 
-                <Box>
-                  {weekday?.map((x, index) => {
-                    return (
-                      <Row key={index}>
-                        <Col>
-                          <Form.Check type="checkbox" />
-                        </Col>
-                        <Col>{x}</Col>
-                        <Col>
-                          <input type="time"></input>
-                        </Col>
-                        <Col>
-                          <input type="time"></input>
-                        </Col>
-                      </Row>
-                    );
-                  })}
-                </Box>
+                  <Box>
+                    <Radio value="3">Availability</Radio>
+                    {value == 3 ? (
+                      <Box>
+                        {inputList.map((y, i) => {
+                          return (
+                            <Box key={i} mt={5}>
+                              <HStack>
+                                <Select
+                                  placeholder="Select Group"
+                                  width="30%"
+                                  size="sm"
+                                  borderRadius="8px"
+                                  name="Day"
+                                  value={y.a}
+                                  onChange={(e) => handleInputChange(e, i)}
+                                >
+                                  {weekday?.map((a) => {
+                                    return <option value={a}>{a}</option>;
+                                  })}
+                                </Select>
+
+                                <Input
+                                  borderRadius="8px"
+                                  placeholder="Max"
+                                  size="sm"
+                                  name="StartTime"
+                                  type="time"
+                                  width="30%"
+                                  value={y.StartTime}
+                                  onChange={(e) => handleInputChange(e, i)}
+                                />
+
+                                <Input
+                                  borderRadius="8px"
+                                  placeholder="Max"
+                                  size="sm"
+                                  name="EndTime"
+                                  type="time"
+                                  width="30%"
+                                  value={y.EndTime}
+                                  onChange={(e) => handleInputChange(e, i)}
+                                />
+                                {inputList.length !== 1 && (
+                                  <IconButton
+                                    size="xs"
+                                    variant="outline"
+                                    colorScheme="blue"
+                                    onClick={() => handleRemoveClick(i)}
+                                    icon={<CloseIcon />}
+                                  />
+                                )}
+                                {inputList.length - 1 === i && (
+                                  <IconButton
+                                    size="xs"
+                                    variant="outline"
+                                    colorScheme="blue"
+                                    onClick={handleAddClick}
+                                    icon={<AddIcon />}
+                                  />
+                                )}
+                              </HStack>
+                            </Box>
+                          );
+                        })}
+                      </Box>
+                    ) : null}
+                    {/* 
+                    <div style={{ marginTop: 20 }}>
+                      {JSON.stringify(inputList)}
+                    </div> */}
+                  </Box>
+                </RadioGroup>
               </TabPanel>
               {/* Availability */}
             </TabPanels>

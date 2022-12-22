@@ -70,7 +70,7 @@ const ItemDrawer = (props) => {
 
   let sectionArr =
     response[props.menu_index].section[props?.section_index]?.item[
-    props?.item_index
+      props?.item_index
     ];
 
   const itemCondtionState = Number.isInteger(props?.subsection_index)
@@ -132,7 +132,7 @@ const ItemDrawer = (props) => {
   const [rrr, setRrr] = useState([]);
 
   const [video, setVideo] = useState();
-  let itemModifier = []
+  let itemModifier = [];
 
   const [name, setName] = useState(initialState);
 
@@ -380,7 +380,6 @@ const ItemDrawer = (props) => {
     }
   }
 
-
   const modifierUpdate = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemModifier
     : sectionArr?.itemModifier;
@@ -388,9 +387,7 @@ const ItemDrawer = (props) => {
   let modifierOption;
   if (typeof modifierUpdate === "undefined") {
     modifierOption = [{ min: "", max: "" }];
-
-  }
-  else {
+  } else {
     modifierOption = modifierUpdate;
   }
 
@@ -407,31 +404,27 @@ const ItemDrawer = (props) => {
     for (let y = 0; y < modifier.length; y++) {
       for (let i = 0; i < demoModifier.length; i++) {
         if (modifier[y].Groupname == demoModifier[i].groupname) {
-          let Arr = []
+          let Arr = [];
           for (let z = 0; z < modifier[y].modifiers.length; z++) {
-            let jsonObj = {}
+            let jsonObj = {};
 
-            jsonObj["Name"] = modifier[y].modifiers[z].Name
-            jsonObj["Price"] = modifier[y].modifiers[z].Price
-            jsonObj["Calorie"] = modifier[y].modifiers[z].Calorie
-            Arr.push(jsonObj)
-
+            jsonObj["Name"] = modifier[y].modifiers[z].Name;
+            jsonObj["Price"] = modifier[y].modifiers[z].Price;
+            jsonObj["Calorie"] = modifier[y].modifiers[z].Calorie;
+            Arr.push(jsonObj);
           }
           let responseBody = {
             groupname: demoModifier[i].groupname,
             min: demoModifier[i].min,
             max: demoModifier[i].max,
-            reference: Arr
-          }
+            reference: Arr,
+          };
 
-          itemModifier.push(responseBody)
-          setState(itemModifier)
-
-
+          itemModifier.push(responseBody);
+          setState(itemModifier);
         }
       }
     }
-
   };
 
   function getTimestampInSeconds() {
@@ -476,7 +469,7 @@ const ItemDrawer = (props) => {
     itemNutritionCalories: nutcalories,
     itemCaloriesFat: caloriesfat,
     itemServingSize: servingsize,
-    itemModifier: state
+    itemModifier: state,
   };
 
   const updateItem = (x) => {
@@ -879,9 +872,6 @@ const ItemDrawer = (props) => {
     x.splice(index, 1);
     setDemoModifier(x);
   };
-
-
-
 
   const pictureCapture = (event) => {
     let value = URL.createObjectURL(event.target.files[0]);
@@ -1301,9 +1291,9 @@ const ItemDrawer = (props) => {
                         </Box>
                       );
                     })}
-                    <div style={{ marginTop: 20 }}>
+                    {/* <div style={{ marginTop: 20 }}>
                       {JSON.stringify(demoModifier)}
-                    </div>
+                    </div> */}
                   </Box>
                   {/* <CustomButton
                     click={addModifiersOption}
