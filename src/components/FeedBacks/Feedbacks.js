@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -41,7 +41,9 @@ const Feedbacks = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showform, setShowForm] = useState(false);
   const [showresult, setShowResult] = useState(true);
+
   const [feedbackFormList, setFeedbackFormList] = useState(createfeedback);
+
   const [count, setCount] = useState();
 
   const fileType =
@@ -82,9 +84,13 @@ const Feedbacks = () => {
   }
 
   const handleRemove = (index) => {
-    createfeedback.splice(index, 1);
-    setCreateFeedback([...createfeedback]);
-    setFeedbackFormList(createfeedback);
+    // console.log(index, "delete index");
+
+    if (window.confirm("Do you really want to leave?")) {
+      createfeedback.splice(index, 1);
+      setCreateFeedback([...createfeedback]);
+      setFeedbackFormList(createfeedback);
+    }
   };
 
   const getIndex = (index) => {
@@ -209,7 +215,7 @@ const Feedbacks = () => {
               </TabPanel>
 
               <TabPanel>
-                {feedbackFormList?.map((x, index) => {
+                {createfeedback?.map((x, index) => {
                   return (
                     <Box
                       h="90px"
@@ -238,10 +244,10 @@ const Feedbacks = () => {
                             <EditIcon mr={4} onClick={() => editForm(index)} />
                           </Tooltip>
 
-                          <Button onClick={onOpen} bg="white">
-                            <DeleteIcon onClick={() => getIndex(index)} />
-                            {/* onClick={() => handleRemove(index)} */}
-                            {isOpen ? (
+                          {/* <Button onClick={onOpen} bg="white"> */}
+                          <DeleteIcon onClick={() => handleRemove(index)} />
+                          {/* onClick={() => handleRemove(index)} */}
+                          {/* {isOpen ? (
                               <FeedbackDeleteModal
                                 isOpen={isOpen}
                                 onOpen={onOpen}
@@ -250,8 +256,8 @@ const Feedbacks = () => {
                               />
                             ) : (
                               console.log("ss")
-                            )}
-                          </Button>
+                            )} */}
+                          {/* </Button> */}
                         </GridItem>
                       </Grid>
                     </Box>

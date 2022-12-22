@@ -84,34 +84,27 @@ const ItemDrawer = (props) => {
   const initialState5 = props.subsection_push ? "" : itemCondtionState5;
   const [itemprice, setItemPrice] = useState(initialState5);
 
+  const itemCondtionState4 = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemCalorie
+    : sectionArr?.itemCalorie;
+  const initialState4 = props.subsection_push ? "" : itemCondtionState4;
+  const [calorie, setCalorie] = useState(initialState4);
+
   const XX = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemPriceOption
     : sectionArr?.itemPriceOption;
+
   let A;
+
   if (typeof XX === "undefined") {
-    if (itemprice != null) {
-      console.log("iff");
-      console.log(itemprice, "itemprice====");
-      A = [{ name: "", price: itemprice, calories: "" }];
-      console.log(A, "=======");
+    if (itemprice != null || calorie != null) {
+      A = [{ name: "", price: itemprice, calories: calorie }];
     } else {
       console.log("iff else");
-
       A = [{ name: "", price: "", calories: "" }];
     }
   } else {
-    // if (itemprice != null) {
-    //   let initialArray = XX;
-    //   for (var i = 0; i < initialArray.length; i++) {
-    //     if (initialArray[0].price != itemprice) {
-    //       initialArray[0].price = itemprice
-    //       A = initialArray
-    //     }
-    //   }
-
-    // } else {
     A = XX;
-    // }
   }
   console.log(typeof A[0].price, "A+++++");
   // console.log(typeof (itemprice), "itemprice type")
@@ -173,12 +166,6 @@ const ItemDrawer = (props) => {
     : sectionArr?.itemPrepTime;
   const initialState3 = props.subsection_push ? "" : itemCondtionState3;
   const [time, setTime] = useState(initialState3);
-
-  const itemCondtionState4 = Number.isInteger(props?.subsection_index)
-    ? subSectionArr?.itemCalorie
-    : sectionArr?.itemCalorie;
-  const initialState4 = props.subsection_push ? "" : itemCondtionState4;
-  const [calorie, setCalorie] = useState(initialState4);
 
   const itemCondtionState6 = Number.isInteger(props?.subsection_index)
     ? subSectionArr?.itemWarning
@@ -440,7 +427,6 @@ const ItemDrawer = (props) => {
   };
 
   const updateItem = (x) => {
-    console.log(warningState, "====warning state====");
     if (x != undefined) {
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
@@ -593,16 +579,33 @@ const ItemDrawer = (props) => {
         props.subsection_index
       ].item[props.item_index].image = image;
 
-      setResponse([...response]);
-      alert("Item With-In SubSection Updated Successfully");
-    } else {
-      if (itemprice != null) {
+      if (itemprice != null || calorie != null) {
         let initialArray = inputList;
-        if (inputList[0].price != itemprice) {
+        if (
+          inputList[0].price != itemprice ||
+          inputList[0].calories != calorie
+        ) {
           inputList[0].price = itemprice;
+          inputList[0].calories = calorie;
           setInputList(initialArray);
         }
       }
+
+      setResponse([...response]);
+      alert("Item With-In SubSection Updated Successfully");
+    } else {
+      if (itemprice != null || calorie != null) {
+        let initialArray = inputList;
+        if (
+          inputList[0].price != itemprice ||
+          inputList[0].calories != calorie
+        ) {
+          inputList[0].price = itemprice;
+          inputList[0].calories = calorie;
+          setInputList(initialArray);
+        }
+      }
+
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemPrice = itemprice;
@@ -780,12 +783,12 @@ const ItemDrawer = (props) => {
         props.subsection_index
       ].item.push(itemData);
       alert("Single Push On basis Of Conditional Parameters");
-      console.log(response, "orig");
+      // console.log(response, "orig");
     } else {
       response[props.menu_index].section[props.section_index].item.push(
         itemData
       );
-      console.log(response, "orig");
+      // console.log(response, "orig");
       alert("Item Created Successfully");
     }
   };
