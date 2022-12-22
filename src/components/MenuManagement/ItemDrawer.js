@@ -70,7 +70,7 @@ const ItemDrawer = (props) => {
 
   let sectionArr =
     response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
+    props?.item_index
     ];
 
   const itemCondtionState = Number.isInteger(props?.subsection_index)
@@ -111,9 +111,9 @@ const ItemDrawer = (props) => {
 
   const [inputList, setInputList] = useState(A);
 
-  useEffect(() => {
-    setInputList(A);
-  }, [A]);
+  // useEffect(() => {
+  //   setInputList(A);
+  // }, [A]);
 
   console.log(inputList, "inputList+++++");
   const yy = Number.isInteger(props?.subsection_index)
@@ -122,7 +122,7 @@ const ItemDrawer = (props) => {
 
   let B;
   if (typeof yy === "undefined") {
-    B = [{ modifiergroup: "", min: "", max: "" }];
+    B = [{ min: "", max: "" }];
   } else {
     B = yy;
   }
@@ -132,6 +132,7 @@ const ItemDrawer = (props) => {
   const [rrr, setRrr] = useState([]);
 
   const [video, setVideo] = useState();
+  let itemModifier = []
 
   const [name, setName] = useState(initialState);
 
@@ -379,7 +380,59 @@ const ItemDrawer = (props) => {
     }
   }
 
+
+  const modifierUpdate = Number.isInteger(props?.subsection_index)
+    ? subSectionArr?.itemModifier
+    : sectionArr?.itemModifier;
+
+  let modifierOption;
+  if (typeof modifierUpdate === "undefined") {
+    modifierOption = [{ min: "", max: "" }];
+
+  }
+  else {
+    modifierOption = modifierUpdate;
+  }
+
   const [sold, setSold] = useState(soldTag);
+
+  const [state, setState] = useState(modifierOption);
+
+  const ModifierOptions = (e, index) => {
+    const { name, value } = e.target;
+    const x = [...demoModifier];
+    x[index][name] = value;
+
+    setDemoModifier(x);
+    for (let y = 0; y < modifier.length; y++) {
+      for (let i = 0; i < demoModifier.length; i++) {
+        if (modifier[y].Groupname == demoModifier[i].groupname) {
+          let Arr = []
+          for (let z = 0; z < modifier[y].modifiers.length; z++) {
+            let jsonObj = {}
+
+            jsonObj["Name"] = modifier[y].modifiers[z].Name
+            jsonObj["Price"] = modifier[y].modifiers[z].Price
+            jsonObj["Calorie"] = modifier[y].modifiers[z].Calorie
+            Arr.push(jsonObj)
+
+          }
+          let responseBody = {
+            groupname: demoModifier[i].groupname,
+            min: demoModifier[i].min,
+            max: demoModifier[i].max,
+            reference: Arr
+          }
+
+          itemModifier.push(responseBody)
+          setState(itemModifier)
+
+
+        }
+      }
+    }
+
+  };
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -398,7 +451,6 @@ const ItemDrawer = (props) => {
     itemPrice: itemprice,
     itemCalories: nutcalories,
     itemPriceOption: inputList,
-    itemModifierOptions: demoModifier,
     itemSaturatedFatPercentage: saturatedfatpercentage,
     itemTransFat: transfat,
     itemTransFatPercentage: transfatpercentage,
@@ -424,6 +476,7 @@ const ItemDrawer = (props) => {
     itemNutritionCalories: nutcalories,
     itemCaloriesFat: caloriesfat,
     itemServingSize: servingsize,
+    itemModifier: state
   };
 
   const updateItem = (x) => {
@@ -788,7 +841,7 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item.push(
         itemData
       );
-      // console.log(response, "orig");
+      console.log(response, "orig");
       alert("Item Created Successfully");
     }
   };
@@ -815,7 +868,7 @@ const ItemDrawer = (props) => {
   };
 
   const handleModifierInput = () => {
-    setDemoModifier([...demoModifier, { modifiergroup: "", min: "", max: "" }]);
+    setDemoModifier([...demoModifier, { min: "", max: "" }]);
     // const list = [...inputList]
     // list.push({ firstName: "", lastName: "" })
     // setInputList(list)
@@ -827,13 +880,8 @@ const ItemDrawer = (props) => {
     setDemoModifier(x);
   };
 
-  const ModifierOptions = (e, index) => {
-    const { name, value } = e.target;
 
-    const x = [...demoModifier];
-    x[index][name] = value;
-    setDemoModifier(x);
-  };
+
 
   const pictureCapture = (event) => {
     let value = URL.createObjectURL(event.target.files[0]);
