@@ -41,6 +41,7 @@ import Multiselect from "multiselect-react-dropdown";
 import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
 import ImagePreviewModal from "./ImagePreviewModal";
 import { BsFillTrashFill } from "react-icons/bs";
+import { useEffect } from "react";
 
 const SectionDrawer = (props) => {
   let menu_index = props.menu_index;
@@ -52,8 +53,14 @@ const SectionDrawer = (props) => {
   const [food, setFood] = useState(["New", "Signature"]);
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
+
   const { response, setResponse } = MenuState();
   const inputElement = useRef();
+
+
+
+
+
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
@@ -84,6 +91,18 @@ const SectionDrawer = (props) => {
       props?.subsection_index
     ]?.image
     : response[props.menu_index].section[props?.section_index]?.image;
+
+
+  let initialArrayFaizy = [...response[props.menu_index]?.section]
+  let initalArrayShafay = response[props.menu_index]?.section
+  let initalArrayfaiz = initialArrayFaizy?.splice(props?.section_index, 1)
+
+  console.log(initialArrayFaizy, 'initialArrayFaizy')
+  console.log(initalArrayfaiz, 'initalArrayfaiz')
+
+  const initalArrayDecider = Number.isInteger(props?.section_index) ? initialArrayFaizy : initalArrayShafay
+  const [arrayDecider, setArrayDecider] = useState(initalArrayDecider);
+  console.log(arrayDecider, "arrayDecider")
 
   const [image, setImage] = useState(imageState);
 
@@ -149,9 +168,25 @@ const SectionDrawer = (props) => {
     setImage(value);
   };
 
+  // const arraydecider = () => {
+  //   if (Number.isInteger(props?.section_index)) {
+  //     let initialArrayFaizy = [...response[props.menu_index]?.section]
+  //     initialArrayFaizy.splice(props?.section_index, 1);
+  //     // setArrayDecider(initialArray)
+  //     console.log(initialArrayFaizy, "initialArrayFaizy")
+  //   }
+  //   else {
+  //     // setArrayDecider(response[props.menu_index].section)
+  //     console.log(response[props.menu_index].section, "arrayDecider")
+  //   }
+  // }
+  // useEffect(() => {
+  // }, [arrayDecider]);
+
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
+
 
   let sectionData = {
     sectionId: getTimestampInSeconds(),
@@ -168,6 +203,7 @@ const SectionDrawer = (props) => {
   const [modalShow, setModalShow] = useState(false);
 
   const testfunc = () => {
+
     if (checkedItems === true) {
       let initialArray = [...response[props.menu_index].section];
       for (var i = 0; i < initialArray.length; i++) {
@@ -192,12 +228,13 @@ const SectionDrawer = (props) => {
       response[props.menu_index].section.sort(compare);
 
       setResponse([...response]);
-      console.log(response);
+      // console.log(response);
       alert("Section Created Successfully");
     }
   };
 
   const updatedSection = (x, y) => {
+
     if (x == undefined && checkedItems == false) {
       response[props.menu_index].section[props.section_index].sectionName =
         name;
@@ -395,7 +432,7 @@ const SectionDrawer = (props) => {
                     />
                   </FormControl>
 
-                  {response[props.menu_index].section.length > 1 &&
+                  {arrayDecider.length > 0 &&
                     props?.subsection_index == undefined ? (
                     <FormControl>
                       <Checkbox
@@ -410,7 +447,7 @@ const SectionDrawer = (props) => {
                           placeholder="Select option"
                           onChange={(e) => setVal(e.target.value)}
                         >
-                          {response[props.menu_index].section.map(
+                          {arrayDecider?.map(
                             (x, index) => {
                               return (
                                 <option value={x.sectionName}>
@@ -422,7 +459,7 @@ const SectionDrawer = (props) => {
                         </Select>
                       ) : (
                         <Select placeholder="Select option">
-                          {response[props.menu_index].section.map(
+                          {arrayDecider?.map(
                             (x, index) => {
                               return (
                                 <option value={x.sectionName}>
