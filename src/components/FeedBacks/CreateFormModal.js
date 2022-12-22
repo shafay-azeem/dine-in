@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -41,7 +41,9 @@ const CreateFormModal = (props) => {
   const formCreate = () => {
     createfeedback.push(feedbackFormData);
     console.log(createfeedback, "createfeedback");
+    setCreateFeedback([...createfeedback]);
     alert("FeedBack Form Created Successfully");
+
     //document.getElementById("myForm").reset();
   };
 

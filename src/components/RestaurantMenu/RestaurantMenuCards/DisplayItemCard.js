@@ -26,7 +26,7 @@ const DisplayItemCard = (props) => {
       <Row>
         {props.item_response?.map((x, index) => {
           return (
-            <Col lg={4} md={4} sm={6} xs={12}>
+            <Col lg={4} md={4} sm={6} xs={12} key={index}>
               <Card
                 className="mx-auto mb-1 fooditem"
                 style={{
