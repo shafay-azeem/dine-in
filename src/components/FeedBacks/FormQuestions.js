@@ -19,12 +19,10 @@ const FormQuestions = () => {
   }
   if (createfeedback[feedback_index].formQuestions.length > 0) {
     A = createfeedback[feedback_index].formQuestions;
-    console.log(A, "====A=====");
   } else {
     A = [
       { question: "", questionType: "", questionId: getTimestampInSeconds() },
     ];
-    console.log(A, "====B=====");
   }
   const [inputList, setInputList] = useState(A);
 

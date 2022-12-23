@@ -22,8 +22,7 @@ import SettingDrawer from "../../MenuManagement/SettingDrawer";
 import { MenuState } from "../../../context/MenuContext";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import BootstrapSwitchButton from 'bootstrap-switch-button-react'
-
+import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 const DisplayCard = () => {
   const navigate = useNavigate();
@@ -136,21 +135,19 @@ const DisplayCard = () => {
                                   {/* {x.status} */}
                                 </Badge>
                               </Text>
+                              <Text>{x.menuDescription}</Text>
+                              <Text>Last Updated on {x.createdDate}</Text>
                               <Text fontSize="13" fontWeight="400" p={2}>
                                 {/* {x.item} item, last updated on {x.date} */}
                               </Text>
                             </GridItem>
                             <GridItem colStart={4} colEnd={6}>
                               <HStack mt={2} gap={4} ml="38%">
-
                                 <BootstrapSwitchButton
                                   checked={x.menuStatus}
                                   onChange={() => switchStatus(index)}
                                   data-size="xs"
-
                                 />
-
-
 
                                 <Button onClick={() => myfun(index)}>
                                   EDIT MENU

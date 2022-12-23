@@ -128,6 +128,7 @@ const SettingDrawer = (props) => {
     response[props.index].menuDescription = description;
     response[props.index].menuNote = note;
     response[props.index].menuStatus = active;
+    response[props.index].createdDate = new Date().toLocaleString();
     setResponse([...response]);
     alert("Menu Updated Successfully");
   };
@@ -165,6 +166,7 @@ const SettingDrawer = (props) => {
       menuStatus: active,
       availaibility: value == 3 ? SpecificDate : [SpecificDate],
       section: [],
+      createdDate: new Date().toLocaleString(),
     };
 
     response.push(menuData);

@@ -10,6 +10,7 @@ import { BsArrowLeftShort, BsStopwatch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import mySvg from "../Assets/new.svg";
 
 const MenuDetail = (props) => {
   const { response, setResponse } = MenuState();
@@ -98,10 +99,6 @@ const MenuDetail = (props) => {
 
                   {x.itemCalorie == undefined ? null : (
                     <div className="d-flex align-items-center calorie">
-                      {/* <img
-                        src={require("../Assets/calories.png")}
-                        className="img-calorie"
-                      /> */}
                       <p className="itemCalorie">{x.itemCalorie} Calories</p>
                     </div>
                   )}
@@ -119,6 +116,10 @@ const MenuDetail = (props) => {
                   {x.itemLabel?.map((y, index) => {
                     return (
                       <Badge pill bg="primary" key={index}>
+                        <img
+                          src="../Assets/new.svg"
+                          alt="SVG as an image"
+                        ></img>
                         {y}
                       </Badge>
                     );
