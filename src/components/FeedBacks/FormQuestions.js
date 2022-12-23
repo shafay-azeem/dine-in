@@ -1,10 +1,12 @@
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import React from "react";
 import { Card } from "react-bootstrap";
 import { useState } from "react";
 import { MenuState } from "../../context/MenuContext";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { List } from "@chakra-ui/react";
+import { useSearchParams } from "react-router-dom";
+import { BsFillTrashFill } from "react-icons/bs";
+import CustomButton from "../../CustomElements/CustomButton";
+import { Button } from "@chakra-ui/react";
 
 const FormQuestions = () => {
   const { createfeedback, setCreateFeedback } = MenuState();
@@ -19,7 +21,9 @@ const FormQuestions = () => {
     A = createfeedback[feedback_index].formQuestions;
     console.log(A, "====A=====");
   } else {
-    A = [{ question: "", questionType: "", questionId: getTimestampInSeconds() }];
+    A = [
+      { question: "", questionType: "", questionId: getTimestampInSeconds() },
+    ];
     console.log(A, "====B=====");
   }
   const [inputList, setInputList] = useState(A);
@@ -30,49 +34,47 @@ const FormQuestions = () => {
       console.log(createfeedback[feedback_index].formQuestions, "update");
       alert("Your Question Updated");
     } else {
-      // createfeedback[feedback_index].formQuestions.push(inputList[y]);
       createfeedback[feedback_index].formQuestions = inputList;
       console.log(createfeedback[feedback_index].formQuestions, "create");
       alert("Your Question Has Been Submitted");
     }
-
-    //console.log(createfeedback, "cccc");
   };
 
-  // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...inputList];
     list[index][name] = value;
     setInputList(list);
-    console.log(list, "list")
+    console.log(list, "list");
   };
 
-  // handle click event of the Remove button
   const handleRemoveClick = (index) => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    setInputList(list);
-    createfeedback[feedback_index].formQuestions = list;
-    //testfunc(createfeedback[feedback_index].formQuestions.length, index);
+    if (window.confirm("Do You Want To Remove This Question?")) {
+      const list = [...inputList];
+      list.splice(index, 1);
+      setInputList(list);
+      createfeedback[feedback_index].formQuestions = list;
+    }
   };
 
-  // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { question: "", questionType: "", questionId: getTimestampInSeconds() }]);
+    setInputList([
+      ...inputList,
+      { question: "", questionType: "", questionId: getTimestampInSeconds() },
+    ]);
   };
 
   return (
     <div className="container">
-      <Card
-        style={{ width: "40rem", backgroundColor: "white" }}
-        className="ml-auto"
-      >
-        {inputList?.map((x, i) => {
-          return (
+      {inputList?.map((x, i) => {
+        return (
+          <Card
+            className="feedBack-Card mx-auto mt-3"
+            style={{ width: "50rem" }}
+          >
             <Card.Body>
               <Row>
-                <Col>
+                <Col lg={10}>
                   <Form>
                     <Form.Group className="mb-3">
                       <Form.Label>Question {i + 1}</Form.Label>
@@ -80,55 +82,61 @@ const FormQuestions = () => {
                         type="text"
                         name="question"
                         placeholder="Add Your Question"
+                        size="sm"
                         value={x.question}
                         onChange={(e) => handleInputChange(e, i)}
                       />
                     </Form.Group>
 
-                    <Form.Group className="mb-3">
-                      <Form.Control
-                        type="text"
-                        name="questionType"
-                        placeholder="Type"
-                        value={x.questionType}
-                        onChange={(e) => handleInputChange(e, i)}
-                      />
-                    </Form.Group>
+                    {/* <Form.Group className="mb-3">
+                  <Form.Control
+                    type="text"
+                    name="questionType"
+                    placeholder="Type"
+                    value={x.questionType}
+                    onChange={(e) => handleInputChange(e, i)}
+                  />
+                </Form.Group> */}
                   </Form>
+                </Col>
+                <Col lg={2} className="d-flex align-items-center">
+                  {inputList.length !== 1 && (
+                    <BsFillTrashFill
+                      onClick={() => handleRemoveClick(i)}
+                      style={{ cursor: "pointer" }}
+                    />
+                  )}
                 </Col>
               </Row>
               <Row>
                 <Col>
                   {inputList.length - 1 === i && (
-                    <Button variant="primary" onClick={handleAddClick}>
-                      Add
-                    </Button>
-                  )}
-                </Col>
-                <Col>
-                  {inputList.length !== 1 && (
-                    <Button
-                      variant="primary"
-                      onClick={() => handleRemoveClick(i)}
-                    >
-                      Remove
-                    </Button>
+                    <CustomButton
+                      click={handleAddClick}
+                      btnText={"Add Question"}
+                      size={"sm"}
+                      mb={2}
+                    />
                   )}
                 </Col>
               </Row>
             </Card.Body>
-          );
-        })}
-      </Card>
+          </Card>
+        );
+      })}
 
-      <Button
-        variant="primary"
-        onClick={() =>
-          testfunc(createfeedback[feedback_index].formQuestions.length)
-        }
-      >
-        SAVE
-      </Button>
+      <div>
+        <Button
+          colorScheme="teal"
+          size="sm"
+          click={() =>
+            testfunc(createfeedback[feedback_index].formQuestions.length)
+          }
+          style={{ marginLeft: "76%", marginTop: "1%", marginBottom: "2%" }}
+        >
+          Save
+        </Button>
+      </div>
     </div>
   );
 };
