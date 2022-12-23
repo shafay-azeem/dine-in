@@ -43,11 +43,13 @@ const SubSecItemCard = (props) => {
               <Card className="mx-auto mb-2 fooditem">
                 <Card.Body>
                   <Row className="align-items-start">
-                    <Col lg={4} className="p-0">
-                      <img
-                        src={x.image}
-                        className="image mx-auto d-block w-100"
-                      />
+                    <Col lg={4} className="imgcol p-0">
+                      <div>
+                        <img
+                          src={x.image}
+                          className="image mx-auto d-block w-100"
+                        />
+                      </div>
                     </Col>
                     <Col lg={8}>
                       <Card.Title
@@ -60,24 +62,105 @@ const SubSecItemCard = (props) => {
                         {x.itemDescription}
                       </Card.Text>
                       <Card.Text className="pricetext">
-                        ${x.itemPrice}
+                        {x.itemPriceOption[0].price ==
+                        x.itemPriceOption[x.itemPriceOption.length - 1]
+                          .price ? (
+                          <div
+                            className="itemPrice"
+                            style={{
+                              paddingLeft: "5px",
+                              paddingRight: "5px",
+                            }}
+                          >
+                            ${x.itemPriceOption[0].price}
+                          </div>
+                        ) : (
+                          <div
+                            className="itemPrice"
+                            style={{
+                              paddingLeft: "5px",
+                              paddingRight: "5px",
+                            }}
+                          >
+                            ${x.itemPriceOption[0].price} ━━━ $
+                            {
+                              x.itemPriceOption[x.itemPriceOption.length - 1]
+                                .price
+                            }
+                          </div>
+                        )}
                       </Card.Text>
 
                       <div className="d-flex align-items-center">
                         {x.itemLabel?.map((y, index) => {
                           return (
-                            <Badge pill bg="primary" key={index}>
-                              {y}
-                            </Badge>
+                            <div>
+                              {y === "New" ? (
+                                <div>
+                                  <img
+                                    src={
+                                      require("../../Assets/new.svg").default
+                                    }
+                                    alt="mySvgImage"
+                                  />
+                                </div>
+                              ) : null}
+
+                              {y === "Signature" ? (
+                                <div>
+                                  <img
+                                    src={
+                                      require("../../Assets/signature.svg")
+                                        .default
+                                    }
+                                    alt="mySvgImage"
+                                  />
+                                </div>
+                              ) : null}
+
+                              {y === "Special Presentation" ? (
+                                <div>
+                                  <img
+                                    src={
+                                      require("../../Assets/special.svg")
+                                        .default
+                                    }
+                                    alt="mySvgImage"
+                                  />
+                                </div>
+                              ) : null}
+                            </div>
                           );
                         })}
                       </div>
-                      <div className="d-flex align-items-center">
+                      <div className="d-flex align-items-center mt-2 gap-2">
                         {x.itemWarning?.map((z, index) => {
                           return (
-                            <Badge pill bg="primary" key={index}>
-                              {z}
-                            </Badge>
+                            <div>
+                              {z === "Alcohol" ? (
+                                <div>
+                                  <img
+                                    src={
+                                      require("../../Assets/Alcohol.svg")
+                                        .default
+                                    }
+                                    alt="mySvgImage"
+                                  />
+                                </div>
+                              ) : null}
+
+                              {z === "AlcoholFree" ? (
+                                <div>
+                                  <img
+                                    src={
+                                      require("../../Assets/AlcoholFree.svg")
+                                        .default
+                                    }
+                                    alt="mySvgImage"
+                                  />
+                                </div>
+                              ) : null}
+                            </div>
                           );
                         })}
                       </div>

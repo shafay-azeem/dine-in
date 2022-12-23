@@ -43,7 +43,7 @@ const DisplayItemCard = (props) => {
 
                 <Card.Body style={{ opacity: x.itemTag ? "0.5" : "none" }}>
                   <Row>
-                    <Col lg={4} className="p-0">
+                    <Col lg={4} className="imgcol p-0">
                       <img
                         src={x.image}
                         className="image mx-auto d-block w-100"
@@ -62,24 +62,105 @@ const DisplayItemCard = (props) => {
                       </Card.Text>
 
                       <Card.Text className="pricetext">
-                        ${x.itemPrice}
+                        {x.itemPriceOption[0].price ==
+                        x.itemPriceOption[x.itemPriceOption.length - 1]
+                          .price ? (
+                          <div
+                            className="itemPrice"
+                            style={{
+                              paddingLeft: "5px",
+                              paddingRight: "5px",
+                            }}
+                          >
+                            ${x.itemPriceOption[0].price}
+                          </div>
+                        ) : (
+                          <div
+                            className="itemPrice"
+                            style={{
+                              paddingLeft: "5px",
+                              paddingRight: "5px",
+                            }}
+                          >
+                            ${x.itemPriceOption[0].price} ━━━ $
+                            {
+                              x.itemPriceOption[x.itemPriceOption.length - 1]
+                                .price
+                            }
+                          </div>
+                        )}
                       </Card.Text>
 
-                      <div className="d-flex align-items-center">
+                      <div className="d-flex align-items-center mt-2">
                         {x.itemLabel?.map((y, index) => {
                           return (
-                            <Badge pill bg="primary" key={index}>
-                              {y}
-                            </Badge>
+                            <div>
+                              {y === "New" ? (
+                                <div>
+                                  <img
+                                    src={
+                                      require("../../Assets/new.svg").default
+                                    }
+                                    alt="mySvgImage"
+                                  />
+                                </div>
+                              ) : null}
+
+                              {y === "Signature" ? (
+                                <div>
+                                  <img
+                                    src={
+                                      require("../../Assets/signature.svg")
+                                        .default
+                                    }
+                                    alt="mySvgImage"
+                                  />
+                                </div>
+                              ) : null}
+
+                              {y === "Special Presentation" ? (
+                                <div>
+                                  <img
+                                    src={
+                                      require("../../Assets/special.svg")
+                                        .default
+                                    }
+                                    alt="mySvgImage"
+                                  />
+                                </div>
+                              ) : null}
+                            </div>
                           );
                         })}
                       </div>
-                      <div className="d-flex align-items-center">
+                      <div className="d-flex align-items-center mt-2">
                         {x.itemWarning?.map((z, index) => {
                           return (
-                            <Badge pill bg="primary" key={index}>
-                              {z}
-                            </Badge>
+                            <div>
+                              {z === "Alcohol" ? (
+                                <div>
+                                  <img
+                                    src={
+                                      require("../../Assets/Alcohol.svg")
+                                        .default
+                                    }
+                                    alt="mySvgImage"
+                                  />
+                                </div>
+                              ) : null}
+
+                              {z === "AlcoholFree" ? (
+                                <div>
+                                  <img
+                                    src={
+                                      require("../../Assets/AlcoholFree.svg")
+                                        .default
+                                    }
+                                    alt="mySvgImage"
+                                  />
+                                </div>
+                              ) : null}
+                            </div>
                           );
                         })}
                       </div>

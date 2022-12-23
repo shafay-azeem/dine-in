@@ -39,8 +39,8 @@ const ItemCard = (props) => {
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ].item
+        props?.subsection_index
+      ].item
     : response[props?.menu_index]?.section[props?.section_index]?.item;
 
   const [itemList, setItemList] = useState(initialState);
@@ -267,15 +267,34 @@ const ItemCard = (props) => {
                                       mr={4}
                                       value={x.itemPrice}
                                     /> */}
-                                    {x.itemPriceOption[0].price == x.itemPriceOption[x.itemPriceOption.length - 1].price ? (
-                                      <Text>
-                                        {x.itemPriceOption[0].price}
-                                      </Text>
-
+                                    {x.itemPriceOption[0].price ==
+                                    x.itemPriceOption[
+                                      x.itemPriceOption.length - 1
+                                    ].price ? (
+                                      <Box
+                                        style={{
+                                          border: "1px solid black",
+                                          paddingLeft: "5px",
+                                          paddingRight: "5px",
+                                        }}
+                                      >
+                                        ${x.itemPriceOption[0].price}
+                                      </Box>
                                     ) : (
-                                      <Text>
-                                        {x.itemPriceOption[0].price}---{x.itemPriceOption[x.itemPriceOption.length - 1].price}
-                                      </Text>
+                                      <Box
+                                        style={{
+                                          border: "1px solid black",
+                                          paddingLeft: "5px",
+                                          paddingRight: "5px",
+                                        }}
+                                      >
+                                        ${x.itemPriceOption[0].price} ━━━ $
+                                        {
+                                          x.itemPriceOption[
+                                            x.itemPriceOption.length - 1
+                                          ].price
+                                        }
+                                      </Box>
                                     )}
 
                                     {/* 

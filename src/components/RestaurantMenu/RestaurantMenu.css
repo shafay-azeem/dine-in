@@ -56,6 +56,15 @@
 }
 .fooditem .image {
   border-radius: 3px;
+  object-fit: cover;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+}
+
+.fooditem .imgcol {
+  height: 100px;
+  position: relative;
 }
 .menu {
   padding-top: 15px;
@@ -137,6 +146,13 @@
   background-size: cover;
 }
 
+.menuDetail-Card .sub-title {
+  font-size: 14px;
+  line-height: 25px;
+  font-weight: normal;
+  color: rgb(87, 89, 98);
+}
+
 .itemPrice {
   color: rgb(230, 3, 75);
   font-weight: 600;
@@ -148,4 +164,33 @@
   font-size: 14px;
   line-height: 19px;
   font-weight: normal;
+}
+.feedbackSubmit-form p {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: normal;
+  color: rgb(87, 89, 98);
+  margin-top: 12px;
+}
+
+.feedbackSubmit-form Button {
+  background-color: rgb(230, 3, 75);
+  color: rgb(255, 255, 255);
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid rgb(230, 3, 75);
+  padding: 9px 12px;
+  margin-top: 25px;
+}
+
+.feedbackSubmit-form {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.backarrow {
+  background-color: white;
+  border: none;
+  position: absolute;
+  z-index: 1;
 }

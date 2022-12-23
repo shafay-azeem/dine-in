@@ -4,10 +4,12 @@ import { Button, Col, Row, Stack } from "react-bootstrap";
 import "./MenuPage.css";
 import MenuStartModal from "./Modal/MenuStartModal";
 import { useNavigate } from "react-router-dom";
+import { MenuState } from "../../context/MenuContext";
 
 const MenuPage = () => {
   const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
+  const { activeForm } = MenuState();
 
   const menuFeedback = () => {
     navigate({
@@ -34,9 +36,11 @@ const MenuPage = () => {
             >
               Tap To Start
             </Button>
-            <p onClick={menuFeedback} className="feedback-text">
-              Give Feedback
-            </p>
+            {Number.isInteger(activeForm) ? (
+              <p onClick={menuFeedback} className="feedback-text">
+                Give Feedback
+              </p>
+            ) : null}
           </Stack>
           <MenuStartModal show={modalShow} onHide={() => setModalShow(false)} />
         </Col>

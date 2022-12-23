@@ -17,8 +17,10 @@ import {
   FormHelperText,
   HStack,
   Switch,
+  IconButton,
+  Box,
 } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 import CustomButton from "../../CustomElements/CustomButton";
 import { BsPlusLg } from "react-icons/bs";
 import { MenuState } from "../../context/MenuContext";
@@ -83,74 +85,67 @@ const MenuModifieModal = (props) => {
                   onChange={(e) => setGroupName(e.target.value)}
                 />
               </FormControl>
-              {/* <FormControl isInvalid={isError}>
-                <FormLabel fontWeight="400">Group Name</FormLabel>
-                <Input
-                  width="50%"
-                  size="sm"
-                  borderRadius="8px"
-                  value={input}
-                  onChange={(e) => setGroupName(e.target.value)}
-                />
-                {!isError ? (
-                  <FormHelperText></FormHelperText>
-                ) : (
-                  <FormErrorMessage>Group Name is required.</FormErrorMessage>
-                )}
-              </FormControl> */}
             </Center>
             {inputList.map((x, i) => {
               return (
-                <div className="box">
-                  <input
-                    name="Name"
-                    placeholder="Name"
-                    value={x.Name}
-                    onChange={(e) => handleInputChange(e, i)}
-                  />
-                  <input
-                    className="ml10"
-                    name="Price"
-                    placeholder="Price"
-                    value={x.Price}
-                    onChange={(e) => handleInputChange(e, i)}
-                  />
-                  <input
-                    className="ml10"
-                    name="Calorie"
-                    placeholder="Calorie"
-                    value={x.Calorie}
-                    onChange={(e) => handleInputChange(e, i)}
-                  />
-                  <div className="btn-box">
+                <Box key={i} mt={5}>
+                  <HStack>
+                    <Input
+                      borderRadius="8px"
+                      placeholder="Name"
+                      name="Name"
+                      size="sm"
+                      type="text"
+                      value={x.Name}
+                      width="30%"
+                      onChange={(e) => handleInputChange(e, i)}
+                    />
+
+                    <Input
+                      borderRadius="8px"
+                      placeholder="Price"
+                      size="sm"
+                      name="Price"
+                      type="text"
+                      value={x.Price}
+                      width="30%"
+                      onChange={(e) => handleInputChange(e, i)}
+                    />
+
+                    <Input
+                      borderRadius="8px"
+                      placeholder="Calorie"
+                      size="sm"
+                      name="Calorie"
+                      type="text"
+                      width="30%"
+                      value={x.Calorie}
+                      onChange={(e) => handleInputChange(e, i)}
+                    />
+
                     {inputList.length !== 1 && (
-                      <button
-                        className="mr10"
+                      <IconButton
+                        size="xs"
+                        variant="outline"
+                        colorScheme="blue"
                         onClick={() => handleRemoveClick(i)}
-                      >
-                        Remove
-                      </button>
+                        icon={<CloseIcon />}
+                      />
                     )}
+
                     {inputList.length - 1 === i && (
-                      <button onClick={handleAddClick}>Add</button>
+                      <IconButton
+                        size="xs"
+                        variant="outline"
+                        colorScheme="blue"
+                        onClick={handleAddClick}
+                        icon={<AddIcon />}
+                      />
                     )}
-                  </div>
-                </div>
+                  </HStack>
+                </Box>
               );
             })}
-            <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>
-            {/* <Text mt={6}>Modifiers</Text> */}
-
-            {/* <CustomButton
-              click={onAddBtnClick}
-              btnText={" Add more Modifier"}
-              variant={"outline"}
-              leftIcon={<BsPlusLg />}
-              mt={3}
-              size={"xs"}
-            />
-
-            {inputList} */}
           </ModalBody>
           <ModalFooter>
             <CustomButton

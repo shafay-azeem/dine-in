@@ -54,6 +54,7 @@ const MenuDetail = (props) => {
 
   let secItemDetailResponse =
     response[menu_index]?.section[section_index]?.item[item_index];
+
   //console.log(secItemDetailResponse, "secItemDetailResponse");
 
   const initialState =
@@ -62,6 +63,8 @@ const MenuDetail = (props) => {
       : secItemDetailResponse;
 
   const [itemList, setItemList] = useState(initialState);
+
+  console.log(itemList, "itemlist");
 
   // console.log(props.subsection_index, "subsection_index");
   // console.log(props.subsectionitem_index, "subsectionitem_index");
@@ -87,15 +90,41 @@ const MenuDetail = (props) => {
 
                 <div
                   className="item-image"
-                  style={{ backgroundImage: `url(${x.image})` }}
+                  style={{
+                    backgroundImage: `url(${x.image})`,
+                    backgroundPosition: "center",
+                  }}
                 ></div>
 
                 <p className="title text-center">{x.itemName}</p>
 
                 <div className="d-flex justify-content-around mt-2">
-                  {x.itemPrice === undefined ? null : (
-                    <div className="itemPrice">${x.itemPrice}</div>
+                  {x.itemPriceOption[0].price ==
+                  x.itemPriceOption[x.itemPriceOption.length - 1].price ? (
+                    <div
+                      className="itemPrice"
+                      style={{
+                        paddingLeft: "5px",
+                        paddingRight: "5px",
+                      }}
+                    >
+                      ${x.itemPriceOption[0].price}
+                    </div>
+                  ) : (
+                    <div
+                      className="itemPrice"
+                      style={{
+                        paddingLeft: "5px",
+                        paddingRight: "5px",
+                      }}
+                    >
+                      ${x.itemPriceOption[0].price} ━━━ $
+                      {x.itemPriceOption[x.itemPriceOption.length - 1].price}
+                    </div>
                   )}
+                  {/* {x.itemPrice === undefined ? null : (
+                    <div className="itemPrice">${x.itemPrice}</div>
+                  )} */}
 
                   {x.itemCalorie == undefined ? null : (
                     <div className="d-flex align-items-center calorie">
@@ -112,11 +141,11 @@ const MenuDetail = (props) => {
 
                 <p className="text-center"> {x.itemDescription}</p>
 
-                <div className="d-flex justify-content-around mt-2 ">
+                <div className="d-flex justify-content-center gap-2 mt-2">
                   {x.itemLabel?.map((y, index) => {
                     return (
                       <div>
-                        {y[0] === "N" ? (
+                        {y === "New" ? (
                           <div>
                             <img
                               src={require("../Assets/new.svg").default}
@@ -125,52 +154,93 @@ const MenuDetail = (props) => {
                           </div>
                         ) : null}
 
-                        {/* {y[1] === "S" ? (
+                        {y === "Signature" ? (
                           <div>
                             <img
                               src={require("../Assets/signature.svg").default}
                               alt="mySvgImage"
                             />
                           </div>
-                        ) : (
-                          console.log(y[0], "gggg")
-                        )} */}
+                        ) : null}
+
+                        {y === "Special Presentation" ? (
+                          <div>
+                            <img
+                              src={require("../Assets/special.svg").default}
+                              alt="mySvgImage"
+                            />
+                          </div>
+                        ) : null}
                       </div>
                     );
                   })}
                 </div>
 
-                <div className="d-flex">
+                <div className="d-flex justify-content-center gap-2 mt-2">
                   {x.itemWarning?.map((z, index) => {
                     return (
-                      <Badge pill bg="primary" key={index}>
-                        {z}
-                      </Badge>
+                      <div>
+                        {z === "Alcohol" ? (
+                          <div>
+                            <img
+                              src={require("../Assets/Alcohol.svg").default}
+                              alt="mySvgImage"
+                            />
+                          </div>
+                        ) : null}
+
+                        {z === "AlcoholFree" ? (
+                          <div>
+                            <img
+                              src={require("../Assets/AlcoholFree.svg").default}
+                              alt="mySvgImage"
+                            />
+                          </div>
+                        ) : null}
+                      </div>
                     );
                   })}
                 </div>
 
-                <div></div>
-
                 {itemPriceList?.map((y) => {
                   return (
-                    <div class=" my-4">
-                      <Row className="align-items-start">
-                        <Col lg={8}>
-                          <Card.Text className="d-flex align-items-start justify-content-start">
-                            {y.name}
-                          </Card.Text>
-                        </Col>
-                        <Col lg={4}>
-                          <p className=" d-flex align-items-end justify-content-end hYqPvw">
-                            $ {y.price}
-                          </p>
-                        </Col>
-                      </Row>
-                      <hr className="dashed" />
+                    <div className="d-flex justify-content-between mt-2 py-1 px-2 border-bottom mb-3">
+                      {y.name === undefined ? null : <div>{y.name}</div>}
+
+                      {y.price === undefined ? null : (
+                        <div className="itemPrice">${y.price}</div>
+                      )}
                     </div>
                   );
                 })}
+
+                <div>
+                  {x.itemModifier?.map((s, index) => {
+                    return (
+                      <div>
+                        <p className="title text-center">{s.groupname}</p>
+                        <p className="sub-title text-center">
+                          Min {s.min} - Max {s.max}
+                        </p>
+                        <div>
+                          {s.reference?.map((r, index) => {
+                            return (
+                              <div className="d-flex justify-content-between mt-2 py-1 px-2 border-bottom mb-3">
+                                {r.Name === undefined ? null : (
+                                  <div>{r.Name}</div>
+                                )}
+
+                                {r.Price === undefined ? null : (
+                                  <div className="itemPrice">${r.Price}</div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             );
           })}
@@ -180,105 +250,6 @@ const MenuDetail = (props) => {
           <p className="restaurant-name">Your Restaurant Name</p>
         </Col>
       </Row>
-
-      {/* <Container className="mt-5">
-        <Row>
-          <Col lg={12} md={12} sm={12} xs={12}>
-            {[itemList]?.map((x) => {
-              return (
-                <Card className="mx-auto mb-1">
-                  <Card.Body>
-                    <Row>
-                      <Col lg={4} className="p-0 d-flex align-items-center">
-                        <img
-                          src={x.image}
-                          className="image mx-auto d-block w-100 align-items-center "
-                        />
-                      </Col>
-                      <Col lg={8}>
-                        <Card.Title className="d-flex align-items-center justify-content-center mt-3">
-                          {x.itemName}
-                        </Card.Title>
-
-                        <Card.Text className="d-flex align-items-center justify-content-center">
-                          {x.itemDescription}
-                        </Card.Text>
-
-                        <Card.Text className="pricetext">
-                          <div className="d-flex gap-3">
-                            {x.itemPrice === undefined ? null : (
-                              <div className="d-flex align-items-center">
-                                ${x.itemPrice}
-                              </div>
-                            )}
-
-                            {x.itemPrepTime == undefined ? null : (
-                              <div className="d-flex align-items-center">
-                                {x.itemPrepTime} Min
-                              </div>
-                            )}
-                            {x.itemCalorie == undefined ? null : (
-                              <div className="d-flex align-items-center calorie">
-                                <img
-                                  src={require("../Assets/calories.png")}
-                                  className="img-calorie"
-                                />
-                                <p>{x.itemCalorie} Calories</p>
-                              </div>
-                            )}
-                          </div>
-
-                          <div className="d-flex gap-3">
-                            <div className="d-flex align-items-center gap-1">
-                              {x.itemLabel?.map((y, index) => {
-                                return (
-                                  <Badge pill bg="primary" key={index}>
-                                    {y}
-                                  </Badge>
-                                );
-                              })}
-                            </div>
-
-                            <div className="d-flex align-items-center gap-1">
-                              {x.itemWarning?.map((z, index) => {
-                                return (
-                                  <Badge pill bg="primary" key={index}>
-                                    {z}
-                                  </Badge>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </Card.Text>
-
-                        {itemPriceList?.map((y) => {
-                          return (
-                            <div class=" my-4">
-                              <Row className="align-items-start">
-                                <Col lg={8}>
-                                  <Card.Text className="d-flex align-items-start justify-content-start">
-                                    {y.name}
-                                  </Card.Text>
-                                </Col>
-                                <Col lg={4}>
-                                  <Card.Text className="pricetext d-flex align-items-end justify-content-end">
-                                    $ {y.price}
-                                  </Card.Text>
-                                </Col>
-                              </Row>
-                              <hr className="dashed" />
-                            </div>
-                          );
-                        })}
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Card>
-              );
-            })}
-          </Col>
-        </Row>
-      </Container> */}
     </div>
   );
 };

@@ -8,8 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { MenuState } from "../../context/MenuContext";
 import DisplayItemCard from "./RestaurantMenuCards/DisplayItemCard";
 import SubSecItemCard from "./RestaurantMenuCards/SubSecItemCard";
+import { BsArrowLeftShort } from "react-icons/bs";
+import { IconButton } from "@chakra-ui/react";
 
 const RestaurantMenu = (props) => {
+  const navigate = useNavigate();
   const { response, setResponse } = MenuState();
   // console.log(props.menuName);
   let menu_index = props.menu_index;
@@ -71,6 +74,20 @@ const RestaurantMenu = (props) => {
   return (
     <>
       <div className="menu">
+        <div class="d-flex justify-content-start">
+          <div className="backarrow">
+            <IconButton
+              aria-label="Search database"
+              icon={<BsArrowLeftShort />}
+              onClick={() => navigate(-1)}
+            />
+          </div>
+          {/* <BsArrowLeftShort
+            onClick={() => navigate(-1)}
+            style={{ cursor: "pointer" }}
+          /> */}
+        </div>
+
         <p className="heading">{props.menuName}</p>
         <p className="description">{props.menuDescription}</p>
       </div>

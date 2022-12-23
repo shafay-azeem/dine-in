@@ -7,37 +7,40 @@ import "./RestaurantMenu.css";
 
 const MenuFeedBackForm = () => {
   const ref = useRef(null);
-  const { feedback, setFeedback, activeForm, createfeedback, setCreateFeedback, setNotification, notification } =
-    MenuState();
+  const {
+    feedback,
+    setFeedback,
+    activeForm,
+    createfeedback,
+    setCreateFeedback,
+    setNotification,
+    notification,
+  } = MenuState();
   const [demo, setDemo] = useState(createfeedback[activeForm]?.formQuestions);
   const [question, setQuestion] = useState();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
-  console.log(activeForm, "------")
+  console.log(activeForm, "------");
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
-  let A = []
-  let B = []
-  let C = []
-  let D = []
-  let H = []
-  let F = []
-
+  let A = [];
+  let B = [];
+  let C = [];
+  let D = [];
+  let H = [];
+  let F = [];
 
   const handleInputChange = (e, index, c, d, h, f, g) => {
-
-    const { value } = e.target
+    const { value } = e.target;
 
     A[index] = value;
     B[index] = c;
-    C[index] = d
+    C[index] = d;
     D[index] = h;
     H[index] = f;
-    F[index] = g
-
-
+    F[index] = g;
 
     // var C = {};
     // let count = 0
@@ -47,7 +50,6 @@ const MenuFeedBackForm = () => {
     //   count = count + 2
     // }
     // console.log([C], "===C+++====")
-
   };
 
   let feedbackData = {
@@ -63,23 +65,23 @@ const MenuFeedBackForm = () => {
       formName: createfeedback[activeForm].formName,
       createdDate: new Date().toLocaleDateString(),
       createdTime: new Date().toTimeString().slice(0, 8),
-      responses: []
-    }
+      responses: [],
+    };
 
     for (var i = 0; i < A.length; i++) {
       var jsonObj = {};
-      let count = 0
+      let count = 0;
       jsonObj["q" + (count + 1)] = A[i];
       jsonObj["q" + (count + 2)] = B[i];
       formBody.responses.push(jsonObj);
     }
     feedback.push(formBody);
-    setNotification(true)
+    setNotification(true);
     alert("feedback Submitted");
     document.getElementById("myForm").reset();
     setFeedback([...feedback]);
-    console.log(demo, "demo")
-    console.log(createfeedback, "createfeedback")
+    console.log(demo, "demo");
+    console.log(createfeedback, "createfeedback");
     console.log(feedback, "feedback Submitted");
   };
 
@@ -87,42 +89,45 @@ const MenuFeedBackForm = () => {
     <Container className="my-auto">
       <Row className="d-flex align-items-center" style={{ height: "100vh" }}>
         <Col lg={12} md={12} sm={12} xs={12}>
-          <Card className="mx-auto mb-1">
+          <Card className="mx-auto feedbackSubmit-form text-center p-5">
             <Card.Body>
               {demo?.map((x, index) => {
-
                 return (
                   <Form id="myForm" key={index}>
                     <Form.Group>
-                      <Form.Label>{x.question}</Form.Label>
+                      <p>{x.question}</p>
+
                       <Form.Control
                         ref={ref}
                         id={index}
                         type="text"
-                        onChange={e => handleInputChange(
-                          e,
-                          index,
-                          x.question,
-                          createfeedback[activeForm].formName,
-                          createfeedback[activeForm].createdDate,
-                          createfeedback[activeForm].id,
-                          createfeedback[activeForm].createdTime)}
+                        onChange={(e) =>
+                          handleInputChange(
+                            e,
+                            index,
+                            x.question,
+                            createfeedback[activeForm].formName,
+                            createfeedback[activeForm].createdDate,
+                            createfeedback[activeForm].id,
+                            createfeedback[activeForm].createdTime
+                          )
+                        }
                       />
                     </Form.Group>
                   </Form>
-
-                )
+                );
               })}
 
               <div className=" text-center">
                 <Button
                   variant="primary"
                   type="submit"
+                  size="md"
                   onClick={() => {
                     feedbackSubmit();
                   }}
                 >
-                  Submit
+                  SUBMIT
                 </Button>
               </div>
             </Card.Body>

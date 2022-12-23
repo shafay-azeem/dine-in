@@ -111,9 +111,9 @@ const ItemDrawer = (props) => {
 
   const [inputList, setInputList] = useState(A);
 
-  // useEffect(() => {
-  //   setInputList(A);
-  // }, [A]);
+  useEffect(() => {
+    setInputList(A);
+  }, [A]);
 
   console.log(inputList, "inputList+++++");
   const yy = Number.isInteger(props?.subsection_index)
@@ -1291,19 +1291,10 @@ const ItemDrawer = (props) => {
                         </Box>
                       );
                     })}
-                    <div style={{ marginTop: 20 }}>
+                    {/* <div style={{ marginTop: 20 }}>
                       {JSON.stringify(demoModifier)}
-                    </div>
+                    </div> */}
                   </Box>
-                  {/* <CustomButton
-                    click={addModifiersOption}
-                    btnText={"Add Modifiers Option"}
-                    variant={"outline"}
-                    leftIcon={<BsPlusLg />}
-                    mt={3}
-                    size={"sm"}
-                  />
-                  {modifiers} */}
                 </TabPanel>
                 <TabPanel>
                   <FormControl>
