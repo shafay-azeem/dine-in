@@ -115,13 +115,27 @@ const MenuDetail = (props) => {
                 <div className="d-flex justify-content-around mt-2 ">
                   {x.itemLabel?.map((y, index) => {
                     return (
-                      <Badge pill bg="primary" key={index}>
-                        <img
-                          src="../Assets/new.svg"
-                          alt="SVG as an image"
-                        ></img>
-                        {y}
-                      </Badge>
+                      <div>
+                        {y[0] === "N" ? (
+                          <div>
+                            <img
+                              src={require("../Assets/new.svg").default}
+                              alt="mySvgImage"
+                            />
+                          </div>
+                        ) : null}
+
+                        {/* {y[1] === "S" ? (
+                          <div>
+                            <img
+                              src={require("../Assets/signature.svg").default}
+                              alt="mySvgImage"
+                            />
+                          </div>
+                        ) : (
+                          console.log(y[0], "gggg")
+                        )} */}
+                      </div>
                     );
                   })}
                 </div>
@@ -135,6 +149,8 @@ const MenuDetail = (props) => {
                     );
                   })}
                 </div>
+
+                <div></div>
 
                 {itemPriceList?.map((y) => {
                   return (

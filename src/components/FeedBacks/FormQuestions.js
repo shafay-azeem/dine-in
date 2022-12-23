@@ -31,6 +31,7 @@ const FormQuestions = () => {
       createfeedback[feedback_index].formQuestions = inputList;
       console.log(createfeedback[feedback_index].formQuestions, "update");
       alert("Your Question Updated");
+      console.log('Your Question Updated"');
     } else {
       createfeedback[feedback_index].formQuestions = inputList;
       console.log(createfeedback[feedback_index].formQuestions, "create");
@@ -127,7 +128,7 @@ const FormQuestions = () => {
         <Button
           colorScheme="teal"
           size="sm"
-          click={() =>
+          onClick={() =>
             testfunc(createfeedback[feedback_index].formQuestions.length)
           }
           style={{ marginLeft: "76%", marginTop: "1%", marginBottom: "2%" }}

@@ -1291,9 +1291,9 @@ const ItemDrawer = (props) => {
                         </Box>
                       );
                     })}
-                    {/* <div style={{ marginTop: 20 }}>
+                    <div style={{ marginTop: 20 }}>
                       {JSON.stringify(demoModifier)}
-                    </div> */}
+                    </div>
                   </Box>
                   {/* <CustomButton
                     click={addModifiersOption}
