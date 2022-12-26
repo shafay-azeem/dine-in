@@ -70,7 +70,7 @@ const ItemDrawer = (props) => {
 
   let sectionArr =
     response[props.menu_index].section[props?.section_index]?.item[
-      props?.item_index
+    props?.item_index
     ];
 
   const itemCondtionState = Number.isInteger(props?.subsection_index)
@@ -111,22 +111,22 @@ const ItemDrawer = (props) => {
 
   const [inputList, setInputList] = useState(A);
 
-  useEffect(() => {
-    setInputList(A);
-  }, [A]);
+  // useEffect(() => {
+  //   setInputList(A);
+  // }, [A]);
 
   console.log(inputList, "inputList+++++");
-  const yy = Number.isInteger(props?.subsection_index)
-    ? subSectionArr?.itemModifierOptions
-    : sectionArr?.itemModifierOptions;
+  // const yy = Number.isInteger(props?.subsection_index)
+  //   ? subSectionArr?.itemModifierOptions
+  //   : sectionArr?.itemModifierOptions;
 
-  let B;
-  if (typeof yy === "undefined") {
-    B = [{ min: "", max: "" }];
-  } else {
-    B = yy;
-  }
-  const [demoModifier, setDemoModifier] = useState(B);
+  // let B;
+  // if (typeof yy === "undefined") {
+  //   B = [{ min: "", max: "" }];
+  // } else {
+  //   B = yy;
+  // }
+  // const [demoModifier, setDemoModifier] = useState(B);
 
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
@@ -394,6 +394,7 @@ const ItemDrawer = (props) => {
   const [sold, setSold] = useState(soldTag);
 
   const [state, setState] = useState(modifierOption);
+  const [demoModifier, setDemoModifier] = useState(modifierOption);
 
   const ModifierOptions = (e, index) => {
     const { name, value } = e.target;
@@ -617,9 +618,13 @@ const ItemDrawer = (props) => {
         props.subsection_index
       ].item[props.item_index].itemPriceOption = inputList;
 
+      // response[props.menu_index].section[props.section_index].subSection[
+      //   props.subsection_index
+      // ].item[props.item_index].itemModifierOptions = demoModifier;
+
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
-      ].item[props.item_index].itemModifierOptions = demoModifier;
+      ].item[props.item_index].itemModifier = state;
 
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
@@ -655,6 +660,11 @@ const ItemDrawer = (props) => {
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemPrice = itemprice;
+
+
+      response[props.menu_index].section[props.section_index].item[
+        props.item_index
+      ].itemModifier = state;
 
       response[props.menu_index].section[props.section_index].item[
         props.item_index
