@@ -19,8 +19,6 @@ const DisplayItemCard = (props) => {
     });
   };
 
-  // console.log(props.item_response, "props.item_response");
-
   return (
     <div className="mx-auto mt-3">
       <Row>

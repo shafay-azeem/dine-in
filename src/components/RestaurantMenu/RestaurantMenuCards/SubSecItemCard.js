@@ -8,19 +8,12 @@ const SubSecItemCard = (props) => {
   const navigate = useNavigate();
   const { response, setResponse } = MenuState();
 
-  //console.log(props.subSection_response, "subSection_response");
-  //console.log(props.subSection_index, "subSection_index");
-
   let subSectionList =
     props?.subSection_response[props?.subSection_index]?.item;
-  // console.log(subSectionList, "subsection list response");
 
   let menu_index_refSub = props?.menu_index;
   let section_index_refSub = props?.section_index;
   let subsectionIndex = props?.subSection_index;
-
-  // console.log(menu_index_refSub, section_index_refSub, subsectionIndex , 'subsection');
-  // console.log(menu_index_refSub, section_index_refSub, subsectionIndex , 'subsection');
 
   const myFunc = (subsecitemindex) => {
     navigate({

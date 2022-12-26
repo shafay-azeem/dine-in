@@ -43,11 +43,9 @@ const DisplayCard = () => {
 
   function myfun2(id) {
     setIndivisualId(id);
-    console.log(id);
   }
 
   function switchStatus(index) {
-    console.log("helloo je");
     response[index].menuStatus = !response[index].menuStatus;
     setResponse([...response]);
   }
@@ -58,7 +56,7 @@ const DisplayCard = () => {
     setMenulist(response);
   };
 
-  const duplicate = (x) => {
+  const duplicate = (x, index) => {
     function getTimestampInSeconds() {
       return Math.floor(Date.now() / 1000);
     }
@@ -69,7 +67,9 @@ const DisplayCard = () => {
       menuDescription: x.menuDescription,
       menuNote: x.menuNote,
       menuStatus: x.menuStatus,
-      section: [],
+      availaibility: x.availaibility,
+      section: response[index].section,
+      createdDate: new Date().toLocaleString(),
     };
 
     response.push(menuData);
@@ -80,14 +80,11 @@ const DisplayCard = () => {
   const handleDrop = (droppedItem) => {
     if (!droppedItem.destination) return;
     var updatedList = [...menulist];
-    console.log(updatedList, "updatedList");
     const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
 
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
 
     setMenulist(updatedList);
-
-    console.log(updatedList, "kng");
 
     response.length = 0;
     response.push.apply(response, updatedList);
@@ -99,7 +96,7 @@ const DisplayCard = () => {
         <Droppable droppableId="droppable-1">
           {(provided) => (
             <Box {...provided.droppableProps} ref={provided.innerRef}>
-              {menulist?.map((x, index) => {
+              {response?.map((x, index) => {
                 return (
                   <Draggable
                     key={x.id}
@@ -162,16 +159,14 @@ const DisplayCard = () => {
                                     onOpen={onOpen}
                                     onClose={onClose}
                                   ></SettingDrawer>
-                                ) : (
-                                  console.log("sss")
-                                )}
+                                ) : null}
                                 <Menu>
                                   <MenuButton>
                                     <BsThreeDotsVertical as={Button} />
                                   </MenuButton>
                                   <MenuList>
                                     <MenuItem
-                                      onClick={() => duplicate(x)}
+                                      onClick={() => duplicate(x, index)}
                                       icon={<AiFillCopy />}
                                     >
                                       Duplicate

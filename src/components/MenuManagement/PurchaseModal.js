@@ -26,13 +26,12 @@ import CustomButton from "../../CustomElements/CustomButton";
 const PurchaseModal = (props) => {
   const [show, setShow] = useState(false);
 
-
   const hiddenFileInput = React.useRef(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
-  const handleChange = event => {
+  const handleChange = (event) => {
     const fileUploaded = event.target.files[0];
     // props.handleFile(fileUplooaded);
   };
@@ -68,15 +67,12 @@ const PurchaseModal = (props) => {
               </RadioGroup>
             </FormControl>
 
-
-
-            <Button onClick={handleClick}>
-              Upload a file
-            </Button>
-            <input type="file"
+            <Button onClick={handleClick}>Upload a file</Button>
+            <input
+              type="file"
               ref={hiddenFileInput}
               onChange={handleChange}
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
             />
 
             <FormControl mt={5}>
@@ -114,16 +110,19 @@ const PurchaseModal = (props) => {
                   </NumberInputStepper>
                 </NumberInput>
               </FormControl>
-            ) : (
-              console.log("Sss")
-            )}
+            ) : null}
           </ModalBody>
 
           <ModalFooter>
-
             <CustomButton btnText={"Save Draft"} mr={3} size={"sm"} />
 
-            <CustomButton click={props.onClose} btnText={"Cancel"} variant={"outline"} mr={3} size={"sm"} />
+            <CustomButton
+              click={props.onClose}
+              btnText={"Cancel"}
+              variant={"outline"}
+              mr={3}
+              size={"sm"}
+            />
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -89,7 +89,6 @@ const CreateMenu = () => {
       for (let i = 0; i < responseSec.length; i++) {
         if (responseSec[i].sectionStatus == false) {
           filterSec.push(responseSec[i]);
-          console.log(filterSec, "filterSec");
         }
       }
     }
@@ -98,10 +97,7 @@ const CreateMenu = () => {
 
   const hitMe = (x) => {
     setHit(true);
-    console.log(x, "++++++++++x++++++++++++");
     setToggle(x);
-    console.log(hit, "+++hit+++");
-    console.log(toggle, "+++toggle+++");
   };
 
   return (
@@ -165,24 +161,6 @@ const CreateMenu = () => {
 
                                     <Text>{x.sectionName}</Text>
                                   </HStack>
-                                  {/* {hit
-                                  onClick={() => hitMe(index)
-                                    ? filter[toggle]?.item.map((x, index) => {
-                                        return (
-                                          <HStack ml={5}>
-                                            <Box
-                                              bg="#28B463"
-                                              width="7px"
-                                              borderRadius={8}
-                                              height="7px"
-                                              mt={1}
-                                            ></Box>
-
-                                            <Text>{x.itemName}</Text>
-                                          </HStack>
-                                        );
-                                      })
-                                    : console.log("error")} */}
                                 </Box>
                               ) : (
                                 <Box>
@@ -237,9 +215,7 @@ const CreateMenu = () => {
                           onOpen={onOpenSection}
                           onClose={onCloseSection}
                         ></SectionDrawer>
-                      ) : (
-                        console.log("sss")
-                      )}
+                      ) : null}
                     </MenuItem>
                   </MenuList>
                 </Portal>

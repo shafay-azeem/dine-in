@@ -18,8 +18,6 @@ import { MenuState } from "../../context/MenuContext";
 const ViewFeedBacks = (props) => {
   const { feedback, setFeedback } = MenuState();
 
-  console.log(props.index, "index");
-  console.log(feedback[props.index].responses, "feedback");
   let questionResponses = feedback[props?.index]?.responses;
   return (
     <div>

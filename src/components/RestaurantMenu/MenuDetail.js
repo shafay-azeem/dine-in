@@ -15,19 +15,19 @@ import mySvg from "../Assets/new.svg";
 const MenuDetail = (props) => {
   const { response, setResponse } = MenuState();
   let menu_index = props?.menu_index;
-  // console.log(menu_index, "menu_index");
+
   let menu_index_refSub = props?.menu_index_refSub;
-  // console.log(menu_index_refSub, "menu_index_refSub");
+
   let section_index_refSub = props?.section_index_refSub;
-  // console.log(section_index_refSub, "section_index_refSub");
+
   let section_index = props?.section_index;
-  // console.log(section_index, "section_index");
+
   let item_index = props?.item_index;
-  // console.log(item_index, "item_index");
+
   let subsection_index = props?.subsection_index;
-  // console.log(subsection_index, "subsection_index");
+
   let subsectionitem_index = props?.subsectionitem_index;
-  // console.log(subsectionitem_index, "subsectionitem_index");
+
   const navigate = useNavigate();
 
   let itemPriceOptionResponse =
@@ -50,12 +50,9 @@ const MenuDetail = (props) => {
     response[menu_index_refSub]?.section[section_index_refSub]?.subSection[
       subsection_index
     ]?.item[subsectionitem_index];
-  //console.log(subSecItemDetailResponse, "subSecItemDetailResponse");
 
   let secItemDetailResponse =
     response[menu_index]?.section[section_index]?.item[item_index];
-
-  //console.log(secItemDetailResponse, "secItemDetailResponse");
 
   const initialState =
     typeof subsectionitem_index === "string"
@@ -63,15 +60,6 @@ const MenuDetail = (props) => {
       : secItemDetailResponse;
 
   const [itemList, setItemList] = useState(initialState);
-
-  console.log(itemList, "itemlist");
-
-  // console.log(props.subsection_index, "subsection_index");
-  // console.log(props.subsectionitem_index, "subsectionitem_index");
-
-  // let itemDetailResponse =
-  //   response[menu_index]?.section[section_index]?.item[item_index];
-  //console.log([itemDetailResponse], "itemDetailResponse");
 
   return (
     <div style={{ width: "100%", margin: "0 auto" }}>

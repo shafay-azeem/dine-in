@@ -25,7 +25,6 @@ const MenuFeedBackForm = () => {
   const [question, setQuestion] = useState();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
-  console.log(activeForm, "------");
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -46,15 +45,6 @@ const MenuFeedBackForm = () => {
     D[index] = h;
     H[index] = f;
     F[index] = g;
-
-    // var C = {};
-    // let count = 0
-    // for (var i = 0; i < A.length; i++) {
-    //   C["answer" + (count + 1)] = A[i];
-    //   C["questionId" + (count + 2)] = B[i];
-    //   count = count + 2
-    // }
-    // console.log([C], "===C+++====")
   };
 
   let feedbackData = {
@@ -85,9 +75,6 @@ const MenuFeedBackForm = () => {
     alert("feedback Submitted");
 
     setFeedback([...feedback]);
-    console.log(demo, "demo");
-    console.log(createfeedback, "createfeedback");
-    console.log(feedback, "feedback Submitted");
   };
 
   return (

@@ -40,7 +40,6 @@ const CreateFormModal = (props) => {
 
   const formCreate = () => {
     createfeedback.push(feedbackFormData);
-    console.log(createfeedback, "createfeedback");
     setCreateFeedback([...createfeedback]);
     alert("FeedBack Form Created Successfully");
 

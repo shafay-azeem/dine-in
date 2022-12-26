@@ -56,7 +56,6 @@ const SubSectionCard = (props) => {
   const [status, setSatus] = useState();
 
   function switchStatus(index) {
-    console.log("Switch Status Func Work");
     subSecRes[index].sectionStatus = !subSecRes[index].sectionStatus;
     setResponse([...response]);
     setSubSectionList(subSecRes);
@@ -79,8 +78,7 @@ const SubSectionCard = (props) => {
       item: [],
       subSection: [],
     };
-    console.log(menu_index);
-    console.log(subSecRes.push(sectionData), "section array");
+
     setResponse([...response]);
   };
 
@@ -95,9 +93,7 @@ const SubSectionCard = (props) => {
     response[props.menu_index].section[section_index].subSection[index].active =
       !response[props.menu_index].section[section_index].subSection[index]
         .active;
-    console.log(
-      response[props.menu_index].section[section_index].subSection[index].active
-    );
+
     setResponse([...response]);
   }
 
@@ -182,9 +178,7 @@ const SubSectionCard = (props) => {
                               onOpen={onOpenItem}
                               onClose={onCloseItem}
                             ></ItemDrawer>
-                          ) : (
-                            console.log("Cant Open Item Drawer")
-                          )}
+                          ) : null}
 
                           <Box onClick={() => getIndex(index)}>
                             <MenuItem
@@ -204,9 +198,7 @@ const SubSectionCard = (props) => {
                               onOpen={onOpenSection}
                               onClose={onCloseSection}
                             ></SectionDrawer>
-                          ) : (
-                            console.log("Cant Open Section Drawer For Edit")
-                          )}
+                          ) : null}
 
                           <MenuItem
                             onClick={() => duplicate(x)}
@@ -243,9 +235,7 @@ const SubSectionCard = (props) => {
                   section_index={section_index}
                   subsection_index={index}
                 />
-              ) : (
-                console.log("Cant Open Items")
-              )}
+              ) : null}
             </Box>
           </Box>
         );

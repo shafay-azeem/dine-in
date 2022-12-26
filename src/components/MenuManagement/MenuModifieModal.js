@@ -27,12 +27,8 @@ import { MenuState } from "../../context/MenuContext";
 
 const MenuModifieModal = (props) => {
   const [input, setInput] = useState("");
-  //const handleInputChange = (e) => setInput(e.target.value);
   const { modifier, setModifier } = MenuState();
   const [groupName, setGroupName] = useState();
-  // console.log(groupName, "groupName");
-
-  // const isError = input === "";
 
   const [inputList, setInputList] = useState([
     { Name: "", Price: "", Calorie: "" },
@@ -62,7 +58,6 @@ const MenuModifieModal = (props) => {
 
   const modifierCreate = () => {
     modifier.push(modifierData);
-    console.log(modifier, "modifier data");
     alert("modifier Form Created Successfully");
   };
 

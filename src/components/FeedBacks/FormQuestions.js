@@ -29,12 +29,9 @@ const FormQuestions = () => {
   const testfunc = (x, y) => {
     if (x > 0) {
       createfeedback[feedback_index].formQuestions = inputList;
-      console.log(createfeedback[feedback_index].formQuestions, "update");
       alert("Your Question Updated");
-      console.log('Your Question Updated"');
     } else {
       createfeedback[feedback_index].formQuestions = inputList;
-      console.log(createfeedback[feedback_index].formQuestions, "create");
       alert("Your Question Has Been Submitted");
     }
   };
@@ -44,7 +41,6 @@ const FormQuestions = () => {
     const list = [...inputList];
     list[index][name] = value;
     setInputList(list);
-    console.log(list, "list");
   };
 
   const handleRemoveClick = (index) => {

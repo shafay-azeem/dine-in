@@ -79,9 +79,7 @@ const TranslationCenter = () => {
                             onOpen={onOpen}
                             onClose={onClose}
                           ></LanguageModal>
-                        ) : (
-                          console.log("sss")
-                        )}
+                        ) : null}
                       </Text>
 
                       <Center>

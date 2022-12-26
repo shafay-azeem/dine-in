@@ -78,9 +78,7 @@ const InitialMenu = () => {
                     onOpen={onOpen}
                     onClose={onClose}
                   ></SettingDrawer>
-                ) : (
-                  console.log("sss")
-                )}
+                ) : null}
               </Grid>
               <DisplayCard />
             </TabPanel>
@@ -97,9 +95,7 @@ const InitialMenu = () => {
                   onOpen={modifierOnOpen}
                   onClose={modifierOnClose}
                 />
-              ) : (
-                console.log("ss")
-              )}
+              ) : null}
 
               <ModifiersTable />
             </TabPanel>
@@ -117,9 +113,7 @@ const InitialMenu = () => {
                   onOpen={promoOnOpen}
                   onClose={promoOnClose}
                 />
-              ) : (
-                console.log("ss")
-              )}
+              ) : null}
               <ConditionalTable number={1} />
             </TabPanel>
 
@@ -137,9 +131,7 @@ const InitialMenu = () => {
                   onOpen={purchaseOnOpen}
                   onClose={purchaseOnClose}
                 />
-              ) : (
-                console.log("ss")
-              )}
+              ) : null}
 
               <ConditionalTable number={2} />
             </TabPanel>

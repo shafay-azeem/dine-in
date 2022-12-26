@@ -41,7 +41,6 @@ const CreateMenuDrawer = (props) => {
 
   const menuCreate = () => {
     response.push(menuResponse);
-    //console.log(menuResponse, "menuResponse");
     alert("Menu Created Successfully");
   };
 

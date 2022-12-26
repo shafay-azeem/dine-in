@@ -6,7 +6,6 @@ import { MenuState } from "../../../context/MenuContext";
 
 const MenuStartModal = (props) => {
   const { response, setResponse } = MenuState();
-  // console.log(response, "menu response");
 
   const navigate = useNavigate();
   const myfun = (index, menuname, menuDescription) => {

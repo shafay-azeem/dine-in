@@ -14,12 +14,9 @@ import { IconButton } from "@chakra-ui/react";
 const RestaurantMenu = (props) => {
   const navigate = useNavigate();
   const { response, setResponse } = MenuState();
-  // console.log(props.menuName);
   let menu_index = props.menu_index;
   let section_response = response[props.menu_index].section;
 
-  // console.log(section_response, "section_response");
-  // console.log(props.menu_index, "menu_index");
   const [sectionList, setSectionList] = useState(section_response);
   const [count, setCount] = useState();
 
@@ -28,11 +25,8 @@ const RestaurantMenu = (props) => {
   let subSection_response =
     response[props.menu_index]?.section[count]?.subSection;
 
-  //console.log(item_response, "item_response");
-
   const getIndex = (index) => {
     setCount(index);
-    // console.log(index, "33");
   };
 
   var settings = {

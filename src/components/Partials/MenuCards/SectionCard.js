@@ -41,7 +41,6 @@ import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 const SectionCard = (props) => {
   let menu_index = props?.menu_index;
-  console.log(props.menu_index, "in section");
   const { section, setSection, response, setResponse } = MenuState();
   const [sectionList, setSectionList] = useState(
     response[props?.menu_index]?.section
@@ -71,7 +70,6 @@ const SectionCard = (props) => {
   };
 
   function switchStatus(index) {
-    console.log("helloo je");
     response[props.menu_index].section[index].sectionStatus =
       !response[props.menu_index].section[index].sectionStatus;
     setResponse([...response]);
@@ -80,16 +78,10 @@ const SectionCard = (props) => {
 
   const duplicate = (x, index) => {
     let filterSec = [];
-    // console.log(index, "index=================");
 
     function getTimestampInSeconds() {
       return Math.floor(Date.now() / 1000);
     }
-
-    console.log(
-      response[menu_index]?.section[index].item,
-      "=========+_+=========="
-    );
 
     let sectionData = {
       sectionId: getTimestampInSeconds(),
@@ -102,11 +94,7 @@ const SectionCard = (props) => {
       item: response[menu_index]?.section[index].item,
       subSection: response[menu_index]?.section[index].subSection,
     };
-    console.log(menu_index);
-    console.log(
-      response[menu_index].section.push(sectionData),
-      "section array"
-    );
+
     setResponse([...response]);
   };
 
@@ -120,14 +108,11 @@ const SectionCard = (props) => {
   const handleDrop = (droppedItem) => {
     if (!droppedItem.destination) return;
     var updatedList = [...sectionList];
-    console.log(updatedList, "updatedList");
     const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
 
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
 
     setSectionList(updatedList);
-
-    console.log(updatedList, "kng");
 
     response[props?.menu_index].section.length = 0;
     response[props?.menu_index]?.section.push.apply(
@@ -141,8 +126,6 @@ const SectionCard = (props) => {
   };
 
   const clearMessage = () => {
-    console.log(search, "searc");
-
     setSearch("");
     setSectionList(response[props?.menu_index]?.section);
   };
@@ -162,7 +145,6 @@ const SectionCard = (props) => {
           item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1
         );
       });
-      console.log(updatedList, "updatedList");
 
       setSectionList(updatedListTemp);
     }
@@ -287,9 +269,7 @@ const SectionCard = (props) => {
                                           onOpen={onOpenItem}
                                           onClose={onCloseItem}
                                         ></ItemDrawer>
-                                      ) : (
-                                        console.log("Cant Open Item Drawer")
-                                      )}
+                                      ) : null}
 
                                       <Box onClick={() => getIndex(index)}>
                                         <MenuItem
@@ -308,11 +288,7 @@ const SectionCard = (props) => {
                                           onOpen={onOpenSection}
                                           onClose={onCloseSection}
                                         ></SectionDrawer>
-                                      ) : (
-                                        console.log(
-                                          "Cant Open Section Drawer For Edit"
-                                        )
-                                      )}
+                                      ) : null}
 
                                       <MenuItem
                                         onClick={() => duplicate(x, index)}
@@ -351,9 +327,7 @@ const SectionCard = (props) => {
                               menu_index={menu_index}
                               section_index={index}
                             />
-                          ) : (
-                            console.log("Cant Open Items")
-                          )}
+                          ) : null}
                         </Box>
 
                         <Box ml="55px">
@@ -362,9 +336,7 @@ const SectionCard = (props) => {
                               menu_index={menu_index}
                               section_index={index}
                             />
-                          ) : (
-                            console.log("Cant Open Items")
-                          )}
+                          ) : null}
                         </Box>
                       </Box>
                     )}

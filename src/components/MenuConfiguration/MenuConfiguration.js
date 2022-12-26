@@ -17,9 +17,9 @@ import {
 import React, { useState } from "react";
 import QRCode from "qrcode";
 import { useNavigate } from "react-router-dom";
-import Card from 'react-bootstrap/Card';
-import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
+import Card from "react-bootstrap/Card";
+import Nav from "react-bootstrap/Nav";
+import Button from "react-bootstrap/Button";
 
 const MenuConfiguration = () => {
   const [inputList, setInputList] = useState([]);
@@ -47,7 +47,6 @@ const MenuConfiguration = () => {
       (err, url) => {
         if (err) return console.error(err);
 
-        console.log(url);
         setQr(url);
       }
     );
@@ -85,21 +84,16 @@ const MenuConfiguration = () => {
 
           <TabPanels>
             <TabPanel>
-
-              <Card style={{ width: '48rem' }}>
-
+              <Card style={{ width: "48rem" }}>
                 <Card.Body>
-
-
-
                   <Nav.Link onClick={myfun}>Your Restaurant Menu</Nav.Link>
                   <Card.Title>QR Generator</Card.Title>
 
-
                   <Card.Text>
-                    <text
-                    >http://localhost:3000/menustart </text>
-                    <Button onClick={GenerateQRCode} variant="info">Generate</Button>
+                    <text>http://localhost:3000/menustart </text>
+                    <Button onClick={GenerateQRCode} variant="info">
+                      Generate
+                    </Button>
                     <div className="margin-left:auto">
                       {qr && (
                         <>
@@ -117,10 +111,8 @@ const MenuConfiguration = () => {
                       )}
                     </div>
                   </Card.Text>
-
                 </Card.Body>
               </Card>
-
             </TabPanel>
             <TabPanel>
               <p>Display Options</p>

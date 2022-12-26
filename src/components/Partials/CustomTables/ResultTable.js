@@ -61,9 +61,7 @@ const ResultTable = () => {
                       onClose={ViewFeedBackOnClose}
                       index={index}
                     />
-                  ) : (
-                    console.log("ss")
-                  )}
+                  ) : null}
                 </Tr>
               );
             })}

@@ -38,8 +38,11 @@ import {
 import Reports from "../Reports/Reports";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import 'react-notifications/lib/notifications.css';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 import { MenuState } from "../../context/MenuContext";
 
 const SideDrawer = () => {
@@ -47,108 +50,86 @@ const SideDrawer = () => {
   const navigate = useNavigate();
 
   const createNotification = (type) => {
-
     switch (type) {
-      case 'success':
-
-        NotificationManager.success('Success message', 'Title here', 1000, () => {
-          navigate({
-            pathname: "/feedbacks",
-          });
-        });
+      case "success":
+        NotificationManager.success(
+          "Success message",
+          "Title here",
+          1000,
+          () => {
+            navigate({
+              pathname: "/feedbacks",
+            });
+          }
+        );
         break;
 
-      case 'error':
-        NotificationManager.error('Error message', 'Click me!', 5000, () => {
-          alert('callback');
+      case "error":
+        NotificationManager.error("Error message", "Click me!", 5000, () => {
+          alert("callback");
         });
         break;
     }
-
   };
-
 
   useEffect(() => {
     if (notification == true) {
-      createNotification("success")
-      setNotification(false)
-      console.log(notification, "notifivstiom")
+      createNotification("success");
+      setNotification(false);
     }
-
   });
 
-
   const home = () => {
-
     navigate({
       pathname: "/",
-
     });
   };
 
   const reports = () => {
-
     navigate({
       pathname: "/reports",
-
     });
   };
 
   const orders = () => {
-
     navigate({
       pathname: "/order",
-
     });
   };
 
   const customers = () => {
-
-
     navigate({
       pathname: "/customer",
-
     });
   };
 
   const menu = () => {
-
     navigate({
       pathname: "/menu",
-
     });
   };
 
   const feedbacks = () => {
-
     navigate({
       pathname: "/feedbacks",
-
     });
   };
 
   const translationcenter = () => {
-
-
     navigate({
       pathname: "/translationcenter",
-
     });
   };
 
   const venueSettings = () => {
-
     navigate({
       pathname: "/venueSettings",
-
     });
   };
 
   const dineinqrmenu = () => {
-
     navigate({
       pathname: "/dineinqrmenu",
-
     });
   };
 
@@ -229,10 +210,7 @@ const SideDrawer = () => {
               <MenuItem icon={<UnlockIcon />}>Sign Out</MenuItem>
             </MenuList>
           </Menu>
-
         </div>
-
-
       </Box>
 
       <Drawer

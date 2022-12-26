@@ -34,13 +34,12 @@ import {
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 
 const ItemCard = (props) => {
-  console.log(props.menu_index, "pp", props.section_index, "qq");
   const { response, setResponse } = MenuState();
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ].item
+        props?.subsection_index
+      ].item
     : response[props?.menu_index]?.section[props?.section_index]?.item;
 
   const [itemList, setItemList] = useState(initialState);
@@ -54,7 +53,6 @@ const ItemCard = (props) => {
   } = useDisclosure();
 
   const getIndex = (index) => {
-    console.log(index, "index-------------");
     setCount(index);
   };
 
@@ -80,9 +78,6 @@ const ItemCard = (props) => {
   };
 
   const duplicate = (x, y) => {
-    // console.log(x.itemPrice, "ffff");
-    // console.log(y, "=======y=========");
-
     function getTimestampInSeconds() {
       return Math.floor(Date.now() / 1000);
     }
@@ -129,20 +124,8 @@ const ItemCard = (props) => {
     };
 
     if (y != null) {
-      console.log(
-        response[props.menu_index].section[props.section_index].subSection[
-          props.subsection_index
-        ].item.push(itemData),
-        "itemMenu array"
-      );
       setResponse([...response]);
     } else {
-      console.log(
-        response[props.menu_index].section[props.section_index].item.push(
-          itemData
-        ),
-        "section array"
-      );
       setResponse([...response]);
     }
   };
@@ -162,7 +145,6 @@ const ItemCard = (props) => {
     );
   };
   function switchStatus(index) {
-    console.log(index, "index");
     if (Number.isInteger(props?.subsection_index)) {
       response[props.menu_index].section[props.section_index].subSection[
         props.subsection_index
@@ -183,7 +165,6 @@ const ItemCard = (props) => {
         !response[props.menu_index].section[props.section_index].item[index]
           .active;
       setResponse([...response]);
-      console.log(response, "response");
       setItemList(
         response[props?.menu_index]?.section[props?.section_index]?.item
       );
@@ -258,9 +239,7 @@ const ItemCard = (props) => {
                                     >
                                       Sold Out
                                     </Badge>
-                                  ) : (
-                                    console.log("sold tag err")
-                                  )}
+                                  ) : null}
                                 </Text>
                               </HStack>
                             </GridItem>
@@ -285,9 +264,9 @@ const ItemCard = (props) => {
                                       value={x.itemPrice}
                                     /> */}
                                     {x.itemPriceOption[0].price ==
-                                      x.itemPriceOption[
-                                        x.itemPriceOption.length - 1
-                                      ].price ? (
+                                    x.itemPriceOption[
+                                      x.itemPriceOption.length - 1
+                                    ].price ? (
                                       <Box
                                         style={{
                                           border: "1px solid black",
@@ -365,11 +344,7 @@ const ItemCard = (props) => {
                                           onOpen={onOpenItem}
                                           onClose={onCloseItem}
                                         ></ItemDrawer>
-                                      ) : (
-                                        console.log(
-                                          "Cant Open Item Drawer For Edit"
-                                        )
-                                      )}
+                                      ) : null}
 
                                       <MenuItem
                                         onClick={() =>

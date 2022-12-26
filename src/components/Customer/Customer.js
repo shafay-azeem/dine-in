@@ -50,9 +50,7 @@ const Customer = () => {
 
           {isOpen ? (
             <CustomerModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
-          ) : (
-            console.log("ss")
-          )}
+          ) : null}
         </GridItem>
       </Grid>
 

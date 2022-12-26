@@ -52,11 +52,6 @@ import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 
 const ItemDrawer = (props) => {
-  // console.log(props.menu_index, "menu----------");
-  // console.log(props?.section_index, "section---------");
-  // console.log(props?.item_index, "item----------");
-  // console.log(props?.ItemInMenu, "------------itemInMenu---------");
-
   const {
     isOpen: ModalOpen,
     onOpen: ModalOnOpen,
@@ -70,7 +65,7 @@ const ItemDrawer = (props) => {
 
   let sectionArr =
     response[props.menu_index].section[props?.section_index]?.item[
-    props?.item_index
+      props?.item_index
     ];
 
   const itemCondtionState = Number.isInteger(props?.subsection_index)
@@ -100,33 +95,17 @@ const ItemDrawer = (props) => {
     if (itemprice != null || calorie != null) {
       A = [{ name: "", price: itemprice, calories: calorie }];
     } else {
-      console.log("iff else");
       A = [{ name: "", price: "", calories: "" }];
     }
   } else {
     A = XX;
   }
-  console.log(typeof A[0].price, "A+++++");
-  // console.log(typeof (itemprice), "itemprice type")
 
   const [inputList, setInputList] = useState(A);
 
-  // useEffect(() => {
-  //   setInputList(A);
-  // }, [A]);
-
-  console.log(inputList, "inputList+++++");
-  // const yy = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemModifierOptions
-  //   : sectionArr?.itemModifierOptions;
-
-  // let B;
-  // if (typeof yy === "undefined") {
-  //   B = [{ min: "", max: "" }];
-  // } else {
-  //   B = yy;
-  // }
-  // const [demoModifier, setDemoModifier] = useState(B);
+  useEffect(() => {
+    setInputList(A);
+  }, [A]);
 
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
@@ -172,7 +151,6 @@ const ItemDrawer = (props) => {
     ? subSectionArr?.itemWarning
     : sectionArr?.itemWarning;
   const initialState6 = props.subsection_push ? "" : itemCondtionState6;
-  console.log(initialState6, "initialState6");
   const [warningState, setWarningState] = useState(initialState6);
 
   const itemCondtionState8 = Number.isInteger(props?.subsection_index)
@@ -661,7 +639,6 @@ const ItemDrawer = (props) => {
         props.item_index
       ].itemPrice = itemprice;
 
-
       response[props.menu_index].section[props.section_index].item[
         props.item_index
       ].itemModifier = state;
@@ -812,7 +789,6 @@ const ItemDrawer = (props) => {
 
       setResponse([...response]);
 
-      console.log(response, "xxxxxx");
       alert("Item Updated Successfully");
     }
   };
@@ -839,12 +815,10 @@ const ItemDrawer = (props) => {
         props.subsection_index
       ].item.push(itemData);
       alert("Single Push On basis Of Conditional Parameters");
-      // console.log(response, "orig");
     } else {
       response[props.menu_index].section[props.section_index].item.push(
         itemData
       );
-      console.log(response, "orig");
       alert("Item Created Successfully");
     }
   };
@@ -897,30 +871,15 @@ const ItemDrawer = (props) => {
   };
 
   const myfuncresponse = () => {
-    // console.log(a, b, c, "==================")
     var info = {
       Cal: caloriesConcat,
       money: priceConcat,
       siz: size,
     };
     rrr.push(info);
-
-    console.log(rrr, "+_+_+_+_");
   };
 
-  // const potatoes = (x) => {
-  //   console.log(x, "x=====================")
-  //   setCaloriesConcat(x)
-  //   return x
-
-  // }
-
-  // console.log(() => potatoes(), "potatoes")
-
   const addPriceOption = (event) => {
-    // if (caloriesConcat !== undefined || priceConcat !== undefined || size !== undefined) {
-    //   myfuncresponse(caloriesConcat, priceConcat, size)
-    // }
     setPrice(
       price.concat(
         <HStack m={5}>

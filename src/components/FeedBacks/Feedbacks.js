@@ -84,8 +84,6 @@ const Feedbacks = () => {
   }
 
   const handleRemove = (index) => {
-    // console.log(index, "delete index");
-
     if (window.confirm("Do you really want to leave?")) {
       createfeedback.splice(index, 1);
       setCreateFeedback([...createfeedback]);
@@ -106,7 +104,6 @@ const Feedbacks = () => {
     });
   };
   const switchStatus = (index) => {
-    console.log(index, "index");
     for (let i = 0; i < createfeedback.length; i++) {
       if (index === i) {
         createfeedback[index].active = !createfeedback[i].active;
@@ -176,9 +173,7 @@ const Feedbacks = () => {
               </Stack>
             </GridItem>
           </Grid>
-        ) : (
-          console.log("sss")
-        )}
+        ) : null}
 
         {showform ? (
           <Grid templateColumns="repeat(5, 1fr)" gap={4} m={10}>
@@ -193,14 +188,10 @@ const Feedbacks = () => {
                   onOpen={formOnOpen}
                   onClose={formOnClose}
                 />
-              ) : (
-                console.log("create form cant open")
-              )}
+              ) : null}
             </GridItem>
           </Grid>
-        ) : (
-          console.log("Sss")
-        )}
+        ) : null}
 
         <Box m="10">
           <Tabs w="100%">
@@ -244,20 +235,7 @@ const Feedbacks = () => {
                             <EditIcon mr={4} onClick={() => editForm(index)} />
                           </Tooltip>
 
-                          {/* <Button onClick={onOpen} bg="white"> */}
                           <DeleteIcon onClick={() => handleRemove(index)} />
-                          {/* onClick={() => handleRemove(index)} */}
-                          {/* {isOpen ? (
-                              <FeedbackDeleteModal
-                                isOpen={isOpen}
-                                onOpen={onOpen}
-                                onClose={onClose}
-                                index={count}
-                              />
-                            ) : (
-                              console.log("ss")
-                            )} */}
-                          {/* </Button> */}
                         </GridItem>
                       </Grid>
                     </Box>

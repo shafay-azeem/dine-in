@@ -16,7 +16,6 @@ import { Button } from "bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const FeedbackDeleteModal = (props) => {
-  console.log(props.index, "props index")
   const navigate = useNavigate();
   const { createfeedback, setCreateFeedback } = MenuState();
   const [feedbackFormList, setFeedbackFormList] = useState(createfeedback);
@@ -27,7 +26,6 @@ const FeedbackDeleteModal = (props) => {
     setFeedbackFormList(createfeedback);
     navigate({
       pathname: "/feedbacks",
-
     });
   };
   return (
@@ -45,7 +43,12 @@ const FeedbackDeleteModal = (props) => {
           </ModalBody>
 
           <ModalFooter>
-            <CustomButton btnText={"Delete"} click={() => handleRemove()} mr={3} size={"sm"} />
+            <CustomButton
+              btnText={"Delete"}
+              click={() => handleRemove()}
+              mr={3}
+              size={"sm"}
+            />
 
             <CustomButton
               click={props.onClose}

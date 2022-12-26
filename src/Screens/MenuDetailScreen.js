@@ -6,10 +6,6 @@ const MenuDetailScreen = () => {
   const navigate = useNavigate();
   const [searchparams] = useSearchParams();
 
-  //   console.log(searchparams.get("index"), "index");
-  //   console.log(searchparams.get("menu_index"), "menu_index");
-  //   console.log(searchparams.get("section_index"), "section_index");
-
   return (
     <div style={{ width: "100%", margin: "0 auto" }}>
       <MenuDetail

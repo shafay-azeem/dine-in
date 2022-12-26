@@ -48,7 +48,6 @@ const SectionDrawer = (props) => {
   let section_index = props?.section_index;
   let subsection_index = props?.subsection_index;
 
-  console.log(subsection_index, "subsection_index");
   const [checkedItems, setCheckedItems] = useState(false);
   const [food, setFood] = useState(["New", "Signature"]);
   const [value, setValue] = React.useState("1");
@@ -57,52 +56,44 @@ const SectionDrawer = (props) => {
   const { response, setResponse } = MenuState();
   const inputElement = useRef();
 
-
-
-
-
-
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionName
+        props?.subsection_index
+      ]?.sectionName
     : response[props.menu_index].section[props?.section_index]?.sectionName;
   const [name, setName] = useState(initialState);
 
   const descriptionState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionDescription
+        props?.subsection_index
+      ]?.sectionDescription
     : response[props.menu_index].section[props?.section_index]
-      ?.sectionDescription;
+        ?.sectionDescription;
 
   const [description, setDescription] = useState(descriptionState);
 
   const noteState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionNote
+        props?.subsection_index
+      ]?.sectionNote
     : response[props.menu_index].section[props?.section_index]?.sectionNote;
 
   const [note, setNote] = useState(noteState);
 
   const imageState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.image
+        props?.subsection_index
+      ]?.image
     : response[props.menu_index].section[props?.section_index]?.image;
 
+  let initialArrayFaizy = [...response[props.menu_index]?.section];
+  let initalArrayShafay = response[props.menu_index]?.section;
+  let initalArrayfaiz = initialArrayFaizy?.splice(props?.section_index, 1);
 
-  let initialArrayFaizy = [...response[props.menu_index]?.section]
-  let initalArrayShafay = response[props.menu_index]?.section
-  let initalArrayfaiz = initialArrayFaizy?.splice(props?.section_index, 1)
-
-  console.log(initialArrayFaizy, 'initialArrayFaizy')
-  console.log(initalArrayfaiz, 'initalArrayfaiz')
-
-  const initalArrayDecider = Number.isInteger(props?.section_index) ? initialArrayFaizy : initalArrayShafay
+  const initalArrayDecider = Number.isInteger(props?.section_index)
+    ? initialArrayFaizy
+    : initalArrayShafay;
   const [arrayDecider, setArrayDecider] = useState(initalArrayDecider);
-  console.log(arrayDecider, "arrayDecider")
 
   const [image, setImage] = useState(imageState);
 
@@ -110,8 +101,8 @@ const SectionDrawer = (props) => {
 
   const labelState = Number.isInteger(props?.subsection_index)
     ? response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ]?.sectionLabel
+        props?.subsection_index
+      ]?.sectionLabel
     : response[props.menu_index].section[props?.section_index]?.sectionLabel;
 
   const [select, setSelect] = useState(labelState);
@@ -120,7 +111,7 @@ const SectionDrawer = (props) => {
 
   let x =
     response[props.menu_index].section[props?.section_index]?.subSection[
-    props?.subsection_index
+      props?.subsection_index
     ];
   let y = response[props.menu_index].section[props?.section_index];
   const conditonMade = Number.isInteger(props?.subsection_index)
@@ -168,25 +159,9 @@ const SectionDrawer = (props) => {
     setImage(value);
   };
 
-  // const arraydecider = () => {
-  //   if (Number.isInteger(props?.section_index)) {
-  //     let initialArrayFaizy = [...response[props.menu_index]?.section]
-  //     initialArrayFaizy.splice(props?.section_index, 1);
-  //     // setArrayDecider(initialArray)
-  //     console.log(initialArrayFaizy, "initialArrayFaizy")
-  //   }
-  //   else {
-  //     // setArrayDecider(response[props.menu_index].section)
-  //     console.log(response[props.menu_index].section, "arrayDecider")
-  //   }
-  // }
-  // useEffect(() => {
-  // }, [arrayDecider]);
-
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
-
 
   let sectionData = {
     sectionId: getTimestampInSeconds(),
@@ -203,7 +178,6 @@ const SectionDrawer = (props) => {
   const [modalShow, setModalShow] = useState(false);
 
   const testfunc = () => {
-
     if (checkedItems === true) {
       let initialArray = [...response[props.menu_index].section];
       for (var i = 0; i < initialArray.length; i++) {
@@ -228,13 +202,11 @@ const SectionDrawer = (props) => {
       response[props.menu_index].section.sort(compare);
 
       setResponse([...response]);
-      // console.log(response);
       alert("Section Created Successfully");
     }
   };
 
   const updatedSection = (x, y) => {
-
     if (x == undefined && checkedItems == false) {
       response[props.menu_index].section[props.section_index].sectionName =
         name;
@@ -310,12 +282,9 @@ const SectionDrawer = (props) => {
 
   const selectionMultiSelect = (event) => {
     setSelect(event);
-    console.log(select, "select event");
   };
 
-  const handleAlphabetically = (event) => {
-    console.log(event, "event");
-  };
+  const handleAlphabetically = (event) => {};
 
   function deleteimg() {
     setImage(null);
@@ -433,7 +402,7 @@ const SectionDrawer = (props) => {
                   </FormControl>
 
                   {arrayDecider.length > 0 &&
-                    props?.subsection_index == undefined ? (
+                  props?.subsection_index == undefined ? (
                     <FormControl>
                       <Checkbox
                         isChecked={checkedItems}
@@ -447,27 +416,23 @@ const SectionDrawer = (props) => {
                           placeholder="Select option"
                           onChange={(e) => setVal(e.target.value)}
                         >
-                          {arrayDecider?.map(
-                            (x, index) => {
-                              return (
-                                <option value={x.sectionName}>
-                                  {x.sectionName}
-                                </option>
-                              );
-                            }
-                          )}
+                          {arrayDecider?.map((x, index) => {
+                            return (
+                              <option value={x.sectionName}>
+                                {x.sectionName}
+                              </option>
+                            );
+                          })}
                         </Select>
                       ) : (
                         <Select placeholder="Select option">
-                          {arrayDecider?.map(
-                            (x, index) => {
-                              return (
-                                <option value={x.sectionName}>
-                                  {x.sectionName}
-                                </option>
-                              );
-                            }
-                          )}
+                          {arrayDecider?.map((x, index) => {
+                            return (
+                              <option value={x.sectionName}>
+                                {x.sectionName}
+                              </option>
+                            );
+                          })}
                         </Select>
                       )}
                     </FormControl>

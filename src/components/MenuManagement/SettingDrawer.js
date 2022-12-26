@@ -36,13 +36,10 @@ import CustomButton from "../../CustomElements/CustomButton";
 import { MenuState } from "../../context/MenuContext";
 import { useState } from "react";
 import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { Col, Form, FormCheck, Row } from "react-bootstrap";
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 
 const SettingDrawer = (props) => {
-  console.log(props.menuCreate, "props.menuCreate");
-
   // DATA AND TIME
   const weekday = [
     "Sunday",
@@ -59,19 +56,17 @@ const SettingDrawer = (props) => {
   const d = new Date();
   let day = weekday[d.getDay()];
 
-  // const dateInput = document.getElementById('date');
-
-  // dateInput.value = new Date().toISOString().split('T')[0];
-
-  // console.log(new Date().toISOString().split('T')[0]);
-
-  ///
-
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
   const { response, setResponse } = MenuState();
-  const [value, setValue] = useState("1");
+
+  const itemCondtionState5 =
+    typeof response[props?.index]?.availaibility === "undefined"
+      ? "1"
+      : String(response[props.index].val);
+
+  const [value, setValue] = useState(itemCondtionState5);
 
   const nameState = props?.menuCreate ? "" : response[props?.index]?.menuName;
   const [name, setName] = useState(nameState);
@@ -82,10 +77,6 @@ const SettingDrawer = (props) => {
     : response[props?.index]?.menuDescription;
   const [description, setDescription] = useState(descriptionState);
 
-  // const [description, setDescription] = useState(
-  //   response[props?.index]?.menuDescription
-  // );
-
   const noteState = props?.menuCreate ? "" : response[props?.index]?.menuNote;
   const [note, setNote] = useState(noteState);
   const [formChecked, setFormChecked] = useState(true);
@@ -93,6 +84,7 @@ const SettingDrawer = (props) => {
   const [endDate, setEndDate] = useState();
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
+  // const [avail, setEndTime] = useState();
 
   const conditonMade = props?.menuCreate ? "menuCreate" : "section";
 
@@ -121,7 +113,6 @@ const SettingDrawer = (props) => {
   };
 
   const [active, setActive] = useState(TOGGLE);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const updatedMenu = () => {
     response[props.index].menuName = name;
@@ -132,10 +123,8 @@ const SettingDrawer = (props) => {
     setResponse([...response]);
     alert("Menu Updated Successfully");
   };
-
-  console.log(startTime);
+  let SpecificDate;
   const menuCreate = () => {
-    let SpecificDate;
     if (value == 2) {
       if (formChecked == false) {
         SpecificDate = {
@@ -165,6 +154,7 @@ const SettingDrawer = (props) => {
       menuNote: note,
       menuStatus: active,
       availaibility: value == 3 ? SpecificDate : [SpecificDate],
+      val: value,
       section: [],
       createdDate: new Date().toLocaleString(),
     };
@@ -172,12 +162,17 @@ const SettingDrawer = (props) => {
     response.push(menuData);
     alert("Menu Created");
     setResponse([...response]);
-    console.log(response, "create menu");
   };
 
-  const [inputList, setInputList] = useState([{ StartTime: "", EndTime: "" }]);
+  let avail;
 
-  // handle input change
+  if (typeof response[props?.index]?.availaibility === "undefined") {
+    avail = [{ StartTime: "", EndTime: "" }];
+  } else {
+    avail = response[props.index].availaibility;
+  }
+  const [inputList, setInputList] = useState(avail);
+
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...inputList];
@@ -185,14 +180,12 @@ const SettingDrawer = (props) => {
     setInputList(list);
   };
 
-  // handle click event of the Remove button
   const handleRemoveClick = (index) => {
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
   };
 
-  // handle click event of the Add button
   const handleAddClick = () => {
     setInputList([...inputList, { StartTime: "", EndTime: "" }]);
   };
@@ -433,7 +426,7 @@ const SettingDrawer = (props) => {
                                   size="sm"
                                   borderRadius="8px"
                                   name="Day"
-                                  value={y.a}
+                                  value={y.Day}
                                   onChange={(e) => handleInputChange(e, i)}
                                 >
                                   {weekday?.map((a) => {
@@ -486,10 +479,10 @@ const SettingDrawer = (props) => {
                         })}
                       </Box>
                     ) : null}
-                    {/* 
+
                     <div style={{ marginTop: 20 }}>
                       {JSON.stringify(inputList)}
-                    </div> */}
+                    </div>
                   </Box>
                 </RadioGroup>
               </TabPanel>
