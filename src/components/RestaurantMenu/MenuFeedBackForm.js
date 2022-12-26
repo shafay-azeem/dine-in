@@ -1,11 +1,16 @@
+import { IconButton } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { BsArrowLeftShort } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import { MenuState } from "../../context/MenuContext";
 import "./RestaurantMenu.css";
 
 const MenuFeedBackForm = () => {
+  const navigate = useNavigate();
+
   const ref = useRef(null);
   const {
     feedback,
@@ -78,7 +83,7 @@ const MenuFeedBackForm = () => {
     feedback.push(formBody);
     setNotification(true);
     alert("feedback Submitted");
-    document.getElementById("myForm").reset();
+
     setFeedback([...feedback]);
     console.log(demo, "demo");
     console.log(createfeedback, "createfeedback");
@@ -89,8 +94,15 @@ const MenuFeedBackForm = () => {
     <Container className="my-auto">
       <Row className="d-flex align-items-center" style={{ height: "100vh" }}>
         <Col lg={12} md={12} sm={12} xs={12}>
-          <Card className="mx-auto feedbackSubmit-form text-center p-5">
-            <Card.Body>
+          <Card className="mx-auto feedbackSubmit-form text-center ">
+            <div className="text-left px-3">
+              <IconButton
+                icon={<BsArrowLeftShort />}
+                onClick={() => navigate(-1)}
+                className="d-block"
+              />
+            </div>
+            <Card.Body className="p-5">
               {demo?.map((x, index) => {
                 return (
                   <Form id="myForm" key={index}>
@@ -120,7 +132,6 @@ const MenuFeedBackForm = () => {
 
               <div className=" text-center">
                 <Button
-                  variant="primary"
                   type="submit"
                   size="md"
                   onClick={() => {

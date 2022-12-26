@@ -23,7 +23,6 @@ const ModifiersTable = () => {
             <Tr>
               <Th>Group Name</Th>
               <Th>Modifiers</Th>
-              <Th>Actions</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -31,11 +30,12 @@ const ModifiersTable = () => {
               return (
                 <Tr key={index}>
                   <Td>{x.Groupname}</Td>
-                  {x.modifiers?.map((y, index) => (
-                    <Tr>
-                      <Text>{y.Name},</Text>
-                    </Tr>
-                  ))}
+
+                  <Td>
+                    {x.modifiers?.map((y, index) => {
+                      return <span key={index}>{y.Name},</span>;
+                    })}
+                  </Td>
                 </Tr>
               );
             })}

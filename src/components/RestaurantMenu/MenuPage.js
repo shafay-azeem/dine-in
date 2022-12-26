@@ -5,6 +5,8 @@ import "./MenuPage.css";
 import MenuStartModal from "./Modal/MenuStartModal";
 import { useNavigate } from "react-router-dom";
 import { MenuState } from "../../context/MenuContext";
+import { IconButton } from "@chakra-ui/react";
+import { BsArrowLeftShort } from "react-icons/bs";
 
 const MenuPage = () => {
   const navigate = useNavigate();
