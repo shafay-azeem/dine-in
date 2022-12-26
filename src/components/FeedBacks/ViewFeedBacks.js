@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Divider,
   Grid,
   GridItem,
   Modal,
@@ -19,30 +20,58 @@ const ViewFeedBacks = (props) => {
   const { feedback, setFeedback } = MenuState();
 
   let questionResponses = feedback[props?.index]?.responses;
+  console.log(feedback, "feedback");
   return (
     <div>
-      <Modal isOpen={props.isOpen} onClose={props.onClose} size="xl">
+      <Modal isOpen={props.isOpen} onClose={props.onClose} size="5xl">
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {questionResponses?.map((x, index) => {
-              return (
-                <Box>
-                  <Grid templateColumns="repeat(5, 1fr)" gap={4}>
-                    <GridItem colSpan={2} h="10">
-                      <Text>{x.q2}</Text>
-                    </GridItem>
-                    <GridItem colStart={4} colEnd={6} h="10">
-                      {x.q1}
-                    </GridItem>
-                  </Grid>
-                </Box>
-              );
-            })}
-          </ModalBody>
-        </ModalContent>
+        {feedback?.map((y, index) => {
+          return (
+            <ModalContent>
+              <ModalHeader>Form {y.formId}</ModalHeader>
+              <Divider orientation="horizontal" />
+
+              <ModalCloseButton />
+
+              <ModalBody pb={6}>
+                <Text fontWeight="500" mb="1rem">
+                  Date : {y.createdDate} {y.createdTime}
+                </Text>
+
+                <Text fontWeight="500" mb="1rem">
+                  Form : {y.formName}
+                </Text>
+
+                {y.responses?.map((x, index) => {
+                  return (
+                    <Box>
+                      <Grid templateColumns="repeat(5, 1fr)" gap={4} p={2}>
+                        <GridItem colSpan={2} h="10" p={3}>
+                          <Text fontSize="15px">{x.q2}</Text>
+                        </GridItem>
+                        <GridItem colStart={4} colEnd={6} h="10" p={3}>
+                          <Text fontSize="15px">{x.q1}</Text>
+                        </GridItem>
+                      </Grid>
+                      <Divider orientation="horizontal" />
+                    </Box>
+                  );
+                })}
+              </ModalBody>
+              <Divider orientation="horizontal" />
+              <ModalFooter>
+                <Button
+                  colorScheme="blue"
+                  mr={3}
+                  onClick={props.onClose}
+                  size="md"
+                >
+                  OK
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          );
+        })}
       </Modal>
     </div>
   );
