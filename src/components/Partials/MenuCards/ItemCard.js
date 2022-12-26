@@ -39,8 +39,8 @@ const ItemCard = (props) => {
 
   const initialState = Number.isInteger(props?.subsection_index)
     ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ].item
+      props?.subsection_index
+    ].item
     : response[props?.menu_index]?.section[props?.section_index]?.item;
 
   const [itemList, setItemList] = useState(initialState);
@@ -161,17 +161,34 @@ const ItemCard = (props) => {
       updatedList
     );
   };
-
   function switchStatus(index) {
-    response[props.menu_index].section[props.section_index].item[index].active =
-      !response[props.menu_index].section[props.section_index].item[index]
-        .active;
-    setResponse([...response]);
-    setItemList(
-      response[props?.menu_index]?.section[props?.section_index]?.item
-    );
+    console.log(index, "index");
+    if (Number.isInteger(props?.subsection_index)) {
+      response[props.menu_index].section[props.section_index].subSection[
+        props.subsection_index
+      ].item[index].active =
+        !response[props.menu_index].section[props.section_index].subSection[
+          props.subsection_index
+        ].item[index].active;
+      setResponse([...response]);
+      setItemList(
+        response[props.menu_index].section[props.section_index].subSection[
+          props.subsection_index
+        ].item
+      );
+    } else {
+      response[props.menu_index].section[props.section_index].item[
+        index
+      ].active =
+        !response[props.menu_index].section[props.section_index].item[index]
+          .active;
+      setResponse([...response]);
+      console.log(response, "response");
+      setItemList(
+        response[props?.menu_index]?.section[props?.section_index]?.item
+      );
+    }
   }
-
   return (
     <>
       <DragDropContext onDragEnd={handleDrop}>
@@ -268,9 +285,9 @@ const ItemCard = (props) => {
                                       value={x.itemPrice}
                                     /> */}
                                     {x.itemPriceOption[0].price ==
-                                    x.itemPriceOption[
-                                      x.itemPriceOption.length - 1
-                                    ].price ? (
+                                      x.itemPriceOption[
+                                        x.itemPriceOption.length - 1
+                                      ].price ? (
                                       <Box
                                         style={{
                                           border: "1px solid black",
