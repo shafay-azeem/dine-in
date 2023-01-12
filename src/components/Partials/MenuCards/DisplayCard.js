@@ -23,6 +23,9 @@ import { MenuState } from "../../../context/MenuContext";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import apiFunctions from "../../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../../global/Constant";
+import { useEffect } from "react";
 
 const DisplayCard = () => {
   const navigate = useNavigate();
@@ -32,7 +35,21 @@ const DisplayCard = () => {
   const [open, setOpen] = useState(false);
   const [indivisualId, setIndivisualId] = useState();
   const { response, setResponse } = MenuState();
-  const [menulist, setMenulist] = useState(response);
+  const [menulist, setMenulist] = useState();
+
+  useEffect(() => {
+    getAllMenu();
+  }, []);
+
+  async function getAllMenu() {
+    let getMenu = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.GET_ALL_MENU
+    );
+
+    let res = getMenu.data.menu;
+
+    setMenulist(res);
+  }
 
   const myfun = (id) => {
     navigate({
@@ -96,13 +113,9 @@ const DisplayCard = () => {
         <Droppable droppableId="droppable-1">
           {(provided) => (
             <Box {...provided.droppableProps} ref={provided.innerRef}>
-              {response?.map((x, index) => {
+              {menulist?.map((x, index) => {
                 return (
-                  <Draggable
-                    key={x.id}
-                    draggableId={x.id.toString()}
-                    index={index}
-                  >
+                  <Draggable key={x._id} draggableId={x._id} index={index}>
                     {(provided) => (
                       <Box
                         {...provided.draggableProps}
@@ -133,7 +146,7 @@ const DisplayCard = () => {
                                 </Badge>
                               </Text>
                               <Text>{x.menuDescription}</Text>
-                              <Text>Last Updated on {x.createdDate}</Text>
+                              <Text>Last Updated on {x.createAt}</Text>
                               <Text fontSize="13" fontWeight="400" p={2}>
                                 {/* {x.item} item, last updated on {x.date} */}
                               </Text>
