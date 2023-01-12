@@ -33,7 +33,7 @@ export const MenuProvider = ({ children }) => {
         modifier,
         setModifier,
         responseSignleMenu,
-        setResponseSignleMenu
+        setResponseSignleMenu,
       }}
     >
       {children}

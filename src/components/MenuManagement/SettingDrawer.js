@@ -62,7 +62,8 @@ const SettingDrawer = (props) => {
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
-  const { response, setResponse, responseSingleMenu, setResponseSignleMenu } = MenuState();
+  const { response, setResponse, responseSingleMenu, setResponseSignleMenu } =
+    MenuState();
 
   // const itemCondtionState5 =
   //   typeof response[props?.index]?.availaibility === "undefined"
@@ -72,16 +73,16 @@ const SettingDrawer = (props) => {
   // const [value, setValue] = useState(itemCondtionState5);
 
   // const nameState = props?.menuCreate ? "" : response[props?.index]?.menuName;
-  const [name, setName] = useState(responseSingleMenu?.menuName);
+  const [name, setName] = useState();
   const [availability, setAvailability] = useState("All Day");
 
   // const descriptionState = props?.menuCreate
   //   ? ""
   //   : response[props?.index]?.menuDescription;
-  const [description, setDescription] = useState(responseSingleMenu?.menuDescription)
+  const [description, setDescription] = useState();
 
   // const noteState = props?.menuCreate ? "" : response[props?.index]?.menuNote;
-  const [note, setNote] = useState(responseSingleMenu?.menuNote);
+  const [note, setNote] = useState();
   const [formChecked, setFormChecked] = useState(true);
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -187,7 +188,6 @@ const SettingDrawer = (props) => {
     setInputList([...inputList, { StartTime: "", EndTime: "" }]);
   };
 
-
   let menuData = {
     menuName: name,
     menuDescription: description,
@@ -195,42 +195,33 @@ const SettingDrawer = (props) => {
   };
 
   const createMenu = async () => {
-    await apiFunctions.POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData).then(res => {
-      if (res.data.success == true) {
-        alert(`${res.data.message}`)
-        return true
-      }
-      else {
-        alert(`There Some Error`)
-        return false
-      }
-    });
-  }
-
+    await apiFunctions
+      .POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+  };
 
   useEffect(() => {
-    getAllMenu()
-
+    getAllMenu();
   }, []);
 
   async function getAllMenu() {
-    try {
-      await apiFunctions.GET_REQUEST_BY_ID(
-        BASE_URL + API_URL.GET_MENU_BY_ID + props.index
-      ).then(res => {
-        setResponseSignleMenu(res.data.menu);
-      })
-        .catch(err => {
-          console.log(err)
-        })
+    let getSingleMenu = await apiFunctions.GET_REQUEST_BY_ID(
+      BASE_URL + API_URL.GET_MENU_BY_ID + props.index
+    );
 
+    let setVar = getSingleMenu.data.menu;
 
-      // console.log(responseSingleMenu)
-    } catch (error) {
-      console.log(null)
-    }
-
-
+    setName(setVar.menuName);
+    setDescription(setVar.menuDescription);
+    setNote(setVar.menuNote);
   }
 
   return (
@@ -243,8 +234,8 @@ const SettingDrawer = (props) => {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-
-        <DrawerHeader>{name}</DrawerHeader>
+        {/* 
+        <DrawerHeader></DrawerHeader> */}
 
         <DrawerBody>
           <Tabs>
@@ -372,7 +363,6 @@ const SettingDrawer = (props) => {
               {/* Visibility */}
 
               {/* Availability */}
-
 
               {/* 
               <TabPanel>
@@ -532,9 +522,6 @@ const SettingDrawer = (props) => {
                 </RadioGroup>
               </TabPanel> */}
 
-
-
-
               {/* Availability */}
             </TabPanels>
           </Tabs>
@@ -545,7 +532,7 @@ const SettingDrawer = (props) => {
             <Button
               colorScheme="blue"
               onClick={() => {
-                createMenu()
+                createMenu();
               }}
             >
               Save
