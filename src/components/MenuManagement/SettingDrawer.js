@@ -229,10 +229,15 @@ const SettingDrawer = (props) => {
   };
 
   useEffect(() => {
-    getAllMenu();
+
+    if (props?.index) {
+      getSingleMenuByID();
+    }
+    return
+
   }, []);
 
-  async function getAllMenu() {
+  async function getSingleMenuByID() {
     let getSingleMenu = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_MENU_BY_ID + props.index
     );
