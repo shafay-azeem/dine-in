@@ -118,14 +118,34 @@ const SettingDrawer = (props) => {
 
   const [active, setActive] = useState(TOGGLE);
 
-  const updatedMenu = () => {
-    response[props.index].menuName = name;
-    response[props.index].menuDescription = description;
-    response[props.index].menuNote = note;
-    response[props.index].menuStatus = active;
-    response[props.index].createdDate = new Date().toLocaleString();
-    setResponse([...response]);
-    alert("Menu Updated Successfully");
+  const updatedMenu = async () => {
+    // response[props.index].menuName = name;
+    // response[props.index].menuDescription = description;
+    // response[props.index].menuNote = note;
+    // response[props.index].menuStatus = active;
+    // response[props.index].createdDate = new Date().toLocaleString();
+    // setResponse([...response]);
+    // alert("Menu Updated Successfully");
+
+    let menuData = {
+      menuName: name,
+      menuDescription: description,
+      menuNote: note,
+    };
+
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_MENU_BY_ID + props.index, menuData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+
+
   };
   let SpecificDate;
   // const menuCreate = () => {

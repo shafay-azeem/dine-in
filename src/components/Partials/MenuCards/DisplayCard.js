@@ -39,7 +39,7 @@ const DisplayCard = () => {
 
   useEffect(() => {
     getAllMenu();
-  }, []);
+  }, [response]);
 
   async function getAllMenu() {
     let getMenu = await apiFunctions.GET_REQUEST(
