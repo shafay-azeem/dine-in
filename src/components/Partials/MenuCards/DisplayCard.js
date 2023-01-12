@@ -47,8 +47,7 @@ const DisplayCard = () => {
     );
 
     let res = getMenu.data.menu;
-
-    setMenulist(res);
+    setResponse(res);
   }
 
   const myfun = (id) => {
@@ -67,31 +66,46 @@ const DisplayCard = () => {
     setResponse([...response]);
   }
 
-  const handleRemove = (index) => {
-    response.splice(index, 1);
-    setResponse([...response]);
-    setMenulist(response);
+  const handleRemove = async (id) => {
+
+    await apiFunctions.DELETE_REQUEST(BASE_URL + API_URL.DELETE_MENU_BY_ID + id).then(res => {
+      if (res.data.success == true) {
+        alert(`${res.data.message}`)
+        return true
+      }
+      else {
+        alert(`There Some Error`)
+        return false
+      }
+    });
+
+    // response.splice(index, 1);
+    // setResponse([...response]);
+    // setMenulist(response);
   };
 
-  const duplicate = (x, index) => {
-    function getTimestampInSeconds() {
-      return Math.floor(Date.now() / 1000);
-    }
-
+  const duplicate = async (x) => {
     let menuData = {
-      id: getTimestampInSeconds(),
       menuName: x.menuName,
       menuDescription: x.menuDescription,
       menuNote: x.menuNote,
-      menuStatus: x.menuStatus,
-      availaibility: x.availaibility,
-      section: response[index].section,
-      createdDate: new Date().toLocaleString(),
     };
 
-    response.push(menuData);
-    setResponse([...response]);
-    setMenulist(response);
+    await apiFunctions.POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData).then(res => {
+      if (res.data.success == true) {
+        alert(`MENU DUPLICATED SUCCESSFULLY`).then(res => {
+          setResponse(res);
+          return true
+        }
+
+        )
+      }
+      else {
+        alert(`There Some Error`)
+        return false
+      }
+    });
+
   };
 
   const handleDrop = (droppedItem) => {
@@ -113,7 +127,7 @@ const DisplayCard = () => {
         <Droppable droppableId="droppable-1">
           {(provided) => (
             <Box {...provided.droppableProps} ref={provided.innerRef}>
-              {menulist?.map((x, index) => {
+              {response?.map((x, index) => {
                 return (
                   <Draggable key={x._id} draggableId={x._id} index={index}>
                     {(provided) => (
@@ -162,7 +176,7 @@ const DisplayCard = () => {
                                 <Button onClick={() => myfun(index)}>
                                   EDIT MENU
                                 </Button>
-                                <Box onClick={() => myfun2(index)}>
+                                <Box onClick={() => myfun2(x._id)}>
                                   <AiFillSetting onClick={onOpen} />
                                 </Box>
                                 {isOpen ? (
@@ -171,6 +185,7 @@ const DisplayCard = () => {
                                     isOpen={isOpen}
                                     onOpen={onOpen}
                                     onClose={onClose}
+                                    menuCreate={false}
                                   ></SettingDrawer>
                                 ) : null}
                                 <Menu>
@@ -185,7 +200,7 @@ const DisplayCard = () => {
                                       Duplicate
                                     </MenuItem>
                                     <MenuItem
-                                      onClick={() => handleRemove(index)}
+                                      onClick={() => handleRemove(x._id)}
                                       icon={<AiFillDelete />}
                                     >
                                       Delete

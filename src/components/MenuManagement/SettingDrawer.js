@@ -36,8 +36,11 @@ import CustomButton from "../../CustomElements/CustomButton";
 import { MenuState } from "../../context/MenuContext";
 import { useState } from "react";
 import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
-import { Col, Form, FormCheck, Row } from "react-bootstrap";
+import { Alert, Col, Form, FormCheck, Row } from "react-bootstrap";
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
+import apiFunctions from "../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../global/Constant";
+import { useEffect } from "react";
 
 const SettingDrawer = (props) => {
   // DATA AND TIME
@@ -59,26 +62,26 @@ const SettingDrawer = (props) => {
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
-  const { response, setResponse } = MenuState();
+  const { response, setResponse, responseSingleMenu, setResponseSignleMenu } = MenuState();
 
-  const itemCondtionState5 =
-    typeof response[props?.index]?.availaibility === "undefined"
-      ? "1"
-      : String(response[props.index].val);
+  // const itemCondtionState5 =
+  //   typeof response[props?.index]?.availaibility === "undefined"
+  //     ? "1"
+  //     : String(response[props.index].val);
 
-  const [value, setValue] = useState(itemCondtionState5);
+  // const [value, setValue] = useState(itemCondtionState5);
 
-  const nameState = props?.menuCreate ? "" : response[props?.index]?.menuName;
-  const [name, setName] = useState(nameState);
+  // const nameState = props?.menuCreate ? "" : response[props?.index]?.menuName;
+  const [name, setName] = useState(responseSingleMenu?.menuName);
   const [availability, setAvailability] = useState("All Day");
 
-  const descriptionState = props?.menuCreate
-    ? ""
-    : response[props?.index]?.menuDescription;
-  const [description, setDescription] = useState(descriptionState);
+  // const descriptionState = props?.menuCreate
+  //   ? ""
+  //   : response[props?.index]?.menuDescription;
+  const [description, setDescription] = useState(responseSingleMenu?.menuDescription)
 
-  const noteState = props?.menuCreate ? "" : response[props?.index]?.menuNote;
-  const [note, setNote] = useState(noteState);
+  // const noteState = props?.menuCreate ? "" : response[props?.index]?.menuNote;
+  const [note, setNote] = useState(responseSingleMenu?.menuNote);
   const [formChecked, setFormChecked] = useState(true);
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -124,45 +127,39 @@ const SettingDrawer = (props) => {
     alert("Menu Updated Successfully");
   };
   let SpecificDate;
-  const menuCreate = () => {
-    if (value == 2) {
-      if (formChecked == false) {
-        SpecificDate = {
-          startDate: startDate,
-          startTime: startTime,
-          endDate: endDate,
-          endTime: endTime,
-        };
-      } else {
-        SpecificDate = {
-          startDate: startDate,
-          endDate: endDate,
-        };
-      }
-    } else if (value == 3) {
-      SpecificDate = inputList;
-    } else {
-      SpecificDate = {
-        availability: availability,
-      };
-    }
+  // const menuCreate = () => {
+  //   if (value == 2) {
+  //     if (formChecked == false) {
+  //       SpecificDate = {
+  //         startDate: startDate,
+  //         startTime: startTime,
+  //         endDate: endDate,
+  //         endTime: endTime,
+  //       };
+  //     } else {
+  //       SpecificDate = {
+  //         startDate: startDate,
+  //         endDate: endDate,
+  //       };
+  //     }
+  //   } else if (value == 3) {
+  //     SpecificDate = inputList;
+  //   } else {
+  //     SpecificDate = {
+  //       availability: availability,
+  //     };
+  //   }
 
-    let menuData = {
-      id: getTimestampInSeconds(),
-      menuName: name,
-      menuDescription: description,
-      menuNote: note,
-      menuStatus: active,
-      availaibility: value == 3 ? SpecificDate : [SpecificDate],
-      val: value,
-      section: [],
-      createdDate: new Date().toLocaleString(),
-    };
+  //   let menuData = {
+  //     menuName: name,
+  //     menuDescription: description,
+  //     menuNote: note,
+  //   };
 
-    response.push(menuData);
-    alert("Menu Created");
-    setResponse([...response]);
-  };
+  //   response.push(menuData);
+  //   alert("Menu Created");
+  //   setResponse([...response]);
+  // };
 
   let avail;
 
@@ -190,6 +187,52 @@ const SettingDrawer = (props) => {
     setInputList([...inputList, { StartTime: "", EndTime: "" }]);
   };
 
+
+  let menuData = {
+    menuName: name,
+    menuDescription: description,
+    menuNote: note,
+  };
+
+  const createMenu = async () => {
+    await apiFunctions.POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData).then(res => {
+      if (res.data.success == true) {
+        alert(`${res.data.message}`)
+        return true
+      }
+      else {
+        alert(`There Some Error`)
+        return false
+      }
+    });
+  }
+
+
+  useEffect(() => {
+    getAllMenu()
+
+  }, []);
+
+  async function getAllMenu() {
+    try {
+      await apiFunctions.GET_REQUEST_BY_ID(
+        BASE_URL + API_URL.GET_MENU_BY_ID + props.index
+      ).then(res => {
+        setResponseSignleMenu(res.data.menu);
+      })
+        .catch(err => {
+          console.log(err)
+        })
+
+
+      // console.log(responseSingleMenu)
+    } catch (error) {
+      console.log(null)
+    }
+
+
+  }
+
   return (
     <Drawer
       isOpen={props.isOpen}
@@ -201,7 +244,7 @@ const SettingDrawer = (props) => {
       <DrawerContent>
         <DrawerCloseButton />
 
-        <DrawerHeader>{response[props?.index]?.menuName}</DrawerHeader>
+        <DrawerHeader>{name}</DrawerHeader>
 
         <DrawerBody>
           <Tabs>
@@ -245,11 +288,11 @@ const SettingDrawer = (props) => {
                 <FormControl mt={3}>
                   <FormLabel fontWeight="400">Display the section</FormLabel>
 
-                  <SwitchComponent
+                  {/* <SwitchComponent
                     id="switch1"
                     checked={active}
                     onChange={(e) => setActive(e.target.checked)}
-                  />
+                  /> */}
                 </FormControl>
               </TabPanel>
               {/* Overview */}
@@ -330,6 +373,8 @@ const SettingDrawer = (props) => {
 
               {/* Availability */}
 
+
+              {/* 
               <TabPanel>
                 <RadioGroup onChange={setValue} value={value}>
                   <Radio value="1" id="always">
@@ -485,7 +530,11 @@ const SettingDrawer = (props) => {
                     </div>
                   </Box>
                 </RadioGroup>
-              </TabPanel>
+              </TabPanel> */}
+
+
+
+
               {/* Availability */}
             </TabPanels>
           </Tabs>
@@ -496,7 +545,7 @@ const SettingDrawer = (props) => {
             <Button
               colorScheme="blue"
               onClick={() => {
-                menuCreate();
+                createMenu()
               }}
             >
               Save

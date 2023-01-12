@@ -7,33 +7,8 @@ export const MenuProvider = ({ children }) => {
     return Math.floor(Date.now() / 1000);
   }
 
-  const [response, setResponse] = useState([
-    {
-      id: 1,
-      menuName: "demomenu",
-      menuDescription: "demodescription",
-      menuNote: "demonote",
-      menuStatus: false,
-      section: [
-        {
-          sectionId: 1,
-          sectionName: "demosection",
-          sectionDescription: "sectiondescription",
-          sectionNote: "20%",
-          active: false,
-          sectionStatus: false,
-          item: [
-            {
-              itemId: 1,
-              itemName: "demoitem",
-              itemDescription: "itemdescription",
-              active: false,
-            },
-          ],
-        },
-      ],
-    },
-  ]);
+  const [response, setResponse] = useState([]);
+  const [responseSignleMenu, setResponseSignleMenu] = useState();
 
   const [feedback, setFeedback] = useState([]);
   const [createfeedback, setCreateFeedback] = useState([]);
@@ -57,6 +32,8 @@ export const MenuProvider = ({ children }) => {
         setNotification,
         modifier,
         setModifier,
+        responseSignleMenu,
+        setResponseSignleMenu
       }}
     >
       {children}
