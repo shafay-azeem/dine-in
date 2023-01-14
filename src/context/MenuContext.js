@@ -7,9 +7,11 @@ export const MenuProvider = ({ children }) => {
     return Math.floor(Date.now() / 1000);
   }
 
+  //ORIGNAL HOOKS
   const [response, setResponse] = useState([]);
   const [responseSignleMenu, setResponseSignleMenu] = useState();
-
+  const [sectionList, setSectionList] = useState([]);
+  //----------------------------------------------
   const [feedback, setFeedback] = useState([]);
   const [createfeedback, setCreateFeedback] = useState([]);
   const [activeForm, setActiveForm] = useState();
@@ -34,6 +36,8 @@ export const MenuProvider = ({ children }) => {
         setModifier,
         responseSignleMenu,
         setResponseSignleMenu,
+        sectionList,
+        setSectionList
       }}
     >
       {children}

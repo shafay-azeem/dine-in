@@ -40,15 +40,16 @@ import SubSectionCard from "./SubSectionCard";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import apiFunctions from "../../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../../global/Constant";
+import { useEffect } from "react";
 
 const SectionCard = (props) => {
   let menu_index = props?.menu_index;
   console.log(menu_index);
-  const { section, setSection, response, setResponse } = MenuState();
+  const { sectionList, setSectionList } = MenuState();
   // const [sectionList, setSectionList] = useState(
   //   response[props?.menu_index]?.section
   // );
-  const [sectionList, setSectionList] = useState();
+  // const [sectionList, setSectionList] = useState([]);
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
   const [count, setCount] = useState();
@@ -66,14 +67,19 @@ const SectionCard = (props) => {
     onClose: onCloseItem,
   } = useDisclosure();
 
-  // async function getAllSectionByMenuId() {
-  //   let getSection = await apiFunctions.GET_REQUEST(
-  //     BASE_URL + API_URL.GET_ALL_MENU
-  //   );
 
-  //   let res = getMenu.data.menu;
-  //   setResponse(res);
-  // }
+  useEffect(() => {
+    getAllSectionByMenuId();
+  }, [sectionList]);
+
+  async function getAllSectionByMenuId() {
+    let getSection = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.GET_ALL_SECTION_BY_MENU_ID + menu_index
+    );
+
+    let res = getSection.data.section;
+    setSectionList(res);
+  }
 
   const handleRemove = (index) => {
     // response[menu_index]?.section.splice(index, 1);
@@ -185,8 +191,8 @@ const SectionCard = (props) => {
               {sectionList?.map((x, index) => {
                 return (
                   <Draggable
-                    key={x.sectionId}
-                    draggableId={x.sectionId.toString()}
+                    key={x._id}
+                    draggableId={x._id.toString()}
                     index={index}
                   >
                     {(provided) => (

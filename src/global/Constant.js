@@ -9,5 +9,7 @@ export const API_URL = {
 
   UPDATE_MENU_BY_ID: "menu/V1/updatemenu/",
 
-  GET_MENU_BY_ID: "menu/V1/getsinglemenu/"
+  GET_MENU_BY_ID: "menu/V1/getsinglemenu/",
+
+  GET_ALL_SECTION_BY_MENU_ID: "menu/V1/getAllSectionByMenuId/"
 };
