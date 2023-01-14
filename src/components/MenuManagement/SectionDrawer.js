@@ -42,11 +42,20 @@ import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
 import ImagePreviewModal from "./ImagePreviewModal";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useEffect } from "react";
+import apiFunctions from "../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../global/Constant";
 
 const SectionDrawer = (props) => {
   let menu_index = props.menu_index;
-  let section_index = props?.section_index;
+  console.log(menu_index)
+  let sectionId = props?.section_index;
+
+
+  console.log(sectionId, "sectionId")
+
+
   let subsection_index = props?.subsection_index;
+
 
   const [checkedItems, setCheckedItems] = useState(false);
   const [food, setFood] = useState(["New", "Signature"]);
@@ -57,96 +66,105 @@ const SectionDrawer = (props) => {
   const inputElement = useRef();
 
   const initialState = Number.isInteger(props?.subsection_index)
-    ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.sectionName
-    : response[props.menu_index].section[props?.section_index]?.sectionName;
-  const [name, setName] = useState(initialState);
+  // ? response[props.menu_index].section[props?.section_index]?.subSection[
+  //   props?.subsection_index
+  // ]?.sectionName
+  // : response[props.menu_index].section[props?.section_index]?.sectionName;
+  // const [name, setName] = useState(initialState);
+  const [name, setName] = useState();
 
   const descriptionState = Number.isInteger(props?.subsection_index)
-    ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.sectionDescription
-    : response[props.menu_index].section[props?.section_index]
-        ?.sectionDescription;
+  // ? response[props.menu_index].section[props?.section_index]?.subSection[
+  //   props?.subsection_index
+  // ]?.sectionDescription
+  // : response[props.menu_index].section[props?.section_index]
+  //   ?.sectionDescription;
 
-  const [description, setDescription] = useState(descriptionState);
+  // const [description, setDescription] = useState(descriptionState);
+  const [description, setDescription] = useState();
 
   const noteState = Number.isInteger(props?.subsection_index)
-    ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.sectionNote
-    : response[props.menu_index].section[props?.section_index]?.sectionNote;
+  // ? response[props.menu_index].section[props?.section_index]?.subSection[
+  //   props?.subsection_index
+  // ]?.sectionNote
+  // : response[props.menu_index].section[props?.section_index]?.sectionNote;
 
-  const [note, setNote] = useState(noteState);
+  // const [note, setNote] = useState(noteState);
+  const [note, setNote] = useState();
 
   const imageState = Number.isInteger(props?.subsection_index)
-    ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.image
-    : response[props.menu_index].section[props?.section_index]?.image;
+  // ? response[props.menu_index].section[props?.section_index]?.subSection[
+  //   props?.subsection_index
+  // ]?.image
+  // : response[props.menu_index].section[props?.section_index]?.image;
 
-  let initialArrayFaizy = [...response[props.menu_index]?.section];
-  let initalArrayShafay = response[props.menu_index]?.section;
-  let initalArrayfaiz = initialArrayFaizy?.splice(props?.section_index, 1);
+  // let initialArrayFaizy = [...response[props.menu_index]?.section];
+  // let initalArrayShafay = response[props.menu_index]?.section;
+  // let initalArrayfaiz = initialArrayFaizy?.splice(props?.section_index, 1);
 
-  const initalArrayDecider = Number.isInteger(props?.section_index)
-    ? initialArrayFaizy
-    : initalArrayShafay;
-  const [arrayDecider, setArrayDecider] = useState(initalArrayDecider);
+  // const initalArrayDecider = Number.isInteger(props?.section_index)
+  //   ? initialArrayFaizy
+  //   : initalArrayShafay;
+  // const [arrayDecider, setArrayDecider] = useState(initalArrayDecider);
 
-  const [image, setImage] = useState(imageState);
+  // const [image, setImage] = useState(imageState);
+  const [image, setImage] = useState();
 
   const [searchSection, setsearchSection] = useState();
 
   const labelState = Number.isInteger(props?.subsection_index)
-    ? response[props.menu_index].section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ]?.sectionLabel
-    : response[props.menu_index].section[props?.section_index]?.sectionLabel;
+  // ? response[props.menu_index].section[props?.section_index]?.subSection[
+  //   props?.subsection_index
+  // ]?.sectionLabel
+  // : response[props.menu_index].section[props?.section_index]?.sectionLabel;
 
   const [select, setSelect] = useState(labelState);
   const [pass, setPass] = useState(false);
   const [close, setClose] = useState();
 
-  let x =
-    response[props.menu_index].section[props?.section_index]?.subSection[
-      props?.subsection_index
-    ];
-  let y = response[props.menu_index].section[props?.section_index];
-  const conditonMade = Number.isInteger(props?.subsection_index)
-    ? "subSection"
-    : "section";
-  let TOGGLE;
+  // let x =
+  //   response[props.menu_index].section[props?.section_index]?.subSection[
+  //   props?.subsection_index
+  //   ];
+  // let y = response[props.menu_index].section[props?.section_index];
+  // const conditonMade = Number.isInteger(props?.subsection_index)
+  //   ? "subSection"
+  //   : "section";
+  // let TOGGLE;
 
-  if (conditonMade == "subSection") {
-    if (typeof x?.sectionStatus === "undefined") {
-      TOGGLE = false;
-    } else if (x?.sectionStatus === false) {
-      TOGGLE = false;
-    } else {
-      TOGGLE = true;
-    }
-  } else {
-    if (typeof y?.sectionStatus === "undefined") {
-      TOGGLE = false;
-    } else if (y?.sectionStatus === false) {
-      TOGGLE = false;
-    } else {
-      TOGGLE = true;
-    }
-  }
+  // if (conditonMade == "subSection") {
+  //   if (typeof x?.sectionStatus === "undefined") {
+  //     TOGGLE = false;
+  //   } else if (x?.sectionStatus === false) {
+  //     TOGGLE = false;
+  //   } else {
+  //     TOGGLE = true;
+  //   }
+  // } else {
+  //   if (typeof y?.sectionStatus === "undefined") {
+  //     TOGGLE = false;
+  //   } else if (y?.sectionStatus === false) {
+  //     TOGGLE = false;
+  //   } else {
+  //     TOGGLE = true;
+  //   }
+  // }
 
-  const [checked, setChecked] = useState(TOGGLE);
+  // const [checked, setChecked] = useState(TOGGLE);
+  const [checked, setChecked] = useState();
 
   const [alphabetical, setalphabetical] = useState(false);
   const [val, setVal] = useState();
+
+  const [mId, setMId] = useState(menu_index);
 
   const {
     isOpen: ModalOpen,
     onOpen: ModalOnOpen,
     onClose: ModalOnClose,
   } = useDisclosure();
+
+
   // function enabelDisable() {
   //   if (value === "1") {
   //     setValueTrue(true);
@@ -163,118 +181,177 @@ const SectionDrawer = (props) => {
     return Math.floor(Date.now() / 1000);
   }
 
+  // let sectionData = {
+  //   sectionId: getTimestampInSeconds(),
+  //   sectionName: name,
+  //   sectionDescription: description,
+  //   sectionNote: note,
+  //   sectionLabel: select,
+  //   sectionStatus: checked,
+  //   image: image,
+  //   item: [],
+  //   subSection: [],
+  // };
+
+
   let sectionData = {
-    sectionId: getTimestampInSeconds(),
     sectionName: name,
     sectionDescription: description,
-    sectionNote: note,
-    sectionLabel: select,
-    sectionStatus: checked,
-    image: image,
-    item: [],
-    subSection: [],
+    sectionNote: note
   };
 
   const [modalShow, setModalShow] = useState(false);
 
-  const testfunc = () => {
-    if (checkedItems === true) {
-      let initialArray = [...response[props.menu_index].section];
-      for (var i = 0; i < initialArray.length; i++) {
-        if (initialArray[i].sectionName == val) {
-          response[props.menu_index].section[i].subSection.push(sectionData);
-          setResponse([...response]);
-          alert("SubSection has been has been added");
-        }
-      }
-    } else {
-      response[props.menu_index].section.push(sectionData);
-      let initialArray = [...response[props.menu_index].section];
-      function compare(a, b) {
-        if (a.sectionName < b.sectionName) {
-          return -1;
-        }
-        if (a.sectionName > b.sectionName) {
-          return 1;
-        }
-        return 0;
-      }
-      response[props.menu_index].section.sort(compare);
+  const testfunc = async () => {
 
-      setResponse([...response]);
-      alert("Section Created Successfully");
-    }
+    await apiFunctions
+      .POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + props.menu_index, sectionData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`Section Created`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+
+
+    // if (checkedItems === true) {
+    //   let initialArray = [...response[props.menu_index].section];
+    //   for (var i = 0; i < initialArray.length; i++) {
+    //     if (initialArray[i].sectionName == val) {
+    //       response[props.menu_index].section[i].subSection.push(sectionData);
+    //       setResponse([...response]);
+    //       alert("SubSection has been has been added");
+    //     }
+    //   }
+    // } else {
+    //   response[props.menu_index].section.push(sectionData);
+    //   let initialArray = [...response[props.menu_index].section];
+    //   function compare(a, b) {
+    //     if (a.sectionName < b.sectionName) {
+    //       return -1;
+    //     }
+    //     if (a.sectionName > b.sectionName) {
+    //       return 1;
+    //     }
+    //     return 0;
+    //   }
+    //   response[props.menu_index].section.sort(compare);
+
+    //   setResponse([...response]);
+    //   alert("Section Created Successfully");
+    // }
   };
 
-  const updatedSection = (x, y) => {
-    if (x == undefined && checkedItems == false) {
-      response[props.menu_index].section[props.section_index].sectionName =
-        name;
-      response[props.menu_index].section[
-        props.section_index
-      ].sectionDescription = description;
-      response[props.menu_index].section[props.section_index].sectionNote =
-        note;
-      response[props.menu_index].section[props.section_index].sectionLabel =
-        select;
-
-      response[props.menu_index].section[props.section_index].sectionStatus =
-        checked;
-
-      response[props.menu_index].section[props.section_index].image = image;
-
-      function compare(a, b) {
-        if (a.sectionName < b.sectionName) {
-          return -1;
-        }
-        if (a.sectionName > b.sectionName) {
-          return 1;
-        }
-        return 0;
-      }
-      response[props.menu_index].section.sort(compare);
-
-      setResponse([...response]);
-      alert("Section Updated Successfully");
-    } else if (x > -1) {
-      response[props.menu_index].section[props.section_index].subSection[
-        props.subsection_index
-      ].sectionName = name;
-
-      response[props.menu_index].section[props.section_index].subSection[
-        props.subsection_index
-      ].sectionDescription = description;
-
-      response[props.menu_index].section[props.section_index].subSection[
-        props.subsection_index
-      ].sectionNote = note;
-
-      response[props.menu_index].section[props.section_index].subSection[
-        props.subsection_index
-      ].sectionLabel = select;
-
-      response[props.menu_index].section[props.section_index].subSection[
-        props.subsection_index
-      ].sectionStatus = checked;
-
-      response[props.menu_index].section[props.section_index].subSection[
-        props.subsection_index
-      ].image = image;
-
-      setResponse([...response]);
-      alert("SubSection Updated Successfully");
-    } else {
-      let initialArray = [...response[props.menu_index].section];
-      for (var i = 0; i < initialArray.length; i++) {
-        if (initialArray[i].sectionName == val) {
-          response[props.menu_index].section[i].subSection.push(sectionData);
-          response[props.menu_index]?.section.splice(y, 1);
-          setResponse([...response]);
-          alert("SubSection has been has been updated");
-        }
-      }
+  useEffect(() => {
+    if (sectionId) {
+      getSingleSectionById();
     }
-  };
+    return
+
+  }, [])
+
+  async function getSingleSectionById() {
+
+    let getSingleSection = await apiFunctions.GET_REQUEST_BY_ID(
+      BASE_URL + API_URL.GET_SINGLE_SECTION_BY_ID + sectionId
+    )
+    let setRes = getSingleSection.data.section;
+    console.log(setRes, 'single sec')
+
+    setName(setRes.sectionName)
+    setDescription(setRes.sectionDescription);
+    setNote(setRes.sectionNote);
+  }
+
+
+
+
+  const updatedSection = async (id) => {
+    await apiFunctions.PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`Section Updated Successfully`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      })
+  }
+
+
+  // const updatedSection = (x, y) => {
+  //   if (x == undefined && checkedItems == false) {
+  //     response[props.menu_index].section[props.section_index].sectionName =
+  //       name;
+  //     response[props.menu_index].section[
+  //       props.section_index
+  //     ].sectionDescription = description;
+  //     response[props.menu_index].section[props.section_index].sectionNote =
+  //       note;
+  //     response[props.menu_index].section[props.section_index].sectionLabel =
+  //       select;
+
+  //     response[props.menu_index].section[props.section_index].sectionStatus =
+  //       checked;
+
+  //     response[props.menu_index].section[props.section_index].image = image;
+
+  //     function compare(a, b) {
+  //       if (a.sectionName < b.sectionName) {
+  //         return -1;
+  //       }
+  //       if (a.sectionName > b.sectionName) {
+  //         return 1;
+  //       }
+  //       return 0;
+  //     }
+  //     response[props.menu_index].section.sort(compare);
+
+  //     setResponse([...response]);
+  //     alert("Section Updated Successfully");
+  //   } else if (x > -1) {
+  //     response[props.menu_index].section[props.section_index].subSection[
+  //       props.subsection_index
+  //     ].sectionName = name;
+
+  //     response[props.menu_index].section[props.section_index].subSection[
+  //       props.subsection_index
+  //     ].sectionDescription = description;
+
+  //     response[props.menu_index].section[props.section_index].subSection[
+  //       props.subsection_index
+  //     ].sectionNote = note;
+
+  //     response[props.menu_index].section[props.section_index].subSection[
+  //       props.subsection_index
+  //     ].sectionLabel = select;
+
+  //     response[props.menu_index].section[props.section_index].subSection[
+  //       props.subsection_index
+  //     ].sectionStatus = checked;
+
+  //     response[props.menu_index].section[props.section_index].subSection[
+  //       props.subsection_index
+  //     ].image = image;
+
+  //     setResponse([...response]);
+  //     alert("SubSection Updated Successfully");
+  //   } else {
+  //     let initialArray = [...response[props.menu_index].section];
+  //     for (var i = 0; i < initialArray.length; i++) {
+  //       if (initialArray[i].sectionName == val) {
+  //         response[props.menu_index].section[i].subSection.push(sectionData);
+  //         response[props.menu_index]?.section.splice(y, 1);
+  //         setResponse([...response]);
+  //         alert("SubSection has been has been updated");
+  //       }
+  //     }
+  //   }
+  // };
 
   const removalMultiSelect = (event) => {
     setSelect(event);
@@ -284,7 +361,7 @@ const SectionDrawer = (props) => {
     setSelect(event);
   };
 
-  const handleAlphabetically = (event) => {};
+  const handleAlphabetically = (event) => { };
 
   function deleteimg() {
     setImage(null);
@@ -318,6 +395,15 @@ const SectionDrawer = (props) => {
                       type="text"
                       onChange={(e) => setName(e.target.value)}
                       value={name}
+                    />
+                  </FormControl>
+
+                  <FormControl>
+                    <Input
+                      type="text"
+                      onChange={(e) => setMId(e.target.value)}
+                      value={mId}
+                      hidden
                     />
                   </FormControl>
 
@@ -401,8 +487,8 @@ const SectionDrawer = (props) => {
                     />
                   </FormControl>
 
-                  {arrayDecider.length > 0 &&
-                  props?.subsection_index == undefined ? (
+                  {/* {arrayDecider.length > 0 &&
+                    props?.subsection_index == undefined ? (
                     <FormControl>
                       <Checkbox
                         isChecked={checkedItems}
@@ -447,7 +533,7 @@ const SectionDrawer = (props) => {
                         placeholder="Type to search sections"
                       ></Input>
                     </FormControl>
-                  )}
+                  )} */}
                 </TabPanel>
                 <TabPanel>
                   <FormControl>
@@ -535,11 +621,12 @@ const SectionDrawer = (props) => {
               Cancel
             </Button>
 
-            {Number.isInteger(props?.section_index) ? (
+            {props?.section_index ? (
               <Button
                 colorScheme="blue"
                 onClick={() => {
-                  updatedSection(props?.subsection_index, props?.section_index);
+                  // updatedSection(props?.subsection_index, props?.section_index);
+                  updatedSection(sectionId)
                 }}
               >
                 Update

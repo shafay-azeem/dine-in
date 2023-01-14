@@ -44,7 +44,7 @@ import { useEffect } from "react";
 
 const SectionCard = (props) => {
   let menu_index = props?.menu_index;
-  console.log(menu_index);
+  // console.log(menu_index);
   const { sectionList, setSectionList } = MenuState();
   // const [sectionList, setSectionList] = useState(
   //   response[props?.menu_index]?.section
@@ -81,7 +81,22 @@ const SectionCard = (props) => {
     setSectionList(res);
   }
 
-  const handleRemove = (index) => {
+
+  const handleRemove = async (id) => {
+    await apiFunctions
+      .DELETE_REQUEST(BASE_URL + API_URL.DELETE_SECTION_BY_ID + id)
+      .then((res) => {
+        if (res.data.success == true) {
+          console.log(res.data.success)
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+
+
     // response[menu_index]?.section.splice(index, 1);
     // setResponse([...response]);
     // setSectionList(response[props?.menu_index]?.section);
@@ -89,10 +104,11 @@ const SectionCard = (props) => {
 
   function switchStatus(index) {
     // response[props.menu_index].section[index].sectionStatus =
-    //   !response[props.menu_index].section[index].sectionStatus;
+    // response[props.menu_index].section[index].sectionStatus;
     // setResponse([...response]);
     // setSectionList(response[props?.menu_index]?.section);
   }
+
 
   const duplicate = (x, index) => {
     // let filterSec = [];
@@ -116,7 +132,7 @@ const SectionCard = (props) => {
   function sectionClick(index) {
     // setSatus(index);
     // response[props.menu_index].section[index].active =
-    //   !response[props.menu_index].section[index].active;
+    // response[props.menu_index].section[index].active;
     // setResponse([...response]);
   }
 
@@ -133,8 +149,8 @@ const SectionCard = (props) => {
     // );
   };
 
-  const getIndex = (index) => {
-    // setCount(index);
+  const getIndex = (id) => {
+    setCount(id);
   };
 
   const clearMessage = () => {
@@ -192,7 +208,7 @@ const SectionCard = (props) => {
                 return (
                   <Draggable
                     key={x._id}
-                    draggableId={x._id.toString()}
+                    draggableId={x._id}
                     index={index}
                   >
                     {(provided) => (
@@ -281,7 +297,7 @@ const SectionCard = (props) => {
                                         ></ItemDrawer>
                                       ) : null}
 
-                                      <Box onClick={() => getIndex(index)}>
+                                      <Box onClick={() => getIndex(x._id)}>
                                         <MenuItem
                                           icon={<AiFillEdit />}
                                           onClick={onOpenSection}
@@ -297,6 +313,7 @@ const SectionCard = (props) => {
                                           isOpen={isOpenSection}
                                           onOpen={onOpenSection}
                                           onClose={onCloseSection}
+
                                         ></SectionDrawer>
                                       ) : null}
 
@@ -307,7 +324,7 @@ const SectionCard = (props) => {
                                         Duplicate
                                       </MenuItem>
                                       <MenuItem
-                                        onClick={() => handleRemove(index)}
+                                        onClick={() => handleRemove(x._id)}
                                         icon={<AiFillDelete />}
                                       >
                                         Delete
