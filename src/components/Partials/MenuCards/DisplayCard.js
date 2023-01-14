@@ -67,17 +67,17 @@ const DisplayCard = () => {
   }
 
   const handleRemove = async (id) => {
-
-    await apiFunctions.DELETE_REQUEST(BASE_URL + API_URL.DELETE_MENU_BY_ID + id).then(res => {
-      if (res.data.success == true) {
-        alert(`${res.data.message}`)
-        return true
-      }
-      else {
-        alert(`There Some Error`)
-        return false
-      }
-    });
+    await apiFunctions
+      .DELETE_REQUEST(BASE_URL + API_URL.DELETE_MENU_BY_ID + id)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
 
     // response.splice(index, 1);
     // setResponse([...response]);
@@ -91,21 +91,19 @@ const DisplayCard = () => {
       menuNote: x.menuNote,
     };
 
-    await apiFunctions.POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData).then(res => {
-      if (res.data.success == true) {
-        alert(`MENU DUPLICATED SUCCESSFULLY`).then(res => {
-          setResponse(res);
-          return true
+    await apiFunctions
+      .POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`MENU DUPLICATED SUCCESSFULLY`).then((res) => {
+            setResponse(res);
+            return true;
+          });
+        } else {
+          alert(`There Some Error`);
+          return false;
         }
-
-        )
-      }
-      else {
-        alert(`There Some Error`)
-        return false
-      }
-    });
-
+      });
   };
 
   const handleDrop = (droppedItem) => {
@@ -173,7 +171,7 @@ const DisplayCard = () => {
                                   data-size="xs"
                                 />
 
-                                <Button onClick={() => myfun(index)}>
+                                <Button onClick={() => myfun(x._id)}>
                                   EDIT MENU
                                 </Button>
                                 <Box onClick={() => myfun2(x._id)}>

@@ -29,26 +29,24 @@ import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 
 import SectionCard from "../Partials/MenuCards/SectionCard";
-import ItemDrawer from "./ItemDrawer";
 import SectionDrawer from "./SectionDrawer";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import ItemCard from "../Partials/MenuCards/ItemCard";
-import SubSectionCard from "../Partials/MenuCards/SubSectionCard";
-import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 
 const CreateMenu = () => {
   const [searchparams] = useSearchParams();
   let menu_index = searchparams.get("id");
-  const { section, setSection, response, setResponse } = MenuState();
-  const [sectionList, setSectionList] = useState(section);
+
+  const { section, setSection } = MenuState();
+  // const [sectionList, setSectionList] = useState(section);
 
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
   const [hit, setHit] = useState(false);
   const navigate = useNavigate();
 
-  const [filter, setFilter] = useState(response[menu_index].section);
+  // const [filter, setFilter] = useState(response[menu_index].section);
+  const [filter, setFilter] = useState();
 
   const {
     isOpen: isOpenSection,
@@ -56,48 +54,41 @@ const CreateMenu = () => {
     onClose: onCloseSection,
   } = useDisclosure();
 
-  const {
-    isOpen: isOpenItem,
-    onOpen: onOpenItem,
-    onClose: onCloseItem,
-  } = useDisclosure();
-
   const handleDrop = (droppedItem) => {
-    if (!droppedItem.destination) return;
-    var updatedList = [...sectionList];
-    const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
-    updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
-    setSectionList(updatedList);
-    setSection(updatedList);
+    // if (!droppedItem.destination) return;
+    // var updatedList = [...sectionList];
+    // const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
+    // updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
+    // setSectionList(updatedList);
+    // setSection(updatedList);
   };
 
   const myfunc = (event) => {
-    let responseSec = response[menu_index].section;
-    let filterSec = [];
-
-    if (event.target.value === "All") {
-      filterSec = responseSec;
-    }
-    if (event.target.value === "Active") {
-      for (let i = 0; i < responseSec.length; i++) {
-        if (responseSec[i].sectionStatus == true) {
-          filterSec.push(responseSec[i]);
-        }
-      }
-    }
-    if (event.target.value === "InActive") {
-      for (let i = 0; i < responseSec.length; i++) {
-        if (responseSec[i].sectionStatus == false) {
-          filterSec.push(responseSec[i]);
-        }
-      }
-    }
-    setFilter(filterSec);
+    // let responseSec = response[menu_index].section;
+    // let filterSec = [];
+    // if (event.target.value === "All") {
+    //   filterSec = responseSec;
+    // }
+    // if (event.target.value === "Active") {
+    //   for (let i = 0; i < responseSec.length; i++) {
+    //     if (responseSec[i].sectionStatus == true) {
+    //       filterSec.push(responseSec[i]);
+    //     }
+    //   }
+    // }
+    // if (event.target.value === "InActive") {
+    //   for (let i = 0; i < responseSec.length; i++) {
+    //     if (responseSec[i].sectionStatus == false) {
+    //       filterSec.push(responseSec[i]);
+    //     }
+    //   }
+    // }
+    // setFilter(filterSec);
   };
 
   const hitMe = (x) => {
-    setHit(true);
-    setToggle(x);
+    // setHit(true);
+    // setToggle(x);
   };
 
   return (
@@ -135,11 +126,11 @@ const CreateMenu = () => {
                     {filter?.map((x, index) => {
                       return (
                         <Draggable
-                          key={x.sectionId}
-                          draggableId={x.sectionName}
-                          index={index}
+                        // key={x.sectionId}
+                        // draggableId={x.sectionName}
+                        // index={index}
                         >
-                          {(provided) => (
+                          {/* {(provided) => (
                             <Box
                               pl={9}
                               mt={3}
@@ -178,7 +169,7 @@ const CreateMenu = () => {
                                 </Box>
                               )}
                             </Box>
-                          )}
+                          )} */}
                         </Draggable>
                       );
                     })}
@@ -223,6 +214,7 @@ const CreateMenu = () => {
             </HStack>
           </Box>
 
+          {/* <SectionCard menu_index={menu_index} /> */}
           <SectionCard menu_index={menu_index} />
         </GridItem>
       </Grid>

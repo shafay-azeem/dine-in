@@ -38,13 +38,17 @@ import { AddIcon, SearchIcon } from "@chakra-ui/icons";
 import { AiFillCopy } from "react-icons/ai";
 import SubSectionCard from "./SubSectionCard";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import apiFunctions from "../../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../../global/Constant";
 
 const SectionCard = (props) => {
   let menu_index = props?.menu_index;
+  console.log(menu_index);
   const { section, setSection, response, setResponse } = MenuState();
-  const [sectionList, setSectionList] = useState(
-    response[props?.menu_index]?.section
-  );
+  // const [sectionList, setSectionList] = useState(
+  //   response[props?.menu_index]?.section
+  // );
+  const [sectionList, setSectionList] = useState();
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
   const [count, setCount] = useState();
@@ -62,92 +66,92 @@ const SectionCard = (props) => {
     onClose: onCloseItem,
   } = useDisclosure();
 
-  const handleRemove = (index) => {
-    response[menu_index]?.section.splice(index, 1);
+  // async function getAllSectionByMenuId() {
+  //   let getSection = await apiFunctions.GET_REQUEST(
+  //     BASE_URL + API_URL.GET_ALL_MENU
+  //   );
 
-    setResponse([...response]);
-    setSectionList(response[props?.menu_index]?.section);
+  //   let res = getMenu.data.menu;
+  //   setResponse(res);
+  // }
+
+  const handleRemove = (index) => {
+    // response[menu_index]?.section.splice(index, 1);
+    // setResponse([...response]);
+    // setSectionList(response[props?.menu_index]?.section);
   };
 
   function switchStatus(index) {
-    response[props.menu_index].section[index].sectionStatus =
-      !response[props.menu_index].section[index].sectionStatus;
-    setResponse([...response]);
-    setSectionList(response[props?.menu_index]?.section);
+    // response[props.menu_index].section[index].sectionStatus =
+    //   !response[props.menu_index].section[index].sectionStatus;
+    // setResponse([...response]);
+    // setSectionList(response[props?.menu_index]?.section);
   }
 
   const duplicate = (x, index) => {
-    let filterSec = [];
-
-    function getTimestampInSeconds() {
-      return Math.floor(Date.now() / 1000);
-    }
-
-    let sectionData = {
-      sectionId: getTimestampInSeconds(),
-      sectionName: x.sectionName,
-      sectionDescription: x.sectionDescription,
-      sectionStatus: x.sectionStatus,
-      sectionNote: x.sectionNote,
-      sectionLabel: x.sectionLabel,
-      image: x.image,
-      item: response[menu_index]?.section[index].item,
-      subSection: response[menu_index]?.section[index].subSection,
-    };
-
-    setResponse([...response]);
+    // let filterSec = [];
+    // function getTimestampInSeconds() {
+    //   return Math.floor(Date.now() / 1000);
+    // }
+    // let sectionData = {
+    //   sectionId: getTimestampInSeconds(),
+    //   sectionName: x.sectionName,
+    //   sectionDescription: x.sectionDescription,
+    //   sectionStatus: x.sectionStatus,
+    //   sectionNote: x.sectionNote,
+    //   sectionLabel: x.sectionLabel,
+    //   image: x.image,
+    //   item: response[menu_index]?.section[index].item,
+    //   subSection: response[menu_index]?.section[index].subSection,
+    // };
+    // setResponse([...response]);
   };
 
   function sectionClick(index) {
-    setSatus(index);
-    response[props.menu_index].section[index].active =
-      !response[props.menu_index].section[index].active;
-    setResponse([...response]);
+    // setSatus(index);
+    // response[props.menu_index].section[index].active =
+    //   !response[props.menu_index].section[index].active;
+    // setResponse([...response]);
   }
 
   const handleDrop = (droppedItem) => {
-    if (!droppedItem.destination) return;
-    var updatedList = [...sectionList];
-    const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
-
-    updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
-
-    setSectionList(updatedList);
-
-    response[props?.menu_index].section.length = 0;
-    response[props?.menu_index]?.section.push.apply(
-      response[props?.menu_index]?.section,
-      updatedList
-    );
+    // if (!droppedItem.destination) return;
+    // var updatedList = [...sectionList];
+    // const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
+    // updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
+    // setSectionList(updatedList);
+    // response[props?.menu_index].section.length = 0;
+    // response[props?.menu_index]?.section.push.apply(
+    //   response[props?.menu_index]?.section,
+    //   updatedList
+    // );
   };
 
   const getIndex = (index) => {
-    setCount(index);
+    // setCount(index);
   };
 
   const clearMessage = () => {
-    setSearch("");
-    setSectionList(response[props?.menu_index]?.section);
+    // setSearch("");
+    // setSectionList(response[props?.menu_index]?.section);
   };
 
-  var updatedList = [...sectionList];
-  let updatedListTemp;
+  // var updatedList = [...sectionList];
+  // let updatedListTemp;
   const filterBySearch = (event) => {
-    setSearch(event.target.value);
-    const query = event.target.value;
-
-    if (query === "") {
-      setSectionList(response[props?.menu_index]?.section);
-      return;
-    } else {
-      updatedListTemp = updatedList.filter((item) => {
-        return (
-          item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1
-        );
-      });
-
-      setSectionList(updatedListTemp);
-    }
+    // setSearch(event.target.value);
+    // const query = event.target.value;
+    // if (query === "") {
+    //   setSectionList(response[props?.menu_index]?.section);
+    //   return;
+    // } else {
+    //   updatedListTemp = updatedList.filter((item) => {
+    //     return (
+    //       item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    //     );
+    //   });
+    //   setSectionList(updatedListTemp);
+    // }
   };
 
   return (
