@@ -67,7 +67,6 @@ const SectionCard = (props) => {
     onClose: onCloseItem,
   } = useDisclosure();
 
-
   useEffect(() => {
     getAllSectionByMenuId();
   }, [sectionList]);
@@ -81,13 +80,12 @@ const SectionCard = (props) => {
     setSectionList(res);
   }
 
-
   const handleRemove = async (id) => {
     await apiFunctions
       .DELETE_REQUEST(BASE_URL + API_URL.DELETE_SECTION_BY_ID + id)
       .then((res) => {
         if (res.data.success == true) {
-          console.log(res.data.success)
+          console.log(res.data.success);
           alert(`${res.data.message}`);
           return true;
         } else {
@@ -95,7 +93,6 @@ const SectionCard = (props) => {
           return false;
         }
       });
-
 
     // response[menu_index]?.section.splice(index, 1);
     // setResponse([...response]);
@@ -108,7 +105,6 @@ const SectionCard = (props) => {
     // setResponse([...response]);
     // setSectionList(response[props?.menu_index]?.section);
   }
-
 
   const duplicate = (x, index) => {
     // let filterSec = [];
@@ -206,11 +202,7 @@ const SectionCard = (props) => {
             <Box {...provided.droppableProps} ref={provided.innerRef}>
               {sectionList?.map((x, index) => {
                 return (
-                  <Draggable
-                    key={x._id}
-                    draggableId={x._id}
-                    index={index}
-                  >
+                  <Draggable key={x._id} draggableId={x._id} index={index}>
                     {(provided) => (
                       <Box
                         {...provided.draggableProps}
@@ -313,7 +305,6 @@ const SectionCard = (props) => {
                                           isOpen={isOpenSection}
                                           onOpen={onOpenSection}
                                           onClose={onCloseSection}
-
                                         ></SectionDrawer>
                                       ) : null}
 
@@ -349,12 +340,17 @@ const SectionCard = (props) => {
                         </Box>
 
                         <Box ml="55px">
-                          {x.active ? (
+                          <ItemCard
+                            // menu_index={menu_index}
+                            section_index={x._id}
+                          />
+
+                          {/* {x.active ? (
                             <ItemCard
                               menu_index={menu_index}
-                              section_index={index}
+                              section_index={x._id}
                             />
-                          ) : null}
+                          ) : null} */}
                         </Box>
 
                         <Box ml="55px">

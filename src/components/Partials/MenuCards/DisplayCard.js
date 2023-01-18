@@ -127,7 +127,11 @@ const DisplayCard = () => {
             <Box {...provided.droppableProps} ref={provided.innerRef}>
               {response?.map((x, index) => {
                 return (
-                  <Draggable key={x._id} draggableId={x._id.toString()} index={index}>
+                  <Draggable
+                    key={x._id}
+                    draggableId={x._id.toString()}
+                    index={index}
+                  >
                     {(provided) => (
                       <Box
                         {...provided.draggableProps}

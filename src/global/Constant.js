@@ -20,4 +20,6 @@ export const API_URL = {
   UPDATE_SECTION_BY_ID: "menu/V1/updateSection/",
 
   DELETE_SECTION_BY_ID: "menu/V1/deleteSection/",
+
+  Get_All_Item_By_SectionId: "menu/V1/getAllItemBySectionId/",
 };

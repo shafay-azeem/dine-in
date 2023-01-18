@@ -144,8 +144,6 @@ const SettingDrawer = (props) => {
           return false;
         }
       });
-
-
   };
   let SpecificDate;
   // const menuCreate = () => {
@@ -228,14 +226,14 @@ const SettingDrawer = (props) => {
       });
   };
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (props?.index) {
-      getSingleMenuByID();
-    }
-    return
+  //   if (props?.index) {
+  //     getSingleMenuByID();
+  //   }
+  //   return
 
-  }, []);
+  // }, []);
 
   async function getSingleMenuByID() {
     let getSingleMenu = await apiFunctions.GET_REQUEST_BY_ID(

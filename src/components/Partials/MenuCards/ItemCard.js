@@ -32,17 +32,23 @@ import {
   AiFillFileAdd,
 } from "react-icons/ai";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import { API_URL, BASE_URL } from "../../../global/Constant";
+import apiFunctions from "../../../global/GlobalFunction";
 
 const ItemCard = (props) => {
   const { response, setResponse } = MenuState();
+  //console.log(props?.section_index, "section");
 
-  const initialState = Number.isInteger(props?.subsection_index)
-    ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
-        props?.subsection_index
-      ].item
-    : response[props?.menu_index]?.section[props?.section_index]?.item;
+  let secid = props?.section_index;
+  // const initialState = Number.isInteger(props?.subsection_index)
+  //   ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
+  //       props?.subsection_index
+  //     ].item
+  //   : response[props?.menu_index]?.section[props?.section_index]?.item;
 
-  const [itemList, setItemList] = useState(initialState);
+  // const [itemList, setItemList] = useState(initialState);
+  const [itemList, setItemList] = useState();
+
   const [count, setCount] = useState();
   const [checked, setChecked] = useState(false);
 
@@ -56,119 +62,129 @@ const ItemCard = (props) => {
     setCount(index);
   };
 
+  useEffect(() => {
+    getAllItemsBySectionId();
+  }, [itemList]);
+
+  async function getAllItemsBySectionId() {
+    let getItems = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.Get_All_Item_By_SectionId + secid
+    );
+
+    let res = getItems.data.item;
+    console.log(res);
+    setItemList(res);
+  }
+
   const handleRemove = (index) => {
-    if (Number.isInteger(props?.subsection_index) == true) {
-      response[props.menu_index].section[props.section_index].subSection[
-        props.subsection_index
-      ].item.splice(index, 1);
-      setResponse([...response]);
-      setItemList(
-        response[props.menu_index].section[props.section_index].subSection[
-          props.subsection_index
-        ].item
-      );
-    } else {
-      response[props.menu_index].section[props.section_index].item.splice(
-        index,
-        1
-      );
-      setResponse([...response]);
-      setItemList(response[props.menu_index].section[props.section_index].item);
-    }
+    // if (Number.isInteger(props?.subsection_index) == true) {
+    //   response[props.menu_index].section[props.section_index].subSection[
+    //     props.subsection_index
+    //   ].item.splice(index, 1);
+    //   setResponse([...response]);
+    //   setItemList(
+    //     response[props.menu_index].section[props.section_index].subSection[
+    //       props.subsection_index
+    //     ].item
+    //   );
+    // } else {
+    //   response[props.menu_index].section[props.section_index].item.splice(
+    //     index,
+    //     1
+    //   );
+    //   setResponse([...response]);
+    //   setItemList(response[props.menu_index].section[props.section_index].item);
+    // }
   };
 
   const duplicate = (x, y) => {
-    function getTimestampInSeconds() {
-      return Math.floor(Date.now() / 1000);
-    }
-
-    let itemData = {
-      itemId: getTimestampInSeconds(),
-      itemName: x.itemName,
-      itemDescription: x.itemDescription,
-      active: x.active,
-      itemPrice: x.itemPrice,
-      itemCalorie: x.itemCalorie,
-      itemTag: x.itemTag,
-      itemLabel: x.itemLabel,
-      itemWarning: x.itemWarning,
-      itemPrepTime: x.itemPrepTime,
-      itemCalories: x.itemCalories,
-      itemPriceOption: x.itemPriceOption,
-      itemSaturatedFatPercentage: x.itemSaturatedFatPercentage,
-      itemTransFat: x.itemTransFat,
-      itemTransFatPercentage: x.itemTransFatPercentage,
-      itemCholesterol: x.itemCholesterol,
-      itemCholesterolPercentage: x.itemCholesterolPercentage,
-      itemSodium: x.itemSodium,
-      itemSodiumPercentage: x.itemSodiumPercentage,
-      itemTotalCarbs: x.itemTotalCarbs,
-      itemTotalCarbsPercentage: x.itemTotalCarbsPercentage,
-      itemDietaryFiber: x.itemDietaryFiber,
-      itemDietaryFiberPercentage: x.itemDietaryFiberPercentage,
-      itemSugar: x.itemSugar,
-      itemSugarPercentage: x.itemSugarPercentage,
-      itemProtein: x.itemProtein,
-      itemProteinPercentage: x.itemProteinPercentage,
-      itemVitaminA: x.itemVitaminA,
-      itemVitaminC: x.itemVitaminC,
-      itemIron: x.itemIron,
-      itemCalcium: x.itemCalcium,
-      itemTotalFat: x.itemTotalFat,
-      itemTotalFatPercentage: x.itemTotalFatPercentage,
-      itemSaturatedFat: x.itemSaturatedFat,
-      itemNutritionCalories: x.itemNutritionCalories,
-      itemCaloriesFat: x.itemCaloriesFat,
-      itemServingSize: x.itemServingSize,
-      image: x.image,
-    };
-
-    if (y != null) {
-      setResponse([...response]);
-    } else {
-      setResponse([...response]);
-    }
+    // function getTimestampInSeconds() {
+    //   return Math.floor(Date.now() / 1000);
+    // }
+    // let itemData = {
+    //   itemId: getTimestampInSeconds(),
+    //   itemName: x.itemName,
+    //   itemDescription: x.itemDescription,
+    //   active: x.active,
+    //   itemPrice: x.itemPrice,
+    //   itemCalorie: x.itemCalorie,
+    //   itemTag: x.itemTag,
+    //   itemLabel: x.itemLabel,
+    //   itemWarning: x.itemWarning,
+    //   itemPrepTime: x.itemPrepTime,
+    //   itemCalories: x.itemCalories,
+    //   itemPriceOption: x.itemPriceOption,
+    //   itemSaturatedFatPercentage: x.itemSaturatedFatPercentage,
+    //   itemTransFat: x.itemTransFat,
+    //   itemTransFatPercentage: x.itemTransFatPercentage,
+    //   itemCholesterol: x.itemCholesterol,
+    //   itemCholesterolPercentage: x.itemCholesterolPercentage,
+    //   itemSodium: x.itemSodium,
+    //   itemSodiumPercentage: x.itemSodiumPercentage,
+    //   itemTotalCarbs: x.itemTotalCarbs,
+    //   itemTotalCarbsPercentage: x.itemTotalCarbsPercentage,
+    //   itemDietaryFiber: x.itemDietaryFiber,
+    //   itemDietaryFiberPercentage: x.itemDietaryFiberPercentage,
+    //   itemSugar: x.itemSugar,
+    //   itemSugarPercentage: x.itemSugarPercentage,
+    //   itemProtein: x.itemProtein,
+    //   itemProteinPercentage: x.itemProteinPercentage,
+    //   itemVitaminA: x.itemVitaminA,
+    //   itemVitaminC: x.itemVitaminC,
+    //   itemIron: x.itemIron,
+    //   itemCalcium: x.itemCalcium,
+    //   itemTotalFat: x.itemTotalFat,
+    //   itemTotalFatPercentage: x.itemTotalFatPercentage,
+    //   itemSaturatedFat: x.itemSaturatedFat,
+    //   itemNutritionCalories: x.itemNutritionCalories,
+    //   itemCaloriesFat: x.itemCaloriesFat,
+    //   itemServingSize: x.itemServingSize,
+    //   image: x.image,
+    // };
+    // if (y != null) {
+    //   setResponse([...response]);
+    // } else {
+    //   setResponse([...response]);
+    // }
   };
 
   const handleDrop = (droppedItem) => {
-    if (!droppedItem.destination) return;
-    var updatedList = [...itemList];
-    const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
-    updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
-
-    setItemList(updatedList);
-
-    response[props.menu_index].section[props.section_index].item.length = 0;
-    response[props?.menu_index]?.section[props?.section_index]?.item.push.apply(
-      response[props?.menu_index]?.section[props?.section_index]?.item,
-      updatedList
-    );
+    // if (!droppedItem.destination) return;
+    // var updatedList = [...itemList];
+    // const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
+    // updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
+    // setItemList(updatedList);
+    // response[props.menu_index].section[props.section_index].item.length = 0;
+    // response[props?.menu_index]?.section[props?.section_index]?.item.push.apply(
+    //   response[props?.menu_index]?.section[props?.section_index]?.item,
+    //   updatedList
+    // );
   };
   function switchStatus(index) {
-    if (Number.isInteger(props?.subsection_index)) {
-      response[props.menu_index].section[props.section_index].subSection[
-        props.subsection_index
-      ].item[index].active =
-        !response[props.menu_index].section[props.section_index].subSection[
-          props.subsection_index
-        ].item[index].active;
-      setResponse([...response]);
-      setItemList(
-        response[props.menu_index].section[props.section_index].subSection[
-          props.subsection_index
-        ].item
-      );
-    } else {
-      response[props.menu_index].section[props.section_index].item[
-        index
-      ].active =
-        !response[props.menu_index].section[props.section_index].item[index]
-          .active;
-      setResponse([...response]);
-      setItemList(
-        response[props?.menu_index]?.section[props?.section_index]?.item
-      );
-    }
+    // if (Number.isInteger(props?.subsection_index)) {
+    //   response[props.menu_index].section[props.section_index].subSection[
+    //     props.subsection_index
+    //   ].item[index].active =
+    //     !response[props.menu_index].section[props.section_index].subSection[
+    //       props.subsection_index
+    //     ].item[index].active;
+    //   setResponse([...response]);
+    //   setItemList(
+    //     response[props.menu_index].section[props.section_index].subSection[
+    //       props.subsection_index
+    //     ].item
+    //   );
+    // } else {
+    //   response[props.menu_index].section[props.section_index].item[
+    //     index
+    //   ].active =
+    //     !response[props.menu_index].section[props.section_index].item[index]
+    //       .active;
+    //   setResponse([...response]);
+    //   setItemList(
+    //     response[props?.menu_index]?.section[props?.section_index]?.item
+    //   );
+    // }
   }
   return (
     <>
@@ -179,8 +195,8 @@ const ItemCard = (props) => {
               {itemList?.map((x, index) => {
                 return (
                   <Draggable
-                    key={x.itemId}
-                    draggableId={x.itemId.toString()}
+                    key={x._id}
+                    draggableId={x._id.toString()}
                     index={index}
                   >
                     {(provided) => (
@@ -197,7 +213,7 @@ const ItemCard = (props) => {
                                   boxSize="43px"
                                   objectFit="cover"
                                   borderRadius={3}
-                                  src={x.image}
+                                  // src={x.image}
                                 />
 
                                 <Text pl={2}>
