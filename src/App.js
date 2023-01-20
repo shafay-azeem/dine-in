@@ -25,7 +25,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} exact />
-          {/* <Route path="/" element={<HomeScreen />} exact /> */}
+          <Route path="/homeScreen" element={<HomeScreen />} />
           <Route path="/reports" element={<ReportScreen />} />
           <Route path="/order" element={<OrderScreen />} />
           <Route path="/customer" element={<CustomerScreen />} />
