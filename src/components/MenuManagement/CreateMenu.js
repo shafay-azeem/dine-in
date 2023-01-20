@@ -1,4 +1,4 @@
-import { AddIcon, SearchIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -6,21 +6,13 @@ import {
   Grid,
   GridItem,
   HStack,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  list,
-  ListItem,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
   Portal,
   SimpleGrid,
-  Text,
-  UnorderedList,
   useDisclosure,
-  VStack,
 } from "@chakra-ui/react";
 
 import React, { useState } from "react";
@@ -213,8 +205,6 @@ const CreateMenu = () => {
               </Menu>
             </HStack>
           </Box>
-
-          {/* <SectionCard menu_index={menu_index} /> */}
           <SectionCard menu_index={menu_index} />
         </GridItem>
       </Grid>

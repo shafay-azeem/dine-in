@@ -47,33 +47,34 @@ import { API_URL, BASE_URL } from "../../global/Constant";
 
 const SectionDrawer = (props) => {
   let menu_index = props.menu_index;
-  console.log(menu_index)
+
   let sectionId = props?.section_index;
-
-
-  console.log(sectionId, "sectionId")
-
-
-  let subsection_index = props?.subsection_index;
-
+  // let subsection_index = props?.subsection_index;
 
   const [checkedItems, setCheckedItems] = useState(false);
-  const [food, setFood] = useState(["New", "Signature"]);
+
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
 
   const { response, setResponse } = MenuState();
   const inputElement = useRef();
 
-  const initialState = Number.isInteger(props?.subsection_index)
+  // const initialState = Number.isInteger(props?.subsection_index);
   // ? response[props.menu_index].section[props?.section_index]?.subSection[
   //   props?.subsection_index
   // ]?.sectionName
   // : response[props.menu_index].section[props?.section_index]?.sectionName;
   // const [name, setName] = useState(initialState);
-  const [name, setName] = useState();
 
-  const descriptionState = Number.isInteger(props?.subsection_index)
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [note, setNote] = useState();
+  const [food, setFood] = useState(["New", "Signature"]);
+  const [checked, setChecked] = useState();
+
+  const [select, setSelect] = useState(food);
+
+  // const descriptionState = Number.isInteger(props?.subsection_index);
   // ? response[props.menu_index].section[props?.section_index]?.subSection[
   //   props?.subsection_index
   // ]?.sectionDescription
@@ -81,18 +82,16 @@ const SectionDrawer = (props) => {
   //   ?.sectionDescription;
 
   // const [description, setDescription] = useState(descriptionState);
-  const [description, setDescription] = useState();
 
-  const noteState = Number.isInteger(props?.subsection_index)
+  // const noteState = Number.isInteger(props?.subsection_index);
   // ? response[props.menu_index].section[props?.section_index]?.subSection[
   //   props?.subsection_index
   // ]?.sectionNote
   // : response[props.menu_index].section[props?.section_index]?.sectionNote;
 
   // const [note, setNote] = useState(noteState);
-  const [note, setNote] = useState();
 
-  const imageState = Number.isInteger(props?.subsection_index)
+  // const imageState = Number.isInteger(props?.subsection_index);
   // ? response[props.menu_index].section[props?.section_index]?.subSection[
   //   props?.subsection_index
   // ]?.image
@@ -108,17 +107,16 @@ const SectionDrawer = (props) => {
   // const [arrayDecider, setArrayDecider] = useState(initalArrayDecider);
 
   // const [image, setImage] = useState(imageState);
-  const [image, setImage] = useState();
+  // const [image, setImage] = useState();
 
-  const [searchSection, setsearchSection] = useState();
+  // const [searchSection, setsearchSection] = useState();
 
-  const labelState = Number.isInteger(props?.subsection_index)
+  // const labelState = Number.isInteger(props?.subsection_index);
   // ? response[props.menu_index].section[props?.section_index]?.subSection[
   //   props?.subsection_index
   // ]?.sectionLabel
   // : response[props.menu_index].section[props?.section_index]?.sectionLabel;
 
-  const [select, setSelect] = useState(labelState);
   const [pass, setPass] = useState(false);
   const [close, setClose] = useState();
 
@@ -151,7 +149,6 @@ const SectionDrawer = (props) => {
   // }
 
   // const [checked, setChecked] = useState(TOGGLE);
-  const [checked, setChecked] = useState();
 
   const [alphabetical, setalphabetical] = useState(false);
   const [val, setVal] = useState();
@@ -164,7 +161,6 @@ const SectionDrawer = (props) => {
     onClose: ModalOnClose,
   } = useDisclosure();
 
-
   // function enabelDisable() {
   //   if (value === "1") {
   //     setValueTrue(true);
@@ -172,10 +168,10 @@ const SectionDrawer = (props) => {
   //     setValueTrue(false);
   //   }
   // }
-  const pictureCapture = (event) => {
-    let value = URL.createObjectURL(event.target.files[0]);
-    setImage(value);
-  };
+  // const pictureCapture = (event) => {
+  //   let value = URL.createObjectURL(event.target.files[0]);
+  //   setImage(value);
+  // };
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -193,21 +189,22 @@ const SectionDrawer = (props) => {
   //   subSection: [],
   // };
 
-
   let sectionData = {
     sectionName: name,
     sectionDescription: description,
-    sectionNote: note
+    sectionNote: note,
+    sectionLabel: [],
+    sectionStatus: checked,
   };
 
   const [modalShow, setModalShow] = useState(false);
 
   const testfunc = async () => {
-
     await apiFunctions
-      .POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + props.menu_index, sectionData)
+      .POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + menu_index, sectionData)
       .then((res) => {
         if (res.data.success == true) {
+          console.log(res.data, "res.data");
           alert(`Section Created`);
           return true;
         } else {
@@ -215,7 +212,6 @@ const SectionDrawer = (props) => {
           return false;
         }
       });
-
 
     // if (checkedItems === true) {
     //   let initialArray = [...response[props.menu_index].section];
@@ -249,28 +245,25 @@ const SectionDrawer = (props) => {
     if (sectionId) {
       getSingleSectionById();
     }
-    return
-
-  }, [])
+    return;
+  }, []);
 
   async function getSingleSectionById() {
-
     let getSingleSection = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_SINGLE_SECTION_BY_ID + sectionId
-    )
+    );
     let setRes = getSingleSection.data.section;
-    console.log(setRes, 'single sec')
+    console.log(setRes, "single sec");
 
-    setName(setRes.sectionName)
+    setName(setRes.sectionName);
     setDescription(setRes.sectionDescription);
     setNote(setRes.sectionNote);
+    setChecked(setRes.sectionStatus);
   }
 
-
-
-
   const updatedSection = async (id) => {
-    await apiFunctions.PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
           alert(`Section Updated Successfully`);
@@ -279,9 +272,8 @@ const SectionDrawer = (props) => {
           alert(`There Some Error`);
           return false;
         }
-      })
-  }
-
+      });
+  };
 
   // const updatedSection = (x, y) => {
   //   if (x == undefined && checkedItems == false) {
@@ -361,12 +353,12 @@ const SectionDrawer = (props) => {
     setSelect(event);
   };
 
-  const handleAlphabetically = (event) => { };
+  const handleAlphabetically = (event) => {};
 
-  function deleteimg() {
-    setImage(null);
-    document.getElementById("img").value = "";
-  }
+  // function deleteimg() {
+  //   setImage(null);
+  //   document.getElementById("img").value = "";
+  // }
   return (
     <>
       <Drawer
@@ -425,7 +417,7 @@ const SectionDrawer = (props) => {
                     />
                   </FormControl>
 
-                  <FormControl mt={3}>
+                  {/* <FormControl mt={3}>
                     <FormLabel fontWeight="400">Upload Your Image</FormLabel>
                     <Input
                       size="sm"
@@ -468,24 +460,25 @@ const SectionDrawer = (props) => {
                         </ModalBody>
                       </ModalContent>
                     </Modal>
-                  </FormControl>
-
-                  {/* <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Display the section</FormLabel>
-                    <Switch
-                      checked={checked}
-                      onChange={(e) => setChecked(e.target.checked)}
-                    />
                   </FormControl> */}
 
-                  <FormControl mt={3}>
+                  {/* <FormControl mt={3}>
                     <FormLabel fontWeight="400">Display the section</FormLabel>
                     <SwitchComponent
                       id="switch1"
                       checked={checked}
                       onChange={(e) => setChecked(e.target.checked)}
                     />
-                  </FormControl>
+                  </FormControl> */}
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={checked ? checked : false}
+                      onChange={(e) => setChecked(e.target.checked)}
+                    />
+                    Display The Section
+                  </label>
 
                   {/* {arrayDecider.length > 0 &&
                     props?.subsection_index == undefined ? (
@@ -626,7 +619,7 @@ const SectionDrawer = (props) => {
                 colorScheme="blue"
                 onClick={() => {
                   // updatedSection(props?.subsection_index, props?.section_index);
-                  updatedSection(sectionId)
+                  updatedSection(sectionId);
                 }}
               >
                 Update

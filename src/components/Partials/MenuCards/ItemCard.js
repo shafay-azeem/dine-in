@@ -62,9 +62,9 @@ const ItemCard = (props) => {
     setCount(index);
   };
 
-  useEffect(() => {
-    getAllItemsBySectionId();
-  }, [itemList]);
+  // useEffect(() => {
+  //   getAllItemsBySectionId();
+  // }, [itemList]);
 
   async function getAllItemsBySectionId() {
     let getItems = await apiFunctions.GET_REQUEST(

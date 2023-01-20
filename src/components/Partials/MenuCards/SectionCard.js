@@ -46,14 +46,12 @@ const SectionCard = (props) => {
   let menu_index = props?.menu_index;
   // console.log(menu_index);
   const { sectionList, setSectionList } = MenuState();
-  // const [sectionList, setSectionList] = useState(
-  //   response[props?.menu_index]?.section
-  // );
-  // const [sectionList, setSectionList] = useState([]);
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
   const [count, setCount] = useState();
   const [search, setSearch] = useState("");
+
+  const [checked, setChecked] = useState();
 
   const {
     isOpen: isOpenSection,
@@ -69,7 +67,7 @@ const SectionCard = (props) => {
 
   useEffect(() => {
     getAllSectionByMenuId();
-  }, [sectionList]);
+  }, []);
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(
@@ -99,30 +97,54 @@ const SectionCard = (props) => {
     // setSectionList(response[props?.menu_index]?.section);
   };
 
-  function switchStatus(index) {
-    // response[props.menu_index].section[index].sectionStatus =
-    // response[props.menu_index].section[index].sectionStatus;
-    // setResponse([...response]);
-    // setSectionList(response[props?.menu_index]?.section);
-  }
+  const switchStatus = async (x, id) => {
+    let sectionData = {
+      sectionStatus: !x.sectionStatus,
+    };
 
-  const duplicate = (x, index) => {
-    // let filterSec = [];
-    // function getTimestampInSeconds() {
-    //   return Math.floor(Date.now() / 1000);
-    // }
-    // let sectionData = {
-    //   sectionId: getTimestampInSeconds(),
-    //   sectionName: x.sectionName,
-    //   sectionDescription: x.sectionDescription,
-    //   sectionStatus: x.sectionStatus,
-    //   sectionNote: x.sectionNote,
-    //   sectionLabel: x.sectionLabel,
-    //   image: x.image,
-    //   item: response[menu_index]?.section[index].item,
-    //   subSection: response[menu_index]?.section[index].subSection,
-    // };
-    // setResponse([...response]);
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`Section Updated Successfully`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+
+    // console.log(sectionList, "sectionList");
+
+    // sectionList[id].sectionStatus = !sectionList[id].sectionStatus;
+
+    // setSectionList([...sectionList]);
+    // sectionList[id].sectionStatus = !sectionList[id].sectionStatus;
+    // setSectionList([...sectionList]);
+  };
+
+  const duplicate = async (x) => {
+    let sectionData = {
+      sectionName: x.sectionName,
+      sectionDescription: x.sectionDescription,
+      sectionNote: x.sectionNote,
+      sectionLabel: x.sectionLabel,
+      sectionStatus: x.sectionStatus,
+    };
+
+    await apiFunctions
+      .POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + menu_index, sectionData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`SECTION DUPLICATED SUCCESSFULLY`).then((res) => {
+            setSectionList(res);
+            return true;
+          });
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
   };
 
   function sectionClick(index) {
@@ -225,6 +247,7 @@ const SectionCard = (props) => {
                                 ) : (
                                   <Text pl={2}>
                                     {x.sectionName}
+
                                     {x.sectionStatus ? (
                                       <Badge
                                         ml="3"
@@ -256,7 +279,7 @@ const SectionCard = (props) => {
                               <HStack>
                                 <BootstrapSwitchButton
                                   checked={x.sectionStatus}
-                                  onChange={() => switchStatus(index)}
+                                  onChange={() => switchStatus(x, x._id)}
                                   data-size="xs"
                                 />
 
@@ -309,7 +332,7 @@ const SectionCard = (props) => {
                                       ) : null}
 
                                       <MenuItem
-                                        onClick={() => duplicate(x, index)}
+                                        onClick={() => duplicate(x)}
                                         icon={<AiFillCopy />}
                                       >
                                         Duplicate
@@ -340,10 +363,7 @@ const SectionCard = (props) => {
                         </Box>
 
                         <Box ml="55px">
-                          <ItemCard
-                            // menu_index={menu_index}
-                            section_index={x._id}
-                          />
+                          <ItemCard section_index={x._id} />
 
                           {/* {x.active ? (
                             <ItemCard
