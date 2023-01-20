@@ -16,13 +16,16 @@ import MenuDetailScreen from "./Screens/MenuDetailScreen";
 import MenuStartScreen from "./Screens/MenuStartScreen";
 import MenuFeedbackScreen from "./Screens/MenuFeedbackScreen";
 import FormQuestions from "./components/FeedBacks/FormQuestions";
+import Login from "./components/Authentication/Login";
+import HomePage from "./components/HomePage";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomeScreen />} exact />
+          <Route path="/" element={<HomePage />} exact />
+          {/* <Route path="/" element={<HomeScreen />} exact /> */}
           <Route path="/reports" element={<ReportScreen />} />
           <Route path="/order" element={<OrderScreen />} />
           <Route path="/customer" element={<CustomerScreen />} />
