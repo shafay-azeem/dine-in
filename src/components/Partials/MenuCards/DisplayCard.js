@@ -89,6 +89,8 @@ const DisplayCard = () => {
       menuName: x.menuName,
       menuDescription: x.menuDescription,
       menuNote: x.menuNote,
+      menuStatus: x.menuStatus,
+      availability: x.availability
     };
 
     await apiFunctions
