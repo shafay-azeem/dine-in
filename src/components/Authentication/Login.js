@@ -38,18 +38,19 @@ const Login = () => {
             alert(`${res.data.message}`);
             setEmail('')
             setPassword('')
+            localStorage.setItem("token", JSON.stringify(res.data.token));
             navigate({
               pathname: "/homeScreen",
             });
             return true;
           } else {
-            alert(`There Some Error`);
+            alert(`There Some Error---`);
             return false;
           }
         });
 
     } catch (err) {
-      alert(`There Some Error`);
+      alert(`There Some Error ${err}`);
     }
   };
   return (

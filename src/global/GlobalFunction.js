@@ -29,14 +29,18 @@ const apiFunctions = {
   },
 
   POST_REQUEST: async function (url, formData) {
-    console.log(url);
-    console.log(formData);
-    let config = {
-      headers: {
-        "Content-type": "application/json",
 
-      },
-    };
+    const token = localStorage.getItem('token');
+    let config = null;
+    if (token !== null && token !== undefined) {
+      config = {
+        headers: {
+          // "Content-type": "application/json",
+          "Content-type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+    }
 
     const data = await axios
       .post(url, formData, config)

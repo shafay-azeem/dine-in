@@ -78,7 +78,12 @@ const SideDrawer = () => {
       setNotification(false);
     }
   });
-
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    navigate({
+      pathname: "/",
+    });
+  };
   const home = () => {
     navigate({
       pathname: "/",
@@ -207,7 +212,7 @@ const SideDrawer = () => {
                 Change Language
               </MenuItem>
               <MenuDivider />
-              <MenuItem icon={<UnlockIcon />}>Sign Out</MenuItem>
+              <MenuItem icon={<UnlockIcon />} onClick={logoutHandler}>Sign Out</MenuItem>
             </MenuList>
           </Menu>
         </div>
