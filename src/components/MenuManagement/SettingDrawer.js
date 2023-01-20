@@ -222,6 +222,7 @@ const SettingDrawer = (props) => {
     availaibility: inputList
   };
 
+
   const createMenu = async () => {
     await apiFunctions
       .POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData)
@@ -244,6 +245,7 @@ const SettingDrawer = (props) => {
 
   }, []);
 
+
   async function getSingleMenuByID() {
     let getSingleMenu = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_MENU_BY_ID + props.index
@@ -257,7 +259,11 @@ const SettingDrawer = (props) => {
     setActive(setVar.menuStatus)
     setInputList(setVar.availaibility)
 
-    console.log(active, 'setVar.menuStatus')
+    console.log(setVar.menuStatus, 'setVar.menuStatus')
+    console.log(active, 'menuStatus')
+    console.log(name, 'bdnme')
+
+
   }
 
   return (
@@ -318,8 +324,7 @@ const SettingDrawer = (props) => {
                   <label>
                     <input
                       type="checkbox"
-                      defaultChecked={active}
-
+                      checked={active ? active : false}
                       onChange={(e) => setActive(e.target.checked)}
                     />
                     Display the Menu
