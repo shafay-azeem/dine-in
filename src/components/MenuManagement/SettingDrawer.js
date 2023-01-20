@@ -89,6 +89,7 @@ const SettingDrawer = (props) => {
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
   // const [avail, setEndTime] = useState();
+  const [value, setValue] = useState();
 
   const conditonMade = props?.menuCreate ? "menuCreate" : "section";
 
@@ -116,7 +117,7 @@ const SettingDrawer = (props) => {
     setFormChecked(e.target.checked);
   };
 
-  const [active, setActive] = useState(TOGGLE);
+  const [active, setActive] = useState(false);
 
   const updatedMenu = async () => {
     // response[props.index].menuName = name;
@@ -187,7 +188,8 @@ const SettingDrawer = (props) => {
   } else {
     avail = response[props.index].availaibility;
   }
-  const [inputList, setInputList] = useState(avail);
+  //avail
+  const [inputList, setInputList] = useState([{ StartTime: "", EndTime: "" }]);
 
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -210,6 +212,8 @@ const SettingDrawer = (props) => {
     menuName: name,
     menuDescription: description,
     menuNote: note,
+    menuStatus: active,
+    availaibility: inputList
   };
 
   const createMenu = async () => {
@@ -300,7 +304,16 @@ const SettingDrawer = (props) => {
                 </FormControl>
 
                 <FormControl mt={3}>
-                  <FormLabel fontWeight="400">Display the section</FormLabel>
+                  {/* <FormLabel fontWeight="400">Display the section</FormLabel> */}
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      defaultChecked={active}
+                      onChange={(e) => setActive(e.target.checked)}
+                    />
+                    Display the Menu
+                  </label>
 
                   {/* <SwitchComponent
                     id="switch1"
@@ -387,92 +400,13 @@ const SettingDrawer = (props) => {
 
               {/* Availability */}
 
-              {/* 
+
               <TabPanel>
                 <RadioGroup onChange={setValue} value={value}>
-                  <Radio value="1" id="always">
-                    Always
-                  </Radio>
-                  <Text ml={6} fontSize="13px" color="gray">
-                    The menu will always be shown
-                  </Text>
-
-                  <Radio value="2" mt={3}>
-                    Specific Dates & Times
-                  </Radio>
-
-                  <Text ml={6} fontSize="13px" color="gray" mt={3}>
-                    The menu will be visible between specific dates.
-                  </Text>
-                  <Text ml={6} fontSize="14px" color="gray">
-                    Current Time : {day} {date_time}
-                  </Text>
-
-                  {value == 2 ? (
-                    <Box>
-                      <Row>
-                        <Col>
-                          <FormControl mt={5}>
-                            <FormLabel fontWeight="400">Start Date</FormLabel>
-                            <input
-                              id="date"
-                              type="date"
-                              onChange={(e) => setStartDate(e.target.value)}
-                            ></input>
-                          </FormControl>
-                        </Col>
-                        <Col>
-                          <FormControl mt={5}>
-                            <FormLabel fontWeight="400">End Date</FormLabel>
-                            <input
-                              id="date-input"
-                              type="date"
-                              onChange={(e) => setEndDate(e.target.value)}
-                            ></input>
-                          </FormControl>
-                        </Col>
-                      </Row>
-
-                      <Box mt={3}>
-                        <Form.Check
-                          type="checkbox"
-                          label="All Day"
-                          onChange={(e) => handleChange(e)}
-                          checked={formChecked}
-                        />
-                      </Box>
-                      {formChecked == false ? (
-                        <Box>
-                          <Row>
-                            <Col>
-                              <FormControl mt={5}>
-                                <FormLabel fontWeight="400">
-                                  Start Time
-                                </FormLabel>
-                                <input
-                                  type="time"
-                                  onChange={(e) => setStartTime(e.target.value)}
-                                ></input>
-                              </FormControl>
-                            </Col>
-                            <Col>
-                              <FormControl mt={5}>
-                                <FormLabel fontWeight="400">End Time</FormLabel>
-                                <input
-                                  type="time"
-                                  onChange={(e) => setEndTime(e.target.value)}
-                                ></input>
-                              </FormControl>
-                            </Col>
-                          </Row>
-                        </Box>
-                      ) : null}
-                    </Box>
-                  ) : null}
 
                   <Box>
-                    <Radio value="3">Availability</Radio>
-                    {value == 3 ? (
+                    <Radio value="1">Availability</Radio>
+                    {value == 1 ? (
                       <Box>
                         {inputList.map((y, i) => {
                           return (
@@ -538,12 +472,12 @@ const SettingDrawer = (props) => {
                       </Box>
                     ) : null}
 
-                    <div style={{ marginTop: 20 }}>
+                    {/* <div style={{ marginTop: 20 }}>
                       {JSON.stringify(inputList)}
-                    </div>
+                    </div> */}
                   </Box>
                 </RadioGroup>
-              </TabPanel> */}
+              </TabPanel>
 
               {/* Availability */}
             </TabPanels>
