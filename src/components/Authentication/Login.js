@@ -38,7 +38,7 @@ const Login = () => {
             alert(`${res.data.message}`);
             setEmail('')
             setPassword('')
-            localStorage.setItem("token", JSON.stringify(res.data.token));
+            localStorage.setItem("token", res.data.token);
             navigate({
               pathname: "/homeScreen",
             });

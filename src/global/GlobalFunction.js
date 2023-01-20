@@ -2,8 +2,20 @@ import axios from "axios";
 
 const apiFunctions = {
   GET_REQUEST: async function (url) {
+    const token = localStorage.getItem('token');
+    let config = null;
+    if (token !== null && token !== undefined) {
+      config = {
+        headers: {
+          "Content-type": "application/json",
+          // "Content-type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+    }
+
     const data = await axios
-      .get(url)
+      .get(url, config)
       .then(function (response) {
         return response;
       })
@@ -15,8 +27,19 @@ const apiFunctions = {
   },
 
   GET_REQUEST_BY_ID: async function (url) {
+    const token = localStorage.getItem('token');
+    let config = null;
+    if (token !== null && token !== undefined) {
+      config = {
+        headers: {
+          "Content-type": "application/json",
+          // "Content-type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+    }
     const data = await axios
-      .get(url)
+      .get(url, config)
       .then(function (response) {
         return response;
       })
@@ -35,8 +58,8 @@ const apiFunctions = {
     if (token !== null && token !== undefined) {
       config = {
         headers: {
-          // "Content-type": "application/json",
-          "Content-type": "application/x-www-form-urlencoded",
+          "Content-type": "application/json",
+          // "Content-type": "application/x-www-form-urlencoded",
           Authorization: `Bearer ${token}`,
         },
       };
@@ -58,12 +81,17 @@ const apiFunctions = {
   },
 
   DELETE_REQUEST: async function (url) {
-    let config = {
-      headers: {
-        "Content-type": "application/json",
-
-      },
-    };
+    const token = localStorage.getItem('token');
+    let config = null;
+    if (token !== null && token !== undefined) {
+      config = {
+        headers: {
+          "Content-type": "application/json",
+          // "Content-type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+    }
     const data = await axios
       .delete(url, config)
       .then((res) => {
@@ -80,13 +108,17 @@ const apiFunctions = {
   },
 
   PUT_REQUEST: async function (url, formData) {
-
-    let config = {
-      headers: {
-        "Content-type": "application/json",
-
-      },
-    };
+    const token = localStorage.getItem('token');
+    let config = null;
+    if (token !== null && token !== undefined) {
+      config = {
+        headers: {
+          "Content-type": "application/json",
+          // "Content-type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+    }
     const data = await axios
       .put(url, formData, config)
       .then((res) => {
