@@ -22,4 +22,10 @@ export const API_URL = {
   DELETE_SECTION_BY_ID: "menu/V1/deleteSection/",
 
   Get_All_Item_By_SectionId: "menu/V1/getAllItemBySectionId/",
+
+  //User
+
+  CREATE_USER: "user/V1/createUser",
+
+  LOGIN: "user/V1/login/",
 };
