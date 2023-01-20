@@ -60,10 +60,23 @@ const DisplayCard = () => {
   function myfun2(id) {
     setIndivisualId(id);
   }
-
-  function switchStatus(index) {
-    response[index].menuStatus = !response[index].menuStatus;
-    setResponse([...response]);
+  const switchStatus = async (id, x, y) => {
+    let menuData = {
+      menuStatus: !(x.menuStatus),
+    };
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_MENU_BY_ID + id, menuData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+    // response[index].menuStatus = !response[index].menuStatus;
+    // setResponse([...response]);
   }
 
   const handleRemove = async (id) => {
@@ -173,7 +186,7 @@ const DisplayCard = () => {
                               <HStack mt={2} gap={4} ml="38%">
                                 <BootstrapSwitchButton
                                   checked={x.menuStatus}
-                                  onChange={() => switchStatus(index)}
+                                  onChange={() => switchStatus(x._id, x)}
                                   data-size="xs"
                                 />
 
