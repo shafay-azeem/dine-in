@@ -34,4 +34,18 @@ export const API_URL = {
   CREATE_USER: "user/V1/createUser",
 
   LOGIN: "user/V1/login/",
+
+  //Modifier
+  CREATE_MODIFIER: "modifier/V1/createModifier",
+
+  GET_ALL_MODIFIER: "modifier/V1/getAllModifier",
+
+  GET_MODIFIER_BY_ID: "modifier/V1/getSingleModifer/",
+
+  DELETE_MODIFIER_BY_ID: "modifier/V1/deleteModifierById/",
+
+  UPDATE_MODIFIER: "modifier/V1/updateModifier/",
+
+  //FeedBack
+  CREATE_MODIFIER: "feedback/V1/createfeedback",
 };

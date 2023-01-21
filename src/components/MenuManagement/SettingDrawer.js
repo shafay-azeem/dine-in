@@ -117,7 +117,6 @@ const SettingDrawer = (props) => {
     setFormChecked(e.target.checked);
   };
 
-
   // if (!props?.index) {
 
   // }
@@ -137,7 +136,7 @@ const SettingDrawer = (props) => {
       menuDescription: description,
       menuNote: note,
       menuStatus: active,
-      availability: inputList
+      availability: inputList,
     };
 
     await apiFunctions
@@ -219,9 +218,8 @@ const SettingDrawer = (props) => {
     menuDescription: description,
     menuNote: note,
     menuStatus: active,
-    availaibility: inputList
+    availaibility: inputList,
   };
-
 
   const createMenu = async () => {
     await apiFunctions
@@ -241,10 +239,8 @@ const SettingDrawer = (props) => {
     if (props?.index) {
       getSingleMenuByID();
     }
-    return
-
+    return;
   }, []);
-
 
   async function getSingleMenuByID() {
     let getSingleMenu = await apiFunctions.GET_REQUEST_BY_ID(
@@ -256,14 +252,12 @@ const SettingDrawer = (props) => {
     setName(setVar.menuName);
     setDescription(setVar.menuDescription);
     setNote(setVar.menuNote);
-    setActive(setVar.menuStatus)
-    setInputList(setVar.availaibility)
+    setActive(setVar.menuStatus);
+    setInputList(setVar.availaibility);
 
-    console.log(setVar.menuStatus, 'setVar.menuStatus')
-    console.log(active, 'menuStatus')
-    console.log(name, 'bdnme')
-
-
+    console.log(setVar.menuStatus, "setVar.menuStatus");
+    console.log(active, "menuStatus");
+    console.log(name, "bdnme");
   }
 
   return (
@@ -329,7 +323,6 @@ const SettingDrawer = (props) => {
                     />
                     Display the Menu
                   </label>
-
                 </FormControl>
               </TabPanel>
               {/* Overview */}
@@ -410,13 +403,8 @@ const SettingDrawer = (props) => {
 
               {/* Availability */}
 
-
               <TabPanel>
-
-
                 <Box>
-
-
                   <Box>
                     {inputList.map((y, i) => {
                       return (
@@ -481,12 +469,10 @@ const SettingDrawer = (props) => {
                     })}
                   </Box>
 
-
                   {/* <div style={{ marginTop: 20 }}>
                       {JSON.stringify(inputList)}
                     </div> */}
                 </Box>
-
               </TabPanel>
 
               {/* Availability */}

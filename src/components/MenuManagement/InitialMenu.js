@@ -82,6 +82,7 @@ const InitialMenu = () => {
               </Grid>
               <DisplayCard />
             </TabPanel>
+
             <TabPanel backgroundColor="white" textAlign="right">
               <CustomButton
                 click={modifierOnOpen}

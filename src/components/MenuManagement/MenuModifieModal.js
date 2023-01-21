@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -10,26 +10,22 @@ import {
   Button,
   Input,
   Center,
-  Text,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   HStack,
-  Switch,
   IconButton,
   Box,
 } from "@chakra-ui/react";
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
-import CustomButton from "../../CustomElements/CustomButton";
-import { BsPlusLg } from "react-icons/bs";
 import { MenuState } from "../../context/MenuContext";
+import { API_URL, BASE_URL } from "../../global/Constant";
+import apiFunctions from "../../global/GlobalFunction";
 
 const MenuModifieModal = (props) => {
-  const [input, setInput] = useState("");
-  const { modifier, setModifier } = MenuState();
-  const [groupName, setGroupName] = useState();
+  let modifier_id = props.modifier_id;
+  // console.log(modifier_id);
 
+  const [groupName, setGroupName] = useState();
   const [inputList, setInputList] = useState([
     { Name: "", Price: "", Calorie: "" },
   ]);
@@ -56,17 +52,66 @@ const MenuModifieModal = (props) => {
     modifiers: inputList,
   };
 
-  const modifierCreate = () => {
-    modifier.push(modifierData);
-    alert("modifier Form Created Successfully");
+  const modifierCreate = async () => {
+    await apiFunctions
+      .POST_REQUEST(BASE_URL + API_URL.CREATE_MODIFIER, modifierData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`${res.data.message}`);
+
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+    // modifier.push(modifierData);
+    // alert("modifier Form Created Successfully");
   };
+
+  const updatedModifier = async (id) => {
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_MODIFIER + id, modifierData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+  };
+
+  useEffect(() => {
+    if (modifier_id) {
+      getModifierByID();
+    }
+    return;
+  }, []);
+
+  async function getModifierByID() {
+    let getModifier = await apiFunctions.GET_REQUEST_BY_ID(
+      BASE_URL + API_URL.GET_MODIFIER_BY_ID + modifier_id
+    );
+
+    let setVar = getModifier.data.modifier;
+
+    setGroupName(setVar.Groupname);
+    setInputList(setVar.modifiers);
+  }
 
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="4xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add a Modifier Group</ModalHeader>
+          {props?.modifier_id ? (
+            <ModalHeader>Edit {groupName}</ModalHeader>
+          ) : (
+            <ModalHeader>Add a Modifier Group</ModalHeader>
+          )}
+
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Center>
@@ -78,6 +123,7 @@ const MenuModifieModal = (props) => {
                   size="sm"
                   borderRadius="8px"
                   onChange={(e) => setGroupName(e.target.value)}
+                  value={groupName}
                 />
               </FormControl>
             </Center>
@@ -143,20 +189,25 @@ const MenuModifieModal = (props) => {
             })}
           </ModalBody>
           <ModalFooter>
-            <CustomButton
-              btnText={"Save"}
-              mr={3}
-              size={"sm"}
-              click={modifierCreate}
-            />
-
-            <CustomButton
-              click={props.onClose}
-              btnText={"Cancel"}
-              variant={"outline"}
-              mr={3}
-              size={"sm"}
-            />
+            {props?.modifier_id ? (
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  updatedModifier(modifier_id);
+                }}
+              >
+                Update
+              </Button>
+            ) : (
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  modifierCreate();
+                }}
+              >
+                Save
+              </Button>
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>
