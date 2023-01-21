@@ -50,8 +50,8 @@ const SectionCard = (props) => {
   const [index, setIndex] = useState();
   const [count, setCount] = useState();
   const [search, setSearch] = useState("");
-
   const [checked, setChecked] = useState();
+  const [sectionIndex, setSectionIndex] = useState();
 
   const {
     isOpen: isOpenSection,
@@ -130,6 +130,7 @@ const SectionCard = (props) => {
       sectionNote: x.sectionNote,
       sectionLabel: x.sectionLabel,
       sectionStatus: x.sectionStatus,
+      sectionImage: x.sectionImage
     };
 
     await apiFunctions
@@ -167,8 +168,10 @@ const SectionCard = (props) => {
     // );
   };
 
-  const getIndex = (id) => {
+  const getIndex = (id, index) => {
     setCount(id);
+    setSectionIndex(index)
+
   };
 
   const clearMessage = () => {
@@ -240,7 +243,7 @@ const SectionCard = (props) => {
                                   boxSize="43px"
                                   objectFit="cover"
                                   borderRadius={3}
-                                  src={x.image}
+                                  src={x.sectionImage}
                                 />
                                 {sectionList?.length == 0 ? (
                                   <Text>"NO DATA FOUND"</Text>
@@ -312,7 +315,7 @@ const SectionCard = (props) => {
                                         ></ItemDrawer>
                                       ) : null}
 
-                                      <Box onClick={() => getIndex(x._id)}>
+                                      <Box onClick={() => getIndex(x._id, index)}>
                                         <MenuItem
                                           icon={<AiFillEdit />}
                                           onClick={onOpenSection}
@@ -323,6 +326,7 @@ const SectionCard = (props) => {
 
                                       {isOpenSection ? (
                                         <SectionDrawer
+                                          new_index={sectionIndex}
                                           section_index={count}
                                           menu_index={menu_index}
                                           isOpen={isOpenSection}

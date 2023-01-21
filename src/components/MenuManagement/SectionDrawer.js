@@ -75,6 +75,8 @@ const SectionDrawer = (props) => {
   const [note, setNote] = useState();
   const [food, setFood] = useState(["New", "Signature"]);
   const [checked, setChecked] = useState();
+  const [image, setImage] = useState()
+  const [blobImage, setBlobImage] = useState()
 
   const [select, setSelect] = useState();
   const [conversion, setConversion] = useState([]);
@@ -102,16 +104,18 @@ const SectionDrawer = (props) => {
   // ]?.image
   // : response[props.menu_index].section[props?.section_index]?.image;
 
-  // let initialArrayFaizy = [...response[props.menu_index]?.section];
-  // let initalArrayShafay = response[props.menu_index]?.section;
-  // let initalArrayfaiz = initialArrayFaizy?.splice(props?.section_index, 1);
+  console.log(props?.new_index, "props?.section_index")
+  let initialArrayFaizy = [...sectionList];
+  let initalArrayShafay = sectionList
+  let initalArrayfaiz = initialArrayFaizy?.splice(props?.new_index, 1);
 
-  // const initalArrayDecider = Number.isInteger(props?.section_index)
-  //   ? initialArrayFaizy
-  //   : initalArrayShafay;
-  // const [arrayDecider, setArrayDecider] = useState(initalArrayDecider);
+  const initalArrayDecider = props?.section_index
+    ? initialArrayFaizy
+    : initalArrayShafay;
+  const [arrayDecider, setArrayDecider] = useState(initalArrayDecider);
+  console.log(arrayDecider, 'arrayDecider')
 
-  const initalArrayDecider = sectionId;
+  // const initalArrayDecider = sectionId;
 
   // const [image, setImage] = useState(imageState);
   // const [image, setImage] = useState();
@@ -177,10 +181,11 @@ const SectionDrawer = (props) => {
   //     setValueTrue(false);
   //   }
   // }
-  // const pictureCapture = (event) => {
-  //   let value = URL.createObjectURL(event.target.files[0]);
-  //   setImage(value);
-  // };
+  const pictureCapture = (event) => {
+    let value = URL.createObjectURL(event.target.files[0]);
+    setImage(value);
+    console.log(value)
+  };
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -212,24 +217,62 @@ const SectionDrawer = (props) => {
     sectionDescription: description,
     sectionNote: note,
     sectionLabel: conversion,
+    sectionImage: image,
     sectionStatus: checked,
   };
 
   const [modalShow, setModalShow] = useState(false);
 
   const testfunc = async () => {
-    await apiFunctions
-      .POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + menu_index, sectionData)
-      .then((res) => {
-        if (res.data.success == true) {
-          console.log(res.data, "res.data");
-          alert(`Section Created`);
+    console.log(sectionData)
+
+    if (checkedItems && val) {
+      try {
+        const postRes = await apiFunctions.POST_REQUEST(
+          BASE_URL + API_URL.CREATE_SUBSECTION + val,
+          sectionData
+        );
+        if (postRes.data.success == true) {
+          alert(`SUB SECTION CREATED SUCCESSFULLY`);
+          setSubSectionList(postRes);
+          console.log(subSectionList, "setSubSectionList");
+
+        } else {
+          throw new Error("Error creating sub-section");
+        }
+      } catch (err) {
+        alert(`There Some Error: ${err.message}`);
+        return false;
+      }
+    } else {
+      try {
+        const putRes = await apiFunctions.POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + menu_index, sectionData)
+        if (putRes.data.success == true) {
+          alert(`Section Created Successfully`);
           return true;
         } else {
-          alert(`There Some Error`);
-          return false;
+          throw new Error("Error creating section");
         }
-      });
+      } catch (err) {
+        alert(`There Some Error: ${err.message}`);
+        return false;
+      }
+    }
+
+
+
+    // await apiFunctions
+    //   .POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + menu_index, sectionData)
+    //   .then((res) => {
+    //     if (res.data.success == true) {
+    //       console.log(res.data, "res.data");
+    //       alert(`Section Created`);
+    //       return true;
+    //     } else {
+    //       alert(`There Some Error`);
+    //       return false;
+    //     }
+    //   });
 
     // if (checkedItems === true) {
     //   let initialArray = [...response[props.menu_index].section];
@@ -278,11 +321,16 @@ const SectionDrawer = (props) => {
     setDescription(setRes.sectionDescription);
     setNote(setRes.sectionNote);
     setChecked(setRes.sectionStatus);
+    setImage(setRes.sectionImage)
     for (let i in setRes.sectionLabel) {
       propertyNames = Object.keys(setRes.sectionLabel[i]);
     }
-    propertyNames.pop();
+    if (propertyNames) {
+      propertyNames.pop();
+    }
+
     setSelect(propertyNames);
+    console.log(setRes.sectionImage, 'setRes.sectionImage')
   }
 
   const updatedSection = async (id) => {
@@ -425,12 +473,12 @@ const SectionDrawer = (props) => {
     setConversion([jsonObj]);
   };
 
-  const handleAlphabetically = (event) => {};
+  const handleAlphabetically = (event) => { };
 
-  // function deleteimg() {
-  //   setImage(null);
-  //   document.getElementById("img").value = "";
-  // }
+  function deleteimg() {
+    setImage(null);
+    document.getElementById("img").value = "";
+  }
   return (
     <>
       <Drawer
@@ -489,6 +537,50 @@ const SectionDrawer = (props) => {
                     />
                   </FormControl>
 
+                  <FormControl mt={3}>
+                    <FormLabel fontWeight="400">Upload Your Image</FormLabel>
+                    <Input
+                      size="sm"
+                      type="file"
+                      accept=".jpg,.png"
+                      onChange={pictureCapture}
+                      id="img"
+                    />
+                    {image && (
+                      <div>
+                        <img
+                          className="preview mt-4 mx-auto"
+                          src={image}
+                          alt=""
+                          width="200px"
+                          height="200px"
+                          onClick={ModalOnOpen}
+                        />
+
+                        <IconButton
+                          onClick={deleteimg}
+                          variant="outline"
+                          colorScheme="teal"
+                          icon={<BsFillTrashFill />}
+                        />
+                      </div>
+                    )}
+                    <Modal isOpen={ModalOpen} onClose={ModalOnClose}>
+                      <ModalOverlay />
+                      <ModalContent>
+                        <ModalCloseButton />
+
+                        <ModalBody>
+                          <Center>
+                            <div>
+                              <img className="preview p-5" src={image} alt="" />
+                            </div>
+                          </Center>
+                        </ModalBody>
+                      </ModalContent>
+                    </Modal>
+
+                  </FormControl>
                   {/* <FormControl mt={3}>
                     <FormLabel fontWeight="400">Upload Your Image</FormLabel>
                     <Input
@@ -552,7 +644,7 @@ const SectionDrawer = (props) => {
                     Display The Section
                   </label>
 
-                  <label>
+                  {/* <label>
                     <input
                       type="checkbox"
                       checked={checkedItems}
@@ -568,17 +660,19 @@ const SectionDrawer = (props) => {
                     {sectionList?.map((x, index) => {
                       return <option value={x._id}>{x.sectionName}</option>;
                     })}
-                  </Select>
+                  </Select> */}
 
-                  {/* {arrayDecider.length > 0 &&
+                  {arrayDecider.length > 0 &&
                     props?.subsection_index == undefined ? (
                     <FormControl>
-                      <Checkbox
-                        isChecked={checkedItems}
-                        onChange={(e) => setCheckedItems(e.target.checked)}
-                      >
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={checkedItems}
+                          onChange={(e) => setCheckedItems(e.target.checked)}
+                        />
                         Use as a sub-section
-                      </Checkbox>
+                      </label>
 
                       {checkedItems ? (
                         <Select
@@ -587,9 +681,7 @@ const SectionDrawer = (props) => {
                         >
                           {arrayDecider?.map((x, index) => {
                             return (
-                              <option value={x.sectionName}>
-                                {x.sectionName}
-                              </option>
+                              <option value={x._id}>{x.sectionName}</option>
                             );
                           })}
                         </Select>
@@ -597,26 +689,17 @@ const SectionDrawer = (props) => {
                         <Select placeholder="Select option">
                           {arrayDecider?.map((x, index) => {
                             return (
-                              <option value={x.sectionName}>
-                                {x.sectionName}
-                              </option>
+                              <option value={x._id}>{x.sectionName}</option>
                             );
                           })}
                         </Select>
                       )}
                     </FormControl>
                   ) : (
-                    <FormControl mt={3}>
-                      <Checkbox isDisabled>Use as a sub-section</Checkbox>
-                      <Input
-                        isDisabled
-                        type="text"
-                        mt={2}
-                        bg="grey.300"
-                        placeholder="Type to search sections"
-                      ></Input>
-                    </FormControl>
+                    null
                   )}
+
+
 
                   {/* {arrayDecider.length > 0 &&
                     props?.subsection_index == undefined ? (
