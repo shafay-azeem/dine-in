@@ -51,12 +51,16 @@ const SectionDrawer = (props) => {
   let sectionId = props?.section_index;
   // let subsection_index = props?.subsection_index;
 
+  const { subSectionList, setSubSectionList } = MenuState();
+
   const [checkedItems, setCheckedItems] = useState(false);
 
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
 
-  const { response, setResponse } = MenuState();
+  const { sectionList, setSectionList } = MenuState();
+
+  // const [subSectionList, setSubSectionList] = useState();
   const inputElement = useRef();
 
   // const initialState = Number.isInteger(props?.subsection_index);
@@ -72,7 +76,8 @@ const SectionDrawer = (props) => {
   const [food, setFood] = useState(["New", "Signature"]);
   const [checked, setChecked] = useState();
 
-  const [select, setSelect] = useState(food);
+  const [select, setSelect] = useState();
+  const [conversion, setConversion] = useState([]);
 
   // const descriptionState = Number.isInteger(props?.subsection_index);
   // ? response[props.menu_index].section[props?.section_index]?.subSection[
@@ -105,6 +110,8 @@ const SectionDrawer = (props) => {
   //   ? initialArrayFaizy
   //   : initalArrayShafay;
   // const [arrayDecider, setArrayDecider] = useState(initalArrayDecider);
+
+  const initalArrayDecider = sectionId;
 
   // const [image, setImage] = useState(imageState);
   // const [image, setImage] = useState();
@@ -151,7 +158,9 @@ const SectionDrawer = (props) => {
   // const [checked, setChecked] = useState(TOGGLE);
 
   const [alphabetical, setalphabetical] = useState(false);
+
   const [val, setVal] = useState();
+  // console.log(val, "val");
 
   const [mId, setMId] = useState(menu_index);
 
@@ -189,11 +198,20 @@ const SectionDrawer = (props) => {
   //   subSection: [],
   // };
 
+  async function getAllSectionByMenuId() {
+    let getSection = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.GET_ALL_SECTION_BY_MENU_ID + menu_index
+    );
+
+    let res = getSection.data.section;
+    setSectionList(res);
+  }
+
   let sectionData = {
     sectionName: name,
     sectionDescription: description,
     sectionNote: note,
-    sectionLabel: [],
+    sectionLabel: conversion,
     sectionStatus: checked,
   };
 
@@ -253,26 +271,66 @@ const SectionDrawer = (props) => {
       BASE_URL + API_URL.GET_SINGLE_SECTION_BY_ID + sectionId
     );
     let setRes = getSingleSection.data.section;
+    let propertyNames;
     console.log(setRes, "single sec");
 
     setName(setRes.sectionName);
     setDescription(setRes.sectionDescription);
     setNote(setRes.sectionNote);
     setChecked(setRes.sectionStatus);
+    for (let i in setRes.sectionLabel) {
+      propertyNames = Object.keys(setRes.sectionLabel[i]);
+    }
+    propertyNames.pop();
+    setSelect(propertyNames);
   }
 
   const updatedSection = async (id) => {
-    await apiFunctions
-      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
-      .then((res) => {
-        if (res.data.success == true) {
+    console.log(val);
+    if (checkedItems && val) {
+      try {
+        const postRes = await apiFunctions.POST_REQUEST(
+          BASE_URL + API_URL.CREATE_SUBSECTION + val,
+          sectionData
+        );
+        if (postRes.data.success == true) {
+          alert(`SUB SECTION CREATED SUCCESSFULLY`);
+          setSubSectionList(postRes);
+          console.log(subSectionList, "setSubSectionList");
+          const deleteRes = await apiFunctions.DELETE_REQUEST(
+            BASE_URL + API_URL.DELETE_SECTION_BY_ID + id
+          );
+          if (deleteRes.data.success == true) {
+            console.log(deleteRes.data.success);
+            alert(`${deleteRes.data.message}`);
+            return true;
+          } else {
+            throw new Error("Error deleting section");
+          }
+        } else {
+          throw new Error("Error creating sub-section");
+        }
+      } catch (err) {
+        alert(`There Some Error: ${err.message}`);
+        return false;
+      }
+    } else {
+      try {
+        const putRes = await apiFunctions.PUT_REQUEST(
+          BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id,
+          sectionData
+        );
+        if (putRes.data.success == true) {
           alert(`Section Updated Successfully`);
           return true;
         } else {
-          alert(`There Some Error`);
-          return false;
+          throw new Error("Error updating section");
         }
-      });
+      } catch (err) {
+        alert(`There Some Error: ${err.message}`);
+        return false;
+      }
+    }
   };
 
   // const updatedSection = (x, y) => {
@@ -345,12 +403,26 @@ const SectionDrawer = (props) => {
   //   }
   // };
 
+  let jsonObj = {};
+
   const removalMultiSelect = (event) => {
     setSelect(event);
+
+    for (let i in event) {
+      jsonObj[event[i]] = event[i];
+    }
+    setConversion([]);
+    setConversion([jsonObj]);
   };
 
   const selectionMultiSelect = (event) => {
     setSelect(event);
+
+    for (let i in event) {
+      jsonObj[event[i]] = event[i];
+    }
+    setConversion([]);
+    setConversion([jsonObj]);
   };
 
   const handleAlphabetically = (event) => {};
@@ -479,6 +551,72 @@ const SectionDrawer = (props) => {
                     />
                     Display The Section
                   </label>
+
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={checkedItems}
+                      onChange={(e) => setCheckedItems(e.target.checked)}
+                    />
+                    Use as a sub-section
+                  </label>
+
+                  <Select
+                    placeholder="Select option"
+                    onChange={(e) => setVal(e.target.value)}
+                  >
+                    {sectionList?.map((x, index) => {
+                      return <option value={x._id}>{x.sectionName}</option>;
+                    })}
+                  </Select>
+
+                  {/* {arrayDecider.length > 0 &&
+                    props?.subsection_index == undefined ? (
+                    <FormControl>
+                      <Checkbox
+                        isChecked={checkedItems}
+                        onChange={(e) => setCheckedItems(e.target.checked)}
+                      >
+                        Use as a sub-section
+                      </Checkbox>
+
+                      {checkedItems ? (
+                        <Select
+                          placeholder="Select option"
+                          onChange={(e) => setVal(e.target.value)}
+                        >
+                          {arrayDecider?.map((x, index) => {
+                            return (
+                              <option value={x.sectionName}>
+                                {x.sectionName}
+                              </option>
+                            );
+                          })}
+                        </Select>
+                      ) : (
+                        <Select placeholder="Select option">
+                          {arrayDecider?.map((x, index) => {
+                            return (
+                              <option value={x.sectionName}>
+                                {x.sectionName}
+                              </option>
+                            );
+                          })}
+                        </Select>
+                      )}
+                    </FormControl>
+                  ) : (
+                    <FormControl mt={3}>
+                      <Checkbox isDisabled>Use as a sub-section</Checkbox>
+                      <Input
+                        isDisabled
+                        type="text"
+                        mt={2}
+                        bg="grey.300"
+                        placeholder="Type to search sections"
+                      ></Input>
+                    </FormControl>
+                  )}
 
                   {/* {arrayDecider.length > 0 &&
                     props?.subsection_index == undefined ? (

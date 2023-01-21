@@ -30,16 +30,24 @@ import ItemDrawer from "../../MenuManagement/ItemDrawer";
 import SectionDrawer from "../../MenuManagement/SectionDrawer";
 import ItemCard from "./ItemCard";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import apiFunctions from "../../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../../global/Constant";
+import { useEffect } from "react";
 
 const SubSectionCard = (props) => {
-  const { response, setResponse } = MenuState();
+  // const { subSectionList, setSubSectionList } = MenuState();
+
+  const [subSectionList, setSubSectionList] = useState();
+
   let menu_index = props.menu_index;
-  let section_index = props.section_index;
+  let section_index = props?.section_index;
 
-  let subSecRes =
-    response[props?.menu_index]?.section[props?.section_index]?.subSection;
+  console.log(section_index, "section_index");
 
-  const [subSectionList, setSubSectionList] = useState(subSecRes);
+  // let subSecRes =
+  //   response[props?.menu_index]?.section[props?.section_index]?.subSection;
+
+  // const [subSectionList, setSubSectionList] = useState(subSecRes);
   const [count, setCount] = useState();
 
   const {
@@ -55,10 +63,24 @@ const SubSectionCard = (props) => {
   } = useDisclosure();
   const [status, setSatus] = useState();
 
+  useEffect(() => {
+    getAllSubSectionBySectionId();
+  }, []);
+
+  async function getAllSubSectionBySectionId() {
+    let getSubSection = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.Get_All_SUBSECTION_BY_SECTIONID + section_index
+    );
+
+    let res = getSubSection.data.subSection;
+    console.log(res);
+    setSubSectionList(res);
+  }
+
   function switchStatus(index) {
-    subSecRes[index].sectionStatus = !subSecRes[index].sectionStatus;
-    setResponse([...response]);
-    setSubSectionList(subSecRes);
+    // subSecRes[index].sectionStatus = !subSecRes[index].sectionStatus;
+    // setResponse([...response]);
+    // setSubSectionList(subSecRes);
   }
 
   const getIndex = (index) => {
@@ -66,35 +88,33 @@ const SubSectionCard = (props) => {
   };
 
   const duplicate = (x) => {
-    function getTimestampInSeconds() {
-      return Math.floor(Date.now() / 1000);
-    }
-    let sectionData = {
-      sectionId: getTimestampInSeconds(),
-      sectionName: x.sectionName,
-      sectionDescription: x.sectionDescription,
-      sectionStatus: x.sectionStatus,
-      image: x.image,
-      item: [],
-      subSection: [],
-    };
-
-    setResponse([...response]);
+    // function getTimestampInSeconds() {
+    //   return Math.floor(Date.now() / 1000);
+    // }
+    // let sectionData = {
+    //   sectionId: getTimestampInSeconds(),
+    //   sectionName: x.sectionName,
+    //   sectionDescription: x.sectionDescription,
+    //   sectionStatus: x.sectionStatus,
+    //   image: x.image,
+    //   item: [],
+    //   subSection: [],
+    // };
+    // setResponse([...response]);
   };
 
   const handleRemove = (index) => {
-    subSecRes.splice(index, 1);
-    setResponse([...response]);
-    setSubSectionList(subSecRes);
+    // subSecRes.splice(index, 1);
+    // setResponse([...response]);
+    // setSubSectionList(subSecRes);
   };
 
   function sectionClick(index) {
-    setSatus(index);
-    response[props.menu_index].section[section_index].subSection[index].active =
-      !response[props.menu_index].section[section_index].subSection[index]
-        .active;
-
-    setResponse([...response]);
+    // setSatus(index);
+    // response[props.menu_index].section[section_index].subSection[index].active =
+    //   !response[props.menu_index].section[section_index].subSection[index]
+    //     .active;
+    // setResponse([...response]);
   }
 
   return (
@@ -106,12 +126,12 @@ const SubSectionCard = (props) => {
               <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                 <GridItem colSpan={2} h="10">
                   <HStack>
-                    <Image
+                    {/* <Image
                       boxSize="43px"
                       objectFit="cover"
                       borderRadius={3}
                       src={x.image}
-                    />
+                    /> */}
 
                     <Text pl={2}>
                       {x.sectionName}

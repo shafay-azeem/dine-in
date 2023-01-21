@@ -374,12 +374,14 @@ const SectionCard = (props) => {
                         </Box>
 
                         <Box ml="55px">
-                          {x.active ? (
+                          <SubSectionCard section_index={x._id} />
+
+                          {/* {x.active ? (
                             <SubSectionCard
                               menu_index={menu_index}
                               section_index={index}
                             />
-                          ) : null}
+                          ) : null} */}
                         </Box>
                       </Box>
                     )}

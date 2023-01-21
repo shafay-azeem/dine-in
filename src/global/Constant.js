@@ -23,6 +23,12 @@ export const API_URL = {
 
   Get_All_Item_By_SectionId: "menu/V1/getAllItemBySectionId/",
 
+  CREATE_SUBSECTION: "menu/V1/createSubSection/",
+
+  Get_All_SUBSECTION_BY_SECTIONID: "menu/V1/getAllSubSectionBySectionId/",
+
+  DELETE_SUBSECTION_BY_ID: "menu/V1/deleteSubSection/",
+
   //User
 
   CREATE_USER: "user/V1/createUser",

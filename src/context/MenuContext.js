@@ -18,6 +18,7 @@ export const MenuProvider = ({ children }) => {
   const [notification, setNotification] = useState();
 
   const [modifier, setModifier] = useState([]);
+  const [subSectionList, setSubSectionList] = useState([]);
 
   return (
     <MenuContext.Provider
@@ -37,7 +38,9 @@ export const MenuProvider = ({ children }) => {
         responseSignleMenu,
         setResponseSignleMenu,
         sectionList,
-        setSectionList
+        setSectionList,
+        subSectionList,
+        setSubSectionList,
       }}
     >
       {children}
