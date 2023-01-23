@@ -12,6 +12,7 @@ import {
   MenuList,
   Portal,
   SimpleGrid,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 
@@ -24,6 +25,9 @@ import SectionCard from "../Partials/MenuCards/SectionCard";
 import SectionDrawer from "./SectionDrawer";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import apiFunctions from "../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../global/Constant";
+import { useEffect } from "react";
 
 const CreateMenu = () => {
   const [searchparams] = useSearchParams();
@@ -45,6 +49,19 @@ const CreateMenu = () => {
     onOpen: onOpenSection,
     onClose: onCloseSection,
   } = useDisclosure();
+
+  useEffect(() => {
+    getAllSectionByMenuId();
+  }, []);
+
+  async function getAllSectionByMenuId() {
+    let getSection = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.GET_ALL_SECTION_BY_MENU_ID + menu_index
+    );
+
+    let res = getSection.data.section;
+    setFilter(res);
+  }
 
   const handleDrop = (droppedItem) => {
     // if (!droppedItem.destination) return;
@@ -118,11 +135,11 @@ const CreateMenu = () => {
                     {filter?.map((x, index) => {
                       return (
                         <Draggable
-                        // key={x.sectionId}
-                        // draggableId={x.sectionName}
-                        // index={index}
+                          key={x._id}
+                          draggableId={x.sectionName}
+                          index={index}
                         >
-                          {/* {(provided) => (
+                          {(provided) => (
                             <Box
                               pl={9}
                               mt={3}
@@ -161,7 +178,7 @@ const CreateMenu = () => {
                                 </Box>
                               )}
                             </Box>
-                          )} */}
+                          )}
                         </Draggable>
                       );
                     })}

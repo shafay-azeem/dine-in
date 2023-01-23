@@ -21,13 +21,30 @@ export const API_URL = {
 
   DELETE_SECTION_BY_ID: "menu/V1/deleteSection/",
 
-  Get_All_Item_By_SectionId: "menu/V1/getAllItemBySectionId/",
+  //Sub Section
 
   CREATE_SUBSECTION: "menu/V1/createSubSection/",
 
   Get_All_SUBSECTION_BY_SECTIONID: "menu/V1/getAllSubSectionBySectionId/",
 
+  Get_SUBSECTION_BY_ID: "menu/V1/getSingleSubSection/",
+
   DELETE_SUBSECTION_BY_ID: "menu/V1/deleteSubSection/",
+
+  UPDATE_SUBSECTION_BY_ID: "menu/V1/updateSubSection/",
+
+  Get_All_Item_By_SUBSECTIONID: "menu/V1/getAllItemBySubSectionId/",
+
+  //Item
+  Get_All_Item_By_SectionId: "menu/V1/getAllItemBySectionId/",
+
+  CREATE_ITEM: "menu/V1/createItem/",
+
+  UPDATE_ITEM_BY_ID: "menu/V1/updateItem/",
+
+  DELETE_ITEM_BY_ID: "menu/V1/deleteItem/",
+
+  GET_ITEM_BY_ID: "menu/V1/getSingleItem/",
 
   //User
 
@@ -47,5 +64,16 @@ export const API_URL = {
   UPDATE_MODIFIER: "modifier/V1/updateModifier/",
 
   //FeedBack
-  CREATE_MODIFIER: "feedback/V1/createfeedback",
+  CREATE_FEEDBACK_FORM: "feedback/V1/createfeedback",
+
+  GET_ALL_FEEDBACK_FORM: "feedback/V1/getallform",
+
+  DELETE_FEEDBACK_FORM_BY_ID: "feedback/V1/deleteform/",
+
+  //Questions
+  CREATE_FORM_QUESTIONS: "feedback/V1/createfeedbackquestion/",
+
+  GET_ALL_QUESTIONS_BY_FORMID: "feedback/V1/getallquestion/",
+
+  UPDATE_QUESTION_BY_FORM_ID: "feedback/V1/updateFormQuestion/",
 };

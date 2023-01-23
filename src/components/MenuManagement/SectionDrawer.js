@@ -49,7 +49,8 @@ const SectionDrawer = (props) => {
   let menu_index = props.menu_index;
 
   let sectionId = props?.section_index;
-  // let subsection_index = props?.subsection_index;
+  let subSecId = props?.subsection_index;
+  console.log(subSecId, "subSecId");
 
   const { subSectionList, setSubSectionList } = MenuState();
 
@@ -75,8 +76,8 @@ const SectionDrawer = (props) => {
   const [note, setNote] = useState();
   const [food, setFood] = useState(["New", "Signature"]);
   const [checked, setChecked] = useState();
-  const [image, setImage] = useState()
-  const [blobImage, setBlobImage] = useState()
+  const [image, setImage] = useState();
+  const [blobImage, setBlobImage] = useState();
 
   const [select, setSelect] = useState();
   const [conversion, setConversion] = useState([]);
@@ -104,16 +105,14 @@ const SectionDrawer = (props) => {
   // ]?.image
   // : response[props.menu_index].section[props?.section_index]?.image;
 
-  console.log(props?.new_index, "props?.section_index")
   let initialArrayFaizy = [...sectionList];
-  let initalArrayShafay = sectionList
+  let initalArrayShafay = sectionList;
   let initalArrayfaiz = initialArrayFaizy?.splice(props?.new_index, 1);
 
   const initalArrayDecider = props?.section_index
     ? initialArrayFaizy
     : initalArrayShafay;
   const [arrayDecider, setArrayDecider] = useState(initalArrayDecider);
-  console.log(arrayDecider, 'arrayDecider')
 
   // const initalArrayDecider = sectionId;
 
@@ -182,9 +181,24 @@ const SectionDrawer = (props) => {
   //   }
   // }
   const pictureCapture = (event) => {
-    let value = URL.createObjectURL(event.target.files[0]);
-    setImage(value);
-    console.log(value)
+    const formData = new FormData();
+    formData.append("file", event.target.files[0]);
+    formData.append("upload_preset", "dineInApp");
+
+    fetch("https://api.cloudinary.com/v1_1/dkq6jers7/image/upload", {
+      method: "post",
+      body: formData,
+    }).then((res) =>
+      res
+        .json()
+        .then((data) => {
+          // setPic(data.url.toString());
+          setImage(data.url.toString());
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    );
   };
 
   function getTimestampInSeconds() {
@@ -224,8 +238,6 @@ const SectionDrawer = (props) => {
   const [modalShow, setModalShow] = useState(false);
 
   const testfunc = async () => {
-    console.log(sectionData)
-
     if (checkedItems && val) {
       try {
         const postRes = await apiFunctions.POST_REQUEST(
@@ -236,7 +248,6 @@ const SectionDrawer = (props) => {
           alert(`SUB SECTION CREATED SUCCESSFULLY`);
           setSubSectionList(postRes);
           console.log(subSectionList, "setSubSectionList");
-
         } else {
           throw new Error("Error creating sub-section");
         }
@@ -246,7 +257,10 @@ const SectionDrawer = (props) => {
       }
     } else {
       try {
-        const putRes = await apiFunctions.POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + menu_index, sectionData)
+        const putRes = await apiFunctions.POST_REQUEST(
+          BASE_URL + API_URL.CREATE_SECTION + menu_index,
+          sectionData
+        );
         if (putRes.data.success == true) {
           alert(`Section Created Successfully`);
           return true;
@@ -258,8 +272,6 @@ const SectionDrawer = (props) => {
         return false;
       }
     }
-
-
 
     // await apiFunctions
     //   .POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + menu_index, sectionData)
@@ -315,13 +327,12 @@ const SectionDrawer = (props) => {
     );
     let setRes = getSingleSection.data.section;
     let propertyNames;
-    console.log(setRes, "single sec");
 
     setName(setRes.sectionName);
     setDescription(setRes.sectionDescription);
     setNote(setRes.sectionNote);
     setChecked(setRes.sectionStatus);
-    setImage(setRes.sectionImage)
+    setImage(setRes.sectionImage);
     for (let i in setRes.sectionLabel) {
       propertyNames = Object.keys(setRes.sectionLabel[i]);
     }
@@ -330,11 +341,9 @@ const SectionDrawer = (props) => {
     }
 
     setSelect(propertyNames);
-    console.log(setRes.sectionImage, 'setRes.sectionImage')
   }
 
   const updatedSection = async (id) => {
-    console.log(val);
     if (checkedItems && val) {
       try {
         const postRes = await apiFunctions.POST_REQUEST(
@@ -473,7 +482,7 @@ const SectionDrawer = (props) => {
     setConversion([jsonObj]);
   };
 
-  const handleAlphabetically = (event) => { };
+  const handleAlphabetically = (event) => {};
 
   function deleteimg() {
     setImage(null);
@@ -579,7 +588,6 @@ const SectionDrawer = (props) => {
                         </ModalBody>
                       </ModalContent>
                     </Modal>
-
                   </FormControl>
                   {/* <FormControl mt={3}>
                     <FormLabel fontWeight="400">Upload Your Image</FormLabel>
@@ -663,7 +671,7 @@ const SectionDrawer = (props) => {
                   </Select> */}
 
                   {arrayDecider.length > 0 &&
-                    props?.subsection_index == undefined ? (
+                  props?.subsection_index == undefined ? (
                     <FormControl>
                       <label>
                         <input
@@ -695,11 +703,7 @@ const SectionDrawer = (props) => {
                         </Select>
                       )}
                     </FormControl>
-                  ) : (
-                    null
-                  )}
-
-
+                  ) : null}
 
                   {/* {arrayDecider.length > 0 &&
                     props?.subsection_index == undefined ? (

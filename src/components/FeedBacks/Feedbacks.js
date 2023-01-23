@@ -32,17 +32,20 @@ import excelData from "../Orders/Export.json";
 import { MenuState } from "../../context/MenuContext";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
+import apiFunctions from "../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../global/Constant";
 
 const Feedbacks = () => {
   const navigate = useNavigate();
   const handle = useFullScreenHandle();
-  const { createfeedback, setCreateFeedback, activeForm, setActiveForm } =
-    MenuState();
+  // const { createfeedback, setCreateFeedback, activeForm, setActiveForm } =
+  //   MenuState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showform, setShowForm] = useState(false);
   const [showresult, setShowResult] = useState(true);
 
-  const [feedbackFormList, setFeedbackFormList] = useState(createfeedback);
+  const [feedbackFormList, setFeedbackFormList] = useState();
+  // const [feedbackFormList, setFeedbackFormList] = useState(createfeedback);
 
   const [count, setCount] = useState();
 
@@ -79,46 +82,74 @@ const Feedbacks = () => {
   }
 
   function reload() {
-    window.location.reload();
+    // window.location.reload();
     // return false;
   }
 
-  const handleRemove = (index) => {
-    if (window.confirm("Do you really want to leave?")) {
-      createfeedback.splice(index, 1);
-      setCreateFeedback([...createfeedback]);
-      setFeedbackFormList(createfeedback);
-    }
+  const handleRemove = async (id) => {
+    await apiFunctions
+      .DELETE_REQUEST(BASE_URL + API_URL.DELETE_FEEDBACK_FORM_BY_ID + id)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+    // if (window.confirm("Do you really want to leave?")) {
+    //   createfeedback.splice(index, 1);
+    //   setCreateFeedback([...createfeedback]);
+    //   setFeedbackFormList(createfeedback);
+    // }
   };
 
-  const getIndex = (index) => {
-    setCount(index);
-    setCreateFeedback([...createfeedback]);
-    setFeedbackFormList(createfeedback);
+  const getIndex = (id) => {
+    // console.log(id);
+    // setCount(id);
+    // console.log(count, "count");
+    // setCreateFeedback([...createfeedback]);
+    // setFeedbackFormList(createfeedback);
   };
 
-  const editForm = (index) => {
+  const editForm = (id) => {
     navigate({
       pathname: "/editform",
-      search: createSearchParams({ index }).toString(),
+      search: createSearchParams({ id }).toString(),
     });
   };
+
   const switchStatus = (index) => {
-    for (let i = 0; i < createfeedback.length; i++) {
-      if (index === i) {
-        createfeedback[index].active = !createfeedback[i].active;
-        setCreateFeedback([...createfeedback]);
-        if (createfeedback[index].active == false) {
-          setActiveForm("");
-        } else {
-          setActiveForm(index);
-        }
-      } else {
-        createfeedback[i].active = false;
-        setCreateFeedback([...createfeedback]);
-      }
-    }
+    // for (let i = 0; i < createfeedback.length; i++) {
+    //   if (index === i) {
+    //     createfeedback[index].active = !createfeedback[i].active;
+    //     setCreateFeedback([...createfeedback]);
+    //     if (createfeedback[index].active == false) {
+    //       setActiveForm("");
+    //     } else {
+    //       setActiveForm(index);
+    //     }
+    //   } else {
+    //     createfeedback[i].active = false;
+    //     setCreateFeedback([...createfeedback]);
+    //   }
+    // }
   };
+
+  useEffect(() => {
+    getAllFeedbackForm();
+  }, []);
+
+  async function getAllFeedbackForm() {
+    let geFeedbackForms = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.GET_ALL_FEEDBACK_FORM
+    );
+
+    let res = geFeedbackForms.data.feedbackForm;
+    console.log(res);
+    setFeedbackFormList(res);
+  }
 
   return (
     <>
@@ -206,7 +237,7 @@ const Feedbacks = () => {
               </TabPanel>
 
               <TabPanel>
-                {createfeedback?.map((x, index) => {
+                {feedbackFormList?.map((x, index) => {
                   return (
                     <Box
                       h="90px"
@@ -231,11 +262,12 @@ const Feedbacks = () => {
                             onChange={() => switchStatus(index)}
                             data-size="xs"
                           />
-                          <Tooltip label="Edit">
-                            <EditIcon mr={4} onClick={() => editForm(index)} />
-                          </Tooltip>
+                          {/* <Box onClick={() => getIndex(x._id)}></Box> */}
 
-                          <DeleteIcon onClick={() => handleRemove(index)} />
+                          <Tooltip label="Edit">
+                            <EditIcon mr={4} onClick={() => editForm(x._id)} />
+                          </Tooltip>
+                          <DeleteIcon onClick={() => handleRemove(x._id)} />
                         </GridItem>
                       </Grid>
                     </Box>

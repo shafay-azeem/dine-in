@@ -53,6 +53,13 @@ const SectionCard = (props) => {
   const [checked, setChecked] = useState();
   const [sectionIndex, setSectionIndex] = useState();
 
+  const [isOpened, setIsOpened] = useState(false);
+
+  function toggle() {
+    setIsOpened((wasOpened) => !wasOpened);
+    // console.log(isOpened);
+  }
+
   const {
     isOpen: isOpenSection,
     onOpen: onOpenSection,
@@ -130,7 +137,7 @@ const SectionCard = (props) => {
       sectionNote: x.sectionNote,
       sectionLabel: x.sectionLabel,
       sectionStatus: x.sectionStatus,
-      sectionImage: x.sectionImage
+      sectionImage: x.sectionImage,
     };
 
     await apiFunctions
@@ -168,10 +175,9 @@ const SectionCard = (props) => {
     // );
   };
 
-  const getIndex = (id, index) => {
+  const getIndex = (id) => {
     setCount(id);
-    setSectionIndex(index)
-
+    // setSectionIndex(index);
   };
 
   const clearMessage = () => {
@@ -278,6 +284,7 @@ const SectionCard = (props) => {
                                 )}
                               </HStack>
                             </GridItem>
+
                             <GridItem colStart={4} colEnd={6} h="10" ml="auto">
                               <HStack>
                                 <BootstrapSwitchButton
@@ -297,7 +304,7 @@ const SectionCard = (props) => {
                                     />
 
                                     <MenuList>
-                                      <Box onClick={() => getIndex(index)}>
+                                      <Box onClick={() => getIndex(x._id)}>
                                         <MenuItem
                                           icon={<AiFillFileAdd />}
                                           onClick={onOpenItem}
@@ -307,7 +314,7 @@ const SectionCard = (props) => {
                                       </Box>
                                       {isOpenItem ? (
                                         <ItemDrawer
-                                          menu_index={menu_index}
+                                          // menu_index={menu_index}
                                           section_index={count}
                                           isOpen={isOpenItem}
                                           onOpen={onOpenItem}
@@ -315,7 +322,9 @@ const SectionCard = (props) => {
                                         ></ItemDrawer>
                                       ) : null}
 
-                                      <Box onClick={() => getIndex(x._id, index)}>
+                                      <Box
+                                        onClick={() => getIndex(x._id, index)}
+                                      >
                                         <MenuItem
                                           icon={<AiFillEdit />}
                                           onClick={onOpenSection}
@@ -350,15 +359,12 @@ const SectionCard = (props) => {
                                     </MenuList>
                                   </Menu>
                                 </Box>
+
                                 <Box>
-                                  {x.active ? (
-                                    <AiOutlineUp
-                                      onClick={() => sectionClick(index)}
-                                    />
+                                  {isOpened ? (
+                                    <AiOutlineUp onClick={toggle} />
                                   ) : (
-                                    <AiOutlineDown
-                                      onClick={() => sectionClick(index)}
-                                    />
+                                    <AiOutlineDown onClick={toggle} />
                                   )}
                                 </Box>
                               </HStack>
@@ -367,18 +373,13 @@ const SectionCard = (props) => {
                         </Box>
 
                         <Box ml="55px">
-                          <ItemCard section_index={x._id} />
-
-                          {/* {x.active ? (
-                            <ItemCard
-                              menu_index={menu_index}
-                              section_index={x._id}
-                            />
-                          ) : null} */}
+                          {isOpened ? <ItemCard section_index={x._id} /> : null}
                         </Box>
 
                         <Box ml="55px">
-                          <SubSectionCard section_index={x._id} />
+                          {isOpened ? (
+                            <SubSectionCard section_index={x._id} />
+                          ) : null}
 
                           {/* {x.active ? (
                             <SubSectionCard

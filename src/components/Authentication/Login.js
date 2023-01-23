@@ -19,10 +19,10 @@ const Login = () => {
   const [show, setShow] = useState(false);
 
   const handleClick = () => setShow(!show);
-  const submitHandler = async () => {
 
+  const submitHandler = async () => {
     if (!email || !password) {
-      alert('Please Enter All Fields')
+      alert("Please Enter All Fields");
       return;
     }
 
@@ -36,8 +36,8 @@ const Login = () => {
         .then((res) => {
           if (res.data.success == true) {
             alert(`${res.data.message}`);
-            setEmail('')
-            setPassword('')
+            setEmail("");
+            setPassword("");
             localStorage.setItem("token", res.data.token);
             navigate({
               pathname: "/homeScreen",
@@ -48,7 +48,6 @@ const Login = () => {
             return false;
           }
         });
-
     } catch (err) {
       alert(`There Some Error ${err}`);
     }

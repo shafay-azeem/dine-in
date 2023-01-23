@@ -36,9 +36,8 @@ import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
 
 const ItemCard = (props) => {
-  const { response, setResponse } = MenuState();
-  //console.log(props?.section_index, "section");
-
+  let subSecId = props?.subsection_index;
+  console.log(subSecId);
   let secid = props?.section_index;
   // const initialState = Number.isInteger(props?.subsection_index)
   //   ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
@@ -62,9 +61,9 @@ const ItemCard = (props) => {
     setCount(index);
   };
 
-  // useEffect(() => {
-  //   getAllItemsBySectionId();
-  // }, [itemList]);
+  useEffect(() => {
+    getAllItemsBySectionId();
+  }, []);
 
   async function getAllItemsBySectionId() {
     let getItems = await apiFunctions.GET_REQUEST(
@@ -72,11 +71,22 @@ const ItemCard = (props) => {
     );
 
     let res = getItems.data.item;
-    console.log(res);
     setItemList(res);
   }
 
-  const handleRemove = (index) => {
+  const handleRemove = async (id) => {
+    await apiFunctions
+      .DELETE_REQUEST(BASE_URL + API_URL.DELETE_ITEM_BY_ID + id)
+      .then((res) => {
+        if (res.data.success == true) {
+          console.log(res.data.success);
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
     // if (Number.isInteger(props?.subsection_index) == true) {
     //   response[props.menu_index].section[props.section_index].subSection[
     //     props.subsection_index
@@ -213,7 +223,7 @@ const ItemCard = (props) => {
                                   boxSize="43px"
                                   objectFit="cover"
                                   borderRadius={3}
-                                  // src={x.image}
+                                  src={x.itemImage}
                                 />
 
                                 <Text pl={2}>
@@ -262,23 +272,9 @@ const ItemCard = (props) => {
 
                             <GridItem colStart={4} colEnd={6} h="10" ml="auto">
                               <HStack>
-                                <Box>
+                                {/* <Box>
                                   <InputGroup>
-                                    {/* <InputLeftElement
-                                      pointerEvents="none"
-                                      color="gray.500"
-                                      children="$"
-                                      size="sm"
-                                      mt="-4px"
-                                    /> */}
-                                    {/* <Input
-                                      placeholder="Price"
-                                      size="sm"
-                                      borderRadius={6}
-                                      width="160px"
-                                      mr={4}
-                                      value={x.itemPrice}
-                                    /> */}
+                                
                                     {x.itemPriceOption[0].price ==
                                     x.itemPriceOption[
                                       x.itemPriceOption.length - 1
@@ -309,18 +305,9 @@ const ItemCard = (props) => {
                                       </Box>
                                     )}
 
-                                    {/* 
-                                    <InputRightElement width="4.5rem">
-                                      <Button
-                                        h="1.75rem"
-                                        size="xs"
-                                        marginBottom="8px"
-                                      >
-                                        Ok
-                                      </Button>
-                                    </InputRightElement> */}
+                                  
                                   </InputGroup>
-                                </Box>
+                                </Box> */}
 
                                 <BootstrapSwitchButton
                                   checked={x.active}
@@ -339,7 +326,7 @@ const ItemCard = (props) => {
                                     />
 
                                     <MenuList>
-                                      <Box onClick={() => getIndex(index)}>
+                                      <Box onClick={() => getIndex(x._id)}>
                                         <MenuItem
                                           onClick={onOpenItem}
                                           icon={<AiFillEdit />}
@@ -350,11 +337,11 @@ const ItemCard = (props) => {
 
                                       {isOpenItem ? (
                                         <ItemDrawer
-                                          menu_index={props.menu_index}
-                                          section_index={props.section_index}
-                                          subsection_index={
-                                            props.subsection_index
-                                          }
+                                          // menu_index={props.menu_index}
+                                          // section_index={props.section_index}
+                                          // subsection_index={
+                                          //   props.subsection_index
+                                          // }
                                           item_index={count}
                                           isOpen={isOpenItem}
                                           onOpen={onOpenItem}
@@ -371,7 +358,7 @@ const ItemCard = (props) => {
                                         Duplicate
                                       </MenuItem>
                                       <MenuItem
-                                        onClick={() => handleRemove(index)}
+                                        onClick={() => handleRemove(x._id)}
                                         icon={<AiFillDelete />}
                                       >
                                         Delete

@@ -44,6 +44,13 @@ const SubSectionCard = (props) => {
 
   console.log(section_index, "section_index");
 
+  const [isOpened, setIsOpened] = useState(false);
+
+  function toggle() {
+    setIsOpened((wasOpened) => !wasOpened);
+    // console.log(isOpened);
+  }
+
   // let subSecRes =
   //   response[props?.menu_index]?.section[props?.section_index]?.subSection;
 
@@ -77,17 +84,58 @@ const SubSectionCard = (props) => {
     setSubSectionList(res);
   }
 
-  function switchStatus(index) {
+  const switchStatus = async (x, id) => {
+    let sectionData = {
+      sectionStatus: !x.sectionStatus,
+    };
+
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + id, sectionData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`Sub Section Updated Successfully`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+
     // subSecRes[index].sectionStatus = !subSecRes[index].sectionStatus;
     // setResponse([...response]);
     // setSubSectionList(subSecRes);
-  }
+  };
 
   const getIndex = (index) => {
     setCount(index);
   };
 
-  const duplicate = (x) => {
+  const duplicate = async (x) => {
+    let sectionData = {
+      sectionName: x.sectionName,
+      sectionDescription: x.sectionDescription,
+      sectionNote: x.sectionNote,
+      sectionLabel: x.sectionLabel,
+      sectionStatus: x.sectionStatus,
+      sectionImage: x.sectionImage,
+    };
+
+    await apiFunctions
+      .POST_REQUEST(
+        BASE_URL + API_URL.CREATE_SUBSECTION + section_index,
+        sectionData
+      )
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`SUB SECTION DUPLICATED SUCCESSFULLY`).then((res) => {
+            setSubSectionList(res);
+            return true;
+          });
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
     // function getTimestampInSeconds() {
     //   return Math.floor(Date.now() / 1000);
     // }
@@ -103,7 +151,19 @@ const SubSectionCard = (props) => {
     // setResponse([...response]);
   };
 
-  const handleRemove = (index) => {
+  const handleRemove = async (id) => {
+    await apiFunctions
+      .DELETE_REQUEST(BASE_URL + API_URL.DELETE_SUBSECTION_BY_ID + id)
+      .then((res) => {
+        if (res.data.success == true) {
+          console.log(res.data.success);
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
     // subSecRes.splice(index, 1);
     // setResponse([...response]);
     // setSubSectionList(subSecRes);
@@ -126,12 +186,12 @@ const SubSectionCard = (props) => {
               <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                 <GridItem colSpan={2} h="10">
                   <HStack>
-                    {/* <Image
+                    <Image
                       boxSize="43px"
                       objectFit="cover"
                       borderRadius={3}
-                      src={x.image}
-                    /> */}
+                      src={x.sectionImage}
+                    />
 
                     <Text pl={2}>
                       {x.sectionName}
@@ -165,7 +225,7 @@ const SubSectionCard = (props) => {
                   <HStack>
                     <BootstrapSwitchButton
                       checked={x.sectionStatus}
-                      onChange={() => switchStatus(index)}
+                      onChange={() => switchStatus(x, x._id)}
                       data-size="xs"
                     />
 
@@ -200,7 +260,7 @@ const SubSectionCard = (props) => {
                             ></ItemDrawer>
                           ) : null}
 
-                          <Box onClick={() => getIndex(index)}>
+                          <Box onClick={() => getIndex(x._id)}>
                             <MenuItem
                               icon={<AiFillEdit />}
                               onClick={onOpenSection}
@@ -228,7 +288,7 @@ const SubSectionCard = (props) => {
                           </MenuItem>
 
                           <MenuItem
-                            onClick={() => handleRemove(index)}
+                            onClick={() => handleRemove(x._id)}
                             icon={<AiFillDelete />}
                           >
                             Delete
@@ -237,10 +297,10 @@ const SubSectionCard = (props) => {
                       </Menu>
                     </Box>
                     <Box>
-                      {x.active ? (
-                        <AiOutlineUp onClick={() => sectionClick(index)} />
+                      {isOpened ? (
+                        <AiOutlineUp onClick={toggle} />
                       ) : (
-                        <AiOutlineDown onClick={() => sectionClick(index)} />
+                        <AiOutlineDown onClick={toggle} />
                       )}
                     </Box>
                   </HStack>
@@ -249,11 +309,11 @@ const SubSectionCard = (props) => {
             </Box>
 
             <Box ml="55px">
-              {x.active ? (
+              {x.isOpened ? (
                 <ItemCard
-                  menu_index={menu_index}
-                  section_index={section_index}
-                  subsection_index={index}
+                  // menu_index={menu_index}
+                  // section_index={section_index}
+                  subsection_index={x._id}
                 />
               ) : null}
             </Box>

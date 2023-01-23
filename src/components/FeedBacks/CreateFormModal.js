@@ -17,6 +17,8 @@ import CustomButton from "../../CustomElements/CustomButton";
 import { MenuState } from "../../context/MenuContext";
 import { useState } from "react";
 import { Form } from "react-bootstrap";
+import { API_URL, BASE_URL } from "../../global/Constant";
+import apiFunctions from "../../global/GlobalFunction";
 
 const CreateFormModal = (props) => {
   const { createfeedback, setCreateFeedback } = MenuState();
@@ -28,22 +30,38 @@ const CreateFormModal = (props) => {
     return Math.floor(Date.now() / 1000);
   }
 
+  // let feedbackFormData = {
+  //   id: getTimestampInSeconds(),
+  //   formName: formName,
+  //   welcomeMessage: welcomeMessage,
+  //   active: false,
+  //   formQuestions: [],
+  //   createdDate: new Date().toLocaleDateString(),
+  //   createdTime: new Date().toTimeString().slice(0, 8),
+  // };
+
   let feedbackFormData = {
-    id: getTimestampInSeconds(),
     formName: formName,
-    welcomeMessage: welcomeMessage,
-    active: false,
-    formQuestions: [],
-    createdDate: new Date().toLocaleDateString(),
-    createdTime: new Date().toTimeString().slice(0, 8),
   };
 
-  const formCreate = () => {
-    createfeedback.push(feedbackFormData);
-    setCreateFeedback([...createfeedback]);
-    alert("FeedBack Form Created Successfully");
+  const formCreate = async () => {
+    await apiFunctions
+      .POST_REQUEST(BASE_URL + API_URL.CREATE_FEEDBACK_FORM, feedbackFormData)
+      .then((res) => {
+        if (res.data.success == true) {
+          console.log(res.data);
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+    // createfeedback.push(feedbackFormData);
+    // setCreateFeedback([...createfeedback]);
+    // alert("FeedBack Form Created Successfully");
 
-    //document.getElementById("myForm").reset();
+    // //document.getElementById("myForm").reset();
   };
 
   return (
@@ -69,7 +87,7 @@ const CreateFormModal = (props) => {
                 </FormLabel>
                 <Input
                   placeholder="Could you give us 60 secs?"
-                  onChange={(e) => setWelcomeMessage(e.target.value)}
+                  // onChange={(e) => setWelcomeMessage(e.target.value)}
                 />
               </FormControl>
 
