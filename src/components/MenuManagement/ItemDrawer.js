@@ -511,17 +511,32 @@ const ItemDrawer = (props) => {
   };
 
   const updateItem = async (id) => {
-    await apiFunctions
-      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_ITEM_BY_ID + id, itemData)
-      .then((res) => {
-        if (res.data.success == true) {
-          alert(`${res.data.message}`);
-          return true;
-        } else {
-          alert(`There Some Error`);
-          return false;
-        }
-      });
+    if (props?.itemDecider === 'item' && id) {
+      await apiFunctions
+        .PUT_REQUEST(BASE_URL + API_URL.UPDATE_ITEM_BY_ID + id, itemData)
+        .then((res) => {
+          if (res.data.success == true) {
+            alert(` ITEM UPDATED SUCCESSFULLY`);
+            return true;
+          } else {
+            alert(`There Some Error`);
+            return false;
+          }
+        });
+    } else {
+      await apiFunctions
+        .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUB_ITEM_BY_ID + id, itemData)
+        .then((res) => {
+          if (res.data.success == true) {
+            alert(`SUB ITEM UPDATED SUCCESSFULLY`);
+            return true;
+          } else {
+            alert(`There Some Error`);
+            return false;
+          }
+        });
+    }
+
 
     // if (x != undefined) {
     //   response[props.menu_index].section[props.section_index].subSection[
@@ -872,15 +887,91 @@ const ItemDrawer = (props) => {
   };
 
   useEffect(() => {
-    if (item_index) {
+    console.log(props.itemDecider)
+    if (item_index && props?.itemDecider === 'item') {
       getSingleItemByID();
     }
-    return;
+    else if (item_index && props?.itemDecider === 'subItem') {
+      getSingleSubItemByID();
+    }
+    else {
+      return
+    };
   }, []);
 
   async function getSingleItemByID() {
     let getSingleItem = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_ITEM_BY_ID + item_index
+    );
+
+    let setVar = getSingleItem.data.item;
+    let propertyNames;
+    let propertyNamesWarning;
+
+    setName(setVar.itemName);
+    setImage(setVar.itemImage);
+    setDescription(setVar.itemDescription);
+    setChecked(setVar.active);
+    setCalorie(setVar.calorie);
+    setSold(setVar.itemTag);
+
+    for (let i in setVar.itemLabel) {
+      propertyNames = Object.keys(setVar.itemLabel[i]);
+    }
+    if (propertyNames) {
+      propertyNames.pop();
+    }
+
+    setSelect(propertyNames);
+
+    for (let i in setVar.itemWarning) {
+      propertyNamesWarning = Object.keys(setVar.itemWarning[i]);
+    }
+    if (propertyNamesWarning) {
+      propertyNamesWarning.pop();
+    }
+
+    setWarningState(propertyNamesWarning);
+
+    setRecommendedItem(setVar.itemRecommendedItems);
+    setTime(setVar.itemPrepTime);
+    setItemPrice(setVar.itemPrice);
+    setNutCalories(setVar.itemCalories);
+    setInputList(setVar.itemPriceOption);
+    setSaturatedFatPercentage(setVar.itemSaturatedFatPercentage);
+    setTransFat(setVar.itemTransFat);
+    setTransFatPercentage(setVar.itemTransFatPercentage);
+    setCholesterol(setVar.itemCholesterol);
+    setCholesterolPercentage(setVar.itemCholesterolPercentage);
+    setSodium(setVar.itemSodium);
+    setSodiumPercentage(setVar.itemSodiumPercentage);
+    setTotalCarbs(setVar.itemTotalCarbs);
+    setTotalCarbsPercentage(setVar.itemTotalCarbsPercentage);
+    setDietaryFiber(setVar.itemDietaryFiber);
+    setDietaryFiberPercentage(setVar.itemDietaryFiberPercentage);
+    setSugar(setVar.itemSugar);
+    setSugarPercentage(setVar.itemSugarPercentage);
+    setProtein(setVar.itemProtein);
+    setProteinPercentage(setVar.itemProteinPercentage);
+    setVitaminA(setVar.itemVitaminA);
+    setVitaminC(setVar.itemVitaminC);
+    setIron(setVar.itemIron);
+    setCalcium(setVar.itemCalcium);
+    setTotalFat(setVar.itemTotalFat);
+    setTotalFatPercentage(setVar.itemTotalFatPercentage);
+    setSaturatedFat(setVar.itemSaturatedFat);
+    setNutCalories(setVar.itemNutritionCalories);
+    setCaloriesFat(setVar.itemCaloriesFat);
+    setServingSize(setVar.itemServingSize);
+    setDemoModifier(setVar.itemModifier);
+  }
+
+
+
+
+  async function getSingleSubItemByID() {
+    let getSingleItem = await apiFunctions.GET_REQUEST_BY_ID(
+      BASE_URL + API_URL.GET_SINGLE_SUB_ITEM_BY_ID + item_index
     );
 
     let setVar = getSingleItem.data.item;

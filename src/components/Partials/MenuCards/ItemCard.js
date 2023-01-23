@@ -51,6 +51,8 @@ const ItemCard = (props) => {
   // const [itemList, setItemList] = useState(initialState);
   const [itemList, setItemList] = useState();
 
+  const [itemDecider, setItemDecider] = useState()
+
   const [count, setCount] = useState();
   const [checked, setChecked] = useState(false);
 
@@ -67,11 +69,13 @@ const ItemCard = (props) => {
   useEffect(() => {
     if (section_Or_subSection === "section" && secid) {
       console.log('Inside IF')
+      setItemDecider('item')
       getAllItemsBySectionId();
     }
     else if (section_Or_subSection === "subSection" && subSecId) {
       console.log(subSecId)
       console.log("else run");
+      setItemDecider('subItem')
       getAllSubItemsBySubSectionId();
     } else {
       return;
@@ -369,6 +373,7 @@ const ItemCard = (props) => {
                                           // subsection_index={
                                           //   props.subsection_index
                                           // }
+                                          itemDecider={itemDecider}
                                           item_index={count}
                                           isOpen={isOpenItem}
                                           onOpen={onOpenItem}

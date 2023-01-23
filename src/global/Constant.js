@@ -84,7 +84,12 @@ export const API_URL = {
 
   CREATE_SUB_ITEM: 'menu/V1/createSubSectionItem/',
 
-  GET_ALL_SUB_ITEM_BY_SUBSECTION_ID: 'menu/V1/getAllItemBySubSectionId/'
+  GET_ALL_SUB_ITEM_BY_SUBSECTION_ID: 'menu/V1/getAllItemBySubSectionId/',
+
+
+  GET_SINGLE_SUB_ITEM_BY_ID: 'menu/V1/getSingleSubItem/',
+
+  UPDATE_SUB_ITEM_BY_ID: 'menu/V1/updateSubItem/'
 
 
 
