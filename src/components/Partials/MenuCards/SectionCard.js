@@ -313,7 +313,7 @@ const SectionCard = (props) => {
                                       </Box>
                                       {isOpenItem ? (
                                         <ItemDrawer
-                                          // menu_index={menu_index}
+                                          fromSection={"section"}
                                           section_index={count}
                                           isOpen={isOpenItem}
                                           onOpen={onOpenItem}
@@ -374,7 +374,7 @@ const SectionCard = (props) => {
 
                         <Box ml="55px">
                           {/* {isOpened ? <ItemCard section_index={x._id} /> : null} */}
-                          <ItemCard section_index={x._id} />
+                          <ItemCard fromSection={"section"} section_index={x._id} />
                         </Box>
 
                         <Box ml="55px">

@@ -55,8 +55,12 @@ import { API_URL, BASE_URL } from "../../global/Constant";
 
 const ItemDrawer = (props) => {
   let section_index = props?.section_index;
+  let subSection_index = props?.subSection_index
+  console.log(subSection_index, 'subsection_index')
+  console.log(section_index, 'section_index')
   // console.log(section_index, "section_index");
-
+  let section_Or_subSection = props?.fromSection;
+  console.log(section_Or_subSection, 'section_Or_subSection')
   let item_index = props?.item_index;
   // console.log(item_index);
 
@@ -823,19 +827,36 @@ const ItemDrawer = (props) => {
     setConversionWarning([jsonObjWarning]);
   };
 
-  const testfunc = async (id) => {
-    await apiFunctions
-      .POST_REQUEST(BASE_URL + API_URL.CREATE_ITEM + id, itemData)
-      .then((res) => {
-        console.log(res.data.item, "item response");
-        if (res.data.success == true) {
-          alert(`${res.data.message}`);
-          return true;
-        } else {
-          alert(`There Some Error`);
-          return false;
-        }
-      });
+  const testfunc = async (secid, subsecid) => {
+
+    if (section_Or_subSection === "section" && secid) {
+      await apiFunctions
+        .POST_REQUEST(BASE_URL + API_URL.CREATE_ITEM + secid, itemData)
+        .then((res) => {
+          console.log(res.data.item, "item response");
+          if (res.data.success == true) {
+            alert(`${res.data.message}`);
+            return true;
+          } else {
+            alert(`There Some Error`);
+            return false;
+          }
+        });
+    } else if (section_Or_subSection === "subSection" && subsecid) {
+      await apiFunctions
+        .POST_REQUEST(BASE_URL + API_URL.CREATE_SUB_ITEM + subsecid, itemData)
+        .then((res) => {
+          console.log(res.data.subSectionItem, "item response");
+          if (res.data.success == true) {
+            alert(`SUB ITEM CREATED SUCCESSFULLY`);
+            return true;
+          } else {
+            alert(`There Some Error`);
+            return false;
+          }
+        });
+    }
+
 
     // if (x === true) {
     //   response[props.menu_index].section[props.section_index].subSection[
@@ -1887,7 +1908,7 @@ const ItemDrawer = (props) => {
               <Button
                 colorScheme="blue"
                 onClick={() => {
-                  testfunc(section_index);
+                  testfunc(section_index, subSection_index);
                 }}
               >
                 Save

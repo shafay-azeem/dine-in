@@ -30,15 +30,18 @@ import {
   AiFillDelete,
   AiFillEdit,
   AiFillFileAdd,
+  AiOutlineConsoleSql,
 } from "react-icons/ai";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
 
 const ItemCard = (props) => {
+
   let subSecId = props?.subsection_index;
   console.log(subSecId);
   let secid = props?.section_index;
+  let section_Or_subSection = props?.fromSection;
   // const initialState = Number.isInteger(props?.subsection_index)
   //   ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
   //       props?.subsection_index
@@ -62,7 +65,18 @@ const ItemCard = (props) => {
   };
 
   useEffect(() => {
-    getAllItemsBySectionId();
+    if (section_Or_subSection === "section" && secid) {
+      console.log('Inside IF')
+      getAllItemsBySectionId();
+    }
+    else if (section_Or_subSection === "subSection" && subSecId) {
+      console.log(subSecId)
+      console.log("else run");
+      getAllSubItemsBySubSectionId();
+    } else {
+      return;
+    }
+
   }, []);
 
   async function getAllItemsBySectionId() {
@@ -71,6 +85,19 @@ const ItemCard = (props) => {
     );
 
     let res = getItems.data.item;
+    console.log(res, 'res1')
+    setItemList(res);
+  }
+
+
+
+  async function getAllSubItemsBySubSectionId() {
+    let getItems = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.GET_ALL_SUB_ITEM_BY_SUBSECTION_ID + subSecId
+    );
+    // console.log(getItems, 'getItems')
+    let res = getItems.data.item;
+    console.log(res, 'res2')
     setItemList(res);
   }
 

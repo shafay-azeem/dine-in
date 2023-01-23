@@ -240,7 +240,7 @@ const SubSectionCard = (props) => {
                         />
 
                         <MenuList>
-                          <Box onClick={() => getIndex(index)}>
+                          <Box onClick={() => getIndex(x._id)}>
                             <MenuItem
                               icon={<AiFillFileAdd />}
                               onClick={onOpenItem}
@@ -250,7 +250,8 @@ const SubSectionCard = (props) => {
                           </Box>
                           {isOpenItem ? (
                             <ItemDrawer
-                              subsection_index={count}
+                              fromSection={"subSection"}
+                              subSection_index={count}
                               section_index={section_index}
                               menu_index={menu_index}
                               subsection_push={true}
@@ -272,9 +273,7 @@ const SubSectionCard = (props) => {
                           {isOpenSection ? (
                             <SectionDrawer
                               fromSection={"subSection"}
-                              subsection_index={count}
-                              section_index={section_index}
-                              menu_index={menu_index}
+                              subSection_index={count}
                               isOpen={isOpenSection}
                               onOpen={onOpenSection}
                               onClose={onCloseSection}
@@ -310,13 +309,14 @@ const SubSectionCard = (props) => {
             </Box>
 
             <Box ml="55px">
-              {x.isOpened ? (
-                <ItemCard
-                  // menu_index={menu_index}
-                  // section_index={section_index}
-                  subsection_index={x._id}
-                />
-              ) : null}
+              {/* {x.isOpened ? ( */}
+              <ItemCard
+                fromSection={"subSection"}
+                // menu_index={menu_index}
+                // section_index={section_index}
+                subsection_index={x._id}
+              />
+              {/* ) : null} */}
             </Box>
           </Box>
         );

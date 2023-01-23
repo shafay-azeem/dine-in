@@ -40,6 +40,8 @@ export const API_URL = {
 
   CREATE_ITEM: "menu/V1/createItem/",
 
+
+
   UPDATE_ITEM_BY_ID: "menu/V1/updateItem/",
 
   DELETE_ITEM_BY_ID: "menu/V1/deleteItem/",
@@ -76,4 +78,14 @@ export const API_URL = {
   GET_ALL_QUESTIONS_BY_FORMID: "feedback/V1/getallquestion/",
 
   UPDATE_QUESTION_BY_FORM_ID: "feedback/V1/updateFormQuestion/",
+
+
+  //SUB-ITEM
+
+  CREATE_SUB_ITEM: 'menu/V1/createSubSectionItem/',
+
+  GET_ALL_SUB_ITEM_BY_SUBSECTION_ID: 'menu/V1/getAllItemBySubSectionId/'
+
+
+
 };
