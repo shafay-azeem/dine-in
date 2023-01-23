@@ -335,6 +335,7 @@ const SectionCard = (props) => {
 
                                       {isOpenSection ? (
                                         <SectionDrawer
+                                          fromSection={'section'}
                                           new_index={sectionIndex}
                                           section_index={count}
                                           menu_index={menu_index}

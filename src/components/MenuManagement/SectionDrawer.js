@@ -50,16 +50,19 @@ const SectionDrawer = (props) => {
 
   let sectionId = props?.section_index;
   let subSecId = props?.subsection_index;
+  let section_Or_subSection = props?.fromSection
+
+  // console.log(props?.fromSection, "---")
   console.log(subSecId, "subSecId");
 
-  const { subSectionList, setSubSectionList } = MenuState();
+  const { subSectionList, setSubSectionList, sectionList, setSectionList } = MenuState();
 
   const [checkedItems, setCheckedItems] = useState(false);
 
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
 
-  const { sectionList, setSectionList } = MenuState();
+  // const { sectionList, setSectionList } = MenuState();
 
   // const [subSectionList, setSubSectionList] = useState();
   const inputElement = useRef();
@@ -315,11 +318,40 @@ const SectionDrawer = (props) => {
   };
 
   useEffect(() => {
-    if (sectionId) {
+    if (section_Or_subSection === 'section' && sectionId) {
       getSingleSectionById();
     }
-    return;
+    else if (section_Or_subSection === 'subSection' && subSecId) {
+      console.log('else run')
+      getSingleSubSectionById();
+    }
+    else {
+      return;
+    }
+
   }, []);
+
+  async function getSingleSubSectionById() {
+    let getSingleSection = await apiFunctions.GET_REQUEST_BY_ID(
+      BASE_URL + API_URL.Get_SUBSECTION_BY_ID + subSecId
+    );
+    let setRes = getSingleSection.data.subSection;
+    let propertyNames;
+
+    setName(setRes.sectionName);
+    setDescription(setRes.sectionDescription);
+    setNote(setRes.sectionNote);
+    setChecked(setRes.sectionStatus);
+    setImage(setRes.sectionImage);
+    for (let i in setRes.sectionLabel) {
+      propertyNames = Object.keys(setRes.sectionLabel[i]);
+    }
+    if (propertyNames) {
+      propertyNames.pop();
+    }
+
+    setSelect(propertyNames);
+  }
 
   async function getSingleSectionById() {
     let getSingleSection = await apiFunctions.GET_REQUEST_BY_ID(
@@ -482,7 +514,7 @@ const SectionDrawer = (props) => {
     setConversion([jsonObj]);
   };
 
-  const handleAlphabetically = (event) => {};
+  const handleAlphabetically = (event) => { };
 
   function deleteimg() {
     setImage(null);
@@ -671,7 +703,7 @@ const SectionDrawer = (props) => {
                   </Select> */}
 
                   {arrayDecider.length > 0 &&
-                  props?.subsection_index == undefined ? (
+                    props?.subsection_index == undefined ? (
                     <FormControl>
                       <label>
                         <input
