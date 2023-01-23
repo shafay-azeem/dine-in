@@ -79,7 +79,7 @@ const MenuDetail = (props) => {
                 <div
                   className="item-image"
                   style={{
-                    backgroundImage: `url(${x.image})`,
+                    backgroundImage: `url(${x.itemImage})`,
                     backgroundPosition: "center",
                   }}
                 ></div>
@@ -133,7 +133,7 @@ const MenuDetail = (props) => {
                   {x.itemLabel?.map((y, index) => {
                     return (
                       <div>
-                        {y === "New" ? (
+                        {y.New === "New" ? (
                           <div>
                             <img
                               src={require("../Assets/new.svg").default}
@@ -142,7 +142,7 @@ const MenuDetail = (props) => {
                           </div>
                         ) : null}
 
-                        {y === "Signature" ? (
+                        {y.Signature === "Signature" ? (
                           <div>
                             <img
                               src={require("../Assets/signature.svg").default}
@@ -151,7 +151,7 @@ const MenuDetail = (props) => {
                           </div>
                         ) : null}
 
-                        {y === "Special Presentation" ? (
+                        {y.Special_Presentation === "Special Presentation" ? (
                           <div>
                             <img
                               src={require("../Assets/special.svg").default}
@@ -168,7 +168,7 @@ const MenuDetail = (props) => {
                   {x.itemWarning?.map((z, index) => {
                     return (
                       <div>
-                        {z === "Alcohol" ? (
+                        {z.Alcohol === "Alcohol" ? (
                           <div>
                             <img
                               src={require("../Assets/Alcohol.svg").default}
@@ -177,7 +177,7 @@ const MenuDetail = (props) => {
                           </div>
                         ) : null}
 
-                        {z === "AlcoholFree" ? (
+                        {z.AlcoholFree === "AlcoholFree" ? (
                           <div>
                             <img
                               src={require("../Assets/AlcoholFree.svg").default}

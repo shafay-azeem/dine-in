@@ -91,7 +91,7 @@ const RestaurantMenu = (props) => {
           return (
             <div onClick={() => getIndex(index)}>
               <img
-                src={x.image}
+                src={x.sectionImage}
                 style={{ cursor: "pointer", width: "250px", height: "150px" }}
               />
               <p>{x.sectionName}</p>

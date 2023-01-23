@@ -43,7 +43,7 @@ const DisplayItemCard = (props) => {
                   <Row>
                     <Col lg={4} className="imgcol p-0">
                       <img
-                        src={x.image}
+                        src={x.itemImage}
                         className="image mx-auto d-block w-100"
                       />
                     </Col>
@@ -93,7 +93,7 @@ const DisplayItemCard = (props) => {
                         {x.itemLabel?.map((y, index) => {
                           return (
                             <div>
-                              {y === "New" ? (
+                              {y.New === "New" ? (
                                 <div>
                                   <img
                                     src={
@@ -104,7 +104,7 @@ const DisplayItemCard = (props) => {
                                 </div>
                               ) : null}
 
-                              {y === "Signature" ? (
+                              {y.Signature === "Signature" ? (
                                 <div>
                                   <img
                                     src={
@@ -116,7 +116,8 @@ const DisplayItemCard = (props) => {
                                 </div>
                               ) : null}
 
-                              {y === "Special Presentation" ? (
+                              {y.Special_Presentation ===
+                              "Special Presentation" ? (
                                 <div>
                                   <img
                                     src={
@@ -135,7 +136,7 @@ const DisplayItemCard = (props) => {
                         {x.itemWarning?.map((z, index) => {
                           return (
                             <div>
-                              {z === "Alcohol" ? (
+                              {z.Alcohol === "Alcohol" ? (
                                 <div>
                                   <img
                                     src={
@@ -147,7 +148,7 @@ const DisplayItemCard = (props) => {
                                 </div>
                               ) : null}
 
-                              {z === "AlcoholFree" ? (
+                              {z.AlcoholFree === "AlcoholFree" ? (
                                 <div>
                                   <img
                                     src={
