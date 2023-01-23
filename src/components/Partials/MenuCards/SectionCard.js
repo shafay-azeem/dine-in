@@ -154,13 +154,31 @@ const SectionCard = (props) => {
       });
   };
 
-  function sectionClick(index) {
+  const sectionClick = async (x, id) => {
+    console.log(id, "id");
+    console.log(x, "x");
+
+    let sectionData = {
+      sectionStatus: !x.sectionStatus,
+    };
+
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+
     // setSatus(index);
     // response[props.menu_index].section[index].active =
     // response[props.menu_index].section[index].active;
     // setResponse([...response]);
-  }
-
+  };
   const handleDrop = (droppedItem) => {
     // if (!droppedItem.destination) return;
     // var updatedList = [...sectionList];
@@ -361,11 +379,15 @@ const SectionCard = (props) => {
                                 </Box>
 
                                 <Box>
-                                  {/* {isOpened ? (
-                                    <AiOutlineUp onClick={toggle} />
+                                  {x.sectionStatus ? (
+                                    <AiOutlineUp
+                                      onClick={() => sectionClick(x, x._id)}
+                                    />
                                   ) : (
-                                    <AiOutlineDown onClick={toggle} />
-                                  )} */}
+                                    <AiOutlineDown
+                                      onClick={() => sectionClick(x, x._id)}
+                                    />
+                                  )}
                                 </Box>
                               </HStack>
                             </GridItem>
@@ -373,23 +395,20 @@ const SectionCard = (props) => {
                         </Box>
 
                         <Box ml="55px">
-                          {/* {isOpened ? <ItemCard section_index={x._id} /> : null} */}
-                          <ItemCard fromSection={"section"} section_index={x._id} />
+                          {x.sectionStatus ? (
+                            <ItemCard fromSection={"section"} section_index={x._id} />
+                          ) : null}
                         </Box>
 
                         <Box ml="55px">
-                          {/* {isOpened ? (
+
+
+                          {x.sectionStatus ? (
                             <SubSectionCard section_index={x._id} />
-                          ) : null} */}
+                          ) : null}
 
-                          <SubSectionCard section_index={x._id} />
 
-                          {/* {x.active ? (
-                            <SubSectionCard
-                              menu_index={menu_index}
-                              section_index={index}
-                            />
-                          ) : null} */}
+
                         </Box>
                       </Box>
                     )}

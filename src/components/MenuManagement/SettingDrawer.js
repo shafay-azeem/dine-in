@@ -136,7 +136,7 @@ const SettingDrawer = (props) => {
       menuDescription: description,
       menuNote: note,
       menuStatus: active,
-      availability: inputList,
+      availaibility: inputList,
     };
 
     await apiFunctions
