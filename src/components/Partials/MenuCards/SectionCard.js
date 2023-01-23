@@ -53,12 +53,11 @@ const SectionCard = (props) => {
   const [checked, setChecked] = useState();
   const [sectionIndex, setSectionIndex] = useState();
 
-  const [isOpened, setIsOpened] = useState(false);
+  // const [isOpened, setIsOpened] = useState(false);
 
-  function toggle() {
-    setIsOpened((wasOpened) => !wasOpened);
-    // console.log(isOpened);
-  }
+  // function toggle() {
+  //   setIsOpened((wasOpened) => !wasOpened);
+  // }
 
   const {
     isOpen: isOpenSection,
@@ -335,7 +334,7 @@ const SectionCard = (props) => {
 
                                       {isOpenSection ? (
                                         <SectionDrawer
-                                          fromSection={'section'}
+                                          fromSection={"section"}
                                           new_index={sectionIndex}
                                           section_index={count}
                                           menu_index={menu_index}
@@ -362,11 +361,11 @@ const SectionCard = (props) => {
                                 </Box>
 
                                 <Box>
-                                  {isOpened ? (
+                                  {/* {isOpened ? (
                                     <AiOutlineUp onClick={toggle} />
                                   ) : (
                                     <AiOutlineDown onClick={toggle} />
-                                  )}
+                                  )} */}
                                 </Box>
                               </HStack>
                             </GridItem>
@@ -374,13 +373,16 @@ const SectionCard = (props) => {
                         </Box>
 
                         <Box ml="55px">
-                          {isOpened ? <ItemCard section_index={x._id} /> : null}
+                          {/* {isOpened ? <ItemCard section_index={x._id} /> : null} */}
+                          <ItemCard section_index={x._id} />
                         </Box>
 
                         <Box ml="55px">
-                          {isOpened ? (
+                          {/* {isOpened ? (
                             <SubSectionCard section_index={x._id} />
-                          ) : null}
+                          ) : null} */}
+
+                          <SubSectionCard section_index={x._id} />
 
                           {/* {x.active ? (
                             <SubSectionCard

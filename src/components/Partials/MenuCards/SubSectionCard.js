@@ -35,9 +35,9 @@ import { API_URL, BASE_URL } from "../../../global/Constant";
 import { useEffect } from "react";
 
 const SubSectionCard = (props) => {
-  const { subSectionList, setSubSectionList } = MenuState();
+  //const { subSectionList, setSubSectionList } = MenuState();
 
-  // const [subSectionList, setSubSectionList] = useState();
+  const [subSectionList, setSubSectionList] = useState();
 
   let menu_index = props.menu_index;
   let section_index = props?.section_index;
@@ -271,7 +271,7 @@ const SubSectionCard = (props) => {
 
                           {isOpenSection ? (
                             <SectionDrawer
-                              fromSection={'subSection'}
+                              fromSection={"subSection"}
                               subsection_index={count}
                               section_index={section_index}
                               menu_index={menu_index}
