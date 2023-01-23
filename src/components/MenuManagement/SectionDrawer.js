@@ -377,7 +377,7 @@ const SectionDrawer = (props) => {
     setSelect(propertyNames);
   }
 
-  const updatedSection = async (id) => {
+  const updatedSection = async (secid, subsecid) => {
     if (checkedItems && val) {
       try {
         const postRes = await apiFunctions.POST_REQUEST(
@@ -389,7 +389,7 @@ const SectionDrawer = (props) => {
           setSubSectionList(postRes);
           console.log(subSectionList, "setSubSectionList");
           const deleteRes = await apiFunctions.DELETE_REQUEST(
-            BASE_URL + API_URL.DELETE_SECTION_BY_ID + id
+            BASE_URL + API_URL.DELETE_SECTION_BY_ID + secid
           );
           if (deleteRes.data.success == true) {
             console.log(deleteRes.data.success);
@@ -405,10 +405,28 @@ const SectionDrawer = (props) => {
         alert(`There Some Error: ${err.message}`);
         return false;
       }
-    } else {
+    } else if (subsecid && section_Or_subSection === 'subSection') {
+
       try {
         const putRes = await apiFunctions.PUT_REQUEST(
-          BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id,
+          BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + subsecid,
+          sectionData
+        );
+        if (putRes.data.success == true) {
+          alert(`Subsection Updated Successfully`);
+          return true;
+        } else {
+          throw new Error("Error updating section");
+        }
+      } catch (err) {
+        alert(`There Some Error: ${err.message}`);
+        return false;
+      }
+    }
+    else {
+      try {
+        const putRes = await apiFunctions.PUT_REQUEST(
+          BASE_URL + API_URL.UPDATE_SECTION_BY_ID + secid,
           sectionData
         );
         if (putRes.data.success == true) {
@@ -516,7 +534,7 @@ const SectionDrawer = (props) => {
     setConversion([jsonObj]);
   };
 
-  const handleAlphabetically = (event) => {};
+  const handleAlphabetically = (event) => { };
 
   function deleteimg() {
     setImage(null);
@@ -705,7 +723,7 @@ const SectionDrawer = (props) => {
                   </Select> */}
 
                   {arrayDecider.length > 0 &&
-                  props?.subsection_index == undefined ? (
+                    props?.subsection_index == undefined ? (
                     <FormControl>
                       <label>
                         <input
@@ -878,7 +896,7 @@ const SectionDrawer = (props) => {
                 colorScheme="blue"
                 onClick={() => {
                   // updatedSection(props?.subsection_index, props?.section_index);
-                  updatedSection(sectionId);
+                  updatedSection(sectionId, subSecId);
                 }}
               >
                 Update
