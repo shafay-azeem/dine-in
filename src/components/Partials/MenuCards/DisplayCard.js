@@ -26,8 +26,10 @@ import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import apiFunctions from "../../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import { useEffect } from "react";
+import { useToast } from "@chakra-ui/react";
 
 const DisplayCard = () => {
+  const toast = useToast();
   const navigate = useNavigate();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -62,32 +64,61 @@ const DisplayCard = () => {
   }
   const switchStatus = async (id, x, y) => {
     let menuData = {
-      menuStatus: !(x.menuStatus),
+      menuStatus: !x.menuStatus,
     };
     await apiFunctions
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_MENU_BY_ID + id, menuData)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`${res.data.message}`);
+          // alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `Menu Updated SuccessFully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           return true;
         } else {
-          alert(`There Some Error`);
+          // alert(`There Some Error`);
+
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
     // response[index].menuStatus = !response[index].menuStatus;
     // setResponse([...response]);
-  }
+  };
 
   const handleRemove = async (id) => {
     await apiFunctions
       .DELETE_REQUEST(BASE_URL + API_URL.DELETE_MENU_BY_ID + id)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`${res.data.message}`);
+          // alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `Menu Deleted SuccessFully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           return true;
         } else {
-          alert(`There Some Error`);
+          // alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
@@ -103,19 +134,33 @@ const DisplayCard = () => {
       menuDescription: x.menuDescription,
       menuNote: x.menuNote,
       menuStatus: x.menuStatus,
-      availability: x.availability
+      availability: x.availability,
     };
 
     await apiFunctions
       .POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`MENU DUPLICATED SUCCESSFULLY`).then((res) => {
+          // alert(`MENU DUPLICATED SUCCESSFULLY`)
+          toast({
+            position: "top",
+            title: `Menu Duplicated SuccessFully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          }).then((res) => {
             setResponse(res);
             return true;
           });
         } else {
-          alert(`There Some Error`);
+          // alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });

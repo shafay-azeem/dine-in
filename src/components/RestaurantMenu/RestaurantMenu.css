@@ -14,10 +14,12 @@
 .slick-prev {
   left: 0;
 }
+
 .slick-prev:before,
 .slick-next:before {
   color: #000;
 }
+
 .slick-next {
   right: 0;
 }
@@ -26,26 +28,31 @@
   display: block;
   margin-top: 20px;
 }
+
 .slider p {
   text-align: center;
   font-size: 17px;
   font-weight: 500;
   margin-top: 10px;
 }
+
 .fooditem {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
+
 .fooditem .title {
   font-size: 20px;
   font-weight: 600;
   line-height: 30px;
   color: rgb(87, 89, 98);
 }
+
 .fooditem .text {
   max-height: 50px;
   overflow-y: scroll;
   font-size: 12px;
 }
+
 .fooditem .pricetext {
   box-sizing: border-box;
   color: rgb(230, 3, 75);
@@ -54,6 +61,7 @@
   line-height: 22px;
   margin-top: 8px;
 }
+
 .fooditem .image {
   border-radius: 3px;
   object-fit: cover;
@@ -63,12 +71,14 @@
 }
 
 .fooditem .imgcol {
-  height: 100px;
+  height: 130px;
   position: relative;
 }
+
 .menu {
   padding-top: 15px;
 }
+
 .menu .heading {
   text-align: center;
   box-sizing: border-box;
@@ -78,6 +88,7 @@
   line-height: 30px;
   position: relative;
 }
+
 .menu .description {
   text-align: center;
   box-sizing: border-box;
@@ -88,16 +99,20 @@
   font-weight: normal;
   color: rgb(87, 89, 98);
 }
+
 .subsection {
   margin-top: 12px;
 }
+
 .subsection p {
   font-size: 16px;
   margin: 10px 0px 20px 0px;
 }
+
 .accordion-button:not(.collapsed)::after {
   border-color: red;
 }
+
 .accordion-collapse {
   border: 1px solid red;
 }
@@ -106,26 +121,31 @@
   border-color: black !important;
   box-shadow: none !important;
 }
+
 .Soldout-Badge {
   position: absolute;
-  top: 0;
+  top: 5px;
   right: 10px;
   z-index: 1;
 }
+
 .slider p {
   font-size: 16px;
   font-weight: 600;
 }
+
 .accordion p {
   line-height: 22px;
   font-size: 16px;
   font-weight: normal;
   color: rgb(87, 89, 98);
 }
+
 .img-calorie {
   width: 5%;
   color: rgb(87, 89, 98);
 }
+
 .calorie p {
   color: rgb(87, 89, 98);
   font-size: 14px;
@@ -165,6 +185,7 @@
   line-height: 19px;
   font-weight: normal;
 }
+
 .feedbackSubmit-form p {
   margin-bottom: 12px;
   font-size: 16px;

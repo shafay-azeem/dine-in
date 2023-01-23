@@ -89,12 +89,12 @@ const DisplayItemCard = (props) => {
                         )}
                       </Card.Text>
 
-                      <div className="d-flex align-items-center mt-2">
+                      <div className="d-flex align-items-center">
                         {x.itemLabel?.map((y, index) => {
                           return (
-                            <div>
+                            <div className="d-flex my-1">
                               {y.New === "New" ? (
-                                <div>
+                                <div className="me-2">
                                   <img
                                     src={
                                       require("../../Assets/new.svg").default
@@ -105,7 +105,7 @@ const DisplayItemCard = (props) => {
                               ) : null}
 
                               {y.Signature === "Signature" ? (
-                                <div>
+                                <div className="me-2">
                                   <img
                                     src={
                                       require("../../Assets/signature.svg")
@@ -118,7 +118,7 @@ const DisplayItemCard = (props) => {
 
                               {y.Special_Presentation ===
                               "Special Presentation" ? (
-                                <div>
+                                <div className="me-2">
                                   <img
                                     src={
                                       require("../../Assets/special.svg")
@@ -135,9 +135,9 @@ const DisplayItemCard = (props) => {
                       <div className="d-flex align-items-center mt-2">
                         {x.itemWarning?.map((z, index) => {
                           return (
-                            <div>
+                            <div className="d-flex my-1">
                               {z.Alcohol === "Alcohol" ? (
-                                <div>
+                                <div className="me-2">
                                   <img
                                     src={
                                       require("../../Assets/Alcohol.svg")

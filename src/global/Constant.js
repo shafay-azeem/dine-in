@@ -40,8 +40,6 @@ export const API_URL = {
 
   CREATE_ITEM: "menu/V1/createItem/",
 
-
-
   UPDATE_ITEM_BY_ID: "menu/V1/updateItem/",
 
   DELETE_ITEM_BY_ID: "menu/V1/deleteItem/",
@@ -79,18 +77,15 @@ export const API_URL = {
 
   UPDATE_QUESTION_BY_FORM_ID: "feedback/V1/updateFormQuestion/",
 
-
   //SUB-ITEM
 
-  CREATE_SUB_ITEM: 'menu/V1/createSubSectionItem/',
+  CREATE_SUB_ITEM: "menu/V1/createSubSectionItem/",
 
-  GET_ALL_SUB_ITEM_BY_SUBSECTION_ID: 'menu/V1/getAllItemBySubSectionId/',
+  GET_ALL_SUB_ITEM_BY_SUBSECTION_ID: "menu/V1/getAllItemBySubSectionId/",
 
+  GET_SINGLE_SUB_ITEM_BY_ID: "menu/V1/getSingleSubItem/",
 
-  GET_SINGLE_SUB_ITEM_BY_ID: 'menu/V1/getSingleSubItem/',
+  UPDATE_SUB_ITEM_BY_ID: "menu/V1/updateSubItem/",
 
-  UPDATE_SUB_ITEM_BY_ID: 'menu/V1/updateSubItem/'
-
-
-
+  DELETE_SUB_ITEM_BY_ID: "menu/V1/deleteSubItemById/",
 };

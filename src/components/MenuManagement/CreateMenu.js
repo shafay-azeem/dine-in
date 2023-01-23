@@ -33,12 +33,12 @@ const CreateMenu = () => {
   const [searchparams] = useSearchParams();
   let menu_index = searchparams.get("id");
 
-  const { section, setSection } = MenuState();
+  const { section, setSection, sectionList, setSectionList } = MenuState();
   // const [sectionList, setSectionList] = useState(section);
 
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
-  const [hit, setHit] = useState(false);
+  const [hit, setHit] = useState();
   const navigate = useNavigate();
 
   // const [filter, setFilter] = useState(response[menu_index].section);
@@ -50,9 +50,15 @@ const CreateMenu = () => {
     onClose: onCloseSection,
   } = useDisclosure();
 
-  useEffect(() => {
-    getAllSectionByMenuId();
-  }, []);
+  useEffect(
+    () => {
+      // console.log(hit, "hit")
+      // if (hit === 'All' && hit !== 'Active' && hit !== 'InActive' || !hit) {
+      //   return getAllSectionByMenuId()
+      // }
+    },
+    hit ? [sectionList] : []
+  );
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(
@@ -73,26 +79,27 @@ const CreateMenu = () => {
   };
 
   const myfunc = (event) => {
-    // let responseSec = response[menu_index].section;
-    // let filterSec = [];
-    // if (event.target.value === "All") {
-    //   filterSec = responseSec;
-    // }
-    // if (event.target.value === "Active") {
-    //   for (let i = 0; i < responseSec.length; i++) {
-    //     if (responseSec[i].sectionStatus == true) {
-    //       filterSec.push(responseSec[i]);
-    //     }
-    //   }
-    // }
-    // if (event.target.value === "InActive") {
-    //   for (let i = 0; i < responseSec.length; i++) {
-    //     if (responseSec[i].sectionStatus == false) {
-    //       filterSec.push(responseSec[i]);
-    //     }
-    //   }
-    // }
-    // setFilter(filterSec);
+    setHit(event.target.value);
+    let responseSec = sectionList;
+    let filterSec = [];
+    if (event.target.value === "All") {
+      return getAllSectionByMenuId();
+    }
+    if (event.target.value === "Active") {
+      for (let i = 0; i < responseSec.length; i++) {
+        if (responseSec[i].sectionStatus == true) {
+          filterSec.push(responseSec[i]);
+        }
+      }
+    }
+    if (event.target.value === "InActive") {
+      for (let i = 0; i < responseSec.length; i++) {
+        if (responseSec[i].sectionStatus == false) {
+          filterSec.push(responseSec[i]);
+        }
+      }
+    }
+    setFilter(filterSec);
   };
 
   const hitMe = (x) => {

@@ -132,9 +132,9 @@ const MenuDetail = (props) => {
                 <div className="d-flex justify-content-center gap-2 mt-2">
                   {x.itemLabel?.map((y, index) => {
                     return (
-                      <div>
+                      <div className="d-flex">
                         {y.New === "New" ? (
-                          <div>
+                          <div className="me-2">
                             <img
                               src={require("../Assets/new.svg").default}
                               alt="mySvgImage"
@@ -143,7 +143,7 @@ const MenuDetail = (props) => {
                         ) : null}
 
                         {y.Signature === "Signature" ? (
-                          <div>
+                          <div className="me-2">
                             <img
                               src={require("../Assets/signature.svg").default}
                               alt="mySvgImage"
@@ -152,7 +152,7 @@ const MenuDetail = (props) => {
                         ) : null}
 
                         {y.Special_Presentation === "Special Presentation" ? (
-                          <div>
+                          <div className="me-2">
                             <img
                               src={require("../Assets/special.svg").default}
                               alt="mySvgImage"
@@ -167,9 +167,9 @@ const MenuDetail = (props) => {
                 <div className="d-flex justify-content-center gap-2 mt-2">
                   {x.itemWarning?.map((z, index) => {
                     return (
-                      <div>
+                      <div className="d-flex my-1">
                         {z.Alcohol === "Alcohol" ? (
-                          <div>
+                          <div className="me-2">
                             <img
                               src={require("../Assets/Alcohol.svg").default}
                               alt="mySvgImage"

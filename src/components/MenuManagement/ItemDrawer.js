@@ -52,101 +52,36 @@ import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
+import { useToast } from "@chakra-ui/react";
 
 const ItemDrawer = (props) => {
   let section_index = props?.section_index;
-  let subSection_index = props?.subSection_index
-  console.log(subSection_index, 'subsection_index')
-  console.log(section_index, 'section_index')
-  // console.log(section_index, "section_index");
+  let subSection_index = props?.subSection_index;
+  console.log(subSection_index, "subsection_index");
+  console.log(section_index, "section_index");
+
   let section_Or_subSection = props?.fromSection;
-  console.log(section_Or_subSection, 'section_Or_subSection')
+  console.log(section_Or_subSection, "section_Or_subSection");
   let item_index = props?.item_index;
-  // console.log(item_index);
+
+  const toast = useToast();
 
   const {
     isOpen: ModalOpen,
     onOpen: ModalOnOpen,
     onClose: ModalOnClose,
   } = useDisclosure();
-  const { response, setResponse, modifier, setModifier } = MenuState();
+  const { response, setResponse } = MenuState();
 
   const [select, setSelect] = useState();
   const [conversion, setConversion] = useState([]);
 
-  // let subSectionArr =
-  //   response[props.menu_index].section[props?.section_index]?.subSection[
-  //     props?.subsection_index
-  //   ]?.item[props?.item_index];
-
-  // let sectionArr =
-  //   response[props.menu_index].section[props?.section_index]?.item[
-  //     props?.item_index
-  //   ];
-
-  // const itemCondtionState = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemName
-  //   : sectionArr?.itemName;
-  // const initialState = props.subsection_push ? "" : itemCondtionState;
-
-  // const itemCondtionState5 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemPrice
-  //   : sectionArr?.itemPrice;
-  // const initialState5 = props.subsection_push ? "" : itemCondtionState5;
-  // const [itemprice, setItemPrice] = useState(initialState5);
-
-  // const itemCondtionState4 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemCalorie
-  //   : sectionArr?.itemCalorie;
-  // const initialState4 = props.subsection_push ? "" : itemCondtionState4;
-  // const [calorie, setCalorie] = useState(initialState4);
-
-  // const XX = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemPriceOption
-  //   : sectionArr?.itemPriceOption;
-
-  // let A;
-
-  // if (typeof XX === "undefined") {
-  //   if (itemprice != null || calorie != null) {
-  //     A = [{ name: "", price: itemprice, calories: calorie }];
-  //   } else {
-  //     A = [{ name: "", price: "", calories: "" }];
-  //   }
-  // } else {
-  //   A = XX;
-  // }
-
-  const [inputList, setInputList] = useState([
-    { name: "", price: "", calories: "" },
-  ]);
-
   const [demoModifier, setDemoModifier] = useState([{ min: "", max: "" }]);
-
-  // useEffect(() => {
-  //   setInputList(A);
-  // }, [A]);
 
   const [price, setPrice] = useState([]);
   const [rrr, setRrr] = useState([]);
 
   const [video, setVideo] = useState();
-  // let itemModifier = [];
-
-  // const [name, setName] = useState(initialState);
-
-  // const itemCondtionState2 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemDescription
-  //   : sectionArr?.itemDescription;
-  // const initialState2 = props.subsection_push ? "" : itemCondtionState2;
-
-  // const [description, setDescription] = useState(initialState2);
-
-  // const itemCondtionState7 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemLabel
-  //   : sectionArr?.itemLabel;
-  // const initialState7 = props.subsection_push ? "" : itemCondtionState7;
-  // const [select, setSelect] = useState(initialState7);
 
   const [priceConcat, setPriceConcat] = useState();
   const [caloriesConcat, setCaloriesConcat] = useState();
@@ -158,280 +93,12 @@ const ItemDrawer = (props) => {
     "Special_Presentation",
   ]);
 
+  const [modifier, setModifier] = useState([]);
+
   const [warning, setWarning] = useState(["Alcohol", "AlcoholFree"]);
 
   const [conversionWarning, setConversionWarning] = useState([]);
   const [warningState, setWarningState] = useState();
-
-  // const itemCondtionState3 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemPrepTime
-  //   : sectionArr?.itemPrepTime;
-  // const initialState3 = props.subsection_push ? "" : itemCondtionState3;
-  // const [time, setTime] = useState(initialState3);
-
-  // const itemCondtionState6 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemWarning
-  //   : sectionArr?.itemWarning;
-  // const initialState6 = props.subsection_push ? "" : itemCondtionState6;
-  // const [warningState, setWarningState] = useState(initialState6);
-
-  // const itemCondtionState8 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemServingSize
-  //   : sectionArr?.itemServingSize;
-  // const initialState8 = props.subsection_push ? "" : itemCondtionState8;
-  // const [servingsize, setServingSize] = useState(initialState8);
-
-  // const itemCondtionState9 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemNutritionCalories
-  //   : sectionArr?.itemNutritionCalories;
-  // const initialState9 = props.subsection_push ? "" : itemCondtionState9;
-  // const [nutcalories, setNutCalories] = useState(initialState9);
-
-  // const itemCondtionState10 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemCaloriesFat
-  //   : sectionArr?.itemCaloriesFat;
-  // const initialState10 = props.subsection_push ? "" : itemCondtionState10;
-  // const [caloriesfat, setCaloriesFat] = useState(initialState10);
-
-  // const itemCondtionState11 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemTotalFat
-  //   : sectionArr?.itemTotalFat;
-  // const initialState11 = props.subsection_push ? "" : itemCondtionState11;
-  // const [totalfat, setTotalFat] = useState(initialState11);
-
-  // const itemCondtionState12 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemTotalFatPercentage
-  //   : sectionArr?.itemTotalFatPercentage;
-  // const initialState12 = props.subsection_push ? "" : itemCondtionState12;
-  // const [totalfatpercentage, setTotalFatPercentage] = useState(initialState12);
-
-  // const itemCondtionState13 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemSaturatedFat
-  //   : sectionArr?.itemSaturatedFat;
-  // const initialState13 = props.subsection_push ? "" : itemCondtionState13;
-  // const [saturatedFat, setSaturatedFat] = useState(initialState13);
-
-  // const itemCondtionState14 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemSaturatedFatPercentage
-  //   : sectionArr?.itemSaturatedFatPercentage;
-  // const initialState14 = props.subsection_push ? "" : itemCondtionState14;
-  // const [saturatedfatpercentage, setSaturatedFatPercentage] =
-  //   useState(initialState14);
-
-  // const itemCondtionState15 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemTransFat
-  //   : sectionArr?.itemTransFat;
-  // const initialState15 = props.subsection_push ? "" : itemCondtionState15;
-  // const [transfat, setTransFat] = useState(initialState15);
-
-  // const itemCondtionState16 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemTransFatPercentage
-  //   : sectionArr?.itemTransFatPercentage;
-  // const initialState16 = props.subsection_push ? "" : itemCondtionState16;
-  // const [transfatpercentage, setTransFatPercentage] = useState(initialState16);
-
-  // const itemCondtionState17 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemCholesterol
-  //   : sectionArr?.itemCholesterol;
-  // const initialState17 = props.subsection_push ? "" : itemCondtionState17;
-  // const [cholesterol, setCholesterol] = useState(initialState17);
-
-  // const itemCondtionState18 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemCholesterolPercentage
-  //   : sectionArr?.itemCholesterolPercentage;
-  // const initialState18 = props.subsection_push ? "" : itemCondtionState18;
-  // const [cholesterolpercentage, setCholesterolPercentage] =
-  //   useState(initialState18);
-
-  // const itemCondtionState19 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemSodiumPercentage
-  //   : sectionArr?.itemSodiumPercentage;
-  // const initialState19 = props.subsection_push ? "" : itemCondtionState19;
-  // const [sodiumPercentage, setSodiumPercentage] = useState(initialState19);
-
-  // const itemCondtionState20 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemSodium
-  //   : sectionArr?.itemSodium;
-  // const initialState20 = props.subsection_push ? "" : itemCondtionState20;
-  // const [sodium, setSodium] = useState(initialState20);
-
-  // const itemCondtionState21 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemTotalCarbs
-  //   : sectionArr?.itemTotalCarbs;
-  // const initialState21 = props.subsection_push ? "" : itemCondtionState21;
-  // const [totalCarbs, setTotalCarbs] = useState(initialState21);
-
-  // const itemCondtionState22 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemTotalCarbsPercentage
-  //   : sectionArr?.itemTotalCarbsPercentage;
-  // const initialState22 = props.subsection_push ? "" : itemCondtionState22;
-  // const [totalCarbsPercentage, setTotalCarbsPercentage] =
-  //   useState(initialState22);
-
-  // const itemCondtionState23 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemDietaryFiber
-  //   : sectionArr?.itemDietaryFiber;
-  // const initialState23 = props.subsection_push ? "" : itemCondtionState23;
-  // const [dietaryFiber, setDietaryFiber] = useState(initialState23);
-
-  // const itemCondtionState24 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemDietaryFiberPercentage
-  //   : sectionArr?.itemDietaryFiberPercentage;
-  // const initialState24 = props.subsection_push ? "" : itemCondtionState24;
-  // const [dietaryFiberPercentage, setDietaryFiberPercentage] =
-  //   useState(initialState24);
-
-  // const itemCondtionState25 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemSugar
-  //   : sectionArr?.itemSugar;
-  // const initialState25 = props.subsection_push ? "" : itemCondtionState25;
-  // const [sugar, setSugar] = useState(initialState25);
-
-  // const itemCondtionState26 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemSugarPercentage
-  //   : sectionArr?.itemSugarPercentage;
-  // const initialState26 = props.subsection_push ? "" : itemCondtionState26;
-  // const [sugarPercentage, setSugarPercentage] = useState(initialState26);
-
-  // const itemCondtionState27 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemProtein
-  //   : sectionArr?.itemProtein;
-  // const initialState27 = props.subsection_push ? "" : itemCondtionState27;
-  // const [protein, setProtein] = useState(initialState27);
-
-  // const itemCondtionState28 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemProteinPercentage
-  //   : sectionArr?.itemProteinPercentage;
-  // const initialState28 = props.subsection_push ? "" : itemCondtionState28;
-  // const [proteinPercentage, setProteinPercentage] = useState(initialState28);
-
-  // const itemCondtionState29 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemVitaminA
-  //   : sectionArr?.itemVitaminA;
-  // const initialState29 = props.subsection_push ? "" : itemCondtionState29;
-  // const [vitaminA, setVitaminA] = useState(initialState29);
-
-  // const itemCondtionState30 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemVitaminC
-  //   : sectionArr?.itemVitaminC;
-  // const initialState30 = props.subsection_push ? "" : itemCondtionState30;
-  // const [vitaminC, setVitaminC] = useState(initialState30);
-
-  // const itemCondtionState31 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemCalcium
-  //   : sectionArr?.itemCalcium;
-  // const initialState31 = props.subsection_push ? "" : itemCondtionState31;
-  // const [calcium, setCalcium] = useState(initialState31);
-
-  // const itemCondtionState32 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemIron
-  //   : sectionArr?.itemIron;
-  // const initialState32 = props.subsection_push ? "" : itemCondtionState32;
-  // const [iron, setIron] = useState(initialState32);
-
-  // const itemCondtionState33 = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.image
-  //   : sectionArr?.image;
-  // const initialState33 = props.subsection_push ? "" : itemCondtionState33;
-
-  // const [image, setImage] = useState(initialState33);
-
-  // const conditonMade = Number.isInteger(props?.subsection_index)
-  //   ? "subSection"
-  //   : "section";
-
-  // let TOGGLE;
-  // if (conditonMade == "subSection") {
-  //   if (typeof subSectionArr?.active === "undefined") {
-  //     TOGGLE = false;
-  //   } else if (subSectionArr?.active === false) {
-  //     TOGGLE = false;
-  //   } else {
-  //     TOGGLE = true;
-  //   }
-  // } else {
-  //   if (typeof sectionArr?.active === "undefined") {
-  //     TOGGLE = false;
-  //   } else if (sectionArr?.active === false) {
-  //     TOGGLE = false;
-  //   } else {
-  //     TOGGLE = true;
-  //   }
-  // }
-
-  // const [checked, setChecked] = useState(TOGGLE);
-
-  // let soldTag;
-  // if (conditonMade == "subSection") {
-  //   if (typeof subSectionArr?.itemTag === "undefined") {
-  //     soldTag = false;
-  //   } else if (subSectionArr?.itemTag === false) {
-  //     soldTag = false;
-  //   } else {
-  //     soldTag = true;
-  //   }
-  // } else {
-  //   if (typeof sectionArr?.itemTag === "undefined") {
-  //     soldTag = false;
-  //   } else if (sectionArr?.itemTag === false) {
-  //     soldTag = false;
-  //   } else {
-  //     soldTag = true;
-  //   }
-  // }
-
-  // const modifierUpdate = Number.isInteger(props?.subsection_index)
-  //   ? subSectionArr?.itemModifier
-  //   : sectionArr?.itemModifier;
-
-  // let modifierOption;
-  // if (typeof modifierUpdate === "undefined") {
-  //   modifierOption = [{ min: "", max: "" }];
-  // } else {
-  //   modifierOption = modifierUpdate;
-  // }
-
-  // const [sold, setSold] = useState(soldTag);
-
-  // const [state, setState] = useState(modifierOption);
-  // const [demoModifier, setDemoModifier] = useState(modifierOption);
-
-  // const ModifierOptions = (e, index) => {
-  //   const { name, value } = e.target;
-  //   const x = [...demoModifier];
-  //   x[index][name] = value;
-
-  //   setDemoModifier(x);
-  //   for (let y = 0; y < modifier.length; y++) {
-  //     for (let i = 0; i < demoModifier.length; i++) {
-  //       if (modifier[y].Groupname == demoModifier[i].groupname) {
-  //         let Arr = [];
-  //         for (let z = 0; z < modifier[y].modifiers.length; z++) {
-  //           let jsonObj = {};
-
-  //           jsonObj["Name"] = modifier[y].modifiers[z].Name;
-  //           jsonObj["Price"] = modifier[y].modifiers[z].Price;
-  //           jsonObj["Calorie"] = modifier[y].modifiers[z].Calorie;
-  //           Arr.push(jsonObj);
-  //         }
-  //         let responseBody = {
-  //           groupname: demoModifier[i].groupname,
-  //           min: demoModifier[i].min,
-  //           max: demoModifier[i].max,
-  //           reference: Arr,
-  //         };
-
-  //         itemModifier.push(responseBody);
-  //         setState(itemModifier);
-  //       }
-  //     }
-  //   }
-  // };
-
-  // function getTimestampInSeconds() {
-  //   return Math.floor(Date.now() / 1000);
-  // }
-
   const [image, setImage] = useState();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
@@ -465,8 +132,17 @@ const ItemDrawer = (props) => {
   const [saturatedFat, setSaturatedFat] = useState();
   const [caloriesfat, setCaloriesFat] = useState();
   const [servingSize, setServingSize] = useState();
-
+  const [state, setState] = useState();
+  let itemModifier = [];
   const [recommendedItem, setRecommendedItem] = useState();
+
+  const [inputList, setInputList] = useState([
+    { name: "", price: "", calories: "" },
+  ]);
+  if (itemPrice || calorie) {
+    inputList[0].price = itemPrice;
+    inputList[0].calories = calorie;
+  }
 
   let itemData = {
     itemName: name,
@@ -507,19 +183,33 @@ const ItemDrawer = (props) => {
     itemNutritionCalories: nutCalories,
     itemCaloriesFat: caloriesfat,
     itemServingSize: servingSize,
-    itemModifier: demoModifier,
+    itemModifier: state,
   };
 
   const updateItem = async (id) => {
-    if (props?.itemDecider === 'item' && id) {
+    if (props?.itemDecider === "item" && id) {
       await apiFunctions
         .PUT_REQUEST(BASE_URL + API_URL.UPDATE_ITEM_BY_ID + id, itemData)
         .then((res) => {
           if (res.data.success == true) {
-            alert(` ITEM UPDATED SUCCESSFULLY`);
+            // alert(` ITEM UPDATED SUCCESSFULLY`);
+            toast({
+              position: "top",
+              title: ` Item Updated Successfully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
             return true;
           } else {
-            alert(`There Some Error`);
+            // alert(`There Some Error`);
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
             return false;
           }
         });
@@ -528,276 +218,28 @@ const ItemDrawer = (props) => {
         .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUB_ITEM_BY_ID + id, itemData)
         .then((res) => {
           if (res.data.success == true) {
-            alert(`SUB ITEM UPDATED SUCCESSFULLY`);
+            //alert(`SUB ITEM UPDATED SUCCESSFULLY`);
+            toast({
+              position: "top",
+              title: `Sub Item Updated Successfully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
             return true;
           } else {
-            alert(`There Some Error`);
+            //alert(`There Some Error`);
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
             return false;
           }
         });
     }
-
-
-    // if (x != undefined) {
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemName = name;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemDescription = description;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemPrice = itemprice;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemCalorie = calorie;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemLabel = select;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemWarning = warningState;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].active = checked;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemPrepTime = time;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemServingSize = servingsize;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemNutritionCalories = nutcalories;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemCaloriesFat = caloriesfat;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemTotalFat = totalfat;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemTotalFatPercentage = totalfatpercentage;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemSaturatedFat = saturatedFat;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemSaturatedFatPercentage =
-    //     saturatedfatpercentage;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemTransFat = transfat;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemTransFatPercentage = transfatpercentage;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemCholesterol = cholesterol;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemCholesterolPercentage =
-    //     cholesterolpercentage;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemSodium = sodium;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemSodiumPercentage = sodiumPercentage;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemTotalCarbs = totalCarbs;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemTotalCarbsPercentage = totalCarbsPercentage;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemDietaryFiber = dietaryFiber;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemDietaryFiberPercentage =
-    //     dietaryFiberPercentage;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemSugar = sugar;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemSugarPercentage = sugarPercentage;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemProtein = protein;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemProteinPercentage = proteinPercentage;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemVitaminA = vitaminA;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemVitaminC = vitaminC;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemCalcium = calcium;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemIron = iron;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemTag = sold;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemPriceOption = inputList;
-    //   // response[props.menu_index].section[props.section_index].subSection[
-    //   //   props.subsection_index
-    //   // ].item[props.item_index].itemModifierOptions = demoModifier;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].itemModifier = state;
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[props.item_index].image = image;
-    //   if (itemprice != null || calorie != null) {
-    //     let initialArray = inputList;
-    //     if (
-    //       inputList[0].price != itemprice ||
-    //       inputList[0].calories != calorie
-    //     ) {
-    //       inputList[0].price = itemprice;
-    //       inputList[0].calories = calorie;
-    //       setInputList(initialArray);
-    //     }
-    //   }
-    //   setResponse([...response]);
-    //   alert("Item With-In SubSection Updated Successfully");
-    // } else {
-    //   if (itemprice != null || calorie != null) {
-    //     let initialArray = inputList;
-    //     if (
-    //       inputList[0].price != itemprice ||
-    //       inputList[0].calories != calorie
-    //     ) {
-    //       inputList[0].price = itemprice;
-    //       inputList[0].calories = calorie;
-    //       setInputList(initialArray);
-    //     }
-    //   }
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemPrice = itemprice;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemModifier = state;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemLabel = select;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemWarning = warningState;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemName = name;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemDescription = description;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemPrepTime = time;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].active = checked;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemNutritionCalories = nutcalories;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemCaloriesFat = caloriesfat;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemTotalFat = totalfat;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemTotalFatPercentage = totalfatpercentage;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemSaturatedFat = saturatedFat;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemTag = sold;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemTransFat = transfat;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemTransFatPercentage = transfatpercentage;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemCholesterol = cholesterol;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemCholesterolPercentage = cholesterolpercentage;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemSodium = sodium;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemSodiumPercentage = sodiumPercentage;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemTotalCarbs = totalCarbs;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemTotalCarbsPercentage = totalCarbsPercentage;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemDietaryFiber = dietaryFiber;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemDietaryFiberPercentage = dietaryFiberPercentage;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemSugar = sugar;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemSugarPercentage = sugarPercentage;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemProtein = protein;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemProteinPercentage = proteinPercentage;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemVitaminA = vitaminA;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemVitaminC = vitaminC;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemCalcium = calcium;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemIron = iron;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemServingSize = servingsize;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemSaturatedFatPercentage = saturatedfatpercentage;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemPriceOption = inputList;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemModifierOptions = demoModifier;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].image = image;
-    //   response[props.menu_index].section[props.section_index].item[
-    //     props.item_index
-    //   ].itemCalorie = calorie;
-    //   setResponse([...response]);
-    //   alert("Item Updated Successfully");
-    // }
   };
 
   let jsonObj = {};
@@ -843,17 +285,29 @@ const ItemDrawer = (props) => {
   };
 
   const testfunc = async (secid, subsecid) => {
-
     if (section_Or_subSection === "section" && secid) {
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.CREATE_ITEM + secid, itemData)
         .then((res) => {
-          console.log(res.data.item, "item response");
           if (res.data.success == true) {
-            alert(`${res.data.message}`);
+            //alert(`${res.data.message}`);
+            toast({
+              position: "top",
+              title: `Item Created SuccessFully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
             return true;
           } else {
-            alert(`There Some Error`);
+            // alert(`There Some Error`);
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
             return false;
           }
         });
@@ -863,40 +317,39 @@ const ItemDrawer = (props) => {
         .then((res) => {
           console.log(res.data.subSectionItem, "item response");
           if (res.data.success == true) {
-            alert(`SUB ITEM CREATED SUCCESSFULLY`);
+            // alert(`SUB ITEM CREATED SUCCESSFULLY`);
+            toast({
+              position: "top",
+              title: `Sub Item Created SuccessFully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
             return true;
           } else {
-            alert(`There Some Error`);
+            // alert(`There Some Error`);
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
             return false;
           }
         });
     }
-
-
-    // if (x === true) {
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item.push(itemData);
-    //   alert("Single Push On basis Of Conditional Parameters");
-    // } else {
-    //   response[props.menu_index].section[props.section_index].item.push(
-    //     itemData
-    //   );
-    //   alert("Item Created Successfully");
-    // }
   };
 
   useEffect(() => {
-    console.log(props.itemDecider)
-    if (item_index && props?.itemDecider === 'item') {
+    console.log(props.itemDecider);
+    if (item_index && props?.itemDecider === "item") {
       getSingleItemByID();
-    }
-    else if (item_index && props?.itemDecider === 'subItem') {
+    } else if (item_index && props?.itemDecider === "subItem") {
       getSingleSubItemByID();
+    } else {
+      return;
     }
-    else {
-      return
-    };
   }, []);
 
   async function getSingleItemByID() {
@@ -965,9 +418,6 @@ const ItemDrawer = (props) => {
     setServingSize(setVar.itemServingSize);
     setDemoModifier(setVar.itemModifier);
   }
-
-
-
 
   async function getSingleSubItemByID() {
     let getSingleItem = await apiFunctions.GET_REQUEST_BY_ID(
@@ -1062,12 +512,37 @@ const ItemDrawer = (props) => {
     const x = [...demoModifier];
     x[index][name] = value;
     setDemoModifier(x);
+
+    for (let y = 0; y < modifier.length; y++) {
+      for (let i = 0; i < demoModifier.length; i++) {
+        if (modifier[y].Groupname == demoModifier[i].groupname) {
+          let Arr = [];
+          for (let z = 0; z < modifier[y].modifiers.length; z++) {
+            let jsonObj = {};
+            jsonObj["Name"] = modifier[y].modifiers[z].Name;
+            jsonObj["Price"] = modifier[y].modifiers[z].Price;
+            jsonObj["Calorie"] = modifier[y].modifiers[z].Calorie;
+            Arr.push(jsonObj);
+          }
+          let responseBody = {
+            groupname: demoModifier[i].groupname,
+            min: demoModifier[i].min,
+            max: demoModifier[i].max,
+            reference: Arr,
+          };
+          // console.log(itemModifier, 'itemMODIFER')
+          itemModifier.push(responseBody);
+          setState(itemModifier);
+          console.log(state, "states");
+        }
+      }
+    }
   };
 
   const handleModifierInput = () => {
     setDemoModifier([...demoModifier, { min: "", max: "" }]);
-    const list = [...inputList];
-    list.push({ firstName: "", lastName: "" });
+    const list = [...demoModifier];
+    list.push({ min: "", max: "" });
     setInputList(list);
   };
 
@@ -1117,66 +592,6 @@ const ItemDrawer = (props) => {
 
   const videoCapture = (event) => {
     setVideo(event);
-  };
-
-  const myfuncresponse = () => {
-    // var info = {
-    //   Cal: caloriesConcat,
-    //   money: priceConcat,
-    //   siz: size,
-    // };
-    // rrr.push(info);
-  };
-
-  const addPriceOption = (event) => {
-    // setPrice(
-    //   price.concat(
-    //     <HStack m={5}>
-    //       <FormControl>
-    //         <FormLabel fontWeight="400">Size</FormLabel>
-    //         <Input
-    //           borderRadius="8px"
-    //           placeholder="Size"
-    //           type="text"
-    //           onChange={(e) => {
-    //             setSize(e.target.value);
-    //           }}
-    //         />
-    //       </FormControl>
-    //       ,
-    //       <FormControl mt={3}>
-    //         <FormLabel fontWeight="400">Price</FormLabel>
-    //         <InputGroup>
-    //           <InputLeftAddon children="$" />
-    //           <Input
-    //             type="number"
-    //             placeholder="0"
-    //             onChange={(e) => setPriceConcat(e.target.value)}
-    //           />
-    //         </InputGroup>
-    //       </FormControl>
-    //       ,
-    //       <FormControl mt={3}>
-    //         <FormLabel fontWeight="400">Calories</FormLabel>
-    //         <InputGroup>
-    //           <InputLeftAddon children="cal" />
-    //           <Input
-    //             type="number"
-    //             placeholder="0"
-    //             onChange={(e) => setCaloriesConcat(e.target.value)}
-    //           />
-    //         </InputGroup>
-    //       </FormControl>
-    //       <Box marginTop={20}>
-    //         <Switch
-    //           size="sm"
-    //           checked={push}
-    //           onChange={() => myfuncresponse(caloriesConcat, priceConcat, size)}
-    //         ></Switch>
-    //       </Box>
-    //     </HStack>
-    //   )
-    // );
   };
 
   return (
@@ -1263,12 +678,21 @@ const ItemDrawer = (props) => {
                   </FormControl>
 
                   <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Mark as Sold Out</FormLabel>
+                    {/* <FormLabel fontWeight="400">Mark as Sold Out</FormLabel>
                     <SwitchComponent
                       id="switch1"
                       checked={sold}
                       onChange={(e) => setSold(e.target.checked)}
-                    />
+                    /> */}
+
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={sold ? sold : false}
+                        onChange={(e) => setSold(e.target.checked)}
+                      />
+                      Mark as Sold Out
+                    </label>
                   </FormControl>
 
                   <FormControl mt={3}>
@@ -1520,6 +944,10 @@ const ItemDrawer = (props) => {
                         </Box>
                       );
                     })}
+
+                    <Box>
+                      <Text>{JSON.stringify(demoModifier, null, 2)}</Text>
+                    </Box>
                   </Box>
                 </TabPanel>
                 <TabPanel>

@@ -44,6 +44,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { useEffect } from "react";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
+import { useToast } from "@chakra-ui/react";
 
 const SectionDrawer = (props) => {
   let menu_index = props.menu_index;
@@ -52,8 +53,7 @@ const SectionDrawer = (props) => {
   let subSecId = props?.subsection_index;
   let section_Or_subSection = props?.fromSection;
 
-  // console.log(props?.fromSection, "---")
-  console.log(subSecId, "subSecId");
+  const toast = useToast();
 
   const { subSectionList, setSubSectionList, sectionList, setSectionList } =
     MenuState();
@@ -63,17 +63,7 @@ const SectionDrawer = (props) => {
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
 
-  // const { sectionList, setSectionList } = MenuState();
-
-  // const [subSectionList, setSubSectionList] = useState();
   const inputElement = useRef();
-
-  // const initialState = Number.isInteger(props?.subsection_index);
-  // ? response[props.menu_index].section[props?.section_index]?.subSection[
-  //   props?.subsection_index
-  // ]?.sectionName
-  // : response[props.menu_index].section[props?.section_index]?.sectionName;
-  // const [name, setName] = useState(initialState);
 
   const [name, setName] = useState();
   const [description, setDescription] = useState();
@@ -86,29 +76,6 @@ const SectionDrawer = (props) => {
   const [select, setSelect] = useState();
   const [conversion, setConversion] = useState([]);
 
-  // const descriptionState = Number.isInteger(props?.subsection_index);
-  // ? response[props.menu_index].section[props?.section_index]?.subSection[
-  //   props?.subsection_index
-  // ]?.sectionDescription
-  // : response[props.menu_index].section[props?.section_index]
-  //   ?.sectionDescription;
-
-  // const [description, setDescription] = useState(descriptionState);
-
-  // const noteState = Number.isInteger(props?.subsection_index);
-  // ? response[props.menu_index].section[props?.section_index]?.subSection[
-  //   props?.subsection_index
-  // ]?.sectionNote
-  // : response[props.menu_index].section[props?.section_index]?.sectionNote;
-
-  // const [note, setNote] = useState(noteState);
-
-  // const imageState = Number.isInteger(props?.subsection_index);
-  // ? response[props.menu_index].section[props?.section_index]?.subSection[
-  //   props?.subsection_index
-  // ]?.image
-  // : response[props.menu_index].section[props?.section_index]?.image;
-
   let initialArrayFaizy = [...sectionList];
   let initalArrayShafay = sectionList;
   let initalArrayfaiz = initialArrayFaizy?.splice(props?.new_index, 1);
@@ -117,19 +84,6 @@ const SectionDrawer = (props) => {
     ? initialArrayFaizy
     : initalArrayShafay;
   const [arrayDecider, setArrayDecider] = useState(initalArrayDecider);
-
-  // const initalArrayDecider = sectionId;
-
-  // const [image, setImage] = useState(imageState);
-  // const [image, setImage] = useState();
-
-  // const [searchSection, setsearchSection] = useState();
-
-  // const labelState = Number.isInteger(props?.subsection_index);
-  // ? response[props.menu_index].section[props?.section_index]?.subSection[
-  //   props?.subsection_index
-  // ]?.sectionLabel
-  // : response[props.menu_index].section[props?.section_index]?.sectionLabel;
 
   const [pass, setPass] = useState(false);
   const [close, setClose] = useState();
@@ -249,7 +203,14 @@ const SectionDrawer = (props) => {
           sectionData
         );
         if (postRes.data.success == true) {
-          alert(`SUB SECTION CREATED SUCCESSFULLY`);
+          // alert(`SUB SECTION CREATED SUCCESSFULLY`);
+          toast({
+            position: "top",
+            title: `Sub Section Created Successfully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           setSubSectionList(postRes);
           console.log(subSectionList, "setSubSectionList");
         } else {
@@ -266,7 +227,14 @@ const SectionDrawer = (props) => {
           sectionData
         );
         if (putRes.data.success == true) {
-          alert(`Section Created Successfully`);
+          // alert(`Section Created Successfully`);
+          toast({
+            position: "top",
+            title: `Section Created Successfully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           return true;
         } else {
           throw new Error("Error creating section");
@@ -392,8 +360,15 @@ const SectionDrawer = (props) => {
             BASE_URL + API_URL.DELETE_SECTION_BY_ID + secid
           );
           if (deleteRes.data.success == true) {
-            console.log(deleteRes.data.success);
-            alert(`${deleteRes.data.message}`);
+            // console.log(deleteRes.data.success);
+            // alert(`${deleteRes.data.message}`);
+            toast({
+              position: "top",
+              title: `${deleteRes.data.message}`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
             return true;
           } else {
             throw new Error("Error deleting section");
@@ -405,25 +380,37 @@ const SectionDrawer = (props) => {
         alert(`There Some Error: ${err.message}`);
         return false;
       }
-    } else if (subsecid && section_Or_subSection === 'subSection') {
-
+    } else if (subsecid && section_Or_subSection === "subSection") {
       try {
         const putRes = await apiFunctions.PUT_REQUEST(
           BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + subsecid,
           sectionData
         );
         if (putRes.data.success == true) {
-          alert(`Subsection Updated Successfully`);
+          //alert(`Subsection Updated Successfully`);
+          toast({
+            position: "top",
+            title: `Subsection Updated Successfully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           return true;
         } else {
           throw new Error("Error updating section");
         }
       } catch (err) {
-        alert(`There Some Error: ${err.message}`);
+        //alert(`There Some Error: ${err.message}`);
+        toast({
+          position: "top",
+          title: `There Some Error`,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
         return false;
       }
-    }
-    else {
+    } else {
       try {
         const putRes = await apiFunctions.PUT_REQUEST(
           BASE_URL + API_URL.UPDATE_SECTION_BY_ID + secid,
@@ -534,7 +521,7 @@ const SectionDrawer = (props) => {
     setConversion([jsonObj]);
   };
 
-  const handleAlphabetically = (event) => { };
+  const handleAlphabetically = (event) => {};
 
   function deleteimg() {
     setImage(null);
@@ -723,7 +710,7 @@ const SectionDrawer = (props) => {
                   </Select> */}
 
                   {arrayDecider.length > 0 &&
-                    props?.subsection_index == undefined ? (
+                  props?.subsection_index == undefined ? (
                     <FormControl>
                       <label>
                         <input

@@ -7,6 +7,7 @@
   background-position: center;
   background-color: #f1f1f1;
 }
+
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -26,4 +27,36 @@
 
 .cursor {
   cursor: pointer;
+}
+
+.subItemsCards {
+  padding: 0 !important;
+}
+
+.subItemsCards .description {
+  justify-content: space-between;
+}
+
+.subItemsCards .hidden_text {
+  height: 20px;
+  overflow: hidden;
+}
+
+.subItemsCards .show_text {
+  padding: 2px;
+  background-color: #c03;
+  color: #fff;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.subItemsCards .hidden_text.show {
+  height: auto;
+}
+
+.subItemsCards .attributes {
+  min-height: 30px;
+  margin: 10px auto;
 }

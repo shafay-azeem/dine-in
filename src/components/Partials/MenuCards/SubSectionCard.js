@@ -72,7 +72,7 @@ const SubSectionCard = (props) => {
 
   useEffect(() => {
     getAllSubSectionBySectionId();
-  }, []);
+  }, [subSectionList]);
 
   async function getAllSubSectionBySectionId() {
     let getSubSection = await apiFunctions.GET_REQUEST(
@@ -169,13 +169,29 @@ const SubSectionCard = (props) => {
     // setSubSectionList(subSecRes);
   };
 
-  function sectionClick(index) {
+  const sectionClick = async (x, id) => {
+    let sectionData = {
+      sectionStatus: !x.sectionStatus,
+    };
+
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + id, sectionData)
+      .then((res) => {
+        if (res.data.success == true) {
+          alert(`${res.data.message}`);
+          return true;
+        } else {
+          alert(`There Some Error`);
+          return false;
+        }
+      });
+
     // setSatus(index);
     // response[props.menu_index].section[section_index].subSection[index].active =
     //   !response[props.menu_index].section[section_index].subSection[index]
     //     .active;
     // setResponse([...response]);
-  }
+  };
 
   return (
     <>
@@ -281,7 +297,7 @@ const SubSectionCard = (props) => {
                           ) : null}
 
                           <MenuItem
-                            onClick={() => duplicate(x)}
+                            onClick={() => duplicate(x._id)}
                             icon={<AiFillCopy />}
                           >
                             Duplicate
@@ -297,10 +313,10 @@ const SubSectionCard = (props) => {
                       </Menu>
                     </Box>
                     <Box>
-                      {isOpened ? (
-                        <AiOutlineUp onClick={toggle} />
+                      {x.sectionStatus ? (
+                        <AiOutlineUp onClick={() => sectionClick(x, x._id)} />
                       ) : (
-                        <AiOutlineDown onClick={toggle} />
+                        <AiOutlineDown onClick={() => sectionClick(x, x._id)} />
                       )}
                     </Box>
                   </HStack>
@@ -309,14 +325,23 @@ const SubSectionCard = (props) => {
             </Box>
 
             <Box ml="55px">
-              {/* {x.isOpened ? ( */}
+              {x.sectionStatus ? (
+                <ItemCard
+                  fromSection={"subSection"}
+                  // menu_index={menu_index}
+                  // section_index={section_index}
+                  subsection_index={x._id}
+                />
+              ) : null}
+
+              {/* {x.isOpened ? (
               <ItemCard
                 fromSection={"subSection"}
                 // menu_index={menu_index}
                 // section_index={section_index}
                 subsection_index={x._id}
               />
-              {/* ) : null} */}
+              ) : null}} */}
             </Box>
           </Box>
         );

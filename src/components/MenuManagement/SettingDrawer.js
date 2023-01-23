@@ -41,6 +41,7 @@ import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useEffect } from "react";
+import { useToast } from "@chakra-ui/react";
 
 const SettingDrawer = (props) => {
   // DATA AND TIME
@@ -64,6 +65,7 @@ const SettingDrawer = (props) => {
   }
   const { response, setResponse, responseSingleMenu, setResponseSignleMenu } =
     MenuState();
+  const toast = useToast();
 
   // const itemCondtionState5 =
   //   typeof response[props?.index]?.availaibility === "undefined"
@@ -143,7 +145,14 @@ const SettingDrawer = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_MENU_BY_ID + props.index, menuData)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`${res.data.message}`);
+          // alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `${res.data.message}`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           return true;
         } else {
           alert(`There Some Error`);
@@ -226,10 +235,23 @@ const SettingDrawer = (props) => {
       .POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `${res.data.message}`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           return true;
         } else {
-          alert(`There Some Error`);
+          // alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
@@ -254,10 +276,6 @@ const SettingDrawer = (props) => {
     setNote(setVar.menuNote);
     setActive(setVar.menuStatus);
     setInputList(setVar.availaibility);
-
-    console.log(setVar.menuStatus, "setVar.menuStatus");
-    console.log(active, "menuStatus");
-    console.log(name, "bdnme");
   }
 
   return (

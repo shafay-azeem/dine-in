@@ -41,8 +41,10 @@ import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import apiFunctions from "../../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import { useEffect } from "react";
+import { useToast } from "@chakra-ui/react";
 
 const SectionCard = (props) => {
+  const toast = useToast();
   let menu_index = props?.menu_index;
   // console.log(menu_index);
   const { sectionList, setSectionList } = MenuState();
@@ -72,8 +74,10 @@ const SectionCard = (props) => {
   } = useDisclosure();
 
   useEffect(() => {
-    getAllSectionByMenuId();
-  }, []);
+    if (!search) {
+      getAllSectionByMenuId();
+    }
+  }, [sectionList]);
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(
@@ -89,11 +93,25 @@ const SectionCard = (props) => {
       .DELETE_REQUEST(BASE_URL + API_URL.DELETE_SECTION_BY_ID + id)
       .then((res) => {
         if (res.data.success == true) {
-          console.log(res.data.success);
-          alert(`${res.data.message}`);
+          // console.log(res.data.success);
+          // alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `Section Deleted SuccessFully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           return true;
         } else {
-          alert(`There Some Error`);
+          // alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
@@ -112,10 +130,24 @@ const SectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`Section Updated Successfully`);
+          //alert(`Section Updated Successfully`);
+          toast({
+            position: "top",
+            title: `Section Updated Successfully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           return true;
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
@@ -143,12 +175,26 @@ const SectionCard = (props) => {
       .POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + menu_index, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`SECTION DUPLICATED SUCCESSFULLY`).then((res) => {
+          // alert(`SECTION DUPLICATED SUCCESSFULLY`)
+          toast({
+            position: "top",
+            title: `Section Duplicated SuccessFully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          }).then((res) => {
             setSectionList(res);
             return true;
           });
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
@@ -166,10 +212,25 @@ const SectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`${res.data.message}`);
+          // alert(`${res.data.message}`);
+          // toast({
+          //   position: "top",
+          //   title: `Section Updated SuccessFully`,
+          //   status: "success",
+          //   duration: 9000,
+          //   isClosable: true,
+          // });
+          console.log("section status updated");
           return true;
         } else {
-          alert(`There Some Error`);
+          // alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
@@ -194,30 +255,30 @@ const SectionCard = (props) => {
 
   const getIndex = (id) => {
     setCount(id);
-    // setSectionIndex(index);
   };
 
   const clearMessage = () => {
-    // setSearch("");
-    // setSectionList(response[props?.menu_index]?.section);
+    setSearch("");
+    getAllSectionByMenuId();
   };
 
-  // var updatedList = [...sectionList];
-  // let updatedListTemp;
+  var updatedList = [...sectionList];
+  let updatedListTemp;
   const filterBySearch = (event) => {
-    // setSearch(event.target.value);
-    // const query = event.target.value;
-    // if (query === "") {
-    //   setSectionList(response[props?.menu_index]?.section);
-    //   return;
-    // } else {
-    //   updatedListTemp = updatedList.filter((item) => {
-    //     return (
-    //       item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1
-    //     );
-    //   });
-    //   setSectionList(updatedListTemp);
-    // }
+    setSearch(event.target.value);
+    const query = event.target.value;
+    if (query === "") {
+      getAllSectionByMenuId();
+      return;
+    } else {
+      updatedListTemp = updatedList.filter((item) => {
+        return (
+          item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1
+        );
+      });
+      console.log(updatedListTemp);
+      setSectionList(updatedListTemp);
+    }
   };
 
   return (
@@ -396,19 +457,17 @@ const SectionCard = (props) => {
 
                         <Box ml="55px">
                           {x.sectionStatus ? (
-                            <ItemCard fromSection={"section"} section_index={x._id} />
+                            <ItemCard
+                              fromSection={"section"}
+                              section_index={x._id}
+                            />
                           ) : null}
                         </Box>
 
                         <Box ml="55px">
-
-
                           {x.sectionStatus ? (
                             <SubSectionCard section_index={x._id} />
                           ) : null}
-
-
-
                         </Box>
                       </Box>
                     )}

@@ -39,7 +39,7 @@ const SubSecItemCard = (props) => {
                     <Col lg={4} className="imgcol p-0">
                       <div>
                         <img
-                          src={x.image}
+                          src={x.itemImage}
                           className="image mx-auto d-block w-100"
                         />
                       </div>
@@ -88,19 +88,17 @@ const SubSecItemCard = (props) => {
                         {x.itemLabel?.map((y, index) => {
                           return (
                             <div>
-                              {y === "New" ? (
-                                <div>
+                              {y.New === "New" ? (
+                                <div className="me-2">
                                   <img
-                                    src={
-                                      require("../../Assets/new.svg").default
-                                    }
+                                    src={require("../../Assets/new.svg")}
                                     alt="mySvgImage"
                                   />
                                 </div>
                               ) : null}
 
-                              {y === "Signature" ? (
-                                <div>
+                              {y.Signature === "Signature" ? (
+                                <div className="me-2">
                                   <img
                                     src={
                                       require("../../Assets/signature.svg")
@@ -111,8 +109,9 @@ const SubSecItemCard = (props) => {
                                 </div>
                               ) : null}
 
-                              {y === "Special Presentation" ? (
-                                <div>
+                              {y.Special_Presentation ===
+                              "Special Presentation" ? (
+                                <div className="me-2">
                                   <img
                                     src={
                                       require("../../Assets/special.svg")
@@ -129,9 +128,9 @@ const SubSecItemCard = (props) => {
                       <div className="d-flex align-items-center mt-2 gap-2">
                         {x.itemWarning?.map((z, index) => {
                           return (
-                            <div>
-                              {z === "Alcohol" ? (
-                                <div>
+                            <div className="d-flex">
+                              {z.Alcohol === "Alcohol" ? (
+                                <div className="me-2">
                                   <img
                                     src={
                                       require("../../Assets/Alcohol.svg")
@@ -142,7 +141,7 @@ const SubSecItemCard = (props) => {
                                 </div>
                               ) : null}
 
-                              {z === "AlcoholFree" ? (
+                              {z.AlcoholFree === "AlcoholFree" ? (
                                 <div>
                                   <img
                                     src={

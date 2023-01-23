@@ -35,11 +35,10 @@ import {
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
+import { useToast } from "@chakra-ui/react";
 
 const ItemCard = (props) => {
-
   let subSecId = props?.subsection_index;
-  console.log(subSecId);
   let secid = props?.section_index;
   let section_Or_subSection = props?.fromSection;
   // const initialState = Number.isInteger(props?.subsection_index)
@@ -51,7 +50,8 @@ const ItemCard = (props) => {
   // const [itemList, setItemList] = useState(initialState);
   const [itemList, setItemList] = useState();
 
-  const [itemDecider, setItemDecider] = useState()
+  const [itemDecider, setItemDecider] = useState();
+  const toast = useToast();
 
   const [count, setCount] = useState();
   const [checked, setChecked] = useState(false);
@@ -68,20 +68,18 @@ const ItemCard = (props) => {
 
   useEffect(() => {
     if (section_Or_subSection === "section" && secid) {
-      console.log('Inside IF')
-      setItemDecider('item')
+      console.log("Inside IF");
+      setItemDecider("item");
       getAllItemsBySectionId();
-    }
-    else if (section_Or_subSection === "subSection" && subSecId) {
-      console.log(subSecId)
+    } else if (section_Or_subSection === "subSection" && subSecId) {
+      console.log(subSecId);
       console.log("else run");
-      setItemDecider('subItem')
+      setItemDecider("subItem");
       getAllSubItemsBySubSectionId();
     } else {
       return;
     }
-
-  }, []);
+  }, [itemList]);
 
   async function getAllItemsBySectionId() {
     let getItems = await apiFunctions.GET_REQUEST(
@@ -89,11 +87,9 @@ const ItemCard = (props) => {
     );
 
     let res = getItems.data.item;
-    console.log(res, 'res1')
+    console.log(res, "res1");
     setItemList(res);
   }
-
-
 
   async function getAllSubItemsBySubSectionId() {
     let getItems = await apiFunctions.GET_REQUEST(
@@ -101,23 +97,69 @@ const ItemCard = (props) => {
     );
     // console.log(getItems, 'getItems')
     let res = getItems.data.item;
-    console.log(res, 'res2')
+    console.log(res, "res2");
     setItemList(res);
   }
 
   const handleRemove = async (id) => {
-    await apiFunctions
-      .DELETE_REQUEST(BASE_URL + API_URL.DELETE_ITEM_BY_ID + id)
-      .then((res) => {
-        if (res.data.success == true) {
-          console.log(res.data.success);
-          alert(`${res.data.message}`);
-          return true;
-        } else {
-          alert(`There Some Error`);
-          return false;
-        }
-      });
+    if (itemDecider === "item" && id) {
+      await apiFunctions
+        .DELETE_REQUEST(BASE_URL + API_URL.DELETE_ITEM_BY_ID + id)
+        .then((res) => {
+          if (res.data.success == true) {
+            // console.log(res.data.success);
+            // alert(`${res.data.message}`);
+            toast({
+              position: "top",
+              title: `Item Deleted SuccessFully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            return true;
+          } else {
+            //alert(`There Some Error`);
+
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+            return false;
+          }
+        });
+    } else {
+      await apiFunctions
+        .DELETE_REQUEST(BASE_URL + API_URL.DELETE_SUB_ITEM_BY_ID + id)
+        .then((res) => {
+          if (res.data.success == true) {
+            console.log(res.data.success);
+
+            // alert(`${res.data.message}`);
+            toast({
+              position: "top",
+              title: `Sub Item Deleted`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            return true;
+          } else {
+            //alert(`There Some Error`);
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+            return false;
+          }
+        });
+    }
+
     // if (Number.isInteger(props?.subsection_index) == true) {
     //   response[props.menu_index].section[props.section_index].subSection[
     //     props.subsection_index
@@ -138,7 +180,105 @@ const ItemCard = (props) => {
     // }
   };
 
-  const duplicate = (x, y) => {
+  const duplicate = async (x) => {
+    console.log(x);
+    console.log(itemDecider, "gg");
+
+    let itemData = {
+      itemName: x.itemName,
+      itemImage: x.itemImage,
+      itemDescription: x.itemDescription,
+      active: x.active,
+      itemCalorie: x.itemCalorie,
+      itemTag: x.itemTag,
+      itemLabel: x.itemLabel,
+      itemRecommendedItems: x.itemRecommendedItems,
+      itemWarning: x.itemWarning,
+      itemPrepTime: x.itemPrepTime,
+      itemPrice: x.itemPrice,
+      itemCalories: x.itemCalories,
+      itemPriceOption: x.itemPriceOption,
+      itemSaturatedFatPercentage: x.itemSaturatedFatPercentage,
+      itemTransFat: x.itemTransFat,
+      itemTransFatPercentage: x.itemTransFatPercentage,
+      itemCholesterol: x.itemCholesterol,
+      itemCholesterolPercentage: x.itemCholesterolPercentage,
+      itemSodium: x.itemSodium,
+      itemSodiumPercentage: x.itemSodiumPercentage,
+      itemTotalCarbs: x.itemTotalCarbs,
+      itemTotalCarbsPercentage: x.itemTotalCarbsPercentage,
+      itemDietaryFiber: x.itemDietaryFiber,
+      itemDietaryFiberPercentage: x.itemDietaryFiberPercentage,
+      itemSugar: x.itemSugar,
+      itemSugarPercentage: x.itemSugarPercentage,
+      itemProtein: x.itemProtein,
+      itemProteinPercentage: x.itemProteinPercentage,
+      itemVitaminA: x.itemVitaminA,
+      itemVitaminC: x.itemVitaminC,
+      itemIron: x.itemIron,
+      itemCalcium: x.itemCalcium,
+      itemTotalFat: x.itemTotalFat,
+      itemTotalFatPercentage: x.itemTotalFatPercentage,
+      itemSaturatedFat: x.itemSaturatedFat,
+      itemNutritionCalories: x.itemNutritionCalories,
+      itemCaloriesFat: x.itemCaloriesFat,
+      itemServingSize: x.itemServingSize,
+      itemModifier: x.itemModifier,
+    };
+
+    if (itemDecider === "item") {
+      await apiFunctions
+        .POST_REQUEST(BASE_URL + API_URL.CREATE_ITEM + secid, x)
+        .then((res) => {
+          if (res.data.success == true) {
+            //alert(` ITEM CREATED SUCCESSFULLY`);
+            toast({
+              position: "top",
+              title: `Item Created SuccessFully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            return true;
+          } else {
+            //alert(`There Some Error`);
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+            return false;
+          }
+        });
+    } else {
+      await apiFunctions
+        .POST_REQUEST(BASE_URL + API_URL.CREATE_SUB_ITEM + subSecId, x)
+        .then((res) => {
+          if (res.data.success == true) {
+            //alert(`SUB ITEM CREATED SUCCESSFULLY`);
+            toast({
+              position: "top",
+              title: `Sub Item Created SuccessFully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            return true;
+          } else {
+            // alert(`There Some Error`);
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+            return false;
+          }
+        });
+    }
     // function getTimestampInSeconds() {
     //   return Math.floor(Date.now() / 1000);
     // }
@@ -303,9 +443,8 @@ const ItemCard = (props) => {
 
                             <GridItem colStart={4} colEnd={6} h="10" ml="auto">
                               <HStack>
-                                {/* <Box>
+                                <Box>
                                   <InputGroup>
-                                
                                     {x.itemPriceOption[0].price ==
                                     x.itemPriceOption[
                                       x.itemPriceOption.length - 1
@@ -335,10 +474,8 @@ const ItemCard = (props) => {
                                         }
                                       </Box>
                                     )}
-
-                                  
                                   </InputGroup>
-                                </Box> */}
+                                </Box>
 
                                 <BootstrapSwitchButton
                                   checked={x.active}
@@ -382,9 +519,7 @@ const ItemCard = (props) => {
                                       ) : null}
 
                                       <MenuItem
-                                        onClick={() =>
-                                          duplicate(x, props?.subsection_index)
-                                        }
+                                        onClick={() => duplicate(x)}
                                         icon={<AiFillCopy />}
                                       >
                                         Duplicate
