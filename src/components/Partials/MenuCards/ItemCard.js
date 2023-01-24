@@ -79,7 +79,7 @@ const ItemCard = (props) => {
     } else {
       return;
     }
-  }, [itemList]);
+  }, []);
 
   async function getAllItemsBySectionId() {
     let getItems = await apiFunctions.GET_REQUEST(

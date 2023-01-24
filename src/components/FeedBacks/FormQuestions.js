@@ -56,7 +56,7 @@ const FormQuestions = () => {
             //alert(`${res.data.message}`);
             toast({
               position: "top",
-              title: `${res.data.message}`,
+              title: `Form Questions Created SuccessFully`,
               status: "success",
               duration: 9000,
               isClosable: true,
@@ -83,10 +83,9 @@ const FormQuestions = () => {
         )
         .then((res) => {
           if (res.data.success == true) {
-            alert(`${res.data.message}`);
             toast({
               position: "top",
-              title: `${res.data.message}`,
+              title: `Updated SuccessFully`,
               status: "success",
               duration: 9000,
               isClosable: true,
@@ -94,7 +93,6 @@ const FormQuestions = () => {
 
             return true;
           } else {
-            alert(`There Some Error`);
             toast({
               position: "top",
               title: `There Some Error`,
@@ -123,7 +121,15 @@ const FormQuestions = () => {
   };
 
   const handleRemoveClick = async (index, id) => {
-    if (window.confirm("Do You Want To Remove This Question?")) {
+    if (
+      toast({
+        position: "top",
+        title: "Do You Want To Remove This Question?",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      })
+    ) {
       const list = [...inputList];
       list.splice(index, 1);
       setInputList(list);

@@ -73,7 +73,7 @@ const SubSectionCard = (props) => {
 
   useEffect(() => {
     getAllSubSectionBySectionId();
-  }, [subSectionList]);
+  }, []);
 
   async function getAllSubSectionBySectionId() {
     let getSubSection = await apiFunctions.GET_REQUEST(
@@ -344,7 +344,7 @@ const SubSectionCard = (props) => {
                           {isOpenSection ? (
                             <SectionDrawer
                               fromSection={"subSection"}
-                              subSection_index={count}
+                              subsection_index={count}
                               isOpen={isOpenSection}
                               onOpen={onOpenSection}
                               onClose={onCloseSection}

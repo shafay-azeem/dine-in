@@ -6,11 +6,14 @@ import Form from "react-bootstrap/Form";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { MenuState } from "../../context/MenuContext";
+import { API_URL, BASE_URL } from "../../global/Constant";
+import apiFunctions from "../../global/GlobalFunction";
 import "./RestaurantMenu.css";
-
+import { useToast } from "@chakra-ui/react";
 const MenuFeedBackForm = () => {
   const navigate = useNavigate();
 
+  const toast = useToast();
   const ref = useRef(null);
   const {
     feedback,
@@ -20,8 +23,11 @@ const MenuFeedBackForm = () => {
     setCreateFeedback,
     setNotification,
     notification,
+    feedbackFormList,
   } = MenuState();
-  const [demo, setDemo] = useState(createfeedback[activeForm]?.formQuestions);
+  const [demo, setDemo] = useState(
+    feedbackFormList[activeForm]?.formQuestions[0].Questions
+  );
   const [question, setQuestion] = useState();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -55,26 +61,51 @@ const MenuFeedBackForm = () => {
   };
 
   const feedbackSubmit = () => {
+    let id = feedbackFormList[activeForm]._id;
     let formBody = {
-      formId: getTimestampInSeconds(),
-      formName: createfeedback[activeForm].formName,
-      createdDate: new Date().toLocaleDateString(),
-      createdTime: new Date().toTimeString().slice(0, 8),
-      responses: [],
+      formName: feedbackFormList[activeForm].formName,
+      response: [],
     };
 
     for (var i = 0; i < A.length; i++) {
       var jsonObj = {};
       let count = 0;
-      jsonObj["q" + (count + 1)] = A[i];
-      jsonObj["q" + (count + 2)] = B[i];
-      formBody.responses.push(jsonObj);
+      jsonObj["question"] = B[i];
+      jsonObj["answer"] = A[i];
+      formBody.response.push(jsonObj);
     }
-    feedback.push(formBody);
-    setNotification(true);
-    alert("feedback Submitted");
+    // feedback.push(formBody);
 
-    setFeedback([...feedback]);
+    // console.log(formBody)
+
+    apiFunctions
+      .POST_REQUEST(BASE_URL + API_URL.CREATE_RESULT_BY_FORM_ID + id, formBody)
+      .then((res) => {
+        if (res.data.success == true) {
+          // console.log(res.data.formResponse);
+          toast({
+            position: "top",
+            title: `feedback Submitted`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+          // setFeedback(res.data.formResponse)
+          return true;
+        } else {
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+          return false;
+        }
+      });
+    setNotification(true);
+
+    // setFeedback([...feedback]);
   };
 
   return (
@@ -105,10 +136,10 @@ const MenuFeedBackForm = () => {
                             e,
                             index,
                             x.question,
-                            createfeedback[activeForm].formName,
-                            createfeedback[activeForm].createdDate,
-                            createfeedback[activeForm].id,
-                            createfeedback[activeForm].createdTime
+                            feedbackFormList[activeForm].formName
+                            // createfeedback[activeForm].createdDate,
+                            // createfeedback[activeForm].id,
+                            // createfeedback[activeForm].createdTime
                           )
                         }
                       />

@@ -77,7 +77,7 @@ const SectionCard = (props) => {
     if (!search) {
       getAllSectionByMenuId();
     }
-  }, [sectionList]);
+  }, []);
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(

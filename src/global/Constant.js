@@ -70,6 +70,8 @@ export const API_URL = {
 
   DELETE_FEEDBACK_FORM_BY_ID: "feedback/V1/deleteform/",
 
+  UPDATE_FORM_BY_ID: "feedback/V1/updateform/",
+
   //Questions
   CREATE_FORM_QUESTIONS: "feedback/V1/createfeedbackquestion/",
 
@@ -88,4 +90,8 @@ export const API_URL = {
   UPDATE_SUB_ITEM_BY_ID: "menu/V1/updateSubItem/",
 
   DELETE_SUB_ITEM_BY_ID: "menu/V1/deleteSubItemById/",
+
+  //RESULTS
+
+  CREATE_RESULT_BY_FORM_ID: "feedback/V1/createquestions/",
 };

@@ -52,7 +52,7 @@ const SectionDrawer = (props) => {
   let sectionId = props?.section_index;
   let subSecId = props?.subsection_index;
   let section_Or_subSection = props?.fromSection;
-
+  console.log(section_Or_subSection);
   const toast = useToast();
 
   const { subSectionList, setSubSectionList, sectionList, setSectionList } =
@@ -252,12 +252,12 @@ const SectionDrawer = (props) => {
     // }
     // return;
     if (section_Or_subSection === "section" && sectionId) {
+      console.log("ff");
       getSingleSectionById();
     } else if (section_Or_subSection === "subSection" && subSecId) {
-      console.log("else run");
+      console.log("run");
       getSingleSubSectionById();
     } else {
-      return;
     }
   }, []);
 
@@ -265,6 +265,7 @@ const SectionDrawer = (props) => {
     let getSingleSection = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.Get_SUBSECTION_BY_ID + subSecId
     );
+
     let setRes = getSingleSection.data.subSection;
     let propertyNames;
 

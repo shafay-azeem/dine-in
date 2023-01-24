@@ -40,13 +40,14 @@ const Feedbacks = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const handle = useFullScreenHandle();
-  // const { createfeedback, setCreateFeedback, activeForm, setActiveForm } =
-  //   MenuState();
+  // createfeedback, setCreateFeedback,
+  const { feedbackFormList, setFeedbackFormList, activeForm, setActiveForm } =
+    MenuState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showform, setShowForm] = useState(false);
   const [showresult, setShowResult] = useState(true);
 
-  const [feedbackFormList, setFeedbackFormList] = useState();
+  // const [feedbackFormList, setFeedbackFormList] = useState();
   // const [feedbackFormList, setFeedbackFormList] = useState(createfeedback);
 
   const [count, setCount] = useState();
@@ -137,27 +138,31 @@ const Feedbacks = () => {
     });
   };
 
-  const switchStatus = (id) => {
+  const switchStatus = (id, index) => {
     console.log(id);
-    // for (let i = 0; i < createfeedback.length; i++) {
-    //   if (index === i) {
-    //     createfeedback[index].active = !createfeedback[i].active;
-    //     setCreateFeedback([...createfeedback]);
-    //     if (createfeedback[index].active == false) {
-    //       setActiveForm("");
-    //     } else {
-    //       setActiveForm(index);
-    //     }
-    //   } else {
-    //     createfeedback[i].active = false;
-    //     setCreateFeedback([...createfeedback]);
-    //   }
-    // }
+    for (let i = 0; i < feedbackFormList.length; i++) {
+      if (index === i) {
+        feedbackFormList[index].active = !feedbackFormList[i].active;
+        setFeedbackFormList([...feedbackFormList]);
+        if (feedbackFormList[index].active == false) {
+          setActiveForm("");
+        } else {
+          setActiveForm(index);
+        }
+      } else {
+        feedbackFormList[i].active = false;
+        setFeedbackFormList([...feedbackFormList]);
+      }
+    }
   };
 
   useEffect(() => {
     getAllFeedbackForm();
   }, []);
+
+  useEffect(() => {
+    // getAllFeedbackForm();
+  }, [feedbackFormList]);
 
   async function getAllFeedbackForm() {
     let geFeedbackForms = await apiFunctions.GET_REQUEST(
@@ -277,7 +282,7 @@ const Feedbacks = () => {
                         >
                           <BootstrapSwitchButton
                             checked={x.active}
-                            onChange={() => switchStatus(x._id)}
+                            onChange={() => switchStatus(x._id, index)}
                             data-size="xs"
                           />
                           {/* <Box onClick={() => getIndex(x._id)}></Box> */}
