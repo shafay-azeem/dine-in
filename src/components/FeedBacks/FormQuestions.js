@@ -10,10 +10,12 @@ import { Button } from "@chakra-ui/react";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useEffect } from "react";
+import { useToast } from "@chakra-ui/react";
 
 const FormQuestions = () => {
   const { createfeedback, setCreateFeedback } = MenuState();
   const [searchparams] = useSearchParams();
+  const toast = useToast();
 
   let feedback_index = searchparams.get("id");
   console.log(feedback_index, "feedback_index");
@@ -53,11 +55,25 @@ const FormQuestions = () => {
         .then((res) => {
           if (res.data.success == true) {
             console.log(res);
-            alert(`${res.data.message}`);
+            //alert(`${res.data.message}`);
+            toast({
+              position: "top",
+              title: `${res.data.message}`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
 
             return true;
           } else {
-            alert(`There Some Error`);
+            //alert(`There Some Error`);
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
             return false;
           }
         });
@@ -70,9 +86,24 @@ const FormQuestions = () => {
         .then((res) => {
           if (res.data.success == true) {
             alert(`${res.data.message}`);
+            toast({
+              position: "top",
+              title: `${res.data.message}`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+
             return true;
           } else {
             alert(`There Some Error`);
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
             return false;
           }
         });

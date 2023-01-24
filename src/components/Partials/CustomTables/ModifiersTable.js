@@ -21,7 +21,10 @@ import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
 import MenuModifieModal from "../../MenuManagement/MenuModifieModal";
 
+import { useToast } from "@chakra-ui/react";
+
 const ModifiersTable = () => {
+  const toast = useToast();
   const { modifier, setModifier } = MenuState();
   const [count, setCount] = useState();
   const {
@@ -32,7 +35,7 @@ const ModifiersTable = () => {
 
   useEffect(() => {
     getAllModifiers();
-  }, []);
+  }, [modifier]);
 
   async function getAllModifiers() {
     let getModifier = await apiFunctions.GET_REQUEST(
@@ -49,10 +52,25 @@ const ModifiersTable = () => {
       .DELETE_REQUEST(BASE_URL + API_URL.DELETE_MODIFIER_BY_ID + id)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`${res.data.message}`);
+          //alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `${res.data.message}`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+
           return true;
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });

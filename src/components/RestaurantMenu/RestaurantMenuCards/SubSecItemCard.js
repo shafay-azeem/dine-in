@@ -87,11 +87,13 @@ const SubSecItemCard = (props) => {
                       <div className="d-flex align-items-center">
                         {x.itemLabel?.map((y, index) => {
                           return (
-                            <div>
+                            <div className="d-flex my-1">
                               {y.New === "New" ? (
                                 <div className="me-2">
                                   <img
-                                    src={require("../../Assets/new.svg")}
+                                    src={
+                                      require("../../Assets/new.svg").default
+                                    }
                                     alt="mySvgImage"
                                   />
                                 </div>

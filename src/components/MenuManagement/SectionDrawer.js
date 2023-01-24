@@ -244,46 +244,6 @@ const SectionDrawer = (props) => {
         return false;
       }
     }
-
-    // await apiFunctions
-    //   .POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + menu_index, sectionData)
-    //   .then((res) => {
-    //     if (res.data.success == true) {
-    //       console.log(res.data, "res.data");
-    //       alert(`Section Created`);
-    //       return true;
-    //     } else {
-    //       alert(`There Some Error`);
-    //       return false;
-    //     }
-    //   });
-
-    // if (checkedItems === true) {
-    //   let initialArray = [...response[props.menu_index].section];
-    //   for (var i = 0; i < initialArray.length; i++) {
-    //     if (initialArray[i].sectionName == val) {
-    //       response[props.menu_index].section[i].subSection.push(sectionData);
-    //       setResponse([...response]);
-    //       alert("SubSection has been has been added");
-    //     }
-    //   }
-    // } else {
-    //   response[props.menu_index].section.push(sectionData);
-    //   let initialArray = [...response[props.menu_index].section];
-    //   function compare(a, b) {
-    //     if (a.sectionName < b.sectionName) {
-    //       return -1;
-    //     }
-    //     if (a.sectionName > b.sectionName) {
-    //       return 1;
-    //     }
-    //     return 0;
-    //   }
-    //   response[props.menu_index].section.sort(compare);
-
-    //   setResponse([...response]);
-    //   alert("Section Created Successfully");
-    // }
   };
 
   useEffect(() => {
@@ -313,6 +273,7 @@ const SectionDrawer = (props) => {
     setNote(setRes.sectionNote);
     setChecked(setRes.sectionStatus);
     setImage(setRes.sectionImage);
+
     for (let i in setRes.sectionLabel) {
       propertyNames = Object.keys(setRes.sectionLabel[i]);
     }
@@ -355,13 +316,10 @@ const SectionDrawer = (props) => {
         if (postRes.data.success == true) {
           alert(`SUB SECTION CREATED SUCCESSFULLY`);
           setSubSectionList(postRes);
-          console.log(subSectionList, "setSubSectionList");
           const deleteRes = await apiFunctions.DELETE_REQUEST(
             BASE_URL + API_URL.DELETE_SECTION_BY_ID + secid
           );
           if (deleteRes.data.success == true) {
-            // console.log(deleteRes.data.success);
-            // alert(`${deleteRes.data.message}`);
             toast({
               position: "top",
               title: `${deleteRes.data.message}`,
@@ -417,87 +375,31 @@ const SectionDrawer = (props) => {
           sectionData
         );
         if (putRes.data.success == true) {
-          alert(`Section Updated Successfully`);
+          //alert(`Section Updated Successfully`);
+          toast({
+            position: "top",
+            title: `Section Updated Successfully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           return true;
         } else {
           throw new Error("Error updating section");
         }
       } catch (err) {
-        alert(`There Some Error: ${err.message}`);
+        //alert(`There Some Error: ${err.message}`);
+        toast({
+          position: "top",
+          title: `There Some Error`,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
         return false;
       }
     }
   };
-
-  // const updatedSection = (x, y) => {
-  //   if (x == undefined && checkedItems == false) {
-  //     response[props.menu_index].section[props.section_index].sectionName =
-  //       name;
-  //     response[props.menu_index].section[
-  //       props.section_index
-  //     ].sectionDescription = description;
-  //     response[props.menu_index].section[props.section_index].sectionNote =
-  //       note;
-  //     response[props.menu_index].section[props.section_index].sectionLabel =
-  //       select;
-
-  //     response[props.menu_index].section[props.section_index].sectionStatus =
-  //       checked;
-
-  //     response[props.menu_index].section[props.section_index].image = image;
-
-  //     function compare(a, b) {
-  //       if (a.sectionName < b.sectionName) {
-  //         return -1;
-  //       }
-  //       if (a.sectionName > b.sectionName) {
-  //         return 1;
-  //       }
-  //       return 0;
-  //     }
-  //     response[props.menu_index].section.sort(compare);
-
-  //     setResponse([...response]);
-  //     alert("Section Updated Successfully");
-  //   } else if (x > -1) {
-  //     response[props.menu_index].section[props.section_index].subSection[
-  //       props.subsection_index
-  //     ].sectionName = name;
-
-  //     response[props.menu_index].section[props.section_index].subSection[
-  //       props.subsection_index
-  //     ].sectionDescription = description;
-
-  //     response[props.menu_index].section[props.section_index].subSection[
-  //       props.subsection_index
-  //     ].sectionNote = note;
-
-  //     response[props.menu_index].section[props.section_index].subSection[
-  //       props.subsection_index
-  //     ].sectionLabel = select;
-
-  //     response[props.menu_index].section[props.section_index].subSection[
-  //       props.subsection_index
-  //     ].sectionStatus = checked;
-
-  //     response[props.menu_index].section[props.section_index].subSection[
-  //       props.subsection_index
-  //     ].image = image;
-
-  //     setResponse([...response]);
-  //     alert("SubSection Updated Successfully");
-  //   } else {
-  //     let initialArray = [...response[props.menu_index].section];
-  //     for (var i = 0; i < initialArray.length; i++) {
-  //       if (initialArray[i].sectionName == val) {
-  //         response[props.menu_index].section[i].subSection.push(sectionData);
-  //         response[props.menu_index]?.section.splice(y, 1);
-  //         setResponse([...response]);
-  //         alert("SubSection has been has been updated");
-  //       }
-  //     }
-  //   }
-  // };
 
   let jsonObj = {};
 
@@ -882,7 +784,6 @@ const SectionDrawer = (props) => {
               <Button
                 colorScheme="blue"
                 onClick={() => {
-                  // updatedSection(props?.subsection_index, props?.section_index);
                   updatedSection(sectionId, subSecId);
                 }}
               >

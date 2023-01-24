@@ -131,13 +131,14 @@ const SectionCard = (props) => {
       .then((res) => {
         if (res.data.success == true) {
           //alert(`Section Updated Successfully`);
-          toast({
-            position: "top",
-            title: `Section Updated Successfully`,
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
+          // toast({
+          //   position: "top",
+          //   title: `Section Updated Successfully`,
+          //   status: "success",
+          //   duration: 9000,
+          //   isClosable: true,
+          // });
+          console.log("Section Status Updated");
           return true;
         } else {
           //alert(`There Some Error`);
@@ -168,6 +169,7 @@ const SectionCard = (props) => {
       sectionNote: x.sectionNote,
       sectionLabel: x.sectionLabel,
       sectionStatus: x.sectionStatus,
+      sectionToggle: x.sectionToggle,
       sectionImage: x.sectionImage,
     };
 
@@ -205,7 +207,7 @@ const SectionCard = (props) => {
     console.log(x, "x");
 
     let sectionData = {
-      sectionStatus: !x.sectionStatus,
+      sectionToggle: !x.sectionToggle,
     };
 
     await apiFunctions
@@ -440,7 +442,7 @@ const SectionCard = (props) => {
                                 </Box>
 
                                 <Box>
-                                  {x.sectionStatus ? (
+                                  {x.sectionToggle ? (
                                     <AiOutlineUp
                                       onClick={() => sectionClick(x, x._id)}
                                     />
@@ -456,7 +458,7 @@ const SectionCard = (props) => {
                         </Box>
 
                         <Box ml="55px">
-                          {x.sectionStatus ? (
+                          {x.sectionToggle ? (
                             <ItemCard
                               fromSection={"section"}
                               section_index={x._id}
@@ -465,7 +467,7 @@ const SectionCard = (props) => {
                         </Box>
 
                         <Box ml="55px">
-                          {x.sectionStatus ? (
+                          {x.sectionToggle ? (
                             <SubSectionCard section_index={x._id} />
                           ) : null}
                         </Box>

@@ -11,9 +11,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
+import { useToast } from "@chakra-ui/react";
 
 const Login = () => {
   const navigate = useNavigate();
+  const toast = useToast();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [show, setShow] = useState(false);
@@ -35,7 +37,14 @@ const Login = () => {
         .POST_REQUEST(BASE_URL + API_URL.LOGIN, userData)
         .then((res) => {
           if (res.data.success == true) {
-            alert(`${res.data.message}`);
+            //alert(`${res.data.message}`);
+            toast({
+              position: "top",
+              title: `${res.data.message}`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
             setEmail("");
             setPassword("");
             localStorage.setItem("token", res.data.token);
@@ -49,7 +58,14 @@ const Login = () => {
           }
         });
     } catch (err) {
-      alert(`There Some Error ${err}`);
+      //alert(`There Some Error ${err}`);
+      toast({
+        position: "top",
+        title: `There Some Error`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
   return (

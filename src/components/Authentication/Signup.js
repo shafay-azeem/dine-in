@@ -24,6 +24,7 @@ const SignUp = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
+  const toast = useToast();
 
   const submitHandler = async () => {
     // console.log(password, "password");
@@ -43,7 +44,14 @@ const SignUp = () => {
       .then((res) => {
         console.log(res);
         if (res.data.success == true) {
-          alert(`${res.data.message}`);
+          //alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `${res.data.message}`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           // setName("");
           // setEmail("");
           // setPassword("");
@@ -54,7 +62,15 @@ const SignUp = () => {
 
           return true;
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });

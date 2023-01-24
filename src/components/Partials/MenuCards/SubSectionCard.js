@@ -33,10 +33,11 @@ import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import apiFunctions from "../../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import { useEffect } from "react";
+import { useToast } from "@chakra-ui/react";
 
 const SubSectionCard = (props) => {
   //const { subSectionList, setSubSectionList } = MenuState();
-
+  const toast = useToast();
   const [subSectionList, setSubSectionList] = useState();
 
   let menu_index = props.menu_index;
@@ -93,10 +94,25 @@ const SubSectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`Sub Section Updated Successfully`);
+          //alert(`Sub Section Updated Successfully`);
+          toast({
+            position: "top",
+            title: `Sub Section Updated Successfully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+
           return true;
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
@@ -117,6 +133,7 @@ const SubSectionCard = (props) => {
       sectionNote: x.sectionNote,
       sectionLabel: x.sectionLabel,
       sectionStatus: x.sectionStatus,
+      sectionToggle: x.sectionToggle,
       sectionImage: x.sectionImage,
     };
 
@@ -127,12 +144,26 @@ const SubSectionCard = (props) => {
       )
       .then((res) => {
         if (res.data.success == true) {
-          alert(`SUB SECTION DUPLICATED SUCCESSFULLY`).then((res) => {
+          //alert(`SUB SECTION DUPLICATED SUCCESSFULLY`)
+          toast({
+            position: "top",
+            title: `SUB SECTION DUPLICATED SUCCESSFULLY`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          }).then((res) => {
             setSubSectionList(res);
             return true;
           });
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
@@ -157,10 +188,25 @@ const SubSectionCard = (props) => {
       .then((res) => {
         if (res.data.success == true) {
           console.log(res.data.success);
-          alert(`${res.data.message}`);
+          //alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `${res.data.message}`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+
           return true;
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
@@ -171,17 +217,26 @@ const SubSectionCard = (props) => {
 
   const sectionClick = async (x, id) => {
     let sectionData = {
-      sectionStatus: !x.sectionStatus,
+      sectionToggle: !x.sectionToggle,
     };
 
     await apiFunctions
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`${res.data.message}`);
+          //alert(`${res.data.message}`);
+          console.log("SubSetion Toggle Updated");
+
           return true;
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
@@ -313,7 +368,7 @@ const SubSectionCard = (props) => {
                       </Menu>
                     </Box>
                     <Box>
-                      {x.sectionStatus ? (
+                      {x.sectionToggle ? (
                         <AiOutlineUp onClick={() => sectionClick(x, x._id)} />
                       ) : (
                         <AiOutlineDown onClick={() => sectionClick(x, x._id)} />
@@ -325,7 +380,7 @@ const SubSectionCard = (props) => {
             </Box>
 
             <Box ml="55px">
-              {x.sectionStatus ? (
+              {x.sectionToggle ? (
                 <ItemCard
                   fromSection={"subSection"}
                   // menu_index={menu_index}

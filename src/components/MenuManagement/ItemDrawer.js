@@ -191,6 +191,7 @@ const ItemDrawer = (props) => {
       await apiFunctions
         .PUT_REQUEST(BASE_URL + API_URL.UPDATE_ITEM_BY_ID + id, itemData)
         .then((res) => {
+          console.log(res);
           if (res.data.success == true) {
             // alert(` ITEM UPDATED SUCCESSFULLY`);
             toast({
@@ -244,6 +245,7 @@ const ItemDrawer = (props) => {
 
   let jsonObj = {};
   let jsonObjWarning = {};
+
   const selectionMultiSelect = (event) => {
     setSelect(event);
 
@@ -365,7 +367,7 @@ const ItemDrawer = (props) => {
     setImage(setVar.itemImage);
     setDescription(setVar.itemDescription);
     setChecked(setVar.active);
-    setCalorie(setVar.calorie);
+    setCalorie(setVar.itemCalorie);
     setSold(setVar.itemTag);
 
     for (let i in setVar.itemLabel) {
@@ -432,7 +434,7 @@ const ItemDrawer = (props) => {
     setImage(setVar.itemImage);
     setDescription(setVar.itemDescription);
     setChecked(setVar.active);
-    setCalorie(setVar.calorie);
+    setCalorie(setVar.itemCalorie);
     setSold(setVar.itemTag);
 
     for (let i in setVar.itemLabel) {
@@ -501,7 +503,6 @@ const ItemDrawer = (props) => {
   };
 
   const handleRemoveInput = (index) => {
-    console.log(index, "remove index");
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
@@ -541,9 +542,9 @@ const ItemDrawer = (props) => {
 
   const handleModifierInput = () => {
     setDemoModifier([...demoModifier, { min: "", max: "" }]);
-    const list = [...demoModifier];
-    list.push({ min: "", max: "" });
-    setInputList(list);
+    const x = [...demoModifier];
+    x.push({ min: "", max: "" });
+    setDemoModifier(x);
   };
 
   const handleRemoveModifier = (index) => {
@@ -927,7 +928,7 @@ const ItemDrawer = (props) => {
                                 size="xs"
                                 variant="outline"
                                 colorScheme="blue"
-                                onClick={handleRemoveModifier}
+                                onClick={() => handleRemoveModifier(index)}
                                 icon={<CloseIcon />}
                               />
                             )}
@@ -945,9 +946,9 @@ const ItemDrawer = (props) => {
                       );
                     })}
 
-                    <Box>
+                    {/* <Box>
                       <Text>{JSON.stringify(demoModifier, null, 2)}</Text>
-                    </Box>
+                    </Box> */}
                   </Box>
                 </TabPanel>
                 <TabPanel>

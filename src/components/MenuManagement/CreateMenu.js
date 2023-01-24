@@ -119,7 +119,7 @@ const CreateMenu = () => {
           <Grid templateColumns="repeat(5, 1fr)" gap={4} p={5}>
             <GridItem colSpan={2}>Section</GridItem>
             <GridItem colStart={4} colEnd={6}>
-              <AddIcon ml={9} onClick={onOpenSection} />
+              {/* <AddIcon ml={9} onClick={onOpenSection} /> */}
             </GridItem>
           </Grid>
           <SimpleGrid>

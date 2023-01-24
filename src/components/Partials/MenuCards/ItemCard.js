@@ -279,54 +279,6 @@ const ItemCard = (props) => {
           }
         });
     }
-    // function getTimestampInSeconds() {
-    //   return Math.floor(Date.now() / 1000);
-    // }
-    // let itemData = {
-    //   itemId: getTimestampInSeconds(),
-    //   itemName: x.itemName,
-    //   itemDescription: x.itemDescription,
-    //   active: x.active,
-    //   itemPrice: x.itemPrice,
-    //   itemCalorie: x.itemCalorie,
-    //   itemTag: x.itemTag,
-    //   itemLabel: x.itemLabel,
-    //   itemWarning: x.itemWarning,
-    //   itemPrepTime: x.itemPrepTime,
-    //   itemCalories: x.itemCalories,
-    //   itemPriceOption: x.itemPriceOption,
-    //   itemSaturatedFatPercentage: x.itemSaturatedFatPercentage,
-    //   itemTransFat: x.itemTransFat,
-    //   itemTransFatPercentage: x.itemTransFatPercentage,
-    //   itemCholesterol: x.itemCholesterol,
-    //   itemCholesterolPercentage: x.itemCholesterolPercentage,
-    //   itemSodium: x.itemSodium,
-    //   itemSodiumPercentage: x.itemSodiumPercentage,
-    //   itemTotalCarbs: x.itemTotalCarbs,
-    //   itemTotalCarbsPercentage: x.itemTotalCarbsPercentage,
-    //   itemDietaryFiber: x.itemDietaryFiber,
-    //   itemDietaryFiberPercentage: x.itemDietaryFiberPercentage,
-    //   itemSugar: x.itemSugar,
-    //   itemSugarPercentage: x.itemSugarPercentage,
-    //   itemProtein: x.itemProtein,
-    //   itemProteinPercentage: x.itemProteinPercentage,
-    //   itemVitaminA: x.itemVitaminA,
-    //   itemVitaminC: x.itemVitaminC,
-    //   itemIron: x.itemIron,
-    //   itemCalcium: x.itemCalcium,
-    //   itemTotalFat: x.itemTotalFat,
-    //   itemTotalFatPercentage: x.itemTotalFatPercentage,
-    //   itemSaturatedFat: x.itemSaturatedFat,
-    //   itemNutritionCalories: x.itemNutritionCalories,
-    //   itemCaloriesFat: x.itemCaloriesFat,
-    //   itemServingSize: x.itemServingSize,
-    //   image: x.image,
-    // };
-    // if (y != null) {
-    //   setResponse([...response]);
-    // } else {
-    //   setResponse([...response]);
-    // }
   };
 
   const handleDrop = (droppedItem) => {
@@ -341,7 +293,28 @@ const ItemCard = (props) => {
     //   updatedList
     // );
   };
-  function switchStatus(index) {
+  const switchStatus = async (x, id) => {
+    // let itemRes = {
+    //   active: !x.active,
+    // };
+    // await apiFunctions
+    //   .PUT_REQUEST(BASE_URL + API_URL.UPDATE_ITEM_BY_ID + id, itemRes)
+    //   .then((res) => {
+    //     if (res.data.success == true) {
+    //       console.log("Item Status Updated");
+    //       return true;
+    //     } else {
+    //       //alert(`There Some Error`);
+    //       toast({
+    //         position: "top",
+    //         title: `There Some Error`,
+    //         status: "error",
+    //         duration: 9000,
+    //         isClosable: true,
+    //       });
+    //       return false;
+    //     }
+    //   });
     // if (Number.isInteger(props?.subsection_index)) {
     //   response[props.menu_index].section[props.section_index].subSection[
     //     props.subsection_index
@@ -366,7 +339,7 @@ const ItemCard = (props) => {
     //     response[props?.menu_index]?.section[props?.section_index]?.item
     //   );
     // }
-  }
+  };
   return (
     <>
       <DragDropContext onDragEnd={handleDrop}>
@@ -479,7 +452,7 @@ const ItemCard = (props) => {
 
                                 <BootstrapSwitchButton
                                   checked={x.active}
-                                  onChange={() => switchStatus(index)}
+                                  onChange={() => switchStatus(x.x._id)}
                                   data-size="xs"
                                 />
 

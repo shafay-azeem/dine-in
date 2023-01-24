@@ -20,7 +20,10 @@ import { Form } from "react-bootstrap";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 
+import { useToast } from "@chakra-ui/react";
+
 const CreateFormModal = (props) => {
+  const toast = useToast();
   const { createfeedback, setCreateFeedback } = MenuState();
   const [formName, setFormName] = useState();
   const [welcomeMessage, setWelcomeMessage] = useState();
@@ -50,10 +53,25 @@ const CreateFormModal = (props) => {
       .then((res) => {
         if (res.data.success == true) {
           console.log(res.data);
-          alert(`${res.data.message}`);
+          //alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `${res.data.message}`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+
           return true;
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });

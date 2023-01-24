@@ -21,9 +21,12 @@ import { MenuState } from "../../context/MenuContext";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 
+import { useToast } from "@chakra-ui/react";
+
 const MenuModifieModal = (props) => {
   let modifier_id = props.modifier_id;
   // console.log(modifier_id);
+  const toast = useToast();
 
   const [groupName, setGroupName] = useState();
   const [inputList, setInputList] = useState([
@@ -57,11 +60,25 @@ const MenuModifieModal = (props) => {
       .POST_REQUEST(BASE_URL + API_URL.CREATE_MODIFIER, modifierData)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`${res.data.message}`);
+          //alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `${res.data.message}`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
 
           return true;
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
@@ -74,10 +91,25 @@ const MenuModifieModal = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_MODIFIER + id, modifierData)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`${res.data.message}`);
+          //alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `${res.data.message}`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+
           return true;
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });

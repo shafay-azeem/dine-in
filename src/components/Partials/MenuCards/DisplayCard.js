@@ -33,7 +33,6 @@ const DisplayCard = () => {
   const navigate = useNavigate();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { menu } = MenuState();
   const [open, setOpen] = useState(false);
   const [indivisualId, setIndivisualId] = useState();
   const { response, setResponse } = MenuState();
@@ -70,14 +69,7 @@ const DisplayCard = () => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_MENU_BY_ID + id, menuData)
       .then((res) => {
         if (res.data.success == true) {
-          // alert(`${res.data.message}`);
-          toast({
-            position: "top",
-            title: `Menu Updated SuccessFully`,
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
+          console.log("Status Updated");
           return true;
         } else {
           // alert(`There Some Error`);
@@ -134,7 +126,7 @@ const DisplayCard = () => {
       menuDescription: x.menuDescription,
       menuNote: x.menuNote,
       menuStatus: x.menuStatus,
-      availability: x.availability,
+      availaibility: x.availaibility,
     };
 
     await apiFunctions

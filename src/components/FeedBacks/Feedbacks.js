@@ -34,8 +34,10 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
+import { useToast } from "@chakra-ui/react";
 
 const Feedbacks = () => {
+  const toast = useToast();
   const navigate = useNavigate();
   const handle = useFullScreenHandle();
   // const { createfeedback, setCreateFeedback, activeForm, setActiveForm } =
@@ -91,10 +93,25 @@ const Feedbacks = () => {
       .DELETE_REQUEST(BASE_URL + API_URL.DELETE_FEEDBACK_FORM_BY_ID + id)
       .then((res) => {
         if (res.data.success == true) {
-          alert(`${res.data.message}`);
+          //alert(`${res.data.message}`);
+          toast({
+            position: "top",
+            title: `${res.data.message}`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           return true;
         } else {
-          alert(`There Some Error`);
+          //alert(`There Some Error`);
+
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           return false;
         }
       });
