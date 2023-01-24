@@ -38,6 +38,7 @@ import apiFunctions from "../../../global/GlobalFunction";
 import { useToast } from "@chakra-ui/react";
 
 const ItemCard = (props) => {
+  const { itemUpdater, setItemUpdater } = MenuState();
   let subSecId = props?.subsection_index;
   let secid = props?.section_index;
   let section_Or_subSection = props?.fromSection;
@@ -55,6 +56,10 @@ const ItemCard = (props) => {
 
   const [count, setCount] = useState();
   const [checked, setChecked] = useState(false);
+  const [subItemDeleted, setSubItemDeleted] = useState(false);
+  const [itemDeleted, setItemDeleted] = useState(false);
+  const [subItemDuplicate, setSubItemDuplicate] = useState(false);
+  const [itemDuplicate, setItemDuplicate] = useState(false);
 
   const {
     isOpen: isOpenItem,
@@ -71,15 +76,24 @@ const ItemCard = (props) => {
       console.log("Inside IF");
       setItemDecider("item");
       getAllItemsBySectionId();
+      setItemDeleted(false)
+      setItemDuplicate(false)
+      setItemUpdater(false)
+
+
     } else if (section_Or_subSection === "subSection" && subSecId) {
       console.log(subSecId);
       console.log("else run");
       setItemDecider("subItem");
       getAllSubItemsBySubSectionId();
+      setSubItemDeleted(false)
+      setSubItemDuplicate(false)
+      setItemUpdater(false)
+
     } else {
       return;
     }
-  }, []);
+  }, [subItemDeleted, itemDeleted, subItemDuplicate, itemDuplicate, itemUpdater]);
 
   async function getAllItemsBySectionId() {
     let getItems = await apiFunctions.GET_REQUEST(
@@ -116,6 +130,7 @@ const ItemCard = (props) => {
               duration: 9000,
               isClosable: true,
             });
+            setItemDeleted(true)
             return true;
           } else {
             //alert(`There Some Error`);
@@ -145,6 +160,7 @@ const ItemCard = (props) => {
               duration: 9000,
               isClosable: true,
             });
+            setSubItemDeleted(true)
             return true;
           } else {
             //alert(`There Some Error`);
@@ -159,25 +175,6 @@ const ItemCard = (props) => {
           }
         });
     }
-
-    // if (Number.isInteger(props?.subsection_index) == true) {
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item.splice(index, 1);
-    //   setResponse([...response]);
-    //   setItemList(
-    //     response[props.menu_index].section[props.section_index].subSection[
-    //       props.subsection_index
-    //     ].item
-    //   );
-    // } else {
-    //   response[props.menu_index].section[props.section_index].item.splice(
-    //     index,
-    //     1
-    //   );
-    //   setResponse([...response]);
-    //   setItemList(response[props.menu_index].section[props.section_index].item);
-    // }
   };
 
   const duplicate = async (x) => {
@@ -236,6 +233,7 @@ const ItemCard = (props) => {
               duration: 9000,
               isClosable: true,
             });
+            setItemDuplicate(true)
             return true;
           } else {
             //alert(`There Some Error`);
@@ -246,6 +244,7 @@ const ItemCard = (props) => {
               duration: 9000,
               isClosable: true,
             });
+            setSubItemDuplicate(true)
             return false;
           }
         });
@@ -262,6 +261,7 @@ const ItemCard = (props) => {
               duration: 9000,
               isClosable: true,
             });
+            setSubItemDuplicate(true)
             return true;
           } else {
             // alert(`There Some Error`);
@@ -311,6 +311,7 @@ const ItemCard = (props) => {
               duration: 9000,
               isClosable: true,
             });
+            setSubItemDuplicate(true)
             return false;
           }
         });
@@ -320,6 +321,7 @@ const ItemCard = (props) => {
         .then((res) => {
           if (res.data.success == true) {
             console.log("Sub Item Status Updated");
+            setSubItemDuplicate(true)
             return true;
           } else {
             //alert(`There Some Error`);
@@ -334,31 +336,6 @@ const ItemCard = (props) => {
           }
         });
     }
-
-    // if (Number.isInteger(props?.subsection_index)) {
-    //   response[props.menu_index].section[props.section_index].subSection[
-    //     props.subsection_index
-    //   ].item[index].active =
-    //     !response[props.menu_index].section[props.section_index].subSection[
-    //       props.subsection_index
-    //     ].item[index].active;
-    //   setResponse([...response]);
-    //   setItemList(
-    //     response[props.menu_index].section[props.section_index].subSection[
-    //       props.subsection_index
-    //     ].item
-    //   );
-    // } else {
-    //   response[props.menu_index].section[props.section_index].item[
-    //     index
-    //   ].active =
-    //     !response[props.menu_index].section[props.section_index].item[index]
-    //       .active;
-    //   setResponse([...response]);
-    //   setItemList(
-    //     response[props?.menu_index]?.section[props?.section_index]?.item
-    //   );
-    // }
   };
   return (
     <>
@@ -439,9 +416,9 @@ const ItemCard = (props) => {
                                 <Box>
                                   <InputGroup>
                                     {x.itemPriceOption[0].price ==
-                                    x.itemPriceOption[
-                                      x.itemPriceOption.length - 1
-                                    ].price ? (
+                                      x.itemPriceOption[
+                                        x.itemPriceOption.length - 1
+                                      ].price ? (
                                       <Box
                                         style={{
                                           border: "1px solid black",

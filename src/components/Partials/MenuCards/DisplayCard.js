@@ -35,12 +35,20 @@ const DisplayCard = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [open, setOpen] = useState(false);
   const [indivisualId, setIndivisualId] = useState();
-  const { response, setResponse } = MenuState();
+  const { response, setResponse, setCreateMenu, CreateMenu, setUpdateMenu, updateMenu } = MenuState();
   const [menulist, setMenulist] = useState();
+  const [statusMenu, setStatusMenu] = useState(false);
+  const [menuDelete, setMenuDelete] = useState(false);
+  const [menuDuplicate, setMenuDuplicate] = useState(false);
 
   useEffect(() => {
     getAllMenu();
-  }, [response]);
+    setStatusMenu(false)
+    setMenuDelete(false)
+    setMenuDuplicate(false)
+    setUpdateMenu(false)
+    setCreateMenu(false)
+  }, [statusMenu, menuDelete, menuDuplicate, updateMenu, CreateMenu]);
 
   async function getAllMenu() {
     let getMenu = await apiFunctions.GET_REQUEST(
@@ -70,6 +78,7 @@ const DisplayCard = () => {
       .then((res) => {
         if (res.data.success == true) {
           console.log("Status Updated");
+          setStatusMenu(true)
           return true;
         } else {
           // alert(`There Some Error`);
@@ -81,6 +90,7 @@ const DisplayCard = () => {
             duration: 9000,
             isClosable: true,
           });
+
           return false;
         }
       });
@@ -101,6 +111,7 @@ const DisplayCard = () => {
             duration: 9000,
             isClosable: true,
           });
+          setMenuDelete(true)
           return true;
         } else {
           // alert(`There Some Error`);
@@ -140,10 +151,9 @@ const DisplayCard = () => {
             status: "success",
             duration: 9000,
             isClosable: true,
-          }).then((res) => {
-            setResponse(res);
-            return true;
-          });
+          })
+          setMenuDuplicate(true)
+          return true;
         } else {
           // alert(`There Some Error`);
           toast({

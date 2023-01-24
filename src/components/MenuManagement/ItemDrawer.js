@@ -71,7 +71,7 @@ const ItemDrawer = (props) => {
     onOpen: ModalOnOpen,
     onClose: ModalOnClose,
   } = useDisclosure();
-  const { response, setResponse } = MenuState();
+  const { response, setResponse, itemUpdater, setItemUpdater } = MenuState();
 
   const [select, setSelect] = useState();
   const [conversion, setConversion] = useState([]);
@@ -201,6 +201,7 @@ const ItemDrawer = (props) => {
               duration: 9000,
               isClosable: true,
             });
+            setItemUpdater(true)
             return true;
           } else {
             // alert(`There Some Error`);
@@ -227,6 +228,7 @@ const ItemDrawer = (props) => {
               duration: 9000,
               isClosable: true,
             });
+            setItemUpdater(true)
             return true;
           } else {
             //alert(`There Some Error`);
@@ -300,6 +302,7 @@ const ItemDrawer = (props) => {
               duration: 9000,
               isClosable: true,
             });
+            setItemUpdater(true)
             return true;
           } else {
             // alert(`There Some Error`);
@@ -327,6 +330,7 @@ const ItemDrawer = (props) => {
               duration: 9000,
               isClosable: true,
             });
+            setItemUpdater(true)
             return true;
           } else {
             // alert(`There Some Error`);

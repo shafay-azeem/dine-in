@@ -41,11 +41,13 @@ const Feedbacks = () => {
   const navigate = useNavigate();
   const handle = useFullScreenHandle();
   // createfeedback, setCreateFeedback,
-  const { feedbackFormList, setFeedbackFormList, activeForm, setActiveForm } =
+  const { feedbackFormList, setFeedbackFormList, activeForm, setActiveForm, createForm, setCreateForm } =
     MenuState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showform, setShowForm] = useState(false);
   const [showresult, setShowResult] = useState(true);
+  const [getFeedback, setGetFeedback] = useState(false);
+  const [deleteFeedback, setDeleteFeedback] = useState(false);
 
   // const [feedbackFormList, setFeedbackFormList] = useState();
   // const [feedbackFormList, setFeedbackFormList] = useState(createfeedback);
@@ -102,6 +104,7 @@ const Feedbacks = () => {
             duration: 9000,
             isClosable: true,
           });
+          setDeleteFeedback(true)
           return true;
         } else {
           //alert(`There Some Error`);
@@ -158,11 +161,10 @@ const Feedbacks = () => {
 
   useEffect(() => {
     getAllFeedbackForm();
-  }, []);
+    setDeleteFeedback(false)
+    setCreateForm(false)
+  }, [createForm, deleteFeedback]);
 
-  useEffect(() => {
-    // getAllFeedbackForm();
-  }, [feedbackFormList]);
 
   async function getAllFeedbackForm() {
     let geFeedbackForms = await apiFunctions.GET_REQUEST(
@@ -170,8 +172,11 @@ const Feedbacks = () => {
     );
 
     let res = geFeedbackForms.data.feedbackForm;
+
     console.log(res);
     setFeedbackFormList(res);
+    // setGetFeedback(true)
+    // return true
   }
 
   return (

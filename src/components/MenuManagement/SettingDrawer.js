@@ -59,7 +59,7 @@ const SettingDrawer = (props) => {
   //DAY
   const d = new Date();
   let day = weekday[d.getDay()];
-
+  const { setCreateMenu, CreateMenu, updateMenu, setUpdateMenu } = MenuState();
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
@@ -93,6 +93,7 @@ const SettingDrawer = (props) => {
   // const [avail, setEndTime] = useState();
   const [value, setValue] = useState();
 
+
   const conditonMade = props?.menuCreate ? "menuCreate" : "section";
 
   let y = response[props.index];
@@ -125,14 +126,6 @@ const SettingDrawer = (props) => {
   const [active, setActive] = useState();
 
   const updatedMenu = async () => {
-    // response[props.index].menuName = name;
-    // response[props.index].menuDescription = description;
-    // response[props.index].menuNote = note;
-    // response[props.index].menuStatus = active;
-    // response[props.index].createdDate = new Date().toLocaleString();
-    // setResponse([...response]);
-    // alert("Menu Updated Successfully");
-
     let menuData = {
       menuName: name,
       menuDescription: description,
@@ -153,6 +146,7 @@ const SettingDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
+          setUpdateMenu(true)
           return true;
         } else {
           //alert(`There Some Error`);
@@ -168,39 +162,7 @@ const SettingDrawer = (props) => {
       });
   };
   let SpecificDate;
-  // const menuCreate = () => {
-  //   if (value == 2) {
-  //     if (formChecked == false) {
-  //       SpecificDate = {
-  //         startDate: startDate,
-  //         startTime: startTime,
-  //         endDate: endDate,
-  //         endTime: endTime,
-  //       };
-  //     } else {
-  //       SpecificDate = {
-  //         startDate: startDate,
-  //         endDate: endDate,
-  //       };
-  //     }
-  //   } else if (value == 3) {
-  //     SpecificDate = inputList;
-  //   } else {
-  //     SpecificDate = {
-  //       availability: availability,
-  //     };
-  //   }
 
-  //   let menuData = {
-  //     menuName: name,
-  //     menuDescription: description,
-  //     menuNote: note,
-  //   };
-
-  //   response.push(menuData);
-  //   alert("Menu Created");
-  //   setResponse([...response]);
-  // };
 
   let avail;
 
@@ -249,6 +211,7 @@ const SettingDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
+          setCreateMenu(true)
           return true;
         } else {
           // alert(`There Some Error`);

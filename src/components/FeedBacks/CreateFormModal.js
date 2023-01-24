@@ -24,10 +24,11 @@ import { useToast } from "@chakra-ui/react";
 
 const CreateFormModal = (props) => {
   const toast = useToast();
-  const { createfeedback, setCreateFeedback } = MenuState();
+  const { createfeedback, setCreateFeedback, createForm, setCreateForm } = MenuState();
   const [formName, setFormName] = useState();
   const [welcomeMessage, setWelcomeMessage] = useState();
   const [active, setActive] = useState(false);
+  // const [createForm, setCreateForm] = useState(false);
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -61,7 +62,7 @@ const CreateFormModal = (props) => {
             duration: 9000,
             isClosable: true,
           });
-
+          setCreateForm(true)
           return true;
         } else {
           //alert(`There Some Error`);
@@ -105,7 +106,7 @@ const CreateFormModal = (props) => {
                 </FormLabel>
                 <Input
                   placeholder="Could you give us 60 secs?"
-                  // onChange={(e) => setWelcomeMessage(e.target.value)}
+                // onChange={(e) => setWelcomeMessage(e.target.value)}
                 />
               </FormControl>
 

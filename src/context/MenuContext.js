@@ -18,8 +18,18 @@ export const MenuProvider = ({ children }) => {
   const [notification, setNotification] = useState();
 
   const [feedbackFormList, setFeedbackFormList] = useState([]);
-
   const [modifier, setModifier] = useState([]);
+  const [createForm, setCreateForm] = useState(false);
+  const [getResults, setGetResults] = useState(false);
+  const [CreateMenu, setCreateMenu] = useState(false);
+  const [updateMenu, setUpdateMenu] = useState(false);
+  const [UpdatedSection, setUpdatedSection] = useState(false);
+  const [sectionCreated, setSectionCreated] = useState(false);
+
+  const [updatedSubSection, setUpdatedSubSection] = useState(false);
+  const [createSubSection, setCreateSubSection] = useState(false);
+
+  const [itemUpdater, setItemUpdater] = useState(false);
   const [subSectionList, setSubSectionList] = useState([]);
 
   return (
@@ -45,6 +55,32 @@ export const MenuProvider = ({ children }) => {
         setSubSectionList,
         feedbackFormList,
         setFeedbackFormList,
+        setCreateForm,
+        createForm,
+        getResults,
+        setGetResults,
+        setCreateMenu,
+        CreateMenu,
+
+        updateMenu,
+        setUpdateMenu,
+
+        UpdatedSection,
+        setUpdatedSection,
+
+        sectionCreated,
+        setSectionCreated,
+
+        setUpdatedSubSection,
+        updatedSubSection,
+
+        setCreateSubSection,
+        createSubSection,
+
+        setItemUpdater,
+        itemUpdater
+
+
       }}
     >
       {children}

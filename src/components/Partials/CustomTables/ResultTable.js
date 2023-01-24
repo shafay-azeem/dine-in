@@ -26,6 +26,8 @@ const ResultTable = () => {
     setFeedback,
     activeForm,
     setActiveForm,
+    getResults,
+    setGetResults
   } = MenuState();
 
   const {
@@ -36,7 +38,8 @@ const ResultTable = () => {
 
   useEffect(() => {
     getAllResults();
-  }, []);
+    setGetResults(true)
+  }, [getResults]);
 
   async function getAllResults() {
     let getResults = await apiFunctions.GET_REQUEST(

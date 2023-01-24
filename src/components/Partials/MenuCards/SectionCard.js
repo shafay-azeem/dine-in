@@ -47,7 +47,7 @@ const SectionCard = (props) => {
   const toast = useToast();
   let menu_index = props?.menu_index;
   // console.log(menu_index);
-  const { sectionList, setSectionList } = MenuState();
+  const { sectionList, setSectionList, setUpdatedSection, UpdatedSection, setSectionCreated, sectionCreated } = MenuState();
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
   const [count, setCount] = useState();
@@ -55,6 +55,9 @@ const SectionCard = (props) => {
   const [checked, setChecked] = useState();
   const [sectionIndex, setSectionIndex] = useState();
   const [sectionDelete, setSectionDelete] = useState(false);
+  const [sectionDuplicate, setSectionDuplicate] = useState(false);
+  const [sectionUpdate, setSectionUpdate] = useState(false);
+
 
   // const [isOpened, setIsOpened] = useState(false);
 
@@ -78,7 +81,12 @@ const SectionCard = (props) => {
     if (!search) {
       getAllSectionByMenuId();
     }
-  }, [sectionDelete]);
+    setSectionDelete(false)
+    setSectionDuplicate(false)
+    setSectionUpdate(false)
+    setUpdatedSection(false)
+    setSectionCreated(false)
+  }, [sectionDelete, sectionDuplicate, sectionUpdate, UpdatedSection, sectionCreated]);
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(
@@ -94,8 +102,6 @@ const SectionCard = (props) => {
       .DELETE_REQUEST(BASE_URL + API_URL.DELETE_SECTION_BY_ID + id)
       .then((res) => {
         if (res.data.success == true) {
-          // console.log(res.data.success);
-          // alert(`${res.data.message}`);
           toast({
             position: "top",
             title: `Section Deleted SuccessFully`,
@@ -140,6 +146,7 @@ const SectionCard = (props) => {
           //   duration: 9000,
           //   isClosable: true,
           // });
+          setSectionUpdate(true)
           console.log("Section Status Updated");
           return true;
         } else {
@@ -186,10 +193,10 @@ const SectionCard = (props) => {
             status: "success",
             duration: 9000,
             isClosable: true,
-          }).then((res) => {
-            setSectionList(res);
-            return true;
-          });
+          })
+          setSectionDuplicate(true)
+          return true;
+
         } else {
           //alert(`There Some Error`);
           toast({

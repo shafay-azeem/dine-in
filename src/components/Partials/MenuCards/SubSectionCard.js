@@ -36,9 +36,13 @@ import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
 
 const SubSectionCard = (props) => {
-  //const { subSectionList, setSubSectionList } = MenuState();
+  const { setUpdatedSubSection, updatedSubSection, setCreateSubSection, createSubSection } = MenuState();
   const toast = useToast();
   const [subSectionList, setSubSectionList] = useState();
+  const [subSectionUpdate, setSubSectionUpdate] = useState(false);
+
+  const [subSectionDuplicate, setSubSectionDuplicate] = useState(false);
+  const [subSectionDelete, setSubSectionDelete] = useState(false);
 
   let menu_index = props.menu_index;
   let section_index = props?.section_index;
@@ -73,7 +77,13 @@ const SubSectionCard = (props) => {
 
   useEffect(() => {
     getAllSubSectionBySectionId();
-  }, []);
+    setSubSectionUpdate(false)
+    setSubSectionDuplicate(false)
+    setSubSectionDelete(false)
+    setUpdatedSubSection(false)
+    setCreateSubSection(false)
+
+  }, [subSectionUpdate, subSectionDuplicate, subSectionDelete, createSubSection, updatedSubSection]);
 
   async function getAllSubSectionBySectionId() {
     let getSubSection = await apiFunctions.GET_REQUEST(
@@ -102,7 +112,7 @@ const SubSectionCard = (props) => {
             duration: 9000,
             isClosable: true,
           });
-
+          setSubSectionUpdate(true)
           return true;
         } else {
           //alert(`There Some Error`);
@@ -151,10 +161,10 @@ const SubSectionCard = (props) => {
             status: "success",
             duration: 9000,
             isClosable: true,
-          }).then((res) => {
-            setSubSectionList(res);
-            return true;
-          });
+          })
+          setSubSectionDuplicate(true)
+          return true;
+
         } else {
           //alert(`There Some Error`);
           toast({
@@ -196,7 +206,7 @@ const SubSectionCard = (props) => {
             duration: 9000,
             isClosable: true,
           });
-
+          setSubSectionDelete(true)
           return true;
         } else {
           //alert(`There Some Error`);

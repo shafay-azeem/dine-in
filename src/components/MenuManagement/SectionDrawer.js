@@ -55,7 +55,7 @@ const SectionDrawer = (props) => {
   console.log(section_Or_subSection);
   const toast = useToast();
 
-  const { subSectionList, setSubSectionList, sectionList, setSectionList } =
+  const { subSectionList, setSubSectionList, sectionList, setSectionList, setUpdatedSection, UpdatedSection, setSectionCreated, sectionCreated, setCreateSubSection, createSubSection, setUpdatedSubSection, updatedSubSection } =
     MenuState();
 
   const [checkedItems, setCheckedItems] = useState(false);
@@ -87,36 +87,6 @@ const SectionDrawer = (props) => {
 
   const [pass, setPass] = useState(false);
   const [close, setClose] = useState();
-
-  // let x =
-  //   response[props.menu_index].section[props?.section_index]?.subSection[
-  //   props?.subsection_index
-  //   ];
-  // let y = response[props.menu_index].section[props?.section_index];
-  // const conditonMade = Number.isInteger(props?.subsection_index)
-  //   ? "subSection"
-  //   : "section";
-  // let TOGGLE;
-
-  // if (conditonMade == "subSection") {
-  //   if (typeof x?.sectionStatus === "undefined") {
-  //     TOGGLE = false;
-  //   } else if (x?.sectionStatus === false) {
-  //     TOGGLE = false;
-  //   } else {
-  //     TOGGLE = true;
-  //   }
-  // } else {
-  //   if (typeof y?.sectionStatus === "undefined") {
-  //     TOGGLE = false;
-  //   } else if (y?.sectionStatus === false) {
-  //     TOGGLE = false;
-  //   } else {
-  //     TOGGLE = true;
-  //   }
-  // }
-
-  // const [checked, setChecked] = useState(TOGGLE);
 
   const [alphabetical, setalphabetical] = useState(false);
 
@@ -211,7 +181,8 @@ const SectionDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          setSubSectionList(postRes);
+          setCreateSubSection(true)
+          // setSubSectionList(postRes);
           console.log(subSectionList, "setSubSectionList");
         } else {
           throw new Error("Error creating sub-section");
@@ -242,6 +213,7 @@ const SectionDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
+          setSectionCreated(true)
           return true;
         } else {
           throw new Error("Error creating section");
@@ -337,7 +309,8 @@ const SectionDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          setSubSectionList(postRes);
+          setCreateSubSection(true)
+          // setSubSectionList(postRes);
           const deleteRes = await apiFunctions.DELETE_REQUEST(
             BASE_URL + API_URL.DELETE_SECTION_BY_ID + secid
           );
@@ -367,7 +340,6 @@ const SectionDrawer = (props) => {
           sectionData
         );
         if (putRes.data.success == true) {
-          //alert(`Subsection Updated Successfully`);
           toast({
             position: "top",
             title: `Subsection Updated Successfully`,
@@ -375,12 +347,12 @@ const SectionDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
+          setUpdatedSubSection(true)
           return true;
         } else {
           throw new Error("Error updating section");
         }
       } catch (err) {
-        //alert(`There Some Error: ${err.message}`);
         toast({
           position: "top",
           title: `There Some Error`,
@@ -405,6 +377,7 @@ const SectionDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
+          setUpdatedSection(true)
           return true;
         } else {
           throw new Error("Error updating section");
@@ -445,7 +418,7 @@ const SectionDrawer = (props) => {
     setConversion([jsonObj]);
   };
 
-  const handleAlphabetically = (event) => {};
+  const handleAlphabetically = (event) => { };
 
   function deleteimg() {
     setImage(null);
@@ -634,7 +607,7 @@ const SectionDrawer = (props) => {
                   </Select> */}
 
                   {arrayDecider.length > 0 &&
-                  props?.subsection_index == undefined ? (
+                    props?.subsection_index == undefined ? (
                     <FormControl>
                       <label>
                         <input

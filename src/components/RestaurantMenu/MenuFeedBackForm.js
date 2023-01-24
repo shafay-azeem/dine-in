@@ -24,6 +24,8 @@ const MenuFeedBackForm = () => {
     setNotification,
     notification,
     feedbackFormList,
+    getResults,
+    setGetResults
   } = MenuState();
   const [demo, setDemo] = useState(
     feedbackFormList[activeForm]?.formQuestions[0].Questions
@@ -90,6 +92,7 @@ const MenuFeedBackForm = () => {
             duration: 9000,
             isClosable: true,
           });
+          getResults(true)
           // setFeedback(res.data.formResponse)
           return true;
         } else {
