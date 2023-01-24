@@ -181,9 +181,6 @@ const ItemCard = (props) => {
   };
 
   const duplicate = async (x) => {
-    console.log(x);
-    console.log(itemDecider, "gg");
-
     let itemData = {
       itemName: x.itemName,
       itemImage: x.itemImage,

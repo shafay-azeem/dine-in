@@ -144,7 +144,7 @@ const SubSectionCard = (props) => {
       )
       .then((res) => {
         if (res.data.success == true) {
-          //alert(`SUB SECTION DUPLICATED SUCCESSFULLY`)
+          console.log(res, "res");
           toast({
             position: "top",
             title: `SUB SECTION DUPLICATED SUCCESSFULLY`,
@@ -352,7 +352,7 @@ const SubSectionCard = (props) => {
                           ) : null}
 
                           <MenuItem
-                            onClick={() => duplicate(x._id)}
+                            onClick={() => duplicate(x)}
                             icon={<AiFillCopy />}
                           >
                             Duplicate
