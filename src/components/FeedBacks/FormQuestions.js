@@ -44,8 +44,6 @@ const FormQuestions = () => {
   };
 
   const testfunc = async (id) => {
-    console.log(id);
-    console.log(sdf, "sdf");
     if (!sdf) {
       await apiFunctions
         .POST_REQUEST(

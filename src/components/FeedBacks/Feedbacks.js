@@ -137,7 +137,8 @@ const Feedbacks = () => {
     });
   };
 
-  const switchStatus = (index) => {
+  const switchStatus = (id) => {
+    console.log(id);
     // for (let i = 0; i < createfeedback.length; i++) {
     //   if (index === i) {
     //     createfeedback[index].active = !createfeedback[i].active;
@@ -276,7 +277,7 @@ const Feedbacks = () => {
                         >
                           <BootstrapSwitchButton
                             checked={x.active}
-                            onChange={() => switchStatus(index)}
+                            onChange={() => switchStatus(x._id)}
                             data-size="xs"
                           />
                           {/* <Box onClick={() => getIndex(x._id)}></Box> */}
