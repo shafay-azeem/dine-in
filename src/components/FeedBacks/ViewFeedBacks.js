@@ -28,29 +28,29 @@ const ViewFeedBacks = (props) => {
         {feedback?.map((y, index) => {
           return (
             <ModalContent>
-              <ModalHeader>Form {y.formId}</ModalHeader>
+              <ModalHeader>Form {index + 1}</ModalHeader>
               <Divider orientation="horizontal" />
 
               <ModalCloseButton />
 
               <ModalBody pb={6}>
                 <Text fontWeight="500" mb="1rem">
-                  Date : {y.createdDate} {y.createdTime}
+                  Date : {y.createAt}
                 </Text>
 
                 <Text fontWeight="500" mb="1rem">
                   Form : {y.formName}
                 </Text>
 
-                {y.responses?.map((x, index) => {
+                {y.response?.map((x, index) => {
                   return (
                     <Box>
                       <Grid templateColumns="repeat(5, 1fr)" gap={4} p={2}>
                         <GridItem colSpan={2} h="10" p={3}>
-                          <Text fontSize="15px">{x.q2}</Text>
+                          <Text fontSize="15px">{x.question}</Text>
                         </GridItem>
                         <GridItem colStart={4} colEnd={6} h="10" p={3}>
-                          <Text fontSize="15px">{x.q1}</Text>
+                          <Text fontSize="15px">{x.answer}</Text>
                         </GridItem>
                       </Grid>
                       <Divider orientation="horizontal" />
