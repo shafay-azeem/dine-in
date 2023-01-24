@@ -418,7 +418,12 @@ const ItemDrawer = (props) => {
     setNutCalories(setVar.itemNutritionCalories);
     setCaloriesFat(setVar.itemCaloriesFat);
     setServingSize(setVar.itemServingSize);
-    setDemoModifier(setVar.itemModifier);
+
+    if (setVar.itemModifier) {
+      setDemoModifier(setVar.itemModifier);
+    } else {
+      setDemoModifier([{ min: "", max: "" }]);
+    }
   }
 
   async function getSingleSubItemByID() {
@@ -485,7 +490,11 @@ const ItemDrawer = (props) => {
     setNutCalories(setVar.itemNutritionCalories);
     setCaloriesFat(setVar.itemCaloriesFat);
     setServingSize(setVar.itemServingSize);
-    setDemoModifier(setVar.itemModifier);
+    if (setVar.itemModifier) {
+      setDemoModifier(setVar.itemModifier);
+    } else {
+      setDemoModifier([{ min: "", max: "" }]);
+    }
   }
 
   const handleChange = (e, index) => {
@@ -551,6 +560,8 @@ const ItemDrawer = (props) => {
     const x = [...demoModifier];
     x.splice(index, 1);
     setDemoModifier(x);
+
+    setState(x);
   };
 
   useEffect(() => {
@@ -587,8 +598,8 @@ const ItemDrawer = (props) => {
   };
 
   function deleteimg() {
-    // setImage(null);
-    // document.getElementById("img").value = "";
+    setImage(null);
+    document.getElementById("img").value = "";
   }
 
   const videoCapture = (event) => {
@@ -740,14 +751,14 @@ const ItemDrawer = (props) => {
                     </Modal>
                   </FormControl>
 
-                  <FormControl mt={3}>
+                  {/* <FormControl mt={3}>
                     <FormLabel fontWeight="400">Upload Your Video</FormLabel>
                     <Input
                       size="sm"
                       type="file"
                       onChange={(e) => videoCapture(e.target.files[0].name)}
                     />
-                  </FormControl>
+                  </FormControl> */}
 
                   {/* <FormControl mt={3}>
                     <FormLabel fontWeight="400">Section</FormLabel>

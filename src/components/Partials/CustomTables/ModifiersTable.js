@@ -22,6 +22,7 @@ import apiFunctions from "../../../global/GlobalFunction";
 import MenuModifieModal from "../../MenuManagement/MenuModifieModal";
 
 import { useToast } from "@chakra-ui/react";
+import { EditIcon } from "@chakra-ui/icons";
 
 const ModifiersTable = () => {
   const toast = useToast();
@@ -104,28 +105,38 @@ const ModifiersTable = () => {
                   </Td>
 
                   <Td>
-                    <IconButton
+                    <div className="d-flex align-items-center">
+                      {/* <IconButton
                       onClick={() => handleRemove(x._id)}
                       variant="outline"
                       colorScheme="teal"
                       icon={<BsFillTrashFill />}
-                    />
+                    /> */}
+                      <Box className="mt-1 me-2">
+                        <BsFillTrashFill
+                          onClick={() => handleRemove(x._id)}
+                          cursor="pointer"
+                        />
+                      </Box>
 
-                    <Box onClick={() => getIndex(x._id)}>
-                      <IconButton
+                      <Box onClick={() => getIndex(x._id)} className="me-2">
+                        {/* <IconButton
                         onClick={modifierOnOpen}
                         colorScheme="teal"
                         icon={<BsFillTrashFill />}
-                      />
-                    </Box>
-                    {modifierIsOpen ? (
-                      <MenuModifieModal
-                        isOpen={modifierIsOpen}
-                        onOpen={modifierOnOpen}
-                        onClose={modifierOnClose}
-                        modifier_id={count}
-                      />
-                    ) : null}
+                      /> */}
+                        <EditIcon onClick={modifierOnOpen} cursor="pointer" />
+                      </Box>
+
+                      {modifierIsOpen ? (
+                        <MenuModifieModal
+                          isOpen={modifierIsOpen}
+                          onOpen={modifierOnOpen}
+                          onClose={modifierOnClose}
+                          modifier_id={count}
+                        />
+                      ) : null}
+                    </div>
                   </Td>
                 </Tr>
               );

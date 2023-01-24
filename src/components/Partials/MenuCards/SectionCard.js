@@ -54,6 +54,7 @@ const SectionCard = (props) => {
   const [search, setSearch] = useState("");
   const [checked, setChecked] = useState();
   const [sectionIndex, setSectionIndex] = useState();
+  const [sectionDelete, setSectionDelete] = useState(false);
 
   // const [isOpened, setIsOpened] = useState(false);
 
@@ -77,7 +78,7 @@ const SectionCard = (props) => {
     if (!search) {
       getAllSectionByMenuId();
     }
-  }, []);
+  }, [sectionDelete]);
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(
@@ -102,6 +103,7 @@ const SectionCard = (props) => {
             duration: 9000,
             isClosable: true,
           });
+          setSectionDelete(true);
           return true;
         } else {
           // alert(`There Some Error`);

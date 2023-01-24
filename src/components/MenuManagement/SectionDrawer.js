@@ -217,7 +217,14 @@ const SectionDrawer = (props) => {
           throw new Error("Error creating sub-section");
         }
       } catch (err) {
-        alert(`There Some Error: ${err.message}`);
+        //alert(`There Some Error: ${err.message}`);
+        toast({
+          position: "top",
+          title: `There Some Error`,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
         return false;
       }
     } else {
@@ -240,7 +247,14 @@ const SectionDrawer = (props) => {
           throw new Error("Error creating section");
         }
       } catch (err) {
-        alert(`There Some Error: ${err.message}`);
+        //alert(`There Some Error: ${err.message}`);
+        toast({
+          position: "top",
+          title: `There Some Error`,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
         return false;
       }
     }
@@ -315,7 +329,14 @@ const SectionDrawer = (props) => {
           sectionData
         );
         if (postRes.data.success == true) {
-          alert(`SUB SECTION CREATED SUCCESSFULLY`);
+          //alert(`SUB SECTION CREATED SUCCESSFULLY`);
+          toast({
+            position: "top",
+            title: `Sub Section Created SuccessFully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
           setSubSectionList(postRes);
           const deleteRes = await apiFunctions.DELETE_REQUEST(
             BASE_URL + API_URL.DELETE_SECTION_BY_ID + secid
@@ -781,7 +802,7 @@ const SectionDrawer = (props) => {
               Cancel
             </Button>
 
-            {props?.section_index ? (
+            {props?.section_index || props?.subsection_index ? (
               <Button
                 colorScheme="blue"
                 onClick={() => {

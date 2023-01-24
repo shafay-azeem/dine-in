@@ -291,27 +291,50 @@ const ItemCard = (props) => {
     // );
   };
   const switchStatus = async (x, id) => {
-    // let itemRes = {
-    //   active: !x.active,
-    // };
-    // await apiFunctions
-    //   .PUT_REQUEST(BASE_URL + API_URL.UPDATE_ITEM_BY_ID + id, itemRes)
-    //   .then((res) => {
-    //     if (res.data.success == true) {
-    //       console.log("Item Status Updated");
-    //       return true;
-    //     } else {
-    //       //alert(`There Some Error`);
-    //       toast({
-    //         position: "top",
-    //         title: `There Some Error`,
-    //         status: "error",
-    //         duration: 9000,
-    //         isClosable: true,
-    //       });
-    //       return false;
-    //     }
-    //   });
+    let itemRes = {
+      active: !x.active,
+    };
+
+    if (section_Or_subSection === "section") {
+      await apiFunctions
+        .PUT_REQUEST(BASE_URL + API_URL.UPDATE_ITEM_BY_ID + id, itemRes)
+        .then((res) => {
+          if (res.data.success == true) {
+            console.log("Item Status Updated");
+            return true;
+          } else {
+            //alert(`There Some Error`);
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+            return false;
+          }
+        });
+    } else if (section_Or_subSection === "subSection") {
+      await apiFunctions
+        .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUB_ITEM_BY_ID + id, itemRes)
+        .then((res) => {
+          if (res.data.success == true) {
+            console.log("Sub Item Status Updated");
+            return true;
+          } else {
+            //alert(`There Some Error`);
+            toast({
+              position: "top",
+              title: `There Some Error`,
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+            return false;
+          }
+        });
+    }
+
     // if (Number.isInteger(props?.subsection_index)) {
     //   response[props.menu_index].section[props.section_index].subSection[
     //     props.subsection_index
@@ -449,7 +472,7 @@ const ItemCard = (props) => {
 
                                 <BootstrapSwitchButton
                                   checked={x.active}
-                                  onChange={() => switchStatus(x.x._id)}
+                                  onChange={() => switchStatus(x, x._id)}
                                   data-size="xs"
                                 />
 
