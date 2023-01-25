@@ -27,12 +27,12 @@ const MenuFeedBackForm = () => {
     getResults,
     setGetResults
   } = MenuState();
-  const [demo, setDemo] = useState(
-    feedbackFormList[activeForm]?.formQuestions[0].Questions
-  );
+  const [demo, setDemo] = useState([])
+
   const [question, setQuestion] = useState();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
+  const [form, setForm] = useState();
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -43,6 +43,25 @@ const MenuFeedBackForm = () => {
   let D = [];
   let H = [];
   let F = [];
+
+
+  useEffect(() => {
+    getActiveFormQuestions();
+
+  }, []);
+
+  async function getActiveFormQuestions() {
+    try {
+      let getFormQuestions = await apiFunctions.GET_REQUEST(
+        BASE_URL + API_URL.GET_ALL_FORM_QR
+      );
+      let res = getFormQuestions.data.feedbackForm;
+      setDemo(res[0]?.formQuestions[0].Questions)
+      setForm(res[0])
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const handleInputChange = (e, index, c, d, h, f, g) => {
     const { value } = e.target;
@@ -63,9 +82,9 @@ const MenuFeedBackForm = () => {
   };
 
   const feedbackSubmit = () => {
-    let id = feedbackFormList[activeForm]._id;
+    let id = form._id;
     let formBody = {
-      formName: feedbackFormList[activeForm].formName,
+      formName: form.formName,
       response: [],
     };
 
@@ -92,7 +111,7 @@ const MenuFeedBackForm = () => {
             duration: 9000,
             isClosable: true,
           });
-          getResults(true)
+          // getResults(true)
           // setFeedback(res.data.formResponse)
           return true;
         } else {
@@ -139,7 +158,7 @@ const MenuFeedBackForm = () => {
                             e,
                             index,
                             x.question,
-                            feedbackFormList[activeForm].formName
+                            form.formName
                             // createfeedback[activeForm].createdDate,
                             // createfeedback[activeForm].id,
                             // createfeedback[activeForm].createdTime

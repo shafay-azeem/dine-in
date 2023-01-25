@@ -96,4 +96,6 @@ export const API_URL = {
   CREATE_RESULT_BY_FORM_ID: "feedback/V1/createquestions/",
 
   GET_ALL_RESULTS: "feedback/V1/getAllResults",
+
+  GET_ALL_FORM_QR: 'qr/V1/getAllFormQr'
 };

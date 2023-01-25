@@ -141,8 +141,32 @@ const Feedbacks = () => {
     });
   };
 
-  const switchStatus = (id, index) => {
+  const switchStatus = async (id, index, x) => {
     console.log(id);
+    let formbody = {
+      active: !x.active,
+    };
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_FORM_BY_ID + id, formbody)
+      .then((res) => {
+        if (res.data.success == true) {
+          console.log("Status Updated");
+          setCount(true)
+          return true;
+        } else {
+          // alert(`There Some Error`);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+          return false;
+        }
+      });
+
+
     for (let i = 0; i < feedbackFormList.length; i++) {
       if (index === i) {
         feedbackFormList[index].active = !feedbackFormList[i].active;
@@ -163,7 +187,8 @@ const Feedbacks = () => {
     getAllFeedbackForm();
     setDeleteFeedback(false)
     setCreateForm(false)
-  }, [createForm, deleteFeedback]);
+    setCount(false)
+  }, [createForm, deleteFeedback, count]);
 
 
   async function getAllFeedbackForm() {
@@ -287,7 +312,7 @@ const Feedbacks = () => {
                         >
                           <BootstrapSwitchButton
                             checked={x.active}
-                            onChange={() => switchStatus(x._id, index)}
+                            onChange={() => switchStatus(x._id, index, x)}
                             data-size="xs"
                           />
                           {/* <Box onClick={() => getIndex(x._id)}></Box> */}

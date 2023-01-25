@@ -7,17 +7,36 @@ import { useNavigate } from "react-router-dom";
 import { MenuState } from "../../context/MenuContext";
 import { IconButton } from "@chakra-ui/react";
 import { BsArrowLeftShort } from "react-icons/bs";
+import apiFunctions from "../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../global/Constant";
+import { useEffect } from "react";
 
 const MenuPage = () => {
   const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
   const { activeForm } = MenuState();
-
+  const [demo, setDemo] = useState([])
   const menuFeedback = () => {
     navigate({
       pathname: "/menufeedback",
     });
   };
+  useEffect(() => {
+    getActiveFormQuestions();
+
+  }, []);
+
+  async function getActiveFormQuestions() {
+    try {
+      let getFormQuestions = await apiFunctions.GET_REQUEST(
+        BASE_URL + API_URL.GET_ALL_FORM_QR
+      );
+      let res = getFormQuestions.data.feedbackForm;
+      setDemo(res[0]?.formQuestions[0].Questions)
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div>
@@ -38,11 +57,13 @@ const MenuPage = () => {
             >
               Tap To Start
             </Button>
-            {Number.isInteger(activeForm) ? (
+            {demo ? (
               <p onClick={menuFeedback} className="feedback-text">
                 Give Feedback
               </p>
-            ) : null}
+            ) : (null)}
+
+
           </Stack>
           <MenuStartModal show={modalShow} onHide={() => setModalShow(false)} />
         </Col>

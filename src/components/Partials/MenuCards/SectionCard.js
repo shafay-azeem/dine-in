@@ -147,7 +147,6 @@ const SectionCard = (props) => {
           //   isClosable: true,
           // });
           setSectionUpdate(true)
-          console.log("Section Status Updated");
           return true;
         } else {
           //alert(`There Some Error`);
