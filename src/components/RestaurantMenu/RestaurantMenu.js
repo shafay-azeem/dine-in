@@ -73,10 +73,10 @@ const RestaurantMenu = (props) => {
   useEffect(() => {
     getAllSectionByMenuId();
 
-    // if (count) {
-    getAllSubSectionBySectionId();
-    //   setCount("");
-    // }
+    if (count) {
+      getAllSubSectionBySectionId();
+      // setCount("");
+    }
 
     // setState(false);
   }, [count]);

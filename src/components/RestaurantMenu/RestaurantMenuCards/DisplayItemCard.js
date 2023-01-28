@@ -30,9 +30,9 @@ const DisplayItemCard = (props) => {
   };
 
   useEffect(() => {
-    // if (section_index) {
-    getAllItemsBySectionId();
-    // }
+    if (section_index) {
+      getAllItemsBySectionId();
+    }
   }, [section_index]);
 
   async function getAllItemsBySectionId() {
