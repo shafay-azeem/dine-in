@@ -116,5 +116,5 @@ export const API_URL = {
 
   GET_SUB_ITEMS_BY_ITEMID_QR: "qr/V1/getSingleSubItemQr/",
 
-  GET_ALL_FORM_QR: "qr/V1/getAllFormQr",
+  GET_ALL_FORM_QR: "qr/V1/getAllFormQr/",
 };

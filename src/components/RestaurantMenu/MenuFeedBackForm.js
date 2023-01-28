@@ -11,7 +11,8 @@ import apiFunctions from "../../global/GlobalFunction";
 import "./RestaurantMenu.css";
 import { useToast } from "@chakra-ui/react";
 import Spinner from "react-bootstrap/Spinner";
-const MenuFeedBackForm = () => {
+const MenuFeedBackForm = (props) => {
+  let userId = props?.userId
   const navigate = useNavigate();
 
   const toast = useToast();
@@ -53,7 +54,7 @@ const MenuFeedBackForm = () => {
     try {
       setLoading(false);
       let getFormQuestions = await apiFunctions.GET_REQUEST(
-        BASE_URL + API_URL.GET_ALL_FORM_QR
+        BASE_URL + API_URL.GET_ALL_FORM_QR + userId
       );
 
       if (getFormQuestions.data.feedbackForm.length == 0) {

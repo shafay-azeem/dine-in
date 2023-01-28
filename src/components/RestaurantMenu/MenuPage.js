@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Col, Row, Stack } from "react-bootstrap";
 import "./MenuPage.css";
 import MenuStartModal from "./Modal/MenuStartModal";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { MenuState } from "../../context/MenuContext";
 import { IconButton } from "@chakra-ui/react";
 import { BsArrowLeftShort } from "react-icons/bs";
@@ -38,6 +38,9 @@ const MenuPage = (props) => {
   const menuFeedback = () => {
     navigate({
       pathname: "/menufeedback",
+      search: createSearchParams({
+        userId
+      }).toString(),
     });
   };
   useEffect(() => {
@@ -47,7 +50,7 @@ const MenuPage = (props) => {
   async function getActiveFormQuestions() {
     try {
       let getFormQuestions = await apiFunctions.GET_REQUEST(
-        BASE_URL + API_URL.GET_ALL_FORM_QR
+        BASE_URL + API_URL.GET_ALL_FORM_QR + userId
       );
       let res = getFormQuestions.data.feedbackForm;
       if (!res[0]?.formQuestions[0]?.Questions) {
