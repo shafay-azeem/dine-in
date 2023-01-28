@@ -36,7 +36,7 @@ const ModifiersTable = () => {
 
   useEffect(() => {
     getAllModifiers();
-  }, [modifier]);
+  }, []);
 
   async function getAllModifiers() {
     let getModifier = await apiFunctions.GET_REQUEST(

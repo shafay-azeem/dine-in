@@ -41,8 +41,16 @@ const Feedbacks = () => {
   const navigate = useNavigate();
   const handle = useFullScreenHandle();
   // createfeedback, setCreateFeedback,
-  const { feedbackFormList, setFeedbackFormList, activeForm, setActiveForm, createForm, setCreateForm } =
-    MenuState();
+  const {
+    feedbackFormList,
+    setFeedbackFormList,
+    activeForm,
+    setActiveForm,
+    createForm,
+    setCreateForm,
+    feedback,
+    setFeedback,
+  } = MenuState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showform, setShowForm] = useState(false);
   const [showresult, setShowResult] = useState(true);
@@ -104,7 +112,7 @@ const Feedbacks = () => {
             duration: 9000,
             isClosable: true,
           });
-          setDeleteFeedback(true)
+          setDeleteFeedback(true);
           return true;
         } else {
           //alert(`There Some Error`);
@@ -141,30 +149,33 @@ const Feedbacks = () => {
     });
   };
 
-  const switchStatus = (id, index) => {
-    console.log(id);
-    for (let i = 0; i < feedbackFormList.length; i++) {
-      if (index === i) {
-        feedbackFormList[index].active = !feedbackFormList[i].active;
-        setFeedbackFormList([...feedbackFormList]);
-        if (feedbackFormList[index].active == false) {
-          setActiveForm("");
+  const switchStatus = async (id, index, x) => {
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDTAE_FORM_STATUS + id)
+      .then((res) => {
+        console.log(res, "res");
+        if (res.status == 200) {
+          console.log("Status Updated");
+          setCount(true);
+          return true;
         } else {
-          setActiveForm(index);
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+          return false;
         }
-      } else {
-        feedbackFormList[i].active = false;
-        setFeedbackFormList([...feedbackFormList]);
-      }
-    }
+      });
   };
 
   useEffect(() => {
     getAllFeedbackForm();
-    setDeleteFeedback(false)
-    setCreateForm(false)
+    setDeleteFeedback(false);
+    setCreateForm(false);
   }, [createForm, deleteFeedback]);
-
 
   async function getAllFeedbackForm() {
     let geFeedbackForms = await apiFunctions.GET_REQUEST(
@@ -193,26 +204,26 @@ const Feedbacks = () => {
         {showresult ? (
           <Grid templateColumns="repeat(4, 1fr)" gap={6} m={10}>
             <GridItem w="100%" h="10" colSpan={1}>
-              <Text fontWeight={600}>0 results Listed</Text>
+              <Text fontWeight={600}>{feedback?.length} results Listed</Text>
             </GridItem>
-            <GridItem w="100%" h="10">
+            {/* <GridItem w="100%" h="10">
               <Input
                 placeholder="Select Date and Time"
                 size="md"
                 type="datetime-local"
                 bg="white"
               />
-            </GridItem>
-            <GridItem w="100%" h="10">
+            </GridItem> */}
+            {/* <GridItem w="100%" h="10">
               <Input
                 placeholder="Select Date and Time"
                 size="md"
                 type="datetime-local"
                 bg="white"
               />
-            </GridItem>
+            </GridItem> */}
 
-            <GridItem w="100%" h="10">
+            {/* <GridItem w="100%" h="10">
               <Stack direction={["column", "row"]} spacing="24px">
                 <Box w="100px" h="40px">
                   <CustomButton
@@ -230,14 +241,16 @@ const Feedbacks = () => {
                   />
                 </Box>
               </Stack>
-            </GridItem>
+            </GridItem> */}
           </Grid>
         ) : null}
 
         {showform ? (
           <Grid templateColumns="repeat(5, 1fr)" gap={4} m={10}>
             <GridItem colSpan={2} h="10">
-              <Text fontWeight={600}>0 forms listed</Text>
+              <Text fontWeight={600}>
+                {feedbackFormList?.length} forms listed
+              </Text>
             </GridItem>
             <GridItem colStart={4} colEnd={6} h="10" textAlign="right">
               <CustomButton click={formOnOpen} btnText={"Create Form"} />

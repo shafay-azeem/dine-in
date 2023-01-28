@@ -11,12 +11,13 @@ import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
+import Spinner from "react-bootstrap/Spinner";
 
 const FormQuestions = () => {
   const { createfeedback, setCreateFeedback } = MenuState();
   const [searchparams] = useSearchParams();
   const toast = useToast();
-
+  const [loading, setLoading] = useState(false);
   let feedback_index = searchparams.get("id");
   console.log(feedback_index, "feedback_index");
   const [sdf, setSdf] = useState();
@@ -124,7 +125,7 @@ const FormQuestions = () => {
     if (
       toast({
         position: "top",
-        title: "Do You Want To Remove This Question?",
+        title: "Question Has Been Removed Press Save",
         status: "success",
         duration: 9000,
         isClosable: true,
@@ -151,91 +152,98 @@ const FormQuestions = () => {
     let getFormQuestions = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_ALL_QUESTIONS_BY_FORMID + feedback_index
     );
-
+    if (getFormQuestions.data.formQuestion.length == 0) {
+      return setLoading(true);
+    }
     let setVar = getFormQuestions.data.formQuestion[0].Questions;
     // let id = getFormQuestions.data.formQuestion[0]._id;
     setSdf(getFormQuestions.data.formQuestion[0]?._id);
     // console.log(getFormQuestions.data., "ioioio");
-    console.log(setVar);
+    console.log(setVar, "ddd");
     setInputList(setVar);
-
-    // console.log(setVar.menuStatus, "setVar.menuStatus");
-    // console.log(active, "menuStatus");
-    // console.log(name, "bdnme");
+    setLoading(true);
   }
 
   return (
     <div className="container">
-      {inputList?.map((x, i) => {
-        return (
-          <Card
-            key={i}
-            className="feedBack-Card mx-auto mt-3"
-            style={{ width: "50rem" }}
-          >
-            <Card.Body>
-              <Row>
-                <Col lg={10}>
-                  <Form>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Question {i + 1}</Form.Label>
-                      <Form.Control
-                        type="text"
-                        name="question"
-                        placeholder="Add Your Question"
-                        size="sm"
-                        value={x.question}
-                        onChange={(e) => handleInputChange(e, i)}
-                      />
-                    </Form.Group>
+      {loading ? (
+        <div>
+          {inputList?.map((x, i) => {
+            return (
+              <Card
+                key={i}
+                className="feedBack-Card mx-auto mt-3"
+                style={{ width: "50rem" }}
+              >
+                <Card.Body>
+                  <Row>
+                    <Col lg={10}>
+                      <Form>
+                        <Form.Group className="mb-3">
+                          <Form.Label>Question {i + 1}</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="question"
+                            placeholder="Add Your Question"
+                            size="sm"
+                            value={x.question}
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </Form.Group>
 
-                    <Form.Group className="mb-3">
-                      <Form.Control
-                        type="text"
-                        name="questionType"
-                        placeholder="Type"
-                        value={x.questionType}
-                        onChange={(e) => handleInputChange(e, i)}
-                      />
-                    </Form.Group>
-                  </Form>
-                </Col>
-                <Col lg={2} className="d-flex align-items-center">
-                  {inputList.length !== 1 && (
-                    <BsFillTrashFill
-                      onClick={() => handleRemoveClick(i)}
-                      style={{ cursor: "pointer" }}
-                    />
-                  )}
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  {inputList.length - 1 === i && (
-                    <CustomButton
-                      click={handleAddClick}
-                      btnText={"Add Question"}
-                      size={"sm"}
-                      mb={2}
-                    />
-                  )}
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        );
-      })}
+                        <Form.Group className="mb-3">
+                          <Form.Control
+                            type="text"
+                            name="questionType"
+                            placeholder="Type"
+                            value={x.questionType}
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </Form.Group>
+                      </Form>
+                    </Col>
+                    <Col lg={2} className="d-flex align-items-center">
+                      {inputList.length !== 1 && (
+                        <BsFillTrashFill
+                          onClick={() => handleRemoveClick(i)}
+                          style={{ cursor: "pointer" }}
+                        />
+                      )}
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      {inputList.length - 1 === i && (
+                        <CustomButton
+                          click={handleAddClick}
+                          btnText={"Add Question"}
+                          size={"sm"}
+                          mb={2}
+                        />
+                      )}
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Card>
+            );
+          })}
 
-      <div>
-        <Button
-          colorScheme="teal"
-          size="sm"
-          onClick={() => testfunc(feedback_index)}
-          style={{ marginLeft: "76%", marginTop: "1%", marginBottom: "2%" }}
-        >
-          Save
-        </Button>
-      </div>
+          <div>
+            <Button
+              colorScheme="teal"
+              size="sm"
+              onClick={() => testfunc(feedback_index)}
+              style={{ marginLeft: "76%", marginTop: "1%", marginBottom: "2%" }}
+            >
+              Save
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <div className="loading-screen">
+          <div className="loading-spinner"> </div>
+        </div>
+      )}
     </div>
   );
 };

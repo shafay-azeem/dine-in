@@ -1,5 +1,6 @@
 import { ViewIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Icon,
   Table,
   TableContainer,
@@ -12,6 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { MenuState } from "../../../context/MenuContext";
 import { API_URL, BASE_URL } from "../../../global/Constant";
@@ -19,6 +21,7 @@ import apiFunctions from "../../../global/GlobalFunction";
 import ViewFeedBacks from "../../FeedBacks/ViewFeedBacks";
 
 const ResultTable = () => {
+  const [count, setCount] = useState();
   const {
     createfeedback,
     setCreateFeedback,
@@ -27,7 +30,7 @@ const ResultTable = () => {
     activeForm,
     setActiveForm,
     getResults,
-    setGetResults
+    setGetResults,
   } = MenuState();
 
   const {
@@ -38,7 +41,7 @@ const ResultTable = () => {
 
   useEffect(() => {
     getAllResults();
-    setGetResults(true)
+    setGetResults(true);
   }, [getResults]);
 
   async function getAllResults() {
@@ -50,6 +53,11 @@ const ResultTable = () => {
     console.log(res, "form response");
     setFeedback(res);
   }
+
+  const getIndex = (index) => {
+    //console.log(index, "index form");
+    setCount(index);
+  };
 
   return (
     <>
@@ -72,14 +80,16 @@ const ResultTable = () => {
                   <Td>{x.formName}</Td>
 
                   <Td style={{ textAlign: "center", cursor: "pointer" }}>
-                    <Icon onClick={ViewFeedBackOnOpen} as={ViewIcon} />
+                    <Box onClick={() => getIndex(index)}>
+                      <Icon onClick={ViewFeedBackOnOpen} as={ViewIcon} />
+                    </Box>
                   </Td>
                   {ViewFeedBackIsOpen ? (
                     <ViewFeedBacks
                       isOpen={ViewFeedBackIsOpen}
                       onOpen={ViewFeedBackOnOpen}
                       onClose={ViewFeedBackOnClose}
-                      index={index}
+                      index={count}
                     />
                   ) : null}
                 </Tr>

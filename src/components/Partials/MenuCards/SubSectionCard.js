@@ -36,7 +36,12 @@ import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
 
 const SubSectionCard = (props) => {
-  const { setUpdatedSubSection, updatedSubSection, setCreateSubSection, createSubSection } = MenuState();
+  const {
+    setUpdatedSubSection,
+    updatedSubSection,
+    setCreateSubSection,
+    createSubSection,
+  } = MenuState();
   const toast = useToast();
   const [subSectionList, setSubSectionList] = useState();
   const [subSectionUpdate, setSubSectionUpdate] = useState(false);
@@ -56,10 +61,6 @@ const SubSectionCard = (props) => {
     // console.log(isOpened);
   }
 
-  // let subSecRes =
-  //   response[props?.menu_index]?.section[props?.section_index]?.subSection;
-
-  // const [subSectionList, setSubSectionList] = useState(subSecRes);
   const [count, setCount] = useState();
 
   const {
@@ -77,13 +78,18 @@ const SubSectionCard = (props) => {
 
   useEffect(() => {
     getAllSubSectionBySectionId();
-    setSubSectionUpdate(false)
-    setSubSectionDuplicate(false)
-    setSubSectionDelete(false)
-    setUpdatedSubSection(false)
-    setCreateSubSection(false)
-
-  }, [subSectionUpdate, subSectionDuplicate, subSectionDelete, createSubSection, updatedSubSection]);
+    setSubSectionUpdate(false);
+    setSubSectionDuplicate(false);
+    setSubSectionDelete(false);
+    setUpdatedSubSection(false);
+    setCreateSubSection(false);
+  }, [
+    subSectionUpdate,
+    subSectionDuplicate,
+    subSectionDelete,
+    createSubSection,
+    updatedSubSection,
+  ]);
 
   async function getAllSubSectionBySectionId() {
     let getSubSection = await apiFunctions.GET_REQUEST(
@@ -104,18 +110,11 @@ const SubSectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          //alert(`Sub Section Updated Successfully`);
-          toast({
-            position: "top",
-            title: `Sub Section Updated Successfully`,
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
-          setSubSectionUpdate(true)
+          console.log("Sub Section Status Updated");
+
+          setSubSectionUpdate(true);
           return true;
         } else {
-          //alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
@@ -157,16 +156,14 @@ const SubSectionCard = (props) => {
           console.log(res, "res");
           toast({
             position: "top",
-            title: `SUB SECTION DUPLICATED SUCCESSFULLY`,
+            title: `Sub Section Duplicated Successfully`,
             status: "success",
             duration: 9000,
             isClosable: true,
-          })
-          setSubSectionDuplicate(true)
+          });
+          setSubSectionDuplicate(true);
           return true;
-
         } else {
-          //alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
@@ -177,19 +174,6 @@ const SubSectionCard = (props) => {
           return false;
         }
       });
-    // function getTimestampInSeconds() {
-    //   return Math.floor(Date.now() / 1000);
-    // }
-    // let sectionData = {
-    //   sectionId: getTimestampInSeconds(),
-    //   sectionName: x.sectionName,
-    //   sectionDescription: x.sectionDescription,
-    //   sectionStatus: x.sectionStatus,
-    //   image: x.image,
-    //   item: [],
-    //   subSection: [],
-    // };
-    // setResponse([...response]);
   };
 
   const handleRemove = async (id) => {
@@ -198,7 +182,7 @@ const SubSectionCard = (props) => {
       .then((res) => {
         if (res.data.success == true) {
           console.log(res.data.success);
-          //alert(`${res.data.message}`);
+
           toast({
             position: "top",
             title: `${res.data.message}`,
@@ -206,10 +190,9 @@ const SubSectionCard = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          setSubSectionDelete(true)
+          setSubSectionDelete(true);
           return true;
         } else {
-          //alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
@@ -220,9 +203,6 @@ const SubSectionCard = (props) => {
           return false;
         }
       });
-    // subSecRes.splice(index, 1);
-    // setResponse([...response]);
-    // setSubSectionList(subSecRes);
   };
 
   const sectionClick = async (x, id) => {
@@ -234,12 +214,10 @@ const SubSectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          //alert(`${res.data.message}`);
           console.log("SubSetion Toggle Updated");
 
           return true;
         } else {
-          //alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
@@ -391,12 +369,7 @@ const SubSectionCard = (props) => {
 
             <Box ml="55px">
               {x.sectionToggle ? (
-                <ItemCard
-                  fromSection={"subSection"}
-                  // menu_index={menu_index}
-                  // section_index={section_index}
-                  subsection_index={x._id}
-                />
+                <ItemCard fromSection={"subSection"} subsection_index={x._id} />
               ) : null}
 
               {/* {x.isOpened ? (

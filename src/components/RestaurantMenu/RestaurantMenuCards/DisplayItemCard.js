@@ -1,28 +1,55 @@
+import { useFormControlStyles } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Badge, Card, Col, Row } from "react-bootstrap";
 import { createSearchParams, useNavigate } from "react-router-dom";
+import { API_URL, BASE_URL } from "../../../global/Constant";
+import apiFunctions from "../../../global/GlobalFunction";
 import "../RestaurantMenu.css";
 
 const DisplayItemCard = (props) => {
-  let menu_index = props.menu_index;
-  let section_index = props.section_index;
+  //let menu_index = props.menu_index;
+  // console.log(menu_index);
+  let section_index = props?.section_index;
+  //console.log(section_index, "secid");
+  // console.log(section_index, "section_index");
+  const [itemList, setItemList] = useState();
+  const [state, setstate] = useState(false);
+
   const navigate = useNavigate();
 
-  const menuDetail = (index) => {
+  const menuDetail = (index, section) => {
     navigate({
       pathname: "/menudetail",
       search: createSearchParams({
         index,
-        menu_index,
-        section_index,
+        // menu_index,
+        // section_index,
       }).toString(),
     });
   };
 
+  useEffect(() => {
+    // if (section_index) {
+    getAllItemsBySectionId();
+    // }
+  }, [section_index]);
+
+  async function getAllItemsBySectionId() {
+    let getItems = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.GET_ALL_ITEMS_BY_SECTIONID_QR + section_index
+    );
+
+    let res = getItems.data.item;
+    setItemList(res);
+
+    return;
+  }
+
   return (
     <div className="mx-auto mt-3">
       <Row>
-        {props.item_response?.map((x, index) => {
+        {itemList?.map((x, index) => {
           return (
             <Col lg={4} md={4} sm={6} xs={12} key={index}>
               <Card
@@ -50,7 +77,7 @@ const DisplayItemCard = (props) => {
                     <Col lg={8}>
                       <Card.Title
                         className="title"
-                        onClick={() => menuDetail(index)}
+                        onClick={() => menuDetail(x._id)}
                       >
                         {x.itemName}
                       </Card.Title>

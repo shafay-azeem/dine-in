@@ -46,8 +46,14 @@ import { useToast } from "@chakra-ui/react";
 const SectionCard = (props) => {
   const toast = useToast();
   let menu_index = props?.menu_index;
-  // console.log(menu_index);
-  const { sectionList, setSectionList, setUpdatedSection, UpdatedSection, setSectionCreated, sectionCreated } = MenuState();
+  const {
+    sectionList,
+    setSectionList,
+    setUpdatedSection,
+    UpdatedSection,
+    setSectionCreated,
+    sectionCreated,
+  } = MenuState();
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
   const [count, setCount] = useState();
@@ -57,13 +63,6 @@ const SectionCard = (props) => {
   const [sectionDelete, setSectionDelete] = useState(false);
   const [sectionDuplicate, setSectionDuplicate] = useState(false);
   const [sectionUpdate, setSectionUpdate] = useState(false);
-
-
-  // const [isOpened, setIsOpened] = useState(false);
-
-  // function toggle() {
-  //   setIsOpened((wasOpened) => !wasOpened);
-  // }
 
   const {
     isOpen: isOpenSection,
@@ -81,12 +80,18 @@ const SectionCard = (props) => {
     if (!search) {
       getAllSectionByMenuId();
     }
-    setSectionDelete(false)
-    setSectionDuplicate(false)
-    setSectionUpdate(false)
-    setUpdatedSection(false)
-    setSectionCreated(false)
-  }, [sectionDelete, sectionDuplicate, sectionUpdate, UpdatedSection, sectionCreated]);
+    setSectionDelete(false);
+    setSectionDuplicate(false);
+    setSectionUpdate(false);
+    setUpdatedSection(false);
+    setSectionCreated(false);
+  }, [
+    sectionDelete,
+    sectionDuplicate,
+    sectionUpdate,
+    UpdatedSection,
+    sectionCreated,
+  ]);
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(
@@ -112,7 +117,6 @@ const SectionCard = (props) => {
           setSectionDelete(true);
           return true;
         } else {
-          // alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
@@ -138,19 +142,10 @@ const SectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          //alert(`Section Updated Successfully`);
-          // toast({
-          //   position: "top",
-          //   title: `Section Updated Successfully`,
-          //   status: "success",
-          //   duration: 9000,
-          //   isClosable: true,
-          // });
-          setSectionUpdate(true)
+          setSectionUpdate(true);
           console.log("Section Status Updated");
           return true;
         } else {
-          //alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
@@ -161,14 +156,6 @@ const SectionCard = (props) => {
           return false;
         }
       });
-
-    // console.log(sectionList, "sectionList");
-
-    // sectionList[id].sectionStatus = !sectionList[id].sectionStatus;
-
-    // setSectionList([...sectionList]);
-    // sectionList[id].sectionStatus = !sectionList[id].sectionStatus;
-    // setSectionList([...sectionList]);
   };
 
   const duplicate = async (x) => {
@@ -186,19 +173,16 @@ const SectionCard = (props) => {
       .POST_REQUEST(BASE_URL + API_URL.CREATE_SECTION + menu_index, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          // alert(`SECTION DUPLICATED SUCCESSFULLY`)
           toast({
             position: "top",
             title: `Section Duplicated SuccessFully`,
             status: "success",
             duration: 9000,
             isClosable: true,
-          })
-          setSectionDuplicate(true)
+          });
+          setSectionDuplicate(true);
           return true;
-
         } else {
-          //alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
@@ -223,18 +207,9 @@ const SectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          // alert(`${res.data.message}`);
-          // toast({
-          //   position: "top",
-          //   title: `Section Updated SuccessFully`,
-          //   status: "success",
-          //   duration: 9000,
-          //   isClosable: true,
-          // });
           console.log("section status updated");
           return true;
         } else {
-          // alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
@@ -245,11 +220,6 @@ const SectionCard = (props) => {
           return false;
         }
       });
-
-    // setSatus(index);
-    // response[props.menu_index].section[index].active =
-    // response[props.menu_index].section[index].active;
-    // setResponse([...response]);
   };
   const handleDrop = (droppedItem) => {
     // if (!droppedItem.destination) return;
@@ -275,6 +245,7 @@ const SectionCard = (props) => {
 
   var updatedList = [...sectionList];
   let updatedListTemp;
+
   const filterBySearch = (event) => {
     setSearch(event.target.value);
     const query = event.target.value;

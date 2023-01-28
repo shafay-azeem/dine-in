@@ -52,6 +52,8 @@ export const API_URL = {
 
   LOGIN: "user/V1/login/",
 
+  UPDATE_PROFILE: "user/V1/updateProfile",
+
   //Modifier
   CREATE_MODIFIER: "modifier/V1/createModifier",
 
@@ -71,6 +73,8 @@ export const API_URL = {
   DELETE_FEEDBACK_FORM_BY_ID: "feedback/V1/deleteform/",
 
   UPDATE_FORM_BY_ID: "feedback/V1/updateform/",
+
+  UPDTAE_FORM_STATUS: "feedback/V1/updateStatus/",
 
   //Questions
   CREATE_FORM_QUESTIONS: "feedback/V1/createfeedbackquestion/",
@@ -96,4 +100,21 @@ export const API_URL = {
   CREATE_RESULT_BY_FORM_ID: "feedback/V1/createquestions/",
 
   GET_ALL_RESULTS: "feedback/V1/getAllResults",
+
+  //QR
+  GET_ALL_MENU_QR: "qr/V1/getAllMenuQr/",
+
+  GET_ALL_SECTION_BY_MENUID_QR: "qr/V1/getAllSectionByMenuIdQr/",
+
+  GET_ALL_ITEMS_BY_SECTIONID_QR: "qr/V1/getAllItemBySectionIdQr/",
+
+  GET_ITEMS_BY_ITEMID_QR: "qr/V1/getSingleItemQr/",
+
+  GET_ALL_SUBSECTION_BY_SECTIONID_QR: "qr/V1/getAllSubSectionBySectionIdQr/",
+
+  GET_ALL_ITEMS_BY_SUB_SECTIONID_QR: "qr/V1/getAllItemBySubSectionIdQr/",
+
+  GET_SUB_ITEMS_BY_ITEMID_QR: "qr/V1/getSingleSubItemQr/",
+
+  GET_ALL_FORM_QR: "qr/V1/getAllFormQr",
 };

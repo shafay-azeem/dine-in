@@ -16,22 +16,31 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import QRCode from "qrcode";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 
 const MenuConfiguration = () => {
+  const USERID = localStorage.getItem("user_id");
+  console.log(USERID);
+
   const [inputList, setInputList] = useState([]);
-  const [url, setUrl] = useState("http://localhost:3000/menustart");
+
+  const [url, setUrl] = useState(`http://localhost:3000/menustart`);
   const [qr, setQr] = useState("");
   const navigate = useNavigate();
 
   const myfun = () => {
     navigate({
       pathname: "/menustart",
+      search: createSearchParams({
+        USERID,
+      }).toString(),
     });
   };
+  const port = window.location.port;
+  console.log(port);
 
   const GenerateQRCode = () => {
     QRCode.toDataURL(
@@ -48,6 +57,7 @@ const MenuConfiguration = () => {
         if (err) return console.error(err);
 
         setQr(url);
+        setUrl(`http://localhost:${port}/menustart?USERID=${USERID}`);
       }
     );
   };
@@ -75,11 +85,11 @@ const MenuConfiguration = () => {
         <Tabs w="100%">
           <TabList>
             <Tab>QR Settings</Tab>
-            <Tab>Display Options</Tab>
+            {/* <Tab>Display Options</Tab>
             <Tab>Design</Tab>
             <Tab>Service Options</Tab>
             <Tab>Feedback Settings</Tab>
-            <Tab>Ordering Settings</Tab>
+            <Tab>Ordering Settings</Tab> */}
           </TabList>
 
           <TabPanels>
@@ -90,7 +100,7 @@ const MenuConfiguration = () => {
                   <Card.Title>QR Generator</Card.Title>
 
                   <Card.Text>
-                    <text>http://localhost:3000/menustart </text>
+                    <text>{url}</text>
                     <Button onClick={GenerateQRCode} variant="info">
                       Generate
                     </Button>
@@ -114,13 +124,13 @@ const MenuConfiguration = () => {
                 </Card.Body>
               </Card>
             </TabPanel>
-            <TabPanel>
+            {/* <TabPanel>
               <p>Display Options</p>
-            </TabPanel>
-            <TabPanel>
+            </TabPanel> */}
+            {/* <TabPanel>
               <p>Design</p>
-            </TabPanel>
-            <TabPanel>
+            </TabPanel> */}
+            {/* <TabPanel>
               <Box bg="white" w="50%" p={4} borderRadius="10">
                 <Box w="70%" m={4}>
                   <Text fontSize="17px" fontWeight="500">
@@ -143,13 +153,13 @@ const MenuConfiguration = () => {
                   </Button>
                 </Box>
               </Box>
-            </TabPanel>
-            <TabPanel>
+            </TabPanel> */}
+            {/* <TabPanel>
               <p>Feedback Settings</p>
-            </TabPanel>
-            <TabPanel>
+            </TabPanel> */}
+            {/* <TabPanel>
               <p>Ordering Settings</p>
-            </TabPanel>
+            </TabPanel> */}
           </TabPanels>
         </Tabs>
       </Box>

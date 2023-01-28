@@ -18,6 +18,8 @@ import MenuFeedbackScreen from "./Screens/MenuFeedbackScreen";
 import FormQuestions from "./components/FeedBacks/FormQuestions";
 import Login from "./components/Authentication/Login";
 import HomePage from "./components/HomePage";
+import { AuthProvider } from "./context/authContext";
+import RequireAuth from "./Screens/RequireAuth";
 
 function App() {
   return (
@@ -25,24 +27,74 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} exact />
-          <Route path="/homeScreen" element={<HomeScreen />} />
+          <Route
+            path="/homeScreen"
+            element={
+              <RequireAuth>
+                <HomeScreen />
+              </RequireAuth>
+            }
+          />
           <Route path="/reports" element={<ReportScreen />} />
           <Route path="/order" element={<OrderScreen />} />
           <Route path="/customer" element={<CustomerScreen />} />
-          <Route path="/menu" element={<MenuManagementScreen />} />
-          <Route path="/feedbacks" element={<FeedBacksScreen />} />
+          <Route
+            path="/menu"
+            element={
+              <RequireAuth>
+                <MenuManagementScreen />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/feedbacks"
+            element={
+              <RequireAuth>
+                <FeedBacksScreen />
+              </RequireAuth>
+            }
+          />
           <Route
             path="/translationcenter"
             element={<TranslationCenterScreen />}
           />
           <Route path="/venuesettings" element={<VenueSettingsScreen />} />
-          <Route path="/dineinqrmenu" element={<DineInQRMenuScreen />} />
-          <Route path="/createmenu" element={<CreateMenuScreen />} />
+          <Route
+            path="/dineinqrmenu"
+            element={
+              <RequireAuth>
+                <DineInQRMenuScreen />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/createmenu"
+            element={
+              <RequireAuth>
+                <CreateMenuScreen />
+              </RequireAuth>
+            }
+          />
           <Route path="/menudisplay" element={<MenuDisplayScreen />} />
           <Route path="/menudetail" element={<MenuDetailScreen />} />
           <Route path="/menustart" element={<MenuStartScreen />} />
           <Route path="/menufeedback" element={<MenuFeedbackScreen />} />
-          <Route path="/editform" element={<FormQuestions />} />
+          <Route
+            path="/editform"
+            element={
+              <RequireAuth>
+                <FormQuestions />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/updateProfile"
+            element={
+              <RequireAuth>
+                <UpdateUser />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

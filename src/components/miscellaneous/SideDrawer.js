@@ -45,7 +45,11 @@ import {
 } from "react-notifications";
 import { MenuState } from "../../context/MenuContext";
 
+import { MdQrCode } from "react-icons/md";
+import { useAuth } from "../../context/authContext";
+
 const SideDrawer = () => {
+  const auth = useAuth();
   const { setNotification, notification } = MenuState();
   const navigate = useNavigate();
 
@@ -79,9 +83,16 @@ const SideDrawer = () => {
     }
   });
   const logoutHandler = () => {
+    auth.logout();
     localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
     navigate({
       pathname: "/",
+    });
+  };
+  const UpdateUser = () => {
+    navigate({
+      pathname: "/updateProfile",
     });
   };
   const home = () => {
@@ -175,7 +186,7 @@ const SideDrawer = () => {
         </Tooltip>
 
         <div>
-          <Menu>
+          {/* <Menu>
             <MenuButton>
               <QuestionOutlineIcon fontSize="20px" m={2} />
               <MenuList>
@@ -183,26 +194,26 @@ const SideDrawer = () => {
                 <MenuItem icon={<BellIcon />}>Live Chat</MenuItem>
               </MenuList>
             </MenuButton>
-          </Menu>
-          <Menu>
+          </Menu> */}
+          {/* <Menu>
             <Tooltip label="Notifications" hasArrow placement="bottom-end">
               <MenuButton onClick={onOpenNotificationModel}>
                 <BellIcon fontSize="20px" m={2} />
               </MenuButton>
             </Tooltip>
-          </Menu>
+          </Menu> */}
 
-          <Menu>
+          {/* <Menu>
             <MenuButton onClick={onOpenInfoModel}>
               <InfoIcon fontSize="20px" m={2} />
             </MenuButton>
-          </Menu>
+          </Menu> */}
           <Menu>
             <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
               <Avatar size="sm" cursor="pointer" />
             </MenuButton>
             <MenuList>
-              <MenuItem icon={<SettingsIcon />}>Account Setting</MenuItem>
+              {/* <MenuItem icon={<SettingsIcon />}>Account Setting</MenuItem>
               <MenuItem icon={<BellIcon />}>Notifications</MenuItem>
               <MenuItem icon={<QuestionOutlineIcon />}>Help Center</MenuItem>
               <MenuItem icon={<i className="fas fa-bars"></i>}>
@@ -211,8 +222,14 @@ const SideDrawer = () => {
               <MenuItem icon={<i className="fas fa-language"></i>}>
                 Change Language
               </MenuItem>
-              <MenuDivider />
-              <MenuItem icon={<UnlockIcon />} onClick={logoutHandler}>Sign Out</MenuItem>
+              <MenuDivider /> */}
+              <MenuItem icon={<SettingsIcon />} onClick={UpdateUser}>
+                Update Profile
+              </MenuItem>
+
+              <MenuItem icon={<UnlockIcon />} onClick={logoutHandler}>
+                Sign Out
+              </MenuItem>
             </MenuList>
           </Menu>
         </div>
@@ -231,7 +248,7 @@ const SideDrawer = () => {
           </DrawerHeader>
           <DrawerBody>
             <Stack direction="column" spacing={1} align="start">
-              <Button variant="link" onClick={home}>
+              {/* <Button variant="link" onClick={home}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Dashboard
               </Button>
@@ -246,7 +263,7 @@ const SideDrawer = () => {
               <Button variant="link" onClick={customers}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Customers
-              </Button>
+              </Button> */}
               <Button variant="link" onClick={menu}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Menu Management
@@ -255,7 +272,7 @@ const SideDrawer = () => {
                 <HamburgerIcon fontSize="20px" m={2} />
                 Feedbacks
               </Button>
-              <Button variant="link" onClick={translationcenter}>
+              {/* <Button variant="link" onClick={translationcenter}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Translation Center
               </Button>
@@ -266,7 +283,7 @@ const SideDrawer = () => {
               <Button variant="link">
                 <HamburgerIcon fontSize="20px" m={2} />
                 Integrations
-              </Button>
+              </Button> */}
 
               <DrawerHeader borderBottomWidth="1px" fontSize="16px" mb={2}>
                 App Configurations
@@ -275,14 +292,14 @@ const SideDrawer = () => {
                 <HamburgerIcon fontSize="20px" m={2} />
                 Dine-In-OR Menu
               </Button>
-              <Button variant="link">
+              {/* <Button variant="link">
                 <HamburgerIcon fontSize="20px" m={2} />
                 Delivery / Pick Up
               </Button>
               <Button variant="link">
                 <HamburgerIcon fontSize="20px" m={2} />
                 Tablet Menu
-              </Button>
+              </Button> */}
             </Stack>
           </DrawerBody>
         </DrawerContent>

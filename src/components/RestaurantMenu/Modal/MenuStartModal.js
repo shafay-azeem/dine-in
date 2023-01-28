@@ -6,9 +6,15 @@ import { MenuState } from "../../../context/MenuContext";
 import { useEffect } from "react";
 import apiFunctions from "../../../global/GlobalFunction";
 import { BASE_URL, API_URL } from "../../../global/Constant";
+import { useState } from "react";
 
 const MenuStartModal = (props) => {
-  const { response, setResponse } = MenuState();
+  // const { response, setResponse } = MenuState();
+  // let change;
+  const [response, setResponse] = useState([]);
+  const [change, setChange] = useState(false);
+
+  let userId = props?.userId;
 
   const navigate = useNavigate();
   const myfun = (index, menuname, menuDescription) => {
@@ -24,15 +30,29 @@ const MenuStartModal = (props) => {
 
   useEffect(() => {
     getAllMenu();
-  }, [response]);
+  }, []);
+
+  // async function getAllMenu() {
+  //   let getAllMenu = await apiFunctions.GET_REQUEST(
+  //     BASE_URL + API_URL.GET_ALL_MENU
+  //   );
+  //   let res = getAllMenu.data.menu;
+
+  //   setResponse(res);
+  // }
 
   async function getAllMenu() {
-    let getAllMenu = await apiFunctions.GET_REQUEST(
-      BASE_URL + API_URL.GET_ALL_MENU
-    );
-    let res = getAllMenu.data.menu;
-    // console.log(res)
-    setResponse(res);
+    try {
+      let getAllMenu = await apiFunctions.GET_REQUEST(
+        BASE_URL + API_URL.GET_ALL_MENU_QR + userId
+      );
+      let res = getAllMenu.data.menu;
+      console.log(res, "res");
+      setResponse(res);
+      // setChange(true);
+    } catch (err) {
+      console.log("An error occurred while fetching menus", err.message);
+    }
   }
 
   return (
@@ -47,9 +67,9 @@ const MenuStartModal = (props) => {
         <Modal.Body>
           {response.map((x, index) => {
             return (
-              <ListGroup className="text-center list-group-flush">
+              <ListGroup className="text-center list-group-flush" key={index}>
                 <ListGroup.Item
-                  onClick={() => myfun(index, x.menuName, x.menuDescription)}
+                  onClick={() => myfun(x._id, x.menuName, x.menuDescription)}
                   className="item"
                 >
                   {x.menuName}

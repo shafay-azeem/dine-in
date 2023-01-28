@@ -157,6 +157,7 @@ const ItemDrawer = (props) => {
     itemPrepTime: time,
     itemPrice: itemPrice,
     itemCalories: nutCalories,
+    video: video,
     itemPriceOption: inputList,
     itemSaturatedFatPercentage: saturatedFatPercentage,
     itemTransFat: transFat,
@@ -201,10 +202,9 @@ const ItemDrawer = (props) => {
               duration: 9000,
               isClosable: true,
             });
-            setItemUpdater(true)
+            setItemUpdater(true);
             return true;
           } else {
-            // alert(`There Some Error`);
             toast({
               position: "top",
               title: `There Some Error`,
@@ -220,7 +220,6 @@ const ItemDrawer = (props) => {
         .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUB_ITEM_BY_ID + id, itemData)
         .then((res) => {
           if (res.data.success == true) {
-            //alert(`SUB ITEM UPDATED SUCCESSFULLY`);
             toast({
               position: "top",
               title: `Sub Item Updated Successfully`,
@@ -228,10 +227,9 @@ const ItemDrawer = (props) => {
               duration: 9000,
               isClosable: true,
             });
-            setItemUpdater(true)
+            setItemUpdater(true);
             return true;
           } else {
-            //alert(`There Some Error`);
             toast({
               position: "top",
               title: `There Some Error`,
@@ -294,7 +292,6 @@ const ItemDrawer = (props) => {
         .POST_REQUEST(BASE_URL + API_URL.CREATE_ITEM + secid, itemData)
         .then((res) => {
           if (res.data.success == true) {
-            //alert(`${res.data.message}`);
             toast({
               position: "top",
               title: `Item Created SuccessFully`,
@@ -302,7 +299,7 @@ const ItemDrawer = (props) => {
               duration: 9000,
               isClosable: true,
             });
-            setItemUpdater(true)
+            setItemUpdater(true);
             return true;
           } else {
             // alert(`There Some Error`);
@@ -322,7 +319,6 @@ const ItemDrawer = (props) => {
         .then((res) => {
           console.log(res.data.subSectionItem, "item response");
           if (res.data.success == true) {
-            // alert(`SUB ITEM CREATED SUCCESSFULLY`);
             toast({
               position: "top",
               title: `Sub Item Created SuccessFully`,
@@ -330,10 +326,9 @@ const ItemDrawer = (props) => {
               duration: 9000,
               isClosable: true,
             });
-            setItemUpdater(true)
+            setItemUpdater(true);
             return true;
           } else {
-            // alert(`There Some Error`);
             toast({
               position: "top",
               title: `There Some Error`,
@@ -396,6 +391,7 @@ const ItemDrawer = (props) => {
     setTime(setVar.itemPrepTime);
     setItemPrice(setVar.itemPrice);
     setNutCalories(setVar.itemCalories);
+    setVideo(setVar.video);
     setInputList(setVar.itemPriceOption);
     setSaturatedFatPercentage(setVar.itemSaturatedFatPercentage);
     setTransFat(setVar.itemTransFat);
@@ -423,7 +419,7 @@ const ItemDrawer = (props) => {
     setCaloriesFat(setVar.itemCaloriesFat);
     setServingSize(setVar.itemServingSize);
 
-    if (setVar.itemModifier) {
+    if (setVar.itemModifier[0]?.min) {
       setDemoModifier(setVar.itemModifier);
     } else {
       setDemoModifier([{ min: "", max: "" }]);
@@ -468,6 +464,7 @@ const ItemDrawer = (props) => {
     setTime(setVar.itemPrepTime);
     setItemPrice(setVar.itemPrice);
     setNutCalories(setVar.itemCalories);
+    setVideo(setVar.video);
     setInputList(setVar.itemPriceOption);
     setSaturatedFatPercentage(setVar.itemSaturatedFatPercentage);
     setTransFat(setVar.itemTransFat);
@@ -494,7 +491,7 @@ const ItemDrawer = (props) => {
     setNutCalories(setVar.itemNutritionCalories);
     setCaloriesFat(setVar.itemCaloriesFat);
     setServingSize(setVar.itemServingSize);
-    if (setVar.itemModifier) {
+    if (setVar.itemModifier[0]?.min) {
       setDemoModifier(setVar.itemModifier);
     } else {
       setDemoModifier([{ min: "", max: "" }]);
@@ -606,8 +603,25 @@ const ItemDrawer = (props) => {
     document.getElementById("img").value = "";
   }
 
-  const videoCapture = (event) => {
-    setVideo(event);
+  const videoCapture = async (event) => {
+    try {
+      setVideo("");
+      const formData = new FormData();
+      formData.append("file", event.target.files[0]);
+      formData.append("upload_preset", "dineInApp");
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dkq6jers7/video/upload",
+        {
+          method: "post",
+          body: formData,
+        }
+      );
+      const data = await res.json();
+      setVideo(data.url.toString());
+      console.log(video, "video");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -755,19 +769,31 @@ const ItemDrawer = (props) => {
                     </Modal>
                   </FormControl>
 
-                  {/* <FormControl mt={3}>
+                  <FormControl mt={3}>
                     <FormLabel fontWeight="400">Upload Your Video</FormLabel>
                     <Input
                       size="sm"
                       type="file"
-                      onChange={(e) => videoCapture(e.target.files[0].name)}
+                      accept="video/*"
+                      onChange={videoCapture}
                     />
-                  </FormControl> */}
+                  </FormControl>
 
-                  {/* <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Section</FormLabel>
-                    <Select></Select>
-                  </FormControl> */}
+                  {video && (
+                    <div>
+                      <video width="320" height="240" controls autoPlay>
+                        <source src={video} type="video/mp4"></source>
+                      </video>
+                    </div>
+                  )}
+
+                  {/* <video width="320" height="240" controls>
+                    <source src={video} type="video/mp4">
+                     
+
+
+                      </video> */}
+                  {/* )} */}
 
                   <FormControl mt={3}>
                     <FormLabel fontWeight="400">Labels</FormLabel>

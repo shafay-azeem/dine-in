@@ -34,14 +34,12 @@ const CreateMenu = () => {
   let menu_index = searchparams.get("id");
 
   const { section, setSection, sectionList, setSectionList } = MenuState();
-  // const [sectionList, setSectionList] = useState(section);
 
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
   const [hit, setHit] = useState();
   const navigate = useNavigate();
 
-  // const [filter, setFilter] = useState(response[menu_index].section);
   const [filter, setFilter] = useState();
 
   const {
@@ -50,15 +48,7 @@ const CreateMenu = () => {
     onClose: onCloseSection,
   } = useDisclosure();
 
-  useEffect(
-    () => {
-      // console.log(hit, "hit")
-      // if (hit === 'All' && hit !== 'Active' && hit !== 'InActive' || !hit) {
-      //   return getAllSectionByMenuId()
-      // }
-    },
-    hit ? [sectionList] : []
-  );
+  useEffect(() => {}, hit ? [sectionList] : []);
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(

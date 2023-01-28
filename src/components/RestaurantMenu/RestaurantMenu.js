@@ -10,23 +10,28 @@ import DisplayItemCard from "./RestaurantMenuCards/DisplayItemCard";
 import SubSecItemCard from "./RestaurantMenuCards/SubSecItemCard";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { IconButton } from "@chakra-ui/react";
+import apiFunctions from "../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../global/Constant";
+import { useEffect } from "react";
 
 const RestaurantMenu = (props) => {
   const navigate = useNavigate();
   const { response, setResponse } = MenuState();
-  let menu_index = props.menu_index;
-  let section_response = response[props.menu_index].section;
+  let menu_index = props?.menu_index;
 
-  const [sectionList, setSectionList] = useState(section_response);
+  const [sectionList, setSectionList] = useState();
+  const [subSectionList, setSubSectionList] = useState();
   const [count, setCount] = useState();
+  const [state, setState] = useState(false);
+  const [state2, setState2] = useState(false);
+  const [inputType, setInputType] = useState(false);
 
-  let item_response = response[props.menu_index]?.section[count]?.item;
-
-  let subSection_response =
-    response[props.menu_index]?.section[count]?.subSection;
+  const [count2, setCount2] = useState(false);
 
   const getIndex = (index) => {
     setCount(index);
+    // setCount2(index);
+    // console.log(index);
   };
 
   var settings = {
@@ -65,10 +70,48 @@ const RestaurantMenu = (props) => {
     ],
   };
 
+  useEffect(() => {
+    getAllSectionByMenuId();
+
+    // if (count) {
+    getAllSubSectionBySectionId();
+    //   setCount("");
+    // }
+
+    // setState(false);
+  }, [count]);
+
+  async function getAllSectionByMenuId() {
+    try {
+      let getSection = await apiFunctions.GET_REQUEST(
+        BASE_URL + API_URL.GET_ALL_SECTION_BY_MENUID_QR + menu_index
+      );
+      let res = getSection.data.section;
+      setSectionList(res);
+      // setState(true);
+      return true;
+    } catch (err) {
+      console.log("An error occurred while fetching sections", err.message);
+    }
+  }
+
+  async function getAllSubSectionBySectionId() {
+    try {
+      let getSubSection = await apiFunctions.GET_REQUEST(
+        BASE_URL + API_URL.GET_ALL_SUBSECTION_BY_SECTIONID_QR + count
+      );
+      let res = getSubSection.data.subSection;
+      setSubSectionList(res);
+      return true;
+    } catch (err) {
+      console.log("An error occurred while fetching sub sections", err.message);
+    }
+  }
+
   return (
     <>
       <div className="menu">
-        <div class="d-flex justify-content-start">
+        <div className="d-flex justify-content-start">
           <div className="backarrow">
             <IconButton
               aria-label="Search database"
@@ -82,14 +125,14 @@ const RestaurantMenu = (props) => {
           /> */}
         </div>
 
-        <p className="heading">{props.menuName}</p>
-        <p className="description">{props.menuDescription}</p>
+        {/* <p className="heading">{props.menuName}</p>
+        <p className="description">{props.menuDescription}</p> */}
       </div>
 
       <Slider {...settings} className="slider">
         {sectionList?.map((x, index) => {
           return (
-            <div onClick={() => getIndex(index)}>
+            <div onClick={() => getIndex(x._id)} key={index}>
               <img
                 src={x.sectionImage}
                 className="mx-auto"
@@ -102,21 +145,16 @@ const RestaurantMenu = (props) => {
       </Slider>
 
       <div className="subsection">
-        {subSection_response?.map((x, index) => {
+        {subSectionList?.map((x, index) => {
           return (
-            <Accordion className="mb-2 accordion">
+            <Accordion className="mb-2 accordion" key={index}>
               <Accordion.Item eventKey="1">
                 <Accordion.Header>{x.sectionName}</Accordion.Header>
                 <Accordion.Body>
                   <div className="text-center">
                     <p>{x.sectionDescription}</p>
                   </div>
-                  <SubSecItemCard
-                    menu_index={menu_index}
-                    section_index={count}
-                    subSection_response={subSection_response}
-                    subSection_index={index}
-                  />
+                  <SubSecItemCard subSection_index={x._id} />
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
@@ -125,11 +163,7 @@ const RestaurantMenu = (props) => {
       </div>
 
       <div className="mx-auto mt-3 mb-3">
-        <DisplayItemCard
-          item_response={item_response}
-          menu_index={menu_index}
-          section_index={count}
-        />
+        <DisplayItemCard section_index={count} />
       </div>
     </>
   );

@@ -42,13 +42,7 @@ const ItemCard = (props) => {
   let subSecId = props?.subsection_index;
   let secid = props?.section_index;
   let section_Or_subSection = props?.fromSection;
-  // const initialState = Number.isInteger(props?.subsection_index)
-  //   ? response[props?.menu_index]?.section[props?.section_index]?.subSection[
-  //       props?.subsection_index
-  //     ].item
-  //   : response[props?.menu_index]?.section[props?.section_index]?.item;
 
-  // const [itemList, setItemList] = useState(initialState);
   const [itemList, setItemList] = useState();
 
   const [itemDecider, setItemDecider] = useState();
@@ -76,24 +70,25 @@ const ItemCard = (props) => {
       console.log("Inside IF");
       setItemDecider("item");
       getAllItemsBySectionId();
-      setItemDeleted(false)
-      setItemDuplicate(false)
-      setItemUpdater(false)
-
-
+      setItemDeleted(false);
+      setItemDuplicate(false);
+      setItemUpdater(false);
     } else if (section_Or_subSection === "subSection" && subSecId) {
-      console.log(subSecId);
-      console.log("else run");
       setItemDecider("subItem");
       getAllSubItemsBySubSectionId();
-      setSubItemDeleted(false)
-      setSubItemDuplicate(false)
-      setItemUpdater(false)
-
+      setSubItemDeleted(false);
+      setSubItemDuplicate(false);
+      setItemUpdater(false);
     } else {
       return;
     }
-  }, [subItemDeleted, itemDeleted, subItemDuplicate, itemDuplicate, itemUpdater]);
+  }, [
+    subItemDeleted,
+    itemDeleted,
+    subItemDuplicate,
+    itemDuplicate,
+    itemUpdater,
+  ]);
 
   async function getAllItemsBySectionId() {
     let getItems = await apiFunctions.GET_REQUEST(
@@ -101,7 +96,7 @@ const ItemCard = (props) => {
     );
 
     let res = getItems.data.item;
-    console.log(res, "res1");
+
     setItemList(res);
   }
 
@@ -109,9 +104,9 @@ const ItemCard = (props) => {
     let getItems = await apiFunctions.GET_REQUEST(
       BASE_URL + API_URL.GET_ALL_SUB_ITEM_BY_SUBSECTION_ID + subSecId
     );
-    // console.log(getItems, 'getItems')
+
     let res = getItems.data.item;
-    console.log(res, "res2");
+
     setItemList(res);
   }
 
@@ -121,8 +116,6 @@ const ItemCard = (props) => {
         .DELETE_REQUEST(BASE_URL + API_URL.DELETE_ITEM_BY_ID + id)
         .then((res) => {
           if (res.data.success == true) {
-            // console.log(res.data.success);
-            // alert(`${res.data.message}`);
             toast({
               position: "top",
               title: `Item Deleted SuccessFully`,
@@ -130,11 +123,9 @@ const ItemCard = (props) => {
               duration: 9000,
               isClosable: true,
             });
-            setItemDeleted(true)
+            setItemDeleted(true);
             return true;
           } else {
-            //alert(`There Some Error`);
-
             toast({
               position: "top",
               title: `There Some Error`,
@@ -160,7 +151,7 @@ const ItemCard = (props) => {
               duration: 9000,
               isClosable: true,
             });
-            setSubItemDeleted(true)
+            setSubItemDeleted(true);
             return true;
           } else {
             //alert(`There Some Error`);
@@ -225,18 +216,16 @@ const ItemCard = (props) => {
         .POST_REQUEST(BASE_URL + API_URL.CREATE_ITEM + secid, x)
         .then((res) => {
           if (res.data.success == true) {
-            //alert(` ITEM CREATED SUCCESSFULLY`);
             toast({
               position: "top",
-              title: `Item Created SuccessFully`,
+              title: `Item Duplicated SuccessFully`,
               status: "success",
               duration: 9000,
               isClosable: true,
             });
-            setItemDuplicate(true)
+            setItemDuplicate(true);
             return true;
           } else {
-            //alert(`There Some Error`);
             toast({
               position: "top",
               title: `There Some Error`,
@@ -244,7 +233,7 @@ const ItemCard = (props) => {
               duration: 9000,
               isClosable: true,
             });
-            setSubItemDuplicate(true)
+            setSubItemDuplicate(true);
             return false;
           }
         });
@@ -256,12 +245,12 @@ const ItemCard = (props) => {
             //alert(`SUB ITEM CREATED SUCCESSFULLY`);
             toast({
               position: "top",
-              title: `Sub Item Created SuccessFully`,
+              title: `Sub Item Duplicated SuccessFully`,
               status: "success",
               duration: 9000,
               isClosable: true,
             });
-            setSubItemDuplicate(true)
+            setSubItemDuplicate(true);
             return true;
           } else {
             // alert(`There Some Error`);
@@ -311,7 +300,7 @@ const ItemCard = (props) => {
               duration: 9000,
               isClosable: true,
             });
-            setSubItemDuplicate(true)
+            setSubItemDuplicate(true);
             return false;
           }
         });
@@ -321,7 +310,7 @@ const ItemCard = (props) => {
         .then((res) => {
           if (res.data.success == true) {
             console.log("Sub Item Status Updated");
-            setSubItemDuplicate(true)
+            setSubItemDuplicate(true);
             return true;
           } else {
             //alert(`There Some Error`);
@@ -416,9 +405,9 @@ const ItemCard = (props) => {
                                 <Box>
                                   <InputGroup>
                                     {x.itemPriceOption[0].price ==
-                                      x.itemPriceOption[
-                                        x.itemPriceOption.length - 1
-                                      ].price ? (
+                                    x.itemPriceOption[
+                                      x.itemPriceOption.length - 1
+                                    ].price ? (
                                       <Box
                                         style={{
                                           border: "1px solid black",

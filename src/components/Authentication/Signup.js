@@ -15,21 +15,21 @@ import { useState } from "react";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 
 const SignUp = () => {
+  const auth = useAuth();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [confirmpassword, setConfirmpassword] = useState();
   const [password, setPassword] = useState();
   const [show, setShow] = useState(false);
+
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
   const toast = useToast();
 
   const submitHandler = async () => {
-    // console.log(password, "password");
-    // console.log(confirmpassword, "confirmpassword");
-
     if (password !== confirmpassword) {
       return alert("Password donot match");
     }
@@ -44,7 +44,6 @@ const SignUp = () => {
       .then((res) => {
         console.log(res);
         if (res.data.success == true) {
-          //alert(`${res.data.message}`);
           toast({
             position: "top",
             title: `${res.data.message}`,
@@ -52,6 +51,9 @@ const SignUp = () => {
             duration: 9000,
             isClosable: true,
           });
+          auth.login(res.data.name);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("user_id", res.data.user._id);
           // setName("");
           // setEmail("");
           // setPassword("");
@@ -62,8 +64,6 @@ const SignUp = () => {
 
           return true;
         } else {
-          //alert(`There Some Error`);
-
           toast({
             position: "top",
             title: `There Some Error`,
@@ -125,16 +125,6 @@ const SignUp = () => {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-
-      {/* <FormControl id="pic" isRequired>
-            <FormLabel>Upload Your Picture</FormLabel>
-            <Input
-              type="file"
-              p={1.5}
-              accept="image/*"
-              onChange={(e) => postDetails(e.target.files[0])}
-            />
-          </FormControl> */}
 
       <Button
         colorScheme="blue"

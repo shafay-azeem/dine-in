@@ -1,38 +1,49 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { Badge, Card, Col, Row } from "react-bootstrap";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { MenuState } from "../../../context/MenuContext";
+import { API_URL, BASE_URL } from "../../../global/Constant";
+import apiFunctions from "../../../global/GlobalFunction";
 import "../RestaurantMenu.css";
 
 const SubSecItemCard = (props) => {
   const navigate = useNavigate();
   const { response, setResponse } = MenuState();
+  const [subItemList, setSubItemList] = useState();
 
-  let subSectionList =
-    props?.subSection_response[props?.subSection_index]?.item;
-
-  let menu_index_refSub = props?.menu_index;
-  let section_index_refSub = props?.section_index;
   let subsectionIndex = props?.subSection_index;
 
   const myFunc = (subsecitemindex) => {
+    console.log(subsecitemindex);
     navigate({
       pathname: "/menudetail",
       search: createSearchParams({
         subsecitemindex,
-        subsectionIndex,
-        menu_index_refSub,
-        section_index_refSub,
       }).toString(),
     });
   };
 
+  useEffect(() => {
+    getAllSubItemsBySectionId();
+  }, [subsectionIndex]);
+
+  async function getAllSubItemsBySectionId() {
+    let getSubItems = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.GET_ALL_ITEMS_BY_SUB_SECTIONID_QR + subsectionIndex
+    );
+
+    let res = getSubItems.data.item;
+    setSubItemList(res);
+  }
+
   return (
     <div>
       <Row>
-        {subSectionList?.map((x, index) => {
+        {subItemList?.map((x, index) => {
           return (
-            <Col lg={4} md={4} sm={6} xs={12}>
+            <Col lg={4} md={4} sm={6} xs={12} key={index}>
               <Card className="mx-auto mb-2 fooditem">
                 <Card.Body>
                   <Row className="align-items-start">
@@ -47,7 +58,7 @@ const SubSecItemCard = (props) => {
                     <Col lg={8}>
                       <Card.Title
                         className="title"
-                        onClick={() => myFunc(index)}
+                        onClick={() => myFunc(x._id)}
                       >
                         {x.itemName}
                       </Card.Title>

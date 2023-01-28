@@ -12,8 +12,10 @@ import { useNavigate } from "react-router-dom";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 import { useToast } from "@chakra-ui/react";
+import { useAuth } from "../../context/authContext";
 
 const Login = () => {
+  const auth = useAuth();
   const navigate = useNavigate();
   const toast = useToast();
   const [email, setEmail] = useState();
@@ -37,7 +39,6 @@ const Login = () => {
         .POST_REQUEST(BASE_URL + API_URL.LOGIN, userData)
         .then((res) => {
           if (res.data.success == true) {
-            //alert(`${res.data.message}`);
             toast({
               position: "top",
               title: `${res.data.message}`,
@@ -45,9 +46,11 @@ const Login = () => {
               duration: 9000,
               isClosable: true,
             });
+            auth.login(res.data.user.name);
             setEmail("");
             setPassword("");
             localStorage.setItem("token", res.data.token);
+            localStorage.setItem("user_id", res.data.user._id);
             navigate({
               pathname: "/homeScreen",
             });
@@ -58,7 +61,6 @@ const Login = () => {
           }
         });
     } catch (err) {
-      //alert(`There Some Error ${err}`);
       toast({
         position: "top",
         title: `There Some Error`,

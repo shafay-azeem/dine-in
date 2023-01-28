@@ -56,8 +56,8 @@ const InitialMenu = () => {
           <TabList>
             <Tab>Menu</Tab>
             <Tab>Modifiers</Tab>
-            <Tab>Promo Codes</Tab>
-            <Tab>In-app purchases</Tab>
+            {/* <Tab>Promo Codes</Tab>
+            <Tab>In-app purchases</Tab> */}
           </TabList>
 
           <TabPanels>

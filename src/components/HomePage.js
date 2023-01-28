@@ -13,6 +13,7 @@ import {
 import React from "react";
 import Login from "./Authentication/Login";
 import SignUp from "./Authentication/Signup";
+import UpdateUser from "./Authentication/UpdateUser";
 
 const HomePage = () => {
   return (
@@ -86,6 +87,7 @@ const HomePage = () => {
           <TabList mb="1em">
             <Tab width="50%">Login</Tab>
             <Tab width="50%">Sign Up</Tab>
+            {/* <Tab width="50%">Update Profile</Tab> */}
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -94,6 +96,9 @@ const HomePage = () => {
             <TabPanel>
               <SignUp />
             </TabPanel>
+            {/* <TabPanel>
+              <UpdateUser />
+            </TabPanel> */}
           </TabPanels>
         </Tabs>
       </Box>
