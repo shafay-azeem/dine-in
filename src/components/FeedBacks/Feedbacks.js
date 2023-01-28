@@ -186,8 +186,10 @@ const Feedbacks = () => {
       BASE_URL + API_URL.GET_ALL_FEEDBACK_FORM
     );
 
+    console.log(geFeedbackForms.data.feedbackForm, "Shafay")
+
     if (geFeedbackForms.data.feedbackForm.length == 0) {
-      return setLoading(true);
+      setLoading(true);
     }
 
     let res = geFeedbackForms.data.feedbackForm;

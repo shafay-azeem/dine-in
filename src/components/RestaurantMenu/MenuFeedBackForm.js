@@ -58,7 +58,7 @@ const MenuFeedBackForm = (props) => {
       );
 
       if (getFormQuestions.data.feedbackForm.length == 0) {
-        return setLoading(true);
+        setLoading(true);
       }
 
       let res = getFormQuestions.data.feedbackForm;

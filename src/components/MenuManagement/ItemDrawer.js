@@ -361,7 +361,7 @@ const ItemDrawer = (props) => {
     );
 
     if (getSingleItem.data.item.length == 0) {
-      return setLoading(true);
+      setLoading(true);
     }
 
     let setVar = getSingleItem.data.item;
@@ -440,7 +440,7 @@ const ItemDrawer = (props) => {
     );
 
     if (getSingleItem.data.item.length == 0) {
-      return setLoading(true);
+      setLoading(true);
     }
 
     let setVar = getSingleItem.data.item;

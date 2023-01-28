@@ -66,7 +66,7 @@ const DisplayCard = () => {
       BASE_URL + API_URL.GET_ALL_MENU
     );
     if (getMenu.data.menu.length == 0) {
-      return setLoading(true);
+      setLoading(true);
     }
 
     let res = getMenu.data.menu;

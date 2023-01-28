@@ -241,7 +241,7 @@ const SettingDrawer = (props) => {
     );
 
     if (getSingleMenu.data.menu.length == 0) {
-      return setLoading(true);
+      setLoading(true);
     }
 
     let setVar = getSingleMenu.data.menu;

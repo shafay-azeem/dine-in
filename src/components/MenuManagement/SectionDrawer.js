@@ -267,7 +267,7 @@ const SectionDrawer = (props) => {
     );
 
     if (getSingleSection.data.subSection.length == 0) {
-      return setLoading(true);
+      setLoading(true);
     }
 
     let setRes = getSingleSection.data.subSection;

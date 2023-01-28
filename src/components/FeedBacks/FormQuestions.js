@@ -153,7 +153,7 @@ const FormQuestions = () => {
       BASE_URL + API_URL.GET_ALL_QUESTIONS_BY_FORMID + feedback_index
     );
     if (getFormQuestions.data.formQuestion.length == 0) {
-      return setLoading(true);
+      setLoading(true);
     }
     let setVar = getFormQuestions.data.formQuestion[0].Questions;
     // let id = getFormQuestions.data.formQuestion[0]._id;

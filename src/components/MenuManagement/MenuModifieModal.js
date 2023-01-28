@@ -131,7 +131,7 @@ const MenuModifieModal = (props) => {
     );
 
     if (getModifier.data.modifier.length == 0) {
-      setLoading(true);
+      (true);
     }
 
     let setVar = getModifier.data.modifier;
