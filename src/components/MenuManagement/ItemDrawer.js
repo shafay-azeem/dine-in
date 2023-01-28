@@ -616,6 +616,11 @@ const ItemDrawer = (props) => {
     document.getElementById("img").value = "";
   }
 
+  function deleteVideo() {
+    setVideo(null);
+    document.getElementById("video").value = "";
+  }
+
   const videoCapture = async (event) => {
     try {
       setVideo("");
@@ -794,16 +799,25 @@ const ItemDrawer = (props) => {
                         type="file"
                         accept="video/*"
                         onChange={videoCapture}
+                        id="video"
                       />
-                    </FormControl>
 
-                    {video && (
-                      <div>
-                        <video width="320" height="240" controls>
-                          <source src={video} type="video/mp4"></source>
-                        </video>
-                      </div>
-                    )}
+                      {video && (
+                        <div>
+                          <Center>
+                            <video width="320" height="240" controls>
+                              <source src={video} type="video/mp4"></source>
+                            </video>
+                          </Center>
+                          <IconButton
+                            onClick={deleteVideo}
+                            variant="outline"
+                            colorScheme="teal"
+                            icon={<BsFillTrashFill />}
+                          />
+                        </div>
+                      )}
+                    </FormControl>
 
                     {/* <video width="320" height="240" controls>
                     <source src={video} type="video/mp4">
