@@ -59,6 +59,9 @@ const SubSecItemCard = (props) => {
                       <Card.Title
                         className="title"
                         onClick={() => myFunc(x._id)}
+                        style={{
+                          cursor: "pointer",
+                        }}
                       >
                         {x.itemName}
                       </Card.Title>
