@@ -58,6 +58,8 @@ const DisplayCard = () => {
     setCreateMenu(false);
   }, [statusMenu, menuDelete, menuDuplicate, updateMenu, CreateMenu]);
 
+
+
   async function getAllMenu() {
     setLoading(false);
     let getMenu = await apiFunctions.GET_REQUEST(

@@ -89,7 +89,7 @@ const SubSectionCard = (props) => {
     subSectionDelete,
     createSubSection,
     updatedSubSection,
-    subSectionList,
+    section_index,
   ]);
 
   async function getAllSubSectionBySectionId() {
@@ -216,7 +216,7 @@ const SubSectionCard = (props) => {
       .then((res) => {
         if (res.data.success == true) {
           console.log("SubSetion Toggle Updated");
-
+          setSubSectionUpdate(true)
           return true;
         } else {
           toast({

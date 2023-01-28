@@ -48,7 +48,10 @@ const CreateMenu = () => {
     onClose: onCloseSection,
   } = useDisclosure();
 
-  useEffect(() => {}, hit ? [sectionList] : []);
+  useEffect(() => {
+
+
+  }, [menu_index]);
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(

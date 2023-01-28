@@ -258,7 +258,7 @@ const SectionDrawer = (props) => {
       getSingleSubSectionById();
     } else {
     }
-  }, []);
+  }, [menu_index]);
 
   async function getSingleSubSectionById() {
     setLoading(false);
@@ -445,7 +445,7 @@ const SectionDrawer = (props) => {
     setConversion([jsonObj]);
   };
 
-  const handleAlphabetically = (event) => {};
+  const handleAlphabetically = (event) => { };
 
   function deleteimg() {
     setImage(null);
@@ -639,7 +639,7 @@ const SectionDrawer = (props) => {
                   </Select> */}
 
                     {arrayDecider.length > 0 &&
-                    props?.subsection_index == undefined ? (
+                      props?.subsection_index == undefined ? (
                       <FormControl>
                         <label>
                           <input
@@ -657,7 +657,7 @@ const SectionDrawer = (props) => {
                           >
                             {arrayDecider?.map((x, index) => {
                               return (
-                                <option value={x._id}>{x.sectionName}</option>
+                                <option value={x._id} key={index}>{x.sectionName} </option>
                               );
                             })}
                           </Select>
@@ -665,7 +665,7 @@ const SectionDrawer = (props) => {
                           <Select placeholder="Select option">
                             {arrayDecider?.map((x, index) => {
                               return (
-                                <option value={x._id}>{x.sectionName}</option>
+                                <option value={x._id} key={index}>{x.sectionName}</option>
                               );
                             })}
                           </Select>

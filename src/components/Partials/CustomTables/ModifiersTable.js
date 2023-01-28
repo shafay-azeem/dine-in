@@ -27,6 +27,7 @@ import { EditIcon } from "@chakra-ui/icons";
 const ModifiersTable = () => {
   const toast = useToast();
   const { modifier, setModifier } = MenuState();
+  const [update, setUpdate] = useState(true)
   const [count, setCount] = useState();
   const {
     isOpen: modifierIsOpen,
@@ -35,7 +36,9 @@ const ModifiersTable = () => {
   } = useDisclosure();
 
   useEffect(() => {
+    setUpdate(false)
     getAllModifiers();
+
   }, []);
 
   async function getAllModifiers() {
@@ -45,6 +48,7 @@ const ModifiersTable = () => {
 
     let res = getModifier.data.modifier;
     console.log(modifier);
+    setUpdate(true)
     setModifier(res);
   }
 

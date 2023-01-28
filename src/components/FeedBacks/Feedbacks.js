@@ -201,22 +201,22 @@ const Feedbacks = () => {
 
   return (
     <>
-      {loading ? (
-        <FullScreen handle={handle}>
-          <Grid>
-            <GridItem w="100%" bg="white" height="120%">
-              <Text ml="10" fontWeight="500" fontSize="25" mt={5}>
-                Feedbacks
-              </Text>
+      {/* {loading ? ( */}
+      <FullScreen handle={handle}>
+        <Grid>
+          <GridItem w="100%" bg="white" height="120%">
+            <Text ml="10" fontWeight="500" fontSize="25" mt={5}>
+              Feedbacks
+            </Text>
+          </GridItem>
+        </Grid>
+
+        {showresult ? (
+          <Grid templateColumns="repeat(4, 1fr)" gap={6} m={10}>
+            <GridItem w="100%" h="10" colSpan={1}>
+              <Text fontWeight={600}>{feedback?.length} results Listed</Text>
             </GridItem>
-          </Grid>
-
-          {showresult ? (
-            <Grid templateColumns="repeat(4, 1fr)" gap={6} m={10}>
-              <GridItem w="100%" h="10" colSpan={1}>
-                <Text fontWeight={600}>{feedback?.length} results Listed</Text>
-              </GridItem>
-              {/* <GridItem w="100%" h="10">
+            {/* <GridItem w="100%" h="10">
               <Input
                 placeholder="Select Date and Time"
                 size="md"
@@ -224,7 +224,7 @@ const Feedbacks = () => {
                 bg="white"
               />
             </GridItem> */}
-              {/* <GridItem w="100%" h="10">
+            {/* <GridItem w="100%" h="10">
               <Input
                 placeholder="Select Date and Time"
                 size="md"
@@ -233,7 +233,7 @@ const Feedbacks = () => {
               />
             </GridItem> */}
 
-              {/* <GridItem w="100%" h="10">
+            {/* <GridItem w="100%" h="10">
               <Stack direction={["column", "row"]} spacing="24px">
                 <Box w="100px" h="40px">
                   <CustomButton
@@ -252,91 +252,91 @@ const Feedbacks = () => {
                 </Box>
               </Stack>
             </GridItem> */}
-            </Grid>
-          ) : null}
+          </Grid>
+        ) : null}
 
-          {showform ? (
-            <Grid templateColumns="repeat(5, 1fr)" gap={4} m={10}>
-              <GridItem colSpan={2} h="10">
-                <Text fontWeight={600}>
-                  {feedbackFormList?.length} forms listed
-                </Text>
-              </GridItem>
-              <GridItem colStart={4} colEnd={6} h="10" textAlign="right">
-                <CustomButton click={formOnOpen} btnText={"Create Form"} />
-                {formIsOpen ? (
-                  <CreateFormModal
-                    isOpen={formIsOpen}
-                    onOpen={formOnOpen}
-                    onClose={formOnClose}
-                  />
-                ) : null}
-              </GridItem>
-            </Grid>
-          ) : null}
+        {showform ? (
+          <Grid templateColumns="repeat(5, 1fr)" gap={4} m={10}>
+            <GridItem colSpan={2} h="10">
+              <Text fontWeight={600}>
+                {feedbackFormList?.length} forms listed
+              </Text>
+            </GridItem>
+            <GridItem colStart={4} colEnd={6} h="10" textAlign="right">
+              <CustomButton click={formOnOpen} btnText={"Create Form"} />
+              {formIsOpen ? (
+                <CreateFormModal
+                  isOpen={formIsOpen}
+                  onOpen={formOnOpen}
+                  onClose={formOnClose}
+                />
+              ) : null}
+            </GridItem>
+          </Grid>
+        ) : null}
 
-          <Box m="10">
-            <Tabs w="100%">
-              <TabList>
-                <Tab onClick={testfucn1}>Results</Tab>
-                <Tab onClick={testfucn2}>Forms</Tab>
-              </TabList>
+        <Box m="10">
+          <Tabs w="100%">
+            <TabList>
+              <Tab onClick={testfucn1}>Results</Tab>
+              <Tab onClick={testfucn2}>Forms</Tab>
+            </TabList>
 
-              <TabPanels>
-                <TabPanel backgroundColor="white" m={5}>
-                  <ResultTable />
-                </TabPanel>
+            <TabPanels>
+              <TabPanel backgroundColor="white" m={5}>
+                <ResultTable />
+              </TabPanel>
 
-                <TabPanel>
-                  {feedbackFormList?.map((x, index) => {
-                    return (
-                      <Box
-                        h="90px"
-                        bg="white"
-                        borderRadius={6}
-                        mt={2}
-                        key={index}
-                      >
-                        <Grid templateColumns="repeat(5, 1fr)" gap={4}>
-                          <GridItem colSpan={2}>
-                            <Text p={8}>{x.formName}</Text>
-                          </GridItem>
-                          <GridItem
-                            colStart={4}
-                            colEnd={6}
-                            h="10"
-                            align="end"
-                            p={8}
-                          >
-                            <BootstrapSwitchButton
-                              checked={x.active}
-                              onChange={() => switchStatus(x._id, index, x)}
-                              data-size="xs"
+              <TabPanel>
+                {feedbackFormList?.map((x, index) => {
+                  return (
+                    <Box
+                      h="90px"
+                      bg="white"
+                      borderRadius={6}
+                      mt={2}
+                      key={index}
+                    >
+                      <Grid templateColumns="repeat(5, 1fr)" gap={4}>
+                        <GridItem colSpan={2}>
+                          <Text p={8}>{x.formName}</Text>
+                        </GridItem>
+                        <GridItem
+                          colStart={4}
+                          colEnd={6}
+                          h="10"
+                          align="end"
+                          p={8}
+                        >
+                          <BootstrapSwitchButton
+                            checked={x.active}
+                            onChange={() => switchStatus(x._id, index, x)}
+                            data-size="xs"
+                          />
+                          {/* <Box onClick={() => getIndex(x._id)}></Box> */}
+
+                          <Tooltip label="Edit">
+                            <EditIcon
+                              mr={4}
+                              onClick={() => editForm(x._id)}
                             />
-                            {/* <Box onClick={() => getIndex(x._id)}></Box> */}
-
-                            <Tooltip label="Edit">
-                              <EditIcon
-                                mr={4}
-                                onClick={() => editForm(x._id)}
-                              />
-                            </Tooltip>
-                            <DeleteIcon onClick={() => handleRemove(x._id)} />
-                          </GridItem>
-                        </Grid>
-                      </Box>
-                    );
-                  })}
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Box>
-        </FullScreen>
-      ) : (
+                          </Tooltip>
+                          <DeleteIcon onClick={() => handleRemove(x._id)} />
+                        </GridItem>
+                      </Grid>
+                    </Box>
+                  );
+                })}
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Box>
+      </FullScreen>
+      {/* ) : (
         <div className="loading-screen">
           <div className="loading-spinner"> </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

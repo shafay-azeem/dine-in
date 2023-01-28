@@ -50,6 +50,10 @@ const MenuPage = (props) => {
         BASE_URL + API_URL.GET_ALL_FORM_QR
       );
       let res = getFormQuestions.data.feedbackForm;
+      if (!res[0]?.formQuestions[0]?.Questions) {
+        console.log('jejjeje')
+        return setDemo(null)
+      }
       setDemo(res[0]?.formQuestions[0].Questions);
     } catch (error) {
       console.error(error);

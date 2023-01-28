@@ -93,7 +93,7 @@ const SectionCard = (props) => {
     sectionUpdate,
     UpdatedSection,
     sectionCreated,
-    sectionList,
+    menu_index,
   ]);
 
   async function getAllSectionByMenuId() {
@@ -218,6 +218,7 @@ const SectionCard = (props) => {
       .then((res) => {
         if (res.data.success == true) {
           console.log("section status updated");
+          setSectionUpdate(true)
           return true;
         } else {
           toast({

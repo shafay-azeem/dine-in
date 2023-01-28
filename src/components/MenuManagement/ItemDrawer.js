@@ -956,7 +956,7 @@ const ItemDrawer = (props) => {
                               >
                                 {modifier?.map((a, index) => {
                                   return (
-                                    <option value={a.Groupname}>
+                                    <option value={a.Groupname} key={index}>
                                       {a.Groupname}
                                     </option>
                                   );

@@ -413,8 +413,8 @@ const SettingDrawer = (props) => {
                                 value={y.Day}
                                 onChange={(e) => handleInputChange(e, i)}
                               >
-                                {weekday?.map((a) => {
-                                  return <option value={a}>{a}</option>;
+                                {weekday?.map((a, index) => {
+                                  return <option value={a} key={index}>{a}</option>;
                                 })}
                               </Select>
 
