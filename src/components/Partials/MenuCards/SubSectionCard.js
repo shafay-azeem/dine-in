@@ -98,7 +98,7 @@ const SubSectionCard = (props) => {
     );
 
     let res = getSubSection.data.subSection;
-    console.log(res);
+    // console.log(res);
     setSubSectionList(res);
   }
 
@@ -111,7 +111,7 @@ const SubSectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          console.log("Sub Section Status Updated");
+          // console.log("Sub Section Status Updated");
 
           setSubSectionUpdate(true);
           return true;
@@ -154,7 +154,7 @@ const SubSectionCard = (props) => {
       )
       .then((res) => {
         if (res.data.success == true) {
-          console.log(res, "res");
+          // console.log(res, "res");
           toast({
             position: "top",
             title: `Sub Section Duplicated Successfully`,
