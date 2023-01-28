@@ -53,7 +53,7 @@ const CreateFormModal = (props) => {
       .POST_REQUEST(BASE_URL + API_URL.CREATE_FEEDBACK_FORM, feedbackFormData)
       .then((res) => {
         if (res.data.success == true) {
-          console.log(res.data);
+          // console.log(res.data);
           //alert(`${res.data.message}`);
           toast({
             position: "top",

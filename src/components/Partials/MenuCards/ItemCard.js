@@ -67,7 +67,7 @@ const ItemCard = (props) => {
 
   useEffect(() => {
     if (section_Or_subSection === "section" && secid) {
-      console.log("Inside IF");
+      // console.log("Inside IF");
       setItemDecider("item");
       getAllItemsBySectionId();
       setItemDeleted(false);
@@ -142,7 +142,7 @@ const ItemCard = (props) => {
         .DELETE_REQUEST(BASE_URL + API_URL.DELETE_SUB_ITEM_BY_ID + id)
         .then((res) => {
           if (res.data.success == true) {
-            console.log(res.data.success);
+            // console.log(res.data.success);
 
             // alert(`${res.data.message}`);
             toast({
@@ -290,7 +290,7 @@ const ItemCard = (props) => {
         .PUT_REQUEST(BASE_URL + API_URL.UPDATE_ITEM_BY_ID + id, itemRes)
         .then((res) => {
           if (res.data.success == true) {
-            console.log("Item Status Updated");
+            // console.log("Item Status Updated");
             return true;
           } else {
             //alert(`There Some Error`);
@@ -310,7 +310,7 @@ const ItemCard = (props) => {
         .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUB_ITEM_BY_ID + id, itemRes)
         .then((res) => {
           if (res.data.success == true) {
-            console.log("Sub Item Status Updated");
+            // console.log("Sub Item Status Updated");
             setSubItemDuplicate(true);
             return true;
           } else {

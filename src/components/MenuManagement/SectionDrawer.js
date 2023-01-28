@@ -53,7 +53,7 @@ const SectionDrawer = (props) => {
   let sectionId = props?.section_index;
   let subSecId = props?.subsection_index;
   let section_Or_subSection = props?.fromSection;
-  console.log(section_Or_subSection);
+  // console.log(section_Or_subSection);
   const toast = useToast();
 
   const {
@@ -196,7 +196,7 @@ const SectionDrawer = (props) => {
           });
           setCreateSubSection(true);
           // setSubSectionList(postRes);
-          console.log(subSectionList, "setSubSectionList");
+          // console.log(subSectionList, "setSubSectionList");
         } else {
           throw new Error("Error creating sub-section");
         }
@@ -251,10 +251,10 @@ const SectionDrawer = (props) => {
     // }
     // return;
     if (section_Or_subSection === "section" && sectionId) {
-      console.log("ff");
+      // console.log("ff");
       getSingleSectionById();
     } else if (section_Or_subSection === "subSection" && subSecId) {
-      console.log("run");
+      // console.log("run");
       getSingleSubSectionById();
     } else {
     }

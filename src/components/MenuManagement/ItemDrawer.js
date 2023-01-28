@@ -58,11 +58,11 @@ import Spinner from "react-bootstrap/Spinner";
 const ItemDrawer = (props) => {
   let section_index = props?.section_index;
   let subSection_index = props?.subSection_index;
-  console.log(subSection_index, "subsection_index");
-  console.log(section_index, "section_index");
+  // console.log(subSection_index, "subsection_index");
+  // console.log(section_index, "section_index");
 
   let section_Or_subSection = props?.fromSection;
-  console.log(section_Or_subSection, "section_Or_subSection");
+  // console.log(section_Or_subSection, "section_Or_subSection");
   let item_index = props?.item_index;
 
   const toast = useToast();
@@ -318,7 +318,7 @@ const ItemDrawer = (props) => {
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.CREATE_SUB_ITEM + subsecid, itemData)
         .then((res) => {
-          console.log(res.data.subSectionItem, "item response");
+          // console.log(res.data.subSectionItem, "item response");
           if (res.data.success == true) {
             toast({
               position: "top",
@@ -344,7 +344,7 @@ const ItemDrawer = (props) => {
   };
 
   useEffect(() => {
-    console.log(props.itemDecider);
+    // console.log(props.itemDecider);
     if (item_index && props?.itemDecider === "item") {
       getSingleItemByID();
     } else if (item_index && props?.itemDecider === "subItem") {
@@ -557,7 +557,7 @@ const ItemDrawer = (props) => {
           // console.log(itemModifier, 'itemMODIFER')
           itemModifier.push(responseBody);
           setState(itemModifier);
-          console.log(state, "states");
+          // console.log(state, "states");
         }
       }
     }
@@ -606,7 +606,7 @@ const ItemDrawer = (props) => {
           setImage(data.url.toString());
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         })
     );
   };
@@ -631,7 +631,7 @@ const ItemDrawer = (props) => {
       );
       const data = await res.json();
       setVideo(data.url.toString());
-      console.log(video, "video");
+      // console.log(video, "video");
     } catch (err) {
       console.log(err);
     }

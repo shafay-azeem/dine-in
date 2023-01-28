@@ -92,7 +92,7 @@ const DisplayCard = () => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_MENU_BY_ID + id, menuData)
       .then((res) => {
         if (res.data.success == true) {
-          console.log("Status Updated");
+          // console.log("Status Updated");
           setStatusMenu(true);
           return true;
         } else {

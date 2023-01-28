@@ -23,7 +23,7 @@ import Button from "react-bootstrap/Button";
 
 const MenuConfiguration = () => {
   const USERID = localStorage.getItem("user_id");
-  console.log(USERID);
+  // console.log(USERID);
 
   const [inputList, setInputList] = useState([]);
 
@@ -40,7 +40,7 @@ const MenuConfiguration = () => {
     });
   };
   const port = window.location.port;
-  console.log(port);
+  // console.log(port);
 
   const GenerateQRCode = () => {
     QRCode.toDataURL(

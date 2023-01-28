@@ -23,9 +23,9 @@ const ViewFeedBacks = (props) => {
 
   let questionResponses = feedback[props?.index]?.response;
   let feedbackInfo = feedback[props?.index];
-  console.log(questionResponses, "questionResponses");
+  // console.log(questionResponses, "questionResponses");
 
-  console.log(feedbackInfo, "feedback");
+  // console.log(feedbackInfo, "feedback");
   return (
     <div>
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="5xl">

@@ -109,7 +109,7 @@ const SectionCard = (props) => {
     let res = getSection.data.section;
     setSectionList(res);
     setLoading(true);
-    console.log("kkk");
+    // console.log("kkk");
   }
 
   const handleRemove = async (id) => {
@@ -153,7 +153,7 @@ const SectionCard = (props) => {
       .then((res) => {
         if (res.data.success == true) {
           setSectionUpdate(true);
-          console.log("Section Status Updated");
+          // console.log("Section Status Updated");
           return true;
         } else {
           toast({
@@ -206,8 +206,8 @@ const SectionCard = (props) => {
   };
 
   const sectionClick = async (x, id) => {
-    console.log(id, "id");
-    console.log(x, "x");
+    // console.log(id, "id");
+    // console.log(x, "x");
 
     let sectionData = {
       sectionToggle: !x.sectionToggle,
@@ -217,7 +217,7 @@ const SectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          console.log("section status updated");
+          // console.log("section status updated");
           setSectionUpdate(true)
           return true;
         } else {
@@ -269,7 +269,7 @@ const SectionCard = (props) => {
           item.sectionName.toLowerCase().indexOf(query.toLowerCase()) !== -1
         );
       });
-      console.log(updatedListTemp);
+      // console.log(updatedListTemp);
       setSectionList(updatedListTemp);
     }
   };

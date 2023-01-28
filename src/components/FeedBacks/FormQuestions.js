@@ -19,7 +19,7 @@ const FormQuestions = () => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   let feedback_index = searchparams.get("id");
-  console.log(feedback_index, "feedback_index");
+  // console.log(feedback_index, "feedback_index");
   const [sdf, setSdf] = useState();
 
   // let A;
@@ -53,7 +53,7 @@ const FormQuestions = () => {
         )
         .then((res) => {
           if (res.data.success == true) {
-            console.log(res);
+            // console.log(res);
             //alert(`${res.data.message}`);
             toast({
               position: "top",
@@ -148,7 +148,7 @@ const FormQuestions = () => {
   }, []);
 
   async function getAllQuestionsByFormID() {
-    console.log("jshshhsh");
+    // console.log("jshshhsh");
     let getFormQuestions = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_ALL_QUESTIONS_BY_FORMID + feedback_index
     );
@@ -159,7 +159,7 @@ const FormQuestions = () => {
     // let id = getFormQuestions.data.formQuestion[0]._id;
     setSdf(getFormQuestions.data.formQuestion[0]?._id);
     // console.log(getFormQuestions.data., "ioioio");
-    console.log(setVar, "ddd");
+    // console.log(setVar, "ddd");
     setInputList(setVar);
     setLoading(true);
   }

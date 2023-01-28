@@ -155,9 +155,9 @@ const Feedbacks = () => {
     await apiFunctions
       .PUT_REQUEST(BASE_URL + API_URL.UPDTAE_FORM_STATUS + id)
       .then((res) => {
-        console.log(res, "res");
+        // console.log(res, "res");
         if (res.status == 200) {
-          console.log("Status Updated");
+          // console.log("Status Updated");
           setCount(true);
           return true;
         } else {
@@ -192,7 +192,7 @@ const Feedbacks = () => {
 
     let res = geFeedbackForms.data.feedbackForm;
 
-    console.log(res);
+    // console.log(res);
     setFeedbackFormList(res);
     setLoading(true);
     // setGetFeedback(true)

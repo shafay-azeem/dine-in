@@ -31,7 +31,7 @@ const UpdateUser = () => {
         .PUT_REQUEST(BASE_URL + API_URL.UPDATE_PROFILE, userData)
         .then((res) => {
           if (res.data.success == true) {
-            console.log(res.data);
+            // console.log(res.data);
             toast({
               position: "top",
               title: `Updated SuccessFully`,

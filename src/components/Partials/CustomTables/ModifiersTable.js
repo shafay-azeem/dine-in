@@ -47,7 +47,7 @@ const ModifiersTable = () => {
     );
 
     let res = getModifier.data.modifier;
-    console.log(modifier);
+    // console.log(modifier);
     setUpdate(true)
     setModifier(res);
   }

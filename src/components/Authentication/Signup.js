@@ -42,7 +42,7 @@ const SignUp = () => {
     await apiFunctions
       .POST_REQUEST(BASE_URL + API_URL.CREATE_USER, userData)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.success == true) {
           toast({
             position: "top",
