@@ -14,6 +14,7 @@ import React from "react";
 import Login from "./Authentication/Login";
 import SignUp from "./Authentication/Signup";
 import UpdateUser from "./Authentication/UpdateUser";
+import img from "../components/Assets/DINE-IN.png";
 
 const HomePage = () => {
   return (
@@ -40,7 +41,7 @@ const HomePage = () => {
         m="40px 0 15px 0"
       >
         <Center>
-          <Text
+          {/* <Text
             margin="auto"
             resizeMode="contain"
             text-align="center"
@@ -49,16 +50,16 @@ const HomePage = () => {
             align-items="center"
           >
             Dine In
-          </Text>
-          {/* <Image
+          </Text> */}
+          <Image
             margin="auto"
             resizeMode="contain"
             text-align="center"
             display="block"
             justify-content="center"
             align-items="center"
-            // src={Img}
-          /> */}
+            src={img}
+          />
         </Center>
         {/* <Text
               fontSize="4xl"

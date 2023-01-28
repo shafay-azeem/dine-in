@@ -34,12 +34,13 @@ const ModifiersTable = () => {
     onOpen: modifierOnOpen,
     onClose: modifierOnClose,
   } = useDisclosure();
+  let changer = Math.random()
 
   useEffect(() => {
-    setUpdate(false)
+    // setUpdate(false)
     getAllModifiers();
 
-  }, []);
+  }, [changer]);
 
   async function getAllModifiers() {
     let getModifier = await apiFunctions.GET_REQUEST(
