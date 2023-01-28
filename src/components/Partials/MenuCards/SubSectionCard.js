@@ -89,6 +89,7 @@ const SubSectionCard = (props) => {
     subSectionDelete,
     createSubSection,
     updatedSubSection,
+    subSectionList,
   ]);
 
   async function getAllSubSectionBySectionId() {

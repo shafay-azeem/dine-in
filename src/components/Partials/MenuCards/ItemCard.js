@@ -88,6 +88,7 @@ const ItemCard = (props) => {
     subItemDuplicate,
     itemDuplicate,
     itemUpdater,
+    itemList,
   ]);
 
   async function getAllItemsBySectionId() {

@@ -20,6 +20,7 @@ import Login from "./components/Authentication/Login";
 import HomePage from "./components/HomePage";
 import { AuthProvider } from "./context/authContext";
 import RequireAuth from "./Screens/RequireAuth";
+import UpdateUser from "./components/Authentication/UpdateUser";
 
 function App() {
   return (

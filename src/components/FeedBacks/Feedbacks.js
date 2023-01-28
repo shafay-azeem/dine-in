@@ -175,7 +175,8 @@ const Feedbacks = () => {
     getAllFeedbackForm();
     setDeleteFeedback(false);
     setCreateForm(false);
-  }, [createForm, deleteFeedback]);
+    setCount(false);
+  }, [createForm, deleteFeedback, count]);
 
   async function getAllFeedbackForm() {
     let geFeedbackForms = await apiFunctions.GET_REQUEST(
@@ -300,7 +301,7 @@ const Feedbacks = () => {
                         >
                           <BootstrapSwitchButton
                             checked={x.active}
-                            onChange={() => switchStatus(x._id, index)}
+                            onChange={() => switchStatus(x._id, index, x)}
                             data-size="xs"
                           />
                           {/* <Box onClick={() => getIndex(x._id)}></Box> */}

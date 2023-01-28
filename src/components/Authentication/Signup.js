@@ -57,7 +57,7 @@ const SignUp = () => {
           // setName("");
           // setEmail("");
           // setPassword("");
-
+          localStorage.setItem("token", res.data.token);
           navigate({
             pathname: "/homeScreen",
           });
@@ -131,7 +131,7 @@ const SignUp = () => {
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}
-        // isLoading={loading}
+      // isLoading={loading}
       >
         Sign Up
       </Button>

@@ -40,6 +40,21 @@ const MenuPage = (props) => {
       pathname: "/menufeedback",
     });
   };
+  useEffect(() => {
+    getActiveFormQuestions();
+  }, []);
+
+  async function getActiveFormQuestions() {
+    try {
+      let getFormQuestions = await apiFunctions.GET_REQUEST(
+        BASE_URL + API_URL.GET_ALL_FORM_QR
+      );
+      let res = getFormQuestions.data.feedbackForm;
+      setDemo(res[0]?.formQuestions[0].Questions);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div>
