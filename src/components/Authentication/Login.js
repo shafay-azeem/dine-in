@@ -26,10 +26,16 @@ const Login = () => {
 
   const submitHandler = async () => {
     if (!email || !password) {
-      alert("Please Enter All Fields");
+      //alert("Please Enter All Fields");
+      toast({
+        position: "top",
+        title: `Please Enter All Fields`,
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
       return;
     }
-
     try {
       let userData = {
         email: email,

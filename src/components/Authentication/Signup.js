@@ -30,8 +30,26 @@ const SignUp = () => {
   const toast = useToast();
 
   const submitHandler = async () => {
+    if (!email || !password || !name) {
+      //alert("Please Enter All Fields");
+      toast({
+        position: "top",
+        title: `Please Enter All Fields`,
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
     if (password !== confirmpassword) {
-      return alert("Password donot match");
+      toast({
+        position: "top",
+        title: `Password donot match`,
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      return
     }
     let userData = {
       name: name,
