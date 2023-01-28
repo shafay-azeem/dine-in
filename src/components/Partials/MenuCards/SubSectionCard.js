@@ -241,7 +241,7 @@ const SubSectionCard = (props) => {
     <>
       {subSectionList?.map((x, index) => {
         return (
-          <Box>
+          <Box key={index}>
             <Box bg="white" w="100%" p={4} borderRadius={6} mt={2}>
               <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                 <GridItem colSpan={2} h="10">

@@ -88,8 +88,8 @@ const DisplayItemCard = (props) => {
 
                       <Card.Text className="pricetext">
                         {x.itemPriceOption[0].price ==
-                        x.itemPriceOption[x.itemPriceOption.length - 1]
-                          .price ? (
+                          x.itemPriceOption[x.itemPriceOption.length - 1]
+                            .price ? (
                           <div
                             className="itemPrice"
                             style={{
@@ -119,7 +119,7 @@ const DisplayItemCard = (props) => {
                       <div className="d-flex align-items-center">
                         {x.itemLabel?.map((y, index) => {
                           return (
-                            <div className="d-flex my-1">
+                            <div className="d-flex my-1" key={index}>
                               {y.New === "New" ? (
                                 <div className="me-2">
                                   <img
@@ -144,7 +144,7 @@ const DisplayItemCard = (props) => {
                               ) : null}
 
                               {y.Special_Presentation ===
-                              "Special Presentation" ? (
+                                "Special Presentation" ? (
                                 <div className="me-2">
                                   <img
                                     src={
@@ -162,7 +162,7 @@ const DisplayItemCard = (props) => {
                       <div className="d-flex align-items-center mt-2">
                         {x.itemWarning?.map((z, index) => {
                           return (
-                            <div className="d-flex my-1">
+                            <div className="d-flex my-1" key={index}>
                               {z.Alcohol === "Alcohol" ? (
                                 <div className="me-2">
                                   <img

@@ -112,7 +112,7 @@ const MenuDetail = (props) => {
               {priceOption ? (
                 <div>
                   {priceOption[0].price ==
-                  priceOption[priceOption.length - 1]?.price ? (
+                    priceOption[priceOption.length - 1]?.price ? (
                     <div
                       className="itemPrice"
                       style={{
@@ -153,7 +153,7 @@ const MenuDetail = (props) => {
             <div className="d-flex justify-content-center gap-2 mt-2">
               {select?.map((y, index) => {
                 return (
-                  <div className="d-flex">
+                  <div className="d-flex" key={index}>
                     {y.New === "New" ? (
                       <div className="me-2">
                         <img
@@ -188,7 +188,7 @@ const MenuDetail = (props) => {
             <div className="d-flex justify-content-center gap-2 mt-2">
               {warningState?.map((z, index) => {
                 return (
-                  <div className="d-flex my-1">
+                  <div className="d-flex my-1" key={index}>
                     {z.Alcohol === "Alcohol" ? (
                       <div className="me-2">
                         <img
@@ -226,7 +226,7 @@ const MenuDetail = (props) => {
             <div>
               {demoModifier?.map((s, index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <p className="title text-center">{s.groupname}</p>
                     <p className="sub-title text-center">
                       Min {s.min} - Max {s.max}
@@ -234,7 +234,7 @@ const MenuDetail = (props) => {
                     <div>
                       {s.reference?.map((r, index) => {
                         return (
-                          <div className="d-flex justify-content-between mt-2 py-1 px-2 border-bottom mb-3">
+                          <div className="d-flex justify-content-between mt-2 py-1 px-2 border-bottom mb-3" key={index}>
                             {r.Name === undefined ? null : <div>{r.Name}</div>}
 
                             {r.Price === undefined ? null : (
