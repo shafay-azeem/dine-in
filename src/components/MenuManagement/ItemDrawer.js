@@ -53,6 +53,7 @@ import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useToast } from "@chakra-ui/react";
+import Spinner from "react-bootstrap/Spinner";
 
 const ItemDrawer = (props) => {
   let section_index = props?.section_index;
@@ -72,7 +73,7 @@ const ItemDrawer = (props) => {
     onClose: ModalOnClose,
   } = useDisclosure();
   const { response, setResponse, itemUpdater, setItemUpdater } = MenuState();
-
+  const [loading, setLoading] = useState(true);
   const [select, setSelect] = useState();
   const [conversion, setConversion] = useState([]);
 
@@ -354,10 +355,15 @@ const ItemDrawer = (props) => {
   }, []);
 
   async function getSingleItemByID() {
+    setLoading(false);
     let getSingleItem = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_ITEM_BY_ID + item_index
     );
 
+    if (getSingleItem.data.item.length == 0) {
+      return setLoading(true);
+    }
+
     let setVar = getSingleItem.data.item;
     let propertyNames;
     let propertyNamesWarning;
@@ -424,13 +430,19 @@ const ItemDrawer = (props) => {
     } else {
       setDemoModifier([{ min: "", max: "" }]);
     }
+    setLoading(true);
   }
 
   async function getSingleSubItemByID() {
+    setLoading(false);
     let getSingleItem = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_SINGLE_SUB_ITEM_BY_ID + item_index
     );
 
+    if (getSingleItem.data.item.length == 0) {
+      return setLoading(true);
+    }
+
     let setVar = getSingleItem.data.item;
     let propertyNames;
     let propertyNamesWarning;
@@ -496,6 +508,7 @@ const ItemDrawer = (props) => {
     } else {
       setDemoModifier([{ min: "", max: "" }]);
     }
+    setLoading(true);
   }
 
   const handleChange = (e, index) => {
@@ -637,36 +650,37 @@ const ItemDrawer = (props) => {
           <DrawerCloseButton />
           <DrawerHeader>Add New Item</DrawerHeader>
 
-          <DrawerBody>
-            <Tabs>
-              <TabList>
-                <Tab>General Information</Tab>
-                <Tab>Price Options</Tab>
-                <Tab>Modifier Options</Tab>
-                <Tab>Nutrition Info</Tab>
-              </TabList>
+          {loading ? (
+            <DrawerBody>
+              <Tabs>
+                <TabList>
+                  <Tab>General Information</Tab>
+                  <Tab>Price Options</Tab>
+                  <Tab>Modifier Options</Tab>
+                  <Tab>Nutrition Info</Tab>
+                </TabList>
 
-              <TabPanels>
-                <TabPanel>
-                  <FormControl>
-                    <FormLabel fontWeight="400">Name</FormLabel>
-                    <Input
-                      type="text"
-                      onChange={(e) => setName(e.target.value)}
-                      value={name}
-                    />
-                  </FormControl>
+                <TabPanels>
+                  <TabPanel>
+                    <FormControl>
+                      <FormLabel fontWeight="400">Name</FormLabel>
+                      <Input
+                        type="text"
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                      />
+                    </FormControl>
 
-                  <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Description</FormLabel>
-                    <Textarea
-                      placeholder="Here is a sample placeholder"
-                      onChange={(e) => setDescription(e.target.value)}
-                      value={description}
-                    />
-                  </FormControl>
+                    <FormControl mt={3}>
+                      <FormLabel fontWeight="400">Description</FormLabel>
+                      <Textarea
+                        placeholder="Here is a sample placeholder"
+                        onChange={(e) => setDescription(e.target.value)}
+                        value={description}
+                      />
+                    </FormControl>
 
-                  {/* <FormControl mt={3}>
+                    {/* <FormControl mt={3}>
                     <FormLabel fontWeight="400">Display the section</FormLabel>
                     <SwitchComponent
                       id="switch1"
@@ -675,404 +689,707 @@ const ItemDrawer = (props) => {
                     />
                   </FormControl> */}
 
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={checked ? checked : false}
-                      onChange={(e) => setChecked(e.target.checked)}
-                    />
-                    Display The Section
-                  </label>
-
-                  <FormControl mt={3}>
-                    <HStack>
-                      <FormLabel fontWeight="400">Price</FormLabel>
-                      <Input
-                        placeholder="Price"
-                        borderRadius={6}
-                        width="160px"
-                        mr={4}
-                        value={itemPrice}
-                        onChange={(e) => setItemPrice(e.target.value)}
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={checked ? checked : false}
+                        onChange={(e) => setChecked(e.target.checked)}
                       />
-                      <FormLabel fontWeight="400">Calorie</FormLabel>
-                      <Input
-                        placeholder="Calorie"
-                        borderRadius={6}
-                        width="160px"
-                        mr={4}
-                        value={calorie}
-                        onChange={(e) => setCalorie(e.target.value)}
-                      />
-                    </HStack>
-                  </FormControl>
+                      Display The Section
+                    </label>
 
-                  <FormControl mt={3}>
-                    {/* <FormLabel fontWeight="400">Mark as Sold Out</FormLabel>
+                    <FormControl mt={3}>
+                      <HStack>
+                        <FormLabel fontWeight="400">Price</FormLabel>
+                        <Input
+                          placeholder="Price"
+                          borderRadius={6}
+                          width="160px"
+                          mr={4}
+                          value={itemPrice}
+                          onChange={(e) => setItemPrice(e.target.value)}
+                        />
+                        <FormLabel fontWeight="400">Calorie</FormLabel>
+                        <Input
+                          placeholder="Calorie"
+                          borderRadius={6}
+                          width="160px"
+                          mr={4}
+                          value={calorie}
+                          onChange={(e) => setCalorie(e.target.value)}
+                        />
+                      </HStack>
+                    </FormControl>
+
+                    <FormControl mt={3}>
+                      {/* <FormLabel fontWeight="400">Mark as Sold Out</FormLabel>
                     <SwitchComponent
                       id="switch1"
                       checked={sold}
                       onChange={(e) => setSold(e.target.checked)}
                     /> */}
 
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={sold ? sold : false}
-                        onChange={(e) => setSold(e.target.checked)}
-                      />
-                      Mark as Sold Out
-                    </label>
-                  </FormControl>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={sold ? sold : false}
+                          onChange={(e) => setSold(e.target.checked)}
+                        />
+                        Mark as Sold Out
+                      </label>
+                    </FormControl>
 
-                  <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Upload Your Image</FormLabel>
-                    <Input
-                      size="sm"
-                      type="file"
-                      accept=".jpg,.png"
-                      onChange={pictureCapture}
-                      id="img"
-                    />
-                    {image && (
+                    <FormControl mt={3}>
+                      <FormLabel fontWeight="400">Upload Your Image</FormLabel>
+                      <Input
+                        size="sm"
+                        type="file"
+                        accept=".jpg,.png"
+                        onChange={pictureCapture}
+                        id="img"
+                      />
+                      {image && (
+                        <div>
+                          <img
+                            className="preview mt-4 mx-auto"
+                            src={image}
+                            alt=""
+                            width="200px"
+                            height="200px"
+                            onClick={ModalOnOpen}
+                          />
+                          <IconButton
+                            onClick={deleteimg}
+                            variant="outline"
+                            colorScheme="teal"
+                            icon={<BsFillTrashFill />}
+                          />
+                        </div>
+                      )}
+
+                      <Modal isOpen={ModalOpen} onClose={ModalOnClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                          <ModalCloseButton />
+
+                          <ModalBody>
+                            <Center>
+                              <div>
+                                <img
+                                  className="preview p-5"
+                                  src={image}
+                                  alt=""
+                                />
+                              </div>
+                            </Center>
+                          </ModalBody>
+                        </ModalContent>
+                      </Modal>
+                    </FormControl>
+
+                    <FormControl mt={3}>
+                      <FormLabel fontWeight="400">Upload Your Video</FormLabel>
+                      <Input
+                        size="sm"
+                        type="file"
+                        accept="video/*"
+                        onChange={videoCapture}
+                      />
+                    </FormControl>
+
+                    {video && (
                       <div>
-                        <img
-                          className="preview mt-4 mx-auto"
-                          src={image}
-                          alt=""
-                          width="200px"
-                          height="200px"
-                          onClick={ModalOnOpen}
-                        />
-                        <IconButton
-                          onClick={deleteimg}
-                          variant="outline"
-                          colorScheme="teal"
-                          icon={<BsFillTrashFill />}
-                        />
+                        <video width="320" height="240" controls>
+                          <source src={video} type="video/mp4"></source>
+                        </video>
                       </div>
                     )}
 
-                    <Modal isOpen={ModalOpen} onClose={ModalOnClose}>
-                      <ModalOverlay />
-                      <ModalContent>
-                        <ModalCloseButton />
-
-                        <ModalBody>
-                          <Center>
-                            <div>
-                              <img className="preview p-5" src={image} alt="" />
-                            </div>
-                          </Center>
-                        </ModalBody>
-                      </ModalContent>
-                    </Modal>
-                  </FormControl>
-
-                  <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Upload Your Video</FormLabel>
-                    <Input
-                      size="sm"
-                      type="file"
-                      accept="video/*"
-                      onChange={videoCapture}
-                    />
-                  </FormControl>
-
-                  {video && (
-                    <div>
-                      <video width="320" height="240" controls autoPlay>
-                        <source src={video} type="video/mp4"></source>
-                      </video>
-                    </div>
-                  )}
-
-                  {/* <video width="320" height="240" controls>
+                    {/* <video width="320" height="240" controls>
                     <source src={video} type="video/mp4">
                      
 
 
                       </video> */}
-                  {/* )} */}
+                    {/* )} */}
 
-                  <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Labels</FormLabel>
-                    <Multiselect
-                      isObject={false}
-                      onRemove={(event) => {
-                        removalMultiSelect(event);
-                      }}
-                      onSelect={(event) => {
-                        selectionMultiSelect(event);
-                      }}
-                      options={food}
-                      selectedValues={select}
-                      showCheckbox
-                    />
-                  </FormControl>
-
-                  <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Ingredient Warnings</FormLabel>
-                    <Multiselect
-                      isObject={false}
-                      // value={warningState}
-                      onRemove={(event) => {
-                        removalMultiSelectwarning(event);
-                      }}
-                      onSelect={(event) => {
-                        selectionMultiSelectwarning(event);
-                      }}
-                      options={warning}
-                      selectedValues={warningState}
-                      showCheckbox
-                    />
-                  </FormControl>
-
-                  <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Recommended Items</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Type to search items"
-                      value={recommendedItem}
-                      onChange={(e) => setRecommendedItem(e.target.value)}
-                    />
-                  </FormControl>
-
-                  <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Preparation Time</FormLabel>
-                    <InputGroup>
-                      <InputLeftAddon children="min(s)" />
-                      <Input
-                        type="number"
-                        placeholder="0"
-                        w="30%"
-                        value={time}
-                        onChange={(e) => setTime(e.target.value)}
+                    <FormControl mt={3}>
+                      <FormLabel fontWeight="400">Labels</FormLabel>
+                      <Multiselect
+                        isObject={false}
+                        onRemove={(event) => {
+                          removalMultiSelect(event);
+                        }}
+                        onSelect={(event) => {
+                          selectionMultiSelect(event);
+                        }}
+                        options={food}
+                        selectedValues={select}
+                        showCheckbox
                       />
-                    </InputGroup>
-                  </FormControl>
-                </TabPanel>
-                <TabPanel>
-                  <Box>
-                    {inputList?.map((x, index) => {
-                      return (
-                        <Box key={index} mt={5}>
-                          <HStack>
-                            <Input
-                              borderRadius="8px"
-                              placeholder="Name"
-                              name="name"
-                              size="sm"
-                              type="text"
-                              value={x.name}
-                              width="30%"
-                              onChange={(e) => handleChange(e, index)}
-                            />
-                            <Input
-                              borderRadius="8px"
-                              placeholder="Price"
-                              size="sm"
-                              name="price"
-                              type="text"
-                              value={x.price}
-                              width="30%"
-                              onChange={(e) => handleChange(e, index)}
-                            />
-                            <Input
-                              borderRadius="8px"
-                              placeholder="Calories"
-                              size="sm"
-                              name="calories"
-                              type="text"
-                              width="30%"
-                              value={x.calories}
-                              onChange={(e) => handleChange(e, index)}
-                            />
-                            {inputList.length !== 1 && (
-                              <IconButton
-                                size="xs"
-                                variant="outline"
-                                colorScheme="blue"
-                                onClick={() => handleRemoveInput(index)}
-                                icon={<CloseIcon />}
-                              />
-                            )}
-                            {inputList.length - 1 === index && (
-                              <IconButton
-                                size="xs"
-                                variant="outline"
-                                colorScheme="blue"
-                                onClick={() => handleAddInput(index)}
-                                icon={<AddIcon />}
-                              />
-                            )}
-                          </HStack>
-                        </Box>
-                      );
-                    })}
-                  </Box>
+                    </FormControl>
 
-                  {/* <Box>
+                    <FormControl mt={3}>
+                      <FormLabel fontWeight="400">
+                        Ingredient Warnings
+                      </FormLabel>
+                      <Multiselect
+                        isObject={false}
+                        // value={warningState}
+                        onRemove={(event) => {
+                          removalMultiSelectwarning(event);
+                        }}
+                        onSelect={(event) => {
+                          selectionMultiSelectwarning(event);
+                        }}
+                        options={warning}
+                        selectedValues={warningState}
+                        showCheckbox
+                      />
+                    </FormControl>
+
+                    <FormControl mt={3}>
+                      <FormLabel fontWeight="400">Recommended Items</FormLabel>
+                      <Input
+                        type="text"
+                        placeholder="Type to search items"
+                        value={recommendedItem}
+                        onChange={(e) => setRecommendedItem(e.target.value)}
+                      />
+                    </FormControl>
+
+                    <FormControl mt={3}>
+                      <FormLabel fontWeight="400">Preparation Time</FormLabel>
+                      <InputGroup>
+                        <InputLeftAddon children="min(s)" />
+                        <Input
+                          type="number"
+                          placeholder="0"
+                          w="30%"
+                          value={time}
+                          onChange={(e) => setTime(e.target.value)}
+                        />
+                      </InputGroup>
+                    </FormControl>
+                  </TabPanel>
+                  <TabPanel>
+                    <Box>
+                      {inputList?.map((x, index) => {
+                        return (
+                          <Box key={index} mt={5}>
+                            <HStack>
+                              <Input
+                                borderRadius="8px"
+                                placeholder="Name"
+                                name="name"
+                                size="sm"
+                                type="text"
+                                value={x.name}
+                                width="30%"
+                                onChange={(e) => handleChange(e, index)}
+                              />
+                              <Input
+                                borderRadius="8px"
+                                placeholder="Price"
+                                size="sm"
+                                name="price"
+                                type="text"
+                                value={x.price}
+                                width="30%"
+                                onChange={(e) => handleChange(e, index)}
+                              />
+                              <Input
+                                borderRadius="8px"
+                                placeholder="Calories"
+                                size="sm"
+                                name="calories"
+                                type="text"
+                                width="30%"
+                                value={x.calories}
+                                onChange={(e) => handleChange(e, index)}
+                              />
+                              {inputList.length !== 1 && (
+                                <IconButton
+                                  size="xs"
+                                  variant="outline"
+                                  colorScheme="blue"
+                                  onClick={() => handleRemoveInput(index)}
+                                  icon={<CloseIcon />}
+                                />
+                              )}
+                              {inputList.length - 1 === index && (
+                                <IconButton
+                                  size="xs"
+                                  variant="outline"
+                                  colorScheme="blue"
+                                  onClick={() => handleAddInput(index)}
+                                  icon={<AddIcon />}
+                                />
+                              )}
+                            </HStack>
+                          </Box>
+                        );
+                      })}
+                    </Box>
+
+                    {/* <Box>
                     <Text>
                       {JSON.stringify(inputList, null, 2)}
                     </Text>
 
                   </Box> */}
-                </TabPanel>
-                <TabPanel>
-                  <Box>
-                    {demoModifier?.map((y, index) => {
-                      return (
-                        <Box key={index} mt={5}>
-                          <HStack>
-                            <Select
-                              placeholder="Select Group"
-                              width="30%"
-                              size="sm"
-                              borderRadius="8px"
-                              name="groupname"
-                              value={y.groupname}
-                              onChange={(e) => ModifierOptions(e, index)}
-                            >
-                              {modifier?.map((a, index) => {
-                                return (
-                                  <option value={a.Groupname}>
-                                    {a.Groupname}
-                                  </option>
-                                );
-                              })}
-                            </Select>
+                  </TabPanel>
+                  <TabPanel>
+                    <Box>
+                      {demoModifier?.map((y, index) => {
+                        return (
+                          <Box key={index} mt={5}>
+                            <HStack>
+                              <Select
+                                placeholder="Select Group"
+                                width="30%"
+                                size="sm"
+                                borderRadius="8px"
+                                name="groupname"
+                                value={y.groupname}
+                                onChange={(e) => ModifierOptions(e, index)}
+                              >
+                                {modifier?.map((a, index) => {
+                                  return (
+                                    <option value={a.Groupname}>
+                                      {a.Groupname}
+                                    </option>
+                                  );
+                                })}
+                              </Select>
 
-                            <Input
-                              borderRadius="8px"
-                              placeholder="Min"
-                              size="sm"
-                              name="min"
-                              type="text"
-                              value={y.min}
-                              width="30%"
-                              onChange={(e) => ModifierOptions(e, index)}
-                            />
-                            <Input
-                              borderRadius="8px"
-                              placeholder="Max"
-                              size="sm"
-                              name="max"
-                              type="text"
-                              width="30%"
-                              value={y.max}
-                              onChange={(e) => ModifierOptions(e, index)}
-                            />
-                            {/* <Checkbox>Required</Checkbox> */}
-                            {demoModifier.length !== 1 && (
-                              <IconButton
-                                size="xs"
-                                variant="outline"
-                                colorScheme="blue"
-                                onClick={() => handleRemoveModifier(index)}
-                                icon={<CloseIcon />}
+                              <Input
+                                borderRadius="8px"
+                                placeholder="Min"
+                                size="sm"
+                                name="min"
+                                type="text"
+                                value={y.min}
+                                width="30%"
+                                onChange={(e) => ModifierOptions(e, index)}
                               />
-                            )}
-                            {demoModifier.length - 1 === index && (
-                              <IconButton
-                                size="xs"
-                                variant="outline"
-                                colorScheme="blue"
-                                onClick={() => handleModifierInput(index)}
-                                icon={<AddIcon />}
+                              <Input
+                                borderRadius="8px"
+                                placeholder="Max"
+                                size="sm"
+                                name="max"
+                                type="text"
+                                width="30%"
+                                value={y.max}
+                                onChange={(e) => ModifierOptions(e, index)}
                               />
-                            )}
-                          </HStack>
-                        </Box>
-                      );
-                    })}
+                              {/* <Checkbox>Required</Checkbox> */}
+                              {demoModifier.length !== 1 && (
+                                <IconButton
+                                  size="xs"
+                                  variant="outline"
+                                  colorScheme="blue"
+                                  onClick={() => handleRemoveModifier(index)}
+                                  icon={<CloseIcon />}
+                                />
+                              )}
+                              {demoModifier.length - 1 === index && (
+                                <IconButton
+                                  size="xs"
+                                  variant="outline"
+                                  colorScheme="blue"
+                                  onClick={() => handleModifierInput(index)}
+                                  icon={<AddIcon />}
+                                />
+                              )}
+                            </HStack>
+                          </Box>
+                        );
+                      })}
 
-                    {/* <Box>
+                      {/* <Box>
                       <Text>{JSON.stringify(demoModifier, null, 2)}</Text>
                     </Box> */}
-                  </Box>
-                </TabPanel>
-                <TabPanel>
-                  <FormControl>
-                    <FormLabel fontWeight="400">
-                      Display the Nutrition Info on the menu
-                    </FormLabel>
-                    <Switch></Switch>
-                  </FormControl>
+                    </Box>
+                  </TabPanel>
+                  <TabPanel>
+                    <FormControl>
+                      <FormLabel fontWeight="400">
+                        Display the Nutrition Info on the menu
+                      </FormLabel>
+                      <Switch></Switch>
+                    </FormControl>
 
-                  <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Serving Size</FormLabel>
-                    <Input
-                      type="text"
-                      value={servingSize}
-                      onChange={(e) => setServingSize(e.target.value)}
-                    />
-                  </FormControl>
+                    <FormControl mt={3}>
+                      <FormLabel fontWeight="400">Serving Size</FormLabel>
+                      <Input
+                        type="text"
+                        value={servingSize}
+                        onChange={(e) => setServingSize(e.target.value)}
+                      />
+                    </FormControl>
 
-                  <Grid templateColumns="repeat(5, 1fr)" gap={4} mt={3}>
-                    <GridItem colSpan={2} h="10">
-                      <FormControl mt={3}>
-                        <FormLabel fontWeight="400">Calories</FormLabel>
+                    <Grid templateColumns="repeat(5, 1fr)" gap={4} mt={3}>
+                      <GridItem colSpan={2} h="10">
+                        <FormControl mt={3}>
+                          <FormLabel fontWeight="400">Calories</FormLabel>
 
-                        <NumberInput
-                          value={nutCalories}
-                          onChange={(nutCalories) =>
-                            setNutCalories(nutCalories)
-                          }
-                        >
-                          <NumberInputField />
-                          <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                          </NumberInputStepper>
-                        </NumberInput>
-                      </FormControl>
-                    </GridItem>
-                    <GridItem colStart={4} colEnd={6} h="10">
-                      <FormControl mt={3}>
-                        <FormLabel fontWeight="400">
-                          Calories From Fat
-                        </FormLabel>
+                          <NumberInput
+                            value={nutCalories}
+                            onChange={(nutCalories) =>
+                              setNutCalories(nutCalories)
+                            }
+                          >
+                            <NumberInputField />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
+                        </FormControl>
+                      </GridItem>
+                      <GridItem colStart={4} colEnd={6} h="10">
+                        <FormControl mt={3}>
+                          <FormLabel fontWeight="400">
+                            Calories From Fat
+                          </FormLabel>
 
-                        <NumberInput
-                          value={caloriesfat}
-                          onChange={(caloriesfat) =>
-                            setCaloriesFat(caloriesfat)
-                          }
-                        >
-                          <NumberInputField />
-                          <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                          </NumberInputStepper>
-                        </NumberInput>
-                      </FormControl>
-                    </GridItem>
-                  </Grid>
+                          <NumberInput
+                            value={caloriesfat}
+                            onChange={(caloriesfat) =>
+                              setCaloriesFat(caloriesfat)
+                            }
+                          >
+                            <NumberInputField />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
+                        </FormControl>
+                      </GridItem>
+                    </Grid>
 
-                  <SimpleGrid columns={3} spacing={10} mt="15%">
-                    <GridItem h="10">
-                      <Text fontWeight="500">Total Fat</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={totalFat}
-                        onChange={(totalFat) => setTotalFat(totalFat)}
-                      >
-                        <NumberInputField placeholder="gr" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                    <GridItem h="10">
+                    <SimpleGrid columns={3} spacing={10} mt="15%">
+                      <GridItem h="10">
+                        <Text fontWeight="500">Total Fat</Text>
+                      </GridItem>
                       <GridItem>
                         <NumberInput
-                          value={totalFatPercentage}
-                          onChange={(totalFatPercentage) =>
-                            setTotalFatPercentage(totalFatPercentage)
+                          value={totalFat}
+                          onChange={(totalFat) => setTotalFat(totalFat)}
+                        >
+                          <NumberInputField placeholder="gr" />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </GridItem>
+                      <GridItem h="10">
+                        <GridItem>
+                          <NumberInput
+                            value={totalFatPercentage}
+                            onChange={(totalFatPercentage) =>
+                              setTotalFatPercentage(totalFatPercentage)
+                            }
+                          >
+                            <NumberInputField placeholder="%" />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
+                        </GridItem>
+                      </GridItem>
+                    </SimpleGrid>
+
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text>Saturated Fat</Text>
+                      </GridItem>
+                      <GridItem>
+                        <NumberInput
+                          value={saturatedFat}
+                          onChange={(saturatedFat) =>
+                            setSaturatedFat(saturatedFat)
                           }
+                        >
+                          <NumberInputField placeholder="gr" />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </GridItem>
+                      <GridItem h="10">
+                        <GridItem>
+                          <NumberInput
+                            value={saturatedFatPercentage}
+                            onChange={(saturatedFatPercentage) =>
+                              setSaturatedFatPercentage(saturatedFatPercentage)
+                            }
+                          >
+                            <NumberInputField placeholder="%" />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
+                        </GridItem>
+                      </GridItem>
+                    </SimpleGrid>
+
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text>Trans Fat</Text>
+                      </GridItem>
+                      <GridItem>
+                        <NumberInput
+                          value={transFat}
+                          onChange={(transFat) => setTransFat(transFat)}
+                        >
+                          <NumberInputField placeholder="gr" />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </GridItem>
+                      <GridItem h="10">
+                        <GridItem>
+                          <NumberInput
+                            value={transFatPercentage}
+                            onChange={(transFatPercentage) =>
+                              setTransFatPercentage(transFatPercentage)
+                            }
+                          >
+                            <NumberInputField placeholder="%" />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
+                        </GridItem>
+                      </GridItem>
+                    </SimpleGrid>
+
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text fontWeight="500">Cholesterol</Text>
+                      </GridItem>
+                      <GridItem>
+                        <NumberInput
+                          value={cholesterol}
+                          onChange={(cholesterol) =>
+                            setCholesterol(cholesterol)
+                          }
+                        >
+                          <NumberInputField placeholder="mg" />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </GridItem>
+                      <GridItem h="10">
+                        <GridItem>
+                          <NumberInput
+                            value={cholesterolPercentage}
+                            onChange={(cholesterolpercentage) =>
+                              setCholesterolPercentage(cholesterolpercentage)
+                            }
+                          >
+                            <NumberInputField placeholder="%" />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
+                        </GridItem>
+                      </GridItem>
+                    </SimpleGrid>
+
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text fontWeight="500">Sodium</Text>
+                      </GridItem>
+                      <GridItem>
+                        <NumberInput
+                          value={sodium}
+                          onChange={(sodium) => setSodium(sodium)}
+                        >
+                          <NumberInputField placeholder="mg" />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </GridItem>
+                      <GridItem h="10">
+                        <GridItem>
+                          <NumberInput
+                            value={sodiumPercentage}
+                            onChange={(sodiumPercentage) =>
+                              setSodiumPercentage(sodiumPercentage)
+                            }
+                          >
+                            <NumberInputField placeholder="%" />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
+                        </GridItem>
+                      </GridItem>
+                    </SimpleGrid>
+
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text fontWeight="500">Total Carbs</Text>
+                      </GridItem>
+                      <GridItem>
+                        <NumberInput
+                          value={totalCarbs}
+                          onChange={(totalCarbs) => setTotalCarbs(totalCarbs)}
+                        >
+                          <NumberInputField placeholder="gr" />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </GridItem>
+                      <GridItem h="10">
+                        <GridItem>
+                          <NumberInput
+                            value={totalCarbsPercentage}
+                            onChange={(totalCarbsPercentage) =>
+                              setTotalCarbsPercentage(totalCarbsPercentage)
+                            }
+                          >
+                            <NumberInputField placeholder="%" />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
+                        </GridItem>
+                      </GridItem>
+                    </SimpleGrid>
+
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text>Dietary Fiber</Text>
+                      </GridItem>
+                      <GridItem>
+                        <NumberInput
+                          value={dietaryFiber}
+                          onChange={(dietaryFiber) =>
+                            setDietaryFiber(dietaryFiber)
+                          }
+                        >
+                          <NumberInputField placeholder="gr" />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </GridItem>
+                      <GridItem h="10">
+                        <GridItem>
+                          <NumberInput
+                            value={dietaryFiberPercentage}
+                            onChange={(dietaryFiberPercentage) =>
+                              setDietaryFiberPercentage(dietaryFiberPercentage)
+                            }
+                          >
+                            <NumberInputField placeholder="%" />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
+                        </GridItem>
+                      </GridItem>
+                    </SimpleGrid>
+
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text>Sugars</Text>
+                      </GridItem>
+                      <GridItem>
+                        <NumberInput
+                          value={sugar}
+                          onChange={(sugar) => setSugar(sugar)}
+                        >
+                          <NumberInputField placeholder="gr" />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </GridItem>
+                      <GridItem h="10">
+                        <GridItem>
+                          <NumberInput
+                            value={sugarPercentage}
+                            onChange={(sugarPercentage) =>
+                              setSugarPercentage(sugarPercentage)
+                            }
+                          >
+                            <NumberInputField placeholder="%" />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
+                        </GridItem>
+                      </GridItem>
+                    </SimpleGrid>
+
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text fontWeight="500">Protein</Text>
+                      </GridItem>
+                      <GridItem>
+                        <NumberInput
+                          value={protein}
+                          onChange={(protein) => setProtein(protein)}
+                        >
+                          <NumberInputField placeholder="mg" />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                      </GridItem>
+                      <GridItem h="10">
+                        <GridItem>
+                          <NumberInput
+                            value={proteinPercentage}
+                            onChange={(proteinPercentage) =>
+                              setProteinPercentage(proteinPercentage)
+                            }
+                          >
+                            <NumberInputField placeholder="%" />
+                            <NumberInputStepper>
+                              <NumberIncrementStepper />
+                              <NumberDecrementStepper />
+                            </NumberInputStepper>
+                          </NumberInput>
+                        </GridItem>
+                      </GridItem>
+                    </SimpleGrid>
+
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text>Vitamin A</Text>
+                      </GridItem>
+                      <GridItem>
+                        <NumberInput
+                          value={vitaminA}
+                          onChange={(vitaminA) => setVitaminA(vitaminA)}
                         >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
@@ -1081,34 +1398,16 @@ const ItemDrawer = (props) => {
                           </NumberInputStepper>
                         </NumberInput>
                       </GridItem>
-                    </GridItem>
-                  </SimpleGrid>
+                    </SimpleGrid>
 
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text>Saturated Fat</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={saturatedFat}
-                        onChange={(saturatedFat) =>
-                          setSaturatedFat(saturatedFat)
-                        }
-                      >
-                        <NumberInputField placeholder="gr" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                    <GridItem h="10">
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text>Vitamin C</Text>
+                      </GridItem>
                       <GridItem>
                         <NumberInput
-                          value={saturatedFatPercentage}
-                          onChange={(saturatedFatPercentage) =>
-                            setSaturatedFatPercentage(saturatedFatPercentage)
-                          }
+                          value={vitaminC}
+                          onChange={(vitaminC) => setVitaminC(vitaminC)}
                         >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
@@ -1117,32 +1416,16 @@ const ItemDrawer = (props) => {
                           </NumberInputStepper>
                         </NumberInput>
                       </GridItem>
-                    </GridItem>
-                  </SimpleGrid>
+                    </SimpleGrid>
 
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text>Trans Fat</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={transFat}
-                        onChange={(transFat) => setTransFat(transFat)}
-                      >
-                        <NumberInputField placeholder="gr" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                    <GridItem h="10">
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text>Calcium</Text>
+                      </GridItem>
                       <GridItem>
                         <NumberInput
-                          value={transFatPercentage}
-                          onChange={(transFatPercentage) =>
-                            setTransFatPercentage(transFatPercentage)
-                          }
+                          value={calcium}
+                          onChange={(calcium) => setCalcium(calcium)}
                         >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
@@ -1151,32 +1434,16 @@ const ItemDrawer = (props) => {
                           </NumberInputStepper>
                         </NumberInput>
                       </GridItem>
-                    </GridItem>
-                  </SimpleGrid>
+                    </SimpleGrid>
 
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text fontWeight="500">Cholesterol</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={cholesterol}
-                        onChange={(cholesterol) => setCholesterol(cholesterol)}
-                      >
-                        <NumberInputField placeholder="mg" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                    <GridItem h="10">
+                    <SimpleGrid columns={3} spacing={10} mt="2%">
+                      <GridItem h="10">
+                        <Text>Iron</Text>
+                      </GridItem>
                       <GridItem>
                         <NumberInput
-                          value={cholesterolPercentage}
-                          onChange={(cholesterolpercentage) =>
-                            setCholesterolPercentage(cholesterolpercentage)
-                          }
+                          value={iron}
+                          onChange={(iron) => setIron(iron)}
                         >
                           <NumberInputField placeholder="%" />
                           <NumberInputStepper>
@@ -1185,297 +1452,63 @@ const ItemDrawer = (props) => {
                           </NumberInputStepper>
                         </NumberInput>
                       </GridItem>
-                    </GridItem>
-                  </SimpleGrid>
+                    </SimpleGrid>
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            </DrawerBody>
+          ) : (
+            <div className="loading-screen">
+              <div className="loading-spinner"> </div>
+            </div>
+          )}
 
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text fontWeight="500">Sodium</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={sodium}
-                        onChange={(sodium) => setSodium(sodium)}
-                      >
-                        <NumberInputField placeholder="mg" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                    <GridItem h="10">
-                      <GridItem>
-                        <NumberInput
-                          value={sodiumPercentage}
-                          onChange={(sodiumPercentage) =>
-                            setSodiumPercentage(sodiumPercentage)
-                          }
-                        >
-                          <NumberInputField placeholder="%" />
-                          <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                          </NumberInputStepper>
-                        </NumberInput>
-                      </GridItem>
-                    </GridItem>
-                  </SimpleGrid>
-
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text fontWeight="500">Total Carbs</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={totalCarbs}
-                        onChange={(totalCarbs) => setTotalCarbs(totalCarbs)}
-                      >
-                        <NumberInputField placeholder="gr" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                    <GridItem h="10">
-                      <GridItem>
-                        <NumberInput
-                          value={totalCarbsPercentage}
-                          onChange={(totalCarbsPercentage) =>
-                            setTotalCarbsPercentage(totalCarbsPercentage)
-                          }
-                        >
-                          <NumberInputField placeholder="%" />
-                          <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                          </NumberInputStepper>
-                        </NumberInput>
-                      </GridItem>
-                    </GridItem>
-                  </SimpleGrid>
-
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text>Dietary Fiber</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={dietaryFiber}
-                        onChange={(dietaryFiber) =>
-                          setDietaryFiber(dietaryFiber)
-                        }
-                      >
-                        <NumberInputField placeholder="gr" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                    <GridItem h="10">
-                      <GridItem>
-                        <NumberInput
-                          value={dietaryFiberPercentage}
-                          onChange={(dietaryFiberPercentage) =>
-                            setDietaryFiberPercentage(dietaryFiberPercentage)
-                          }
-                        >
-                          <NumberInputField placeholder="%" />
-                          <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                          </NumberInputStepper>
-                        </NumberInput>
-                      </GridItem>
-                    </GridItem>
-                  </SimpleGrid>
-
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text>Sugars</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={sugar}
-                        onChange={(sugar) => setSugar(sugar)}
-                      >
-                        <NumberInputField placeholder="gr" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                    <GridItem h="10">
-                      <GridItem>
-                        <NumberInput
-                          value={sugarPercentage}
-                          onChange={(sugarPercentage) =>
-                            setSugarPercentage(sugarPercentage)
-                          }
-                        >
-                          <NumberInputField placeholder="%" />
-                          <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                          </NumberInputStepper>
-                        </NumberInput>
-                      </GridItem>
-                    </GridItem>
-                  </SimpleGrid>
-
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text fontWeight="500">Protein</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={protein}
-                        onChange={(protein) => setProtein(protein)}
-                      >
-                        <NumberInputField placeholder="mg" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                    <GridItem h="10">
-                      <GridItem>
-                        <NumberInput
-                          value={proteinPercentage}
-                          onChange={(proteinPercentage) =>
-                            setProteinPercentage(proteinPercentage)
-                          }
-                        >
-                          <NumberInputField placeholder="%" />
-                          <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                          </NumberInputStepper>
-                        </NumberInput>
-                      </GridItem>
-                    </GridItem>
-                  </SimpleGrid>
-
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text>Vitamin A</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={vitaminA}
-                        onChange={(vitaminA) => setVitaminA(vitaminA)}
-                      >
-                        <NumberInputField placeholder="%" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                  </SimpleGrid>
-
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text>Vitamin C</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={vitaminC}
-                        onChange={(vitaminC) => setVitaminC(vitaminC)}
-                      >
-                        <NumberInputField placeholder="%" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                  </SimpleGrid>
-
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text>Calcium</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={calcium}
-                        onChange={(calcium) => setCalcium(calcium)}
-                      >
-                        <NumberInputField placeholder="%" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                  </SimpleGrid>
-
-                  <SimpleGrid columns={3} spacing={10} mt="2%">
-                    <GridItem h="10">
-                      <Text>Iron</Text>
-                    </GridItem>
-                    <GridItem>
-                      <NumberInput
-                        value={iron}
-                        onChange={(iron) => setIron(iron)}
-                      >
-                        <NumberInputField placeholder="%" />
-                        <NumberInputStepper>
-                          <NumberIncrementStepper />
-                          <NumberDecrementStepper />
-                        </NumberInputStepper>
-                      </NumberInput>
-                    </GridItem>
-                  </SimpleGrid>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </DrawerBody>
-
-          <DrawerFooter>
-            <Checkbox defaultChecked mr="46%">
-              Save and add more
-            </Checkbox>
-            {/* <Button variant="outline" mr={3} onClick={props.onClose}>
+          {loading ? (
+            <DrawerFooter>
+              <Checkbox defaultChecked mr="46%">
+                Save and add more
+              </Checkbox>
+              {/* <Button variant="outline" mr={3} onClick={props.onClose}>
               Cancel
             </Button> */}
-            <CustomButton
-              click={props.onClose}
-              btnText={"Cancel"}
-              variant={"outline"}
-              mr={3}
-              size={"sm"}
-            />
-            {/* <CustomButton
+              <CustomButton
+                click={props.onClose}
+                btnText={"Cancel"}
+                variant={"outline"}
+                mr={3}
+                size={"sm"}
+              />
+              {/* <CustomButton
               btnText={"Save"}
               click={() => testfunc()}
               size={"sm"}
             /> */}
 
-            {props?.item_index ? (
-              <Button
-                colorScheme="blue"
-                onClick={() => {
-                  updateItem(item_index);
-                }}
-              >
-                Update
-              </Button>
-            ) : (
-              <Button
-                colorScheme="blue"
-                onClick={() => {
-                  testfunc(section_index, subSection_index);
-                }}
-              >
-                Save
-              </Button>
-            )}
-          </DrawerFooter>
+              {props?.item_index ? (
+                <Button
+                  colorScheme="blue"
+                  onClick={() => {
+                    updateItem(item_index);
+                  }}
+                >
+                  Update
+                </Button>
+              ) : (
+                <Button
+                  colorScheme="blue"
+                  onClick={() => {
+                    testfunc(section_index, subSection_index);
+                  }}
+                >
+                  Save
+                </Button>
+              )}
+            </DrawerFooter>
+          ) : (
+            <div className="loading-screen">
+              <div className="loading-spinner"> </div>
+            </div>
+          )}
         </DrawerContent>
       </Drawer>
     </>

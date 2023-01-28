@@ -42,6 +42,7 @@ import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
+import Spinner from "react-bootstrap/Spinner";
 
 const SettingDrawer = (props) => {
   // DATA AND TIME
@@ -75,6 +76,7 @@ const SettingDrawer = (props) => {
   // const [value, setValue] = useState(itemCondtionState5);
 
   // const nameState = props?.menuCreate ? "" : response[props?.index]?.menuName;
+  const [loading, setLoading] = useState(true);
   const [name, setName] = useState();
   const [availability, setAvailability] = useState("All Day");
 
@@ -92,7 +94,6 @@ const SettingDrawer = (props) => {
   const [endTime, setEndTime] = useState();
   // const [avail, setEndTime] = useState();
   const [value, setValue] = useState();
-
 
   const conditonMade = props?.menuCreate ? "menuCreate" : "section";
 
@@ -146,7 +147,7 @@ const SettingDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          setUpdateMenu(true)
+          setUpdateMenu(true);
           return true;
         } else {
           //alert(`There Some Error`);
@@ -162,7 +163,6 @@ const SettingDrawer = (props) => {
       });
   };
   let SpecificDate;
-
 
   let avail;
 
@@ -211,7 +211,7 @@ const SettingDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          setCreateMenu(true)
+          setCreateMenu(true);
           return true;
         } else {
           // alert(`There Some Error`);
@@ -235,9 +235,14 @@ const SettingDrawer = (props) => {
   }, []);
 
   async function getSingleMenuByID() {
+    setLoading(false);
     let getSingleMenu = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_MENU_BY_ID + props.index
     );
+
+    if (getSingleMenu.data.menu.length == 0) {
+      return setLoading(true);
+    }
 
     let setVar = getSingleMenu.data.menu;
 
@@ -246,6 +251,7 @@ const SettingDrawer = (props) => {
     setNote(setVar.menuNote);
     setActive(setVar.menuStatus);
     setInputList(setVar.availaibility);
+    setLoading(true);
   }
 
   return (
@@ -260,242 +266,248 @@ const SettingDrawer = (props) => {
         <DrawerCloseButton />
         {/* 
         <DrawerHeader></DrawerHeader> */}
+        {loading ? (
+          <DrawerBody>
+            <Tabs>
+              <TabList>
+                <Tab>Overview</Tab>
+                <Tab>Customize View</Tab>
+                <Tab>Visibility</Tab>
+                <Tab>Availability</Tab>
+              </TabList>
 
-        <DrawerBody>
-          <Tabs>
-            <TabList>
-              <Tab>Overview</Tab>
-              <Tab>Customize View</Tab>
-              <Tab>Visibility</Tab>
-              <Tab>Availability</Tab>
-            </TabList>
-
-            <TabPanels>
-              {/* Overview */}
-              <TabPanel>
-                <FormControl isRequired>
-                  <FormLabel fontWeight="400">Name</FormLabel>
-                  <Input
-                    type="text"
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                  />
-                </FormControl>
-
-                <FormControl mt={4}>
-                  <FormLabel fontWeight="400">Description</FormLabel>
-                  <Textarea
-                    onChange={(e) => setDescription(e.target.value)}
-                    value={description}
-                  />
-                </FormControl>
-
-                <FormControl mt={4}>
-                  <FormLabel fontWeight="400">Note</FormLabel>
-                  <Input
-                    type="text"
-                    placeholder="E.g: 20% VAT included"
-                    value={note}
-                    onChange={(e) => setNote(e.target.value)}
-                  />
-                </FormControl>
-
-                <FormControl mt={3}>
-                  {/* <FormLabel fontWeight="400">Display the section</FormLabel> */}
-
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={active ? active : false}
-                      onChange={(e) => setActive(e.target.checked)}
+              <TabPanels>
+                {/* Overview */}
+                <TabPanel>
+                  <FormControl isRequired>
+                    <FormLabel fontWeight="400">Name</FormLabel>
+                    <Input
+                      type="text"
+                      onChange={(e) => setName(e.target.value)}
+                      value={name}
                     />
-                    Display the Menu
-                  </label>
-                </FormControl>
-              </TabPanel>
-              {/* Overview */}
+                  </FormControl>
 
-              {/* Customize View */}
-              <TabPanel>
-                <SimpleGrid columns={2} spacing={10}>
+                  <FormControl mt={4}>
+                    <FormLabel fontWeight="400">Description</FormLabel>
+                    <Textarea
+                      onChange={(e) => setDescription(e.target.value)}
+                      value={description}
+                    />
+                  </FormControl>
+
+                  <FormControl mt={4}>
+                    <FormLabel fontWeight="400">Note</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="E.g: 20% VAT included"
+                      value={note}
+                      onChange={(e) => setNote(e.target.value)}
+                    />
+                  </FormControl>
+
+                  <FormControl mt={3}>
+                    {/* <FormLabel fontWeight="400">Display the section</FormLabel> */}
+
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={active ? active : false}
+                        onChange={(e) => setActive(e.target.checked)}
+                      />
+                      Display the Menu
+                    </label>
+                  </FormControl>
+                </TabPanel>
+                {/* Overview */}
+
+                {/* Customize View */}
+                <TabPanel>
+                  <SimpleGrid columns={2} spacing={10}>
+                    <Box>
+                      <Text>Alphabetical Order:</Text>
+                    </Box>
+                    <Box>
+                      <FormControl>
+                        <Switch />
+                        <FormHelperText>
+                          This feature sorts the items and sections under the
+                          section in alphabetical order.
+                        </FormHelperText>
+                      </FormControl>
+                    </Box>
+
+                    <Box>
+                      <Text>Number of Columns:</Text>
+                    </Box>
+                    <Box>
+                      <FormControl>
+                        <ButtonGroup variant="outline" spacing="0" size="sm">
+                          <Button>1</Button>
+                          <Button>2</Button>
+                          <Button>3</Button>
+                          <Button>4</Button>
+                        </ButtonGroup>
+                        <FormHelperText>
+                          You can select how many grids will shown in the menu
+                        </FormHelperText>
+                      </FormControl>
+                    </Box>
+                    <Box>
+                      <Text>Grid Title Position:</Text>
+                    </Box>
+                    <Box>
+                      <FormControl>
+                        <ButtonGroup variant="outline" spacing="0" size="sm">
+                          <Button>Top</Button>
+                          <Button>Bottom</Button>
+                        </ButtonGroup>
+                        <FormHelperText>
+                          You can change the title position of inner sections /
+                          inner items
+                        </FormHelperText>
+                      </FormControl>
+                    </Box>
+                  </SimpleGrid>
+                </TabPanel>
+                {/* Customize View */}
+
+                {/* Visibility */}
+
+                <TabPanel>
+                  <Text>
+                    The menu will be visible on the products selected below.
+                  </Text>
+                  <VStack align="stretch" mt={4}>
+                    <Checkbox defaultChecked pt={2}>
+                      Tablet Menu
+                    </Checkbox>
+                    <Checkbox defaultChecked pt={2}>
+                      QR / Dine-In Menu
+                    </Checkbox>
+                    <Checkbox defaultChecked pt={2}>
+                      Pick-Up Menu
+                    </Checkbox>
+                    <Checkbox defaultChecked pt={2}>
+                      Delivery Menu
+                    </Checkbox>
+                  </VStack>
+                </TabPanel>
+                {/* Visibility */}
+
+                {/* Availability */}
+
+                <TabPanel>
                   <Box>
-                    <Text>Alphabetical Order:</Text>
-                  </Box>
-                  <Box>
-                    <FormControl>
-                      <Switch />
-                      <FormHelperText>
-                        This feature sorts the items and sections under the
-                        section in alphabetical order.
-                      </FormHelperText>
-                    </FormControl>
-                  </Box>
+                    <Box>
+                      {inputList.map((y, i) => {
+                        return (
+                          <Box key={i} mt={5}>
+                            <HStack>
+                              <Select
+                                placeholder="Select Group"
+                                width="30%"
+                                size="sm"
+                                borderRadius="8px"
+                                name="Day"
+                                value={y.Day}
+                                onChange={(e) => handleInputChange(e, i)}
+                              >
+                                {weekday?.map((a) => {
+                                  return <option value={a}>{a}</option>;
+                                })}
+                              </Select>
 
-                  <Box>
-                    <Text>Number of Columns:</Text>
-                  </Box>
-                  <Box>
-                    <FormControl>
-                      <ButtonGroup variant="outline" spacing="0" size="sm">
-                        <Button>1</Button>
-                        <Button>2</Button>
-                        <Button>3</Button>
-                        <Button>4</Button>
-                      </ButtonGroup>
-                      <FormHelperText>
-                        You can select how many grids will shown in the menu
-                      </FormHelperText>
-                    </FormControl>
-                  </Box>
-                  <Box>
-                    <Text>Grid Title Position:</Text>
-                  </Box>
-                  <Box>
-                    <FormControl>
-                      <ButtonGroup variant="outline" spacing="0" size="sm">
-                        <Button>Top</Button>
-                        <Button>Bottom</Button>
-                      </ButtonGroup>
-                      <FormHelperText>
-                        You can change the title position of inner sections /
-                        inner items
-                      </FormHelperText>
-                    </FormControl>
-                  </Box>
-                </SimpleGrid>
-              </TabPanel>
-              {/* Customize View */}
-
-              {/* Visibility */}
-
-              <TabPanel>
-                <Text>
-                  The menu will be visible on the products selected below.
-                </Text>
-                <VStack align="stretch" mt={4}>
-                  <Checkbox defaultChecked pt={2}>
-                    Tablet Menu
-                  </Checkbox>
-                  <Checkbox defaultChecked pt={2}>
-                    QR / Dine-In Menu
-                  </Checkbox>
-                  <Checkbox defaultChecked pt={2}>
-                    Pick-Up Menu
-                  </Checkbox>
-                  <Checkbox defaultChecked pt={2}>
-                    Delivery Menu
-                  </Checkbox>
-                </VStack>
-              </TabPanel>
-              {/* Visibility */}
-
-              {/* Availability */}
-
-              <TabPanel>
-                <Box>
-                  <Box>
-                    {inputList.map((y, i) => {
-                      return (
-                        <Box key={i} mt={5}>
-                          <HStack>
-                            <Select
-                              placeholder="Select Group"
-                              width="30%"
-                              size="sm"
-                              borderRadius="8px"
-                              name="Day"
-                              value={y.Day}
-                              onChange={(e) => handleInputChange(e, i)}
-                            >
-                              {weekday?.map((a) => {
-                                return <option value={a}>{a}</option>;
-                              })}
-                            </Select>
-
-                            <Input
-                              borderRadius="8px"
-                              placeholder="Max"
-                              size="sm"
-                              name="StartTime"
-                              type="time"
-                              width="30%"
-                              value={y.StartTime}
-                              onChange={(e) => handleInputChange(e, i)}
-                            />
-
-                            <Input
-                              borderRadius="8px"
-                              placeholder="Max"
-                              size="sm"
-                              name="EndTime"
-                              type="time"
-                              width="30%"
-                              value={y.EndTime}
-                              onChange={(e) => handleInputChange(e, i)}
-                            />
-                            {inputList.length !== 1 && (
-                              <IconButton
-                                size="xs"
-                                variant="outline"
-                                colorScheme="blue"
-                                onClick={() => handleRemoveClick(i)}
-                                icon={<CloseIcon />}
+                              <Input
+                                borderRadius="8px"
+                                placeholder="Max"
+                                size="sm"
+                                name="StartTime"
+                                type="time"
+                                width="30%"
+                                value={y.StartTime}
+                                onChange={(e) => handleInputChange(e, i)}
                               />
-                            )}
-                            {inputList.length - 1 === i && (
-                              <IconButton
-                                size="xs"
-                                variant="outline"
-                                colorScheme="blue"
-                                onClick={handleAddClick}
-                                icon={<AddIcon />}
-                              />
-                            )}
-                          </HStack>
-                        </Box>
-                      );
-                    })}
-                  </Box>
 
-                  {/* <div style={{ marginTop: 20 }}>
+                              <Input
+                                borderRadius="8px"
+                                placeholder="Max"
+                                size="sm"
+                                name="EndTime"
+                                type="time"
+                                width="30%"
+                                value={y.EndTime}
+                                onChange={(e) => handleInputChange(e, i)}
+                              />
+                              {inputList.length !== 1 && (
+                                <IconButton
+                                  size="xs"
+                                  variant="outline"
+                                  colorScheme="blue"
+                                  onClick={() => handleRemoveClick(i)}
+                                  icon={<CloseIcon />}
+                                />
+                              )}
+                              {inputList.length - 1 === i && (
+                                <IconButton
+                                  size="xs"
+                                  variant="outline"
+                                  colorScheme="blue"
+                                  onClick={handleAddClick}
+                                  icon={<AddIcon />}
+                                />
+                              )}
+                            </HStack>
+                          </Box>
+                        );
+                      })}
+                    </Box>
+
+                    {/* <div style={{ marginTop: 20 }}>
                       {JSON.stringify(inputList)}
                     </div> */}
-                </Box>
-              </TabPanel>
+                  </Box>
+                </TabPanel>
 
-              {/* Availability */}
-            </TabPanels>
-          </Tabs>
-        </DrawerBody>
+                {/* Availability */}
+              </TabPanels>
+            </Tabs>
+          </DrawerBody>
+        ) : (
+          <div className="loading-screen">
+            <div className="loading-spinner"> </div>
+          </div>
+        )}
 
-        <DrawerFooter>
-          {props?.menuCreate ? (
-            <Button
-              colorScheme="blue"
-              onClick={() => {
-                createMenu();
-              }}
-            >
-              Save
-            </Button>
-          ) : (
-            <Button
-              colorScheme="blue"
-              onClick={() => {
-                updatedMenu();
-              }}
-            >
-              Update
-            </Button>
-          )}
-          {/* <CustomButton
+        {loading ? (
+          <DrawerFooter>
+            {props?.menuCreate ? (
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  createMenu();
+                }}
+              >
+                Save
+              </Button>
+            ) : (
+              <Button
+                colorScheme="blue"
+                onClick={() => {
+                  updatedMenu();
+                }}
+              >
+                Update
+              </Button>
+            )}
+            {/* <CustomButton
             click={props.onClose}
             btnText={"Cancel"}
             variant={"outline"}
             mr={3}
             size={"sm"}
           /> */}
-          {/* <Button
+            {/* <Button
             colorScheme="blue"
             onClick={() => {
               updatedMenu();
@@ -503,8 +515,13 @@ const SettingDrawer = (props) => {
           >
             Save
           </Button> */}
-          {/* <CustomButton btnText={"Save"} mr={3} size={"sm"} /> */}
-        </DrawerFooter>
+            {/* <CustomButton btnText={"Save"} mr={3} size={"sm"} /> */}
+          </DrawerFooter>
+        ) : (
+          <div className="loading-screen">
+            <div className="loading-spinner"> </div>
+          </div>
+        )}
       </DrawerContent>
     </Drawer>
   );

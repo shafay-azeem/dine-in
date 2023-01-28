@@ -20,6 +20,7 @@ import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 import { MenuState } from "../../context/MenuContext";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
+import Spinner from "react-bootstrap/Spinner";
 
 import { useToast } from "@chakra-ui/react";
 
@@ -27,6 +28,7 @@ const MenuModifieModal = (props) => {
   let modifier_id = props.modifier_id;
   // console.log(modifier_id);
   const toast = useToast();
+  const [loading, setLoading] = useState(true);
 
   const [groupName, setGroupName] = useState();
   const [inputList, setInputList] = useState([
@@ -123,14 +125,20 @@ const MenuModifieModal = (props) => {
   }, []);
 
   async function getModifierByID() {
+    setLoading(false);
     let getModifier = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_MODIFIER_BY_ID + modifier_id
     );
+
+    if (getModifier.data.modifier.length == 0) {
+      setLoading(true);
+    }
 
     let setVar = getModifier.data.modifier;
 
     setGroupName(setVar.Groupname);
     setInputList(setVar.modifiers);
+    setLoading(true);
   }
 
   return (
@@ -162,60 +170,66 @@ const MenuModifieModal = (props) => {
             {inputList.map((x, i) => {
               return (
                 <Box key={i} mt={5}>
-                  <HStack>
-                    <Input
-                      borderRadius="8px"
-                      placeholder="Name"
-                      name="Name"
-                      size="sm"
-                      type="text"
-                      value={x.Name}
-                      width="30%"
-                      onChange={(e) => handleInputChange(e, i)}
-                    />
-
-                    <Input
-                      borderRadius="8px"
-                      placeholder="Price"
-                      size="sm"
-                      name="Price"
-                      type="text"
-                      value={x.Price}
-                      width="30%"
-                      onChange={(e) => handleInputChange(e, i)}
-                    />
-
-                    <Input
-                      borderRadius="8px"
-                      placeholder="Calorie"
-                      size="sm"
-                      name="Calorie"
-                      type="text"
-                      width="30%"
-                      value={x.Calorie}
-                      onChange={(e) => handleInputChange(e, i)}
-                    />
-
-                    {inputList.length !== 1 && (
-                      <IconButton
-                        size="xs"
-                        variant="outline"
-                        colorScheme="blue"
-                        onClick={() => handleRemoveClick(i)}
-                        icon={<CloseIcon />}
+                  {loading ? (
+                    <HStack>
+                      <Input
+                        borderRadius="8px"
+                        placeholder="Name"
+                        name="Name"
+                        size="sm"
+                        type="text"
+                        value={x.Name}
+                        width="30%"
+                        onChange={(e) => handleInputChange(e, i)}
                       />
-                    )}
 
-                    {inputList.length - 1 === i && (
-                      <IconButton
-                        size="xs"
-                        variant="outline"
-                        colorScheme="blue"
-                        onClick={handleAddClick}
-                        icon={<AddIcon />}
+                      <Input
+                        borderRadius="8px"
+                        placeholder="Price"
+                        size="sm"
+                        name="Price"
+                        type="text"
+                        value={x.Price}
+                        width="30%"
+                        onChange={(e) => handleInputChange(e, i)}
                       />
-                    )}
-                  </HStack>
+
+                      <Input
+                        borderRadius="8px"
+                        placeholder="Calorie"
+                        size="sm"
+                        name="Calorie"
+                        type="text"
+                        width="30%"
+                        value={x.Calorie}
+                        onChange={(e) => handleInputChange(e, i)}
+                      />
+
+                      {inputList.length !== 1 && (
+                        <IconButton
+                          size="xs"
+                          variant="outline"
+                          colorScheme="blue"
+                          onClick={() => handleRemoveClick(i)}
+                          icon={<CloseIcon />}
+                        />
+                      )}
+
+                      {inputList.length - 1 === i && (
+                        <IconButton
+                          size="xs"
+                          variant="outline"
+                          colorScheme="blue"
+                          onClick={handleAddClick}
+                          icon={<AddIcon />}
+                        />
+                      )}
+                    </HStack>
+                  ) : (
+                    <div className="loading-screen">
+                      <div className="loading-spinner"> </div>
+                    </div>
+                  )}
                 </Box>
               );
             })}

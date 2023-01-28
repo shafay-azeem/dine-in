@@ -45,6 +45,7 @@ import { useEffect } from "react";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useToast } from "@chakra-ui/react";
+import Spinner from "react-bootstrap/Spinner";
 
 const SectionDrawer = (props) => {
   let menu_index = props.menu_index;
@@ -55,11 +56,23 @@ const SectionDrawer = (props) => {
   console.log(section_Or_subSection);
   const toast = useToast();
 
-  const { subSectionList, setSubSectionList, sectionList, setSectionList, setUpdatedSection, UpdatedSection, setSectionCreated, sectionCreated, setCreateSubSection, createSubSection, setUpdatedSubSection, updatedSubSection } =
-    MenuState();
+  const {
+    subSectionList,
+    setSubSectionList,
+    sectionList,
+    setSectionList,
+    setUpdatedSection,
+    UpdatedSection,
+    setSectionCreated,
+    sectionCreated,
+    setCreateSubSection,
+    createSubSection,
+    setUpdatedSubSection,
+    updatedSubSection,
+  } = MenuState();
 
   const [checkedItems, setCheckedItems] = useState(false);
-
+  const [loading, setLoading] = useState(true);
   const [value, setValue] = React.useState("1");
   const [valuetrue, setValueTrue] = React.useState();
 
@@ -181,7 +194,7 @@ const SectionDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          setCreateSubSection(true)
+          setCreateSubSection(true);
           // setSubSectionList(postRes);
           console.log(subSectionList, "setSubSectionList");
         } else {
@@ -213,7 +226,7 @@ const SectionDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          setSectionCreated(true)
+          setSectionCreated(true);
           return true;
         } else {
           throw new Error("Error creating section");
@@ -248,9 +261,14 @@ const SectionDrawer = (props) => {
   }, []);
 
   async function getSingleSubSectionById() {
+    setLoading(false);
     let getSingleSection = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.Get_SUBSECTION_BY_ID + subSecId
     );
+
+    if (getSingleSection.data.subSection.length == 0) {
+      return setLoading(true);
+    }
 
     let setRes = getSingleSection.data.subSection;
     let propertyNames;
@@ -269,12 +287,20 @@ const SectionDrawer = (props) => {
     }
 
     setSelect(propertyNames);
+
+    setLoading(true);
   }
 
   async function getSingleSectionById() {
+    setLoading(false);
     let getSingleSection = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_SINGLE_SECTION_BY_ID + sectionId
     );
+
+    if (getSingleSection.data.section.length == 0) {
+      return setLoading(true);
+    }
+
     let setRes = getSingleSection.data.section;
     let propertyNames;
 
@@ -291,6 +317,7 @@ const SectionDrawer = (props) => {
     }
 
     setSelect(propertyNames);
+    setLoading(true);
   }
 
   const updatedSection = async (secid, subsecid) => {
@@ -309,7 +336,7 @@ const SectionDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          setCreateSubSection(true)
+          setCreateSubSection(true);
           // setSubSectionList(postRes);
           const deleteRes = await apiFunctions.DELETE_REQUEST(
             BASE_URL + API_URL.DELETE_SECTION_BY_ID + secid
@@ -347,7 +374,7 @@ const SectionDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          setUpdatedSubSection(true)
+          setUpdatedSubSection(true);
           return true;
         } else {
           throw new Error("Error updating section");
@@ -377,7 +404,7 @@ const SectionDrawer = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          setUpdatedSection(true)
+          setUpdatedSection(true);
           return true;
         } else {
           throw new Error("Error updating section");
@@ -418,7 +445,7 @@ const SectionDrawer = (props) => {
     setConversion([jsonObj]);
   };
 
-  const handleAlphabetically = (event) => { };
+  const handleAlphabetically = (event) => {};
 
   function deleteimg() {
     setImage(null);
@@ -437,95 +464,100 @@ const SectionDrawer = (props) => {
           <DrawerCloseButton />
           <DrawerHeader>Add New Section</DrawerHeader>
 
-          <DrawerBody>
-            <Tabs>
-              <TabList>
-                <Tab>Overview</Tab>
-                <Tab>Detail</Tab>
-              </TabList>
+          {loading ? (
+            <DrawerBody>
+              <Tabs>
+                <TabList>
+                  <Tab>Overview</Tab>
+                  <Tab>Detail</Tab>
+                </TabList>
 
-              <TabPanels>
-                <TabPanel>
-                  <FormControl>
-                    <FormLabel fontWeight="400">Name</FormLabel>
-                    <Input
-                      type="text"
-                      onChange={(e) => setName(e.target.value)}
-                      value={name}
-                    />
-                  </FormControl>
+                <TabPanels>
+                  <TabPanel>
+                    <FormControl>
+                      <FormLabel fontWeight="400">Name</FormLabel>
+                      <Input
+                        type="text"
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                      />
+                    </FormControl>
 
-                  <FormControl>
-                    <Input
-                      type="text"
-                      onChange={(e) => setMId(e.target.value)}
-                      value={mId}
-                      hidden
-                    />
-                  </FormControl>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        onChange={(e) => setMId(e.target.value)}
+                        value={mId}
+                        hidden
+                      />
+                    </FormControl>
 
-                  <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Description</FormLabel>
-                    <Textarea
-                      placeholder="Here is a sample placeholder"
-                      onChange={(e) => setDescription(e.target.value)}
-                      value={description}
-                    />
-                  </FormControl>
+                    <FormControl mt={3}>
+                      <FormLabel fontWeight="400">Description</FormLabel>
+                      <Textarea
+                        placeholder="Here is a sample placeholder"
+                        onChange={(e) => setDescription(e.target.value)}
+                        value={description}
+                      />
+                    </FormControl>
 
-                  <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Note</FormLabel>
-                    <Input
-                      type="text"
-                      onChange={(e) => setNote(e.target.value)}
-                      value={note}
-                    />
-                  </FormControl>
+                    <FormControl mt={3}>
+                      <FormLabel fontWeight="400">Note</FormLabel>
+                      <Input
+                        type="text"
+                        onChange={(e) => setNote(e.target.value)}
+                        value={note}
+                      />
+                    </FormControl>
 
-                  <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Upload Your Image</FormLabel>
-                    <Input
-                      size="sm"
-                      type="file"
-                      accept=".jpg,.png"
-                      onChange={pictureCapture}
-                      id="img"
-                    />
-                    {image && (
-                      <div>
-                        <img
-                          className="preview mt-4 mx-auto"
-                          src={image}
-                          alt=""
-                          width="200px"
-                          height="200px"
-                          onClick={ModalOnOpen}
-                        />
+                    <FormControl mt={3}>
+                      <FormLabel fontWeight="400">Upload Your Image</FormLabel>
+                      <Input
+                        size="sm"
+                        type="file"
+                        accept=".jpg,.png"
+                        onChange={pictureCapture}
+                        id="img"
+                      />
+                      {image && (
+                        <div>
+                          <img
+                            className="preview mt-4 mx-auto"
+                            src={image}
+                            alt=""
+                            width="200px"
+                            height="200px"
+                            onClick={ModalOnOpen}
+                          />
 
-                        <IconButton
-                          onClick={deleteimg}
-                          variant="outline"
-                          colorScheme="teal"
-                          icon={<BsFillTrashFill />}
-                        />
-                      </div>
-                    )}
-                    <Modal isOpen={ModalOpen} onClose={ModalOnClose}>
-                      <ModalOverlay />
-                      <ModalContent>
-                        <ModalCloseButton />
+                          <IconButton
+                            onClick={deleteimg}
+                            variant="outline"
+                            colorScheme="teal"
+                            icon={<BsFillTrashFill />}
+                          />
+                        </div>
+                      )}
+                      <Modal isOpen={ModalOpen} onClose={ModalOnClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                          <ModalCloseButton />
 
-                        <ModalBody>
-                          <Center>
-                            <div>
-                              <img className="preview p-5" src={image} alt="" />
-                            </div>
-                          </Center>
-                        </ModalBody>
-                      </ModalContent>
-                    </Modal>
-                  </FormControl>
-                  {/* <FormControl mt={3}>
+                          <ModalBody>
+                            <Center>
+                              <div>
+                                <img
+                                  className="preview p-5"
+                                  src={image}
+                                  alt=""
+                                />
+                              </div>
+                            </Center>
+                          </ModalBody>
+                        </ModalContent>
+                      </Modal>
+                    </FormControl>
+                    {/* <FormControl mt={3}>
                     <FormLabel fontWeight="400">Upload Your Image</FormLabel>
                     <Input
                       size="sm"
@@ -570,7 +602,7 @@ const SectionDrawer = (props) => {
                     </Modal>
                   </FormControl> */}
 
-                  {/* <FormControl mt={3}>
+                    {/* <FormControl mt={3}>
                     <FormLabel fontWeight="400">Display the section</FormLabel>
                     <SwitchComponent
                       id="switch1"
@@ -579,16 +611,16 @@ const SectionDrawer = (props) => {
                     />
                   </FormControl> */}
 
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={checked ? checked : false}
-                      onChange={(e) => setChecked(e.target.checked)}
-                    />
-                    Display The Section
-                  </label>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={checked ? checked : false}
+                        onChange={(e) => setChecked(e.target.checked)}
+                      />
+                      Display The Section
+                    </label>
 
-                  {/* <label>
+                    {/* <label>
                     <input
                       type="checkbox"
                       checked={checkedItems}
@@ -606,42 +638,42 @@ const SectionDrawer = (props) => {
                     })}
                   </Select> */}
 
-                  {arrayDecider.length > 0 &&
+                    {arrayDecider.length > 0 &&
                     props?.subsection_index == undefined ? (
-                    <FormControl>
-                      <label>
-                        <input
-                          type="checkbox"
-                          checked={checkedItems}
-                          onChange={(e) => setCheckedItems(e.target.checked)}
-                        />
-                        Use as a sub-section
-                      </label>
+                      <FormControl>
+                        <label>
+                          <input
+                            type="checkbox"
+                            checked={checkedItems}
+                            onChange={(e) => setCheckedItems(e.target.checked)}
+                          />
+                          Use as a sub-section
+                        </label>
 
-                      {checkedItems ? (
-                        <Select
-                          placeholder="Select option"
-                          onChange={(e) => setVal(e.target.value)}
-                        >
-                          {arrayDecider?.map((x, index) => {
-                            return (
-                              <option value={x._id}>{x.sectionName}</option>
-                            );
-                          })}
-                        </Select>
-                      ) : (
-                        <Select placeholder="Select option">
-                          {arrayDecider?.map((x, index) => {
-                            return (
-                              <option value={x._id}>{x.sectionName}</option>
-                            );
-                          })}
-                        </Select>
-                      )}
-                    </FormControl>
-                  ) : null}
+                        {checkedItems ? (
+                          <Select
+                            placeholder="Select option"
+                            onChange={(e) => setVal(e.target.value)}
+                          >
+                            {arrayDecider?.map((x, index) => {
+                              return (
+                                <option value={x._id}>{x.sectionName}</option>
+                              );
+                            })}
+                          </Select>
+                        ) : (
+                          <Select placeholder="Select option">
+                            {arrayDecider?.map((x, index) => {
+                              return (
+                                <option value={x._id}>{x.sectionName}</option>
+                              );
+                            })}
+                          </Select>
+                        )}
+                      </FormControl>
+                    ) : null}
 
-                  {/* {arrayDecider.length > 0 &&
+                    {/* {arrayDecider.length > 0 &&
                     props?.subsection_index == undefined ? (
                     <FormControl>
                       <Checkbox
@@ -688,113 +720,123 @@ const SectionDrawer = (props) => {
                       ></Input>
                     </FormControl>
                   )} */}
-                </TabPanel>
-                <TabPanel>
-                  <FormControl>
-                    <FormLabel fontWeight="400">Labels</FormLabel>
-                    <Multiselect
-                      isObject={false}
-                      onRemove={(event) => {
-                        removalMultiSelect(event);
-                      }}
-                      onSelect={(event) => {
-                        selectionMultiSelect(event);
-                      }}
-                      options={food}
-                      selectedValues={select}
-                      showCheckbox
-                    />
-                  </FormControl>
+                  </TabPanel>
+                  <TabPanel>
+                    <FormControl>
+                      <FormLabel fontWeight="400">Labels</FormLabel>
+                      <Multiselect
+                        isObject={false}
+                        onRemove={(event) => {
+                          removalMultiSelect(event);
+                        }}
+                        onSelect={(event) => {
+                          selectionMultiSelect(event);
+                        }}
+                        options={food}
+                        selectedValues={select}
+                        showCheckbox
+                      />
+                    </FormControl>
 
-                  <FormControl mt={5}>
-                    <FormLabel fontWeight="400">Alphabetical Order</FormLabel>
-                    <Switch
-                      checked={alphabetical}
-                      onChange={(e) => handleAlphabetically(e.target.checked)}
-                    />
-                  </FormControl>
+                    <FormControl mt={5}>
+                      <FormLabel fontWeight="400">Alphabetical Order</FormLabel>
+                      <Switch
+                        checked={alphabetical}
+                        onChange={(e) => handleAlphabetically(e.target.checked)}
+                      />
+                    </FormControl>
 
-                  <RadioGroup mt={5} onChange={setValue} value={value}>
-                    <Stack direction="row">
-                      {/* <Radio value="1" onChange={enabelDisable}>
+                    <RadioGroup mt={5} onChange={setValue} value={value}>
+                      <Stack direction="row">
+                        {/* <Radio value="1" onChange={enabelDisable}>
                         List
                       </Radio>
                       <Radio value="2" onChange={enabelDisable}>
                         Grid
                       </Radio> */}
-                    </Stack>
+                      </Stack>
+
+                      {valuetrue ? (
+                        <FormControl mt={5}>
+                          <FormLabel fontWeight="400">
+                            Number of Columns
+                          </FormLabel>
+                          <Select>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </Select>
+                        </FormControl>
+                      ) : (
+                        <FormControl mt={5}>
+                          <FormLabel fontWeight="400">
+                            Number of Columns
+                          </FormLabel>
+                          <Select isDisabled>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </Select>
+                        </FormControl>
+                      )}
+                    </RadioGroup>
 
                     {valuetrue ? (
                       <FormControl mt={5}>
-                        <FormLabel fontWeight="400">
-                          Number of Columns
-                        </FormLabel>
-                        <Select>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                        </Select>
+                        <FormLabel fontWeight="400">Hide grid titles</FormLabel>
+                        <Switch />
                       </FormControl>
                     ) : (
                       <FormControl mt={5}>
-                        <FormLabel fontWeight="400">
-                          Number of Columns
-                        </FormLabel>
-                        <Select isDisabled>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                        </Select>
+                        <FormLabel fontWeight="400">Hide grid titles</FormLabel>
+                        <Switch isDisabled />
                       </FormControl>
                     )}
-                  </RadioGroup>
-
-                  {valuetrue ? (
-                    <FormControl mt={5}>
-                      <FormLabel fontWeight="400">Hide grid titles</FormLabel>
-                      <Switch />
-                    </FormControl>
-                  ) : (
-                    <FormControl mt={5}>
-                      <FormLabel fontWeight="400">Hide grid titles</FormLabel>
-                      <Switch isDisabled />
-                    </FormControl>
-                  )}
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </DrawerBody>
-
-          <DrawerFooter>
-            <Checkbox defaultChecked mr="28%">
-              Save and add more
-            </Checkbox>
-            <Button variant="outline" mr={3} onClick={props.onClose}>
-              Cancel
-            </Button>
-
-            {props?.section_index || props?.subsection_index ? (
-              <Button
-                colorScheme="blue"
-                onClick={() => {
-                  updatedSection(sectionId, subSecId);
-                }}
-              >
-                Update
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            </DrawerBody>
+          ) : (
+            <div className="loading-screen">
+              <div className="loading-spinner"> </div>
+            </div>
+          )}
+          {loading ? (
+            <DrawerFooter>
+              <Checkbox defaultChecked mr="28%">
+                Save and add more
+              </Checkbox>
+              <Button variant="outline" mr={3} onClick={props.onClose}>
+                Cancel
               </Button>
-            ) : (
-              <Button
-                colorScheme="blue"
-                onClick={() => {
-                  testfunc();
-                }}
-              >
-                Save
-              </Button>
-            )}
-          </DrawerFooter>
+
+              {props?.section_index || props?.subsection_index ? (
+                <Button
+                  colorScheme="blue"
+                  onClick={() => {
+                    updatedSection(sectionId, subSecId);
+                  }}
+                >
+                  Update
+                </Button>
+              ) : (
+                <Button
+                  colorScheme="blue"
+                  onClick={() => {
+                    testfunc();
+                  }}
+                >
+                  Save
+                </Button>
+              )}
+            </DrawerFooter>
+          ) : (
+            <div className="loading-screen">
+              <div className="loading-spinner"> </div>
+            </div>
+          )}
         </DrawerContent>
       </Drawer>
     </>

@@ -10,6 +10,7 @@ import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 import "./RestaurantMenu.css";
 import { useToast } from "@chakra-ui/react";
+import Spinner from "react-bootstrap/Spinner";
 const MenuFeedBackForm = () => {
   const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ const MenuFeedBackForm = () => {
     setGetResults,
   } = MenuState();
   const [demo, setDemo] = useState([]);
-
+  const [loading, setLoading] = useState();
   const [question, setQuestion] = useState();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -50,12 +51,19 @@ const MenuFeedBackForm = () => {
 
   async function getActiveFormQuestions() {
     try {
+      setLoading(false);
       let getFormQuestions = await apiFunctions.GET_REQUEST(
         BASE_URL + API_URL.GET_ALL_FORM_QR
       );
+
+      if (getFormQuestions.data.feedbackForm.length == 0) {
+        return setLoading(true);
+      }
+
       let res = getFormQuestions.data.feedbackForm;
       setDemo(res[0]?.formQuestions[0].Questions);
       setForm(res[0]);
+      setLoading(true);
     } catch (error) {
       console.error(error);
     }
@@ -132,55 +140,61 @@ const MenuFeedBackForm = () => {
     <Container className="my-auto">
       <Row className="d-flex align-items-center" style={{ height: "100vh" }}>
         <Col lg={12} md={12} sm={12} xs={12}>
-          <Card className="mx-auto feedbackSubmit-form text-center ">
-            <div className="text-left px-3">
-              <IconButton
-                icon={<BsArrowLeftShort />}
-                onClick={() => navigate(-1)}
-                className="d-block"
-              />
-            </div>
-            <Card.Body className="p-5">
-              {demo?.map((x, index) => {
-                return (
-                  <Form id="myForm" key={index}>
-                    <Form.Group>
-                      <p>{x.question}</p>
-
-                      <Form.Control
-                        ref={ref}
-                        id={index}
-                        type="text"
-                        onChange={(e) =>
-                          handleInputChange(
-                            e,
-                            index,
-                            x.question,
-                            form.formName
-                            // createfeedback[activeForm].createdDate,
-                            // createfeedback[activeForm].id,
-                            // createfeedback[activeForm].createdTime
-                          )
-                        }
-                      />
-                    </Form.Group>
-                  </Form>
-                );
-              })}
-
-              <div className=" text-center">
-                <Button
-                  type="submit"
-                  size="md"
-                  onClick={() => {
-                    feedbackSubmit();
-                  }}
-                >
-                  SUBMIT
-                </Button>
+          {loading ? (
+            <Card className="mx-auto feedbackSubmit-form text-center ">
+              <div className="text-left px-3">
+                <IconButton
+                  icon={<BsArrowLeftShort />}
+                  onClick={() => navigate(-1)}
+                  className="d-block"
+                />
               </div>
-            </Card.Body>
-          </Card>
+              <Card.Body className="p-5">
+                {demo?.map((x, index) => {
+                  return (
+                    <Form id="myForm" key={index}>
+                      <Form.Group>
+                        <p>{x.question}</p>
+
+                        <Form.Control
+                          ref={ref}
+                          id={index}
+                          type="text"
+                          onChange={(e) =>
+                            handleInputChange(
+                              e,
+                              index,
+                              x.question,
+                              form.formName
+                              // createfeedback[activeForm].createdDate,
+                              // createfeedback[activeForm].id,
+                              // createfeedback[activeForm].createdTime
+                            )
+                          }
+                        />
+                      </Form.Group>
+                    </Form>
+                  );
+                })}
+
+                <div className=" text-center">
+                  <Button
+                    type="submit"
+                    size="md"
+                    onClick={() => {
+                      feedbackSubmit();
+                    }}
+                  >
+                    SUBMIT
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+          ) : (
+            <div className="loading-screen">
+              <div className="loading-spinner"> </div>
+            </div>
+          )}
         </Col>
       </Row>
     </Container>

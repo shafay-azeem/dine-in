@@ -27,15 +27,23 @@ import apiFunctions from "../../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
+import Spinner from "react-bootstrap/Spinner";
 
 const DisplayCard = () => {
   const toast = useToast();
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [open, setOpen] = useState(false);
   const [indivisualId, setIndivisualId] = useState();
-  const { response, setResponse, setCreateMenu, CreateMenu, setUpdateMenu, updateMenu } = MenuState();
+  const {
+    response,
+    setResponse,
+    setCreateMenu,
+    CreateMenu,
+    setUpdateMenu,
+    updateMenu,
+  } = MenuState();
   const [menulist, setMenulist] = useState();
   const [statusMenu, setStatusMenu] = useState(false);
   const [menuDelete, setMenuDelete] = useState(false);
@@ -43,20 +51,25 @@ const DisplayCard = () => {
 
   useEffect(() => {
     getAllMenu();
-    setStatusMenu(false)
-    setMenuDelete(false)
-    setMenuDuplicate(false)
-    setUpdateMenu(false)
-    setCreateMenu(false)
+    setStatusMenu(false);
+    setMenuDelete(false);
+    setMenuDuplicate(false);
+    setUpdateMenu(false);
+    setCreateMenu(false);
   }, [statusMenu, menuDelete, menuDuplicate, updateMenu, CreateMenu]);
 
   async function getAllMenu() {
+    setLoading(false);
     let getMenu = await apiFunctions.GET_REQUEST(
       BASE_URL + API_URL.GET_ALL_MENU
     );
+    if (getMenu.data.menu.length == 0) {
+      return setLoading(true);
+    }
 
     let res = getMenu.data.menu;
     setResponse(res);
+    setLoading(true);
   }
 
   const myfun = (id) => {
@@ -78,7 +91,7 @@ const DisplayCard = () => {
       .then((res) => {
         if (res.data.success == true) {
           console.log("Status Updated");
-          setStatusMenu(true)
+          setStatusMenu(true);
           return true;
         } else {
           // alert(`There Some Error`);
@@ -111,7 +124,7 @@ const DisplayCard = () => {
             duration: 9000,
             isClosable: true,
           });
-          setMenuDelete(true)
+          setMenuDelete(true);
           return true;
         } else {
           // alert(`There Some Error`);
@@ -151,8 +164,8 @@ const DisplayCard = () => {
             status: "success",
             duration: 9000,
             isClosable: true,
-          })
-          setMenuDuplicate(true)
+          });
+          setMenuDuplicate(true);
           return true;
         } else {
           // alert(`There Some Error`);
@@ -183,107 +196,113 @@ const DisplayCard = () => {
 
   return (
     <>
-      <DragDropContext onDragEnd={handleDrop}>
-        <Droppable droppableId="droppable-1">
-          {(provided) => (
-            <Box {...provided.droppableProps} ref={provided.innerRef}>
-              {response?.map((x, index) => {
-                return (
-                  <Draggable
-                    key={x._id}
-                    draggableId={x._id.toString()}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <Box
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                        key={index}
-                      >
+      {loading ? (
+        <DragDropContext onDragEnd={handleDrop}>
+          <Droppable droppableId="droppable-1">
+            {(provided) => (
+              <Box {...provided.droppableProps} ref={provided.innerRef}>
+                {response?.map((x, index) => {
+                  return (
+                    <Draggable
+                      key={x._id}
+                      draggableId={x._id.toString()}
+                      index={index}
+                    >
+                      {(provided) => (
                         <Box
-                          bg="white"
-                          w="100%"
-                          p={4}
-                          borderRadius={5}
-                          mb={4}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
                           key={index}
                         >
-                          <Grid templateColumns="repeat(5, 1fr)" gap={4}>
-                            <GridItem colSpan={2}>
-                              <Text fontSize="17" fontWeight="500">
-                                {x.menuName}
-                                <Badge
-                                  ml="2"
-                                  colorScheme="green"
-                                  borderRadius={5}
-                                  fontWeight="500"
-                                  fontSize="11"
-                                >
-                                  {/* {x.status} */}
-                                </Badge>
-                              </Text>
-                              <Text>{x.menuDescription}</Text>
-                              <Text>Last Updated on {x.createAt}</Text>
-                              <Text fontSize="13" fontWeight="400" p={2}>
-                                {/* {x.item} item, last updated on {x.date} */}
-                              </Text>
-                            </GridItem>
-                            <GridItem colStart={4} colEnd={6}>
-                              <HStack mt={2} gap={4} ml="38%">
-                                <BootstrapSwitchButton
-                                  checked={x.menuStatus}
-                                  onChange={() => switchStatus(x._id, x)}
-                                  data-size="xs"
-                                />
+                          <Box
+                            bg="white"
+                            w="100%"
+                            p={4}
+                            borderRadius={5}
+                            mb={4}
+                            key={index}
+                          >
+                            <Grid templateColumns="repeat(5, 1fr)" gap={4}>
+                              <GridItem colSpan={2}>
+                                <Text fontSize="17" fontWeight="500">
+                                  {x.menuName}
+                                  <Badge
+                                    ml="2"
+                                    colorScheme="green"
+                                    borderRadius={5}
+                                    fontWeight="500"
+                                    fontSize="11"
+                                  >
+                                    {/* {x.status} */}
+                                  </Badge>
+                                </Text>
+                                <Text>{x.menuDescription}</Text>
+                                <Text>Last Updated on {x.createAt}</Text>
+                                <Text fontSize="13" fontWeight="400" p={2}>
+                                  {/* {x.item} item, last updated on {x.date} */}
+                                </Text>
+                              </GridItem>
+                              <GridItem colStart={4} colEnd={6}>
+                                <HStack mt={2} gap={4} ml="38%">
+                                  <BootstrapSwitchButton
+                                    checked={x.menuStatus}
+                                    onChange={() => switchStatus(x._id, x)}
+                                    data-size="xs"
+                                  />
 
-                                <Button onClick={() => myfun(x._id)}>
-                                  EDIT MENU
-                                </Button>
-                                <Box onClick={() => myfun2(x._id)}>
-                                  <AiFillSetting onClick={onOpen} />
-                                </Box>
-                                {isOpen ? (
-                                  <SettingDrawer
-                                    index={indivisualId}
-                                    isOpen={isOpen}
-                                    onOpen={onOpen}
-                                    onClose={onClose}
-                                    menuCreate={false}
-                                  ></SettingDrawer>
-                                ) : null}
-                                <Menu>
-                                  <MenuButton>
-                                    <BsThreeDotsVertical as={Button} />
-                                  </MenuButton>
-                                  <MenuList>
-                                    <MenuItem
-                                      onClick={() => duplicate(x, index)}
-                                      icon={<AiFillCopy />}
-                                    >
-                                      Duplicate
-                                    </MenuItem>
-                                    <MenuItem
-                                      onClick={() => handleRemove(x._id)}
-                                      icon={<AiFillDelete />}
-                                    >
-                                      Delete
-                                    </MenuItem>
-                                  </MenuList>
-                                </Menu>
-                              </HStack>
-                            </GridItem>
-                          </Grid>
+                                  <Button onClick={() => myfun(x._id)}>
+                                    EDIT MENU
+                                  </Button>
+                                  <Box onClick={() => myfun2(x._id)}>
+                                    <AiFillSetting onClick={onOpen} />
+                                  </Box>
+                                  {isOpen ? (
+                                    <SettingDrawer
+                                      index={indivisualId}
+                                      isOpen={isOpen}
+                                      onOpen={onOpen}
+                                      onClose={onClose}
+                                      menuCreate={false}
+                                    ></SettingDrawer>
+                                  ) : null}
+                                  <Menu>
+                                    <MenuButton>
+                                      <BsThreeDotsVertical as={Button} />
+                                    </MenuButton>
+                                    <MenuList>
+                                      <MenuItem
+                                        onClick={() => duplicate(x, index)}
+                                        icon={<AiFillCopy />}
+                                      >
+                                        Duplicate
+                                      </MenuItem>
+                                      <MenuItem
+                                        onClick={() => handleRemove(x._id)}
+                                        icon={<AiFillDelete />}
+                                      >
+                                        Delete
+                                      </MenuItem>
+                                    </MenuList>
+                                  </Menu>
+                                </HStack>
+                              </GridItem>
+                            </Grid>
+                          </Box>
                         </Box>
-                      </Box>
-                    )}
-                  </Draggable>
-                );
-              })}
-            </Box>
-          )}
-        </Droppable>
-      </DragDropContext>
+                      )}
+                    </Draggable>
+                  );
+                })}
+              </Box>
+            )}
+          </Droppable>
+        </DragDropContext>
+      ) : (
+        <div className="loading-screen">
+          <div className="loading-spinner"> </div>
+        </div>
+      )}
     </>
   );
 };

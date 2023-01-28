@@ -42,6 +42,7 @@ import apiFunctions from "../../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
+import Spinner from "react-bootstrap/Spinner";
 
 const SectionCard = (props) => {
   const toast = useToast();
@@ -54,6 +55,7 @@ const SectionCard = (props) => {
     setSectionCreated,
     sectionCreated,
   } = MenuState();
+  const [loading, setLoading] = useState(false);
   const [status, setSatus] = useState();
   const [index, setIndex] = useState();
   const [count, setCount] = useState();
@@ -95,12 +97,19 @@ const SectionCard = (props) => {
   ]);
 
   async function getAllSectionByMenuId() {
+    // setLoading(false);
     let getSection = await apiFunctions.GET_REQUEST(
       BASE_URL + API_URL.GET_ALL_SECTION_BY_MENU_ID + menu_index
     );
 
+    if (getSection.data.section.length == 0) {
+      setLoading(true);
+    }
+
     let res = getSection.data.section;
     setSectionList(res);
+    setLoading(true);
+    console.log("kkk");
   }
 
   const handleRemove = async (id) => {
@@ -288,180 +297,197 @@ const SectionCard = (props) => {
           </InputRightElement>
         </InputGroup>
       </Box>
-      <DragDropContext onDragEnd={handleDrop}>
-        <Droppable droppableId="droppable-1">
-          {(provided) => (
-            <Box {...provided.droppableProps} ref={provided.innerRef}>
-              {sectionList?.map((x, index) => {
-                return (
-                  <Draggable key={x._id} draggableId={x._id} index={index}>
-                    {(provided) => (
-                      <Box
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                        key={index}
-                      >
-                        <Box bg="white" w="100%" p={4} borderRadius={6} mt={2}>
-                          <Grid templateColumns="repeat(5, 1fr)" gap={4}>
-                            <GridItem colSpan={2} h="10">
-                              <HStack>
-                                <Image
-                                  boxSize="43px"
-                                  objectFit="cover"
-                                  borderRadius={3}
-                                  src={x.sectionImage}
-                                />
-                                {sectionList?.length == 0 ? (
-                                  <Text>"NO DATA FOUND"</Text>
-                                ) : (
-                                  <Text pl={2}>
-                                    {x.sectionName}
-
-                                    {x.sectionStatus ? (
-                                      <Badge
-                                        ml="3"
-                                        mb="3"
-                                        p={1}
-                                        fontSize="9"
-                                        borderRadius={6}
-                                        colorScheme="green"
-                                      >
-                                        Active
-                                      </Badge>
-                                    ) : (
-                                      <Badge
-                                        ml="3"
-                                        mb="3"
-                                        p={1}
-                                        fontSize="9"
-                                        borderRadius={6}
-                                        colorScheme="red"
-                                      >
-                                        InActive
-                                      </Badge>
-                                    )}
-                                  </Text>
-                                )}
-                              </HStack>
-                            </GridItem>
-
-                            <GridItem colStart={4} colEnd={6} h="10" ml="auto">
-                              <HStack>
-                                <BootstrapSwitchButton
-                                  checked={x.sectionStatus}
-                                  onChange={() => switchStatus(x, x._id)}
-                                  data-size="xs"
-                                />
-
-                                <Box>
-                                  <Menu>
-                                    <MenuButton
-                                      as={IconButton}
-                                      aria-label="Options"
-                                      border="none"
-                                      icon={<BsThreeDotsVertical />}
-                                      variant="outline"
-                                    />
-
-                                    <MenuList>
-                                      <Box onClick={() => getIndex(x._id)}>
-                                        <MenuItem
-                                          icon={<AiFillFileAdd />}
-                                          onClick={onOpenItem}
-                                        >
-                                          Items
-                                        </MenuItem>
-                                      </Box>
-                                      {isOpenItem ? (
-                                        <ItemDrawer
-                                          fromSection={"section"}
-                                          section_index={count}
-                                          isOpen={isOpenItem}
-                                          onOpen={onOpenItem}
-                                          onClose={onCloseItem}
-                                        ></ItemDrawer>
-                                      ) : null}
-
-                                      <Box
-                                        onClick={() => getIndex(x._id, index)}
-                                      >
-                                        <MenuItem
-                                          icon={<AiFillEdit />}
-                                          onClick={onOpenSection}
-                                        >
-                                          Edit
-                                        </MenuItem>
-                                      </Box>
-
-                                      {isOpenSection ? (
-                                        <SectionDrawer
-                                          fromSection={"section"}
-                                          new_index={sectionIndex}
-                                          section_index={count}
-                                          menu_index={menu_index}
-                                          isOpen={isOpenSection}
-                                          onOpen={onOpenSection}
-                                          onClose={onCloseSection}
-                                        ></SectionDrawer>
-                                      ) : null}
-
-                                      <MenuItem
-                                        onClick={() => duplicate(x)}
-                                        icon={<AiFillCopy />}
-                                      >
-                                        Duplicate
-                                      </MenuItem>
-                                      <MenuItem
-                                        onClick={() => handleRemove(x._id)}
-                                        icon={<AiFillDelete />}
-                                      >
-                                        Delete
-                                      </MenuItem>
-                                    </MenuList>
-                                  </Menu>
-                                </Box>
-
-                                <Box>
-                                  {x.sectionToggle ? (
-                                    <AiOutlineUp
-                                      onClick={() => sectionClick(x, x._id)}
-                                    />
+      {loading ? (
+        <DragDropContext onDragEnd={handleDrop}>
+          <Droppable droppableId="droppable-1">
+            {(provided) => (
+              <Box {...provided.droppableProps} ref={provided.innerRef}>
+                {sectionList?.map((x, index) => {
+                  return (
+                    <Draggable key={x._id} draggableId={x._id} index={index}>
+                      {(provided) => (
+                        <Box
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                          key={index}
+                        >
+                          <Box
+                            bg="white"
+                            w="100%"
+                            p={4}
+                            borderRadius={6}
+                            mt={2}
+                          >
+                            <Grid templateColumns="repeat(5, 1fr)" gap={4}>
+                              <GridItem colSpan={2} h="10">
+                                <HStack>
+                                  <Image
+                                    boxSize="43px"
+                                    objectFit="cover"
+                                    borderRadius={3}
+                                    src={x.sectionImage}
+                                  />
+                                  {sectionList?.length == 0 ? (
+                                    <Text>"NO DATA FOUND"</Text>
                                   ) : (
-                                    <AiOutlineDown
-                                      onClick={() => sectionClick(x, x._id)}
-                                    />
+                                    <Text pl={2}>
+                                      {x.sectionName}
+
+                                      {x.sectionStatus ? (
+                                        <Badge
+                                          ml="3"
+                                          mb="3"
+                                          p={1}
+                                          fontSize="9"
+                                          borderRadius={6}
+                                          colorScheme="green"
+                                        >
+                                          Active
+                                        </Badge>
+                                      ) : (
+                                        <Badge
+                                          ml="3"
+                                          mb="3"
+                                          p={1}
+                                          fontSize="9"
+                                          borderRadius={6}
+                                          colorScheme="red"
+                                        >
+                                          InActive
+                                        </Badge>
+                                      )}
+                                    </Text>
                                   )}
-                                </Box>
-                              </HStack>
-                            </GridItem>
-                          </Grid>
-                        </Box>
+                                </HStack>
+                              </GridItem>
 
-                        <Box ml="55px">
-                          {x.sectionToggle ? (
-                            <ItemCard
-                              fromSection={"section"}
-                              section_index={x._id}
-                            />
-                          ) : null}
-                        </Box>
+                              <GridItem
+                                colStart={4}
+                                colEnd={6}
+                                h="10"
+                                ml="auto"
+                              >
+                                <HStack>
+                                  <BootstrapSwitchButton
+                                    checked={x.sectionStatus}
+                                    onChange={() => switchStatus(x, x._id)}
+                                    data-size="xs"
+                                  />
 
-                        <Box ml="55px">
-                          {x.sectionToggle ? (
-                            <SubSectionCard section_index={x._id} />
-                          ) : null}
+                                  <Box>
+                                    <Menu>
+                                      <MenuButton
+                                        as={IconButton}
+                                        aria-label="Options"
+                                        border="none"
+                                        icon={<BsThreeDotsVertical />}
+                                        variant="outline"
+                                      />
+
+                                      <MenuList>
+                                        <Box onClick={() => getIndex(x._id)}>
+                                          <MenuItem
+                                            icon={<AiFillFileAdd />}
+                                            onClick={onOpenItem}
+                                          >
+                                            Items
+                                          </MenuItem>
+                                        </Box>
+                                        {isOpenItem ? (
+                                          <ItemDrawer
+                                            fromSection={"section"}
+                                            section_index={count}
+                                            isOpen={isOpenItem}
+                                            onOpen={onOpenItem}
+                                            onClose={onCloseItem}
+                                          ></ItemDrawer>
+                                        ) : null}
+
+                                        <Box
+                                          onClick={() => getIndex(x._id, index)}
+                                        >
+                                          <MenuItem
+                                            icon={<AiFillEdit />}
+                                            onClick={onOpenSection}
+                                          >
+                                            Edit
+                                          </MenuItem>
+                                        </Box>
+
+                                        {isOpenSection ? (
+                                          <SectionDrawer
+                                            fromSection={"section"}
+                                            new_index={sectionIndex}
+                                            section_index={count}
+                                            menu_index={menu_index}
+                                            isOpen={isOpenSection}
+                                            onOpen={onOpenSection}
+                                            onClose={onCloseSection}
+                                          ></SectionDrawer>
+                                        ) : null}
+
+                                        <MenuItem
+                                          onClick={() => duplicate(x)}
+                                          icon={<AiFillCopy />}
+                                        >
+                                          Duplicate
+                                        </MenuItem>
+                                        <MenuItem
+                                          onClick={() => handleRemove(x._id)}
+                                          icon={<AiFillDelete />}
+                                        >
+                                          Delete
+                                        </MenuItem>
+                                      </MenuList>
+                                    </Menu>
+                                  </Box>
+
+                                  <Box>
+                                    {x.sectionToggle ? (
+                                      <AiOutlineUp
+                                        onClick={() => sectionClick(x, x._id)}
+                                      />
+                                    ) : (
+                                      <AiOutlineDown
+                                        onClick={() => sectionClick(x, x._id)}
+                                      />
+                                    )}
+                                  </Box>
+                                </HStack>
+                              </GridItem>
+                            </Grid>
+                          </Box>
+
+                          <Box ml="55px">
+                            {x.sectionToggle ? (
+                              <ItemCard
+                                fromSection={"section"}
+                                section_index={x._id}
+                              />
+                            ) : null}
+                          </Box>
+
+                          <Box ml="55px">
+                            {x.sectionToggle ? (
+                              <SubSectionCard section_index={x._id} />
+                            ) : null}
+                          </Box>
                         </Box>
-                      </Box>
-                    )}
-                  </Draggable>
-                );
-              })}
-              {provided.placeholder}
-            </Box>
-          )}
-        </Droppable>
-      </DragDropContext>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </Box>
+            )}
+          </Droppable>
+        </DragDropContext>
+      ) : (
+        <div className="loading-screen">
+          <div className="loading-spinner"> </div>
+        </div>
+      )}
     </>
   );
 };
