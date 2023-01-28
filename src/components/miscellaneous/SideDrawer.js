@@ -97,7 +97,7 @@ const SideDrawer = () => {
   };
   const home = () => {
     navigate({
-      pathname: "/",
+      pathname: "/homeScreen",
     });
   };
 
@@ -248,6 +248,10 @@ const SideDrawer = () => {
           </DrawerHeader>
           <DrawerBody>
             <Stack direction="column" spacing={1} align="start">
+              <Button variant="link" onClick={home}>
+                <HamburgerIcon fontSize="20px" m={2} />
+                Dashboard
+              </Button>
               {/* <Button variant="link" onClick={home}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Dashboard
