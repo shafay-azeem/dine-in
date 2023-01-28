@@ -36,6 +36,8 @@ const MenuFeedBackForm = (props) => {
   const [email, setEmail] = useState();
   const [form, setForm] = useState();
 
+
+
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
@@ -118,8 +120,7 @@ const MenuFeedBackForm = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          // getResults(true)
-          // setFeedback(res.data.formResponse)
+          navigate(-1)
           return true;
         } else {
           toast({
