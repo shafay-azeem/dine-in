@@ -58,8 +58,6 @@ const DisplayCard = () => {
     setCreateMenu(false);
   }, [statusMenu, menuDelete, menuDuplicate, updateMenu, CreateMenu]);
 
-
-
   async function getAllMenu() {
     setLoading(false);
     let getMenu = await apiFunctions.GET_REQUEST(
@@ -246,11 +244,13 @@ const DisplayCard = () => {
                                 </Text>
                               </GridItem>
                               <GridItem colStart={4} colEnd={6}>
-                                <HStack mt={2} gap={4} ml="38%">
+                                <HStack mt={2} gap={4} ml="40%">
                                   <BootstrapSwitchButton
                                     checked={x.menuStatus}
                                     onChange={() => switchStatus(x._id, x)}
-                                    data-size="xs"
+                                    size="sm"
+                                    onlabel="on"
+                                    offlabel="off"
                                   />
 
                                   <Button onClick={() => myfun(x._id)}>

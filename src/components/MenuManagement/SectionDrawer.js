@@ -79,6 +79,9 @@ const SectionDrawer = (props) => {
   const inputElement = useRef();
 
   const [name, setName] = useState();
+
+  const [title, setTitle] = useState();
+
   const [description, setDescription] = useState();
   const [note, setNote] = useState();
   const [food, setFood] = useState(["New", "Signature"]);
@@ -274,6 +277,8 @@ const SectionDrawer = (props) => {
     let propertyNames;
 
     setName(setRes.sectionName);
+    setTitle(setRes.sectionName);
+
     setDescription(setRes.sectionDescription);
     setNote(setRes.sectionNote);
     setChecked(setRes.sectionStatus);
@@ -302,9 +307,13 @@ const SectionDrawer = (props) => {
     }
 
     let setRes = getSingleSection.data.section;
+
     let propertyNames;
 
     setName(setRes.sectionName);
+
+    setTitle(setRes.sectionName);
+
     setDescription(setRes.sectionDescription);
     setNote(setRes.sectionNote);
     setChecked(setRes.sectionStatus);
@@ -445,7 +454,7 @@ const SectionDrawer = (props) => {
     setConversion([jsonObj]);
   };
 
-  const handleAlphabetically = (event) => { };
+  const handleAlphabetically = (event) => {};
 
   function deleteimg() {
     setImage(null);
@@ -462,7 +471,11 @@ const SectionDrawer = (props) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Add New Section</DrawerHeader>
+          {props?.section_index || props?.subsection_index ? (
+            <DrawerHeader>{title}</DrawerHeader>
+          ) : (
+            <DrawerHeader>Add New Section</DrawerHeader>
+          )}
 
           {loading ? (
             <DrawerBody>
@@ -616,6 +629,7 @@ const SectionDrawer = (props) => {
                         type="checkbox"
                         checked={checked ? checked : false}
                         onChange={(e) => setChecked(e.target.checked)}
+                        style={{ marginRight: "5px", marginTop: "20px" }}
                       />
                       Display The Section
                     </label>
@@ -639,13 +653,18 @@ const SectionDrawer = (props) => {
                   </Select> */}
 
                     {arrayDecider.length > 0 &&
-                      props?.subsection_index == undefined ? (
+                    props?.subsection_index == undefined ? (
                       <FormControl>
                         <label>
                           <input
                             type="checkbox"
                             checked={checkedItems}
                             onChange={(e) => setCheckedItems(e.target.checked)}
+                            style={{
+                              marginRight: "5px",
+                              marginTop: "10px",
+                              marginBottom: "10px",
+                            }}
                           />
                           Use as a sub-section
                         </label>
@@ -657,7 +676,9 @@ const SectionDrawer = (props) => {
                           >
                             {arrayDecider?.map((x, index) => {
                               return (
-                                <option value={x._id} key={index}>{x.sectionName} </option>
+                                <option value={x._id} key={index}>
+                                  {x.sectionName}{" "}
+                                </option>
                               );
                             })}
                           </Select>
@@ -665,7 +686,9 @@ const SectionDrawer = (props) => {
                           <Select placeholder="Select option">
                             {arrayDecider?.map((x, index) => {
                               return (
-                                <option value={x._id} key={index}>{x.sectionName}</option>
+                                <option value={x._id} key={index}>
+                                  {x.sectionName}
+                                </option>
                               );
                             })}
                           </Select>

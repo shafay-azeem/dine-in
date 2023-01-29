@@ -33,7 +33,7 @@ const ViewFeedBacks = (props) => {
         {/* {questionResponses?.map((y, index) => {
           return ( */}
         <ModalContent>
-          <ModalHeader>Form {props?.index + 1}</ModalHeader>
+          <ModalHeader></ModalHeader>
           <Divider orientation="horizontal" />
 
           <ModalCloseButton />

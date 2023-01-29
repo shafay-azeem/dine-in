@@ -42,7 +42,10 @@ import {
   Center,
   useDisclosure,
 } from "@chakra-ui/react";
-import { faXRay } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSpaghettiMonsterFlying,
+  faXRay,
+} from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { BsFillTrashFill, BsPlusLg } from "react-icons/bs";
 import { MenuState } from "../../context/MenuContext";
@@ -95,6 +98,8 @@ const ItemDrawer = (props) => {
   ]);
 
   const [modifier, setModifier] = useState([]);
+
+  const [title, setTitle] = useState();
 
   const [warning, setWarning] = useState(["Alcohol", "AlcoholFree"]);
 
@@ -369,6 +374,7 @@ const ItemDrawer = (props) => {
     let propertyNamesWarning;
 
     setName(setVar.itemName);
+    setTitle(setVar.itemName);
     setImage(setVar.itemImage);
     setDescription(setVar.itemDescription);
     setChecked(setVar.active);
@@ -448,6 +454,7 @@ const ItemDrawer = (props) => {
     let propertyNamesWarning;
 
     setName(setVar.itemName);
+    setTitle(setVar.itemName);
     setImage(setVar.itemImage);
     setDescription(setVar.itemDescription);
     setChecked(setVar.active);
@@ -653,7 +660,13 @@ const ItemDrawer = (props) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Add New Item</DrawerHeader>
+
+          {(item_index && props?.itemDecider === "item") ||
+          (item_index && props?.itemDecider === "subItem") ? (
+            <DrawerHeader>{title}</DrawerHeader>
+          ) : (
+            <DrawerHeader>Add New Item</DrawerHeader>
+          )}
 
           {loading ? (
             <DrawerBody>
@@ -699,6 +712,7 @@ const ItemDrawer = (props) => {
                         type="checkbox"
                         checked={checked ? checked : false}
                         onChange={(e) => setChecked(e.target.checked)}
+                        style={{ marginRight: "5px", marginTop: "20px" }}
                       />
                       Display The Section
                     </label>
@@ -739,6 +753,7 @@ const ItemDrawer = (props) => {
                           type="checkbox"
                           checked={sold ? sold : false}
                           onChange={(e) => setSold(e.target.checked)}
+                          style={{ marginRight: "5px" }}
                         />
                         Mark as Sold Out
                       </label>

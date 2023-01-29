@@ -186,7 +186,7 @@ const Feedbacks = () => {
       BASE_URL + API_URL.GET_ALL_FEEDBACK_FORM
     );
 
-    console.log(geFeedbackForms.data.feedbackForm, "Shafay")
+    console.log(geFeedbackForms.data.feedbackForm, "Shafay");
 
     if (geFeedbackForms.data.feedbackForm.length == 0) {
       setLoading(true);
@@ -313,7 +313,9 @@ const Feedbacks = () => {
                           <BootstrapSwitchButton
                             checked={x.active}
                             onChange={() => switchStatus(x._id, index, x)}
-                            data-size="xs"
+                            size="sm"
+                            onlabel="on"
+                            offlabel="off"
                           />
                           {/* <Box onClick={() => getIndex(x._id)}></Box> */}
 
@@ -321,6 +323,7 @@ const Feedbacks = () => {
                             <EditIcon
                               mr={4}
                               onClick={() => editForm(x._id)}
+                              style={{ marginLeft: "15px" }}
                             />
                           </Tooltip>
                           <DeleteIcon onClick={() => handleRemove(x._id)} />

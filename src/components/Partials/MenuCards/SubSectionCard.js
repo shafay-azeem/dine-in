@@ -216,7 +216,7 @@ const SubSectionCard = (props) => {
       .then((res) => {
         if (res.data.success == true) {
           console.log("SubSetion Toggle Updated");
-          setSubSectionUpdate(true)
+          setSubSectionUpdate(true);
           return true;
         } else {
           toast({
@@ -286,7 +286,9 @@ const SubSectionCard = (props) => {
                     <BootstrapSwitchButton
                       checked={x.sectionStatus}
                       onChange={() => switchStatus(x, x._id)}
-                      data-size="xs"
+                      size="sm"
+                      onlabel="on"
+                      offlabel="off"
                     />
 
                     <Box>

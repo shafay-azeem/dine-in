@@ -48,10 +48,7 @@ const CreateMenu = () => {
     onClose: onCloseSection,
   } = useDisclosure();
 
-  useEffect(() => {
-
-
-  }, [menu_index]);
+  useEffect(() => {}, [menu_index]);
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(
@@ -75,6 +72,7 @@ const CreateMenu = () => {
     setHit(event.target.value);
     let responseSec = sectionList;
     let filterSec = [];
+
     if (event.target.value === "All") {
       return getAllSectionByMenuId();
     }

@@ -406,9 +406,9 @@ const ItemCard = (props) => {
                                 <Box>
                                   <InputGroup>
                                     {x.itemPriceOption[0].price ==
-                                      x.itemPriceOption[
-                                        x.itemPriceOption.length - 1
-                                      ].price ? (
+                                    x.itemPriceOption[
+                                      x.itemPriceOption.length - 1
+                                    ].price ? (
                                       <Box
                                         style={{
                                           border: "1px solid black",
@@ -440,7 +440,9 @@ const ItemCard = (props) => {
                                 <BootstrapSwitchButton
                                   checked={x.active}
                                   onChange={() => switchStatus(x, x._id)}
-                                  data-size="xs"
+                                  size="sm"
+                                  onlabel="on"
+                                  offlabel="off"
                                 />
 
                                 <Box>
