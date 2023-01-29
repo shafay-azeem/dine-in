@@ -35,7 +35,7 @@ const SignUp = () => {
       toast({
         position: "top",
         title: `Please Enter All Fields`,
-        status: "success",
+        status: "warning",
         duration: 9000,
         isClosable: true,
       });
@@ -49,7 +49,7 @@ const SignUp = () => {
         duration: 9000,
         isClosable: true,
       });
-      return
+      return;
     }
     let userData = {
       name: name,
@@ -149,7 +149,7 @@ const SignUp = () => {
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}
-      // isLoading={loading}
+        // isLoading={loading}
       >
         Sign Up
       </Button>

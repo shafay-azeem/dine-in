@@ -6,7 +6,7 @@ import "./MenuDetail.css";
 import { useState } from "react";
 import { BsArrowLeftShort, BsStopwatch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { IconButton } from "@chakra-ui/react";
+import { IconButton, Tooltip } from "@chakra-ui/react";
 
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
@@ -157,28 +157,34 @@ const MenuDetail = (props) => {
                   <div className="d-flex" key={index}>
                     {y.New === "New" ? (
                       <div className="me-2">
-                        <img
-                          src={require("../Assets/new.svg").default}
-                          alt="mySvgImage"
-                        />
+                        <Tooltip label={y.New} placement="top">
+                          <img
+                            src={require("../Assets/new.svg").default}
+                            alt="mySvgImage"
+                          />
+                        </Tooltip>
                       </div>
                     ) : null}
 
                     {y.Signature === "Signature" ? (
                       <div className="me-2">
-                        <img
-                          src={require("../Assets/signature.svg").default}
-                          alt="mySvgImage"
-                        />
+                        <Tooltip label={y.Signature} placement="top">
+                          <img
+                            src={require("../Assets/signature.svg").default}
+                            alt="mySvgImage"
+                          />
+                        </Tooltip>
                       </div>
                     ) : null}
 
-                    {y.Special_Presentation === "Special Presentation" ? (
+                    {y.Special_Presentation === "Special_Presentation" ? (
                       <div className="me-2">
-                        <img
-                          src={require("../Assets/special.svg").default}
-                          alt="mySvgImage"
-                        />
+                        <Tooltip label={y.Special_Presentation} placement="top">
+                          <img
+                            src={require("../Assets/special.svg").default}
+                            alt="mySvgImage"
+                          />
+                        </Tooltip>
                       </div>
                     ) : null}
                   </div>
@@ -192,19 +198,23 @@ const MenuDetail = (props) => {
                   <div className="d-flex my-1" key={index}>
                     {z.Alcohol === "Alcohol" ? (
                       <div className="me-2">
-                        <img
-                          src={require("../Assets/Alcohol.svg").default}
-                          alt="mySvgImage"
-                        />
+                        <Tooltip label={z.Alcohol} placement="top">
+                          <img
+                            src={require("../Assets/Alcohol.svg").default}
+                            alt="mySvgImage"
+                          />
+                        </Tooltip>
                       </div>
                     ) : null}
 
                     {z.AlcoholFree === "AlcoholFree" ? (
                       <div>
-                        <img
-                          src={require("../Assets/AlcoholFree.svg").default}
-                          alt="mySvgImage"
-                        />
+                        <Tooltip label={z.AlcoholFree} placement="top">
+                          <img
+                            src={require("../Assets/AlcoholFree.svg").default}
+                            alt="mySvgImage"
+                          />
+                        </Tooltip>
                       </div>
                     ) : null}
                   </div>

@@ -182,6 +182,18 @@ const SectionDrawer = (props) => {
   const [modalShow, setModalShow] = useState(false);
 
   const testfunc = async () => {
+    if (!name) {
+      //alert("Please Enter All Fields");
+      toast({
+        position: "top",
+        title: `Please Enter All Fields`,
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+
     if (checkedItems && val) {
       try {
         const postRes = await apiFunctions.POST_REQUEST(
@@ -189,7 +201,6 @@ const SectionDrawer = (props) => {
           sectionData
         );
         if (postRes.data.success == true) {
-          // alert(`SUB SECTION CREATED SUCCESSFULLY`);
           toast({
             position: "top",
             title: `Sub Section Created Successfully`,
@@ -198,13 +209,10 @@ const SectionDrawer = (props) => {
             isClosable: true,
           });
           setCreateSubSection(true);
-          // setSubSectionList(postRes);
-          // console.log(subSectionList, "setSubSectionList");
         } else {
           throw new Error("Error creating sub-section");
         }
       } catch (err) {
-        //alert(`There Some Error: ${err.message}`);
         toast({
           position: "top",
           title: `There Some Error`,

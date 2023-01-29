@@ -1,3 +1,4 @@
+import { Tooltip } from "@chakra-ui/react";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -70,8 +71,8 @@ const SubSecItemCard = (props) => {
                       </Card.Text>
                       <Card.Text className="pricetext">
                         {x.itemPriceOption[0].price ==
-                          x.itemPriceOption[x.itemPriceOption.length - 1]
-                            .price ? (
+                        x.itemPriceOption[x.itemPriceOption.length - 1]
+                          .price ? (
                           <div
                             className="itemPrice"
                             style={{
@@ -104,37 +105,46 @@ const SubSecItemCard = (props) => {
                             <div className="d-flex my-1" key={index}>
                               {y.New === "New" ? (
                                 <div className="me-2">
-                                  <img
-                                    src={
-                                      require("../../Assets/new.svg").default
-                                    }
-                                    alt="mySvgImage"
-                                  />
+                                  <Tooltip label={y.New} placement="top">
+                                    <img
+                                      src={
+                                        require("../../Assets/new.svg").default
+                                      }
+                                      alt="mySvgImage"
+                                    />
+                                  </Tooltip>
                                 </div>
                               ) : null}
 
                               {y.Signature === "Signature" ? (
                                 <div className="me-2">
-                                  <img
-                                    src={
-                                      require("../../Assets/signature.svg")
-                                        .default
-                                    }
-                                    alt="mySvgImage"
-                                  />
+                                  <Tooltip label={y.Signature} placement="top">
+                                    <img
+                                      src={
+                                        require("../../Assets/signature.svg")
+                                          .default
+                                      }
+                                      alt="mySvgImage"
+                                    />
+                                  </Tooltip>
                                 </div>
                               ) : null}
 
                               {y.Special_Presentation ===
-                                "Special Presentation" ? (
+                              "Special_Presentation" ? (
                                 <div className="me-2">
-                                  <img
-                                    src={
-                                      require("../../Assets/special.svg")
-                                        .default
-                                    }
-                                    alt="mySvgImage"
-                                  />
+                                  <Tooltip
+                                    label={y.Special_Presentation}
+                                    placement="top"
+                                  >
+                                    <img
+                                      src={
+                                        require("../../Assets/special.svg")
+                                          .default
+                                      }
+                                      alt="mySvgImage"
+                                    />
+                                  </Tooltip>
                                 </div>
                               ) : null}
                             </div>
@@ -147,25 +157,32 @@ const SubSecItemCard = (props) => {
                             <div className="d-flex" key={index}>
                               {z.Alcohol === "Alcohol" ? (
                                 <div className="me-2">
-                                  <img
-                                    src={
-                                      require("../../Assets/Alcohol.svg")
-                                        .default
-                                    }
-                                    alt="mySvgImage"
-                                  />
+                                  <Tooltip label={z.Alcohol} placement="top">
+                                    <img
+                                      src={
+                                        require("../../Assets/Alcohol.svg")
+                                          .default
+                                      }
+                                      alt="mySvgImage"
+                                    />
+                                  </Tooltip>
                                 </div>
                               ) : null}
 
                               {z.AlcoholFree === "AlcoholFree" ? (
                                 <div>
-                                  <img
-                                    src={
-                                      require("../../Assets/AlcoholFree.svg")
-                                        .default
-                                    }
-                                    alt="mySvgImage"
-                                  />
+                                  <Tooltip
+                                    label={z.AlcoholFree}
+                                    placement="top"
+                                  >
+                                    <img
+                                      src={
+                                        require("../../Assets/AlcoholFree.svg")
+                                          .default
+                                      }
+                                      alt="mySvgImage"
+                                    />
+                                  </Tooltip>
                                 </div>
                               ) : null}
                             </div>

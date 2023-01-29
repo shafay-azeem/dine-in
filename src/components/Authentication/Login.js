@@ -30,7 +30,7 @@ const Login = () => {
       toast({
         position: "top",
         title: `Please Enter All Fields`,
-        status: "success",
+        status: "warning",
         duration: 9000,
         isClosable: true,
       });

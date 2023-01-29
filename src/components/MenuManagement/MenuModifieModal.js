@@ -15,6 +15,7 @@ import {
   HStack,
   IconButton,
   Box,
+  Tooltip,
 } from "@chakra-ui/react";
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 import { MenuState } from "../../context/MenuContext";
@@ -172,39 +173,43 @@ const MenuModifieModal = (props) => {
                 <Box key={i} mt={5}>
                   {loading ? (
                     <HStack>
-                      <Input
-                        borderRadius="8px"
-                        placeholder="Name"
-                        name="Name"
-                        size="sm"
-                        type="text"
-                        value={x.Name}
-                        width="30%"
-                        onChange={(e) => handleInputChange(e, i)}
-                      />
+                      <Tooltip label="Name" placement="bottom">
+                        <Input
+                          borderRadius="8px"
+                          placeholder="Name"
+                          name="Name"
+                          size="sm"
+                          type="text"
+                          value={x.Name}
+                          width="30%"
+                          onChange={(e) => handleInputChange(e, i)}
+                        />
+                      </Tooltip>
+                      <Tooltip label="Price" placement="bottom">
+                        <Input
+                          borderRadius="8px"
+                          placeholder="Price"
+                          size="sm"
+                          name="Price"
+                          type="text"
+                          value={x.Price}
+                          width="30%"
+                          onChange={(e) => handleInputChange(e, i)}
+                        />
+                      </Tooltip>
 
-                      <Input
-                        borderRadius="8px"
-                        placeholder="Price"
-                        size="sm"
-                        name="Price"
-                        type="text"
-                        value={x.Price}
-                        width="30%"
-                        onChange={(e) => handleInputChange(e, i)}
-                      />
-
-                      <Input
-                        borderRadius="8px"
-                        placeholder="Calorie"
-                        size="sm"
-                        name="Calorie"
-                        type="text"
-                        width="30%"
-                        value={x.Calorie}
-                        onChange={(e) => handleInputChange(e, i)}
-                      />
-
+                      <Tooltip label="Calorie" placement="bottom">
+                        <Input
+                          borderRadius="8px"
+                          placeholder="Calorie"
+                          size="sm"
+                          name="Calorie"
+                          type="text"
+                          width="30%"
+                          value={x.Calorie}
+                          onChange={(e) => handleInputChange(e, i)}
+                        />
+                      </Tooltip>
                       {inputList.length !== 1 && (
                         <IconButton
                           size="xs"

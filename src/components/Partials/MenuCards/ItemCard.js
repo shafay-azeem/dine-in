@@ -38,6 +38,9 @@ import apiFunctions from "../../../global/GlobalFunction";
 import { useToast } from "@chakra-ui/react";
 
 const ItemCard = (props) => {
+  const [itemUpdate, setItemUpdate] = useState(false);
+  const [subItemUpdate, setSubItemUpdate] = useState(false);
+
   const { itemUpdater, setItemUpdater } = MenuState();
   let subSecId = props?.subsection_index;
   let secid = props?.section_index;
@@ -73,12 +76,14 @@ const ItemCard = (props) => {
       setItemDeleted(false);
       setItemDuplicate(false);
       setItemUpdater(false);
+      setItemUpdate(false);
     } else if (section_Or_subSection === "subSection" && subSecId) {
       setItemDecider("subItem");
       getAllSubItemsBySubSectionId();
       setSubItemDeleted(false);
       setSubItemDuplicate(false);
       setItemUpdater(false);
+      setSubItemUpdate(false);
     } else {
       return;
     }
@@ -89,6 +94,8 @@ const ItemCard = (props) => {
     itemDuplicate,
     itemUpdater,
     secid,
+    itemUpdate,
+    subItemUpdate,
   ]);
 
   async function getAllItemsBySectionId() {
@@ -290,7 +297,7 @@ const ItemCard = (props) => {
         .PUT_REQUEST(BASE_URL + API_URL.UPDATE_ITEM_BY_ID + id, itemRes)
         .then((res) => {
           if (res.data.success == true) {
-            // console.log("Item Status Updated");
+            setItemUpdate(true);
             return true;
           } else {
             //alert(`There Some Error`);
@@ -311,7 +318,8 @@ const ItemCard = (props) => {
         .then((res) => {
           if (res.data.success == true) {
             // console.log("Sub Item Status Updated");
-            setSubItemDuplicate(true);
+            setSubItemUpdate(true);
+
             return true;
           } else {
             //alert(`There Some Error`);

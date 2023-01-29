@@ -41,6 +41,7 @@ import {
   ModalBody,
   Center,
   useDisclosure,
+  Tooltip,
 } from "@chakra-ui/react";
 import {
   faSpaghettiMonsterFlying,
@@ -294,6 +295,17 @@ const ItemDrawer = (props) => {
 
   const testfunc = async (secid, subsecid) => {
     if (section_Or_subSection === "section" && secid) {
+      if (!name) {
+        //alert("Please Enter All Fields");
+        toast({
+          position: "top",
+          title: `Please Enter All Fields`,
+          status: "warning",
+          duration: 9000,
+          isClosable: true,
+        });
+        return;
+      }
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.CREATE_ITEM + secid, itemData)
         .then((res) => {
@@ -320,6 +332,17 @@ const ItemDrawer = (props) => {
           }
         });
     } else if (section_Or_subSection === "subSection" && subsecid) {
+      if (!name) {
+        //alert("Please Enter All Fields");
+        toast({
+          position: "top",
+          title: `Please Enter All Fields`,
+          status: "warning",
+          duration: 9000,
+          isClosable: true,
+        });
+        return;
+      }
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.CREATE_SUB_ITEM + subsecid, itemData)
         .then((res) => {
@@ -907,36 +930,43 @@ const ItemDrawer = (props) => {
                         return (
                           <Box key={index} mt={5}>
                             <HStack>
-                              <Input
-                                borderRadius="8px"
-                                placeholder="Name"
-                                name="name"
-                                size="sm"
-                                type="text"
-                                value={x.name}
-                                width="30%"
-                                onChange={(e) => handleChange(e, index)}
-                              />
-                              <Input
-                                borderRadius="8px"
-                                placeholder="Price"
-                                size="sm"
-                                name="price"
-                                type="text"
-                                value={x.price}
-                                width="30%"
-                                onChange={(e) => handleChange(e, index)}
-                              />
-                              <Input
-                                borderRadius="8px"
-                                placeholder="Calories"
-                                size="sm"
-                                name="calories"
-                                type="text"
-                                width="30%"
-                                value={x.calories}
-                                onChange={(e) => handleChange(e, index)}
-                              />
+                              <Tooltip label="Name" placement="top">
+                                <Input
+                                  borderRadius="8px"
+                                  placeholder="Name"
+                                  name="name"
+                                  size="sm"
+                                  type="text"
+                                  value={x.name}
+                                  width="30%"
+                                  onChange={(e) => handleChange(e, index)}
+                                />
+                              </Tooltip>
+                              <Tooltip label="Price" placement="top">
+                                <Input
+                                  borderRadius="8px"
+                                  placeholder="Price"
+                                  size="sm"
+                                  name="price"
+                                  type="text"
+                                  value={x.price}
+                                  width="30%"
+                                  onChange={(e) => handleChange(e, index)}
+                                />
+                              </Tooltip>
+
+                              <Tooltip label="Calories" placement="top">
+                                <Input
+                                  borderRadius="8px"
+                                  placeholder="Calories"
+                                  size="sm"
+                                  name="calories"
+                                  type="text"
+                                  width="30%"
+                                  value={x.calories}
+                                  onChange={(e) => handleChange(e, index)}
+                                />
+                              </Tooltip>
                               {inputList.length !== 1 && (
                                 <IconButton
                                   size="xs"
@@ -974,44 +1004,51 @@ const ItemDrawer = (props) => {
                         return (
                           <Box key={index} mt={5}>
                             <HStack>
-                              <Select
-                                placeholder="Select Group"
-                                width="30%"
-                                size="sm"
-                                borderRadius="8px"
-                                name="groupname"
-                                value={y.groupname}
-                                onChange={(e) => ModifierOptions(e, index)}
-                              >
-                                {modifier?.map((a, index) => {
-                                  return (
-                                    <option value={a.Groupname} key={index}>
-                                      {a.Groupname}
-                                    </option>
-                                  );
-                                })}
-                              </Select>
+                              <Tooltip label="Groupname" placement="top">
+                                <Select
+                                  placeholder="Select Group"
+                                  width="30%"
+                                  size="sm"
+                                  borderRadius="8px"
+                                  name="groupname"
+                                  value={y.groupname}
+                                  onChange={(e) => ModifierOptions(e, index)}
+                                >
+                                  {modifier?.map((a, index) => {
+                                    return (
+                                      <option value={a.Groupname} key={index}>
+                                        {a.Groupname}
+                                      </option>
+                                    );
+                                  })}
+                                </Select>
+                              </Tooltip>
 
-                              <Input
-                                borderRadius="8px"
-                                placeholder="Min"
-                                size="sm"
-                                name="min"
-                                type="text"
-                                value={y.min}
-                                width="30%"
-                                onChange={(e) => ModifierOptions(e, index)}
-                              />
-                              <Input
-                                borderRadius="8px"
-                                placeholder="Max"
-                                size="sm"
-                                name="max"
-                                type="text"
-                                width="30%"
-                                value={y.max}
-                                onChange={(e) => ModifierOptions(e, index)}
-                              />
+                              <Tooltip label="Min" placement="top">
+                                <Input
+                                  borderRadius="8px"
+                                  placeholder="Min"
+                                  size="sm"
+                                  name="min"
+                                  type="text"
+                                  value={y.min}
+                                  width="30%"
+                                  onChange={(e) => ModifierOptions(e, index)}
+                                />
+                              </Tooltip>
+
+                              <Tooltip label="Max" placement="top">
+                                <Input
+                                  borderRadius="8px"
+                                  placeholder="Max"
+                                  size="sm"
+                                  name="max"
+                                  type="text"
+                                  width="30%"
+                                  value={y.max}
+                                  onChange={(e) => ModifierOptions(e, index)}
+                                />
+                              </Tooltip>
                               {/* <Checkbox>Required</Checkbox> */}
                               {demoModifier.length !== 1 && (
                                 <IconButton

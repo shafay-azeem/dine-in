@@ -51,7 +51,7 @@ const ResultTable = () => {
 
     let res = getResults.data.formResponse;
     console.log(res, "form response");
-    setFeedback(res);
+    setFeedback(res.reverse());
   }
 
   const getIndex = (index) => {
