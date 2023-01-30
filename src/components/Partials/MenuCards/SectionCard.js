@@ -54,6 +54,7 @@ const SectionCard = (props) => {
     UpdatedSection,
     setSectionCreated,
     sectionCreated,
+    setChanger
   } = MenuState();
   const [loading, setLoading] = useState(false);
   const [status, setSatus] = useState();
@@ -125,6 +126,7 @@ const SectionCard = (props) => {
             isClosable: true,
           });
           setSectionDelete(true);
+          setChanger(Math.random())
           return true;
         } else {
           toast({
@@ -153,7 +155,7 @@ const SectionCard = (props) => {
       .then((res) => {
         if (res.data.success == true) {
           setSectionUpdate(true);
-          // console.log("Section Status Updated");
+          setChanger(Math.random())
           return true;
         } else {
           toast({
@@ -191,6 +193,7 @@ const SectionCard = (props) => {
             isClosable: true,
           });
           setSectionDuplicate(true);
+          setChanger(Math.random())
           return true;
         } else {
           toast({

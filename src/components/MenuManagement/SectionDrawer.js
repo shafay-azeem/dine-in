@@ -69,6 +69,7 @@ const SectionDrawer = (props) => {
     createSubSection,
     setUpdatedSubSection,
     updatedSubSection,
+    setChanger
   } = MenuState();
 
   const [checkedItems, setCheckedItems] = useState(false);
@@ -238,6 +239,7 @@ const SectionDrawer = (props) => {
             isClosable: true,
           });
           setSectionCreated(true);
+          setChanger(Math.random())
           return true;
         } else {
           throw new Error("Error creating section");
@@ -462,7 +464,7 @@ const SectionDrawer = (props) => {
     setConversion([jsonObj]);
   };
 
-  const handleAlphabetically = (event) => {};
+  const handleAlphabetically = (event) => { };
 
   function deleteimg() {
     setImage(null);
@@ -661,7 +663,7 @@ const SectionDrawer = (props) => {
                   </Select> */}
 
                     {arrayDecider.length > 0 &&
-                    props?.subsection_index == undefined ? (
+                      props?.subsection_index == undefined ? (
                       <FormControl>
                         <label>
                           <input

@@ -32,6 +32,8 @@ export const MenuProvider = ({ children }) => {
   const [itemUpdater, setItemUpdater] = useState(false);
   const [subSectionList, setSubSectionList] = useState([]);
 
+  const [changer, setChanger] = useState();
+
   return (
     <MenuContext.Provider
       value={{
@@ -78,9 +80,10 @@ export const MenuProvider = ({ children }) => {
         createSubSection,
 
         setItemUpdater,
-        itemUpdater
+        itemUpdater,
 
-
+        setChanger,
+        changer
       }}
     >
       {children}
