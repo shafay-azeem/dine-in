@@ -91,6 +91,24 @@ const MenuFeedBackForm = (props) => {
   };
 
   const feedbackSubmit = () => {
+
+    console.log(demo, 'demo')
+    let qLength
+    let counter = 0
+    for (qLength = 0; qLength < demo.length; qLength++) {
+      // console.log(demo[qLength].question)
+      if (demo[qLength].question) {
+        counter += 1
+      }
+    }
+    // }
+    console.log(counter, "length ")
+    console.log(A.length)
+    // console.log(qLength + 1, 'qlength')
+    // console.log(A.length)
+    if ((A.length) !== (counter)) {
+      return alert('Fill all fields')
+    }
     let id = form._id;
     let formBody = {
       formName: form.formName,
