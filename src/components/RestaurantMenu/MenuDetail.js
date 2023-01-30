@@ -113,7 +113,7 @@ const MenuDetail = (props) => {
               {priceOption ? (
                 <div>
                   {priceOption[0].price ==
-                  priceOption[priceOption.length - 1]?.price ? (
+                    priceOption[priceOption.length - 1]?.price ? (
                     <div
                       className="itemPrice"
                       style={{
@@ -269,7 +269,7 @@ const MenuDetail = (props) => {
           </div>
         </Col>
 
-        <Col lg={8} className="text-center">
+        <Col lg={8} className=" text-center d-none d-lg-block d-xl-block">
           <div className="d-flex align-items-center justify-content-center w-100 vh-100">
             <p className="restaurant-name">Your Restaurant Name</p>
           </div>

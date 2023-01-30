@@ -31,6 +31,7 @@ import {
   useDisclosure,
   Select,
   IconButton,
+  Tooltip,
 } from "@chakra-ui/react";
 import CustomButton from "../../CustomElements/CustomButton";
 import { MenuState } from "../../context/MenuContext";
@@ -79,7 +80,7 @@ const SettingDrawer = (props) => {
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState();
   const [availability, setAvailability] = useState("All Day");
-
+  const [title, setTitle] = useState();
   // const descriptionState = props?.menuCreate
   //   ? ""
   //   : response[props?.index]?.menuDescription;
@@ -200,6 +201,19 @@ const SettingDrawer = (props) => {
   };
 
   const createMenu = async () => {
+    if (!name) {
+      //alert("Please Enter All Fields");
+      toast({
+        position: "top",
+        title: `Name Is Required`,
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+
+
     await apiFunctions
       .POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData)
       .then((res) => {
@@ -252,6 +266,7 @@ const SettingDrawer = (props) => {
     setActive(setVar.menuStatus);
     setInputList(setVar.availaibility);
     setLoading(true);
+    setTitle(setVar.menuName);
   }
 
   return (
@@ -264,14 +279,18 @@ const SettingDrawer = (props) => {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        {/* 
-        <DrawerHeader></DrawerHeader> */}
+        {props?.index ? (
+          <DrawerHeader>{title}</DrawerHeader>
+        ) : (
+          <DrawerHeader>Add Menu</DrawerHeader>
+        )}
+
         {loading ? (
           <DrawerBody>
             <Tabs>
               <TabList>
                 <Tab>Overview</Tab>
-                <Tab>Customize View</Tab>
+                {/* <Tab>Customize View</Tab> */}
                 <Tab>Visibility</Tab>
                 <Tab>Availability</Tab>
               </TabList>
@@ -314,6 +333,7 @@ const SettingDrawer = (props) => {
                         type="checkbox"
                         checked={active ? active : false}
                         onChange={(e) => setActive(e.target.checked)}
+                        style={{ marginRight: "5px", marginTop: "20px" }}
                       />
                       Display the Menu
                     </label>
@@ -322,7 +342,7 @@ const SettingDrawer = (props) => {
                 {/* Overview */}
 
                 {/* Customize View */}
-                <TabPanel>
+                {/* <TabPanel>
                   <SimpleGrid columns={2} spacing={10}>
                     <Box>
                       <Text>Alphabetical Order:</Text>
@@ -369,7 +389,7 @@ const SettingDrawer = (props) => {
                       </FormControl>
                     </Box>
                   </SimpleGrid>
-                </TabPanel>
+                </TabPanel> */}
                 {/* Customize View */}
 
                 {/* Visibility */}
@@ -385,12 +405,12 @@ const SettingDrawer = (props) => {
                     <Checkbox defaultChecked pt={2}>
                       QR / Dine-In Menu
                     </Checkbox>
-                    <Checkbox defaultChecked pt={2}>
+                    {/* <Checkbox defaultChecked pt={2}>
                       Pick-Up Menu
                     </Checkbox>
                     <Checkbox defaultChecked pt={2}>
                       Delivery Menu
-                    </Checkbox>
+                    </Checkbox> */}
                   </VStack>
                 </TabPanel>
                 {/* Visibility */}
@@ -404,41 +424,49 @@ const SettingDrawer = (props) => {
                         return (
                           <Box key={i} mt={5}>
                             <HStack>
-                              <Select
-                                placeholder="Select Group"
-                                width="30%"
-                                size="sm"
-                                borderRadius="8px"
-                                name="Day"
-                                value={y.Day}
-                                onChange={(e) => handleInputChange(e, i)}
-                              >
-                                {weekday?.map((a, index) => {
-                                  return <option value={a} key={index}>{a}</option>;
-                                })}
-                              </Select>
+                              <Tooltip label="Day" placement="top">
+                                <Select
+                                  placeholder="Select Group"
+                                  width="30%"
+                                  size="sm"
+                                  borderRadius="8px"
+                                  name="Day"
+                                  value={y.Day}
+                                  onChange={(e) => handleInputChange(e, i)}
+                                >
+                                  {weekday?.map((a, index) => {
+                                    return <option value={a} key={index}>{a}</option>;
+                                  })}
+                                </Select>
+                              </Tooltip>
 
-                              <Input
-                                borderRadius="8px"
-                                placeholder="Max"
-                                size="sm"
-                                name="StartTime"
-                                type="time"
-                                width="30%"
-                                value={y.StartTime}
-                                onChange={(e) => handleInputChange(e, i)}
-                              />
+                              <Tooltip label="Start Time" placement="top">
+                                <Input
+                                  borderRadius="8px"
+                                  placeholder="Max"
+                                  size="sm"
+                                  name="StartTime"
+                                  type="time"
+                                  width="30%"
+                                  value={y.StartTime}
+                                  onChange={(e) => handleInputChange(e, i)}
+                                />
+                              </Tooltip>
 
-                              <Input
-                                borderRadius="8px"
-                                placeholder="Max"
-                                size="sm"
-                                name="EndTime"
-                                type="time"
-                                width="30%"
-                                value={y.EndTime}
-                                onChange={(e) => handleInputChange(e, i)}
-                              />
+
+                              <Tooltip label="End Time" placement="top">
+                                <Input
+                                  borderRadius="8px"
+                                  placeholder="Max"
+                                  size="sm"
+                                  name="EndTime"
+                                  type="time"
+                                  width="30%"
+                                  value={y.EndTime}
+                                  onChange={(e) => handleInputChange(e, i)}
+                                />
+                              </Tooltip>
+
                               {inputList.length !== 1 && (
                                 <IconButton
                                   size="xs"

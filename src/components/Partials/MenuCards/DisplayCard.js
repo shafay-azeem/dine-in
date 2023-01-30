@@ -71,7 +71,10 @@ const DisplayCard = () => {
     setResponse(res);
     setLoading(true);
   }
-
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
   const myfun = (id) => {
     navigate({
       pathname: "/createmenu",
@@ -238,7 +241,7 @@ const DisplayCard = () => {
                                   </Badge>
                                 </Text>
                                 <Text>{x.menuDescription}</Text>
-                                <Text>Last Updated on {x.createAt}</Text>
+                                <Text>Last Updated on {formatDate(x.createAt.toString())}</Text>
                                 <Text fontSize="13" fontWeight="400" p={2}>
                                   {/* {x.item} item, last updated on {x.date} */}
                                 </Text>

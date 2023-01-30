@@ -107,7 +107,13 @@ const MenuFeedBackForm = (props) => {
     // console.log(qLength + 1, 'qlength')
     // console.log(A.length)
     if ((A.length) !== (counter)) {
-      return alert('Fill all fields')
+      return toast({
+        position: "top",
+        title: `Please Answer All fields`,
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+      });
     }
     let id = form._id;
     let formBody = {

@@ -685,7 +685,7 @@ const ItemDrawer = (props) => {
           <DrawerCloseButton />
 
           {(item_index && props?.itemDecider === "item") ||
-          (item_index && props?.itemDecider === "subItem") ? (
+            (item_index && props?.itemDecider === "subItem") ? (
             <DrawerHeader>{title}</DrawerHeader>
           ) : (
             <DrawerHeader>Add New Item</DrawerHeader>
@@ -1079,12 +1079,12 @@ const ItemDrawer = (props) => {
                     </Box>
                   </TabPanel>
                   <TabPanel>
-                    <FormControl>
+                    {/* <FormControl>
                       <FormLabel fontWeight="400">
                         Display the Nutrition Info on the menu
                       </FormLabel>
                       <Switch></Switch>
-                    </FormControl>
+                    </FormControl> */}
 
                     <FormControl mt={3}>
                       <FormLabel fontWeight="400">Serving Size</FormLabel>
@@ -1531,9 +1531,9 @@ const ItemDrawer = (props) => {
 
           {loading ? (
             <DrawerFooter>
-              <Checkbox defaultChecked mr="46%">
+              {/* <Checkbox defaultChecked mr="46%">
                 Save and add more
-              </Checkbox>
+              </Checkbox> */}
               {/* <Button variant="outline" mr={3} onClick={props.onClose}>
               Cancel
             </Button> */}

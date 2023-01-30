@@ -5,7 +5,7 @@ import "./MenuPage.css";
 import MenuStartModal from "./Modal/MenuStartModal";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { MenuState } from "../../context/MenuContext";
-import { IconButton } from "@chakra-ui/react";
+import { Heading, IconButton } from "@chakra-ui/react";
 import { BsArrowLeftShort } from "react-icons/bs";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
@@ -16,6 +16,7 @@ const MenuPage = (props) => {
   const [modalShow, setModalShow] = useState(false);
   const { activeForm } = MenuState();
   const [demo, setDemo] = useState([]);
+  const [response, setResponse] = useState([]);
 
   useEffect(() => {
     getActiveFormQuestions();
@@ -45,6 +46,7 @@ const MenuPage = (props) => {
   };
   useEffect(() => {
     getActiveFormQuestions();
+    getAllMenu();
   }, []);
 
   async function getActiveFormQuestions() {
@@ -62,13 +64,27 @@ const MenuPage = (props) => {
       console.error(error);
     }
   }
+  async function getAllMenu() {
+    try {
+      let getAllMenu = await apiFunctions.GET_REQUEST(
+        BASE_URL + API_URL.GET_ALL_MENU_QR + userId
+      );
+      let res = getAllMenu.data.menu;
+      console.log(res, "res");
+      setResponse(res);
+      console.log(response[0]?.userResturantImage)
+      // setChange(true);
+    } catch (err) {
+      console.log("An error occurred while fetching menus", err.message);
+    }
+  }
 
   return (
     <div>
       <Row className="align-items-center" style={{ height: "100vh" }}>
         <Col lg={5} md={12} sm={12} className="d-flex justify-content-center">
           <Stack className="mx-auto text-center" gap={4}>
-            <p className="restaurant-name">Your Restaurant Name</p>
+            <Heading size='lg'>{response[0]?.userResturant}</Heading>
             <Button
               onClick={() => setModalShow(true)}
               className="btn-start mx-auto"
@@ -106,10 +122,17 @@ const MenuPage = (props) => {
           </div>
         </Col>
         <Col lg={5} className="text-center d-none d-lg-block d-xl-block">
-          <p className="restaurant-name">Your Restaurant Name</p>
+          <div>
+            <img
+              className="preview p-5"
+              src={response[0]?.userResturantImage}
+              alt=""
+            />
+          </div>
+          {/* <p className="restaurant-name">Your Restaurant Name</p> */}
         </Col>
       </Row>
-    </div>
+    </div >
   );
 };
 

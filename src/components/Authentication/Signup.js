@@ -23,11 +23,35 @@ const SignUp = () => {
   const [email, setEmail] = useState();
   const [confirmpassword, setConfirmpassword] = useState();
   const [password, setPassword] = useState();
+  const [resName, setResName] = useState();
+  const [resImg, setResImg] = useState();
   const [show, setShow] = useState(false);
 
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
   const toast = useToast();
+
+  const pictureCapture = (event) => {
+    const formData = new FormData();
+    formData.append("file", event.target.files[0]);
+    formData.append("upload_preset", "dineInApp");
+    fetch("https://api.cloudinary.com/v1_1/dkq6jers7/image/upload", {
+      method: "post",
+      body: formData,
+    }).then((res) =>
+      res
+        .json()
+        .then((data) => {
+          // setPic(data.url.toString());
+          setResImg(data.url.toString());
+          console.log(data.url.toString())
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    );
+  };
+
 
   const submitHandler = async () => {
     if (!email || !password || !name) {
@@ -55,6 +79,8 @@ const SignUp = () => {
       name: name,
       email: email,
       password: password,
+      resName: resName,
+      resImage: resImg
     };
 
     await apiFunctions
@@ -69,12 +95,9 @@ const SignUp = () => {
             duration: 9000,
             isClosable: true,
           });
-          auth.login(res.data.name);
-          localStorage.setItem("token", res.data.token);
+          auth.login(res.data.user.name);
           localStorage.setItem("user_id", res.data.user._id);
-          // setName("");
-          // setEmail("");
-          // setPassword("");
+
           localStorage.setItem("token", res.data.token);
           navigate({
             pathname: "/homeScreen",
@@ -144,12 +167,30 @@ const SignUp = () => {
         </InputGroup>
       </FormControl>
 
+      <FormControl id="resName" isRequired>
+        <FormLabel>Restaurant Name</FormLabel>
+        <Input
+          placeholder="Enter Your Restaurant Name"
+          onChange={(e) => setResName(e.target.value)}
+        />
+      </FormControl>
+      <FormControl mt={3}>
+        <FormLabel fontWeight="400">Upload Your Restaurant Image</FormLabel>
+        <Input
+          size="sm"
+          type="file"
+          accept=".jpg,.png"
+          onChange={pictureCapture}
+          id="img"
+        />
+      </FormControl>
+
       <Button
         colorScheme="blue"
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}
-        // isLoading={loading}
+      // isLoading={loading}
       >
         Sign Up
       </Button>

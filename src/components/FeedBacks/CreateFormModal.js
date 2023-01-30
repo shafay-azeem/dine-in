@@ -49,6 +49,18 @@ const CreateFormModal = (props) => {
   };
 
   const formCreate = async () => {
+
+    if (!formName) {
+      //alert("Please Enter All Fields");
+      toast({
+        position: "top",
+        title: `Form Name Is Required`,
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
     await apiFunctions
       .POST_REQUEST(BASE_URL + API_URL.CREATE_FEEDBACK_FORM, feedbackFormData)
       .then((res) => {

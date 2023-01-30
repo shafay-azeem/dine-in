@@ -771,22 +771,22 @@ const SectionDrawer = (props) => {
                       />
                     </FormControl>
 
-                    <FormControl mt={5}>
+                    {/* <FormControl mt={5}>
                       <FormLabel fontWeight="400">Alphabetical Order</FormLabel>
                       <Switch
                         checked={alphabetical}
                         onChange={(e) => handleAlphabetically(e.target.checked)}
                       />
-                    </FormControl>
+                    </FormControl> */}
 
-                    <RadioGroup mt={5} onChange={setValue} value={value}>
+                    {/* <RadioGroup mt={5} onChange={setValue} value={value}>
                       <Stack direction="row">
-                        {/* <Radio value="1" onChange={enabelDisable}>
+                        <Radio value="1" onChange={enabelDisable}>
                         List
                       </Radio>
                       <Radio value="2" onChange={enabelDisable}>
                         Grid
-                      </Radio> */}
+                      </Radio>
                       </Stack>
 
                       {valuetrue ? (
@@ -814,9 +814,9 @@ const SectionDrawer = (props) => {
                           </Select>
                         </FormControl>
                       )}
-                    </RadioGroup>
+                    </RadioGroup> */}
 
-                    {valuetrue ? (
+                    {/* {valuetrue ? (
                       <FormControl mt={5}>
                         <FormLabel fontWeight="400">Hide grid titles</FormLabel>
                         <Switch />
@@ -826,7 +826,7 @@ const SectionDrawer = (props) => {
                         <FormLabel fontWeight="400">Hide grid titles</FormLabel>
                         <Switch isDisabled />
                       </FormControl>
-                    )}
+                    )} */}
                   </TabPanel>
                 </TabPanels>
               </Tabs>
@@ -838,9 +838,9 @@ const SectionDrawer = (props) => {
           )}
           {loading ? (
             <DrawerFooter>
-              <Checkbox defaultChecked mr="28%">
+              {/* <Checkbox defaultChecked mr="28%">
                 Save and add more
-              </Checkbox>
+              </Checkbox> */}
               <Button variant="outline" mr={3} onClick={props.onClose}>
                 Cancel
               </Button>
