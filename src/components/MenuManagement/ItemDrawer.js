@@ -625,7 +625,16 @@ const ItemDrawer = (props) => {
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
     formData.append("upload_preset", "dineInApp");
+    const config = {
+      headers: {
+
+        "Content-type": "multipart/form-data",
+        'Access-Control-Allow-Origin': "*",
+      },
+    }
     try {
+
+
       const res = await fetch("https://api.cloudinary.com/v1_1/dkq6jers7/image/upload", {
         method: "post",
         body: formData

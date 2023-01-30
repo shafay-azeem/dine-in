@@ -17,6 +17,7 @@ const MenuPage = (props) => {
   const { activeForm } = MenuState();
   const [demo, setDemo] = useState([]);
   const [response, setResponse] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getActiveFormQuestions();
@@ -65,13 +66,16 @@ const MenuPage = (props) => {
     }
   }
   async function getAllMenu() {
+
     try {
+      setLoading(false)
       let getAllMenu = await apiFunctions.GET_REQUEST(
         BASE_URL + API_URL.GET_ALL_MENU_QR + userId
       );
       let res = getAllMenu.data.menu;
       console.log(res, "res");
       setResponse(res);
+      setLoading(true)
       console.log(response[0]?.userResturantImage)
       // setChange(true);
     } catch (err) {
@@ -84,7 +88,13 @@ const MenuPage = (props) => {
       <Row className="align-items-center" style={{ height: "100vh" }}>
         <Col lg={5} md={12} sm={12} className="d-flex justify-content-center">
           <Stack className="mx-auto text-center" gap={4}>
-            <Heading size='lg'>{response[0]?.userResturant}</Heading>
+            {loading ? (<Heading size='lg'>{response[0]?.userResturant}</Heading>) : (
+              <div className="loading-screen">
+                <div className="loading-spinner"> </div>
+              </div>
+
+            )}
+
             <Button
               onClick={() => setModalShow(true)}
               className="btn-start mx-auto"
@@ -124,7 +134,7 @@ const MenuPage = (props) => {
         <Col lg={5} className="text-center d-none d-lg-block d-xl-block">
           <div>
             <img
-              className="preview p-5"
+              className="preview"
               src={response[0]?.userResturantImage}
               alt=""
             />
