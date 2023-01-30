@@ -26,6 +26,13 @@ const ViewFeedBacks = (props) => {
   // console.log(questionResponses, "questionResponses");
 
   // console.log(feedbackInfo, "feedback");
+
+
+  // const dateString = '2020-05-14T04:00:00Z'
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" }
+    return new Date(dateString).toLocaleDateString(undefined, options)
+  }
   return (
     <div>
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="5xl">
@@ -40,7 +47,7 @@ const ViewFeedBacks = (props) => {
 
           <ModalBody pb={6}>
             <Text fontWeight="500" mb="1rem">
-              Date : {feedbackInfo.createAt}
+              Date : {formatDate(feedbackInfo.createAt.toString())}
             </Text>
 
             <Text fontWeight="500" mb="1rem">

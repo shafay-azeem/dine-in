@@ -58,6 +58,10 @@ const ResultTable = () => {
     //console.log(index, "index form");
     setCount(index);
   };
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" }
+    return new Date(dateString).toLocaleDateString(undefined, options)
+  }
 
   return (
     <>
@@ -76,7 +80,7 @@ const ResultTable = () => {
               return (
                 <Tr key={index}>
                   <Td>{x._id}</Td>
-                  <Td>{x.createAt}</Td>
+                  <Td>{formatDate(x.createAt.toString())}</Td>
                   <Td>{x.formName}</Td>
 
                   <Td style={{ textAlign: "center", cursor: "pointer" }}>
