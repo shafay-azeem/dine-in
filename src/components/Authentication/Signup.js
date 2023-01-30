@@ -31,30 +31,26 @@ const SignUp = () => {
   const navigate = useNavigate();
   const toast = useToast();
 
-  const pictureCapture = (event) => {
+  const pictureCapture = async (event) => {
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
     formData.append("upload_preset", "dineInApp");
-    fetch("https://api.cloudinary.com/v1_1/dkq6jers7/image/upload", {
-      method: "post",
-      body: formData,
-    }).then((res) =>
-      res
-        .json()
-        .then((data) => {
-          // setPic(data.url.toString());
-          setResImg(data.url.toString());
-          console.log(data.url.toString())
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    );
+    try {
+      const res = await fetch("https://api.cloudinary.com/v1_1/dkq6jers7/image/upload", {
+        method: "post",
+        body: formData
+      });
+      const data = await res.json();
+      setResImg(data.url.toString());
+      console.log(data.url.toString());
+    } catch (err) {
+      console.log(err);
+    }
   };
 
 
   const submitHandler = async () => {
-    if (!email || !password || !name) {
+    if (!email || !password || !name || !resName) {
       //alert("Please Enter All Fields");
       toast({
         position: "top",

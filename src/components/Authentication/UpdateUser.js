@@ -21,6 +21,17 @@ const UpdateUser = () => {
   const [email, setEmail] = useState();
 
   const submitHandler = async () => {
+    if (!name || !email) {
+      //alert("Please Enter All Fields");
+      toast({
+        position: "top",
+        title: `Form Name Is Required`,
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
     try {
       let userData = {
         name: name,

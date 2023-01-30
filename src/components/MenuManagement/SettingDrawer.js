@@ -205,7 +205,7 @@ const SettingDrawer = (props) => {
       //alert("Please Enter All Fields");
       toast({
         position: "top",
-        title: `Name Is Required`,
+        title: `Menu Name Cant be Empty`,
         status: "warning",
         duration: 9000,
         isClosable: true,

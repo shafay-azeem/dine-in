@@ -299,7 +299,7 @@ const ItemDrawer = (props) => {
         //alert("Please Enter All Fields");
         toast({
           position: "top",
-          title: `Please Enter All Fields`,
+          title: `Item Name Cant be Empty`,
           status: "warning",
           duration: 9000,
           isClosable: true,
@@ -621,24 +621,20 @@ const ItemDrawer = (props) => {
     setModifier(res);
   }
 
-  const pictureCapture = (event) => {
+  const pictureCapture = async (event) => {
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
     formData.append("upload_preset", "dineInApp");
-    fetch("https://api.cloudinary.com/v1_1/dkq6jers7/image/upload", {
-      method: "post",
-      body: formData,
-    }).then((res) =>
-      res
-        .json()
-        .then((data) => {
-          // setPic(data.url.toString());
-          setImage(data.url.toString());
-        })
-        .catch((err) => {
-          // console.log(err);
-        })
-    );
+    try {
+      const res = await fetch("https://api.cloudinary.com/v1_1/dkq6jers7/image/upload", {
+        method: "post",
+        body: formData
+      });
+      const data = await res.json();
+      setImage(data.url.toString());
+    } catch (err) {
+      // console.log(err);
+    }
   };
 
   function deleteimg() {
