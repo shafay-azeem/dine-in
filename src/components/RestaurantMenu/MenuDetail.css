@@ -1,3 +1,44 @@
 .pricetext {
   color: red;
 }
+.nut-fact {
+  box-sizing: border-box;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+}
+
+.serving {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+
+.size {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+
+.amount {
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+
+.light {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: normal;
+  color: rgb(0, 0, 0);
+}
+.nutInfo-Txt {
+  box-sizing: border-box;
+  color: rgb(230, 3, 75);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+}

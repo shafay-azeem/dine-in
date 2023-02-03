@@ -151,7 +151,7 @@ const DisplayItemCard = (props) => {
                               "Special_Presentation" ? (
                                 <div className="me-2">
                                   <Tooltip
-                                    label={y.Special_Presentation}
+                                    label={"Special Presentation"}
                                     placement="top"
                                   >
                                     <img

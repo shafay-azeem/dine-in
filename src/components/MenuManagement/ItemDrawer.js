@@ -110,6 +110,9 @@ const ItemDrawer = (props) => {
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [checked, setChecked] = useState();
+
+  const [activeNut, setActiveNut] = useState();
+
   const [calorie, setCalorie] = useState();
   const [sold, setSold] = useState();
   const [time, setTime] = useState();
@@ -156,6 +159,7 @@ const ItemDrawer = (props) => {
     itemImage: image,
     itemDescription: description,
     active: checked,
+    activeNutritionInfo: activeNut,
     itemCalorie: calorie,
     itemTag: sold,
     itemLabel: conversion,
@@ -401,6 +405,7 @@ const ItemDrawer = (props) => {
     setImage(setVar.itemImage);
     setDescription(setVar.itemDescription);
     setChecked(setVar.active);
+    setActiveNut(setVar.activeNutritionInfo);
     setCalorie(setVar.itemCalorie);
     setSold(setVar.itemTag);
 
@@ -481,6 +486,7 @@ const ItemDrawer = (props) => {
     setImage(setVar.itemImage);
     setDescription(setVar.itemDescription);
     setChecked(setVar.active);
+    setActiveNut(setVar.activeNutritionInfo);
     setCalorie(setVar.itemCalorie);
     setSold(setVar.itemTag);
 
@@ -627,18 +633,18 @@ const ItemDrawer = (props) => {
     formData.append("upload_preset", "dineInApp");
     const config = {
       headers: {
-
         "Content-type": "multipart/form-data",
-        'Access-Control-Allow-Origin': "*",
+        "Access-Control-Allow-Origin": "*",
       },
-    }
+    };
     try {
-
-
-      const res = await fetch("https://api.cloudinary.com/v1_1/dkq6jers7/image/upload", {
-        method: "post",
-        body: formData
-      });
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dkq6jers7/image/upload",
+        {
+          method: "post",
+          body: formData,
+        }
+      );
       const data = await res.json();
       setImage(data.url.toString());
     } catch (err) {
@@ -690,7 +696,7 @@ const ItemDrawer = (props) => {
           <DrawerCloseButton />
 
           {(item_index && props?.itemDecider === "item") ||
-            (item_index && props?.itemDecider === "subItem") ? (
+          (item_index && props?.itemDecider === "subItem") ? (
             <DrawerHeader>{title}</DrawerHeader>
           ) : (
             <DrawerHeader>Add New Item</DrawerHeader>
@@ -1084,12 +1090,15 @@ const ItemDrawer = (props) => {
                     </Box>
                   </TabPanel>
                   <TabPanel>
-                    {/* <FormControl>
-                      <FormLabel fontWeight="400">
-                        Display the Nutrition Info on the menu
-                      </FormLabel>
-                      <Switch></Switch>
-                    </FormControl> */}
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={activeNut ? activeNut : false}
+                        onChange={(e) => setActiveNut(e.target.checked)}
+                        style={{ marginRight: "5px", marginTop: "20px" }}
+                      />
+                      Display the Nutrition Info on the menu
+                    </label>
 
                     <FormControl mt={3}>
                       <FormLabel fontWeight="400">Serving Size</FormLabel>

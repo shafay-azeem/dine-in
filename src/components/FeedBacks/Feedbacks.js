@@ -68,8 +68,15 @@ const Feedbacks = () => {
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
   const fileExtension = ".xlsx";
   const fileName = "Excel Export";
+
+  //console.log(feedback, "feedback");
+
+  for (let i = 0; i < feedback.length; i++) {
+    console.log(feedback[i]);
+  }
+
   const exportToExcel = async () => {
-    const ws = XLSX.utils.json_to_sheet(excelData);
+    const ws = XLSX.utils.json_to_sheet(feedback);
     const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
     const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
     const data = new Blob([excelBuffer], { type: fileType });
@@ -235,13 +242,13 @@ const Feedbacks = () => {
               />
             </GridItem> */}
 
-            {/* <GridItem w="100%" h="10">
+            <GridItem w="100%" h="10">
               <Stack direction={["column", "row"]} spacing="24px">
                 <Box w="100px" h="40px">
                   <CustomButton
                     btnText={"Export"}
                     leftIcon={<ArrowForwardIcon />}
-                    click={(e) => exportToExcel(fileName)}
+                    click={(e) => exportToExcel()}
                   />
                 </Box>
                 <Box w="100px" h="40px">
@@ -253,7 +260,7 @@ const Feedbacks = () => {
                   />
                 </Box>
               </Stack>
-            </GridItem> */}
+            </GridItem>
           </Grid>
         ) : null}
 
