@@ -1,13 +1,15 @@
-import { Tooltip, useFormControlStyles } from "@chakra-ui/react";
+import { Tooltip, useFormControlStyles, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Badge, Button, Card, Col, Row } from "react-bootstrap";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
+import CartModal from "../Modal/CartModal";
 import "../RestaurantMenu.css";
 
 const DisplayItemCard = (props) => {
+  const toast = useToast();
   //let menu_index = props.menu_index;
   // console.log(menu_index);
   let section_index = props?.section_index;
@@ -15,6 +17,7 @@ const DisplayItemCard = (props) => {
   // console.log(section_index, "section_index");
   const [itemList, setItemList] = useState();
   const [state, setstate] = useState(false);
+  const [adder, setAdder] = useState();
 
   const navigate = useNavigate();
 
@@ -35,7 +38,7 @@ const DisplayItemCard = (props) => {
     }
   }, [section_index]);
 
-  async function getAllItemsBySectionId() {
+  async function getAllItemsBySectionId(id, itemName) {
     let getItems = await apiFunctions.GET_REQUEST(
       BASE_URL + API_URL.GET_ALL_ITEMS_BY_SECTIONID_QR + section_index
     );
@@ -45,6 +48,46 @@ const DisplayItemCard = (props) => {
 
     return;
   }
+
+  const addToCart = async (id, itemName, itemPrice, itemImage) => {
+    try {
+      let cartData = {
+        item_Id: id,
+        item_Name: itemName,
+        item_Price: itemPrice,
+        item_Qty: 1,
+        item_Img: itemImage,
+      };
+      await apiFunctions
+        .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + 1, cartData)
+        .then((res) => {
+          console.log(res.data);
+          if (res.status == 200) {
+            toast({
+              position: "top",
+              title: `Card Added SuccessFully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            setAdder(Math.random());
+            return true;
+          } else {
+            alert(`There Some Error---`);
+            return false;
+          }
+        });
+    } catch (err) {
+      console.log(err);
+      toast({
+        position: "top",
+        title: `There Some Error`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
 
   return (
     <div className="mx-auto mt-3">
@@ -208,9 +251,20 @@ const DisplayItemCard = (props) => {
                       </div>
                     </Col>
 
-                    <Button variant="primary" size="sm">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() =>
+                        addToCart(x._id, x.itemName, x.itemPrice, x.itemImage)
+                      }
+                    >
                       Add To Cart
                     </Button>
+
+                    <CartModal
+                      className={true ? "display: none" : ""}
+                      adder={adder}
+                    />
                   </Row>
                 </Card.Body>
               </Card>

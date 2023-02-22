@@ -13,6 +13,7 @@ const MenuDisplayScreen = (props) => {
     <div style={{ width: "90%", margin: "0 auto" }}>
       <RestaurantMenu
         menu_index={searchparams.get("index")}
+        userId={searchparams.get("userId")}
         // menuName={searchparams.get("menuname")}
         // menuDescription={searchparams.get("menuDescription")}
       />

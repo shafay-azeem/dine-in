@@ -117,4 +117,15 @@ export const API_URL = {
   GET_SUB_ITEMS_BY_ITEMID_QR: "qr/V1/getSingleSubItemQr/",
 
   GET_ALL_FORM_QR: "qr/V1/getAllFormQr/",
+
+  //Order
+  ADD_TO_CART: "cart/V1/addToCart/",
+
+  GET_CART_BY_TABLE_NUMBER: "cart/V1/getCartByTableNumber/",
+
+  CART_INCREMENT_DECREMENT: "cart/V1/cartIncrementDecrement/",
+
+  DELETE_CARTITEM_BY_CART_ITEM_ID: "cart/V1/deleteCartItem/",
+
+  CREATE_ORDER: "order/V1/createOrder/",
 };

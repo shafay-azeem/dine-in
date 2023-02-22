@@ -22,8 +22,9 @@ const MenuStartModal = (props) => {
       pathname: "/menudisplay",
       search: createSearchParams({
         index,
-        menuname,
-        menuDescription,
+        // menuname,
+        // menuDescription,
+        userId,
       }).toString(),
     });
   };

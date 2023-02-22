@@ -5,7 +5,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import CartModal from "./Modal/CartModal";
 
-const RestaurantHeader = () => {
+const RestaurantHeader = (props) => {
+  let userId = props?.userId;
   const [show, setShow] = useState(false);
   const toggleOffcanvas = () => {
     setShow(!show);
@@ -20,7 +21,11 @@ const RestaurantHeader = () => {
             Cart
           </Nav.Link>
         </Nav>
-        <CartModal show={show} toggleOffcanvas={toggleOffcanvas} />
+        <CartModal
+          show={show}
+          toggleOffcanvas={toggleOffcanvas}
+          userId={userId}
+        />
       </Container>
     </Navbar>
   );

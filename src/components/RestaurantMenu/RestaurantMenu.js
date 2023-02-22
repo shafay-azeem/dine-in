@@ -19,6 +19,7 @@ const RestaurantMenu = (props) => {
   const navigate = useNavigate();
   const { response, setResponse } = MenuState();
   let menu_index = props?.menu_index;
+  let userId = props?.userId;
 
   const [sectionList, setSectionList] = useState();
   const [subSectionList, setSubSectionList] = useState();
@@ -111,7 +112,7 @@ const RestaurantMenu = (props) => {
 
   return (
     <>
-      <RestaurantHeader />
+      <RestaurantHeader userId={userId} />
       <div className="menu">
         <div className="d-flex justify-content-start">
           <div className="backarrow">
