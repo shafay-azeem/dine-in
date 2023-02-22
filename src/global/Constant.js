@@ -128,4 +128,6 @@ export const API_URL = {
   DELETE_CARTITEM_BY_CART_ITEM_ID: "cart/V1/deleteCartItem/",
 
   CREATE_ORDER: "order/V1/createOrder/",
+
+  MAKE_PAYMENT: "payment/V1/makePayment/",
 };

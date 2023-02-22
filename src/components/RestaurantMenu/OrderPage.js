@@ -3,7 +3,11 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Form } from "react-bootstrap";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 import RestaurantHeader from "./RestaurantHeader";
@@ -104,7 +108,12 @@ const OrderPage = () => {
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.CREATE_ORDER + userId, orderData)
         .then((res) => {
-          console.log(res.data);
+          console.log(res.data.order._id);
+          console.log(res.data.order.subtotal);
+
+          let orderId = res.data.order._id;
+          let subTotal = res.data.order.subtotal;
+
           if (res.status == 201) {
             toast({
               position: "top",
@@ -113,7 +122,15 @@ const OrderPage = () => {
               duration: 9000,
               isClosable: true,
             });
-            navigate("/Payment");
+            // navigate("/Payment");
+            navigate({
+              pathname: "/Payment",
+              search: createSearchParams({
+                userId,
+                orderId,
+                subTotal,
+              }).toString(),
+            });
             return true;
           } else {
             alert(`There Some Error`);
