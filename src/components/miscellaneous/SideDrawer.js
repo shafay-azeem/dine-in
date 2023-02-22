@@ -109,7 +109,7 @@ const SideDrawer = () => {
 
   const orders = () => {
     navigate({
-      pathname: "/order",
+      pathname: "/filterOrders",
     });
   };
 
@@ -260,14 +260,12 @@ const SideDrawer = () => {
                 <HamburgerIcon fontSize="20px" m={2} />
                 Reports
               </Button>
-              <Button variant="link" onClick={orders}>
-                <HamburgerIcon fontSize="20px" m={2} />
-                Orders
-              </Button>
+     
               <Button variant="link" onClick={customers}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Customers
               </Button> */}
+
               <Button variant="link" onClick={menu}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Menu Management
@@ -275,6 +273,10 @@ const SideDrawer = () => {
               <Button variant="link" onClick={feedbacks}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Feedbacks
+              </Button>
+              <Button variant="link" onClick={orders}>
+                <HamburgerIcon fontSize="20px" m={2} />
+                Orders
               </Button>
               {/* <Button variant="link" onClick={translationcenter}>
                 <HamburgerIcon fontSize="20px" m={2} />

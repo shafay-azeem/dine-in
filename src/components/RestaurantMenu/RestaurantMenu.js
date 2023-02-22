@@ -13,6 +13,7 @@ import { IconButton } from "@chakra-ui/react";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useEffect } from "react";
+import RestaurantHeader from "./RestaurantHeader";
 
 const RestaurantMenu = (props) => {
   const navigate = useNavigate();
@@ -110,6 +111,7 @@ const RestaurantMenu = (props) => {
 
   return (
     <>
+      <RestaurantHeader />
       <div className="menu">
         <div className="d-flex justify-content-start">
           <div className="backarrow">

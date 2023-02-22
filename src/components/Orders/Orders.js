@@ -38,7 +38,8 @@ import excelData from "./Export.json";
 import OrderTable from "../Partials/CustomTables/OrderTable";
 import CustomButton from "../../CustomElements/CustomButton";
 
-const Orders = () => {
+const Orders = (props) => {
+  console.log(props.paymentStatus, "payment status");
   const [checkedItems, setCheckedItems] = React.useState(false);
 
   const fileType =
@@ -69,7 +70,7 @@ const Orders = () => {
       </Grid>
 
       <Grid templateColumns="repeat(5, 1fr)" gap={6} m={10}>
-        <GridItem w="100%" h="10">
+        {/* <GridItem w="100%" h="10">
           <InputGroup>
             <InputLeftElement
               pointerEvents="none"
@@ -77,31 +78,23 @@ const Orders = () => {
             />
             <Input type="text" placeholder="Search" bg="white" />
           </InputGroup>
+        </GridItem> */}
+        <GridItem w="100%" h="10">
+          <Text mb="8px">Start Date</Text>
+          <Input placeholder="Start Date" size="md" type="date" bg="white" />
         </GridItem>
         <GridItem w="100%" h="10">
-          <Input
-            placeholder="Select Date and Time"
-            size="md"
-            type="datetime-local"
-            bg="white"
-          />
+          <Text mb="8px">End Date</Text>
+          <Input placeholder="End Date" size="md" type="date" bg="white" />
         </GridItem>
-        <GridItem w="100%" h="10">
-          <Input
-            placeholder="Select Date and Time"
-            size="md"
-            type="datetime-local"
-            bg="white"
-          />
-        </GridItem>
-        <GridItem w="100%" h="10">
+        {/* <GridItem w="100%" h="10">
           <Select placeholder="Edit Display" bg="white">
             <option value="option1">Option 1</option>
             <option value="option2">Option 2</option>
             <option value="option3">Option 3</option>
           </Select>
-        </GridItem>
-        <GridItem w="100%" h="10" textAlign="center">
+        </GridItem> */}
+        {/* <GridItem w="100%" h="10" textAlign="center">
           <Stack direction={["column", "row"]} spacing="24px">
             <Box w="100px" h="40px">
               <CustomButton
@@ -119,23 +112,23 @@ const Orders = () => {
               />
             </Box>
           </Stack>
-        </GridItem>
+        </GridItem> */}
       </Grid>
 
       <Box m="10" mt={5}>
         <Tabs w="100%">
-          <TabList>
+          {/* <TabList>
             <Tab>All</Tab>
             <Tab>New</Tab>
             <Tab>Preparing</Tab>
             <Tab>Ready</Tab>
-          </TabList>
+          </TabList> */}
 
           <TabPanels>
             <TabPanel backgroundColor="white">
               <OrderTable />
             </TabPanel>
-            <TabPanel backgroundColor="white">
+            {/* <TabPanel backgroundColor="white">
               <OrderTable />
             </TabPanel>
             <TabPanel backgroundColor="white">
@@ -143,7 +136,7 @@ const Orders = () => {
             </TabPanel>
             <TabPanel backgroundColor="white">
               <OrderTable />
-            </TabPanel>
+            </TabPanel> */}
           </TabPanels>
         </Tabs>
       </Box>

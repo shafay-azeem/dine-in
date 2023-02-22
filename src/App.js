@@ -21,6 +21,10 @@ import HomePage from "./components/HomePage";
 import { AuthProvider } from "./context/authContext";
 import RequireAuth from "./Screens/RequireAuth";
 import UpdateUser from "./components/Authentication/UpdateUser";
+import Order from "./components/RestaurantMenu/OrderPage";
+import OrderPage from "./components/RestaurantMenu/OrderPage";
+import Payment from "./components/RestaurantMenu/Payment";
+import FilterOrders from "./components/Orders/FilterOrders";
 
 function App() {
   return (
@@ -96,6 +100,9 @@ function App() {
               </RequireAuth>
             }
           />
+          <Route path="/OrderPage" element={<OrderPage />} />
+          <Route path="/filterOrders" element={<FilterOrders />} />
+          <Route path="/Payment" element={<Payment />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,7 +1,7 @@
 import { Tooltip, useFormControlStyles } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Badge, Card, Col, Row } from "react-bootstrap";
+import { Badge, Button, Card, Col, Row } from "react-bootstrap";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
@@ -207,6 +207,10 @@ const DisplayItemCard = (props) => {
                         })}
                       </div>
                     </Col>
+
+                    <Button variant="primary" size="sm">
+                      Add To Cart
+                    </Button>
                   </Row>
                 </Card.Body>
               </Card>
