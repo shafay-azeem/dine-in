@@ -130,4 +130,6 @@ export const API_URL = {
   CREATE_ORDER: "order/V1/createOrder/",
 
   MAKE_PAYMENT: "payment/V1/makePayment/",
+
+  GET_PAID_UNPAID_ORDERS: "order/V1/getPaidUnpaidOrders/",
 };

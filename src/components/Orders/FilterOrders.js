@@ -30,7 +30,7 @@ const FilterOrders = () => {
           />
           <h3
             className="py-3 heading"
-            onClick={() => navigateToOrder("Success")}
+            onClick={() => navigateToOrder("Payment Paid")}
           >
             Paid
           </h3>
@@ -54,7 +54,9 @@ const FilterOrders = () => {
             className="img-fluid d-block mx-auto w-25"
             alt="hh"
           />
-          <h3 className="py-3 heading">All Orders</h3>
+          <h3 className="py-3 heading" onClick={() => navigateToOrder("All")}>
+            All Orders
+          </h3>
         </div>
       </div>
 

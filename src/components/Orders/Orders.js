@@ -37,9 +37,15 @@ import XLSX from "sheetjs-style";
 import excelData from "./Export.json";
 import OrderTable from "../Partials/CustomTables/OrderTable";
 import CustomButton from "../../CustomElements/CustomButton";
+import { Radio, RadioGroup } from "@chakra-ui/react";
+import { useState } from "react";
+import apiFunctions from "../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../global/Constant";
 
 const Orders = (props) => {
   console.log(props.paymentStatus, "payment status");
+  let paymentStatus = props.paymentStatus;
+
   const [checkedItems, setCheckedItems] = React.useState(false);
 
   const fileType =
@@ -79,14 +85,60 @@ const Orders = (props) => {
             <Input type="text" placeholder="Search" bg="white" />
           </InputGroup>
         </GridItem> */}
-        <GridItem w="100%" h="10">
-          <Text mb="8px">Start Date</Text>
-          <Input placeholder="Start Date" size="md" type="date" bg="white" />
-        </GridItem>
-        <GridItem w="100%" h="10">
-          <Text mb="8px">End Date</Text>
-          <Input placeholder="End Date" size="md" type="date" bg="white" />
-        </GridItem>
+
+        {/* <GridItem>
+          <RadioGroup>
+            <Stack spacing={5} direction="row">
+              <Radio
+                colorScheme="green"
+                value="1"
+                onChange={(e) => setValue(e.target.value)}
+              >
+                Order On Daily Basis
+              </Radio>
+              <Radio
+                colorScheme="green"
+                value="2"
+                onChange={(e) => setValue(e.target.value)}
+              >
+                Specific Range Of Orders
+              </Radio>
+            </Stack>
+          </RadioGroup>
+        </GridItem> */}
+
+        {/* {value == "2" ? (
+          <Box>
+            <GridItem w="100%" h="10">
+              <Text mb="8px">Start Date</Text>
+              <Input
+                placeholder="Start Date"
+                size="md"
+                type="date"
+                bg="white"
+              />
+            </GridItem>
+            <GridItem w="100%" h="10">
+              <Text mb="8px">End Date</Text>
+              <Input placeholder="End Date" size="md" type="date" bg="white" />
+            </GridItem>
+          </Box>
+        ) : null}
+
+        {value == "1" ? (
+          <Box>
+            <GridItem w="100%" h="10">
+              <Text mb="8px">Start Date</Text>
+              <Input
+                placeholder="Start Date"
+                size="md"
+                type="date"
+                bg="white"
+              />
+            </GridItem>
+          </Box>
+        ) : null} */}
+
         {/* <GridItem w="100%" h="10">
           <Select placeholder="Edit Display" bg="white">
             <option value="option1">Option 1</option>
@@ -126,7 +178,7 @@ const Orders = (props) => {
 
           <TabPanels>
             <TabPanel backgroundColor="white">
-              <OrderTable />
+              <OrderTable paymentStatus={paymentStatus} />
             </TabPanel>
             {/* <TabPanel backgroundColor="white">
               <OrderTable />
