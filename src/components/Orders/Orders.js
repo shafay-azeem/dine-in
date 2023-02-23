@@ -1,46 +1,11 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  GridItem,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Select,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-} from "@chakra-ui/react";
-import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
-import {
-  ArrowForwardIcon,
-  EmailIcon,
-  PhoneIcon,
-  RepeatIcon,
-  SearchIcon,
-} from "@chakra-ui/icons";
+import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Tabs, TabPanels, TabPanel } from "@chakra-ui/react";
+
 import * as FileSaver from "file-saver";
 import XLSX from "sheetjs-style";
 import excelData from "./Export.json";
 import OrderTable from "../Partials/CustomTables/OrderTable";
-import CustomButton from "../../CustomElements/CustomButton";
-import { Radio, RadioGroup } from "@chakra-ui/react";
-import { useState } from "react";
-import apiFunctions from "../../global/GlobalFunction";
-import { API_URL, BASE_URL } from "../../global/Constant";
 
 const Orders = (props) => {
   console.log(props.paymentStatus, "payment status");

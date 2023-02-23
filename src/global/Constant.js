@@ -136,4 +136,18 @@ export const API_URL = {
   FILTER_ORDER_BY_DATE: "order/V1/filterOrder/",
 
   GET_ORDER_BY_RANGE: "order/V1/rangeOrder/",
+
+  GET_ALL_PAYMENT_BY_USERID: "payment/V1/getAllPayment/",
+
+  GET_SINGLE_DATE_PAYMENT: "payment/V1/getSingleDatePayment/",
+
+  GET_MULTI__DATE_PAYMENT: "payment/V1/getMultiDatePayment/",
+
+  TOTAL_REVENUE: "payment/V1/totalRevenue/",
+
+  REVENUE_RANGE: "payment/V1/revenueRange/",
+
+  GET_REVENUE_ON_DAILY_BASIS_PAYMENT: "payment/V1/getRevenueOnDailyBasis/",
+
+  PENDING_AMOUNT_ALL: "order/V1/pendingAmount/",
 };

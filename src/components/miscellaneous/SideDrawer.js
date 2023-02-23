@@ -149,6 +149,12 @@ const SideDrawer = () => {
     });
   };
 
+  const payment = () => {
+    navigate({
+      pathname: "/paymentList",
+    });
+  };
+
   const {
     isOpen: isOpenDashboardModel,
     onOpen: onOpenDashboardModel,
@@ -277,6 +283,11 @@ const SideDrawer = () => {
               <Button variant="link" onClick={orders}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Orders
+              </Button>
+
+              <Button variant="link" onClick={payment}>
+                <HamburgerIcon fontSize="20px" m={2} />
+                Payment List
               </Button>
               {/* <Button variant="link" onClick={translationcenter}>
                 <HamburgerIcon fontSize="20px" m={2} />

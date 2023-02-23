@@ -1,0 +1,62 @@
+import { Button } from "@chakra-ui/button";
+
+import { Text } from "@chakra-ui/layout";
+import {
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+} from "@chakra-ui/modal";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { API_URL, BASE_URL } from "../../global/Constant";
+import apiFunctions from "../../global/GlobalFunction";
+
+const RevenueModal = (props) => {
+  let userId = localStorage.getItem("user_id");
+  const [amount, setAmount] = useState();
+  async function totalRevenue() {
+    try {
+      let filterOrdersByDate = await apiFunctions.GET_REQUEST(
+        BASE_URL + API_URL.TOTAL_REVENUE + userId
+      );
+      let res = filterOrdersByDate.data.totalAmount;
+      setAmount(res);
+
+      return true;
+    } catch (err) {
+      console.log("An error occurred while fetching carts", err.message);
+    }
+  }
+
+  useEffect(() => {
+    totalRevenue();
+  }, []);
+  return (
+    <>
+      <Modal isOpen={props.isOpen} onClose={props.onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Total Revenue</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <Text>Total Revenue Rs {amount}</Text>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3}>
+              OK
+            </Button>
+            <Button onClick={props.onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+export default RevenueModal;

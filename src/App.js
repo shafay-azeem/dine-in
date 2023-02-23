@@ -25,6 +25,8 @@ import Order from "./components/RestaurantMenu/OrderPage";
 import OrderPage from "./components/RestaurantMenu/OrderPage";
 import Payment from "./components/RestaurantMenu/Payment";
 import FilterOrders from "./components/Orders/FilterOrders";
+import PaymentList from "./components/Payment/PaymentList";
+import PaymentScreen from "./Screens/PaymentScreen";
 
 function App() {
   return (
@@ -41,7 +43,14 @@ function App() {
             }
           />
           <Route path="/reports" element={<ReportScreen />} />
-          <Route path="/order" element={<OrderScreen />} />
+          <Route
+            path="/order"
+            element={
+              <RequireAuth>
+                <OrderScreen />
+              </RequireAuth>
+            }
+          />
           <Route path="/customer" element={<CustomerScreen />} />
           <Route
             path="/menu"
@@ -101,8 +110,24 @@ function App() {
             }
           />
           <Route path="/OrderPage" element={<OrderPage />} />
-          <Route path="/filterOrders" element={<FilterOrders />} />
+          <Route
+            path="/filterOrders"
+            element={
+              <RequireAuth>
+                <FilterOrders />
+              </RequireAuth>
+            }
+          />
           <Route path="/Payment" element={<Payment />} />
+
+          <Route
+            path="/paymentList"
+            element={
+              <RequireAuth>
+                <PaymentScreen />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

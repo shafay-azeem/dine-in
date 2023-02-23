@@ -43,13 +43,17 @@ const OrderTable = (props) => {
   const [endDate, setEndDate] = useState();
 
   useEffect(() => {
-    if (startDate) {
+    if (startDate && value == "1") {
+      //console.log("first if");
       filterOrdersByDate();
-    } else if (startDate && endDate) {
-      console.log("endDateff");
-      rangeOrders();
     } else {
-      getPaidUnpaidOrders();
+      if (startDate && endDate) {
+        //console.log("secoond if");
+        rangeOrders();
+      } else {
+        //console.log("else");
+        getPaidUnpaidOrders();
+      }
     }
   }, [startDate, endDate]);
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import SideDrawer from "../miscellaneous/SideDrawer";
-import MenuImg from "../Assets/menu.png";
-import FeedBackImg from "../Assets/feedback.png";
-import QrImg from "../Assets/qr-code.png";
+import PaidImg from "../Assets/paid.png";
+import UnPaidImg from "../Assets/paper-money.png";
+import AllOrdersImg from "../Assets/order-delivery.png";
 
 const FilterOrders = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const FilterOrders = () => {
       <div className="d-flex text-center justify-content-center vh-100 align-items-center">
         <div className="img">
           <img
-            src={MenuImg}
+            src={PaidImg}
             className="img-fluid d-block mx-auto w-25"
             alt="gggg"
           />
@@ -37,7 +37,7 @@ const FilterOrders = () => {
         </div>
         <div className="img">
           <img
-            src={FeedBackImg}
+            src={UnPaidImg}
             className="img-fluid d-block mx-auto w-25"
             alt="fff"
           />
@@ -50,7 +50,7 @@ const FilterOrders = () => {
         </div>
         <div className="img">
           <img
-            src={QrImg}
+            src={AllOrdersImg}
             className="img-fluid d-block mx-auto w-25"
             alt="hh"
           />
