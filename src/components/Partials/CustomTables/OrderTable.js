@@ -24,22 +24,34 @@ import OrderDetailModal from "../../Orders/OrderDetailModal";
 import apiFunctions from "../../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import { useEffect } from "react";
+import { MenuState } from "../../../context/MenuContext";
 import { Stack } from "react-bootstrap";
 
 const OrderTable = (props) => {
+  const [count, setCount] = useState();
   let userId = localStorage.getItem("user_id");
   console.log(userId);
   let paymentStatus = props.paymentStatus;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { orders, setOrders } = MenuState();
 
   const [checkedItems, setCheckedItems] = React.useState(false);
-  const [orders, setOrders] = useState([]);
+  // const [orders, setOrders] = useState([]);
   const [value, setValue] = useState();
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
 
   useEffect(() => {
-    getPaidUnpaidOrders();
-  }, []);
+    if (startDate) {
+      filterOrdersByDate();
+    } else if (startDate && endDate) {
+      console.log("endDateff");
+      rangeOrders();
+    } else {
+      getPaidUnpaidOrders();
+    }
+  }, [startDate, endDate]);
 
   async function getPaidUnpaidOrders() {
     try {
@@ -57,6 +69,49 @@ const OrderTable = (props) => {
       console.log("An error occurred while fetching carts", err.message);
     }
   }
+
+  async function filterOrdersByDate() {
+    try {
+      let filterOrdersByDate = await apiFunctions.GET_REQUEST(
+        BASE_URL +
+          API_URL.FILTER_ORDER_BY_DATE +
+          userId +
+          `?paymentStatus=${paymentStatus}&date=${startDate}`
+      );
+      let res = filterOrdersByDate.data.orders;
+      console.log(res);
+      setOrders(res.reverse());
+      return true;
+    } catch (err) {
+      console.log("An error occurred while fetching carts", err.message);
+    }
+  }
+
+  async function rangeOrders() {
+    try {
+      let filterOrdersByDate = await apiFunctions.GET_REQUEST(
+        BASE_URL +
+          API_URL.GET_ORDER_BY_RANGE +
+          userId +
+          `?paymentStatus=${paymentStatus}&startDate=${startDate}&endDate=${endDate}`
+      );
+      let res = filterOrdersByDate.data.orders;
+      console.log(res, "hh");
+      setOrders(res.reverse());
+      return true;
+    } catch (err) {
+      console.log("An error occurred while fetching carts", err.message);
+    }
+  }
+
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const getIndex = (index) => {
+    setCount(index);
+  };
 
   return (
     <>
@@ -91,11 +146,18 @@ const OrderTable = (props) => {
                 size="md"
                 type="date"
                 bg="white"
+                onChange={(e) => setStartDate(e.target.value)}
               />
             </GridItem>
             <GridItem w="100%" h="10">
               <Text mb="8px">End Date</Text>
-              <Input placeholder="End Date" size="md" type="date" bg="white" />
+              <Input
+                placeholder="End Date"
+                size="md"
+                type="date"
+                bg="white"
+                onChange={(e) => setEndDate(e.target.value)}
+              />
             </GridItem>
           </Box>
         ) : null}
@@ -109,6 +171,7 @@ const OrderTable = (props) => {
                 size="md"
                 type="date"
                 bg="white"
+                onChange={(e) => setStartDate(e.target.value)}
               />
             </GridItem>
           </Box>
@@ -130,7 +193,7 @@ const OrderTable = (props) => {
               </Th>
               <Th>Customer Name</Th>
               <Th>Table Number</Th>
-              <Th>Instruction</Th>
+              <Th>Date</Th>
               <Th>Order Status</Th>
               <Th>Payment Status</Th>
               <Th>SubTotal</Th>
@@ -143,18 +206,21 @@ const OrderTable = (props) => {
                 <Td>{x._id}</Td>
                 <Td>{x.customerName}</Td>
                 <Td>{x.tableNumber}</Td>
-                <Td>{x.instructions}</Td>
+                <Td>{formatDate(x.createdAt.toString())}</Td>
                 <Td>{x.orderStatus}</Td>
                 <Td>{x.paymentStatus}</Td>
                 <Td>{x.subtotal}</Td>
                 <Td style={{ textAlign: "center", cursor: "pointer" }}>
                   <Box>
-                    <Icon as={ViewIcon} onClick={onOpen} />
+                    <Box onClick={() => getIndex(index)}>
+                      <Icon onClick={onOpen} as={ViewIcon} />
+                    </Box>
                   </Box>
                 </Td>
 
                 {isOpen ? (
                   <OrderDetailModal
+                    index={count}
                     isOpen={isOpen}
                     onOpen={onOpen}
                     onClose={onClose}

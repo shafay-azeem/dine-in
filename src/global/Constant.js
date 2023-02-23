@@ -132,4 +132,8 @@ export const API_URL = {
   MAKE_PAYMENT: "payment/V1/makePayment/",
 
   GET_PAID_UNPAID_ORDERS: "order/V1/getPaidUnpaidOrders/",
+
+  FILTER_ORDER_BY_DATE: "order/V1/filterOrder/",
+
+  GET_ORDER_BY_RANGE: "order/V1/rangeOrder/",
 };
