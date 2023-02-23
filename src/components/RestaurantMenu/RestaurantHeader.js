@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import CartModal from "./Modal/CartModal";
+import { CgShoppingCart } from 'react-icons/cg';
 
 const RestaurantHeader = (props) => {
   let userId = props?.userId;
@@ -13,20 +14,41 @@ const RestaurantHeader = (props) => {
   };
 
   return (
-    <Navbar bg="light" variant="light">
+    // <Navbar bg="light" variant="light">
+    //   <Container>
+    //     <Navbar.Brand>Navbar</Navbar.Brand>
+    //     <Nav className="justify-content-end">
+    //       <Nav.Link onClick={toggleOffcanvas} className="text-end">
+    //         Cart
+    //       </Nav.Link>
+    //     </Nav>
+    //     <CartModal
+    //       show={show}
+    //       toggleOffcanvas={toggleOffcanvas}
+    //       userId={userId}
+    //     />
+    //   </Container>
+    // </Navbar>
+
+
+    <Navbar sticky="top" bg="light" variant="light">
       <Container>
         <Navbar.Brand>Navbar</Navbar.Brand>
-        <Nav className="ml-auto">
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
           <Nav.Link onClick={toggleOffcanvas} className="text-end">
+            <CgShoppingCart size={20} />
+          </Nav.Link>
+          <Nav.Link onClick={toggleOffcanvas} className="text-end ms-2">
             Cart
           </Nav.Link>
-        </Nav>
-        <CartModal
-          show={show}
-          toggleOffcanvas={toggleOffcanvas}
-          userId={userId}
-        />
+        </Navbar.Collapse>
       </Container>
+      <CartModal
+        show={show}
+        toggleOffcanvas={toggleOffcanvas}
+        userId={userId}
+      />
     </Navbar>
   );
 };
