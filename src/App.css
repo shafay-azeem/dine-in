@@ -65,18 +65,23 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 .loading-spinner {
   width: 50px;
   height: 50px;
-  border: 5px solid #f3f3f3; /* Light grey */
-  border-top: 10px solid #319795; /* Black */
+  border: 5px solid #f3f3f3;
+  /* Light grey */
+  border-top: 10px solid #319795;
+  /* Black */
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
 }
+
 .loading-screen {
   position: absolute;
   top: 0;
@@ -88,8 +93,29 @@
   justify-content: center;
   justify-items: center;
 }
+
 .heading {
   font-size: 25px;
   font-weight: 600;
   cursor: pointer;
+}
+
+
+/* media query  */
+
+@media only screen and (min-width: 900px) {
+  #sideBar {
+    bottom: '100%';
+    right: 0;
+    width: '100%';
+    z-index: 3;
+    position: fixed;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  #MyCart {
+    width: 100%;
+    align-self: center;
+  }
 }

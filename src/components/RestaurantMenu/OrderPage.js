@@ -11,6 +11,8 @@ import {
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 import RestaurantHeader from "./RestaurantHeader";
+import '../../App.css';
+
 const OrderPage = () => {
   const navigate = useNavigate();
   const toast = useToast();
@@ -35,8 +37,8 @@ const OrderPage = () => {
     try {
       let cartIncrementDecrement = await apiFunctions.GET_REQUEST(
         BASE_URL +
-          API_URL.CART_INCREMENT_DECREMENT +
-          `${id}?cartId=${cartId}&cartStatus=${y}`
+        API_URL.CART_INCREMENT_DECREMENT +
+        `${id}?cartId=${cartId}&cartStatus=${y}`
       );
       setChanger(Math.random());
     } catch (err) {
@@ -47,8 +49,8 @@ const OrderPage = () => {
     await apiFunctions
       .DELETE_REQUEST(
         BASE_URL +
-          API_URL.DELETE_CARTITEM_BY_CART_ITEM_ID +
-          `${id}?cartId=${cartId}`
+        API_URL.DELETE_CARTITEM_BY_CART_ITEM_ID +
+        `${id}?cartId=${cartId}`
       )
       .then((res) => {
         if (res.data.success == true) {
@@ -152,78 +154,84 @@ const OrderPage = () => {
   return (
     <div className="container">
       <RestaurantHeader userId={userId} />
-      <div className="row justify-content-between mt-3">
-        {cartItemList?.map((x, index) => {
-          return (
-            <div className="col-lg-7" key={index}>
-              <div class="card rounded-3 mb-4">
-                <div class="card-body p-4">
-                  <div class="row d-flex justify-content-between align-items-center">
-                    <div class="col-md-2 col-lg-2 col-xl-2">
-                      <img
-                        src={x.item_Img}
-                        style={{ width: "60px", height: "60px" }}
-                        alt="img"
-                      />
-                    </div>
-                    <div class="col-md-4 col-lg-4 col-xl-4">
-                      <p class="lead fw-normal mb-2">{x.item_Name}</p>
-                      <p>Rs {x.item_Price}</p>
-                    </div>
-                    <div class="col-md-4 col-lg-4 col-xl-4 d-flex justify-content-end">
-                      <button
-                        class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                      >
-                        <i
-                          class="fas fa-minus"
-                          onClick={() =>
-                            cartIncrementDecrement(x._id, "decrement")
-                          }
-                        ></i>
-                      </button>
+      <div className="row justify-content-between mt-3" >
+        <div className="col-md-7" id="MyCart">
+          {cartItemList?.map((x, index) => {
+            return (
+              <div key={index}>
+                <div class="card rounded-3 mb-4">
+                  <div class="card-body p-4">
+                    <div class="row d-flex justify-content-between align-items-center">
+                      <div class="col-md-2">
+                        <img
+                          src={x.item_Img}
+                          style={{ width: "60px", height: "60px" }}
+                          alt="img"
+                        />
+                      </div>
+                      <div class="col-md-4">
+                        <p class="lead fw-normal mb-2">{x.item_Name}</p>
+                        <p>Rs {x.item_Price}</p>
+                      </div>
+                      <div class="col-md-4 d-flex justify-content-end">
+                        <button
+                          class="btn btn-link px-2"
+                          onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        >
+                          <i
+                            class="fas fa-minus"
+                            onClick={() =>
+                              cartIncrementDecrement(x._id, "decrement")
+                            }
+                          ></i>
+                        </button>
 
-                      <input
-                        id="form1"
-                        min="0"
-                        name="quantity"
-                        value={x.item_Qty}
-                        type="number"
-                        class="form-control form-control-sm"
-                      />
+                        <input
+                          id="form1"
+                          min="0"
+                          name="quantity"
+                          value={x.item_Qty}
+                          type="number"
+                          class="form-control form-control-sm"
+                        />
 
-                      <button class="btn btn-link px-2">
-                        <i
-                          class="fas fa-plus"
-                          onClick={() =>
-                            cartIncrementDecrement(x._id, "increment")
-                          }
-                        ></i>
-                      </button>
-                      <h5 class="mb-0 ms-3">Rs {x.itemPrice_Total}</h5>
-                    </div>
-                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="#!" class="text-danger">
-                        <i
-                          class="fas fa-trash fa-lg"
-                          onClick={() => handleRemove(x._id)}
-                        ></i>
-                      </a>
+                        <button class="btn btn-link px-2">
+                          <i
+                            class="fas fa-plus"
+                            onClick={() =>
+                              cartIncrementDecrement(x._id, "increment")
+                            }
+                          ></i>
+                        </button>
+                        <h5 class="mb-0 ms-3">Rs {x.itemPrice_Total}</h5>
+                      </div>
+                      <div class="col-md-1 text-end">
+                        <a href="#!" class="text-danger">
+                          <i
+                            class="fas fa-trash fa-lg"
+                            onClick={() => handleRemove(x._id)}
+                          ></i>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
 
-        <div className="col-lg-5">
+
+        <div className="col-md-5" id="sideBar">
           <div
             className="inner"
             style={{
               backgroundColor: "#f8f9fa",
               padding: "20px 10px",
               borderRadius: "10px",
+              top: '0px',
+              width: '500px',
+              alignSelf: 'center'
             }}
           >
             <Form.Group
@@ -276,20 +284,29 @@ const OrderPage = () => {
             >
               Proceed to Checkout
             </button>
+
+            <div className="row ms-auto" style={{
+            }}>
+              <h4 style={{
+                fontWeight: "600",
+                fontSize: "20px",
+                marginTop: '20px',
+                textAlign: 'start',
+              }} className="text-black mt-4">Sub Total</h4>
+              <span
+                className="me-2 mt-2"
+                style={{
+                  fontWeight: "600",
+                  fontSize: "20px",
+                  marginTop: '20px',
+                  textAlign: 'start'
+                }}
+              >
+                Rs {cartTotal}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="row">
-        <span
-          className="me-2"
-          style={{
-            marginLeft: "150px",
-            fontWeight: "600",
-            fontSize: "20px",
-          }}
-        >
-          Rs {cartTotal}
-        </span>
       </div>
     </div>
   );
