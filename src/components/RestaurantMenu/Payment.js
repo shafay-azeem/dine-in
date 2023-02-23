@@ -1,3 +1,6 @@
+import { Box } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -5,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
+import PaymentSuccessModal from "./Modal/PaymentSuccessModal";
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -12,7 +16,7 @@ const Payment = () => {
   let userId = searchparams.get("userId");
   let orderId = searchparams.get("orderId");
   let subTotal = searchparams.get("subTotal");
-
+  const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
   console.log(userId);
 
   const [email, setEmail] = useState("");
@@ -27,6 +31,22 @@ const Payment = () => {
     e.preventDefault();
     // Submit the form data
   };
+  const toast = useToast();
+
+  function generateRandomNumber() {
+    let randomNumber = "";
+    const characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const charactersLength = characters.length;
+    for (let i = 0; i < 16; i++) {
+      if (i === 4 || i === 8 || i === 12) {
+        randomNumber += "-";
+      }
+      randomNumber += characters.charAt(
+        Math.floor(Math.random() * charactersLength)
+      );
+    }
+    return randomNumber;
+  }
 
   const makePayment = async () => {
     try {
@@ -45,26 +65,30 @@ const Payment = () => {
         .POST_REQUEST(BASE_URL + API_URL.MAKE_PAYMENT + userId, paymentData)
         .then((res) => {
           console.log(res.data);
-          // if (res.status == 201) {
-          //   toast({
-          //     position: "top",
-          //     title: `Order Confirmed SuccessFully`,
-          //     status: "success",
-          //     duration: 9000,
-          //     isClosable: true,
-          //   });
-          //   // navigate("/Payment");
-          //   navigate({
-          //     pathname: "/Payment",
-          //     search: createSearchParams({
-          //       userId,
-          //     }).toString(),
-          //   });
-          //   return true;
-          // } else {
-          //   alert(`There Some Error`);
-          //   return false;
-          // }
+
+          if (res.status == 201) {
+            setIsPaymentSuccessful(true);
+            toast({
+              position: "top",
+              title: `Payment Created Successfully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+
+            // navigate("/Payment");
+
+            return true;
+          } else {
+            toast({
+              position: "top",
+              title: `There some errors`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            return false;
+          }
         });
     } catch (err) {
       console.log(err);
@@ -78,43 +102,60 @@ const Payment = () => {
     }
   };
 
+  useEffect(() => {
+    setTransactionId(generateRandomNumber());
+  }, []);
+
   return (
     <Container>
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
-          <h3>Make a Payment</h3>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
+          {isPaymentSuccessful ? (
+            <PaymentSuccessModal
+              email={email}
+              phoneNumber={phoneNumber}
+              paymentMethod={paymentMethod}
+              transactionId={transactionId}
+              amount={subTotal}
+              userId={userId}
+            />
+          ) : (
+            <div>
+              <h3>Make a Payment</h3>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="email">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Form.Group>
 
-            <Form.Group controlId="phoneNumber">
-              <Form.Label>Phone Number</Form.Label>
-              <Form.Control
-                type="tel"
-                placeholder="Enter phone number"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </Form.Group>
+                <Form.Group controlId="phoneNumber">
+                  <Form.Label>Phone Number</Form.Label>
+                  <Form.Control
+                    type="tel"
+                    placeholder="Enter phone number"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                  />
+                </Form.Group>
 
-            <Form.Group controlId="value">
-              <Form.Label>Payment Method</Form.Label>
-              <Form.Select onChange={(e) => setPaymentMethod(e.target.value)}>
-                <option>Select a payment method</option>
-                <option value="creditCard">Credit Card</option>
-                <option value="paypal">Paypal</option>
-                <option value="bankTransfer">Bank Transfer</option>
-              </Form.Select>
-            </Form.Group>
+                <Form.Group controlId="value">
+                  <Form.Label>Payment Method</Form.Label>
+                  <Form.Select
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                  >
+                    <option>Select a payment method</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="PayPal">Paypal</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                  </Form.Select>
+                </Form.Group>
 
-            {/* {paymentMethod === "creditCard" && (
+                {/* {paymentMethod === "creditCard" && (
               <div>
                 <h5>Credit Card Information</h5>
                 <Form.Group controlId="cardNumber">
@@ -138,30 +179,33 @@ const Payment = () => {
               </div>
             )} */}
 
-            <Form.Group controlId="transactionId">
-              <Form.Label>Transaction ID</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter transaction ID"
-                value={transactionId}
-                onChange={(e) => setTransactionId(e.target.value)}
-              />
-            </Form.Group>
+                <Form.Group controlId="transactionId">
+                  <Form.Label>Transaction ID</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter transaction ID"
+                    value={transactionId}
+                    disabled={true}
+                  />
+                </Form.Group>
 
-            <Form.Group controlId="amount">
-              <Form.Label>Amount</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter amount"
-                value={subTotal}
-                onChange={(e) => setAmount(e.target.value)}
-              />
-            </Form.Group>
+                <Form.Group controlId="amount">
+                  <Form.Label>Amount</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter amount"
+                    value={subTotal}
+                    onChange={(e) => setAmount(e.target.value)}
+                    disabled={true}
+                  />
+                </Form.Group>
 
-            <Button variant="primary" type="submit" onClick={makePayment}>
-              Pay Now
-            </Button>
-          </Form>
+                <Button variant="primary" type="submit" onClick={makePayment}>
+                  Pay Now
+                </Button>
+              </Form>
+            </div>
+          )}
         </Col>
       </Row>
     </Container>
