@@ -20,7 +20,7 @@ const RestaurantMenu = (props) => {
   const { response, setResponse } = MenuState();
   let menu_index = props?.menu_index;
   let userId = props?.userId;
-  let tableNumber = props?.tableNumber
+  let tableNumber = props?.tableNumber;
 
   const [sectionList, setSectionList] = useState();
   const [subSectionList, setSubSectionList] = useState();
@@ -158,7 +158,10 @@ const RestaurantMenu = (props) => {
                   <div className="text-center">
                     <p>{x.sectionDescription}</p>
                   </div>
-                  <SubSecItemCard subSection_index={x._id} />
+                  <SubSecItemCard
+                    subSection_index={x._id}
+                    tableNumber={tableNumber}
+                  />
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

@@ -9,13 +9,12 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 import PaymentSuccessModal from "./Modal/PaymentSuccessModal";
-import '../../App.css';
+import "../../App.css";
 
 const Payment = () => {
-
   const img = {
-    paymentGif: require('../Assets/payment gif.gif'),
-  }
+    paymentGif: require("../Assets/payment gif.gif"),
+  };
 
   const navigate = useNavigate();
   const [searchparams] = useSearchParams();
@@ -24,7 +23,6 @@ const Payment = () => {
   let subTotal = searchparams.get("subTotal");
   let tableNumber = searchparams.get("tableNumber");
   const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
-  console.log(userId);
 
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -56,6 +54,33 @@ const Payment = () => {
   }
 
   const makePayment = async () => {
+    if (!email || !paymentMethod) {
+      //alert("Please Enter All Fields");
+      toast({
+        position: "top",
+        title: `Please Enter All Fields`,
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    if (
+      !phoneNumber ||
+      phoneNumber.length !== 11 ||
+      !/^\d{11}$/.test(phoneNumber)
+    ) {
+      toast({
+        position: "top",
+        title: `Please Enter a Valid Phone Number with 11 digits`,
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+
     try {
       let paymentData = {
         userId: userId,
@@ -113,116 +138,13 @@ const Payment = () => {
     setTransactionId(generateRandomNumber());
   }, []);
 
-
-  console.log(transactionId, 'transactionId')
   return (
-    // <Container>
-    //   <Row>
-    //     <Col md={{ span: 8, offset: 2 }}>
-    //       {isPaymentSuccessful ? (
-    //         <PaymentSuccessModal
-    //           email={email}
-    //           phoneNumber={phoneNumber}
-    //           paymentMethod={paymentMethod}
-    //           transactionId={transactionId}
-    //           amount={subTotal}
-    //           userId={userId}
-    //         />
-    //       ) : (
-    //         <div>
-    //           <h3>Make a Payment</h3>
-    //           <Form onSubmit={handleSubmit}>
-    //             <Form.Group controlId="email">
-    //               <Form.Label>Email address</Form.Label>
-    //               <Form.Control
-    //                 type="email"
-    //                 placeholder="Enter email"
-    //                 value={email}
-    //                 onChange={(e) => setEmail(e.target.value)}
-    //               />
-    //             </Form.Group>
-
-    //             <Form.Group controlId="phoneNumber">
-    //               <Form.Label>Phone Number</Form.Label>
-    //               <Form.Control
-    //                 type="tel"
-    //                 placeholder="Enter phone number"
-    //                 value={phoneNumber}
-    //                 onChange={(e) => setPhoneNumber(e.target.value)}
-    //               />
-    //             </Form.Group>
-
-    //             <Form.Group controlId="value">
-    //               <Form.Label>Payment Method</Form.Label>
-    //               <Form.Select
-    //                 onChange={(e) => setPaymentMethod(e.target.value)}
-    //               >
-    //                 <option>Select a payment method</option>
-    //                 <option value="Credit Card">Credit Card</option>
-    //                 <option value="PayPal">Paypal</option>
-    //                 <option value="Bank Transfer">Bank Transfer</option>
-    //               </Form.Select>
-    //             </Form.Group>
-
-    //             {/* {paymentMethod === "creditCard" && (
-    //           <div>
-    //             <h5>Credit Card Information</h5>
-    //             <Form.Group controlId="cardNumber">
-    //               <Form.Label>Card Number</Form.Label>
-    //               <Form.Control type="text" placeholder="Enter card number" />
-    //             </Form.Group>
-    //             <Row>
-    //               <Col>
-    //                 <Form.Group controlId="expiryDate">
-    //                   <Form.Label>Expiry Date</Form.Label>
-    //                   <Form.Control type="text" placeholder="MM/YY" />
-    //                 </Form.Group>
-    //               </Col>
-    //               <Col>
-    //                 <Form.Group controlId="cvv">
-    //                   <Form.Label>CVV</Form.Label>
-    //                   <Form.Control type="text" placeholder="Enter CVV" />
-    //                 </Form.Group>
-    //               </Col>
-    //             </Row>
-    //           </div>
-    //         )} */}
-
-    //             <Form.Group controlId="transactionId">
-    //               <Form.Label>Transaction ID</Form.Label>
-    //               <Form.Control
-    //                 type="text"
-    //                 placeholder="Enter transaction ID"
-    //                 value={transactionId}
-    //                 disabled={true}
-    //               />
-    //             </Form.Group>
-
-    //             <Form.Group controlId="amount">
-    //               <Form.Label>Amount</Form.Label>
-    //               <Form.Control
-    //                 type="number"
-    //                 placeholder="Enter amount"
-    //                 value={subTotal}
-    //                 onChange={(e) => setAmount(e.target.value)}
-    //                 disabled={true}
-    //               />
-    //             </Form.Group>
-
-    //             <Button variant="primary" type="submit" onClick={makePayment}>
-    //               Pay Now
-    //             </Button>
-    //           </Form>
-    //         </div>
-    //       )}
-    //     </Col>
-    //   </Row>
-    // </Container>
-
-    <Container style={{
-      backgroundColor: '#fff'
-    }} className="mb-3 container-fluid">
-
+    <Container
+      style={{
+        backgroundColor: "#fff",
+      }}
+      className="mb-3 container-fluid"
+    >
       {isPaymentSuccessful ? (
         <PaymentSuccessModal
           email={email}
@@ -235,24 +157,50 @@ const Payment = () => {
         />
       ) : (
         <Row>
-          <div className="col-md-6 align-self-center" >
-            <img className='img-fluid' src={img.paymentGif} alt='gif' />
+          <div className="col-md-6 align-self-center">
+            <img className="img-fluid" src={img.paymentGif} alt="gif" />
           </div>
           <div className="col-md-6">
-            <h2 className='mt-2 py-2 text-large  text-center text-bold'>Make a Payment</h2>
+            <h2 className="mt-2 py-2 text-large  text-center text-bold">
+              Make a Payment
+            </h2>
             <div className="mb-3">
-              <label for="exampleFormControlInput1" className="form-label">Email address</label>
-              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+              <label for="exampleFormControlInput1" className="form-label">
+                Email address
+              </label>
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="name@example.com"
+              />
             </div>
 
             <div className="mb-3">
-              <label for="exampleFormControlInput1" className="form-label">Phone Number</label>
-              <input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} type="number" className="form-control" id="exampleFormControlInput1" placeholder="+92123456789" />
+              <label for="exampleFormControlInput1" className="form-label">
+                Phone Number
+              </label>
+              <input
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                type="number"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="+92123456789"
+              />
             </div>
 
             <div className="form-group mb-3">
-              <label for="exampleFormControlSelect1" className="form-label">Payment Method</label>
-              <select onChange={(e) => setPaymentMethod(e.target.value)} className="form-control" id="exampleFormControlSelect1">
+              <label for="exampleFormControlSelect1" className="form-label">
+                Payment Method
+              </label>
+              <select
+                onChange={(e) => setPaymentMethod(e.target.value)}
+                className="form-control"
+                id="exampleFormControlSelect1"
+              >
                 <option>Select Payment Method</option>
                 <option>Credit Card</option>
                 <option>Paypal</option>
@@ -261,21 +209,38 @@ const Payment = () => {
             </div>
 
             <div className="mb-3">
-              <label for="exampleFormControlInput1" className="form-label">Transcation Id</label>
-              <input value={transactionId} disabled={true} className="form-control" id="exampleFormControlInput1" placeholder="Enter Transaction Id" />
+              <input
+                value={transactionId}
+                disabled={true}
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Enter Transaction Id"
+                hidden
+              />
             </div>
 
             <div className="mb-3">
-              <label for="exampleFormControlInput1" className="form-label">Enter Amount</label>
-              <input value={subTotal} onChange={(e) => setAmount(e.target.value)} disabled={true} type="number" className="form-control" id="exampleFormControlInput1" placeholder="Amount" />
+              <label for="exampleFormControlInput1" className="form-label">
+                Enter Amount
+              </label>
+              <input
+                value={subTotal}
+                onChange={(e) => setAmount(e.target.value)}
+                disabled={true}
+                type="number"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Amount"
+              />
             </div>
             <div className="d-flex align-items-center justify-content-center py-2">
-              <button onClick={makePayment} type="button" className="Button">Pay Now</button>
+              <button onClick={makePayment} type="button" className="Button">
+                Pay Now
+              </button>
             </div>
           </div>
         </Row>
       )}
-
     </Container>
   );
 };

@@ -1,4 +1,4 @@
-import { Tooltip } from "@chakra-ui/react";
+import { Tooltip, useToast } from "@chakra-ui/react";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -7,12 +7,17 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import { MenuState } from "../../../context/MenuContext";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
+import CartModal from "../Modal/CartModal";
 import "../RestaurantMenu.css";
 
 const SubSecItemCard = (props) => {
+  const toast = useToast();
+  let tableNumber = props?.tableNumber;
+
   const navigate = useNavigate();
   const { response, setResponse } = MenuState();
   const [subItemList, setSubItemList] = useState();
+  const { adder, setAdder } = MenuState();
 
   let subsectionIndex = props?.subSection_index;
 
@@ -22,6 +27,7 @@ const SubSecItemCard = (props) => {
       pathname: "/menudetail",
       search: createSearchParams({
         subsecitemindex,
+        tableNumber,
       }).toString(),
     });
   };
@@ -38,6 +44,48 @@ const SubSecItemCard = (props) => {
     let res = getSubItems.data.item;
     setSubItemList(res);
   }
+
+  const addToCart = async (id, itemName, itemPrice, itemImage) => {
+    console.log(id, "tableNumber add to cart");
+    try {
+      let cartData = {
+        item_Id: id,
+        item_Name: itemName,
+        item_Price: itemPrice,
+        item_Qty: 1,
+        item_Img: itemImage,
+        item_Size: "small",
+      };
+      await apiFunctions
+        .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + tableNumber, cartData)
+        .then((res) => {
+          console.log(res.data);
+          if (res.status == 200) {
+            toast({
+              position: "top",
+              title: `Card Added SuccessFully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            setAdder(Math.random());
+            return true;
+          } else {
+            alert(`There Some Error---`);
+            return false;
+          }
+        });
+    } catch (err) {
+      console.log(err);
+      toast({
+        position: "top",
+        title: `There Some Error`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
 
   return (
     <div>
@@ -190,6 +238,23 @@ const SubSecItemCard = (props) => {
                         })}
                       </div>
                     </Col>
+
+                    <div className="container d-flex justify-content-center align-items-center mt-2">
+                      <button
+                        className="Button"
+                        onClick={() =>
+                          addToCart(x._id, x.itemName, x.itemPrice, x.itemImage)
+                        }
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+
+                    <CartModal
+                      className={true ? "display: none" : ""}
+                      adder={adder}
+                      tableNumber={tableNumber}
+                    />
                   </Row>
                 </Card.Body>
               </Card>

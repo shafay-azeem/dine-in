@@ -71,7 +71,7 @@ const MenuDetail = (props) => {
 
   let subsectionitem_index = props?.subsectionitem_index;
 
-  let tableNumber = props?.tableNumber
+  let tableNumber = props?.tableNumber;
 
   const navigate = useNavigate();
 
@@ -199,12 +199,6 @@ const MenuDetail = (props) => {
   }
 
   const myFun = async (id, name, price, image, size) => {
-    // console.log(id, "item id");
-    // console.log(name, "item name");
-    // console.log(price, "item price");
-    // console.log(size, "item size");
-    // console.log(image, "imgae");
-
     try {
       let cartData = {
         item_Id: id,
@@ -212,7 +206,7 @@ const MenuDetail = (props) => {
         item_Price: price,
         item_Qty: 1,
         item_Img: image,
-        item_Size: size.toLowerCase()
+        item_Size: size.toLowerCase(),
       };
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + tableNumber, cartData)
@@ -244,9 +238,6 @@ const MenuDetail = (props) => {
       });
     }
   };
-
-
-
 
   return (
     <div
@@ -536,7 +527,7 @@ const MenuDetail = (props) => {
                 {priceOption ? (
                   <div>
                     {priceOption[0].price ==
-                      priceOption[priceOption.length - 1]?.price ? (
+                    priceOption[priceOption.length - 1]?.price ? (
                       <div
                         className="itemPrice"
                         style={{
@@ -676,12 +667,17 @@ const MenuDetail = (props) => {
                       variant="primary"
                       size="sm"
                       onClick={() =>
-                        myFun(item_index, name, y.price, image, y.name)
+                        myFun(
+                          item_index ? item_index : subsectionitem_index,
+                          name,
+                          y.price,
+                          image,
+                          y.name
+                        )
                       }
                     >
                       add
                     </Button>
-
                   </div>
                 );
               })}
