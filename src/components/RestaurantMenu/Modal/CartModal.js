@@ -52,13 +52,13 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
     }
   }
 
-  async function cartIncrementDecrement(id, y) {
-    console.log(id, y);
+  async function cartIncrementDecrement(id, y, size) {
+    console.log(size, y);
     try {
       let cartIncrementDecrement = await apiFunctions.GET_REQUEST(
         BASE_URL +
         API_URL.CART_INCREMENT_DECREMENT +
-        `${id}?cartId=${cartId}&cartStatus=${y}`
+        `${id}?cartId=${cartId}&cartStatus=${y}&itemSize=${size}`
       );
       setChanger(Math.random());
     } catch (err) {
@@ -153,7 +153,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                     </div>
 
                     <div className="col-6">
-                      <span className="me-2">{x.item_Name}</span> <br />
+                      <span className="me-2">{x.item_Name} {(x.item_Size)}</span> <br />
                       <div className="d-flex justify-content-start align-items-center mt-2">
                         <span className="me-2">
                           {x.item_Qty == 1 ? (
@@ -167,7 +167,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                               size={20}
                               color="#0000FF"
                               onClick={() =>
-                                cartIncrementDecrement(x._id, "decrement")
+                                cartIncrementDecrement(x._id, "decrement", x.item_Size,)
                               }
                             />
                           )}
@@ -178,7 +178,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                             size={20}
                             color="#0000FF"
                             onClick={() =>
-                              cartIncrementDecrement(x._id, "increment")
+                              cartIncrementDecrement(x._id, "increment", x.item_Size)
                             }
                           />
                         </span>

@@ -112,6 +112,8 @@ const Payment = () => {
     setTransactionId(generateRandomNumber());
   }, []);
 
+
+  console.log(transactionId, 'transactionId')
   return (
     // <Container>
     //   <Row>
@@ -219,47 +221,59 @@ const Payment = () => {
     <Container style={{
       backgroundColor: '#fff'
     }} className="mb-3 container-fluid">
-      <Row>
-        <div className="col-md-6 align-self-center">
-          <img className='img-fluid' src={img.paymentGif} alt='gif' />
-        </div>
-        <div className="col-md-6">
-          <h2 className='mt-2 py-2 text-large  text-center text-bold'>Make a Payment</h2>
-          <div className="mb-3">
-            <label for="exampleFormControlInput1" className="form-label">Email address</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
-          </div>
 
-          <div className="mb-3">
-            <label for="exampleFormControlInput1" className="form-label">Phone Number</label>
-            <input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} type="number" className="form-control" id="exampleFormControlInput1" placeholder="+92123456789" />
+      {isPaymentSuccessful ? (
+        <PaymentSuccessModal
+          email={email}
+          phoneNumber={phoneNumber}
+          paymentMethod={paymentMethod}
+          transactionId={transactionId}
+          amount={subTotal}
+          userId={userId}
+        />
+      ) : (
+        <Row>
+          <div className="col-md-6 align-self-center" >
+            <img className='img-fluid' src={img.paymentGif} alt='gif' />
           </div>
+          <div className="col-md-6">
+            <h2 className='mt-2 py-2 text-large  text-center text-bold'>Make a Payment</h2>
+            <div className="mb-3">
+              <label for="exampleFormControlInput1" className="form-label">Email address</label>
+              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+            </div>
 
-          <div className="form-group mb-3">
-            <label for="exampleFormControlSelect1" className="form-label">Payment Method</label>
-            <select onChange={(e) => setPaymentMethod(e.target.value)} className="form-control" id="exampleFormControlSelect1">
-              <option>Select Payment Method</option>
-              <option>Credit Card</option>
-              <option>Paypal</option>
-              <option>Brank Transfer</option>
-            </select>
-          </div>
+            <div className="mb-3">
+              <label for="exampleFormControlInput1" className="form-label">Phone Number</label>
+              <input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} type="number" className="form-control" id="exampleFormControlInput1" placeholder="+92123456789" />
+            </div>
 
-          <div className="mb-3">
-            <label for="exampleFormControlInput1" className="form-label">Transcation Id</label>
-            <input value={transactionId} onChange={(e) => setTransactionId(e.target.value)} type="number" className="form-control" id="exampleFormControlInput1" placeholder="Enter Transaction Id" />
-          </div>
+            <div className="form-group mb-3">
+              <label for="exampleFormControlSelect1" className="form-label">Payment Method</label>
+              <select onChange={(e) => setPaymentMethod(e.target.value)} className="form-control" id="exampleFormControlSelect1">
+                <option>Select Payment Method</option>
+                <option>Credit Card</option>
+                <option>Paypal</option>
+                <option>Brank Transfer</option>
+              </select>
+            </div>
 
-          <div className="mb-3">
-            <label for="exampleFormControlInput1" className="form-label">Enter Amount</label>
-            <input value={subTotal} onChange={(e) => setAmount(e.target.value)} type="number" className="form-control" id="exampleFormControlInput1" placeholder="Amount" />
-          </div>
-          <div className="d-flex align-items-center justify-content-center py-2">
-            <button onClick={makePayment} type="button" className="Button">Pay Now</button>
-          </div>
-        </div>
+            <div className="mb-3">
+              <label for="exampleFormControlInput1" className="form-label">Transcation Id</label>
+              <input value={transactionId} disabled={true} className="form-control" id="exampleFormControlInput1" placeholder="Enter Transaction Id" />
+            </div>
 
-      </Row>
+            <div className="mb-3">
+              <label for="exampleFormControlInput1" className="form-label">Enter Amount</label>
+              <input value={subTotal} onChange={(e) => setAmount(e.target.value)} disabled={true} type="number" className="form-control" id="exampleFormControlInput1" placeholder="Amount" />
+            </div>
+            <div className="d-flex align-items-center justify-content-center py-2">
+              <button onClick={makePayment} type="button" className="Button">Pay Now</button>
+            </div>
+          </div>
+        </Row>
+      )}
+
     </Container>
   );
 };

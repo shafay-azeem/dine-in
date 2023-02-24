@@ -63,6 +63,7 @@ const DisplayItemCard = (props) => {
         item_Price: itemPrice,
         item_Qty: 1,
         item_Img: itemImage,
+        item_Size: 'small'
       };
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + tableNumber, cartData)

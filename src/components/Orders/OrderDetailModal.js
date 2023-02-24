@@ -49,7 +49,7 @@ const OrderDetailModal = (props) => {
               return (
                 <Box>
                   <Text fontWeight="500" mb="1rem">
-                    Item Name : {x.item_Name}
+                    Item Name : {x.item_Name} {x.item_Size} {x.itemPrice_Total} {x.item_Qty}
                   </Text>
                   {/* <Grid templateColumns="repeat(5, 1fr)" gap={4} p={2}>
                     <GridItem colSpan={2} h="10" p={3}>

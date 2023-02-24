@@ -6,11 +6,12 @@ import "./MenuDetail.css";
 import { useState } from "react";
 import { BsArrowLeftShort, BsStopwatch, BsXLg } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { IconButton, Tooltip } from "@chakra-ui/react";
+import { IconButton, Tooltip, useToast } from "@chakra-ui/react";
 
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useEffect } from "react";
+import { Button } from "react-bootstrap";
 
 const MenuDetail = (props) => {
   const [name, setName] = useState();
@@ -39,7 +40,7 @@ const MenuDetail = (props) => {
 
   const [cholesterol, setCholesterol] = useState();
   const [cholesterolPercentage, setCholesterolPercentage] = useState();
-
+  const toast = useToast();
   const [sodium, setSodium] = useState();
   const [sodiumPercentage, setSodiumPercentage] = useState();
 
@@ -196,6 +197,56 @@ const MenuDetail = (props) => {
       console.error(error);
     }
   }
+
+  const myFun = async (id, name, price, image, size) => {
+    // console.log(id, "item id");
+    // console.log(name, "item name");
+    // console.log(price, "item price");
+    // console.log(size, "item size");
+    // console.log(image, "imgae");
+
+    try {
+      let cartData = {
+        item_Id: id,
+        item_Name: name,
+        item_Price: price,
+        item_Qty: 1,
+        item_Img: image,
+        item_Size: size.toLowerCase()
+      };
+      await apiFunctions
+        .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + tableNumber, cartData)
+        .then((res) => {
+          console.log(res.data);
+          if (res.status == 200) {
+            toast({
+              position: "top",
+              title: `Card Added SuccessFully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            // setAdder(Math.random());
+            return true;
+          } else {
+            alert(`There Some Error---`);
+            return false;
+          }
+        });
+    } catch (err) {
+      console.log(err);
+      toast({
+        position: "top",
+        title: `There Some Error`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
+
+
+
 
   return (
     <div
@@ -620,6 +671,17 @@ const MenuDetail = (props) => {
                     {y.price ? (
                       <div className="itemPrice">${y.price}</div>
                     ) : null}
+
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      onClick={() =>
+                        myFun(item_index, name, y.price, image, y.name)
+                      }
+                    >
+                      add
+                    </Button>
+
                   </div>
                 );
               })}

@@ -173,7 +173,7 @@ const OrderPage = () => {
                         />
                       </div>
                       <div class="col-md-4">
-                        <p class="lead fw-normal mb-2">{x.item_Name}</p>
+                        <p class="lead fw-normal mb-2">{x.item_Name} {x.item_Size}</p>
                         <p>Rs {x.item_Price}</p>
                       </div>
                       <div class="col-md-4 d-flex justify-content-end">
