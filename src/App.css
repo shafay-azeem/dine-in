@@ -119,3 +119,19 @@
     align-self: center;
   }
 }
+
+/* Payment file css   */
+.text-large {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* Global Button  */
+.Button {
+  /* background-color: #8bd675; */
+  background-color: #009997;
+  color: #fff;
+  width: 50%;
+  border-radius: 10px;
+  height: 35px;
+}

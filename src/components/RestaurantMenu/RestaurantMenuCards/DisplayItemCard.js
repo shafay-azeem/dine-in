@@ -7,6 +7,7 @@ import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
 import CartModal from "../Modal/CartModal";
 import "../RestaurantMenu.css";
+import '../../../App.css';
 
 const DisplayItemCard = (props) => {
   const toast = useToast();
@@ -256,7 +257,7 @@ const DisplayItemCard = (props) => {
                       </div>
                     </Col>
 
-                    <Button
+                    {/* <Button
                       variant="primary"
                       size="sm"
                       onClick={() =>
@@ -264,7 +265,15 @@ const DisplayItemCard = (props) => {
                       }
                     >
                       Add To Cart
-                    </Button>
+                    </Button> */}
+
+                    <div className="container d-flex justify-content-center align-items-center mt-2">
+                      <button className="Button" onClick={() =>
+                        addToCart(x._id, x.itemName, x.itemPrice, x.itemImage)
+                      }>
+                        Add to Cart
+                      </button>
+                    </div>
 
                     <CartModal
                       className={true ? "display: none" : ""}

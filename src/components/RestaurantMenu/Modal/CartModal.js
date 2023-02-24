@@ -9,6 +9,7 @@ import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
+import '../../../App.css';
 
 const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let userId = props?.userId;
@@ -193,22 +194,17 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
               );
             })}
           </Offcanvas.Body>
-          <button
-            onClick={navigateToOrderPage}
-            style={{
-              backgroundColor: "#0000FF",
-              color: "white",
-              borderRadius: "10px",
-              borderColor: "#FE0000",
-              height: "40px",
-              marginBottom: "15px",
-              width: "90%",
-              alignSelf: "center",
-            }}
-            type="button"
-          >
-            View Your Cart
-          </button>
+
+          <div className="container d-flex justify-content-center align-items-center mt-2 mb-2">
+            <button
+              className="Button"
+              onClick={navigateToOrderPage}
+              type="button"
+            >
+              View Your Cart
+            </button>
+          </div>
+
         </Offcanvas>
       </div>
     </>

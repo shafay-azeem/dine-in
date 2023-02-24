@@ -233,7 +233,6 @@ const OrderPage = () => {
               padding: "20px 10px",
               borderRadius: "10px",
               top: '0px',
-              width: '500px',
               alignSelf: 'center'
             }}
           >
@@ -271,35 +270,23 @@ const OrderPage = () => {
               <span className="text-muted ms-auto">0/200</span>
             </div> */}
 
-            <button
-              style={{
-                backgroundColor: "#1d1816",
-                borderColor: "white",
-                borderRadius: "10px",
-                width: "100%",
-                height: "50px",
-                marginTop: "40px",
-                color: "white",
-              }}
-            >
-              Done
-            </button>
+            {/* <div className="d-flex py-2 justify-content-center align-items-center">
+              <button className="Button"
+              >
+                Done
+              </button>
+            </div> */}
 
-            <button
-              onClick={() => makeOrder(userId, cartItemList)}
-              // onClick={() => navigate("/Payment")}
-              style={{
-                width: "100%",
-                height: "50px",
-                marginTop: "10px",
-                color: "white",
-                backgroundColor: "#fe0000",
-                borderStyle: "none",
-                borderRadius: "10px",
-              }}
-            >
-              Proceed to Checkout
-            </button>
+            <div className="d-flex py-2 justify-content-center align-items-center">
+              <button
+                onClick={() => makeOrder(userId, cartItemList)}
+                // onClick={() => navigate("/Payment")}
+                className='Button'
+              >
+                Proceed to Checkout
+              </button>
+            </div>
+
 
             <div className="row ms-auto" style={{
             }}>
