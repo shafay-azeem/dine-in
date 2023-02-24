@@ -8,6 +8,7 @@ import apiFunctions from "../../../global/GlobalFunction";
 import CartModal from "../Modal/CartModal";
 import "../RestaurantMenu.css";
 import '../../../App.css';
+import { MenuState } from "../../../context/MenuContext";
 
 const DisplayItemCard = (props) => {
   const toast = useToast();
@@ -19,7 +20,8 @@ const DisplayItemCard = (props) => {
   // console.log(section_index, "section_index");
   const [itemList, setItemList] = useState();
   const [state, setstate] = useState(false);
-  const [adder, setAdder] = useState();
+  // const [adder, setAdder] = useState();
+  const { adder, setAdder } = MenuState()
 
   const navigate = useNavigate();
 

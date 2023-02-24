@@ -22,6 +22,7 @@ const Payment = () => {
   let userId = searchparams.get("userId");
   let orderId = searchparams.get("orderId");
   let subTotal = searchparams.get("subTotal");
+  let tableNumber = searchparams.get("tableNumber");
   const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
   console.log(userId);
 
@@ -230,6 +231,7 @@ const Payment = () => {
           transactionId={transactionId}
           amount={subTotal}
           userId={userId}
+          tableNumber={tableNumber}
         />
       ) : (
         <Row>

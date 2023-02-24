@@ -34,7 +34,7 @@ const RestaurantHeader = (props) => {
 
     <Navbar sticky="top" bg="light" variant="light">
       <Container>
-        <Navbar.Brand>Navbar</Navbar.Brand>
+        <Navbar.Brand>Table Number : {tableNumber}</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Nav.Link onClick={toggleOffcanvas} className="text-end">

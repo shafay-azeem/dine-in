@@ -7,7 +7,7 @@ const MenuStartScreen = () => {
 
   return (
     <div style={{ width: "90%", margin: "0 auto" }}>
-      <MenuPage userId={searchparams.get("USERID")} />
+      <MenuPage userId={searchparams.get("USERID")} tableNumber={searchparams.get("tableNumber")} />
     </div>
   );
 };

@@ -18,27 +18,13 @@ const MenuPage = (props) => {
   const [demo, setDemo] = useState([]);
   const [response, setResponse] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [tableNumber, setTableNumber] = useState();
 
-  function generateRandomNumber() {
-    let randomNumber = "";
-    const characters = "0123456789";
-    const charactersLength = characters.length;
-    for (let i = 0; i < 5; i++) {
-      randomNumber += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    // randomNumber += "-";
-    // for (let i = 0; i < 3; i++) {
-    //   randomNumber += characters.charAt(Math.floor(Math.random() * charactersLength));
-    // }
-    return randomNumber;
-  }
+  let tableNumber = props?.tableNumber
 
-  console.log(tableNumber, 'tableNumber')
 
   useEffect(() => {
     getActiveFormQuestions();
-    setTableNumber(generateRandomNumber())
+
   }, []);
 
   async function getActiveFormQuestions() {
@@ -61,6 +47,7 @@ const MenuPage = (props) => {
       search: createSearchParams({
         userId
       }).toString(),
+
     });
   };
   useEffect(() => {
@@ -112,7 +99,9 @@ const MenuPage = (props) => {
               </div>
 
             )}
-
+            <Heading size="sm" className="mt-2">
+              YOUR TABLE NUMBER : {tableNumber}
+            </Heading>
             <Button
               onClick={() => setModalShow(true)}
               className="btn-start mx-auto"

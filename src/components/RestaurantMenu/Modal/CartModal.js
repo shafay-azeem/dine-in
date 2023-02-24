@@ -10,14 +10,16 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
 import '../../../App.css';
+import { MenuState } from "../../../context/MenuContext";
 
 const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let userId = props?.userId;
   let tableNumber = props?.tableNumber
   console.log(tableNumber, 'tableNumber CartModal ')
   const toast = useToast();
-  let Adder = props?.adder;
+  const { adder, setAdder } = MenuState()
 
+  console.log(adder, "chnager ")
   const [cartItemList, setCartItemList] = useState([]);
   const [cartTotal, setCartTotal] = useState();
   const [cartId, setCartId] = useState();
@@ -31,7 +33,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
 
   useEffect(() => {
     getAllCartByTableNumber();
-  }, [changer]);
+  }, [changer, adder]);
 
   async function getAllCartByTableNumber() {
     try {

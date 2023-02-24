@@ -7,6 +7,8 @@ import { createSearchParams } from "react-router-dom";
 const PaymentSuccessModal = (props) => {
   const navigate = useNavigate();
   let USERID = props.userId;
+  let tableNumber = props.tableNumber;
+
 
   return (
     <div
@@ -32,6 +34,9 @@ const PaymentSuccessModal = (props) => {
           <br />
           <br />
           <p>Amount : {props.amount}</p>
+          <br />
+          <br />
+          <p>Table Number : {props.tableNumber}</p>
         </Modal.Body>
 
         <Modal.Footer>
@@ -42,6 +47,7 @@ const PaymentSuccessModal = (props) => {
                 pathname: "/menustart",
                 search: createSearchParams({
                   USERID,
+                  tableNumber
                 }).toString(),
               })
             }

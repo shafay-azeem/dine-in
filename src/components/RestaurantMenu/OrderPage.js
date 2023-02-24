@@ -134,6 +134,7 @@ const OrderPage = () => {
                 userId,
                 orderId,
                 subTotal,
+                tableNumber
               }).toString(),
             });
             return true;

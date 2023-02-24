@@ -20,6 +20,7 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
+import { useEffect } from "react";
 
 const MenuConfiguration = () => {
   const USERID = localStorage.getItem("user_id");
@@ -30,17 +31,40 @@ const MenuConfiguration = () => {
   const [url, setUrl] = useState(`http://localhost:3000/menustart`);
   const [qr, setQr] = useState("");
   const navigate = useNavigate();
+  const [tableNumber, setTableNumber] = useState();
 
   const myfun = () => {
     navigate({
       pathname: "/menustart",
       search: createSearchParams({
         USERID,
+        tableNumber
       }).toString(),
     });
   };
   const port = window.location.port;
   // console.log(port);
+
+  function generateRandomNumber() {
+    let randomNumber = "";
+    const characters = "0123456789";
+    const charactersLength = characters.length;
+    for (let i = 0; i < 5; i++) {
+      randomNumber += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    // randomNumber += "-";
+    // for (let i = 0; i < 3; i++) {
+    //   randomNumber += characters.charAt(Math.floor(Math.random() * charactersLength));
+    // }
+    return randomNumber;
+  }
+
+  useEffect(() => {
+    setTableNumber(generateRandomNumber())
+
+  }, []);
+
+
 
   const GenerateQRCode = () => {
     QRCode.toDataURL(
@@ -57,20 +81,12 @@ const MenuConfiguration = () => {
         if (err) return console.error(err);
 
         setQr(url);
-        setUrl(`http://localhost:${port}/menustart?USERID=${USERID}`);
+        setUrl(`http://localhost:${port}/menustart?USERID=${USERID}&tableNumber=${tableNumber}`);
       }
     );
   };
 
-  const onAddBtnClick = (event) => {
-    setInputList(
-      inputList.concat(
-        <HStack m={5}>
-          <Input size="md" borderRadius="8px" width="100%" placeholder="" />
-        </HStack>
-      )
-    );
-  };
+
   return (
     <>
       <Grid>

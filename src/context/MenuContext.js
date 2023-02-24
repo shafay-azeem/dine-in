@@ -36,6 +36,10 @@ export const MenuProvider = ({ children }) => {
 
   const [orders, setOrders] = useState([]);
 
+
+
+  const [adder, setAdder] = useState();
+
   return (
     <MenuContext.Provider
       value={{
@@ -89,6 +93,10 @@ export const MenuProvider = ({ children }) => {
 
         setOrders,
         orders,
+
+
+        adder,
+        setAdder
       }}
     >
       {children}
