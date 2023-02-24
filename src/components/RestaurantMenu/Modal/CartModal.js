@@ -38,8 +38,8 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   }, [changer, adder]);
 
   async function getAllCartByTableNumber() {
-    setLoading(false);
-    setLoading1(false);
+    // setLoading(false);
+    // setLoading1(false);
     try {
       let getCartByTableNumber = await apiFunctions.GET_REQUEST(
         BASE_URL + API_URL.GET_CART_BY_TABLE_NUMBER + tableNumber
@@ -50,6 +50,11 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
       if (res.cartItems?.length > 0) {
         setLoading1(true);
         setLoading(true);
+      }
+
+      if (res.cartItems?.length <= 0) {
+        setLoading1(false);
+        setLoading(false);
       }
 
       setCartItemList(res.cartItems);
@@ -132,8 +137,8 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                 fontSize: "20px",
               }}
             >
-              {/* {cartTotal ? <div>Rs {cartTotal}</div> : null} */}
-              <div>Rs {cartTotal}</div>
+              {cartTotal ? <div>Rs {cartTotal}</div> : null}
+              {/* <div>Rs {cartTotal}</div> */}
             </span>
           </Offcanvas.Header>
           {loading ? (
