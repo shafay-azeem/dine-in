@@ -70,6 +70,8 @@ const MenuDetail = (props) => {
 
   let subsectionitem_index = props?.subsectionitem_index;
 
+  let tableNumber = props?.tableNumber
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -483,7 +485,7 @@ const MenuDetail = (props) => {
                 {priceOption ? (
                   <div>
                     {priceOption[0].price ==
-                    priceOption[priceOption.length - 1]?.price ? (
+                      priceOption[priceOption.length - 1]?.price ? (
                       <div
                         className="itemPrice"
                         style={{

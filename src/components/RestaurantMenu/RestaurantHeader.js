@@ -8,6 +8,7 @@ import { CgShoppingCart } from 'react-icons/cg';
 
 const RestaurantHeader = (props) => {
   let userId = props?.userId;
+  let tableNumber = props?.tableNumber
   const [show, setShow] = useState(false);
   const toggleOffcanvas = () => {
     setShow(!show);
@@ -48,6 +49,7 @@ const RestaurantHeader = (props) => {
         show={show}
         toggleOffcanvas={toggleOffcanvas}
         userId={userId}
+        tableNumber={tableNumber}
       />
     </Navbar>
   );

@@ -12,6 +12,8 @@ import apiFunctions from "../../../global/GlobalFunction";
 
 const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let userId = props?.userId;
+  let tableNumber = props?.tableNumber
+  console.log(tableNumber, 'tableNumber CartModal ')
   const toast = useToast();
   let Adder = props?.adder;
 
@@ -33,7 +35,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   async function getAllCartByTableNumber() {
     try {
       let getCartByTableNumber = await apiFunctions.GET_REQUEST(
-        BASE_URL + API_URL.GET_CART_BY_TABLE_NUMBER + 1
+        BASE_URL + API_URL.GET_CART_BY_TABLE_NUMBER + tableNumber
       );
       let res = getCartByTableNumber.data.cart;
       console.log(res, "res");
@@ -99,6 +101,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
       pathname: "/OrderPage",
       search: createSearchParams({
         userId,
+        tableNumber
       }).toString(),
     });
   };

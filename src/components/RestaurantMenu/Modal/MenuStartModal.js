@@ -15,6 +15,8 @@ const MenuStartModal = (props) => {
   const [change, setChange] = useState(false);
 
   let userId = props?.userId;
+  let tableNumber = props?.tableNumber
+  console.log(tableNumber, "tableNumber")
 
   const navigate = useNavigate();
   const myfun = (index, menuname, menuDescription) => {
@@ -22,6 +24,7 @@ const MenuStartModal = (props) => {
       pathname: "/menudisplay",
       search: createSearchParams({
         index,
+        tableNumber,
         // menuname,
         // menuDescription,
         userId,

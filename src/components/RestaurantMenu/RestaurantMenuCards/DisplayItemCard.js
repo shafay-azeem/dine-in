@@ -13,6 +13,7 @@ const DisplayItemCard = (props) => {
   //let menu_index = props.menu_index;
   // console.log(menu_index);
   let section_index = props?.section_index;
+  let tableNumber = props?.tableNumber
   //console.log(section_index, "secid");
   // console.log(section_index, "section_index");
   const [itemList, setItemList] = useState();
@@ -26,11 +27,13 @@ const DisplayItemCard = (props) => {
       pathname: "/menudetail",
       search: createSearchParams({
         index,
+        tableNumber
         // menu_index,
         // section_index,
       }).toString(),
     });
   };
+
 
   useEffect(() => {
     if (section_index) {
@@ -50,6 +53,8 @@ const DisplayItemCard = (props) => {
   }
 
   const addToCart = async (id, itemName, itemPrice, itemImage) => {
+
+    console.log(tableNumber, 'tableNumber add to cart')
     try {
       let cartData = {
         item_Id: id,
@@ -59,7 +64,7 @@ const DisplayItemCard = (props) => {
         item_Img: itemImage,
       };
       await apiFunctions
-        .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + 1, cartData)
+        .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + tableNumber, cartData)
         .then((res) => {
           console.log(res.data);
           if (res.status == 200) {
@@ -131,8 +136,8 @@ const DisplayItemCard = (props) => {
 
                       <Card.Text className="pricetext">
                         {x.itemPriceOption[0].price ==
-                        x.itemPriceOption[x.itemPriceOption.length - 1]
-                          .price ? (
+                          x.itemPriceOption[x.itemPriceOption.length - 1]
+                            .price ? (
                           <div
                             className="itemPrice"
                             style={{
@@ -191,7 +196,7 @@ const DisplayItemCard = (props) => {
                               ) : null}
 
                               {y.Special_Presentation ===
-                              "Special_Presentation" ? (
+                                "Special_Presentation" ? (
                                 <div className="me-2">
                                   <Tooltip
                                     label={"Special Presentation"}
@@ -264,6 +269,7 @@ const DisplayItemCard = (props) => {
                     <CartModal
                       className={true ? "display: none" : ""}
                       adder={adder}
+                      tableNumber={tableNumber}
                     />
                   </Row>
                 </Card.Body>

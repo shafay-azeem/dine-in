@@ -18,9 +18,27 @@ const MenuPage = (props) => {
   const [demo, setDemo] = useState([]);
   const [response, setResponse] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [tableNumber, setTableNumber] = useState();
+
+  function generateRandomNumber() {
+    let randomNumber = "";
+    const characters = "0123456789";
+    const charactersLength = characters.length;
+    for (let i = 0; i < 5; i++) {
+      randomNumber += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    // randomNumber += "-";
+    // for (let i = 0; i < 3; i++) {
+    //   randomNumber += characters.charAt(Math.floor(Math.random() * charactersLength));
+    // }
+    return randomNumber;
+  }
+
+  console.log(tableNumber, 'tableNumber')
 
   useEffect(() => {
     getActiveFormQuestions();
+    setTableNumber(generateRandomNumber())
   }, []);
 
   async function getActiveFormQuestions() {
@@ -118,6 +136,7 @@ const MenuPage = (props) => {
             show={modalShow}
             onHide={() => setModalShow(false)}
             userId={userId}
+            tableNumber={tableNumber}
           />
         </Col>
         <Col

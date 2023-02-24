@@ -20,6 +20,7 @@ const RestaurantMenu = (props) => {
   const { response, setResponse } = MenuState();
   let menu_index = props?.menu_index;
   let userId = props?.userId;
+  let tableNumber = props?.tableNumber
 
   const [sectionList, setSectionList] = useState();
   const [subSectionList, setSubSectionList] = useState();
@@ -112,7 +113,7 @@ const RestaurantMenu = (props) => {
 
   return (
     <>
-      <RestaurantHeader userId={userId} />
+      <RestaurantHeader userId={userId} tableNumber={tableNumber} />
       <div className="menu">
         <div className="d-flex justify-content-start">
           <div className="backarrow">
@@ -166,7 +167,7 @@ const RestaurantMenu = (props) => {
       </div>
 
       <div className="mx-auto mt-3 mb-3">
-        <DisplayItemCard section_index={count} />
+        <DisplayItemCard section_index={count} tableNumber={tableNumber} />
       </div>
     </>
   );

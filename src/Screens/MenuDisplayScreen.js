@@ -7,15 +7,14 @@ const MenuDisplayScreen = (props) => {
   const navigate = useNavigate();
   const [searchparams] = useSearchParams();
 
-  //console.log(searchparams.get("index"), "menu index");
+  console.log(searchparams.get("tableNumber"), "tableNumber MenuDisplayScreen ");
 
   return (
     <div style={{ width: "90%", margin: "0 auto" }}>
       <RestaurantMenu
         menu_index={searchparams.get("index")}
         userId={searchparams.get("userId")}
-        // menuName={searchparams.get("menuname")}
-        // menuDescription={searchparams.get("menuDescription")}
+        tableNumber={searchparams.get("tableNumber")}
       />
     </div>
   );

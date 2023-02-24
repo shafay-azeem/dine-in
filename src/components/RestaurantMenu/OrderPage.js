@@ -22,7 +22,10 @@ const OrderPage = () => {
   const [cartTotal, setCartTotal] = useState();
   const [cartId, setCartId] = useState();
   const [instructions, setInstruction] = useState();
+  const [customerName, setCustomerName] = useState();
+
   let userId = searchparams.get("userId");
+  let tableNumber = searchparams.get("tableNumber");
   console.log(userId, "userId");
   const img = {
     KFCcard: require("../Assets/burger.jpg"),
@@ -79,7 +82,7 @@ const OrderPage = () => {
   async function getAllCartByTableNumber() {
     try {
       let getCartByTableNumber = await apiFunctions.GET_REQUEST(
-        BASE_URL + API_URL.GET_CART_BY_TABLE_NUMBER + 1
+        BASE_URL + API_URL.GET_CART_BY_TABLE_NUMBER + tableNumber
       );
       let res = getCartByTableNumber.data.cart;
       console.log(res, "res");
@@ -99,8 +102,8 @@ const OrderPage = () => {
     try {
       let orderData = {
         userId: userId,
-        customerName: "Shafay",
-        tableNumber: 1,
+        customerName: customerName,
+        tableNumber: tableNumber,
         orderedItems: itemDetail,
         instructions: instructions,
         subtotal: cartTotal,
@@ -239,9 +242,22 @@ const OrderPage = () => {
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Special Instructions (Optional)</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Control
+                as="textarea"
+                rows={3}
+                onChange={(e) => setInstruction(e.target.value)}
+              />
             </Form.Group>
-            <div className="form-check d-flex justify-content-between align-items-center">
+
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Customer Name</Form.Label>
+              <Form.Control
+                type="text"
+                onChange={(e) => setCustomerName(e.target.value)}
+              />
+            </Form.Group>
+            {/* <div className="form-check d-flex justify-content-between align-items-center">
               <input
                 className="form-check-input me-2"
                 type="checkbox"
@@ -253,7 +269,7 @@ const OrderPage = () => {
                 Save for future
               </label>
               <span className="text-muted ms-auto">0/200</span>
-            </div>
+            </div> */}
 
             <button
               style={{
