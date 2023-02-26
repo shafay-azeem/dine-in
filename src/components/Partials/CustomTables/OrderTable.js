@@ -1,5 +1,4 @@
 import {
-  Checkbox,
   Table,
   TableContainer,
   Tbody,
@@ -16,6 +15,8 @@ import {
   Input,
   Text,
   Radio,
+  HStack,
+  Button,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -25,33 +26,26 @@ import apiFunctions from "../../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import { useEffect } from "react";
 import { MenuState } from "../../../context/MenuContext";
-import { Stack } from "react-bootstrap";
 
 const OrderTable = (props) => {
   const [count, setCount] = useState();
   let userId = localStorage.getItem("user_id");
-  console.log(userId);
   let paymentStatus = props.paymentStatus;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { orders, setOrders } = MenuState();
-
-  const [checkedItems, setCheckedItems] = React.useState(false);
-  // const [orders, setOrders] = useState([]);
   const [value, setValue] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (startDate && value == "1") {
-      //console.log("first if");
       filterOrdersByDate();
     } else {
       if (startDate && endDate) {
-        //console.log("secoond if");
         rangeOrders();
       } else {
-        //console.log("else");
         getPaidUnpaidOrders();
       }
     }
@@ -67,7 +61,9 @@ const OrderTable = (props) => {
       );
       let res = getPaidUnpaidOrders.data.orders;
       setOrders(res.reverse());
-      console.log(res, "res");
+      setLoading(true);
+      console.log(res);
+
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -83,7 +79,7 @@ const OrderTable = (props) => {
           `?paymentStatus=${paymentStatus}&date=${startDate}`
       );
       let res = filterOrdersByDate.data.orders;
-      console.log(res);
+
       setOrders(res.reverse());
       return true;
     } catch (err) {
@@ -100,7 +96,7 @@ const OrderTable = (props) => {
           `?paymentStatus=${paymentStatus}&startDate=${startDate}&endDate=${endDate}`
       );
       let res = filterOrdersByDate.data.orders;
-      console.log(res, "hh");
+
       setOrders(res.reverse());
       return true;
     } catch (err) {
@@ -119,82 +115,76 @@ const OrderTable = (props) => {
 
   return (
     <>
-      <Grid templateColumns="repeat(5, 1fr)" gap={6} m={10}>
-        <GridItem>
-          <RadioGroup>
-            <Stack spacing={5} direction="row">
-              <Radio
-                colorScheme="green"
-                value="1"
-                onChange={(e) => setValue(e.target.value)}
-              >
-                Order On Daily Basis
-              </Radio>
-              <Radio
-                colorScheme="green"
-                value="2"
-                onChange={(e) => setValue(e.target.value)}
-              >
-                Specific Range Of Orders
-              </Radio>
-            </Stack>
-          </RadioGroup>
-        </GridItem>
+      <Box>
+        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+          <GridItem w="100%" h="10" className="d-flex align-items-center">
+            <RadioGroup>
+              <HStack spacing={5} direction="row">
+                <Radio
+                  colorScheme="green"
+                  value="1"
+                  onChange={(e) => setValue(e.target.value)}
+                >
+                  Order On Daily Basis
+                </Radio>
+                <Radio
+                  colorScheme="green"
+                  value="2"
+                  onChange={(e) => setValue(e.target.value)}
+                >
+                  Specific Range Of Orders
+                </Radio>
+              </HStack>
+            </RadioGroup>
+          </GridItem>
 
-        {value == "2" ? (
+          {value == "2" ? (
+            <>
+              <GridItem w="100%" h="20">
+                <Text mb="8px">Start Date</Text>
+                <Input
+                  placeholder="Start Date"
+                  size="md"
+                  type="date"
+                  bg="white"
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </GridItem>
+              <GridItem w="100%" h="20">
+                <Text mb="8px">End Date</Text>
+                <Input
+                  placeholder="End Date"
+                  size="md"
+                  type="date"
+                  bg="white"
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </GridItem>
+            </>
+          ) : null}
+
           <Box>
-            <GridItem w="100%" h="10">
-              <Text mb="8px">Start Date</Text>
-              <Input
-                placeholder="Start Date"
-                size="md"
-                type="date"
-                bg="white"
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-            </GridItem>
-            <GridItem w="100%" h="10">
-              <Text mb="8px">End Date</Text>
-              <Input
-                placeholder="End Date"
-                size="md"
-                type="date"
-                bg="white"
-                onChange={(e) => setEndDate(e.target.value)}
-              />
-            </GridItem>
+            {value == "1" ? (
+              <GridItem w="100%" h="20">
+                <Text mb="8px">Start Date</Text>
+                <Input
+                  placeholder="Start Date"
+                  size="md"
+                  type="date"
+                  bg="white"
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </GridItem>
+            ) : null}
           </Box>
-        ) : null}
+        </Grid>
+      </Box>
 
-        {value == "1" ? (
-          <Box>
-            <GridItem w="100%" h="10">
-              <Text mb="8px">Start Date</Text>
-              <Input
-                placeholder="Start Date"
-                size="md"
-                type="date"
-                bg="white"
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-            </GridItem>
-          </Box>
-        ) : null}
-      </Grid>
-
-      <TableContainer>
+      <TableContainer mt={5}>
         <Table variant="simple">
           <Thead backgroundColor="#FAFAFA">
             <Tr>
-              <Th>
-                ID
-                {/* <Checkbox
-                  isChecked={checkedItems}
-                  onChange={(e) => setCheckedItems(e.target.checked)}
-                >
-                  ID
-                </Checkbox> */}
-              </Th>
+              <Th>ID</Th>
               <Th>Customer Name</Th>
               <Th>Table Number</Th>
               <Th>Date</Th>
@@ -204,35 +194,41 @@ const OrderTable = (props) => {
               <Th>Action</Th>
             </Tr>
           </Thead>
-          <Tbody>
-            {orders?.map((x, index) => (
-              <Tr key={index}>
-                <Td>{x._id}</Td>
-                <Td>{x.customerName}</Td>
-                <Td>{x.tableNumber}</Td>
-                <Td>{formatDate(x.createdAt.toString())}</Td>
-                <Td>{x.orderStatus}</Td>
-                <Td>{x.paymentStatus}</Td>
-                <Td>{x.subtotal}</Td>
-                <Td style={{ textAlign: "center", cursor: "pointer" }}>
-                  <Box>
-                    <Box onClick={() => getIndex(index)}>
-                      <Icon onClick={onOpen} as={ViewIcon} />
+          {loading ? (
+            <Tbody>
+              {orders?.map((x, index) => (
+                <Tr key={index}>
+                  <Td>{x._id}</Td>
+                  <Td>{x.customerName}</Td>
+                  <Td>{x.tableNumber}</Td>
+                  <Td>{formatDate(x.createdAt.toString())}</Td>
+                  <Td>{x.orderStatus}</Td>
+                  <Td>{x.paymentStatus}</Td>
+                  <Td>{x.subtotal}</Td>
+                  <Td style={{ textAlign: "center", cursor: "pointer" }}>
+                    <Box>
+                      <Box onClick={() => getIndex(index)}>
+                        <Icon onClick={onOpen} as={ViewIcon} />
+                      </Box>
                     </Box>
-                  </Box>
-                </Td>
+                  </Td>
+                </Tr>
+              ))}
 
-                {isOpen ? (
-                  <OrderDetailModal
-                    index={count}
-                    isOpen={isOpen}
-                    onOpen={onOpen}
-                    onClose={onClose}
-                  />
-                ) : null}
-              </Tr>
-            ))}
-          </Tbody>
+              {isOpen ? (
+                <OrderDetailModal
+                  index={count}
+                  isOpen={isOpen}
+                  onOpen={onOpen}
+                  onClose={onClose}
+                />
+              ) : null}
+            </Tbody>
+          ) : (
+            <div className="loading-screen">
+              <div className="loading-spinner"> </div>
+            </div>
+          )}
         </Table>
       </TableContainer>
     </>

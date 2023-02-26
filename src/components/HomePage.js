@@ -19,16 +19,6 @@ import img from "../components/Assets/DINE-IN.png";
 const HomePage = () => {
   return (
     <Container maxW="xl" centerContent>
-      {/* 
-            d="flex"
-            justifyContent="center"
-            p={3}
-            bg={"white"}
-            w="100%"
-            m="40px 0 15px 0"
-            borderRadius="lg"
-            borderWidth="1px"
-        */}
       <Box
         boxSize="sm"
         d="flex"
@@ -41,16 +31,6 @@ const HomePage = () => {
         m="40px 0 15px 0"
       >
         <Center>
-          {/* <Text
-            margin="auto"
-            resizeMode="contain"
-            text-align="center"
-            display="block"
-            justify-content="center"
-            align-items="center"
-          >
-            Dine In
-          </Text> */}
           <Image
             margin="auto"
             resizeMode="contain"
@@ -61,19 +41,6 @@ const HomePage = () => {
             src={img}
           />
         </Center>
-        {/* <Text
-              fontSize="4xl"
-              fontFamily="Open Sans"
-              alignSelf="center"
-              bg={""}
-              alignContent="center"
-              justifyContent="center"
-              textAlign="center"
-              d="flex"
-              color="black"
-            >
-              Talk-A-Tive
-            </Text> */}
       </Box>
 
       <Box
@@ -88,7 +55,6 @@ const HomePage = () => {
           <TabList mb="1em">
             <Tab width="50%">Login</Tab>
             <Tab width="50%">Sign Up</Tab>
-            {/* <Tab width="50%">Update Profile</Tab> */}
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -97,9 +63,6 @@ const HomePage = () => {
             <TabPanel>
               <SignUp />
             </TabPanel>
-            {/* <TabPanel>
-              <UpdateUser />
-            </TabPanel> */}
           </TabPanels>
         </Tabs>
       </Box>

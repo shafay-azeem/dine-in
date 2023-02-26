@@ -24,7 +24,8 @@ import { useToast } from "@chakra-ui/react";
 
 const CreateFormModal = (props) => {
   const toast = useToast();
-  const { createfeedback, setCreateFeedback, createForm, setCreateForm } = MenuState();
+  const { createfeedback, setCreateFeedback, createForm, setCreateForm } =
+    MenuState();
   const [formName, setFormName] = useState();
   const [welcomeMessage, setWelcomeMessage] = useState();
   const [active, setActive] = useState(false);
@@ -49,7 +50,6 @@ const CreateFormModal = (props) => {
   };
 
   const formCreate = async () => {
-
     if (!formName) {
       //alert("Please Enter All Fields");
       toast({
@@ -65,8 +65,6 @@ const CreateFormModal = (props) => {
       .POST_REQUEST(BASE_URL + API_URL.CREATE_FEEDBACK_FORM, feedbackFormData)
       .then((res) => {
         if (res.data.success == true) {
-          // console.log(res.data);
-          //alert(`${res.data.message}`);
           toast({
             position: "top",
             title: `${res.data.message}`,
@@ -74,10 +72,9 @@ const CreateFormModal = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          setCreateForm(true)
+          setCreateForm(true);
           return true;
         } else {
-          //alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
@@ -118,7 +115,7 @@ const CreateFormModal = (props) => {
                 </FormLabel>
                 <Input
                   placeholder="Could you give us 60 secs?"
-                // onChange={(e) => setWelcomeMessage(e.target.value)}
+                  // onChange={(e) => setWelcomeMessage(e.target.value)}
                 />
               </FormControl>
 

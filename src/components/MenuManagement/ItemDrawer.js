@@ -62,11 +62,9 @@ import Spinner from "react-bootstrap/Spinner";
 const ItemDrawer = (props) => {
   let section_index = props?.section_index;
   let subSection_index = props?.subSection_index;
-  // console.log(subSection_index, "subsection_index");
-  // console.log(section_index, "section_index");
 
   let section_Or_subSection = props?.fromSection;
-  // console.log(section_Or_subSection, "section_Or_subSection");
+
   let item_index = props?.item_index;
 
   const toast = useToast();
@@ -337,7 +335,6 @@ const ItemDrawer = (props) => {
         });
     } else if (section_Or_subSection === "subSection" && subsecid) {
       if (!name) {
-        //alert("Please Enter All Fields");
         toast({
           position: "top",
           title: `Please Enter All Fields`,
@@ -350,7 +347,6 @@ const ItemDrawer = (props) => {
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.CREATE_SUB_ITEM + subsecid, itemData)
         .then((res) => {
-          // console.log(res.data.subSectionItem, "item response");
           if (res.data.success == true) {
             toast({
               position: "top",
@@ -590,10 +586,9 @@ const ItemDrawer = (props) => {
             max: demoModifier[i].max,
             reference: Arr,
           };
-          // console.log(itemModifier, 'itemMODIFER')
+
           itemModifier.push(responseBody);
           setState(itemModifier);
-          // console.log(state, "states");
         }
       }
     }
@@ -677,7 +672,6 @@ const ItemDrawer = (props) => {
       );
       const data = await res.json();
       setVideo(data.url.toString());
-      // console.log(video, "video");
     } catch (err) {
       console.log(err);
     }

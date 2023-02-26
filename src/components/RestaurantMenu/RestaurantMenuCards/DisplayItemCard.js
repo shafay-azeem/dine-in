@@ -7,21 +7,19 @@ import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
 import CartModal from "../Modal/CartModal";
 import "../RestaurantMenu.css";
-import '../../../App.css';
+import "../../../App.css";
 import { MenuState } from "../../../context/MenuContext";
 
 const DisplayItemCard = (props) => {
   const toast = useToast();
-  //let menu_index = props.menu_index;
-  // console.log(menu_index);
+
   let section_index = props?.section_index;
-  let tableNumber = props?.tableNumber
-  //console.log(section_index, "secid");
-  // console.log(section_index, "section_index");
+  let tableNumber = props?.tableNumber;
+
   const [itemList, setItemList] = useState();
   const [state, setstate] = useState(false);
-  // const [adder, setAdder] = useState();
-  const { adder, setAdder } = MenuState()
+
+  const { adder, setAdder } = MenuState();
 
   const navigate = useNavigate();
 
@@ -30,13 +28,10 @@ const DisplayItemCard = (props) => {
       pathname: "/menudetail",
       search: createSearchParams({
         index,
-        tableNumber
-        // menu_index,
-        // section_index,
+        tableNumber,
       }).toString(),
     });
   };
-
 
   useEffect(() => {
     if (section_index) {
@@ -56,8 +51,7 @@ const DisplayItemCard = (props) => {
   }
 
   const addToCart = async (id, itemName, itemPrice, itemImage) => {
-
-    console.log(tableNumber, 'tableNumber add to cart')
+    console.log(tableNumber, "tableNumber add to cart");
     try {
       let cartData = {
         item_Id: id,
@@ -65,12 +59,11 @@ const DisplayItemCard = (props) => {
         item_Price: itemPrice,
         item_Qty: 1,
         item_Img: itemImage,
-        item_Size: 'small'
+        item_Size: "small",
       };
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + tableNumber, cartData)
         .then((res) => {
-          console.log(res.data);
           if (res.status == 200) {
             toast({
               position: "top",
@@ -140,8 +133,8 @@ const DisplayItemCard = (props) => {
 
                       <Card.Text className="pricetext">
                         {x.itemPriceOption[0].price ==
-                          x.itemPriceOption[x.itemPriceOption.length - 1]
-                            .price ? (
+                        x.itemPriceOption[x.itemPriceOption.length - 1]
+                          .price ? (
                           <div
                             className="itemPrice"
                             style={{
@@ -200,7 +193,7 @@ const DisplayItemCard = (props) => {
                               ) : null}
 
                               {y.Special_Presentation ===
-                                "Special_Presentation" ? (
+                              "Special_Presentation" ? (
                                 <div className="me-2">
                                   <Tooltip
                                     label={"Special Presentation"}
@@ -271,9 +264,12 @@ const DisplayItemCard = (props) => {
                     </Button> */}
 
                     <div className="container d-flex justify-content-center align-items-center mt-2">
-                      <button className="Button" onClick={() =>
-                        addToCart(x._id, x.itemName, x.itemPrice, x.itemImage)
-                      }>
+                      <button
+                        className="Button"
+                        onClick={() =>
+                          addToCart(x._id, x.itemName, x.itemPrice, x.itemImage)
+                        }
+                      >
                         Add to Cart
                       </button>
                     </div>

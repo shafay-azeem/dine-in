@@ -19,23 +19,13 @@ const FormQuestions = () => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
   let feedback_index = searchparams.get("id");
-  // console.log(feedback_index, "feedback_index");
+
   const [sdf, setSdf] = useState();
 
-  // let A;
-  // let FormQuestions = createfeedback[feedback_index].formQuestions;
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
 
-  // if (createfeedback[feedback_index].formQuestions.length > 0) {
-  //   A = createfeedback[feedback_index].formQuestions;
-  // } else {
-  //   A = [
-  //     { question: "", questionType: "", questionId: getTimestampInSeconds() },
-  //   ];
-  // }
-  // const [inputList, setInputList] = useState(A);
   const [inputList, setInputList] = useState([
     { question: "", questionType: "" },
   ]);
@@ -53,8 +43,6 @@ const FormQuestions = () => {
         )
         .then((res) => {
           if (res.data.success == true) {
-            // console.log(res);
-            //alert(`${res.data.message}`);
             toast({
               position: "top",
               title: `Form Questions Created SuccessFully`,
@@ -65,7 +53,6 @@ const FormQuestions = () => {
 
             return true;
           } else {
-            //alert(`There Some Error`);
             toast({
               position: "top",
               title: `There Some Error`,
@@ -105,13 +92,6 @@ const FormQuestions = () => {
           }
         });
     }
-    // if (x > 0) {
-    //   createfeedback[feedback_index].formQuestions = inputList;
-    //   alert("Your Question Updated");
-    // } else {
-    //   createfeedback[feedback_index].formQuestions = inputList;
-    //   alert("Your Question Has Been Submitted");
-    // }
   };
 
   const handleInputChange = (e, index) => {
@@ -148,7 +128,6 @@ const FormQuestions = () => {
   }, []);
 
   async function getAllQuestionsByFormID() {
-    // console.log("jshshhsh");
     let getFormQuestions = await apiFunctions.GET_REQUEST_BY_ID(
       BASE_URL + API_URL.GET_ALL_QUESTIONS_BY_FORMID + feedback_index
     );
@@ -156,10 +135,9 @@ const FormQuestions = () => {
       setLoading(true);
     }
     let setVar = getFormQuestions.data.formQuestion[0].Questions;
-    // let id = getFormQuestions.data.formQuestion[0]._id;
+
     setSdf(getFormQuestions.data.formQuestion[0]?._id);
-    // console.log(getFormQuestions.data., "ioioio");
-    // console.log(setVar, "ddd");
+
     setInputList(setVar);
     setLoading(true);
   }

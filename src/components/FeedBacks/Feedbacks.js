@@ -59,17 +59,12 @@ const Feedbacks = () => {
   const [deleteFeedback, setDeleteFeedback] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // const [feedbackFormList, setFeedbackFormList] = useState();
-  // const [feedbackFormList, setFeedbackFormList] = useState(createfeedback);
-
   const [count, setCount] = useState();
 
   const fileType =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
   const fileExtension = ".xlsx";
   const fileName = "Excel Export";
-
-  //console.log(feedback, "feedback");
 
   for (let i = 0; i < feedback.length; i++) {
     console.log(feedback[i]);
@@ -162,9 +157,7 @@ const Feedbacks = () => {
     await apiFunctions
       .PUT_REQUEST(BASE_URL + API_URL.UPDTAE_FORM_STATUS + id)
       .then((res) => {
-        // console.log(res, "res");
         if (res.status == 200) {
-          // console.log("Status Updated");
           setCount(true);
           return true;
         } else {
@@ -193,24 +186,18 @@ const Feedbacks = () => {
       BASE_URL + API_URL.GET_ALL_FEEDBACK_FORM
     );
 
-    console.log(geFeedbackForms.data.feedbackForm, "Shafay");
-
     if (geFeedbackForms.data.feedbackForm.length == 0) {
       setLoading(true);
     }
 
     let res = geFeedbackForms.data.feedbackForm;
 
-    // console.log(res);
     setFeedbackFormList(res);
     setLoading(true);
-    // setGetFeedback(true)
-    // return true
   }
 
   return (
     <>
-      {/* {loading ? ( */}
       <FullScreen handle={handle}>
         <Grid>
           <GridItem w="100%" bg="white" height="120%">
@@ -225,22 +212,6 @@ const Feedbacks = () => {
             <GridItem w="100%" h="10" colSpan={1}>
               <Text fontWeight={600}>{feedback?.length} results Listed</Text>
             </GridItem>
-            {/* <GridItem w="100%" h="10">
-              <Input
-                placeholder="Select Date and Time"
-                size="md"
-                type="datetime-local"
-                bg="white"
-              />
-            </GridItem> */}
-            {/* <GridItem w="100%" h="10">
-              <Input
-                placeholder="Select Date and Time"
-                size="md"
-                type="datetime-local"
-                bg="white"
-              />
-            </GridItem> */}
 
             <GridItem w="100%" h="10">
               <Stack direction={["column", "row"]} spacing="24px">
@@ -324,7 +295,6 @@ const Feedbacks = () => {
                             onlabel="on"
                             offlabel="off"
                           />
-                          {/* <Box onClick={() => getIndex(x._id)}></Box> */}
 
                           <Tooltip label="Edit">
                             <EditIcon
@@ -344,11 +314,6 @@ const Feedbacks = () => {
           </Tabs>
         </Box>
       </FullScreen>
-      {/* ) : (
-        <div className="loading-screen">
-          <div className="loading-spinner"> </div>
-        </div>
-      )} */}
     </>
   );
 };

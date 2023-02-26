@@ -13,13 +13,6 @@ const RequireAuth = ({ children }) => {
     }
   }, ["/"]);
 
-  // console.log(auth.user, 'ssssss')
-  // if (!auth.user) {
-  //     console.log('hanjww')
-  //     return navigate({
-  //         pathname: "/",
-  //     });
-  // }
   return children;
 };
 

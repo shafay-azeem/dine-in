@@ -22,7 +22,6 @@ const SubSecItemCard = (props) => {
   let subsectionIndex = props?.subSection_index;
 
   const myFunc = (subsecitemindex) => {
-    console.log(subsecitemindex);
     navigate({
       pathname: "/menudetail",
       search: createSearchParams({
@@ -46,7 +45,6 @@ const SubSecItemCard = (props) => {
   }
 
   const addToCart = async (id, itemName, itemPrice, itemImage) => {
-    console.log(id, "tableNumber add to cart");
     try {
       let cartData = {
         item_Id: id,
@@ -59,7 +57,6 @@ const SubSecItemCard = (props) => {
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + tableNumber, cartData)
         .then((res) => {
-          console.log(res.data);
           if (res.status == 200) {
             toast({
               position: "top",
@@ -76,7 +73,6 @@ const SubSecItemCard = (props) => {
           }
         });
     } catch (err) {
-      console.log(err);
       toast({
         position: "top",
         title: `There Some Error`,

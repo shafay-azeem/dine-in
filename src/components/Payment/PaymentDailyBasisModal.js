@@ -61,15 +61,8 @@ const PaymentDailyBasisModal = (props) => {
               />
             </FormControl>
 
-            <Text>Amount Rs {amount}</Text>
+            <Text mt={5}>Amount Rs {amount}</Text>
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Save
-            </Button>
-            <Button onClick={props.onClose}>Cancel</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

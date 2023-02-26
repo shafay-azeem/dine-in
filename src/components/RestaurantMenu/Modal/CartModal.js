@@ -45,7 +45,6 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
         BASE_URL + API_URL.GET_CART_BY_TABLE_NUMBER + tableNumber
       );
       let res = getCartByTableNumber.data.cart;
-      console.log(res.cartItems.length, "res");
 
       if (res.cartItems?.length > 0) {
         setLoading1(true);
@@ -61,7 +60,6 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
       setCartTotal(res.total_Price);
       setCartId(res._id);
 
-      console.log(cartItemList);
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -69,7 +67,6 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   }
 
   async function cartIncrementDecrement(id, y, size) {
-    console.log(size, y);
     try {
       let cartIncrementDecrement = await apiFunctions.GET_REQUEST(
         BASE_URL +

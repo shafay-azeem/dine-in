@@ -15,8 +15,7 @@ const MenuStartModal = (props) => {
   const [change, setChange] = useState(false);
 
   let userId = props?.userId;
-  let tableNumber = props?.tableNumber
-  console.log(tableNumber, "tableNumber")
+  let tableNumber = props?.tableNumber;
 
   const navigate = useNavigate();
   const myfun = (index, menuname, menuDescription) => {
@@ -36,24 +35,14 @@ const MenuStartModal = (props) => {
     getAllMenu();
   }, []);
 
-  // async function getAllMenu() {
-  //   let getAllMenu = await apiFunctions.GET_REQUEST(
-  //     BASE_URL + API_URL.GET_ALL_MENU
-  //   );
-  //   let res = getAllMenu.data.menu;
-
-  //   setResponse(res);
-  // }
-
   async function getAllMenu() {
     try {
       let getAllMenu = await apiFunctions.GET_REQUEST(
         BASE_URL + API_URL.GET_ALL_MENU_QR + userId
       );
       let res = getAllMenu.data.menu;
-      console.log(res, "res");
+
       setResponse(res);
-      // setChange(true);
     } catch (err) {
       console.log("An error occurred while fetching menus", err.message);
     }

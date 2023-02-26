@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/button";
 
-import { Text } from "@chakra-ui/layout";
+import { Box, Text } from "@chakra-ui/layout";
 import {
   Modal,
   ModalBody,
@@ -19,6 +19,8 @@ import apiFunctions from "../../global/GlobalFunction";
 const RevenueModal = (props) => {
   let userId = localStorage.getItem("user_id");
   const [amount, setAmount] = useState();
+  const [loading, setLoading] = useState(false);
+
   async function totalRevenue() {
     try {
       let filterOrdersByDate = await apiFunctions.GET_REQUEST(
@@ -26,6 +28,7 @@ const RevenueModal = (props) => {
       );
       let res = filterOrdersByDate.data.totalAmount;
       setAmount(res);
+      setLoading(true);
 
       return true;
     } catch (err) {
@@ -40,19 +43,20 @@ const RevenueModal = (props) => {
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Total Revenue</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <Text>Total Revenue Rs {amount}</Text>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              OK
-            </Button>
-            <Button onClick={props.onClose}>Close</Button>
-          </ModalFooter>
+        <ModalContent className="center-modal">
+          {loading ? (
+            <Box>
+              <ModalHeader>Total Revenue</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody pb={6}>
+                <Text>Total Revenue Rs {amount}</Text>
+              </ModalBody>
+            </Box>
+          ) : (
+            <div className="loading-screen-modal">
+              <div className="loading-spinner-modal"> </div>
+            </div>
+          )}
         </ModalContent>
       </Modal>
     </>

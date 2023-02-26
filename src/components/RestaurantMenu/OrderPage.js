@@ -106,7 +106,6 @@ const OrderPage = () => {
   }
   const makeOrder = async (userId, itemDetail) => {
     if (!customerName) {
-      //alert("Please Enter All Fields");
       toast({
         position: "top",
         title: `Please Enter Your Name`,
@@ -145,7 +144,7 @@ const OrderPage = () => {
               duration: 9000,
               isClosable: true,
             });
-            // navigate("/Payment");
+
             navigate({
               pathname: "/Payment",
               search: createSearchParams({

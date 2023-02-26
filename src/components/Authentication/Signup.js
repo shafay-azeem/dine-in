@@ -36,18 +36,19 @@ const SignUp = () => {
     formData.append("file", event.target.files[0]);
     formData.append("upload_preset", "dineInApp");
     try {
-      const res = await fetch("https://api.cloudinary.com/v1_1/dkq6jers7/image/upload", {
-        method: "post",
-        body: formData
-      });
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dkq6jers7/image/upload",
+        {
+          method: "post",
+          body: formData,
+        }
+      );
       const data = await res.json();
       setResImg(data.url.toString());
-      console.log(data.url.toString());
     } catch (err) {
       console.log(err);
     }
   };
-
 
   const submitHandler = async () => {
     if (!email || !password || !name || !resName) {
@@ -76,13 +77,12 @@ const SignUp = () => {
       email: email,
       password: password,
       resName: resName,
-      resImage: resImg
+      resImage: resImg,
     };
 
     await apiFunctions
       .POST_REQUEST(BASE_URL + API_URL.CREATE_USER, userData)
       .then((res) => {
-        // console.log(res);
         if (res.data.success == true) {
           toast({
             position: "top",
@@ -186,7 +186,7 @@ const SignUp = () => {
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}
-      // isLoading={loading}
+        // isLoading={loading}
       >
         Sign Up
       </Button>

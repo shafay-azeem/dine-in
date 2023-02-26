@@ -52,13 +52,10 @@ const SubSectionCard = (props) => {
   let menu_index = props.menu_index;
   let section_index = props?.section_index;
 
-  console.log(section_index, "section_index");
-
   const [isOpened, setIsOpened] = useState(false);
 
   function toggle() {
     setIsOpened((wasOpened) => !wasOpened);
-    // console.log(isOpened);
   }
 
   const [count, setCount] = useState();
@@ -111,8 +108,6 @@ const SubSectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          // console.log("Sub Section Status Updated");
-
           setSubSectionUpdate(true);
           return true;
         } else {

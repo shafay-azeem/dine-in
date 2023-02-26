@@ -13,11 +13,12 @@ import { useState } from "react";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { Button } from "@chakra-ui/button";
-import { Text } from "@chakra-ui/layout";
+import { Box, Text } from "@chakra-ui/layout";
 
 const PendingPaymentModal = (props) => {
   let userId = localStorage.getItem("user_id");
   const [pendingAmount, setPendingAmount] = useState();
+  const [loading, setLoading] = useState(false);
 
   async function pendingAllAmount() {
     try {
@@ -26,6 +27,7 @@ const PendingPaymentModal = (props) => {
       );
       let res = filterOrdersByDate.data.pendingAmount;
       setPendingAmount(res);
+      setLoading(true);
 
       return true;
     } catch (err) {
@@ -41,19 +43,20 @@ const PendingPaymentModal = (props) => {
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Pending Amount</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <Text>Amount Rs {pendingAmount}</Text>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              OK
-            </Button>
-            <Button onClick={props.onClose}>Close</Button>
-          </ModalFooter>
+        <ModalContent className="center-modal">
+          {loading ? (
+            <Box>
+              <ModalHeader>Pending Amount</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody pb={6}>
+                <Text>Amount Rs {pendingAmount}</Text>
+              </ModalBody>
+            </Box>
+          ) : (
+            <div className="loading-screen-modal">
+              <div className="loading-spinner-modal"> </div>
+            </div>
+          )}
         </ModalContent>
       </Modal>
     </>

@@ -1,23 +1,21 @@
 import {
-  Button,
   Divider,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
   Box,
   Grid,
+  Image,
   GridItem,
 } from "@chakra-ui/react";
 import React from "react";
 import { MenuState } from "../../context/MenuContext";
 const OrderDetailModal = (props) => {
   const { orders, setOrders } = MenuState();
-  console.log(orders);
 
   let orderItemResponse = orders[props?.index]?.orderedItems;
   let customerName = orders[props?.index].customerName;
@@ -25,54 +23,70 @@ const OrderDetailModal = (props) => {
   let paymentStatus = orders[props?.index].paymentStatus;
   let tableNumber = orders[props?.index].tableNumber;
 
+  console.log(orderItemResponse);
+
   return (
-    <div>
-      <Modal isOpen={props.isOpen} onClose={props.onClose} size="5xl">
-        <ModalOverlay />
+    <Modal isOpen={props.isOpen} onClose={props.onClose} size="6xl">
+      <ModalOverlay />
 
-        <ModalContent>
-          <ModalHeader></ModalHeader>
-          <Divider orientation="horizontal" />
+      <ModalContent
+        css={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          overflowY: "auto",
+          maxHeight: "60vh",
+        }}
+      >
+        <ModalHeader></ModalHeader>
+        {/* 
+        <Divider orientation="horizontal" /> */}
 
-          <ModalCloseButton />
+        <ModalCloseButton />
 
-          <ModalBody pb={6}>
-            <Text fontWeight="500" mb="1rem">
-              {/* Date : {formatDate(feedbackInfo.createAt.toString())} */}
-            </Text>
+        <ModalBody pb={6}>
+          <Text fontWeight="bold" mb="1rem" fontSize="lg">
+            Customer Name: {customerName}
+          </Text>
 
-            <Text fontWeight="500" mb="1rem">
-              Customer Name : {customerName}
-            </Text>
+          {orderItemResponse?.map((x, index) => {
+            return (
+              <Box key={index} py={2}>
+                <Grid templateColumns="repeat(6, 1fr)" gap={4}>
+                  <GridItem colSpan={2}>
+                    <Image
+                      src={x.item_Img}
+                      alt={x.item_Name}
+                      boxSize="300px"
+                      objectFit="cover"
+                      mx="auto"
+                      my={4}
+                    />
+                  </GridItem>
+                  <GridItem colSpan={4} mt={4}>
+                    <Text fontWeight="bold">{x.item_Name}</Text>
 
-            {orderItemResponse?.map((x, index) => {
-              return (
-                <Box>
-                  <Text fontWeight="500" mb="1rem">
-                    Item Name : {x.item_Name} {x.item_Size} {x.itemPrice_Total} {x.item_Qty}
-                  </Text>
-                  {/* <Grid templateColumns="repeat(5, 1fr)" gap={4} p={2}>
-                    <GridItem colSpan={2} h="10" p={3}>
-                      <Text fontSize="15px">{x.item_Name}</Text>
-                    </GridItem>
-                    <GridItem colStart={4} colEnd={6} h="10" p={3}>
-                      <Text fontSize="15px">{x.item_Price}</Text>
-                    </GridItem>
-                  </Grid>
-                  <Divider orientation="horizontal" /> */}
-                </Box>
-              );
-            })}
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={props.onClose} size="md">
-              OK
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </div>
+                    <Text fontWeight="medium" mb="0.5rem">
+                      Quantity: {x.item_Qty}
+                    </Text>
+                    <Text fontWeight="medium" mb="0.5rem">
+                      Size: {x.item_Size}
+                    </Text>
+                    <Text fontWeight="medium" mb="0.5rem">
+                      Price: {x.item_Price}
+                    </Text>
+                    <Text fontWeight="medium" mb="0.5rem">
+                      Total Price: {x.itemPrice_Total}
+                    </Text>
+                  </GridItem>
+                </Grid>
+                {index !== orderItemResponse.length - 1 && <Divider my={2} />}
+              </Box>
+            );
+          })}
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 

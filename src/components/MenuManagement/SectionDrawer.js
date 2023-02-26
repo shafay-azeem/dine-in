@@ -69,7 +69,7 @@ const SectionDrawer = (props) => {
     createSubSection,
     setUpdatedSubSection,
     updatedSubSection,
-    setChanger
+    setChanger,
   } = MenuState();
 
   const [checkedItems, setCheckedItems] = useState(false);
@@ -108,7 +108,6 @@ const SectionDrawer = (props) => {
   const [alphabetical, setalphabetical] = useState(false);
 
   const [val, setVal] = useState();
-  // console.log(val, "val");
 
   const [mId, setMId] = useState(menu_index);
 
@@ -118,33 +117,24 @@ const SectionDrawer = (props) => {
     onClose: ModalOnClose,
   } = useDisclosure();
 
-  // function enabelDisable() {
-  //   if (value === "1") {
-  //     setValueTrue(true);
-  //   } else {
-  //     setValueTrue(false);
-  //   }
-  // }
   const pictureCapture = async (event) => {
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
     formData.append("upload_preset", "dineInApp");
     try {
-      const res = await fetch("https://api.cloudinary.com/v1_1/dkq6jers7/image/upload", {
-        method: "post",
-        body: formData
-      });
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dkq6jers7/image/upload",
+        {
+          method: "post",
+          body: formData,
+        }
+      );
       const data = await res.json();
       setImage(data.url.toString());
     } catch (err) {
       console.log(err);
     }
   };
-
-
-
-
-
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -239,7 +229,7 @@ const SectionDrawer = (props) => {
             isClosable: true,
           });
           setSectionCreated(true);
-          setChanger(Math.random())
+          setChanger(Math.random());
           return true;
         } else {
           throw new Error("Error creating section");
@@ -259,15 +249,9 @@ const SectionDrawer = (props) => {
   };
 
   useEffect(() => {
-    // if (sectionId) {
-    //   getSingleSectionById();
-    // }
-    // return;
     if (section_Or_subSection === "section" && sectionId) {
-      // console.log("ff");
       getSingleSectionById();
     } else if (section_Or_subSection === "subSection" && subSecId) {
-      // console.log("run");
       getSingleSubSectionById();
     } else {
     }
@@ -464,7 +448,7 @@ const SectionDrawer = (props) => {
     setConversion([jsonObj]);
   };
 
-  const handleAlphabetically = (event) => { };
+  const handleAlphabetically = (event) => {};
 
   function deleteimg() {
     setImage(null);
@@ -663,7 +647,7 @@ const SectionDrawer = (props) => {
                   </Select> */}
 
                     {arrayDecider.length > 0 &&
-                      props?.subsection_index == undefined ? (
+                    props?.subsection_index == undefined ? (
                       <FormControl>
                         <label>
                           <input

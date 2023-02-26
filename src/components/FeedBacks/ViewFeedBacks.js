@@ -19,26 +19,18 @@ import { MenuState } from "../../context/MenuContext";
 const ViewFeedBacks = (props) => {
   const { feedback, setFeedback } = MenuState();
 
-  //console.log(props?.index, "index form props");
-
   let questionResponses = feedback[props?.index]?.response;
   let feedbackInfo = feedback[props?.index];
-  // console.log(questionResponses, "questionResponses");
 
-  // console.log(feedbackInfo, "feedback");
-
-
-  // const dateString = '2020-05-14T04:00:00Z'
   const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric" }
-    return new Date(dateString).toLocaleDateString(undefined, options)
-  }
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
   return (
     <div>
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="5xl">
         <ModalOverlay />
-        {/* {questionResponses?.map((y, index) => {
-          return ( */}
+
         <ModalContent>
           <ModalHeader></ModalHeader>
           <Divider orientation="horizontal" />
@@ -70,15 +62,13 @@ const ViewFeedBacks = (props) => {
               );
             })}
           </ModalBody>
-          {/* <Divider orientation="horizontal" /> */}
+
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={props.onClose} size="md">
               OK
             </Button>
           </ModalFooter>
         </ModalContent>
-        {/* );
-        })} */}
       </Modal>
     </div>
   );

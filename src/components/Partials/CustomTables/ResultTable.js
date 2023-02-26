@@ -50,12 +50,11 @@ const ResultTable = () => {
     );
 
     let res = getResults.data.formResponse;
-    console.log(res, "form response");
+
     setFeedback(res.reverse());
   }
 
   const getIndex = (index) => {
-    //console.log(index, "index form");
     setCount(index);
   };
   const formatDate = (dateString) => {

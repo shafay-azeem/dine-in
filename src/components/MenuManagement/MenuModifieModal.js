@@ -27,7 +27,7 @@ import { useToast } from "@chakra-ui/react";
 
 const MenuModifieModal = (props) => {
   let modifier_id = props.modifier_id;
-  // console.log(modifier_id);
+
   const toast = useToast();
   const [loading, setLoading] = useState(true);
 
@@ -63,7 +63,6 @@ const MenuModifieModal = (props) => {
       .POST_REQUEST(BASE_URL + API_URL.CREATE_MODIFIER, modifierData)
       .then((res) => {
         if (res.data.success == true) {
-          //alert(`${res.data.message}`);
           toast({
             position: "top",
             title: `${res.data.message}`,
@@ -74,7 +73,6 @@ const MenuModifieModal = (props) => {
 
           return true;
         } else {
-          //alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
@@ -85,8 +83,6 @@ const MenuModifieModal = (props) => {
           return false;
         }
       });
-    // modifier.push(modifierData);
-    // alert("modifier Form Created Successfully");
   };
 
   const updatedModifier = async (id) => {
@@ -94,7 +90,6 @@ const MenuModifieModal = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_MODIFIER + id, modifierData)
       .then((res) => {
         if (res.data.success == true) {
-          //alert(`${res.data.message}`);
           toast({
             position: "top",
             title: `${res.data.message}`,
@@ -105,7 +100,6 @@ const MenuModifieModal = (props) => {
 
           return true;
         } else {
-          //alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,

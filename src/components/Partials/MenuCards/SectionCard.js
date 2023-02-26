@@ -54,7 +54,7 @@ const SectionCard = (props) => {
     UpdatedSection,
     setSectionCreated,
     sectionCreated,
-    setChanger
+    setChanger,
   } = MenuState();
   const [loading, setLoading] = useState(false);
   const [status, setSatus] = useState();
@@ -98,7 +98,6 @@ const SectionCard = (props) => {
   ]);
 
   async function getAllSectionByMenuId() {
-    // setLoading(false);
     let getSection = await apiFunctions.GET_REQUEST(
       BASE_URL + API_URL.GET_ALL_SECTION_BY_MENU_ID + menu_index
     );
@@ -110,7 +109,6 @@ const SectionCard = (props) => {
     let res = getSection.data.section;
     setSectionList(res);
     setLoading(true);
-    // console.log("kkk");
   }
 
   const handleRemove = async (id) => {
@@ -126,7 +124,7 @@ const SectionCard = (props) => {
             isClosable: true,
           });
           setSectionDelete(true);
-          setChanger(Math.random())
+          setChanger(Math.random());
           return true;
         } else {
           toast({
@@ -155,7 +153,7 @@ const SectionCard = (props) => {
       .then((res) => {
         if (res.data.success == true) {
           setSectionUpdate(true);
-          setChanger(Math.random())
+          setChanger(Math.random());
           return true;
         } else {
           toast({
@@ -193,7 +191,7 @@ const SectionCard = (props) => {
             isClosable: true,
           });
           setSectionDuplicate(true);
-          setChanger(Math.random())
+          setChanger(Math.random());
           return true;
         } else {
           toast({
@@ -209,9 +207,6 @@ const SectionCard = (props) => {
   };
 
   const sectionClick = async (x, id) => {
-    // console.log(id, "id");
-    // console.log(x, "x");
-
     let sectionData = {
       sectionToggle: !x.sectionToggle,
     };
@@ -220,7 +215,6 @@ const SectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          // console.log("section status updated");
           setSectionUpdate(true);
           return true;
         } else {

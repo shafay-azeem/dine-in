@@ -70,7 +70,6 @@ const ItemCard = (props) => {
 
   useEffect(() => {
     if (section_Or_subSection === "section" && secid) {
-      // console.log("Inside IF");
       setItemDecider("item");
       getAllItemsBySectionId();
       setItemDeleted(false);
@@ -317,12 +316,10 @@ const ItemCard = (props) => {
         .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUB_ITEM_BY_ID + id, itemRes)
         .then((res) => {
           if (res.data.success == true) {
-            // console.log("Sub Item Status Updated");
             setSubItemUpdate(true);
 
             return true;
           } else {
-            //alert(`There Some Error`);
             toast({
               position: "top",
               title: `There Some Error`,

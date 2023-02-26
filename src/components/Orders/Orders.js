@@ -8,9 +8,7 @@ import excelData from "./Export.json";
 import OrderTable from "../Partials/CustomTables/OrderTable";
 
 const Orders = (props) => {
-  console.log(props.paymentStatus, "payment status");
   let paymentStatus = props.paymentStatus;
-
   const [checkedItems, setCheckedItems] = React.useState(false);
 
   const fileType =
@@ -27,7 +25,6 @@ const Orders = (props) => {
 
   function testfunc() {
     window.location.reload();
-    // return false;
   }
 
   return (
@@ -40,8 +37,8 @@ const Orders = (props) => {
         </GridItem>
       </Grid>
 
-      <Grid templateColumns="repeat(5, 1fr)" gap={6} m={10}>
-        {/* <GridItem w="100%" h="10">
+      {/* <Grid templateColumns="repeat(5, 1fr)" gap={6} m={10}> */}
+      {/* <GridItem w="100%" h="10">
           <InputGroup>
             <InputLeftElement
               pointerEvents="none"
@@ -51,67 +48,15 @@ const Orders = (props) => {
           </InputGroup>
         </GridItem> */}
 
-        {/* <GridItem>
-          <RadioGroup>
-            <Stack spacing={5} direction="row">
-              <Radio
-                colorScheme="green"
-                value="1"
-                onChange={(e) => setValue(e.target.value)}
-              >
-                Order On Daily Basis
-              </Radio>
-              <Radio
-                colorScheme="green"
-                value="2"
-                onChange={(e) => setValue(e.target.value)}
-              >
-                Specific Range Of Orders
-              </Radio>
-            </Stack>
-          </RadioGroup>
-        </GridItem> */}
-
-        {/* {value == "2" ? (
-          <Box>
-            <GridItem w="100%" h="10">
-              <Text mb="8px">Start Date</Text>
-              <Input
-                placeholder="Start Date"
-                size="md"
-                type="date"
-                bg="white"
-              />
-            </GridItem>
-            <GridItem w="100%" h="10">
-              <Text mb="8px">End Date</Text>
-              <Input placeholder="End Date" size="md" type="date" bg="white" />
-            </GridItem>
-          </Box>
-        ) : null}
-
-        {value == "1" ? (
-          <Box>
-            <GridItem w="100%" h="10">
-              <Text mb="8px">Start Date</Text>
-              <Input
-                placeholder="Start Date"
-                size="md"
-                type="date"
-                bg="white"
-              />
-            </GridItem>
-          </Box>
-        ) : null} */}
-
-        {/* <GridItem w="100%" h="10">
+      {/* <GridItem w="100%" h="10">
           <Select placeholder="Edit Display" bg="white">
             <option value="option1">Option 1</option>
             <option value="option2">Option 2</option>
             <option value="option3">Option 3</option>
           </Select>
         </GridItem> */}
-        {/* <GridItem w="100%" h="10" textAlign="center">
+
+      {/* <GridItem w="100%" h="10" textAlign="center">
           <Stack direction={["column", "row"]} spacing="24px">
             <Box w="100px" h="40px">
               <CustomButton
@@ -130,7 +75,7 @@ const Orders = (props) => {
             </Box>
           </Stack>
         </GridItem> */}
-      </Grid>
+      {/* </Grid> */}
 
       <Box m="10" mt={5}>
         <Tabs w="100%">

@@ -72,15 +72,8 @@ const RevenueRangeModal = (props) => {
               />
             </FormControl>
 
-            <Text>Amount Rs {amount}</Text>
+            <Text mt={5}>Amount Rs {amount}</Text>
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              OK
-            </Button>
-            <Button onClick={props.onClose}>Close</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
