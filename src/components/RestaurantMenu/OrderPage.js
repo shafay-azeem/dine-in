@@ -172,6 +172,55 @@ const OrderPage = () => {
     }
   };
 
+  async function modifierIncrementDecrement(
+    cartDocId,
+    modifierId,
+    status,
+    size
+  ) {
+    try {
+      let modifierIncrementDecrement = await apiFunctions.GET_REQUEST(
+        BASE_URL +
+          API_URL.MODIFIER_INCREMENT_DECREMENT +
+          `${cartDocId}?cartId=${cartId}&modifierId=${modifierId}&cartStatus=${status}&itemSize=${size}`
+      );
+      setChanger(Math.random());
+    } catch (err) {
+      console.log("An error occurred while fetching carts", err.message);
+    }
+  }
+
+  const deleteModifierById = async (id, modifierId) => {
+    await apiFunctions
+      .DELETE_REQUEST(
+        BASE_URL +
+          API_URL.MODIFIER_DELETE +
+          `${id}?cartId=${cartId}&modifierId=${modifierId}`
+      )
+      .then((res) => {
+        if (res.data.success == true) {
+          toast({
+            position: "top",
+            title: `Modifier Deleted SuccessFully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+          setChanger(Math.random());
+          return true;
+        } else {
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+          return false;
+        }
+      });
+  };
+
   return (
     <div className="container">
       <RestaurantHeader userId={userId} tableNumber={tableNumber} />
@@ -247,6 +296,82 @@ const OrderPage = () => {
                           </a>
                         </div>
                       </div>
+
+                      {/* Modifier */}
+                      {x.Modifier?.map((s, index) => {
+                        return (
+                          <div class="row d-flex justify-content-between align-items-center">
+                            <div class="col-md-2">
+                              {/* <img
+                            src={x.item_Img}
+                            style={{ width: "60px", height: "60px" }}
+                            alt="img"
+                          /> */}
+                            </div>
+                            <div class="col-md-4">
+                              <p class="lead fw-normal mb-2">
+                                {s.Modifier_Name}
+                              </p>
+                              <p>Rs {s.Modifier_Price}</p>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-end">
+                              <button
+                                class="btn btn-link px-2"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                              >
+                                <i
+                                  class="fas fa-minus"
+                                  onClick={() =>
+                                    modifierIncrementDecrement(
+                                      x._id,
+                                      s._id,
+                                      "decrement",
+                                      x.item_Size
+                                    )
+                                  }
+                                ></i>
+                              </button>
+
+                              <input
+                                id="form1"
+                                min="0"
+                                name="quantity"
+                                value={s.Modifier_Qty}
+                                disabled={true}
+                                type="number"
+                                class="form-control form-control-sm"
+                              />
+
+                              <button class="btn btn-link px-2">
+                                <i
+                                  class="fas fa-plus"
+                                  onClick={() =>
+                                    modifierIncrementDecrement(
+                                      x._id,
+                                      s._id,
+                                      "increment",
+                                      x.item_Size
+                                    )
+                                  }
+                                ></i>
+                              </button>
+                              {/* <h5 class="mb-0 ms-3">Rs {x.itemPrice_Total}</h5> */}
+                            </div>
+                            <div class="col-md-1 text-end">
+                              <a href="#!" class="text-danger">
+                                <i
+                                  class="fas fa-trash fa-lg"
+                                  onClick={() =>
+                                    deleteModifierById(x._id, s._id)
+                                  }
+                                ></i>
+                              </a>
+                            </div>
+                          </div>
+                        );
+                      })}
+
+                      {/* Modifier */}
                     </div>
                   </div>
                 </div>

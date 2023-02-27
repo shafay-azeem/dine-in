@@ -79,6 +79,22 @@ const OrderDetailModal = (props) => {
                       Total Price: {x.itemPrice_Total}
                     </Text>
                   </GridItem>
+
+                  {x.Modifier?.map((s, index) => {
+                    return (
+                      <GridItem colSpan={4} mt={4} key={index}>
+                        <Text fontWeight="bold">{s.Modifier_Name}</Text>
+
+                        <Text fontWeight="medium" mb="0.5rem">
+                          Quantity: {s.Modifier_Qty}
+                        </Text>
+
+                        <Text fontWeight="medium" mb="0.5rem">
+                          Price: {s.Modifier_Price}
+                        </Text>
+                      </GridItem>
+                    );
+                  })}
                 </Grid>
                 {index !== orderItemResponse.length - 1 && <Divider my={2} />}
               </Box>

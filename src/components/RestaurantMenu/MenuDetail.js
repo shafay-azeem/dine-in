@@ -6,14 +6,16 @@ import "./MenuDetail.css";
 import { useState } from "react";
 import { BsArrowLeftShort, BsStopwatch, BsXLg } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { IconButton, Tooltip, useToast } from "@chakra-ui/react";
+import { IconButton, Tooltip, useDisclosure, useToast } from "@chakra-ui/react";
 
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
+import AddModifierModal from "./Modal/AddModifierModal";
 
 const MenuDetail = (props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [name, setName] = useState();
   const [image, setImage] = useState();
   const [video, setVideo] = useState();
@@ -63,6 +65,8 @@ const MenuDetail = (props) => {
   const [totalCarbsPercentage, setTotalCarbsPercentage] = useState();
 
   const [show, setShow] = useState(false);
+
+  const [itemid, setItemId] = useState();
 
   const handleClick = () => setShow(true);
   const handleClick2 = () => setShow(false);
@@ -145,6 +149,8 @@ const MenuDetail = (props) => {
 
         let setVar = getSingleItem.data.item;
         console.log(setVar);
+        setItemId(setVar._id);
+
         setName(setVar.itemName);
         setImage(setVar.itemImage);
         setVideo(setVar.video);
@@ -704,6 +710,14 @@ const MenuDetail = (props) => {
                               {r.Price === undefined ? null : (
                                 <div className="itemPrice">${r.Price}</div>
                               )}
+
+                              <Button
+                                variant="primary"
+                                size="sm"
+                                onClick={onOpen}
+                              >
+                                add
+                              </Button>
                             </div>
                           );
                         })}
@@ -714,6 +728,18 @@ const MenuDetail = (props) => {
               </div>
             </div>
           )}
+
+          {isOpen ? (
+            <AddModifierModal
+              isOpen={isOpen}
+              onOpen={onOpen}
+              onClose={onClose}
+              PriceOption={priceOption}
+              Modifiers={demoModifier}
+              ItemId={itemid}
+              tableNumber={tableNumber}
+            />
+          ) : null}
         </Col>
 
         <Col lg={8} className=" text-center d-none d-lg-block d-xl-block">

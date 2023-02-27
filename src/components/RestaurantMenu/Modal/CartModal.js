@@ -27,6 +27,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   const [cartId, setCartId] = useState();
   const [changer, setChanger] = useState();
   const [cartDelete, setCartDelete] = useState(false);
+  const [cartItemsModifiers, setCartItemsModifiers] = useState();
 
   const navigate = useNavigate();
   const img = {
@@ -57,6 +58,8 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
       }
 
       setCartItemList(res.cartItems);
+      // setCartItemsModifiers(res.cartItems.Modifier);
+      console.log(res.cartItems, "CartItemsModifiers");
       setCartTotal(res.total_Price);
       setCartId(res._id);
 
@@ -79,12 +82,61 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
     }
   }
 
+  async function modifierIncrementDecrement(
+    cartDocId,
+    modifierId,
+    status,
+    size
+  ) {
+    try {
+      let modifierIncrementDecrement = await apiFunctions.GET_REQUEST(
+        BASE_URL +
+          API_URL.MODIFIER_INCREMENT_DECREMENT +
+          `${cartDocId}?cartId=${cartId}&modifierId=${modifierId}&cartStatus=${status}&itemSize=${size}`
+      );
+      setChanger(Math.random());
+    } catch (err) {
+      console.log("An error occurred while fetching carts", err.message);
+    }
+  }
+
   const handleRemove = async (id) => {
     await apiFunctions
       .DELETE_REQUEST(
         BASE_URL +
           API_URL.DELETE_CARTITEM_BY_CART_ITEM_ID +
           `${id}?cartId=${cartId}`
+      )
+      .then((res) => {
+        if (res.data.success == true) {
+          toast({
+            position: "top",
+            title: `Cart Deleted SuccessFully`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+          setChanger(Math.random());
+          return true;
+        } else {
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+          return false;
+        }
+      });
+  };
+
+  const deleteModifierById = async (id, modifierId) => {
+    await apiFunctions
+      .DELETE_REQUEST(
+        BASE_URL +
+          API_URL.MODIFIER_DELETE +
+          `${id}?cartId=${cartId}&modifierId=${modifierId}`
       )
       .then((res) => {
         if (res.data.success == true) {
@@ -170,7 +222,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                       <div className="col-6">
                         <span className="me-2">
                           {x.item_Name} {x.item_Size}
-                        </span>{" "}
+                        </span>
                         <br />
                         <div className="d-flex justify-content-start align-items-center mt-2">
                           <span className="me-2">
@@ -214,6 +266,74 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                       <div className="col-3">
                         <span>Rs {x.itemPrice_Total}</span>
                       </div>
+
+                      {/* Modifier */}
+                      <div
+                        className="row"
+                        style={{
+                          backgroundColor: "#ffffff",
+                          padding: "20px 10px",
+                          margin: "5px",
+                        }}
+                      >
+                        <div className="col-3"></div>
+
+                        <div className="col-6">
+                          {x.Modifier?.map((s, index) => {
+                            return (
+                              <div>
+                                <span className="me-2">{s.Modifier_Name}</span>
+                                <br />
+                                <div>
+                                  <div className="d-flex justify-content-start align-items-center mt-2"></div>
+                                  <span className="me-2">
+                                    {s.Modifier_Qty == 1 ? (
+                                      <AiOutlineDelete
+                                        size={20}
+                                        color="#0000FF"
+                                        onClick={() =>
+                                          deleteModifierById(x._id, s._id)
+                                        }
+                                      />
+                                    ) : (
+                                      <MinusIcon
+                                        size={20}
+                                        color="#0000FF"
+                                        onClick={() =>
+                                          modifierIncrementDecrement(
+                                            x._id,
+                                            s._id,
+                                            "decrement",
+                                            x.item_Size
+                                          )
+                                        }
+                                      />
+                                    )}
+                                  </span>
+                                  <span className="me-2">{s.Modifier_Qty}</span>
+                                  <span className="me-2">
+                                    <AiOutlinePlus
+                                      size={20}
+                                      color="#0000FF"
+                                      onClick={() =>
+                                        modifierIncrementDecrement(
+                                          x._id,
+                                          s._id,
+                                          "increment",
+                                          x.item_Size
+                                        )
+                                      }
+                                    />
+                                  </span>
+                                  <span>Rs {s.Modifier_Price}</span>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Modifier */}
                     </div>
                   </div>
                 );

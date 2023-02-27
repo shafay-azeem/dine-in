@@ -150,4 +150,11 @@ export const API_URL = {
   GET_REVENUE_ON_DAILY_BASIS_PAYMENT: "payment/V1/getRevenueOnDailyBasis/",
 
   PENDING_AMOUNT_ALL: "order/V1/pendingAmount/",
+
+  //Modifier
+  ADD_MODIFIER_ITEM: "cart/V1/addModifiertoCartItem/",
+
+  MODIFIER_INCREMENT_DECREMENT: "cart/V1/modifierIncrementDecrement/",
+
+  MODIFIER_DELETE: "cart/V1/deleteModifierById/",
 };

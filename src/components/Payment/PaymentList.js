@@ -58,7 +58,7 @@ const PaymentList = () => {
       );
       let res = filterOrdersByDate.data.payments;
       console.log(res, "hh");
-      getPayment(res.reverse());
+      getPayment(res);
       setLoading(true);
       return true;
     } catch (err) {

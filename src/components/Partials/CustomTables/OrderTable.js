@@ -26,6 +26,7 @@ import apiFunctions from "../../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import { useEffect } from "react";
 import { MenuState } from "../../../context/MenuContext";
+import Pagination from "../Pagination";
 
 const OrderTable = (props) => {
   const [count, setCount] = useState();
@@ -38,6 +39,9 @@ const OrderTable = (props) => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [loading, setLoading] = useState(false);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
   useEffect(() => {
     if (startDate && value == "1") {
@@ -49,7 +53,7 @@ const OrderTable = (props) => {
         getPaidUnpaidOrders();
       }
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, currentPage]);
 
   async function getPaidUnpaidOrders() {
     try {
@@ -57,10 +61,12 @@ const OrderTable = (props) => {
         BASE_URL +
           API_URL.GET_PAID_UNPAID_ORDERS +
           userId +
-          `?paymentStatus=${paymentStatus}`
+          `?paymentStatus=${paymentStatus}&page=${currentPage}`
       );
       let res = getPaidUnpaidOrders.data.orders;
-      setOrders(res.reverse());
+
+      setOrders(res);
+      setTotalOrders(getPaidUnpaidOrders.data.totalOrders);
       setLoading(true);
       console.log(res);
 
@@ -111,6 +117,10 @@ const OrderTable = (props) => {
 
   const getIndex = (index) => {
     setCount(index);
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -231,6 +241,13 @@ const OrderTable = (props) => {
           )}
         </Table>
       </TableContainer>
+
+      <Pagination
+        total={totalOrders}
+        currentPage={currentPage}
+        perPage={perPage}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 };

@@ -1,0 +1,135 @@
+import { Checkbox } from "@chakra-ui/checkbox";
+import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import { Text } from "@chakra-ui/layout";
+import {
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+} from "@chakra-ui/modal";
+import { Select } from "@chakra-ui/select";
+import React from "react";
+import { useState } from "react";
+import { Button } from "react-bootstrap";
+import { API_URL, BASE_URL } from "../../../global/Constant";
+import apiFunctions from "../../../global/GlobalFunction";
+import { useToast } from "@chakra-ui/react";
+
+const AddModifierModal = (props) => {
+  //console.log(props.PriceOption);
+  const toast = useToast();
+  let ItemSizes = props.PriceOption;
+  let Modifiers = props.Modifiers;
+
+  let ItemId = props.ItemId;
+  let tableNumber = props.tableNumber;
+
+  console.log(ItemId, tableNumber, "ItemId , tableNumber");
+
+  const [checked, setChecked] = useState([]);
+
+  const [selectedSize, setSelectedSize] = useState();
+
+  // const myFun = (Name, Price) => {
+  // let ModifierData =[ {
+  //   Modifier_Name: Name,
+  //   Modifier_Price: Price,
+  //   Modifier_Qty: 1,
+  // }];
+
+  //   setChecked([...checked, ModifierData]);
+  // };
+
+  const myFun = async (Name, Price) => {
+    try {
+      let ModifierData = {
+        Modifier_Name: Name,
+        Modifier_Price: Price,
+        Modifier_Qty: 1,
+      };
+
+      //   setChecked([...checked, ModifierData]);
+
+      await apiFunctions
+        .POST_REQUEST(
+          BASE_URL +
+            API_URL.ADD_MODIFIER_ITEM +
+            tableNumber +
+            `?itemId=${ItemId}&item_Size=${selectedSize}`,
+          ModifierData
+        )
+        .then((res) => {
+          console.log(res.data);
+          if (res.status == 200) {
+            toast({
+              position: "top",
+              title: `Modifier Added SuccessFully`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            // setAdder(Math.random());
+            return true;
+          } else {
+            alert(`There Some Error---`);
+            return false;
+          }
+        });
+    } catch (err) {
+      console.log(err);
+      toast({
+        position: "top",
+        title: `There Some Error`,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
+
+  return (
+    <Modal isOpen={props.isOpen} onClose={props.onClose} size={"lg"}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Modifier</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody pb={6}>
+          <FormControl>
+            <Select
+              placeholder="Select Size"
+              onChange={(e) => setSelectedSize(e.target.value.toLowerCase())}
+              value={selectedSize}
+            >
+              {ItemSizes?.map((y, index) => (
+                <option value={y.name} key={index}>
+                  {y.name} ({y.calories} Calories)
+                </option>
+              ))}
+            </Select>
+          </FormControl>
+
+          {Modifiers?.map((s, index) => {
+            return (
+              <div key={index}>
+                {s.reference?.map((r, index) => {
+                  return (
+                    <div>
+                      <Text>{r.Name}</Text>
+                      <Button onClick={() => myFun(r.Name, r.Price)}>
+                        add
+                      </Button>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+};
+
+export default AddModifierModal;

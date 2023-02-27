@@ -168,3 +168,10 @@
 .center-modal {
   top: 30%;
 }
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
