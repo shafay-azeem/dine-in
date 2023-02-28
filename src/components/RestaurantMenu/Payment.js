@@ -28,7 +28,6 @@ const Payment = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
 
-  console.log(paymentMethod, "ggg");
   const [transactionId, setTransactionId] = useState("");
   const [amount, setAmount] = useState("");
 
@@ -96,8 +95,6 @@ const Payment = () => {
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.MAKE_PAYMENT + userId, paymentData)
         .then((res) => {
-          console.log(res.data);
-
           if (res.status == 201) {
             setIsPaymentSuccessful(true);
             toast({

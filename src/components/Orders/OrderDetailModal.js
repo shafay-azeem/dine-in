@@ -23,7 +23,7 @@ const OrderDetailModal = (props) => {
   let paymentStatus = orders[props?.index].paymentStatus;
   let tableNumber = orders[props?.index].tableNumber;
 
-  console.log(orderItemResponse);
+  // console.log(orderItemResponse);
 
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} size="6xl">

@@ -16,6 +16,7 @@ import { Button } from "react-bootstrap";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
 import { useToast } from "@chakra-ui/react";
+import { BsPlus, BsPlusLg } from "react-icons/bs";
 
 const AddModifierModal = (props) => {
   //console.log(props.PriceOption);
@@ -26,7 +27,7 @@ const AddModifierModal = (props) => {
   let ItemId = props.ItemId;
   let tableNumber = props.tableNumber;
 
-  console.log(ItemId, tableNumber, "ItemId , tableNumber");
+  // console.log(ItemId, tableNumber, "ItemId , tableNumber");
 
   const [checked, setChecked] = useState([]);
 
@@ -61,7 +62,6 @@ const AddModifierModal = (props) => {
           ModifierData
         )
         .then((res) => {
-          console.log(res.data);
           if (res.status == 200) {
             toast({
               position: "top",
@@ -115,11 +115,35 @@ const AddModifierModal = (props) => {
               <div key={index}>
                 {s.reference?.map((r, index) => {
                   return (
-                    <div>
-                      <Text>{r.Name}</Text>
-                      <Button onClick={() => myFun(r.Name, r.Price)}>
-                        add
-                      </Button>
+                    // <div class="d-flex flex-row">
+                    //   <div>
+                    //     <div class="d-flex flex-row">
+                    //       <div class="p-2">
+                    //         <p class="modifier-name">{r.Name}</p>
+                    //       </div>
+                    //       <div class="p-2">
+                    //         <BsPlusLg
+                    //           class="mt-1"
+                    //           onClick={() => myFun(r.Name, r.Price)}
+                    //         />
+                    //       </div>
+                    //     </div>
+                    //   </div>
+                    // </div>
+                    <div
+                      className="d-flex justify-content-between mt-2 py-1 px-2 border-bottom mb-3 mt-4"
+                      key={index}
+                    >
+                      {r.Name === undefined ? null : <div>{r.Name}</div>}
+
+                      {/* {r.Price === undefined ? null : (
+                        <div className="itemPrice">${r.Price}</div>
+                      )} */}
+
+                      <BsPlusLg
+                        className="mt-1"
+                        onClick={() => myFun(r.Name, r.Price)}
+                      />
                     </div>
                   );
                 })}

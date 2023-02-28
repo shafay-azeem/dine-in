@@ -13,6 +13,7 @@ import "../RestaurantMenu.css";
 const SubSecItemCard = (props) => {
   const toast = useToast();
   let tableNumber = props?.tableNumber;
+  let resImage = props?.resImage;
 
   const navigate = useNavigate();
   const { response, setResponse } = MenuState();
@@ -27,6 +28,7 @@ const SubSecItemCard = (props) => {
       search: createSearchParams({
         subsecitemindex,
         tableNumber,
+        resImage,
       }).toString(),
     });
   };
@@ -90,7 +92,15 @@ const SubSecItemCard = (props) => {
           return (
             <Col lg={4} md={4} sm={6} xs={12} key={index}>
               <Card className="mx-auto mb-2 fooditem">
-                <Card.Body>
+                <div className="Soldout-Badge">
+                  {x.itemTag ? (
+                    <Badge pill bg="danger">
+                      Sold Out
+                    </Badge>
+                  ) : null}
+                </div>
+
+                <Card.Body style={{ opacity: x.itemTag ? "0.5" : "none" }}>
                   <Row className="align-items-start">
                     <Col lg={4} className="imgcol p-0">
                       <div>
@@ -235,16 +245,23 @@ const SubSecItemCard = (props) => {
                       </div>
                     </Col>
 
-                    <div className="container d-flex justify-content-center align-items-center mt-2">
-                      <button
-                        className="Button"
-                        onClick={() =>
-                          addToCart(x._id, x.itemName, x.itemPrice, x.itemImage)
-                        }
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
+                    {x.itemTag ? null : (
+                      <div className="container d-flex justify-content-center align-items-center mt-2">
+                        <button
+                          className="Button"
+                          onClick={() =>
+                            addToCart(
+                              x._id,
+                              x.itemName,
+                              x.itemPrice,
+                              x.itemImage
+                            )
+                          }
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    )}
 
                     <CartModal
                       className={true ? "display: none" : ""}

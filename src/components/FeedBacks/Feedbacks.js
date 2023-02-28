@@ -67,7 +67,7 @@ const Feedbacks = () => {
   const fileName = "Excel Export";
 
   for (let i = 0; i < feedback.length; i++) {
-    console.log(feedback[i]);
+    // console.log(feedback[i]);
   }
 
   const exportToExcel = async () => {

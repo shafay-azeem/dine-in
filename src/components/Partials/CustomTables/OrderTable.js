@@ -17,6 +17,7 @@ import {
   Radio,
   HStack,
   Button,
+  InputRightElement,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -68,7 +69,6 @@ const OrderTable = (props) => {
       setOrders(res);
       setTotalOrders(getPaidUnpaidOrders.data.totalOrders);
       setLoading(true);
-      console.log(res);
 
       return true;
     } catch (err) {
@@ -82,11 +82,13 @@ const OrderTable = (props) => {
         BASE_URL +
           API_URL.FILTER_ORDER_BY_DATE +
           userId +
-          `?paymentStatus=${paymentStatus}&date=${startDate}`
+          `?paymentStatus=${paymentStatus}&date=${startDate}&page=${currentPage}`
       );
       let res = filterOrdersByDate.data.orders;
 
-      setOrders(res.reverse());
+      setOrders(res);
+      setTotalOrders(filterOrdersByDate.data.totalOrders);
+      console.log(filterOrdersByDate.data.totalOrders, "total orders");
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -99,11 +101,12 @@ const OrderTable = (props) => {
         BASE_URL +
           API_URL.GET_ORDER_BY_RANGE +
           userId +
-          `?paymentStatus=${paymentStatus}&startDate=${startDate}&endDate=${endDate}`
+          `?paymentStatus=${paymentStatus}&startDate=${startDate}&endDate=${endDate}&page=${currentPage}`
       );
       let res = filterOrdersByDate.data.orders;
 
-      setOrders(res.reverse());
+      setOrders(res);
+      setTotalOrders(filterOrdersByDate.data.totalOrders);
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -170,6 +173,17 @@ const OrderTable = (props) => {
                   onChange={(e) => setEndDate(e.target.value)}
                 />
               </GridItem>
+              <Button
+                onClick={() => {
+                  setStartDate("");
+                  setEndDate("");
+                  document
+                    .querySelectorAll('input[type="date"]')
+                    .forEach((input) => (input.value = ""));
+                }}
+              >
+                Clear
+              </Button>
             </>
           ) : null}
 
@@ -184,6 +198,14 @@ const OrderTable = (props) => {
                   bg="white"
                   onChange={(e) => setStartDate(e.target.value)}
                 />
+                <Button
+                  onClick={() => {
+                    setStartDate("");
+                    document.querySelector('input[type="date"]').value = "";
+                  }}
+                >
+                  Clear
+                </Button>
               </GridItem>
             ) : null}
           </Box>

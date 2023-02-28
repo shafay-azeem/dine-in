@@ -175,3 +175,12 @@ nav {
   align-items: center;
   margin-top: 20px;
 }
+
+.modifier-name {
+  font-size: 17px;
+  font-weight: 500;
+}
+.modifier-heading {
+  font-size: 17px;
+  font-weight: 500;
+}

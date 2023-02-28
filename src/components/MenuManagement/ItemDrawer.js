@@ -201,7 +201,6 @@ const ItemDrawer = (props) => {
       await apiFunctions
         .PUT_REQUEST(BASE_URL + API_URL.UPDATE_ITEM_BY_ID + id, itemData)
         .then((res) => {
-          console.log(res);
           if (res.data.success == true) {
             // alert(` ITEM UPDATED SUCCESSFULLY`);
             toast({

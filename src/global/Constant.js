@@ -157,4 +157,9 @@ export const API_URL = {
   MODIFIER_INCREMENT_DECREMENT: "cart/V1/modifierIncrementDecrement/",
 
   MODIFIER_DELETE: "cart/V1/deleteModifierById/",
+
+  // GET USER
+  GET_RESTURANT_DETAIL: "user/V1/getuserDetailById/",
+
+  GET_CART_LENGTH: "cart/V1/getCartLength/",
 };

@@ -27,7 +27,7 @@ const MenuConfiguration = () => {
 
   const [inputList, setInputList] = useState([]);
 
-  const [url, setUrl] = useState(`http://localhost:3000/menustart`);
+  const [url, setUrl] = useState();
   const [qr, setQr] = useState("");
   const navigate = useNavigate();
   const [tableNumber, setTableNumber] = useState();
@@ -62,7 +62,7 @@ const MenuConfiguration = () => {
 
   const GenerateQRCode = () => {
     QRCode.toDataURL(
-      url,
+      `http://localhost:${port}/menustart?USERID=${USERID}&tableNumber=${tableNumber}`,
       {
         width: 800,
         margin: 2,
@@ -75,6 +75,7 @@ const MenuConfiguration = () => {
         if (err) return console.error(err);
 
         setQr(url);
+
         setUrl(
           `http://localhost:${port}/menustart?USERID=${USERID}&tableNumber=${tableNumber}`
         );
@@ -111,7 +112,7 @@ const MenuConfiguration = () => {
                   <Card.Title>QR Generator</Card.Title>
 
                   <Card.Text>
-                    <text>{url}</text>
+                    <text>{url ? url : null}</text>
                     <Button onClick={GenerateQRCode} variant="info">
                       Generate
                     </Button>

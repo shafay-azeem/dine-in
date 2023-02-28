@@ -15,6 +15,7 @@ const DisplayItemCard = (props) => {
 
   let section_index = props?.section_index;
   let tableNumber = props?.tableNumber;
+  let resImage = props?.resImage;
 
   const [itemList, setItemList] = useState();
   const [state, setstate] = useState(false);
@@ -29,6 +30,7 @@ const DisplayItemCard = (props) => {
       search: createSearchParams({
         index,
         tableNumber,
+        resImage,
       }).toString(),
     });
   };
@@ -51,7 +53,7 @@ const DisplayItemCard = (props) => {
   }
 
   const addToCart = async (id, itemName, itemPrice, itemImage) => {
-    console.log(tableNumber, "tableNumber add to cart");
+    // console.log(tableNumber, "tableNumber add to cart");
     try {
       let cartData = {
         item_Id: id,
@@ -263,16 +265,23 @@ const DisplayItemCard = (props) => {
                       Add To Cart
                     </Button> */}
 
-                    <div className="container d-flex justify-content-center align-items-center mt-2">
-                      <button
-                        className="Button"
-                        onClick={() =>
-                          addToCart(x._id, x.itemName, x.itemPrice, x.itemImage)
-                        }
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
+                    {x.itemTag ? null : (
+                      <div className="container d-flex justify-content-center align-items-center mt-2">
+                        <button
+                          className="Button"
+                          onClick={() =>
+                            addToCart(
+                              x._id,
+                              x.itemName,
+                              x.itemPrice,
+                              x.itemImage
+                            )
+                          }
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    )}
 
                     <CartModal
                       className={true ? "display: none" : ""}

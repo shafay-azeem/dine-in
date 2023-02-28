@@ -177,7 +177,7 @@ const SubSectionCard = (props) => {
       .DELETE_REQUEST(BASE_URL + API_URL.DELETE_SUBSECTION_BY_ID + id)
       .then((res) => {
         if (res.data.success == true) {
-          console.log(res.data.success);
+          // console.log(res.data.success);
 
           toast({
             position: "top",
@@ -210,7 +210,7 @@ const SubSectionCard = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + id, sectionData)
       .then((res) => {
         if (res.data.success == true) {
-          console.log("SubSetion Toggle Updated");
+          // console.log("SubSetion Toggle Updated");
           setSubSectionUpdate(true);
           return true;
         } else {

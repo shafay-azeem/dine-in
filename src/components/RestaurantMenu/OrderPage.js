@@ -31,7 +31,7 @@ const OrderPage = () => {
 
   let userId = searchparams.get("userId");
   let tableNumber = searchparams.get("tableNumber");
-  console.log(userId, "userId");
+
   const img = {
     KFCcard: require("../Assets/burger.jpg"),
   };
@@ -98,7 +98,6 @@ const OrderPage = () => {
       setCartTotal(res.total_Price);
       setCartId(res._id);
 
-      console.log(cartItemList);
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -130,9 +129,6 @@ const OrderPage = () => {
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.CREATE_ORDER + userId, orderData)
         .then((res) => {
-          console.log(res.data.order._id);
-          console.log(res.data.order.subtotal);
-
           let orderId = res.data.order._id;
           let subTotal = res.data.order.subtotal;
 
@@ -185,6 +181,7 @@ const OrderPage = () => {
           `${cartDocId}?cartId=${cartId}&modifierId=${modifierId}&cartStatus=${status}&itemSize=${size}`
       );
       setChanger(Math.random());
+      setAdder(Math.random());
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
     }
@@ -207,6 +204,7 @@ const OrderPage = () => {
             isClosable: true,
           });
           setChanger(Math.random());
+          setAdder(Math.random());
           return true;
         } else {
           toast({
@@ -251,16 +249,18 @@ const OrderPage = () => {
                             class="btn btn-link px-2"
                             onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                           >
-                            <i
-                              class="fas fa-minus"
-                              onClick={() =>
-                                cartIncrementDecrement(
-                                  x._id,
-                                  "decrement",
-                                  x.item_Size
-                                )
-                              }
-                            ></i>
+                            {x.item_Qty == 1 ? null : (
+                              <i
+                                class="fas fa-minus"
+                                onClick={() =>
+                                  cartIncrementDecrement(
+                                    x._id,
+                                    "decrement",
+                                    x.item_Size
+                                  )
+                                }
+                              ></i>
+                            )}
                           </button>
 
                           <input
@@ -297,39 +297,39 @@ const OrderPage = () => {
                         </div>
                       </div>
 
+                      {x.Modifier?.length > 0 ? (
+                        <p className="modifier-heading">Modifiers</p>
+                      ) : null}
+
                       {/* Modifier */}
                       {x.Modifier?.map((s, index) => {
                         return (
-                          <div class="row d-flex justify-content-between align-items-center">
-                            <div class="col-md-2">
-                              {/* <img
-                            src={x.item_Img}
-                            style={{ width: "60px", height: "60px" }}
-                            alt="img"
-                          /> */}
-                            </div>
+                          <div class="row d-flex justify-content-between align-items-center py-2 px-2 border-bottom">
                             <div class="col-md-4">
                               <p class="lead fw-normal mb-2">
                                 {s.Modifier_Name}
                               </p>
                               <p>Rs {s.Modifier_Price}</p>
                             </div>
+
                             <div class="col-md-4 d-flex justify-content-end">
                               <button
                                 class="btn btn-link px-2"
                                 onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                               >
-                                <i
-                                  class="fas fa-minus"
-                                  onClick={() =>
-                                    modifierIncrementDecrement(
-                                      x._id,
-                                      s._id,
-                                      "decrement",
-                                      x.item_Size
-                                    )
-                                  }
-                                ></i>
+                                {s.Modifier_Qty == 1 ? null : (
+                                  <i
+                                    class="fas fa-minus"
+                                    onClick={() =>
+                                      modifierIncrementDecrement(
+                                        x._id,
+                                        s._id,
+                                        "decrement",
+                                        x.item_Size
+                                      )
+                                    }
+                                  ></i>
+                                )}
                               </button>
 
                               <input
@@ -357,7 +357,8 @@ const OrderPage = () => {
                               </button>
                               {/* <h5 class="mb-0 ms-3">Rs {x.itemPrice_Total}</h5> */}
                             </div>
-                            <div class="col-md-1 text-end">
+
+                            <div class="col-md-4 text-end">
                               <a href="#!" class="text-danger">
                                 <i
                                   class="fas fa-trash fa-lg"

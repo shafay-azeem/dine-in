@@ -19,6 +19,7 @@ import { useState } from "react";
 import { Stack } from "react-bootstrap";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
+import Pagination from "../Partials/Pagination";
 import PaymentDailyBasisModal from "./PaymentDailyBasisModal";
 import PendingPaymentModal from "./PendingPaymentModal";
 import RevenueModal from "./RevenueModal";
@@ -48,17 +49,24 @@ const PaymentList = () => {
     onOpen: PendingPaymentModalOnOpen,
     onClose: PendingPaymentModalOnClose,
   } = useDisclosure();
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
   let userId = localStorage.getItem("user_id");
 
   async function getAllPayment() {
     try {
       let filterOrdersByDate = await apiFunctions.GET_REQUEST(
-        BASE_URL + API_URL.GET_ALL_PAYMENT_BY_USERID + userId
+        BASE_URL +
+          API_URL.GET_ALL_PAYMENT_BY_USERID +
+          userId +
+          `?page=${currentPage}`
       );
       let res = filterOrdersByDate.data.payments;
-      console.log(res, "hh");
+
       getPayment(res);
+      setTotalOrders(filterOrdersByDate.data.totalPaymentCount);
       setLoading(true);
       return true;
     } catch (err) {
@@ -72,11 +80,11 @@ const PaymentList = () => {
         BASE_URL +
           API_URL.GET_MULTI__DATE_PAYMENT +
           userId +
-          `?startDate=${startDate}&endDate=${endDate}`
+          `?startDate=${startDate}&endDate=${endDate}&page=${currentPage}`
       );
       let res = filterOrdersByDate.data.payments;
-
-      getPayment(res.reverse());
+      getPayment(res);
+      setTotalOrders(filterOrdersByDate.data.totalPaymentCount);
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -89,12 +97,11 @@ const PaymentList = () => {
         BASE_URL +
           API_URL.GET_SINGLE_DATE_PAYMENT +
           userId +
-          `?date=${startDate}`
+          `?date=${startDate}&page=${currentPage}`
       );
       let res = filterOrdersByDate.data.payments;
-      console.log(res, "hh");
-      getPayment(res.reverse());
-
+      getPayment(res);
+      setTotalOrders(filterOrdersByDate.data.totalPaymentCount);
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -108,6 +115,7 @@ const PaymentList = () => {
 
   useEffect(() => {
     if (startDate && value == "1") {
+      // console.log("run this code");
       getSingleDatePayment();
     } else {
       if (startDate && endDate) {
@@ -116,7 +124,11 @@ const PaymentList = () => {
         getAllPayment();
       }
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, currentPage]);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <>
@@ -303,6 +315,13 @@ const PaymentList = () => {
                   ) : null}
                 </Table>
               </TableContainer>
+
+              <Pagination
+                total={totalOrders}
+                currentPage={currentPage}
+                perPage={perPage}
+                onPageChange={handlePageChange}
+              />
             </TabPanel>
           </TabPanels>
         </Tabs>

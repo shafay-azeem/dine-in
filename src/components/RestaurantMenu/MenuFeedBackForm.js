@@ -12,7 +12,7 @@ import "./RestaurantMenu.css";
 import { useToast } from "@chakra-ui/react";
 import Spinner from "react-bootstrap/Spinner";
 const MenuFeedBackForm = (props) => {
-  let userId = props?.userId
+  let userId = props?.userId;
   const navigate = useNavigate();
 
   const toast = useToast();
@@ -35,8 +35,6 @@ const MenuFeedBackForm = (props) => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [form, setForm] = useState();
-
-
 
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
@@ -91,22 +89,21 @@ const MenuFeedBackForm = (props) => {
   };
 
   const feedbackSubmit = () => {
-
-    console.log(demo, 'demo')
-    let qLength
-    let counter = 0
+    // console.log(demo, 'demo')
+    let qLength;
+    let counter = 0;
     for (qLength = 0; qLength < demo.length; qLength++) {
       // console.log(demo[qLength].question)
       if (demo[qLength].question) {
-        counter += 1
+        counter += 1;
       }
     }
     // }
-    console.log(counter, "length ")
-    console.log(A.length)
+    // console.log(counter, "length ");
+    // console.log(A.length);
     // console.log(qLength + 1, 'qlength')
     // console.log(A.length)
-    if ((A.length) !== (counter)) {
+    if (A.length !== counter) {
       return toast({
         position: "top",
         title: `Please Answer All fields`,
@@ -144,7 +141,7 @@ const MenuFeedBackForm = (props) => {
             duration: 9000,
             isClosable: true,
           });
-          navigate(-1)
+          navigate(-1);
           return true;
         } else {
           toast({

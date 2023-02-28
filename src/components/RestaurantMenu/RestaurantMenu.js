@@ -21,6 +21,8 @@ const RestaurantMenu = (props) => {
   let menu_index = props?.menu_index;
   let userId = props?.userId;
   let tableNumber = props?.tableNumber;
+  let resName = props?.resName;
+  let resImage = props?.resImage;
 
   const [sectionList, setSectionList] = useState();
   const [subSectionList, setSubSectionList] = useState();
@@ -28,8 +30,6 @@ const RestaurantMenu = (props) => {
   const [state, setState] = useState(false);
   const [state2, setState2] = useState(false);
   const [inputType, setInputType] = useState(false);
-
-  const [count2, setCount2] = useState(false);
 
   const getIndex = (index) => {
     setCount(index);
@@ -113,7 +113,12 @@ const RestaurantMenu = (props) => {
 
   return (
     <>
-      <RestaurantHeader userId={userId} tableNumber={tableNumber} />
+      <RestaurantHeader
+        userId={userId}
+        tableNumber={tableNumber}
+        resName={resName}
+        changer={Math.random()}
+      />
       <div className="menu">
         <div className="d-flex justify-content-start">
           <div className="backarrow">
@@ -161,6 +166,7 @@ const RestaurantMenu = (props) => {
                   <SubSecItemCard
                     subSection_index={x._id}
                     tableNumber={tableNumber}
+                    resImage={resImage}
                   />
                 </Accordion.Body>
               </Accordion.Item>
@@ -170,7 +176,11 @@ const RestaurantMenu = (props) => {
       </div>
 
       <div className="mx-auto mt-3 mb-3">
-        <DisplayItemCard section_index={count} tableNumber={tableNumber} />
+        <DisplayItemCard
+          section_index={count}
+          tableNumber={tableNumber}
+          resImage={resImage}
+        />
       </div>
     </>
   );

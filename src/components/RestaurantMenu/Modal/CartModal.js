@@ -15,11 +15,10 @@ import { MenuState } from "../../../context/MenuContext";
 const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let userId = props?.userId;
   let tableNumber = props?.tableNumber;
-  console.log(tableNumber, "tableNumber CartModal ");
+
   const toast = useToast();
   const { adder, setAdder } = MenuState();
 
-  console.log(adder, "chnager ");
   const [loading, setLoading] = useState(false);
   const [loading1, setLoading1] = useState(false);
   const [cartItemList, setCartItemList] = useState([]);
@@ -58,8 +57,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
       }
 
       setCartItemList(res.cartItems);
-      // setCartItemsModifiers(res.cartItems.Modifier);
-      console.log(res.cartItems, "CartItemsModifiers");
+
       setCartTotal(res.total_Price);
       setCartId(res._id);
 
@@ -276,16 +274,20 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                           margin: "5px",
                         }}
                       >
-                        <div className="col-3"></div>
+                        {x.Modifier?.length > 0 ? (
+                          <p className="modifier-heading">Modifiers</p>
+                        ) : null}
 
-                        <div className="col-6">
+                        <div className="col-9">
                           {x.Modifier?.map((s, index) => {
                             return (
-                              <div>
-                                <span className="me-2">{s.Modifier_Name}</span>
-                                <br />
-                                <div>
-                                  <div className="d-flex justify-content-start align-items-center mt-2"></div>
+                              <div
+                                className="d-flex justify-content-between mt-2 py-1 px-2 border-bottom mb-3"
+                                key={index}
+                              >
+                                <span>{s.Modifier_Name}</span>
+
+                                <div className="d-flex">
                                   <span className="me-2">
                                     {s.Modifier_Qty == 1 ? (
                                       <AiOutlineDelete
@@ -311,7 +313,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                                     )}
                                   </span>
                                   <span className="me-2">{s.Modifier_Qty}</span>
-                                  <span className="me-2">
+                                  <span>
                                     <AiOutlinePlus
                                       size={20}
                                       color="#0000FF"
@@ -325,9 +327,60 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                                       }
                                     />
                                   </span>
-                                  <span>Rs {s.Modifier_Price}</span>
                                 </div>
+
+                                <span>Rs {s.Modifier_Price}</span>
                               </div>
+
+                              // <div>
+                              //   <span className="me-2">{s.Modifier_Name}</span>
+                              //   <br />
+                              //   <div>
+                              //     <div className="d-flex justify-content-start align-items-center mt-2"></div>
+                              //     <span className="me-2">
+                              //       {s.Modifier_Qty == 1 ? (
+                              //         <AiOutlineDelete
+                              //           size={20}
+                              //           color="#0000FF"
+                              //           onClick={() =>
+                              //             deleteModifierById(x._id, s._id)
+                              //           }
+                              //         />
+                              //       ) : (
+                              //         <MinusIcon
+                              //           size={20}
+                              //           color="#0000FF"
+                              //           onClick={() =>
+                              //             modifierIncrementDecrement(
+                              //               x._id,
+                              //               s._id,
+                              //               "decrement",
+                              //               x.item_Size
+                              //             )
+                              //           }
+                              //         />
+                              //       )}
+                              //     </span>
+                              //     <span className="me-2">{s.Modifier_Qty}</span>
+                              //     <span className="me-2">
+                              //       <AiOutlinePlus
+                              //         size={20}
+                              //         color="#0000FF"
+                              //         onClick={() =>
+                              //           modifierIncrementDecrement(
+                              //             x._id,
+                              //             s._id,
+                              //             "increment",
+                              //             x.item_Size
+                              //           )
+                              //         }
+                              //       />
+                              //     </span>
+                              //     <div className="col-3">
+                              //       <span>Rs {s.Modifier_Price}</span>
+                              //     </div>
+                              //   </div>
+                              // </div>
                             );
                           })}
                         </div>

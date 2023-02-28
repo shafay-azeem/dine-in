@@ -9,13 +9,13 @@ import { BASE_URL, API_URL } from "../../../global/Constant";
 import { useState } from "react";
 
 const MenuStartModal = (props) => {
-  // const { response, setResponse } = MenuState();
-  // let change;
   const [response, setResponse] = useState([]);
   const [change, setChange] = useState(false);
 
   let userId = props?.userId;
   let tableNumber = props?.tableNumber;
+  let resName = props?.resName;
+  let resImage = props?.resImage;
 
   const navigate = useNavigate();
   const myfun = (index, menuname, menuDescription) => {
@@ -24,6 +24,8 @@ const MenuStartModal = (props) => {
       search: createSearchParams({
         index,
         tableNumber,
+        resName,
+        resImage,
         // menuname,
         // menuDescription,
         userId,

@@ -68,6 +68,8 @@ const MenuDetail = (props) => {
 
   const [itemid, setItemId] = useState();
 
+  const [tag, setTag] = useState();
+
   const handleClick = () => setShow(true);
   const handleClick2 = () => setShow(false);
 
@@ -76,6 +78,8 @@ const MenuDetail = (props) => {
   let subsectionitem_index = props?.subsectionitem_index;
 
   let tableNumber = props?.tableNumber;
+
+  let resImage = props?.resImage;
 
   const navigate = useNavigate();
 
@@ -91,8 +95,8 @@ const MenuDetail = (props) => {
         );
 
         let setVar = getSingleItem.data.item;
-        console.log(setVar, "item detail");
 
+        setTag(setVar.itemTag);
         setName(setVar.itemName);
         setImage(setVar.itemImage);
         setVideo(setVar.video);
@@ -140,15 +144,14 @@ const MenuDetail = (props) => {
 
         setTotalCarbs(setVar.itemTotalCarbs);
         setTotalCarbsPercentage(setVar.itemTotalCarbsPercentage);
-
-        console.log();
       } else {
         let getSingleItem = await apiFunctions.GET_REQUEST_BY_ID(
           BASE_URL + API_URL.GET_ITEMS_BY_ITEMID_QR + item_index
         );
 
         let setVar = getSingleItem.data.item;
-        console.log(setVar);
+
+        setTag(setVar.itemTag);
         setItemId(setVar._id);
 
         setName(setVar.itemName);
@@ -217,7 +220,7 @@ const MenuDetail = (props) => {
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + tableNumber, cartData)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.status == 200) {
             toast({
               position: "top",
@@ -234,7 +237,6 @@ const MenuDetail = (props) => {
           }
         });
     } catch (err) {
-      console.log(err);
       toast({
         position: "top",
         title: `There Some Error`,
@@ -656,9 +658,12 @@ const MenuDetail = (props) => {
                 </p>
               ) : null}
 
-              {priceOption?.map((y) => {
+              {priceOption?.map((y, index) => {
                 return (
-                  <div className="d-flex justify-content-between mt-2 py-1 px-2 border-bottom mb-3">
+                  <div
+                    className="d-flex justify-content-between mt-2 py-1 px-2 border-bottom mb-3"
+                    key={index}
+                  >
                     {y.name ? (
                       <div>
                         {y.name} ({y.calories} Calories)
@@ -669,21 +674,23 @@ const MenuDetail = (props) => {
                       <div className="itemPrice">${y.price}</div>
                     ) : null}
 
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      onClick={() =>
-                        myFun(
-                          item_index ? item_index : subsectionitem_index,
-                          name,
-                          y.price,
-                          image,
-                          y.name
-                        )
-                      }
-                    >
-                      add
-                    </Button>
+                    {tag ? null : (
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        onClick={() =>
+                          myFun(
+                            item_index ? item_index : subsectionitem_index,
+                            name,
+                            y.price,
+                            image,
+                            y.name
+                          )
+                        }
+                      >
+                        add
+                      </Button>
+                    )}
                   </div>
                 );
               })}
@@ -711,13 +718,15 @@ const MenuDetail = (props) => {
                                 <div className="itemPrice">${r.Price}</div>
                               )}
 
-                              <Button
-                                variant="primary"
-                                size="sm"
-                                onClick={onOpen}
-                              >
-                                add
-                              </Button>
+                              {tag ? null : (
+                                <Button
+                                  variant="primary"
+                                  size="sm"
+                                  onClick={onOpen}
+                                >
+                                  add
+                                </Button>
+                              )}
                             </div>
                           );
                         })}
@@ -736,7 +745,7 @@ const MenuDetail = (props) => {
               onClose={onClose}
               PriceOption={priceOption}
               Modifiers={demoModifier}
-              ItemId={itemid}
+              ItemId={item_index ? item_index : subsectionitem_index}
               tableNumber={tableNumber}
             />
           ) : null}
@@ -744,7 +753,9 @@ const MenuDetail = (props) => {
 
         <Col lg={8} className=" text-center d-none d-lg-block d-xl-block">
           <div className="d-flex align-items-center justify-content-center w-100 vh-100">
-            <p className="restaurant-name">Your Restaurant Name</p>
+            <div>
+              <img className="preview" src={resImage} alt="" />
+            </div>
           </div>
         </Col>
       </Row>

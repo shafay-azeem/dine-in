@@ -18,13 +18,13 @@ const MenuPage = (props) => {
   const [demo, setDemo] = useState([]);
   const [response, setResponse] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [resName, setResName] = useState();
+  const [resImage, setResImage] = useState();
 
-  let tableNumber = props?.tableNumber
-
+  let tableNumber = props?.tableNumber;
 
   useEffect(() => {
     getActiveFormQuestions();
-
   }, []);
 
   async function getActiveFormQuestions() {
@@ -45,15 +45,32 @@ const MenuPage = (props) => {
     navigate({
       pathname: "/menufeedback",
       search: createSearchParams({
-        userId
+        userId,
       }).toString(),
-
     });
   };
   useEffect(() => {
     getActiveFormQuestions();
     getAllMenu();
+    getRestaurantDetail();
   }, []);
+
+  async function getRestaurantDetail() {
+    try {
+      setLoading(false);
+      let restaurantDetail = await apiFunctions.GET_REQUEST(
+        BASE_URL + API_URL.GET_RESTURANT_DETAIL + userId
+      );
+      let res = restaurantDetail.data.user;
+
+      setResName(res.resName);
+      setResImage(res.resImage);
+      setLoading(true);
+      // setChange(true);
+    } catch (err) {
+      console.log("An error occurred while fetching menus", err.message);
+    }
+  }
 
   async function getActiveFormQuestions() {
     try {
@@ -62,8 +79,7 @@ const MenuPage = (props) => {
       );
       let res = getFormQuestions.data.feedbackForm;
       if (!res[0]?.formQuestions[0]?.Questions) {
-        console.log('jejjeje')
-        return setDemo(null)
+        return setDemo(null);
       }
       setDemo(res[0]?.formQuestions[0].Questions);
     } catch (error) {
@@ -71,17 +87,16 @@ const MenuPage = (props) => {
     }
   }
   async function getAllMenu() {
-
     try {
-      setLoading(false)
+      setLoading(false);
       let getAllMenu = await apiFunctions.GET_REQUEST(
         BASE_URL + API_URL.GET_ALL_MENU_QR + userId
       );
       let res = getAllMenu.data.menu;
-      console.log(res, "res");
+
       setResponse(res);
-      setLoading(true)
-      console.log(response[0]?.userResturantImage)
+      setLoading(true);
+
       // setChange(true);
     } catch (err) {
       console.log("An error occurred while fetching menus", err.message);
@@ -93,11 +108,12 @@ const MenuPage = (props) => {
       <Row className="align-items-center" style={{ height: "100vh" }}>
         <Col lg={5} md={12} sm={12} className="d-flex justify-content-center">
           <Stack className="mx-auto text-center" gap={4}>
-            {loading ? (<Heading size='lg'>{response[0]?.userResturant}</Heading>) : (
+            {loading ? (
+              <Heading size="lg">{resName}</Heading>
+            ) : (
               <div className="loading-screen">
                 <div className="loading-spinner"> </div>
               </div>
-
             )}
             <Heading size="sm" className="mt-2">
               YOUR TABLE NUMBER : {tableNumber}
@@ -126,6 +142,8 @@ const MenuPage = (props) => {
             onHide={() => setModalShow(false)}
             userId={userId}
             tableNumber={tableNumber}
+            resName={resName}
+            resImage={resImage}
           />
         </Col>
         <Col
@@ -141,16 +159,12 @@ const MenuPage = (props) => {
         </Col>
         <Col lg={5} className="text-center d-none d-lg-block d-xl-block">
           <div>
-            <img
-              className="preview"
-              src={response[0]?.userResturantImage}
-              alt=""
-            />
+            <img className="preview" src={resImage} alt="" />
           </div>
           {/* <p className="restaurant-name">Your Restaurant Name</p> */}
         </Col>
       </Row>
-    </div >
+    </div>
   );
 };
 

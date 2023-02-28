@@ -67,7 +67,7 @@ const apiFunctions = {
     const data = await axios
       .post(url, formData, config)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         return res;
       })
       .catch((error) => {
@@ -75,7 +75,7 @@ const apiFunctions = {
         return error;
       });
 
-    console.log(data);
+    // console.log(data);
     return data;
   },
 

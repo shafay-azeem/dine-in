@@ -23,7 +23,7 @@ const RevenueRangeModal = (props) => {
   const [endDate, setEndDate] = useState();
   const [amount, setAmount] = useState();
 
-  console.log(startDate);
+  // console.log(startDate);
   async function revenueRange() {
     try {
       let filterOrdersByDate = await apiFunctions.GET_REQUEST(
