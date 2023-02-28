@@ -16,6 +16,9 @@ const DisplayItemCard = (props) => {
   let section_index = props?.section_index;
   let tableNumber = props?.tableNumber;
   let resImage = props?.resImage;
+  let userId = props?.userId;
+  let menu_index = props?.menu_index;
+  let resName = props?.resName;
 
   const [itemList, setItemList] = useState();
   const [state, setstate] = useState(false);
@@ -31,6 +34,9 @@ const DisplayItemCard = (props) => {
         index,
         tableNumber,
         resImage,
+        menu_index,
+        resName,
+        userId,
       }).toString(),
     });
   };

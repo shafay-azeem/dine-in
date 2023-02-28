@@ -5,7 +5,7 @@ import "./MenuDetail.css";
 
 import { useState } from "react";
 import { BsArrowLeftShort, BsStopwatch, BsXLg } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { IconButton, Tooltip, useDisclosure, useToast } from "@chakra-ui/react";
 
 import apiFunctions from "../../global/GlobalFunction";
@@ -81,11 +81,30 @@ const MenuDetail = (props) => {
 
   let resImage = props?.resImage;
 
+  let index = props?.menu_index;
+
+  let userId = props?.userId;
+
+  let resName = props?.resName;
+
   const navigate = useNavigate();
 
   useEffect(() => {
     getItems();
   }, []);
+
+  const myfun = () => {
+    navigate({
+      pathname: "/menudisplay",
+      search: createSearchParams({
+        index,
+        tableNumber,
+        resName,
+        resImage,
+        userId,
+      }).toString(),
+    });
+  };
 
   async function getItems() {
     try {
@@ -509,7 +528,7 @@ const MenuDetail = (props) => {
                 <IconButton
                   aria-label="Search database"
                   icon={<BsArrowLeftShort />}
-                  onClick={() => navigate(-1)}
+                  onClick={() => myfun()}
                 />
               </div>
 

@@ -14,6 +14,9 @@ const SubSecItemCard = (props) => {
   const toast = useToast();
   let tableNumber = props?.tableNumber;
   let resImage = props?.resImage;
+  let userId = props?.userId;
+  let menu_index = props?.menu_index;
+  let resName = props?.resName;
 
   const navigate = useNavigate();
   const { response, setResponse } = MenuState();
@@ -29,6 +32,9 @@ const SubSecItemCard = (props) => {
         subsecitemindex,
         tableNumber,
         resImage,
+        menu_index,
+        resName,
+        userId,
       }).toString(),
     });
   };

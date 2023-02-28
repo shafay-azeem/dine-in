@@ -167,6 +167,9 @@ const RestaurantMenu = (props) => {
                     subSection_index={x._id}
                     tableNumber={tableNumber}
                     resImage={resImage}
+                    menu_index={menu_index}
+                    resName={resName}
+                    userId={userId}
                   />
                 </Accordion.Body>
               </Accordion.Item>
@@ -180,6 +183,9 @@ const RestaurantMenu = (props) => {
           section_index={count}
           tableNumber={tableNumber}
           resImage={resImage}
+          menu_index={menu_index}
+          resName={resName}
+          userId={userId}
         />
       </div>
     </>
