@@ -56,7 +56,7 @@ const ResultTable = () => {
 
     let res = getResults.data.formResponse;
     console.log(res, "res result");
-    console.log(getResults.data.formResponseCount, "hhh");
+    // console.log(getResults.data.formResponseCount, "hhh");
     setTotalResults(getResults.data.formResponseCount);
     setFeedback(res);
   }

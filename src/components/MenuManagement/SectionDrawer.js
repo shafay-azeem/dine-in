@@ -454,6 +454,7 @@ const SectionDrawer = (props) => {
     setImage(null);
     document.getElementById("img").value = "";
   }
+
   return (
     <>
       <Drawer
