@@ -31,6 +31,7 @@ const OrderPage = () => {
 
   let userId = searchparams.get("userId");
   let tableNumber = searchparams.get("tableNumber");
+  let resName = searchparams.get("resName");
 
   const img = {
     KFCcard: require("../Assets/burger.jpg"),
@@ -221,7 +222,11 @@ const OrderPage = () => {
 
   return (
     <div className="container">
-      <RestaurantHeader userId={userId} tableNumber={tableNumber} />
+      <RestaurantHeader
+        userId={userId}
+        tableNumber={tableNumber}
+        resName={resName}
+      />
 
       {loading ? (
         <div className="row justify-content-between mt-3">

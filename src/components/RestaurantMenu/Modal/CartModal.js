@@ -16,6 +16,7 @@ import { Row } from "react-bootstrap";
 const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let userId = props?.userId;
   let tableNumber = props?.tableNumber;
+  let resName = props?.resName;
 
   const toast = useToast();
   const { adder, setAdder } = MenuState();
@@ -167,6 +168,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
       search: createSearchParams({
         userId,
         tableNumber,
+        resName,
       }).toString(),
     });
   };

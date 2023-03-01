@@ -62,6 +62,7 @@ const RestaurantHeader = (props) => {
         toggleOffcanvas={toggleOffcanvas}
         userId={userId}
         tableNumber={tableNumber}
+        resName={resName}
       />
     </Navbar>
   );
