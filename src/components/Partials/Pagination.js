@@ -3,14 +3,21 @@ import _ from "lodash";
 
 const Pagination = ({ total, currentPage, perPage, onPageChange }) => {
   let totalPages = Math.ceil(total / perPage);
-  console.log(total, 'total')
+  // console.log(total, 'total')
   if (totalPages == 0) {
-    totalPages = 1
-    currentPage = 1
+    totalPages = 1;
+    currentPage = 1;
   }
 
-  const pages = _.range(1, totalPages + 1);
-  console.log(pages)
+  // const pages = _.range(1, totalPages + 1);
+  // console.log(pages)
+
+  const pageRange = 5; // The number of pages displayed at a time
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  // Calculate the start and end indices of the current page range
+  const startPage = Math.max(1, currentPage - Math.floor(pageRange / 2));
+  const endPage = Math.min(totalPages, startPage + pageRange - 1);
 
   return (
     <nav>
@@ -36,7 +43,7 @@ const Pagination = ({ total, currentPage, perPage, onPageChange }) => {
             <span className="sr-only">Previous</span>
           </button>
         </li>
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+        {pageNumbers.slice(startPage - 1, endPage).map((page) => (
           <li
             key={page}
             className={page === currentPage ? "page-item active" : "page-item "}

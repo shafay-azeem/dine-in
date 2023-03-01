@@ -39,7 +39,7 @@ const ViewFeedBacks = (props) => {
 
           <ModalBody pb={6}>
             <Text fontWeight="500" mb="1rem">
-              Date : {formatDate(feedbackInfo.createAt.toString())}
+              Date : {formatDate(feedbackInfo.createdAt.toString())}
             </Text>
 
             <Text fontWeight="500" mb="1rem">

@@ -98,8 +98,8 @@ const AddModifierModal = (props) => {
         <ModalBody pb={6}>
           <FormControl>
             <Select
-              placeholder="Select Size"
-              onChange={(e) => setSelectedSize(e.target.value.toLowerCase())}
+              placeholder="Please Select Your Item Size"
+              onChange={(e) => setSelectedSize(e.target.value)}
               value={selectedSize}
             >
               {ItemSizes?.map((y, index) => (

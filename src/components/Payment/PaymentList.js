@@ -220,6 +220,17 @@ const PaymentList = () => {
                           bg="white"
                           onChange={(e) => setEndDate(e.target.value)}
                         />
+                        <Button
+                          onClick={() => {
+                            setStartDate("");
+                            setEndDate("");
+                            document
+                              .querySelectorAll('input[type="date"]')
+                              .forEach((input) => (input.value = ""));
+                          }}
+                        >
+                          Clear
+                        </Button>
                       </GridItem>
                     </>
                   ) : null}
@@ -236,6 +247,16 @@ const PaymentList = () => {
                             bg="white"
                             onChange={(e) => setStartDate(e.target.value)}
                           />
+                          <Button
+                            onClick={() => {
+                              setStartDate("");
+                              document.querySelector(
+                                'input[type="date"]'
+                              ).value = "";
+                            }}
+                          >
+                            Clear
+                          </Button>
                         </GridItem>
                       </>
                     ) : null}

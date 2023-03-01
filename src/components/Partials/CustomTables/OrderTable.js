@@ -60,9 +60,9 @@ const OrderTable = (props) => {
     try {
       let getPaidUnpaidOrders = await apiFunctions.GET_REQUEST(
         BASE_URL +
-        API_URL.GET_PAID_UNPAID_ORDERS +
-        userId +
-        `?paymentStatus=${paymentStatus}&page=${currentPage}`
+          API_URL.GET_PAID_UNPAID_ORDERS +
+          userId +
+          `?paymentStatus=${paymentStatus}&page=${currentPage}`
       );
       let res = getPaidUnpaidOrders.data.orders;
 
@@ -80,9 +80,9 @@ const OrderTable = (props) => {
     try {
       let filterOrdersByDate = await apiFunctions.GET_REQUEST(
         BASE_URL +
-        API_URL.FILTER_ORDER_BY_DATE +
-        userId +
-        `?paymentStatus=${paymentStatus}&date=${startDate}&page=${currentPage}`
+          API_URL.FILTER_ORDER_BY_DATE +
+          userId +
+          `?paymentStatus=${paymentStatus}&date=${startDate}&page=${currentPage}`
       );
       let res = filterOrdersByDate.data.orders;
 
@@ -99,16 +99,15 @@ const OrderTable = (props) => {
     try {
       let filterOrdersByDate = await apiFunctions.GET_REQUEST(
         BASE_URL +
-        API_URL.GET_ORDER_BY_RANGE +
-        userId +
-        `?paymentStatus=${paymentStatus}&startDate=${startDate}&endDate=${endDate}&page=${currentPage}`
+          API_URL.GET_ORDER_BY_RANGE +
+          userId +
+          `?paymentStatus=${paymentStatus}&startDate=${startDate}&endDate=${endDate}&page=${currentPage}`
       );
       let res = filterOrdersByDate.data.orders;
 
       setOrders(res);
       setTotalOrders(filterOrdersByDate.data.totalOrders);
-      console.log(res)
-      console.log(totalOrders, 'totalorder -alll')
+
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -126,9 +125,8 @@ const OrderTable = (props) => {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    console.log(pageNumber, 'pageNumber')
+    console.log(pageNumber, "pageNumber");
   };
-
 
   return (
     <>

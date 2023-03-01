@@ -19,6 +19,7 @@ import { MenuState } from "../../../context/MenuContext";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
 import ViewFeedBacks from "../../FeedBacks/ViewFeedBacks";
+import Pagination from "../Pagination";
 
 const ResultTable = () => {
   const [count, setCount] = useState();
@@ -39,19 +40,25 @@ const ResultTable = () => {
     onClose: ViewFeedBackOnClose,
   } = useDisclosure();
 
+  const [totalResults, setTotalResults] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
+
   useEffect(() => {
     getAllResults();
     setGetResults(true);
-  }, [getResults]);
+  }, [getResults, currentPage]);
 
   async function getAllResults() {
     let getResults = await apiFunctions.GET_REQUEST(
-      BASE_URL + API_URL.GET_ALL_RESULTS
+      BASE_URL + API_URL.GET_ALL_RESULTS + `?page=${currentPage}`
     );
 
     let res = getResults.data.formResponse;
-
-    setFeedback(res.reverse());
+    console.log(res, "res result");
+    console.log(getResults.data.formResponseCount, "hhh");
+    setTotalResults(getResults.data.formResponseCount);
+    setFeedback(res);
   }
 
   const getIndex = (index) => {
@@ -60,6 +67,11 @@ const ResultTable = () => {
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    // console.log(pageNumber, "pageNumber");
   };
 
   return (
@@ -79,7 +91,7 @@ const ResultTable = () => {
               return (
                 <Tr key={index}>
                   <Td>{x._id}</Td>
-                  <Td>{formatDate(x.createAt.toString())}</Td>
+                  <Td>{formatDate(x.createdAt.toString())}</Td>
                   <Td>{x.formName}</Td>
 
                   <Td style={{ textAlign: "center", cursor: "pointer" }}>
@@ -100,6 +112,13 @@ const ResultTable = () => {
             })}
           </Tbody>
         </Table>
+
+        <Pagination
+          total={totalResults}
+          currentPage={currentPage}
+          perPage={perPage}
+          onPageChange={handlePageChange}
+        />
       </TableContainer>
     </>
   );
