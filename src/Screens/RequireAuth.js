@@ -6,9 +6,14 @@ import { useAuth } from "../context/authContext";
 const RequireAuth = ({ children }) => {
   const navigate = useNavigate();
   const auth = useAuth();
+  let token = localStorage.getItem("token");
+  let user_id = localStorage.getItem("user_id");
 
   useEffect(() => {
-    if (!auth.user) {
+    // if (!auth.user) {
+    //   return navigate("/");
+    // }
+    if (!token && !user_id) {
       return navigate("/");
     }
   }, ["/"]);

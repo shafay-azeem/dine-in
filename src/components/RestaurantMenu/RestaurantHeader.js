@@ -42,22 +42,21 @@ const RestaurantHeader = (props) => {
   // }
 
   return (
-    <Navbar sticky="top" bg="light" variant="light">
-      <Container>
-        <Navbar.Brand>
-          Table Number : {tableNumber} {resName}
-        </Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          <Nav.Link onClick={toggleOffcanvas} className="text-end">
-            <CgShoppingCart size={20} />
-          </Nav.Link>
+    <Navbar sticky="top" bg="light" variant="light" className="px-2">
+      <Navbar.Brand>
+        Table Number : {tableNumber} {resName}
+      </Navbar.Brand>
+      <Navbar.Toggle />
+      <Navbar.Collapse className="justify-content-end">
+        <Nav.Link onClick={toggleOffcanvas} className="text-end">
+          <CgShoppingCart size={20} />
+        </Nav.Link>
 
-          <Nav.Link onClick={toggleOffcanvas} className="text-end ms-2">
-            Cart
-          </Nav.Link>
-        </Navbar.Collapse>
-      </Container>
+        <Nav.Link onClick={toggleOffcanvas} className="text-end ms-2">
+          Cart
+        </Nav.Link>
+      </Navbar.Collapse>
+
       <CartModal
         show={show}
         toggleOffcanvas={toggleOffcanvas}

@@ -11,6 +11,7 @@ import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
 import "../../../App.css";
 import { MenuState } from "../../../context/MenuContext";
+import { Row } from "react-bootstrap";
 
 const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let userId = props?.userId;
@@ -278,16 +279,16 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                           <p className="modifier-heading">Modifiers</p>
                         ) : null}
 
-                        <div className="col-9">
+                        <div className="col-12">
                           {x.Modifier?.map((s, index) => {
                             return (
                               <div
-                                className="d-flex justify-content-between mt-2 py-1 px-2 border-bottom mb-3"
+                                className="d-flex justify-content-between py-2 border-bottom "
                                 key={index}
                               >
                                 <span>{s.Modifier_Name}</span>
 
-                                <div className="d-flex">
+                                <div className="d-flex ">
                                   <span className="me-2">
                                     {s.Modifier_Qty == 1 ? (
                                       <AiOutlineDelete

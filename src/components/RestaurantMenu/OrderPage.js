@@ -222,6 +222,7 @@ const OrderPage = () => {
   return (
     <div className="container">
       <RestaurantHeader userId={userId} tableNumber={tableNumber} />
+
       {loading ? (
         <div className="row justify-content-between mt-3">
           <div className="col-md-7" id="MyCart">
@@ -285,7 +286,6 @@ const OrderPage = () => {
                               }
                             ></i>
                           </button>
-                          <h5 class="mb-0 ms-3">Rs {x.itemPrice_Total}</h5>
                         </div>
                         <div class="col-md-1 text-end">
                           <a href="#!" class="text-danger">
@@ -374,6 +374,9 @@ const OrderPage = () => {
 
                       {/* Modifier */}
                     </div>
+                    <h5 class="pb-2 px-4  text-end text-danger text-xl">
+                      Rs {x.itemPrice_Total}
+                    </h5>
                   </div>
                 </div>
               );
@@ -434,7 +437,7 @@ const OrderPage = () => {
               </button>
             </div> */}
 
-              <div className="d-flex py-2 justify-content-center align-items-center">
+              <div className="d-flex py-3 justify-content-center align-items-center">
                 <button
                   onClick={() => makeOrder(userId, cartItemList)}
                   // onClick={() => navigate("/Payment")}
@@ -443,26 +446,25 @@ const OrderPage = () => {
                   Proceed to Checkout
                 </button>
               </div>
+              <hr />
 
-              <div className="row ms-auto" style={{}}>
-                <h4
+              <div className="d-flex justify-content-between ">
+                <span
                   style={{
                     fontWeight: "600",
                     fontSize: "20px",
-                    marginTop: "20px",
-                    textAlign: "start",
+
+                    textAlign: "end",
                   }}
-                  className="text-black mt-4"
+                  className="text-black"
                 >
                   Sub Total
-                </h4>
+                </span>
                 <span
-                  className="me-2 mt-2"
                   style={{
                     fontWeight: "600",
                     fontSize: "20px",
-                    marginTop: "20px",
-                    textAlign: "start",
+                    textAlign: "end",
                   }}
                 >
                   Rs {cartTotal}

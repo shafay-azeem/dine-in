@@ -99,8 +99,8 @@ const Feedbacks = () => {
   }
 
   function reload() {
-    // window.location.reload();
-    // return false;
+    window.location.reload();
+    return false;
   }
 
   const handleRemove = async (id) => {

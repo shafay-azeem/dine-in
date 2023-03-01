@@ -15,8 +15,17 @@ import Login from "./Authentication/Login";
 import SignUp from "./Authentication/Signup";
 import UpdateUser from "./Authentication/UpdateUser";
 import img from "../components/Assets/DINE-IN.png";
+import { useEffect } from "react";
 
 const HomePage = () => {
+  useEffect(() => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
+    // if (!token && !user_id) {
+    //   return navigate("/");
+    // }
+  }, ["/"]);
+
   return (
     <Container maxW="xl" centerContent>
       <Box
