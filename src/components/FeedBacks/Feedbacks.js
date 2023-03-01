@@ -4,6 +4,7 @@ import {
   Button,
   Grid,
   GridItem,
+  HStack,
   Input,
   Stack,
   Switch,
@@ -70,14 +71,6 @@ const Feedbacks = () => {
     // console.log(feedback[i]);
   }
 
-  const exportToExcel = async () => {
-    const ws = XLSX.utils.json_to_sheet(feedback);
-    const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
-    const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
-    const data = new Blob([excelBuffer], { type: fileType });
-    FileSaver.saveAs(data, fileName + fileExtension);
-  };
-
   function reload() {
     window.location.reload();
   }
@@ -108,7 +101,6 @@ const Feedbacks = () => {
       .DELETE_REQUEST(BASE_URL + API_URL.DELETE_FEEDBACK_FORM_BY_ID + id)
       .then((res) => {
         if (res.data.success == true) {
-          //alert(`${res.data.message}`);
           toast({
             position: "top",
             title: `${res.data.message}`,
@@ -131,11 +123,6 @@ const Feedbacks = () => {
           return false;
         }
       });
-    // if (window.confirm("Do you really want to leave?")) {
-    //   createfeedback.splice(index, 1);
-    //   setCreateFeedback([...createfeedback]);
-    //   setFeedbackFormList(createfeedback);
-    // }
   };
 
   const getIndex = (id) => {
@@ -208,29 +195,20 @@ const Feedbacks = () => {
         </Grid>
 
         {showresult ? (
-          <Grid templateColumns="repeat(4, 1fr)" gap={6} m={10}>
-            <GridItem w="100%" h="10" colSpan={1}>
+          <Grid templateColumns="repeat(5, 1fr)" gap={4} m={10}>
+            <GridItem w="100%" colSpan={1}>
               <Text fontWeight={600}>{feedback?.length} results Listed</Text>
             </GridItem>
 
-            <GridItem w="100%" h="10">
-              <Stack direction={["column", "row"]} spacing="24px">
-                <Box w="100px" h="40px">
-                  <CustomButton
-                    btnText={"Export"}
-                    leftIcon={<ArrowForwardIcon />}
-                    click={(e) => exportToExcel()}
-                  />
-                </Box>
-                <Box w="100px" h="40px">
-                  <CustomButton
-                    click={reload}
-                    btnText={"Reload"}
-                    variant={"outline"}
-                    leftIcon={<RepeatIcon />}
-                  />
-                </Box>
-              </Stack>
+            <GridItem colStart={9} colEnd={9} textAlign="right">
+              <HStack>
+                <CustomButton
+                  click={reload}
+                  btnText={"Reload"}
+                  variant={"outline"}
+                  leftIcon={<RepeatIcon />}
+                />
+              </HStack>
             </GridItem>
           </Grid>
         ) : null}

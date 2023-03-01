@@ -131,6 +131,9 @@ const OrderTable = (props) => {
   return (
     <>
       <Box>
+        <GridItem w="100%" colSpan={1}>
+          <Text fontWeight={600}>{totalOrders} results Listed</Text>
+        </GridItem>
         <Grid templateColumns="repeat(3, 1fr)" gap={6}>
           <GridItem w="100%" h="10" className="d-flex align-items-center">
             <RadioGroup>
@@ -165,6 +168,7 @@ const OrderTable = (props) => {
                   onChange={(e) => setStartDate(e.target.value)}
                 />
               </GridItem>
+
               <GridItem w="100%" h="20">
                 <Text mb="8px">End Date</Text>
                 <Input
@@ -175,22 +179,25 @@ const OrderTable = (props) => {
                   onChange={(e) => setEndDate(e.target.value)}
                 />
               </GridItem>
-              <Button
-                onClick={() => {
-                  setStartDate("");
-                  setEndDate("");
-                  document
-                    .querySelectorAll('input[type="date"]')
-                    .forEach((input) => (input.value = ""));
-                }}
-              >
-                Clear
-              </Button>
+              <GridItem w="310%" align="end" mt={-5}>
+                <Button
+                  colorScheme="teal"
+                  onClick={() => {
+                    setStartDate("");
+                    setEndDate("");
+                    document
+                      .querySelectorAll('input[type="date"]')
+                      .forEach((input) => (input.value = ""));
+                  }}
+                >
+                  Clear
+                </Button>
+              </GridItem>
             </>
           ) : null}
 
-          <Box>
-            {value == "1" ? (
+          {value == "1" ? (
+            <>
               <GridItem w="100%" h="20">
                 <Text mb="8px">Start Date</Text>
                 <Input
@@ -200,7 +207,10 @@ const OrderTable = (props) => {
                   bg="white"
                   onChange={(e) => setStartDate(e.target.value)}
                 />
+              </GridItem>
+              <GridItem w="50%" h="20" mt={8}>
                 <Button
+                  colorScheme="teal"
                   onClick={() => {
                     setStartDate("");
                     document.querySelector('input[type="date"]').value = "";
@@ -209,8 +219,8 @@ const OrderTable = (props) => {
                   Clear
                 </Button>
               </GridItem>
-            ) : null}
-          </Box>
+            </>
+          ) : null}
         </Grid>
       </Box>
 

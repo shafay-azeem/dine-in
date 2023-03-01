@@ -84,6 +84,7 @@ const PaymentList = () => {
       );
       let res = filterOrdersByDate.data.payments;
       getPayment(res);
+      console.log(res, "multi date");
       setTotalOrders(filterOrdersByDate.data.totalPaymentCount);
       return true;
     } catch (err) {
@@ -173,6 +174,9 @@ const PaymentList = () => {
             <TabPanel backgroundColor="white">
               {/* Filter Data */}
               <Box>
+                <GridItem w="100%" colSpan={1}>
+                  <Text fontWeight={600}>{totalOrders} results Listed</Text>
+                </GridItem>
                 <Grid templateColumns="repeat(3, 1fr)" gap={6}>
                   <GridItem
                     w="100%"
@@ -220,7 +224,10 @@ const PaymentList = () => {
                           bg="white"
                           onChange={(e) => setEndDate(e.target.value)}
                         />
+                      </GridItem>
+                      <GridItem w="310%" align="end" mt={-5}>
                         <Button
+                          colorScheme="teal"
                           onClick={() => {
                             setStartDate("");
                             setEndDate("");
@@ -235,32 +242,33 @@ const PaymentList = () => {
                     </>
                   ) : null}
 
-                  <Box>
-                    {value == "1" ? (
-                      <>
-                        <GridItem w="100%" h="20">
-                          <Text mb="8px">Start Date</Text>
-                          <Input
-                            placeholder="Start Date"
-                            size="md"
-                            type="date"
-                            bg="white"
-                            onChange={(e) => setStartDate(e.target.value)}
-                          />
-                          <Button
-                            onClick={() => {
-                              setStartDate("");
-                              document.querySelector(
-                                'input[type="date"]'
-                              ).value = "";
-                            }}
-                          >
-                            Clear
-                          </Button>
-                        </GridItem>
-                      </>
-                    ) : null}
-                  </Box>
+                  {value == "1" ? (
+                    <>
+                      <GridItem w="100%" h="20">
+                        <Text mb="8px">Start Date</Text>
+                        <Input
+                          placeholder="Start Date"
+                          size="md"
+                          type="date"
+                          bg="white"
+                          onChange={(e) => setStartDate(e.target.value)}
+                        />
+                      </GridItem>
+                      <GridItem w="50%">
+                        <Button
+                          mt={8}
+                          colorScheme="teal"
+                          onClick={() => {
+                            setStartDate("");
+                            document.querySelector('input[type="date"]').value =
+                              "";
+                          }}
+                        >
+                          Clear
+                        </Button>
+                      </GridItem>
+                    </>
+                  ) : null}
                 </Grid>
               </Box>
 

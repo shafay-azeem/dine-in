@@ -1,4 +1,4 @@
-import { ViewIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, ViewIcon } from "@chakra-ui/icons";
 import {
   Box,
   Icon,
@@ -16,10 +16,12 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { MenuState } from "../../../context/MenuContext";
+import CustomButton from "../../../CustomElements/CustomButton";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
 import ViewFeedBacks from "../../FeedBacks/ViewFeedBacks";
 import Pagination from "../Pagination";
+import XLSX from "sheetjs-style";
 
 const ResultTable = () => {
   const [count, setCount] = useState();
@@ -74,9 +76,49 @@ const ResultTable = () => {
     // console.log(pageNumber, "pageNumber");
   };
 
+  function exportToExcel(data) {
+    // Create a new workbook
+    const workbook = XLSX.utils.book_new();
+    // Iterate over each object in the data array and create a new worksheet for each one
+    data.forEach((obj, index) => {
+      // Create a new worksheet and add it to the workbook
+      console.log(obj.response, "ssssssssss");
+      const worksheet = XLSX.utils.json_to_sheet(obj.response);
+      XLSX.utils.book_append_sheet(
+        workbook,
+        worksheet,
+        `Response ${index + 1}`
+      );
+    });
+    // Convert the workbook to an Excel file and download it
+    const excelFile = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "binary",
+    });
+    const fileName = "response_data.xlsx";
+    const buffer = new ArrayBuffer(excelFile.length);
+    const view = new Uint8Array(buffer);
+    for (let i = 0; i < excelFile.length; i++) {
+      view[i] = excelFile.charCodeAt(i) & 0xff;
+    }
+    const blob = new Blob([buffer], { type: "application/octet-stream" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", fileName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   return (
     <>
       <TableContainer>
+        <CustomButton
+          btnText={"Export"}
+          leftIcon={<ArrowForwardIcon />}
+          click={() => exportToExcel(feedback)}
+        />
         <Table variant="simple">
           <Thead backgroundColor="#FAFAFA">
             <Tr style={{ textAlign: "center" }}>
