@@ -1,4 +1,4 @@
-import { useToast } from "@chakra-ui/react";
+import { IconButton, useToast } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -14,6 +14,7 @@ import RestaurantHeader from "./RestaurantHeader";
 import "../../App.css";
 import { MenuState } from "../../context/MenuContext";
 import CartModal from "./Modal/CartModal";
+import { BsArrowLeftShort } from "react-icons/bs";
 
 const OrderPage = () => {
   const navigate = useNavigate();
@@ -32,6 +33,9 @@ const OrderPage = () => {
   let userId = searchparams.get("userId");
   let tableNumber = searchparams.get("tableNumber");
   let resName = searchparams.get("resName");
+
+  let index = searchparams.get("menu_index");
+  let resImage = searchparams.get("resImage");
 
   const img = {
     KFCcard: require("../Assets/burger.jpg"),
@@ -220,6 +224,19 @@ const OrderPage = () => {
       });
   };
 
+  const naviagteToMenuDisplay = () => {
+    navigate({
+      pathname: "/menudisplay",
+      search: createSearchParams({
+        index,
+        resImage,
+        resName,
+        tableNumber,
+        userId,
+      }).toString(),
+    });
+  };
+
   return (
     <div className="container">
       <RestaurantHeader
@@ -227,6 +244,14 @@ const OrderPage = () => {
         tableNumber={tableNumber}
         resName={resName}
       />
+
+      <div className="backarrow">
+        <IconButton
+          aria-label="Search database"
+          icon={<BsArrowLeftShort />}
+          onClick={naviagteToMenuDisplay}
+        />
+      </div>
 
       {loading ? (
         <div className="row justify-content-between mt-3">

@@ -114,11 +114,14 @@ const ResultTable = () => {
   return (
     <>
       <TableContainer>
-        <CustomButton
-          btnText={"Export"}
-          leftIcon={<ArrowForwardIcon />}
-          click={() => exportToExcel(feedback)}
-        />
+        <Box align="end" mt={2} mb={2}>
+          <CustomButton
+            btnText={"Export"}
+            leftIcon={<ArrowForwardIcon />}
+            click={() => exportToExcel(feedback)}
+          />
+        </Box>
+
         <Table variant="simple">
           <Thead backgroundColor="#FAFAFA">
             <Tr style={{ textAlign: "center" }}>

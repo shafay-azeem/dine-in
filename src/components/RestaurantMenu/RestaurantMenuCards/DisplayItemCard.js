@@ -72,6 +72,7 @@ const DisplayItemCard = (props) => {
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + tableNumber, cartData)
         .then((res) => {
+          console.log(res, "add to cart");
           if (res.status == 200) {
             toast({
               position: "top",
@@ -284,7 +285,7 @@ const DisplayItemCard = (props) => {
                             )
                           }
                         >
-                          Add to Cart
+                          Add to Cart (Small)
                         </button>
                       </div>
                     )}

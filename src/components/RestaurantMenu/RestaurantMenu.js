@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "./RestaurantMenu.css";
 import { Accordion } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { MenuState } from "../../context/MenuContext";
 import DisplayItemCard from "./RestaurantMenuCards/DisplayItemCard";
 import SubSecItemCard from "./RestaurantMenuCards/SubSecItemCard";
@@ -20,6 +20,8 @@ const RestaurantMenu = (props) => {
   const { response, setResponse } = MenuState();
   let menu_index = props?.menu_index;
   let userId = props?.userId;
+  let USERID = props?.userId;
+
   let tableNumber = props?.tableNumber;
   let resName = props?.resName;
   let resImage = props?.resImage;
@@ -111,6 +113,16 @@ const RestaurantMenu = (props) => {
     }
   }
 
+  const naviagteToMenuStart = () => {
+    navigate({
+      pathname: "/menustart",
+      search: createSearchParams({
+        USERID,
+        tableNumber,
+      }).toString(),
+    });
+  };
+
   return (
     <>
       <RestaurantHeader
@@ -118,6 +130,8 @@ const RestaurantMenu = (props) => {
         tableNumber={tableNumber}
         resName={resName}
         changer={Math.random()}
+        menu_index={menu_index}
+        resImage={resImage}
       />
       <div className="menu">
         <div className="d-flex justify-content-start">
@@ -125,7 +139,7 @@ const RestaurantMenu = (props) => {
             <IconButton
               aria-label="Search database"
               icon={<BsArrowLeftShort />}
-              onClick={() => navigate(-1)}
+              onClick={naviagteToMenuStart}
             />
           </div>
           {/* <BsArrowLeftShort

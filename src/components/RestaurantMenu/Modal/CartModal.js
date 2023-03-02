@@ -17,6 +17,8 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let userId = props?.userId;
   let tableNumber = props?.tableNumber;
   let resName = props?.resName;
+  let menu_index = props?.menu_index;
+  let resImage = props?.resImage;
 
   const toast = useToast();
   const { adder, setAdder } = MenuState();
@@ -47,6 +49,8 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
         BASE_URL + API_URL.GET_CART_BY_TABLE_NUMBER + tableNumber
       );
       let res = getCartByTableNumber.data.cart;
+
+      console.log(getCartByTableNumber, "get cart");
 
       if (res.cartItems?.length > 0) {
         setLoading1(true);
@@ -169,6 +173,8 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
         userId,
         tableNumber,
         resName,
+        menu_index,
+        resImage,
       }).toString(),
     });
   };

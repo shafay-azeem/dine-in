@@ -45,7 +45,7 @@ const MenuConfiguration = () => {
 
   function generateRandomNumber() {
     let randomNumber = "";
-    const characters = "0123456789";
+    const characters = "123456789";
     const charactersLength = characters.length;
     for (let i = 0; i < 5; i++) {
       randomNumber += characters.charAt(

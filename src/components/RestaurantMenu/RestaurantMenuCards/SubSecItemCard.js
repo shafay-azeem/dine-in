@@ -264,7 +264,7 @@ const SubSecItemCard = (props) => {
                             )
                           }
                         >
-                          Add to Cart
+                          Add to Cart (Small)
                         </button>
                       </div>
                     )}

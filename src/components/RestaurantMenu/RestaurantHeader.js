@@ -13,6 +13,8 @@ const RestaurantHeader = (props) => {
   let userId = props?.userId;
   let tableNumber = props?.tableNumber;
   let resName = props?.resName;
+  let resImage = props?.resImage;
+  let menu_index = props?.menu_index;
 
   const [show, setShow] = useState(false);
 
@@ -42,29 +44,58 @@ const RestaurantHeader = (props) => {
   // }
 
   return (
-    <Navbar sticky="top" bg="light" variant="light" className="px-2">
-      <Navbar.Brand>
-        Table Number : {tableNumber} {resName}
-      </Navbar.Brand>
-      <Navbar.Toggle />
-      <Navbar.Collapse className="justify-content-end">
-        <Nav.Link onClick={toggleOffcanvas} className="text-end">
-          <CgShoppingCart size={20} />
-        </Nav.Link>
+    <>
+      <Navbar className="navbar">
+        <Container>
+          <Navbar.Brand
+            style={{ color: "white", fontWeight: 600, fontSize: "25px" }}
+          >
+            {resName}
+          </Navbar.Brand>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="mx-auto">
+            <Navbar.Text
+              className="text-center"
+              style={{ color: "white", fontWeight: 400, fontSize: "18px" }}
+            >
+              Table # : {tableNumber}
+            </Navbar.Text>
+          </Navbar.Collapse>
+          <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text
+              onClick={toggleOffcanvas}
+              style={{ cursor: "pointer" }}
+            >
+              <CgShoppingCart size={20} style={{ color: "white" }} />
+            </Navbar.Text>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      {/* <Navbar sticky="top" bg="light" variant="light" className="px-2">
+        <Navbar.Brand>
+          Table Number : {tableNumber} {resName}
+        </Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Nav.Link onClick={toggleOffcanvas} className="text-end">
+            <CgShoppingCart size={20} />
+          </Nav.Link>
 
-        <Nav.Link onClick={toggleOffcanvas} className="text-end ms-2">
-          Cart
-        </Nav.Link>
-      </Navbar.Collapse>
-
+          <Nav.Link onClick={toggleOffcanvas} className="text-end ms-2">
+            Cart
+          </Nav.Link>
+        </Navbar.Collapse>
+      </Navbar> */}
       <CartModal
         show={show}
         toggleOffcanvas={toggleOffcanvas}
         userId={userId}
         tableNumber={tableNumber}
         resName={resName}
+        menu_index={menu_index}
+        resImage={resImage}
       />
-    </Navbar>
+    </>
   );
 };
 
