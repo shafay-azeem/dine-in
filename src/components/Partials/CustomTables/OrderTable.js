@@ -166,6 +166,7 @@ const OrderTable = (props) => {
                   type="date"
                   bg="white"
                   onChange={(e) => setStartDate(e.target.value)}
+                  max={new Date().toISOString().slice(0, 10)}
                 />
               </GridItem>
 
@@ -177,6 +178,7 @@ const OrderTable = (props) => {
                   type="date"
                   bg="white"
                   onChange={(e) => setEndDate(e.target.value)}
+                  max={new Date().toISOString().slice(0, 10)}
                 />
               </GridItem>
               <GridItem w="310%" align="end" mt={-5}>
@@ -206,6 +208,7 @@ const OrderTable = (props) => {
                   type="date"
                   bg="white"
                   onChange={(e) => setStartDate(e.target.value)}
+                  max={new Date().toISOString().slice(0, 10)}
                 />
               </GridItem>
               <GridItem w="50%" h="20" mt={8}>

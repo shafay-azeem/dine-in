@@ -78,7 +78,7 @@ const DisplayItemCard = (props) => {
               position: "top",
               title: `Card Added SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setAdder(Math.random());
@@ -94,7 +94,7 @@ const DisplayItemCard = (props) => {
         position: "top",
         title: `There Some Error`,
         status: "error",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
     }
@@ -110,6 +110,7 @@ const DisplayItemCard = (props) => {
                 className="mx-auto mb-1 fooditem"
                 style={{
                   cursor: "pointer",
+                  opacity: x.itemTag ? "0.5" : "none",
                 }}
               >
                 <div className="Soldout-Badge">
@@ -120,7 +121,7 @@ const DisplayItemCard = (props) => {
                   ) : null}
                 </div>
 
-                <Card.Body style={{ opacity: x.itemTag ? "0.5" : "none" }}>
+                <Card.Body>
                   <Row>
                     <Col lg={4} className="imgcol p-0">
                       <img

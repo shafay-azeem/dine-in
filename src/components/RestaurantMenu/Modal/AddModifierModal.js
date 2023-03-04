@@ -67,7 +67,7 @@ const AddModifierModal = (props) => {
               position: "top",
               title: `Modifier Added SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             // setAdder(Math.random());
@@ -83,7 +83,7 @@ const AddModifierModal = (props) => {
         position: "top",
         title: `There Some Error`,
         status: "error",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
     }
@@ -115,21 +115,6 @@ const AddModifierModal = (props) => {
               <div key={index}>
                 {s.reference?.map((r, index) => {
                   return (
-                    // <div class="d-flex flex-row">
-                    //   <div>
-                    //     <div class="d-flex flex-row">
-                    //       <div class="p-2">
-                    //         <p class="modifier-name">{r.Name}</p>
-                    //       </div>
-                    //       <div class="p-2">
-                    //         <BsPlusLg
-                    //           class="mt-1"
-                    //           onClick={() => myFun(r.Name, r.Price)}
-                    //         />
-                    //       </div>
-                    //     </div>
-                    //   </div>
-                    // </div>
                     <div
                       className="d-flex justify-content-between mt-2 py-1 px-2 border-bottom mb-3 mt-4"
                       key={index}
@@ -142,6 +127,7 @@ const AddModifierModal = (props) => {
 
                       <BsPlusLg
                         className="mt-1"
+                        style={{ cursor: "pointer" }}
                         onClick={() => myFun(r.Name, r.Price)}
                       />
                     </div>

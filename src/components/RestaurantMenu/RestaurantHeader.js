@@ -25,31 +25,31 @@ const RestaurantHeader = (props) => {
     setShow(!show);
   };
 
-  useEffect(() => {
-    getCartLength();
-  }, [props?.changer]);
+  // useEffect(() => {
+  //   getCartLength();
+  // }, [props?.changer]);
 
-  async function getCartLength() {
-    try {
-      let getCartLength = await apiFunctions.GET_REQUEST(
-        BASE_URL + API_URL.GET_CART_LENGTH + tableNumber
-      );
-      let res = getCartLength.data.cartLength;
-      // console.log(res, "cartLength");
-      setCartCount(res);
-      // setState(true);
-      return true;
-    } catch (err) {
-      console.log("An error occurred while fetching sections", err.message);
-    }
-  }
+  // async function getCartLength() {
+  //   try {
+  //     let getCartLength = await apiFunctions.GET_REQUEST(
+  //       BASE_URL + API_URL.GET_CART_LENGTH + tableNumber
+  //     );
+  //     let res = getCartLength.data.cartLength;
+  //     // console.log(res, "cartLength");
+  //     setCartCount(res);
+  //     // setState(true);
+  //     return true;
+  //   } catch (err) {
+  //     console.log("An error occurred while fetching sections", err.message);
+  //   }
+  // }
 
   return (
     <>
       <Navbar className="navbar">
         <Container>
           <Navbar.Brand
-            style={{ color: "white", fontWeight: 600, fontSize: "25px" }}
+            style={{ color: "white", fontWeight: 600, fontSize: "20px" }}
           >
             {resName}
           </Navbar.Brand>
@@ -69,9 +69,9 @@ const RestaurantHeader = (props) => {
             >
               {/* <CgShoppingCart size={20} style={{ color: "white" }} /> (
               {cartCount}) */}
-              <Badge pill bg="primary">
+              {/* <Badge pill bg="primary">
                 {cartCount}
-              </Badge>
+              </Badge> */}
               <CgShoppingCart size={20} color="white" />
             </Navbar.Text>
           </Navbar.Collapse>

@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import "./MenuDetail.css";
 
 import { useState } from "react";
-import { BsArrowLeftShort, BsStopwatch, BsXLg } from "react-icons/bs";
+import { BsArrowLeftShort, BsPlusLg, BsStopwatch, BsXLg } from "react-icons/bs";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { IconButton, Tooltip, useDisclosure, useToast } from "@chakra-ui/react";
 
@@ -245,7 +245,7 @@ const MenuDetail = (props) => {
               position: "top",
               title: `Card Added SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             // setAdder(Math.random());
@@ -260,7 +260,7 @@ const MenuDetail = (props) => {
         position: "top",
         title: `There Some Error`,
         status: "error",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
     }
@@ -280,10 +280,14 @@ const MenuDetail = (props) => {
               <div className="backarrow">
                 <IconButton
                   aria-label="Search database"
-                  icon={<BsXLg />}
+                  icon={<BsArrowLeftShort />}
+                  colorScheme="white"
+                  bg="white"
+                  color="black"
                   onClick={handleClick2}
                 />
               </div>
+
               <h3 className="nut-fact text-center mt-3 mb-5">
                 Nutrition Facts
               </h3>
@@ -695,8 +699,13 @@ const MenuDetail = (props) => {
 
                     {tag ? null : (
                       <Button
-                        variant="primary"
+                        variant="outline"
                         size="sm"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
                         onClick={() =>
                           myFun(
                             item_index ? item_index : subsectionitem_index,
@@ -707,8 +716,24 @@ const MenuDetail = (props) => {
                           )
                         }
                       >
+                        <BsPlusLg style={{ marginRight: "8px" }} />
                         add
                       </Button>
+                      // <Button
+                      //   variant="primary"
+                      //   size="sm"
+                      //   onClick={() =>
+                      //     myFun(
+                      //       item_index ? item_index : subsectionitem_index,
+                      //       name,
+                      //       y.price,
+                      //       image,
+                      //       y.name
+                      //     )
+                      //   }
+                      // >
+                      //   add
+                      // </Button>
                     )}
                   </div>
                 );
@@ -739,12 +764,25 @@ const MenuDetail = (props) => {
 
                               {tag ? null : (
                                 <Button
-                                  variant="primary"
+                                  variant="outline"
                                   size="sm"
+                                  style={{
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                  }}
                                   onClick={onOpen}
                                 >
+                                  <BsPlusLg style={{ marginRight: "8px" }} />
                                   add
                                 </Button>
+                                // <Button
+                                //   variant="primary"
+                                //   size="sm"
+                                //   onClick={onOpen}
+                                // >
+                                //   add
+                                // </Button>
                               )}
                             </div>
                           );

@@ -245,16 +245,27 @@ const OrderPage = () => {
         resName={resName}
       />
 
-      <div className="backarrow">
+      {/* <div className="backarrow">
         <IconButton
           aria-label="Search database"
           icon={<BsArrowLeftShort />}
           onClick={naviagteToMenuDisplay}
         />
+      </div> */}
+
+      <div className="backarrow mt-1">
+        <IconButton
+          aria-label="Search database"
+          icon={<BsArrowLeftShort />}
+          colorScheme="white"
+          bg="white"
+          color="black"
+          onClick={naviagteToMenuDisplay}
+        />
       </div>
 
       {loading ? (
-        <div className="row justify-content-between mt-3">
+        <div className="row justify-content-between mt-5">
           <div className="col-md-7" id="MyCart">
             {cartItemList?.map((x, index) => {
               return (

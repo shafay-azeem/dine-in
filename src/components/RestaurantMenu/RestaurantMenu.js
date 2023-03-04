@@ -139,9 +139,19 @@ const RestaurantMenu = (props) => {
             <IconButton
               aria-label="Search database"
               icon={<BsArrowLeftShort />}
+              colorScheme="white"
+              bg="white"
+              color="black"
               onClick={naviagteToMenuStart}
             />
           </div>
+          {/* <div className="backarrow">
+            <IconButton
+              aria-label="Search database"
+              icon={<BsArrowLeftShort />}
+              onClick={naviagteToMenuStart}
+            />
+          </div> */}
           {/* <BsArrowLeftShort
             onClick={() => navigate(-1)}
             style={{ cursor: "pointer" }}

@@ -12,6 +12,7 @@ import apiFunctions from "../../../global/GlobalFunction";
 import "../../../App.css";
 import { MenuState } from "../../../context/MenuContext";
 import { Row } from "react-bootstrap";
+import RestaurantHeader from "../RestaurantHeader";
 
 const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let userId = props?.userId;
@@ -117,7 +118,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
             position: "top",
             title: `Cart Deleted SuccessFully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setChanger(Math.random());
@@ -127,7 +128,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -146,9 +147,9 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
         if (res.data.success == true) {
           toast({
             position: "top",
-            title: `Cart Deleted SuccessFully`,
+            title: `Modifier Deleted SuccessFully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setChanger(Math.random());
@@ -158,7 +159,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -238,11 +239,13 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                                 size={20}
                                 color="#0000FF"
                                 onClick={() => handleRemove(x._id)}
+                                style={{ cursor: "pointer" }}
                               />
                             ) : (
                               <MinusIcon
                                 size={20}
                                 color="#0000FF"
+                                style={{ cursor: "pointer" }}
                                 onClick={() =>
                                   cartIncrementDecrement(
                                     x._id,
@@ -258,6 +261,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                             <AiOutlinePlus
                               size={20}
                               color="#0000FF"
+                              style={{ cursor: "pointer" }}
                               onClick={() =>
                                 cartIncrementDecrement(
                                   x._id,
@@ -305,6 +309,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                                         onClick={() =>
                                           deleteModifierById(x._id, s._id)
                                         }
+                                        style={{ cursor: "pointer" }}
                                       />
                                     ) : (
                                       <MinusIcon
@@ -318,6 +323,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                                             x.item_Size
                                           )
                                         }
+                                        style={{ cursor: "pointer" }}
                                       />
                                     )}
                                   </span>
@@ -334,6 +340,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                                           x.item_Size
                                         )
                                       }
+                                      style={{ cursor: "pointer" }}
                                     />
                                   </span>
                                 </div>

@@ -213,6 +213,7 @@ const PaymentList = () => {
                           type="date"
                           bg="white"
                           onChange={(e) => setStartDate(e.target.value)}
+                          max={new Date().toISOString().slice(0, 10)}
                         />
                       </GridItem>
                       <GridItem w="100%" h="20">
@@ -223,6 +224,7 @@ const PaymentList = () => {
                           type="date"
                           bg="white"
                           onChange={(e) => setEndDate(e.target.value)}
+                          max={new Date().toISOString().slice(0, 10)}
                         />
                       </GridItem>
                       <GridItem w="310%" align="end" mt={-5}>
@@ -252,6 +254,7 @@ const PaymentList = () => {
                           type="date"
                           bg="white"
                           onChange={(e) => setStartDate(e.target.value)}
+                          max={new Date().toISOString().slice(0, 10)}
                         />
                       </GridItem>
                       <GridItem w="50%">
