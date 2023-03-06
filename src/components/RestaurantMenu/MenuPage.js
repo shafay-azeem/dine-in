@@ -123,7 +123,7 @@ const MenuPage = (props) => {
               className="btn-start mx-auto"
               style={{
                 color: "white",
-                backgroundColor: "red",
+                backgroundColor: "#009997",
                 border: "none",
                 borderRadius: "20px",
                 width: "10rem",

@@ -50,8 +50,8 @@ const OrderPage = () => {
     try {
       let cartIncrementDecrement = await apiFunctions.GET_REQUEST(
         BASE_URL +
-          API_URL.CART_INCREMENT_DECREMENT +
-          `${id}?cartId=${cartId}&cartStatus=${y}&itemSize=${size}`
+        API_URL.CART_INCREMENT_DECREMENT +
+        `${id}?cartId=${cartId}&cartStatus=${y}&itemSize=${size}`
       );
       setChanger(Math.random());
       setAdder(Math.random());
@@ -63,8 +63,8 @@ const OrderPage = () => {
     await apiFunctions
       .DELETE_REQUEST(
         BASE_URL +
-          API_URL.DELETE_CARTITEM_BY_CART_ITEM_ID +
-          `${id}?cartId=${cartId}`
+        API_URL.DELETE_CARTITEM_BY_CART_ITEM_ID +
+        `${id}?cartId=${cartId}`
       )
       .then((res) => {
         if (res.data.success == true) {
@@ -182,8 +182,8 @@ const OrderPage = () => {
     try {
       let modifierIncrementDecrement = await apiFunctions.GET_REQUEST(
         BASE_URL +
-          API_URL.MODIFIER_INCREMENT_DECREMENT +
-          `${cartDocId}?cartId=${cartId}&modifierId=${modifierId}&cartStatus=${status}&itemSize=${size}`
+        API_URL.MODIFIER_INCREMENT_DECREMENT +
+        `${cartDocId}?cartId=${cartId}&modifierId=${modifierId}&cartStatus=${status}&itemSize=${size}`
       );
       setChanger(Math.random());
       setAdder(Math.random());
@@ -196,8 +196,8 @@ const OrderPage = () => {
     await apiFunctions
       .DELETE_REQUEST(
         BASE_URL +
-          API_URL.MODIFIER_DELETE +
-          `${id}?cartId=${cartId}&modifierId=${modifierId}`
+        API_URL.MODIFIER_DELETE +
+        `${id}?cartId=${cartId}&modifierId=${modifierId}`
       )
       .then((res) => {
         if (res.data.success == true) {
@@ -270,30 +270,30 @@ const OrderPage = () => {
             {cartItemList?.map((x, index) => {
               return (
                 <div key={index}>
-                  <div class="card rounded-3 mb-4">
-                    <div class="card-body p-4">
-                      <div class="row d-flex justify-content-between align-items-center">
-                        <div class="col-md-2">
+                  <div className="card rounded-3 mb-4">
+                    <div className="card-body p-4">
+                      {/* <div className="row d-flex justify-content-between align-items-center">
+                        <div className="col-md-2">
                           <img
                             src={x.item_Img}
                             style={{ width: "60px", height: "60px" }}
                             alt="img"
                           />
                         </div>
-                        <div class="col-md-4">
-                          <p class="lead fw-normal mb-2">
+                        <div className="col-md-4">
+                          <p className="lead fw-normal mb-2">
                             {x.item_Name} {x.item_Size}
                           </p>
                           <p>Rs {x.item_Price}</p>
                         </div>
-                        <div class="col-md-4 d-flex justify-content-end">
+                        <div className="col-md-4 d-flex justify-content-end">
                           <button
-                            class="btn btn-link px-2"
+                            className="btn btn-link px-2"
                             onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                           >
                             {x.item_Qty == 1 ? null : (
                               <i
-                                class="fas fa-minus"
+                                className="fas fa-minus"
                                 onClick={() =>
                                   cartIncrementDecrement(
                                     x._id,
@@ -312,12 +312,12 @@ const OrderPage = () => {
                             value={x.item_Qty}
                             disabled={true}
                             type="number"
-                            class="form-control form-control-sm"
+                            className="form-control form-control-sm"
                           />
 
-                          <button class="btn btn-link px-2">
+                          <button className="btn btn-link px-2">
                             <i
-                              class="fas fa-plus"
+                              className="fas fa-plus"
                               onClick={() =>
                                 cartIncrementDecrement(
                                   x._id,
@@ -328,15 +328,87 @@ const OrderPage = () => {
                             ></i>
                           </button>
                         </div>
-                        <div class="col-md-1 text-end">
-                          <a href="#!" class="text-danger">
+                        <div className="col-md-1 text-end">
+                          <a href="#!" className="text-danger">
                             <i
-                              class="fas fa-trash fa-lg"
+                              className="fas fa-trash fa-lg"
+                              onClick={() => handleRemove(x._id)}
+                            ></i>
+                          </a>
+                        </div>
+                      </div> */}
+
+
+
+
+
+                      {/* Another  */}
+                      <div className="row d-flex justify-content-between align-items-center">
+                        <div className="col-md-2 col-md-2 col-md-2">
+                          <img
+                            src={x.item_Img}
+                            style={{ width: "80px", height: "80px" }}
+                            alt="img"
+                          />
+                        </div>
+                        <div className="col-md-3 col-md-3 col-md-3">
+                          <p className="lead fw-normal mb-2">{x.item_Name} {x.item_Size}</p>
+                          <p>Rs {x.item_Price}</p>
+
+                        </div>
+                        <div className="col-md-2 col-md-2 col-md-2 d-flex">
+                          <button className="btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                          >
+                            {x.item_Qty == 1 ? null : (
+                              <i
+                                style={{ color: '#009997' }}
+                                className="fas fa-minus"
+                                onClick={() =>
+                                  cartIncrementDecrement(
+                                    x._id,
+                                    "decrement",
+                                    x.item_Size
+                                  )
+                                }
+                              ></i>
+                            )}
+                          </button>
+
+                          <input id="form1" min="0" name="quantity"
+                            className="form-control form-control-sm"
+                            value={x.item_Qty}
+                            disabled={true}
+                            type="number"
+                          />
+
+                          <button className=" btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <i
+                              className="fas fa-plus"
+                              style={{ color: '#009997' }}
+                              onClick={() =>
+                                cartIncrementDecrement(
+                                  x._id,
+                                  "increment",
+                                  x.item_Size
+                                )
+                              }
+                            ></i>
+                          </button>
+                        </div>
+
+                        <div className="DeleteIcon col-md-1 col-md-1 col-md-1 text-end">
+                          <a href="#!" className="text-danger">
+                            <i
+                              className="fas fa-trash fa-lg"
                               onClick={() => handleRemove(x._id)}
                             ></i>
                           </a>
                         </div>
                       </div>
+
+
 
                       {x.Modifier?.length > 0 ? (
                         <p className="modifier-heading">Modifiers</p>
@@ -345,22 +417,22 @@ const OrderPage = () => {
                       {/* Modifier */}
                       {x.Modifier?.map((s, index) => {
                         return (
-                          <div class="row d-flex justify-content-between align-items-center py-2 px-2 border-bottom">
-                            <div class="col-md-4">
-                              <p class="lead fw-normal mb-2">
+                          <div className="row d-flex justify-content-between align-items-center py-2 px-2 border-bottom">
+                            <div className="col-md-4">
+                              <p className="lead fw-normal mb-2">
                                 {s.Modifier_Name}
                               </p>
                               <p>Rs {s.Modifier_Price}</p>
                             </div>
 
-                            <div class="col-md-4 d-flex justify-content-end">
+                            <div className="col-md-4 d-flex justify-content-end">
                               <button
-                                class="btn btn-link px-2"
+                                className="btn btn-link px-2"
                                 onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                               >
                                 {s.Modifier_Qty == 1 ? null : (
                                   <i
-                                    class="fas fa-minus"
+                                    className="fas fa-minus"
                                     onClick={() =>
                                       modifierIncrementDecrement(
                                         x._id,
@@ -380,12 +452,12 @@ const OrderPage = () => {
                                 value={s.Modifier_Qty}
                                 disabled={true}
                                 type="number"
-                                class="form-control form-control-sm"
+                                className="form-control form-control-sm"
                               />
 
-                              <button class="btn btn-link px-2">
+                              <button className="btn btn-link px-2">
                                 <i
-                                  class="fas fa-plus"
+                                  className="fas fa-plus"
                                   onClick={() =>
                                     modifierIncrementDecrement(
                                       x._id,
@@ -396,13 +468,13 @@ const OrderPage = () => {
                                   }
                                 ></i>
                               </button>
-                              {/* <h5 class="mb-0 ms-3">Rs {x.itemPrice_Total}</h5> */}
+                              {/* <h5 className="mb-0 ms-3">Rs {x.itemPrice_Total}</h5> */}
                             </div>
 
-                            <div class="col-md-4 text-end">
-                              <a href="#!" class="text-danger">
+                            <div className="DeleteIcon col-md-4 text-end">
+                              <a href="#!" className="text-danger">
                                 <i
-                                  class="fas fa-trash fa-lg"
+                                  className="fas fa-trash fa-lg"
                                   onClick={() =>
                                     deleteModifierById(x._id, s._id)
                                   }
@@ -415,7 +487,7 @@ const OrderPage = () => {
 
                       {/* Modifier */}
                     </div>
-                    <h5 class="pb-2 px-4  text-end text-danger text-xl">
+                    <h5 className="pb-2 px-4  text-end text-danger text-xl">
                       Rs {x.itemPrice_Total}
                     </h5>
                   </div>
@@ -489,7 +561,7 @@ const OrderPage = () => {
               </div>
               <hr />
 
-              <div className="d-flex justify-content-between ">
+              <div className="d-flex justify-content-between mt-3 ">
                 <span
                   style={{
                     fontWeight: "600",

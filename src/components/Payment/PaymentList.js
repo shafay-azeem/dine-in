@@ -59,9 +59,9 @@ const PaymentList = () => {
     try {
       let filterOrdersByDate = await apiFunctions.GET_REQUEST(
         BASE_URL +
-          API_URL.GET_ALL_PAYMENT_BY_USERID +
-          userId +
-          `?page=${currentPage}`
+        API_URL.GET_ALL_PAYMENT_BY_USERID +
+        userId +
+        `?page=${currentPage}`
       );
       let res = filterOrdersByDate.data.payments;
 
@@ -78,9 +78,9 @@ const PaymentList = () => {
     try {
       let filterOrdersByDate = await apiFunctions.GET_REQUEST(
         BASE_URL +
-          API_URL.GET_MULTI__DATE_PAYMENT +
-          userId +
-          `?startDate=${startDate}&endDate=${endDate}&page=${currentPage}`
+        API_URL.GET_MULTI__DATE_PAYMENT +
+        userId +
+        `?startDate=${startDate}&endDate=${endDate}&page=${currentPage}`
       );
       let res = filterOrdersByDate.data.payments;
       getPayment(res);
@@ -96,9 +96,9 @@ const PaymentList = () => {
     try {
       let filterOrdersByDate = await apiFunctions.GET_REQUEST(
         BASE_URL +
-          API_URL.GET_SINGLE_DATE_PAYMENT +
-          userId +
-          `?date=${startDate}&page=${currentPage}`
+        API_URL.GET_SINGLE_DATE_PAYMENT +
+        userId +
+        `?date=${startDate}&page=${currentPage}`
       );
       let res = filterOrdersByDate.data.payments;
       getPayment(res);
@@ -143,24 +143,25 @@ const PaymentList = () => {
 
       <Grid templateColumns="repeat(4, 1fr)" gap={6} mt={7}>
         <GridItem w="100%" h="10" textAlign="center">
-          <Button onClick={onOpen} bg="blue.500" color="white">
+          <Button onClick={onOpen} bg="#009997" color="white">
             Total Revenue
           </Button>
         </GridItem>
         <GridItem w="100%" h="10" textAlign="center">
-          <Button onClick={PaymentSingleOnOpen} bg="blue.500" color="white">
+          <Button onClick={PaymentSingleOnOpen} bg="#009997" color="white">
             Payment Daily Basis
           </Button>
         </GridItem>
         <GridItem w="100%" h="10" textAlign="center">
-          <Button onClick={RevenueRangeModalOnOpen} bg="blue.500" color="white">
+          <Button onClick={RevenueRangeModalOnOpen} bg="#009997" color="white">
             Revenue Range
           </Button>
         </GridItem>
         <GridItem w="100%" h="10" textAlign="center">
           <Button
             onClick={PendingPaymentModalOnOpen}
-            bg="blue.500"
+            // bg="blue.500"
+            bg="#009997"
             color="white"
           >
             Pending Payment

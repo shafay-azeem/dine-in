@@ -11,6 +11,8 @@ import apiFunctions from "../../global/GlobalFunction";
 import "./RestaurantMenu.css";
 import { useToast } from "@chakra-ui/react";
 import Spinner from "react-bootstrap/Spinner";
+
+
 const MenuFeedBackForm = (props) => {
   let userId = props?.userId;
   const navigate = useNavigate();
@@ -160,67 +162,71 @@ const MenuFeedBackForm = (props) => {
   };
 
   return (
-    <Container className="my-auto">
-      <Row className="d-flex align-items-center" style={{ height: "100vh" }}>
-        <Col lg={12} md={12} sm={12} xs={12}>
-          {loading ? (
-            <Card className="mx-auto feedbackSubmit-form text-center ">
-              <div className="text-left px-3">
-                <IconButton
-                  icon={<BsArrowLeftShort />}
-                  onClick={() => navigate(-1)}
-                  className="d-block"
-                />
-              </div>
-              <Card.Body className="p-5">
-                {demo?.map((x, index) => {
-                  return (
-                    <Form id="myForm" key={index}>
-                      <Form.Group>
-                        <p>{x.question}</p>
-
-                        <Form.Control
-                          ref={ref}
-                          id={index}
-                          type="text"
-                          onChange={(e) =>
-                            handleInputChange(
-                              e,
-                              index,
-                              x.question,
-                              form.formName
-                              // createfeedback[activeForm].createdDate,
-                              // createfeedback[activeForm].id,
-                              // createfeedback[activeForm].createdTime
-                            )
-                          }
-                        />
-                      </Form.Group>
-                    </Form>
-                  );
-                })}
-
-                <div className=" text-center">
-                  <Button
-                    type="submit"
-                    size="md"
-                    onClick={() => {
-                      feedbackSubmit();
-                    }}
-                  >
-                    SUBMIT
-                  </Button>
+    <>
+      <Container className="my-auto">
+        <Row className="d-flex align-items-center" style={{ height: "100vh" }}>
+          <Col lg={12} md={12} sm={12} xs={12}>
+            {loading ? (
+              <Card className="mx-auto feedbackSubmit-form text-center ">
+                <div className="text-left px-3">
+                  <IconButton
+                    icon={<BsArrowLeftShort />}
+                    onClick={() => navigate(-1)}
+                    className="d-block"
+                    colorScheme='white'
+                  />
+                  {/* <button>Submitt Now</button> */}
                 </div>
-              </Card.Body>
-            </Card>
-          ) : (
-            <div className="loading-screen">
-              <div className="loading-spinner"> </div>
-            </div>
-          )}
-        </Col>
-      </Row>
-    </Container>
+                <Card.Body className="p-5">
+                  {demo?.map((x, index) => {
+                    return (
+                      <Form id="myForm" key={index}>
+                        <Form.Group>
+                          <p>{x.question}</p>
+
+                          <Form.Control
+                            ref={ref}
+                            id={index}
+                            type="text"
+                            onChange={(e) =>
+                              handleInputChange(
+                                e,
+                                index,
+                                x.question,
+                                form.formName
+                                // createfeedback[activeForm].createdDate,
+                                // createfeedback[activeForm].id,
+                                // createfeedback[activeForm].createdTime
+                              )
+                            }
+                          />
+                        </Form.Group>
+                      </Form>
+                    );
+                  })}
+
+                  <div className="Submitt text-center">
+                    <button
+                      type="submit"
+                      size="md"
+                      onClick={() => {
+                        feedbackSubmit();
+                      }}
+                    >
+                      SUBMIT
+                    </button>
+                  </div>
+                </Card.Body>
+              </Card>
+            ) : (
+              <div className="loading-screen">
+                <div className="loading-spinner"> </div>
+              </div>
+            )}
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

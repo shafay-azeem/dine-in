@@ -16,6 +16,7 @@
 .text-sm {
   font-size: 14px;
 }
+
 .text-normal {
   font-size: 16px;
 }
@@ -23,15 +24,19 @@
 .text-md {
   font-size: 18px;
 }
+
 .text-lg {
   font-size: 20px;
 }
+
 .text-xl {
   font-size: 22px;
 }
+
 .text-xxl {
   font-size: 24px;
 }
+
 .text-2xl {
   font-size: 26px;
 }
@@ -183,6 +188,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -203,10 +209,22 @@ nav {
   font-size: 17px;
   font-weight: 500;
 }
+
 .modifier-heading {
   font-size: 17px;
   font-weight: 500;
 }
+
 .navbar {
   background-color: #009997;
+}
+
+
+
+@media only screen and (max-width: 900px) {
+  .DeleteIcon {
+    position: absolute;
+    /* bottom: 100px; */
+    right: 20px;
+  }
 }
