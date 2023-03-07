@@ -17,6 +17,7 @@ const SubSecItemCard = (props) => {
   let userId = props?.userId;
   let menu_index = props?.menu_index;
   let resName = props?.resName;
+  let type = props?.type;
 
   const navigate = useNavigate();
   const { response, setResponse } = MenuState();
@@ -35,6 +36,7 @@ const SubSecItemCard = (props) => {
         menu_index,
         resName,
         userId,
+        type,
       }).toString(),
     });
   };
@@ -273,6 +275,7 @@ const SubSecItemCard = (props) => {
                       className={true ? "display: none" : ""}
                       adder={adder}
                       tableNumber={tableNumber}
+                      type={type}
                     />
                   </Row>
                 </Card.Body>

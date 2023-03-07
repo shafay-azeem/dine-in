@@ -19,6 +19,7 @@ const DisplayItemCard = (props) => {
   let userId = props?.userId;
   let menu_index = props?.menu_index;
   let resName = props?.resName;
+  let type = props?.type;
 
   const [itemList, setItemList] = useState();
   const [state, setstate] = useState(false);
@@ -37,6 +38,7 @@ const DisplayItemCard = (props) => {
         menu_index,
         resName,
         userId,
+        type,
       }).toString(),
     });
   };
@@ -295,6 +297,7 @@ const DisplayItemCard = (props) => {
                       className={true ? "display: none" : ""}
                       adder={adder}
                       tableNumber={tableNumber}
+                      type={type}
                     />
                   </Row>
                 </Card.Body>

@@ -21,6 +21,7 @@ const RestaurantMenu = (props) => {
   let menu_index = props?.menu_index;
   let userId = props?.userId;
   let USERID = props?.userId;
+  let type = props?.type;
 
   let tableNumber = props?.tableNumber;
   let resName = props?.resName;
@@ -132,6 +133,7 @@ const RestaurantMenu = (props) => {
         changer={Math.random()}
         menu_index={menu_index}
         resImage={resImage}
+        type={type}
       />
       <div className="menu">
         <div className="d-flex justify-content-start">
@@ -194,6 +196,7 @@ const RestaurantMenu = (props) => {
                     menu_index={menu_index}
                     resName={resName}
                     userId={userId}
+                    type={type}
                   />
                 </Accordion.Body>
               </Accordion.Item>
@@ -210,6 +213,7 @@ const RestaurantMenu = (props) => {
           menu_index={menu_index}
           resName={resName}
           userId={userId}
+          type={type}
         />
       </div>
     </>

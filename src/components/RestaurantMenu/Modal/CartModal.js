@@ -20,6 +20,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let resName = props?.resName;
   let menu_index = props?.menu_index;
   let resImage = props?.resImage;
+  let type = props?.type;
 
   const toast = useToast();
   const { adder, setAdder } = MenuState();
@@ -78,8 +79,8 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
     try {
       let cartIncrementDecrement = await apiFunctions.GET_REQUEST(
         BASE_URL +
-        API_URL.CART_INCREMENT_DECREMENT +
-        `${id}?cartId=${cartId}&cartStatus=${y}&itemSize=${size}`
+          API_URL.CART_INCREMENT_DECREMENT +
+          `${id}?cartId=${cartId}&cartStatus=${y}&itemSize=${size}`
       );
       setChanger(Math.random());
     } catch (err) {
@@ -96,8 +97,8 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
     try {
       let modifierIncrementDecrement = await apiFunctions.GET_REQUEST(
         BASE_URL +
-        API_URL.MODIFIER_INCREMENT_DECREMENT +
-        `${cartDocId}?cartId=${cartId}&modifierId=${modifierId}&cartStatus=${status}&itemSize=${size}`
+          API_URL.MODIFIER_INCREMENT_DECREMENT +
+          `${cartDocId}?cartId=${cartId}&modifierId=${modifierId}&cartStatus=${status}&itemSize=${size}`
       );
       setChanger(Math.random());
     } catch (err) {
@@ -109,8 +110,8 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
     await apiFunctions
       .DELETE_REQUEST(
         BASE_URL +
-        API_URL.DELETE_CARTITEM_BY_CART_ITEM_ID +
-        `${id}?cartId=${cartId}`
+          API_URL.DELETE_CARTITEM_BY_CART_ITEM_ID +
+          `${id}?cartId=${cartId}`
       )
       .then((res) => {
         if (res.data.success == true) {
@@ -140,8 +141,8 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
     await apiFunctions
       .DELETE_REQUEST(
         BASE_URL +
-        API_URL.MODIFIER_DELETE +
-        `${id}?cartId=${cartId}&modifierId=${modifierId}`
+          API_URL.MODIFIER_DELETE +
+          `${id}?cartId=${cartId}&modifierId=${modifierId}`
       )
       .then((res) => {
         if (res.data.success == true) {
@@ -176,6 +177,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
         resName,
         menu_index,
         resImage,
+        type,
       }).toString(),
     });
   };
@@ -238,7 +240,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                               <AiOutlineDelete
                                 size={20}
                                 // color="#0000FF"
-                                color='red'
+                                color="red"
                                 onClick={() => handleRemove(x._id)}
                                 style={{ cursor: "pointer" }}
                               />
@@ -246,7 +248,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                               <MinusIcon
                                 size={20}
                                 // color="#0000FF"
-                                color='#009997'
+                                color="#009997"
                                 style={{ cursor: "pointer" }}
                                 onClick={() =>
                                   cartIncrementDecrement(
@@ -263,7 +265,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                             <AiOutlinePlus
                               size={20}
                               // color="#0000FF"
-                              color='#009997'
+                              color="#009997"
                               style={{ cursor: "pointer" }}
                               onClick={() =>
                                 cartIncrementDecrement(

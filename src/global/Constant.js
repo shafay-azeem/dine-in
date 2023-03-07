@@ -151,6 +151,8 @@ export const API_URL = {
 
   PENDING_AMOUNT_ALL: "order/V1/pendingAmount/",
 
+  CHANGE_STATUS: "order/V1/updateStatusOfOrder/",
+
   //Modifier
   ADD_MODIFIER_ITEM: "cart/V1/addModifiertoCartItem/",
 

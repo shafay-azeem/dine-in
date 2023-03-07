@@ -59,9 +59,9 @@ const PaymentList = () => {
     try {
       let filterOrdersByDate = await apiFunctions.GET_REQUEST(
         BASE_URL +
-        API_URL.GET_ALL_PAYMENT_BY_USERID +
-        userId +
-        `?page=${currentPage}`
+          API_URL.GET_ALL_PAYMENT_BY_USERID +
+          userId +
+          `?page=${currentPage}`
       );
       let res = filterOrdersByDate.data.payments;
 
@@ -78,14 +78,15 @@ const PaymentList = () => {
     try {
       let filterOrdersByDate = await apiFunctions.GET_REQUEST(
         BASE_URL +
-        API_URL.GET_MULTI__DATE_PAYMENT +
-        userId +
-        `?startDate=${startDate}&endDate=${endDate}&page=${currentPage}`
+          API_URL.GET_MULTI__DATE_PAYMENT +
+          userId +
+          `?startDate=${startDate}&endDate=${endDate}&page=${currentPage}`
       );
       let res = filterOrdersByDate.data.payments;
       getPayment(res);
-      console.log(res, "multi date");
+
       setTotalOrders(filterOrdersByDate.data.totalPaymentCount);
+      setLoading(true);
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -96,13 +97,14 @@ const PaymentList = () => {
     try {
       let filterOrdersByDate = await apiFunctions.GET_REQUEST(
         BASE_URL +
-        API_URL.GET_SINGLE_DATE_PAYMENT +
-        userId +
-        `?date=${startDate}&page=${currentPage}`
+          API_URL.GET_SINGLE_DATE_PAYMENT +
+          userId +
+          `?date=${startDate}&page=${currentPage}`
       );
       let res = filterOrdersByDate.data.payments;
       getPayment(res);
       setTotalOrders(filterOrdersByDate.data.totalPaymentCount);
+      setLoading(true);
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -117,9 +119,11 @@ const PaymentList = () => {
   useEffect(() => {
     if (startDate && value == "1") {
       // console.log("run this code");
+      setLoading(false);
       getSingleDatePayment();
     } else {
       if (startDate && endDate) {
+        setLoading(false);
         getMultiDatePayment();
       } else {
         getAllPayment();

@@ -20,9 +20,16 @@ const MenuPage = (props) => {
   const [loading, setLoading] = useState(true);
   const [resName, setResName] = useState();
   const [resImage, setResImage] = useState();
+  const [type, setType] = useState();
+
+  console.log(props.menu, "menu");
+  console.log(typeof props.menu, "menu type ");
+  console.log(props.menu === null, "f check");
+  console.log(props.menu === "null", "f  s check");
 
   let tableNumber = props?.tableNumber;
-
+  let menu = props?.menu;
+  // console.log(menu)
   useEffect(() => {
     getActiveFormQuestions();
   }, []);
@@ -103,6 +110,8 @@ const MenuPage = (props) => {
     }
   }
 
+  console.log(menu);
+
   return (
     <div>
       <Row className="align-items-center" style={{ height: "100vh" }}>
@@ -115,22 +124,68 @@ const MenuPage = (props) => {
                 <div className="loading-spinner"> </div>
               </div>
             )}
-            <Heading size="sm" className="mt-2">
-              YOUR TABLE NUMBER : {tableNumber}
-            </Heading>
-            <Button
-              onClick={() => setModalShow(true)}
-              className="btn-start mx-auto"
-              style={{
-                color: "white",
-                backgroundColor: "#009997",
-                border: "none",
-                borderRadius: "20px",
-                width: "10rem",
-              }}
-            >
-              Tap To Start
-            </Button>
+
+            {menu === null || menu === "null" ? (
+              <Heading size="sm" className="mt-2">
+                YOUR TABLE NUMBER : {tableNumber}
+              </Heading>
+            ) : null}
+
+            {menu === null || menu === "null" ? (
+              <Button
+                onClick={() => {
+                  setModalShow(true);
+                  setType("dinein");
+                }}
+                className="btn-start mx-auto"
+                style={{
+                  color: "white",
+                  backgroundColor: "#009997",
+                  border: "none",
+                  borderRadius: "20px",
+                  width: "10rem",
+                }}
+              >
+                Tap To Start
+              </Button>
+            ) : (
+              <>
+                <Button
+                  onClick={() => {
+                    setModalShow(true);
+                    setType("delivery");
+                  }}
+                  className="btn-start mx-auto"
+                  style={{
+                    color: "white",
+                    backgroundColor: "#009997",
+                    border: "none",
+                    borderRadius: "20px",
+                    width: "10rem",
+                  }}
+                >
+                  Delivery
+                </Button>
+
+                <Button
+                  onClick={() => {
+                    setModalShow(true);
+                    setType("pickup");
+                  }}
+                  className="btn-start mx-auto"
+                  style={{
+                    color: "white",
+                    backgroundColor: "#009997",
+                    border: "none",
+                    borderRadius: "20px",
+                    width: "10rem",
+                  }}
+                >
+                  Pickup
+                </Button>
+              </>
+            )}
+
             {demo ? (
               <p onClick={menuFeedback} className="feedback-text">
                 Give Feedback
@@ -144,6 +199,7 @@ const MenuPage = (props) => {
             tableNumber={tableNumber}
             resName={resName}
             resImage={resImage}
+            type={type}
           />
         </Col>
         <Col

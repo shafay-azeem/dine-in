@@ -149,6 +149,13 @@ const SideDrawer = () => {
     });
   };
 
+  const deliveryPickup = () => {
+    console.log("check");
+    navigate({
+      pathname: "/deliverypickupmenu",
+    });
+  };
+
   const payment = () => {
     navigate({
       pathname: "/paymentList",
@@ -307,8 +314,14 @@ const SideDrawer = () => {
               </DrawerHeader>
               <Button variant="link" onClick={dineinqrmenu}>
                 <HamburgerIcon fontSize="20px" m={2} />
-                Dine-In-OR Menu
+                Dine-In-QR Menu
               </Button>
+
+              <Button variant="link" onClick={deliveryPickup}>
+                <HamburgerIcon fontSize="20px" m={2} />
+                Delivery / Pick Up
+              </Button>
+
               {/* <Button variant="link">
                 <HamburgerIcon fontSize="20px" m={2} />
                 Delivery / Pick Up

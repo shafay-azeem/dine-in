@@ -36,7 +36,7 @@ export const MenuProvider = ({ children }) => {
 
   const [orders, setOrders] = useState([]);
 
-
+  const [statusUpdate, setStatusUpdate] = useState();
 
   const [adder, setAdder] = useState();
 
@@ -94,9 +94,10 @@ export const MenuProvider = ({ children }) => {
         setOrders,
         orders,
 
-
         adder,
-        setAdder
+        setAdder,
+        statusUpdate,
+        setStatusUpdate,
       }}
     >
       {children}

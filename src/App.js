@@ -27,6 +27,7 @@ import Payment from "./components/RestaurantMenu/Payment";
 import FilterOrders from "./components/Orders/FilterOrders";
 import PaymentList from "./components/Payment/PaymentList";
 import PaymentScreen from "./Screens/PaymentScreen";
+import DeliveryPickUpScreen from "./Screens/DeliveryPickUpScreen";
 
 function App() {
   return (
@@ -81,6 +82,16 @@ function App() {
               </RequireAuth>
             }
           />
+
+          <Route
+            path="/deliverypickupmenu"
+            element={
+              <RequireAuth>
+                <DeliveryPickUpScreen />
+              </RequireAuth>
+            }
+          />
+
           <Route
             path="/createmenu"
             element={

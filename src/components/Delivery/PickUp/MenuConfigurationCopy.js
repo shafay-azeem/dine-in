@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Grid,
@@ -9,15 +10,15 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import QRCode from "qrcode";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
+import { useState } from "react";
+import QRCode from "qrcode";
 
-const MenuConfiguration = () => {
+const MenuConfigurationCopy = () => {
   const USERID = localStorage.getItem("user_id");
 
   const [inputList, setInputList] = useState([]);
@@ -57,8 +58,9 @@ const MenuConfiguration = () => {
 
   const GenerateQRCode = () => {
     setTableNumber(generateRandomNumber());
+
     QRCode.toDataURL(
-      `http://localhost:${port}/menustart?USERID=${USERID}&tableNumber=${tableNumber}`,
+      `http://localhost:${port}/menustart?USERID=${USERID}&tableNumber=${tableNumber}&menu=${true}`,
       {
         width: 800,
         margin: 2,
@@ -73,18 +75,17 @@ const MenuConfiguration = () => {
         setQr(url);
 
         setUrl(
-          `http://localhost:${port}/menustart?USERID=${USERID}&tableNumber=${tableNumber}`
+          `http://localhost:${port}/menustart?USERID=${USERID}&tableNumber=${tableNumber}&menu=${"true"}`
         );
       }
     );
   };
-
   return (
     <>
       <Grid>
         <GridItem w="100%" bg="white" height="120%">
           <Text ml="10" fontWeight="500" fontSize="25" mt={5}>
-            Dine-in QR Menu Configuration
+            Delivery & Pick Up Menu Configuration
           </Text>
         </GridItem>
       </Grid>
@@ -94,10 +95,10 @@ const MenuConfiguration = () => {
           <TabList>
             <Tab>QR Settings</Tab>
             {/* <Tab>Display Options</Tab>
-            <Tab>Design</Tab>
-            <Tab>Service Options</Tab>
-            <Tab>Feedback Settings</Tab>
-            <Tab>Ordering Settings</Tab> */}
+          <Tab>Design</Tab>
+          <Tab>Service Options</Tab>
+          <Tab>Feedback Settings</Tab>
+          <Tab>Ordering Settings</Tab> */}
           </TabList>
 
           <TabPanels>
@@ -133,41 +134,41 @@ const MenuConfiguration = () => {
               </Card>
             </TabPanel>
             {/* <TabPanel>
-              <p>Display Options</p>
-            </TabPanel> */}
+            <p>Display Options</p>
+          </TabPanel> */}
             {/* <TabPanel>
-              <p>Design</p>
-            </TabPanel> */}
+            <p>Design</p>
+          </TabPanel> */}
             {/* <TabPanel>
-              <Box bg="white" w="50%" p={4} borderRadius="10">
-                <Box w="70%" m={4}>
-                  <Text fontSize="17px" fontWeight="500">
-                    Service Options
-                  </Text>
+            <Box bg="white" w="50%" p={4} borderRadius="10">
+              <Box w="70%" m={4}>
+                <Text fontSize="17px" fontWeight="500">
+                  Service Options
+                </Text>
 
-                  <HStack>
-                    <p>
-                      You can add service request options below (e.g. Request
-                      checkout, wrong order). If you don’t add any options, your
-                      customers will send requests directly.
-                    </p>
-                    <Switch />
-                  </HStack>
+                <HStack>
+                  <p>
+                    You can add service request options below (e.g. Request
+                    checkout, wrong order). If you don’t add any options, your
+                    customers will send requests directly.
+                  </p>
+                  <Switch />
+                </HStack>
 
-                  {inputList}
+                {inputList}
 
-                  <Button colorScheme="blue" mt={4} onClick={onAddBtnClick}>
-                    Add
-                  </Button>
-                </Box>
+                <Button colorScheme="blue" mt={4} onClick={onAddBtnClick}>
+                  Add
+                </Button>
               </Box>
-            </TabPanel> */}
+            </Box>
+          </TabPanel> */}
             {/* <TabPanel>
-              <p>Feedback Settings</p>
-            </TabPanel> */}
+            <p>Feedback Settings</p>
+          </TabPanel> */}
             {/* <TabPanel>
-              <p>Ordering Settings</p>
-            </TabPanel> */}
+            <p>Ordering Settings</p>
+          </TabPanel> */}
           </TabPanels>
         </Tabs>
       </Box>
@@ -175,4 +176,4 @@ const MenuConfiguration = () => {
   );
 };
 
-export default MenuConfiguration;
+export default MenuConfigurationCopy;

@@ -1,0 +1,110 @@
+import React from "react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  RadioGroup,
+  Radio,
+  Stack,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
+import apiFunctions from "../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../global/Constant";
+import { MenuState } from "../../context/MenuContext";
+
+const ChangeStatusModal = (props) => {
+  const toast = useToast();
+  const [value, setValue] = React.useState();
+
+  const { statusUpdate, setStatusUpdate } = MenuState();
+
+  let userId = localStorage.getItem("user_id");
+  let id = props?.id;
+
+  async function updateStatusOfOrder(value) {
+    let Data = {
+      orderStatus: value,
+    };
+
+    try {
+      let updateStatusOfOrder = await apiFunctions.PUT_REQUEST(
+        BASE_URL + API_URL.CHANGE_STATUS + userId + `?orderId=${id}`,
+        Data
+      );
+      if (updateStatusOfOrder.data.success == true) {
+        toast({
+          position: "top",
+          title: `Order Status Updated`,
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+
+        setStatusUpdate(Math.random());
+        return true;
+      } else {
+        toast({
+          position: "top",
+          title: `There Some Error`,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+        return false;
+      }
+    } catch (err) {
+      console.log("An error occurred while updating status", err.message);
+    }
+  }
+
+  return (
+    <>
+      <Button onClick={props.onOpen}>Open Modal</Button>
+
+      <Modal isOpen={props.isOpen} onClose={props.onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Change order status of {id}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <RadioGroup onChange={setValue} value={value}>
+              <Stack>
+                <Radio
+                  value="Preparing"
+                  onClick={() => updateStatusOfOrder("Preparing")}
+                >
+                  Preparing
+                </Radio>
+                <Radio
+                  value="Ready"
+                  onClick={() => updateStatusOfOrder("Ready")}
+                >
+                  Ready
+                </Radio>
+                <Radio
+                  value="On Delivery"
+                  onClick={() => updateStatusOfOrder("On Delivery")}
+                >
+                  On Delivery
+                </Radio>
+                <Radio
+                  value="Delivered"
+                  onClick={() => updateStatusOfOrder("Delivered")}
+                >
+                  Delivered
+                </Radio>
+              </Stack>
+            </RadioGroup>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+export default ChangeStatusModal;

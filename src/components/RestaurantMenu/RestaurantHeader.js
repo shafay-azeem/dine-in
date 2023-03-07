@@ -16,6 +16,7 @@ const RestaurantHeader = (props) => {
   let resName = props?.resName;
   let resImage = props?.resImage;
   let menu_index = props?.menu_index;
+  let type = props?.type;
 
   const [show, setShow] = useState(false);
 
@@ -55,12 +56,21 @@ const RestaurantHeader = (props) => {
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="mx-auto">
-            <Navbar.Text
-              className="text-center"
-              style={{ color: "white", fontWeight: 400, fontSize: "18px" }}
-            >
-              Table # : {tableNumber}
-            </Navbar.Text>
+            {type != "dinein" ? (
+              <Navbar.Text
+                className="text-center"
+                style={{ color: "white", fontWeight: 400, fontSize: "18px" }}
+              >
+                Type : {type}
+              </Navbar.Text>
+            ) : (
+              <Navbar.Text
+                className="text-center"
+                style={{ color: "white", fontWeight: 400, fontSize: "18px" }}
+              >
+                Table # : {tableNumber}
+              </Navbar.Text>
+            )}
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text
@@ -100,6 +110,7 @@ const RestaurantHeader = (props) => {
         resName={resName}
         menu_index={menu_index}
         resImage={resImage}
+        type={type}
       />
     </>
   );

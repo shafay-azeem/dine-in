@@ -21,20 +21,33 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
-import { ViewIcon } from "@chakra-ui/icons";
+import { EditIcon, ViewIcon } from "@chakra-ui/icons";
 import OrderDetailModal from "../../Orders/OrderDetailModal";
 import apiFunctions from "../../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../../global/Constant";
 import { useEffect } from "react";
 import { MenuState } from "../../../context/MenuContext";
 import Pagination from "../Pagination";
+import ChangeStatusModal from "../../Orders/ChangeStatusModal";
 
 const OrderTable = (props) => {
   const [count, setCount] = useState();
+  const [id, setId] = useState();
+
+  const { statusUpdate, setStatusUpdate } = MenuState();
   let userId = localStorage.getItem("user_id");
   let paymentStatus = props.paymentStatus;
 
+  let type = props.type === null ? undefined : props?.type;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const {
+    isOpen: isOpenStatus,
+    onOpen: onOpenStatus,
+    onClose: onCloseStatus,
+  } = useDisclosure();
+
   const { orders, setOrders } = MenuState();
   const [value, setValue] = useState();
   const [startDate, setStartDate] = useState();
@@ -46,15 +59,17 @@ const OrderTable = (props) => {
 
   useEffect(() => {
     if (startDate && value == "1") {
+      setLoading(false);
       filterOrdersByDate();
     } else {
       if (startDate && endDate) {
+        setLoading(false);
         rangeOrders();
       } else {
         getPaidUnpaidOrders();
       }
     }
-  }, [startDate, endDate, currentPage]);
+  }, [startDate, endDate, currentPage, type, statusUpdate]);
 
   async function getPaidUnpaidOrders() {
     try {
@@ -62,7 +77,7 @@ const OrderTable = (props) => {
         BASE_URL +
           API_URL.GET_PAID_UNPAID_ORDERS +
           userId +
-          `?paymentStatus=${paymentStatus}&page=${currentPage}`
+          `?paymentStatus=${paymentStatus}&page=${currentPage}&type=${type}`
       );
       let res = getPaidUnpaidOrders.data.orders;
 
@@ -82,13 +97,13 @@ const OrderTable = (props) => {
         BASE_URL +
           API_URL.FILTER_ORDER_BY_DATE +
           userId +
-          `?paymentStatus=${paymentStatus}&date=${startDate}&page=${currentPage}`
+          `?paymentStatus=${paymentStatus}&date=${startDate}&page=${currentPage}&type=${type}`
       );
       let res = filterOrdersByDate.data.orders;
 
       setOrders(res);
       setTotalOrders(filterOrdersByDate.data.totalOrders);
-      console.log(filterOrdersByDate.data.totalOrders, "total orders");
+      setLoading(true);
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -101,13 +116,13 @@ const OrderTable = (props) => {
         BASE_URL +
           API_URL.GET_ORDER_BY_RANGE +
           userId +
-          `?paymentStatus=${paymentStatus}&startDate=${startDate}&endDate=${endDate}&page=${currentPage}`
+          `?paymentStatus=${paymentStatus}&startDate=${startDate}&endDate=${endDate}&page=${currentPage}&type=${type}`
       );
       let res = filterOrdersByDate.data.orders;
 
       setOrders(res);
       setTotalOrders(filterOrdersByDate.data.totalOrders);
-
+      setLoading(true);
       return true;
     } catch (err) {
       console.log("An error occurred while fetching carts", err.message);
@@ -121,6 +136,10 @@ const OrderTable = (props) => {
 
   const getIndex = (index) => {
     setCount(index);
+  };
+
+  const getId = (id) => {
+    setId(id);
   };
 
   const handlePageChange = (pageNumber) => {
@@ -237,6 +256,7 @@ const OrderTable = (props) => {
               <Th>Date</Th>
               <Th>Order Status</Th>
               <Th>Payment Status</Th>
+              <Th>Type</Th>
               <Th>SubTotal</Th>
               <Th>Action</Th>
             </Tr>
@@ -251,11 +271,17 @@ const OrderTable = (props) => {
                   <Td>{formatDate(x.createdAt.toString())}</Td>
                   <Td>{x.orderStatus}</Td>
                   <Td>{x.paymentStatus}</Td>
+                  <Td>{x.type}</Td>
+
                   <Td>{x.subtotal}</Td>
                   <Td style={{ textAlign: "center", cursor: "pointer" }}>
                     <Box>
                       <Box onClick={() => getIndex(index)}>
                         <Icon onClick={onOpen} as={ViewIcon} />
+                      </Box>
+
+                      <Box onClick={() => getId(x._id)}>
+                        <Icon onClick={onOpenStatus} as={EditIcon} />
                       </Box>
                     </Box>
                   </Td>
@@ -268,6 +294,15 @@ const OrderTable = (props) => {
                   isOpen={isOpen}
                   onOpen={onOpen}
                   onClose={onClose}
+                />
+              ) : null}
+
+              {isOpenStatus ? (
+                <ChangeStatusModal
+                  id={id}
+                  isOpen={isOpenStatus}
+                  onOpen={onOpenStatus}
+                  onClose={onCloseStatus}
                 />
               ) : null}
             </Tbody>

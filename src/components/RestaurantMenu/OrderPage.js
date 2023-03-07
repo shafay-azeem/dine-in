@@ -27,6 +27,7 @@ const OrderPage = () => {
   const [cartId, setCartId] = useState();
   const [instructions, setInstruction] = useState();
   const [customerName, setCustomerName] = useState();
+  const [address, setAddress] = useState();
 
   const { adder, setAdder } = MenuState();
 
@@ -36,6 +37,8 @@ const OrderPage = () => {
 
   let index = searchparams.get("menu_index");
   let resImage = searchparams.get("resImage");
+
+  let type = searchparams.get("type");
 
   const img = {
     KFCcard: require("../Assets/burger.jpg"),
@@ -50,8 +53,8 @@ const OrderPage = () => {
     try {
       let cartIncrementDecrement = await apiFunctions.GET_REQUEST(
         BASE_URL +
-        API_URL.CART_INCREMENT_DECREMENT +
-        `${id}?cartId=${cartId}&cartStatus=${y}&itemSize=${size}`
+          API_URL.CART_INCREMENT_DECREMENT +
+          `${id}?cartId=${cartId}&cartStatus=${y}&itemSize=${size}`
       );
       setChanger(Math.random());
       setAdder(Math.random());
@@ -63,8 +66,8 @@ const OrderPage = () => {
     await apiFunctions
       .DELETE_REQUEST(
         BASE_URL +
-        API_URL.DELETE_CARTITEM_BY_CART_ITEM_ID +
-        `${id}?cartId=${cartId}`
+          API_URL.DELETE_CARTITEM_BY_CART_ITEM_ID +
+          `${id}?cartId=${cartId}`
       )
       .then((res) => {
         if (res.data.success == true) {
@@ -128,8 +131,9 @@ const OrderPage = () => {
         orderedItems: itemDetail,
         instructions: instructions,
         subtotal: cartTotal,
-        orderStatus: "Order Confirmed",
         paymentStatus: "Pending",
+        address: address,
+        type: type,
       };
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.CREATE_ORDER + userId, orderData)
@@ -138,6 +142,7 @@ const OrderPage = () => {
           let subTotal = res.data.order.subtotal;
 
           if (res.status == 201) {
+            console.log(res.data, "response");
             toast({
               position: "top",
               title: `Order Confirmed SuccessFully`,
@@ -153,6 +158,7 @@ const OrderPage = () => {
                 orderId,
                 subTotal,
                 tableNumber,
+                type,
               }).toString(),
             });
             return true;
@@ -182,8 +188,8 @@ const OrderPage = () => {
     try {
       let modifierIncrementDecrement = await apiFunctions.GET_REQUEST(
         BASE_URL +
-        API_URL.MODIFIER_INCREMENT_DECREMENT +
-        `${cartDocId}?cartId=${cartId}&modifierId=${modifierId}&cartStatus=${status}&itemSize=${size}`
+          API_URL.MODIFIER_INCREMENT_DECREMENT +
+          `${cartDocId}?cartId=${cartId}&modifierId=${modifierId}&cartStatus=${status}&itemSize=${size}`
       );
       setChanger(Math.random());
       setAdder(Math.random());
@@ -196,8 +202,8 @@ const OrderPage = () => {
     await apiFunctions
       .DELETE_REQUEST(
         BASE_URL +
-        API_URL.MODIFIER_DELETE +
-        `${id}?cartId=${cartId}&modifierId=${modifierId}`
+          API_URL.MODIFIER_DELETE +
+          `${id}?cartId=${cartId}&modifierId=${modifierId}`
       )
       .then((res) => {
         if (res.data.success == true) {
@@ -243,6 +249,7 @@ const OrderPage = () => {
         userId={userId}
         tableNumber={tableNumber}
         resName={resName}
+        type={type}
       />
 
       {/* <div className="backarrow">
@@ -338,10 +345,6 @@ const OrderPage = () => {
                         </div>
                       </div> */}
 
-
-
-
-
                       {/* Another  */}
                       <div className="row d-flex justify-content-between align-items-center">
                         <div className="col-md-2 col-md-2 col-md-2">
@@ -352,17 +355,19 @@ const OrderPage = () => {
                           />
                         </div>
                         <div className="col-md-3 col-md-3 col-md-3">
-                          <p className="lead fw-normal mb-2">{x.item_Name} {x.item_Size}</p>
+                          <p className="lead fw-normal mb-2">
+                            {x.item_Name} {x.item_Size}
+                          </p>
                           <p>Rs {x.item_Price}</p>
-
                         </div>
                         <div className="col-md-2 col-md-2 col-md-2 d-flex">
-                          <button className="btn btn-link px-2"
-                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                          <button
+                            className="btn btn-link px-2"
+                            onClick="this.parentNode.querySelector('input[type=number]').stepDown()"
                           >
                             {x.item_Qty == 1 ? null : (
                               <i
-                                style={{ color: '#009997' }}
+                                style={{ color: "#009997" }}
                                 className="fas fa-minus"
                                 onClick={() =>
                                   cartIncrementDecrement(
@@ -375,18 +380,23 @@ const OrderPage = () => {
                             )}
                           </button>
 
-                          <input id="form1" min="0" name="quantity"
+                          <input
+                            id="form1"
+                            min="0"
+                            name="quantity"
                             className="form-control form-control-sm"
                             value={x.item_Qty}
                             disabled={true}
                             type="number"
                           />
 
-                          <button className=" btn btn-link px-2"
-                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                          <button
+                            className=" btn btn-link px-2"
+                            onClick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                          >
                             <i
                               className="fas fa-plus"
-                              style={{ color: '#009997' }}
+                              style={{ color: "#009997" }}
                               onClick={() =>
                                 cartIncrementDecrement(
                                   x._id,
@@ -408,8 +418,6 @@ const OrderPage = () => {
                         </div>
                       </div>
 
-
-
                       {x.Modifier?.length > 0 ? (
                         <p className="modifier-heading">Modifiers</p>
                       ) : null}
@@ -428,7 +436,7 @@ const OrderPage = () => {
                             <div className="col-md-4 d-flex justify-content-end">
                               <button
                                 className="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                onClick="this.parentNode.querySelector('input[type=number]').stepDown()"
                               >
                                 {s.Modifier_Qty == 1 ? null : (
                                   <i
@@ -529,6 +537,20 @@ const OrderPage = () => {
                   onChange={(e) => setCustomerName(e.target.value)}
                 />
               </Form.Group>
+
+              {type === "delivery" ? (
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput1"
+                >
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    type="text"
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                </Form.Group>
+              ) : null}
+
               {/* <div className="form-check d-flex justify-content-between align-items-center">
               <input
                 className="form-check-input me-2"
@@ -596,6 +618,7 @@ const OrderPage = () => {
         className={true ? "display: none" : ""}
         adder={adder}
         tableNumber={tableNumber}
+        type={type}
       />
     </div>
   );

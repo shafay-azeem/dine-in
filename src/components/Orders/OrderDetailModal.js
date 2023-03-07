@@ -23,6 +23,9 @@ const OrderDetailModal = (props) => {
 
   let orderItemResponse = orders[props?.index]?.orderedItems;
   let customerName = orders[props?.index].customerName;
+  let address = orders[props?.index].address;
+  let instructions = orders[props?.index].instructions;
+
   let subtotal = orders[props?.index].subtotal;
 
   let orderStatus = orders[props?.index].orderStatus;
@@ -56,6 +59,16 @@ const OrderDetailModal = (props) => {
         >
           <div fontWeight="bold" mb="1rem" fontSize="lg">
             Customer Name: {customerName}
+          </div>
+
+          {address ? (
+            <div fontWeight="bold" mb="1rem" fontSize="lg">
+              Address: {address}
+            </div>
+          ) : null}
+
+          <div fontWeight="bold" mb="1rem" fontSize="lg">
+            Instructions: {instructions}
           </div>
         </ModalHeader>
         {/* 
