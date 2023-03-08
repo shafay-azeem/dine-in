@@ -219,12 +219,38 @@ nav {
   background-color: #009997;
 }
 
-
-
 @media only screen and (max-width: 900px) {
   .DeleteIcon {
     position: absolute;
     /* bottom: 100px; */
     right: 20px;
   }
+}
+
+.Box-Styling {
+  background-color: white;
+}
+
+.Button-Styling Button {
+  border-radius: 10px;
+  border-style: none;
+  background-color: #009997;
+  color: white;
+}
+
+.global {
+  min-width: 50%;
+}
+
+.Adress {
+  max-width: 50%;
+}
+
+.Link {
+  color: purple;
+  cursor: pointer;
+}
+
+.Purple {
+  background-color: #cdc3e2;
 }

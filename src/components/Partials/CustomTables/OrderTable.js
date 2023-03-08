@@ -30,10 +30,13 @@ import { useEffect } from "react";
 import { MenuState } from "../../../context/MenuContext";
 import Pagination from "../Pagination";
 import ChangeStatusModal from "../../Orders/ChangeStatusModal";
+import { createSearchParams, useNavigate } from "react-router-dom";
+import OrderReceipt from "../../Orders/OrderReceipt";
 
 const OrderTable = (props) => {
   const [count, setCount] = useState();
   const [id, setId] = useState();
+  const navigate = useNavigate();
 
   const { statusUpdate, setStatusUpdate } = MenuState();
   let userId = localStorage.getItem("user_id");
@@ -273,7 +276,6 @@ const OrderTable = (props) => {
                   <Td>{x.orderStatus}</Td>
                   <Td>{x.paymentStatus}</Td>
                   <Td>{x.type}</Td>
-
                   <Td>{x.subtotal}</Td>
                   <Td style={{ textAlign: "center", cursor: "pointer" }}>
                     <HStack>
@@ -288,10 +290,23 @@ const OrderTable = (props) => {
                           <Icon onClick={onOpenStatus} as={EditIcon} />
                         </Tooltip>
                       </Box>
+
+                      <Box>
+                        <Tooltip label="Order Receipt" placement="top">
+                          <Icon
+                            as={EditIcon}
+                            onClick={() =>
+                              window.open(`/orderReceipt/${x._id}`, "_blank")
+                            }
+                          />
+                        </Tooltip>
+                      </Box>
                     </HStack>
                   </Td>
                 </Tr>
               ))}
+
+              {/* <OrderReceipt className={true ? "display: none" : ""} id={id} /> */}
 
               {isOpen ? (
                 <OrderDetailModal

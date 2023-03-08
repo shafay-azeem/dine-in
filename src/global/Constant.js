@@ -129,6 +129,8 @@ export const API_URL = {
 
   CREATE_ORDER: "order/V1/createOrder/",
 
+  GET_SINGLE_ORDER: "order/V1/getSingleOrder/",
+
   MAKE_PAYMENT: "payment/V1/makePayment/",
 
   GET_PAID_UNPAID_ORDERS: "order/V1/getPaidUnpaidOrders/",
@@ -164,4 +166,7 @@ export const API_URL = {
   GET_RESTURANT_DETAIL: "user/V1/getuserDetailById/",
 
   GET_CART_LENGTH: "cart/V1/getCartLength/",
+
+  //Payment
+  GET_PAYMENT_DETAIL_BY_ORDERID: "payment/V1/paymentDetailByOrderId/",
 };

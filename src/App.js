@@ -28,6 +28,8 @@ import FilterOrders from "./components/Orders/FilterOrders";
 import PaymentList from "./components/Payment/PaymentList";
 import PaymentScreen from "./Screens/PaymentScreen";
 import DeliveryPickUpScreen from "./Screens/DeliveryPickUpScreen";
+import OrderReceipt from "./components/Orders/OrderReceipt";
+import OrderReceiptScreen from "./Screens/OrderReceiptScreen";
 
 function App() {
   return (
@@ -126,6 +128,15 @@ function App() {
             element={
               <RequireAuth>
                 <FilterOrders />
+              </RequireAuth>
+            }
+          />
+
+          <Route
+            path="/orderReceipt/:orderId"
+            element={
+              <RequireAuth>
+                <OrderReceiptScreen />
               </RequireAuth>
             }
           />
