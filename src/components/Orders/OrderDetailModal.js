@@ -53,8 +53,8 @@ const OrderDetailModal = (props) => {
         }}
       >
         <ModalHeader
-          position="fixed"
-          className="bg-light bg-white "
+          position="absolute"
+          className="bg-light bg-white w-100"
           style={{ zIndex: 99 }}
         >
           <div fontWeight="bold" mb="1rem" className="text-normal">
@@ -74,7 +74,7 @@ const OrderDetailModal = (props) => {
         {/* 
         <Divider orientation="horizontal" /> */}
 
-        <ModalCloseButton />
+        <ModalCloseButton style={{ zIndex: 99 }} />
 
         <ModalBody pt={12} className="w-100" style={{ paddingTop: "90px" }}>
           <Row className="w-100 pt-3">

@@ -50,7 +50,6 @@ const OrderPage = () => {
   }, [changer, adder]);
 
   async function cartIncrementDecrement(id, y, size) {
-    //console.log(id, y);
     try {
       let cartIncrementDecrement = await apiFunctions.GET_REQUEST(
         BASE_URL +
@@ -63,6 +62,22 @@ const OrderPage = () => {
       console.log("An error occurred while fetching carts", err.message);
     }
   }
+
+  // const cartIncrementDecrement = async (id, y, size) => {
+
+  //   try {
+  //     let cartIncrementDecrement = await apiFunctions.GET_REQUEST(
+  //       BASE_URL +
+  //         API_URL.CART_INCREMENT_DECREMENT +
+  //         `${id}?cartId=${cartId}&cartStatus=${y}&itemSize=${size}`
+  //     );
+  //     setChanger(Math.random());
+  //     setAdder(Math.random());
+  //   } catch (err) {
+  //     console.log("An error occurred while fetching carts", err.message);
+  //   }
+  // };
+
   const handleRemove = async (id) => {
     await apiFunctions
       .DELETE_REQUEST(
@@ -76,7 +91,7 @@ const OrderPage = () => {
             position: "top",
             title: `Cart Deleted SuccessFully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setChanger(Math.random());
@@ -86,7 +101,7 @@ const OrderPage = () => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -118,7 +133,7 @@ const OrderPage = () => {
         position: "top",
         title: `Please Enter Your Name`,
         status: "warning",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
       return;
@@ -174,7 +189,7 @@ const OrderPage = () => {
         position: "top",
         title: `There Some Error`,
         status: "error",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
     }
@@ -365,21 +380,18 @@ const OrderPage = () => {
                           <p>Rs {x.item_Price}</p>
                         </div>
                         <div className="col-md-2 col-md-2 col-md-2 d-flex">
-                          <button
-                            className="btn btn-link px-2"
-                            onClick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                          >
+                          <button className="btn btn-link px-2">
                             {x.item_Qty == 1 ? null : (
                               <i
                                 style={{ color: "#009997" }}
                                 className="fas fa-minus"
-                                onClick={() =>
+                                onClick={() => {
                                   cartIncrementDecrement(
                                     x._id,
                                     "decrement",
                                     x.item_Size
-                                  )
-                                }
+                                  );
+                                }}
                               ></i>
                             )}
                           </button>
@@ -394,10 +406,7 @@ const OrderPage = () => {
                             type="number"
                           />
 
-                          <button
-                            className=" btn btn-link px-2"
-                            onClick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                          >
+                          <button className=" btn btn-link px-2">
                             <i
                               className="fas fa-plus"
                               style={{ color: "#009997" }}
@@ -438,10 +447,7 @@ const OrderPage = () => {
                             </div>
 
                             <div className="col-md-4 d-flex justify-content-end">
-                              <button
-                                className="btn btn-link px-2"
-                                onClick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                              >
+                              <button className="btn btn-link px-2">
                                 {s.Modifier_Qty == 1 ? null : (
                                   <i
                                     className="fas fa-minus"

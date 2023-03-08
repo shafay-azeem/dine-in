@@ -24,6 +24,8 @@ import PaymentDailyBasisModal from "./PaymentDailyBasisModal";
 import PendingPaymentModal from "./PendingPaymentModal";
 import RevenueModal from "./RevenueModal";
 import RevenueRangeModal from "./RevenueRangeModal";
+import CustomButton from "../../CustomElements/CustomButton";
+import { RepeatIcon } from "@chakra-ui/icons";
 
 const PaymentList = () => {
   const [value, setValue] = useState();
@@ -135,6 +137,10 @@ const PaymentList = () => {
     setCurrentPage(pageNumber);
   };
 
+  function reload() {
+    window.location.reload();
+  }
+
   return (
     <>
       <Grid>
@@ -145,7 +151,7 @@ const PaymentList = () => {
         </GridItem>
       </Grid>
 
-      <Grid templateColumns="repeat(4, 1fr)" gap={6} mt={7}>
+      <Grid templateColumns="repeat(5, 1fr)" gap={6} mt={7}>
         <GridItem w="100%" h="10" textAlign="center">
           <Button onClick={onOpen} bg="#009997" color="white">
             Total Revenue
@@ -170,6 +176,14 @@ const PaymentList = () => {
           >
             Pending Payment
           </Button>
+        </GridItem>
+        <GridItem w="100%" h="10" textAlign="center">
+          <CustomButton
+            click={reload}
+            btnText={"Reload"}
+            variant={"outline"}
+            leftIcon={<RepeatIcon />}
+          />
         </GridItem>
       </Grid>
 

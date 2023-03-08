@@ -7,6 +7,8 @@ import XLSX from "sheetjs-style";
 import excelData from "./Export.json";
 import OrderTable from "../Partials/CustomTables/OrderTable";
 import { useState } from "react";
+import { RepeatIcon } from "@chakra-ui/icons";
+import CustomButton from "../../CustomElements/CustomButton";
 
 const Orders = (props) => {
   let paymentStatus = props.paymentStatus;
@@ -26,8 +28,9 @@ const Orders = (props) => {
     FileSaver.saveAs(data, fileName + fileExtension);
   };
 
-  function testfunc() {
+  function reload() {
     window.location.reload();
+    return false;
   }
 
   const handleAllTabClick = (x) => {
@@ -45,6 +48,13 @@ const Orders = (props) => {
       </Grid>
 
       <Box m="10" mt={5}>
+        <CustomButton
+          click={reload}
+          btnText={"Reload"}
+          variant={"outline"}
+          leftIcon={<RepeatIcon />}
+        />
+
         <Tabs w="100%">
           <TabList>
             <Tab onClick={() => handleAllTabClick(null)}>All</Tab>

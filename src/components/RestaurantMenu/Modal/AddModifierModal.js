@@ -56,9 +56,9 @@ const AddModifierModal = (props) => {
       await apiFunctions
         .POST_REQUEST(
           BASE_URL +
-          API_URL.ADD_MODIFIER_ITEM +
-          tableNumber +
-          `?itemId=${ItemId}&item_Size=${selectedSize}`,
+            API_URL.ADD_MODIFIER_ITEM +
+            tableNumber +
+            `?itemId=${ItemId}&item_Size=${selectedSize}`,
           ModifierData
         )
         .then((res) => {

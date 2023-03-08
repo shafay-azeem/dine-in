@@ -60,6 +60,7 @@ const RevenueRangeModal = (props) => {
                 size="md"
                 type="date"
                 onChange={(e) => setStartDate(e.target.value)}
+                max={new Date().toISOString().slice(0, 10)}
               />
             </FormControl>
 
@@ -69,6 +70,7 @@ const RevenueRangeModal = (props) => {
                 size="md"
                 type="date"
                 onChange={(e) => setEndDate(e.target.value)}
+                max={new Date().toISOString().slice(0, 10)}
               />
             </FormControl>
 
