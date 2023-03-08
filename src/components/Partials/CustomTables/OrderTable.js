@@ -18,6 +18,7 @@ import {
   HStack,
   Button,
   InputRightElement,
+  Tooltip,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -275,15 +276,19 @@ const OrderTable = (props) => {
 
                   <Td>{x.subtotal}</Td>
                   <Td style={{ textAlign: "center", cursor: "pointer" }}>
-                    <Box>
+                    <HStack>
                       <Box onClick={() => getIndex(index)}>
-                        <Icon onClick={onOpen} as={ViewIcon} />
+                        <Tooltip label="View Your Order Detail" placement="top">
+                          <Icon onClick={onOpen} as={ViewIcon} />
+                        </Tooltip>
                       </Box>
 
                       <Box onClick={() => getId(x._id)}>
-                        <Icon onClick={onOpenStatus} as={EditIcon} />
+                        <Tooltip label="Change Status" placement="top">
+                          <Icon onClick={onOpenStatus} as={EditIcon} />
+                        </Tooltip>
                       </Box>
-                    </Box>
+                    </HStack>
                   </Td>
                 </Tr>
               ))}

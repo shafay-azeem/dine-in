@@ -12,6 +12,8 @@ import {
   Stack,
   Button,
   useToast,
+  Text,
+  Divider,
 } from "@chakra-ui/react";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
@@ -66,12 +68,16 @@ const ChangeStatusModal = (props) => {
     <>
       <Button onClick={props.onOpen}>Open Modal</Button>
 
-      <Modal isOpen={props.isOpen} onClose={props.onClose}>
+      <Modal isOpen={props.isOpen} onClose={props.onClose} size="2xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Change order status of {id}</ModalHeader>
+          {/* <ModalHeader>Change order status of {id}</ModalHeader> */}
+          <Text fontSize="xl" className="m-3">
+            Change order status of {id}
+          </Text>
+          <Divider />
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody className="m-4">
             <RadioGroup onChange={setValue} value={value}>
               <Stack>
                 <Radio

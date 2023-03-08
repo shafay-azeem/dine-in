@@ -87,6 +87,10 @@ const MenuDetail = (props) => {
 
   let resName = props?.resName;
 
+  let type = props?.type;
+
+  let menu = props?.menu;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -102,6 +106,8 @@ const MenuDetail = (props) => {
         resName,
         resImage,
         userId,
+        type,
+        menu,
       }).toString(),
     });
   };

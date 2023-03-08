@@ -20,6 +20,9 @@ const DisplayItemCard = (props) => {
   let menu_index = props?.menu_index;
   let resName = props?.resName;
   let type = props?.type;
+  let menu = props?.menu;
+
+  console.log(menu, "display item");
 
   const [itemList, setItemList] = useState();
   const [state, setstate] = useState(false);
@@ -39,6 +42,7 @@ const DisplayItemCard = (props) => {
         resName,
         userId,
         type,
+        menu,
       }).toString(),
     });
   };
@@ -112,7 +116,7 @@ const DisplayItemCard = (props) => {
                 className="mx-auto mb-1 fooditem"
                 style={{
                   cursor: "pointer",
-                  opacity: x.itemTag ? "0.5" : "none",
+                  // opacity: x.itemTag ? "0.5" : "none",
                 }}
               >
                 <div className="Soldout-Badge">
@@ -298,6 +302,7 @@ const DisplayItemCard = (props) => {
                       adder={adder}
                       tableNumber={tableNumber}
                       type={type}
+                      menu={menu}
                     />
                   </Row>
                 </Card.Body>

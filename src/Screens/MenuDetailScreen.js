@@ -20,6 +20,9 @@ const MenuDetailScreen = () => {
         menu_index={searchparams.get("menu_index")}
         resName={searchparams.get("resName")}
         userId={searchparams.get("userId")}
+        type={searchparams.get("type")}
+        menu={searchparams.get("menu")}
+
         // subsection_index={searchparams.get("subsectionIndex")}
       />
     </div>

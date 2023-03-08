@@ -17,6 +17,7 @@ const MenuStartModal = (props) => {
   let resName = props?.resName;
   let resImage = props?.resImage;
   let type = props?.type;
+  let menu = props?.menu;
 
   const navigate = useNavigate();
   const myfun = (index, menuname, menuDescription) => {
@@ -31,6 +32,7 @@ const MenuStartModal = (props) => {
         // menuDescription,
         userId,
         type,
+        menu,
       }).toString(),
     });
   };

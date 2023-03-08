@@ -22,13 +22,10 @@ const MenuPage = (props) => {
   const [resImage, setResImage] = useState();
   const [type, setType] = useState();
 
-  console.log(props.menu, "menu");
-  console.log(typeof props.menu, "menu type ");
-  console.log(props.menu === null, "f check");
-  console.log(props.menu === "null", "f  s check");
-
   let tableNumber = props?.tableNumber;
   let menu = props?.menu;
+
+  // console.log(menu === "undefined", "menu");
   // console.log(menu)
   useEffect(() => {
     getActiveFormQuestions();
@@ -200,6 +197,7 @@ const MenuPage = (props) => {
             resName={resName}
             resImage={resImage}
             type={type}
+            menu={menu}
           />
         </Col>
         <Col

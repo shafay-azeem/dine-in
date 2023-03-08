@@ -26,6 +26,7 @@ const RestaurantMenu = (props) => {
   let tableNumber = props?.tableNumber;
   let resName = props?.resName;
   let resImage = props?.resImage;
+  let menu = props?.menu;
 
   const [sectionList, setSectionList] = useState();
   const [subSectionList, setSubSectionList] = useState();
@@ -120,6 +121,7 @@ const RestaurantMenu = (props) => {
       search: createSearchParams({
         USERID,
         tableNumber,
+        menu,
       }).toString(),
     });
   };
@@ -134,6 +136,7 @@ const RestaurantMenu = (props) => {
         menu_index={menu_index}
         resImage={resImage}
         type={type}
+        menu={menu}
       />
       <div className="menu">
         <div className="d-flex justify-content-start">
@@ -197,6 +200,7 @@ const RestaurantMenu = (props) => {
                     resName={resName}
                     userId={userId}
                     type={type}
+                    menu={menu}
                   />
                 </Accordion.Body>
               </Accordion.Item>
@@ -214,6 +218,7 @@ const RestaurantMenu = (props) => {
           resName={resName}
           userId={userId}
           type={type}
+          menu={menu}
         />
       </div>
     </>

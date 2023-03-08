@@ -39,6 +39,7 @@ const OrderPage = () => {
   let resImage = searchparams.get("resImage");
 
   let type = searchparams.get("type");
+  let menu = searchparams.get("menu");
 
   const img = {
     KFCcard: require("../Assets/burger.jpg"),
@@ -239,6 +240,8 @@ const OrderPage = () => {
         resName,
         tableNumber,
         userId,
+        type,
+        menu,
       }).toString(),
     });
   };
@@ -250,6 +253,7 @@ const OrderPage = () => {
         tableNumber={tableNumber}
         resName={resName}
         type={type}
+        menu={menu}
       />
 
       {/* <div className="backarrow">

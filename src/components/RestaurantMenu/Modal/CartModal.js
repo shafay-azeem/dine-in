@@ -21,6 +21,9 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let menu_index = props?.menu_index;
   let resImage = props?.resImage;
   let type = props?.type;
+  let menu = props?.menu;
+
+  console.log(menu, "cart modal");
 
   const toast = useToast();
   const { adder, setAdder } = MenuState();
@@ -178,6 +181,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
         menu_index,
         resImage,
         type,
+        menu,
       }).toString(),
     });
   };

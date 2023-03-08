@@ -6,8 +6,6 @@ const MenuDisplayScreen = (props) => {
   const navigate = useNavigate();
   const [searchparams] = useSearchParams();
 
-  console.log(searchparams.get("resName"), searchparams.get("resImage"));
-
   return (
     <div style={{ width: "90%", margin: "0 auto" }}>
       <RestaurantMenu
@@ -17,6 +15,7 @@ const MenuDisplayScreen = (props) => {
         resName={searchparams.get("resName")}
         resImage={searchparams.get("resImage")}
         type={searchparams.get("type")}
+        menu={searchparams.get("menu")}
       />
     </div>
   );

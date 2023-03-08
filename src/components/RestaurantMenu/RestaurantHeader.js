@@ -17,6 +17,7 @@ const RestaurantHeader = (props) => {
   let resImage = props?.resImage;
   let menu_index = props?.menu_index;
   let type = props?.type;
+  let menu = props?.menu;
 
   const [show, setShow] = useState(false);
 
@@ -111,6 +112,7 @@ const RestaurantHeader = (props) => {
         menu_index={menu_index}
         resImage={resImage}
         type={type}
+        menu={menu}
       />
     </>
   );

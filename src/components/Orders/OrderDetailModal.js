@@ -49,7 +49,7 @@ const OrderDetailModal = (props) => {
           flexDirection: "column",
           alignItems: "flex-start",
           overflowY: "auto",
-          maxHeight: "60vh",
+          maxHeight: "80vh",
         }}
       >
         <ModalHeader
@@ -57,17 +57,17 @@ const OrderDetailModal = (props) => {
           className="bg-light bg-white "
           style={{ zIndex: 99 }}
         >
-          <div fontWeight="bold" mb="1rem" fontSize="lg">
+          <div fontWeight="bold" mb="1rem" className="text-normal">
             Customer Name: {customerName}
           </div>
 
           {address ? (
-            <div fontWeight="bold" mb="1rem" fontSize="lg">
+            <div fontWeight="bold" mb="1rem" className="text-normal">
               Address: {address}
             </div>
           ) : null}
 
-          <div fontWeight="bold" mb="1rem" fontSize="lg">
+          <div fontWeight="bold" mb="1rem" className="text-normal">
             Instructions: {instructions}
           </div>
         </ModalHeader>
@@ -76,7 +76,7 @@ const OrderDetailModal = (props) => {
 
         <ModalCloseButton />
 
-        <ModalBody pt={12} className="w-100">
+        <ModalBody pt={12} className="w-100" style={{ paddingTop: "90px" }}>
           <Row className="w-100 pt-3">
             {orderItemResponse?.map((x, index) => {
               return (
