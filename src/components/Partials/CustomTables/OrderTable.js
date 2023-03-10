@@ -256,7 +256,7 @@ const OrderTable = (props) => {
             <Tr>
               <Th>ID</Th>
               <Th>Customer Name</Th>
-              <Th>Table Number</Th>
+              <Th>Order Number</Th>
               <Th>Date</Th>
               <Th>Order Status</Th>
               <Th>Payment Status</Th>
@@ -271,7 +271,7 @@ const OrderTable = (props) => {
                 <Tr key={index}>
                   <Td>{x._id}</Td>
                   <Td>{x.customerName}</Td>
-                  <Td>{x.tableNumber}</Td>
+                  <Td>{x.uniqueOrderId}</Td>
                   <Td>{formatDate(x.createdAt.toString())}</Td>
                   <Td>{x.orderStatus}</Td>
                   <Td>{x.paymentStatus}</Td>

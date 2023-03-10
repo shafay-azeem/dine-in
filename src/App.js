@@ -30,6 +30,7 @@ import PaymentScreen from "./Screens/PaymentScreen";
 import DeliveryPickUpScreen from "./Screens/DeliveryPickUpScreen";
 import OrderReceipt from "./components/Orders/OrderReceipt";
 import OrderReceiptScreen from "./Screens/OrderReceiptScreen";
+import TableManagementScreen from "./Screens/TableManagementScreen";
 
 function App() {
   return (
@@ -60,6 +61,14 @@ function App() {
             element={
               <RequireAuth>
                 <MenuManagementScreen />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/tableCreation"
+            element={
+              <RequireAuth>
+                <TableManagementScreen />
               </RequireAuth>
             }
           />

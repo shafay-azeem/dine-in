@@ -1,14 +1,14 @@
 import React from "react";
-import InitialMenu from "../components/MenuManagement/InitialMenu";
 import SideDrawer from "../components/miscellaneous/SideDrawer";
+import TableCreation from "../components/TableManagement/TableCreation";
 
-const MenuManagementScreen = () => {
+const TableManagementScreen = () => {
   return (
     <div style={{ width: "100%", marginBottom: "10%" }}>
       <SideDrawer />
-      <InitialMenu />
+      <TableCreation />
     </div>
   );
 };
 
-export default MenuManagementScreen;
+export default TableManagementScreen;

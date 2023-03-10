@@ -1,13 +1,17 @@
 import {
   Box,
+  FormControl,
+  FormLabel,
   Grid,
   GridItem,
+  Input,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import QRCode from "qrcode";
@@ -16,49 +20,76 @@ import Card from "react-bootstrap/Card";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
+import apiFunctions from "../../global/GlobalFunction";
+import { API_URL, BASE_URL } from "../../global/Constant";
 
 const MenuConfiguration = () => {
+  const toast = useToast();
   const USERID = localStorage.getItem("user_id");
 
-  const [inputList, setInputList] = useState([]);
-
   const [url, setUrl] = useState();
-  const [qr, setQr] = useState("");
+
   const navigate = useNavigate();
-  const [tableNumber, setTableNumber] = useState();
 
-  const myfun = () => {
-    navigate({
-      pathname: "/menustart",
-      search: createSearchParams({
-        USERID,
-        tableNumber,
-      }).toString(),
-    });
-  };
-  const port = window.location.port;
-
-  function generateRandomNumber() {
-    let randomNumber = "";
-    const characters = "123456789";
-    const charactersLength = characters.length;
-    for (let i = 0; i < 5; i++) {
-      randomNumber += characters.charAt(
-        Math.floor(Math.random() * charactersLength)
-      );
-    }
-
-    return randomNumber;
-  }
+  const [qr, setQr] = useState("");
+  const [qrVisible, setQrVisible] = useState(false);
+  const [selectedQrIndex, setSelectedQrIndex] = useState(null);
+  const [tableList, setTableList] = useState();
 
   useEffect(() => {
-    setTableNumber(generateRandomNumber());
+    getTablebyUserId();
   }, []);
 
-  const GenerateQRCode = () => {
-    setTableNumber(generateRandomNumber());
+  async function getTablebyUserId() {
+    let getTables = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.GET_TABLES_BY_USERID
+    );
+
+    // if (getSection.data.section.length == 0) {
+    //   setLoading(true);
+    // }
+
+    let res = getTables.data.tables;
+    setTableList(res);
+    console.log(res);
+    // setLoading(true);
+  }
+
+  // const myfun = () => {
+  //   navigate({
+  //     pathname: "/menustart",
+  //     search: createSearchParams({
+  //       USERID,
+  //       tableNumber,
+  //     }).toString(),
+  //   });
+  // };
+
+  const port = window.location.port;
+
+  let DummyData = [
+    {
+      id: 1,
+      tableNumber: "1",
+    },
+    {
+      id: 2,
+      tableNumber: "2",
+    },
+    {
+      id: 3,
+      tableNumber: "3",
+    },
+  ];
+
+  useEffect(() => {}, []);
+
+  function GenerateQRCode(index, y) {
+    console.log(y, "tn");
+    setSelectedQrIndex(index);
+    setQrVisible(!qrVisible);
     QRCode.toDataURL(
-      `http://localhost:${port}/menustart?USERID=${USERID}&tableNumber=${tableNumber}`,
+      `http://localhost:${port}/menustart?USERID=${USERID}&TableNumber=${y}`,
       {
         width: 800,
         margin: 2,
@@ -73,11 +104,11 @@ const MenuConfiguration = () => {
         setQr(url);
 
         setUrl(
-          `http://localhost:${port}/menustart?USERID=${USERID}&tableNumber=${tableNumber}`
+          `http://localhost:${port}/menustart?USERID=${USERID}&TableNumber=${y}`
         );
       }
     );
-  };
+  }
 
   return (
     <>
@@ -102,35 +133,54 @@ const MenuConfiguration = () => {
 
           <TabPanels>
             <TabPanel>
-              <Card style={{ width: "48rem" }}>
-                <Card.Body>
-                  <Nav.Link onClick={myfun}>Your Restaurant Menu</Nav.Link>
-                  <Card.Title>QR Generator</Card.Title>
+              <Box style={{ width: "90rem" }}>
+                <Grid templateColumns="repeat(4, 1fr)" gap={10}>
+                  <GridItem colSpan={2} h="10" mb={4}>
+                    {tableList?.map((x, index) => {
+                      return (
+                        <Card key={index}>
+                          <Card.Body>
+                            <Card.Title>QR Generator</Card.Title>
+                            <div>
+                              <div className="margin-left:auto">
+                                {qrVisible && selectedQrIndex === index && (
+                                  <>
+                                    <img
+                                      src={qr}
+                                      style={{
+                                        width: "150px",
+                                        height: "150px",
+                                      }}
+                                    />
+                                    <a href={qr} download="qrcode.png">
+                                      Download
+                                    </a>
+                                    {url ? (
+                                      <Card.Text>
+                                        URL : {url ? url : null}
+                                      </Card.Text>
+                                    ) : null}
+                                  </>
+                                )}
+                              </div>
+                            </div>
 
-                  <Card.Text>
-                    <text>{url ? url : null}</text>
-                    <Button onClick={GenerateQRCode} variant="info">
-                      Generate
-                    </Button>
-                    <div className="margin-left:auto">
-                      {qr && (
-                        <>
-                          <img
-                            src={qr}
-                            style={{
-                              width: "200px",
-                              height: "200px",
-                            }}
-                          />
-                          <a href={qr} download="qrcode.png">
-                            Download
-                          </a>
-                        </>
-                      )}
-                    </div>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+                            <Button
+                              variant="primary"
+                              className="mt-2"
+                              onClick={() => {
+                                GenerateQRCode(index, x.TableNumber);
+                              }}
+                            >
+                              Table {x.TableNumber}
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      );
+                    })}
+                  </GridItem>
+                </Grid>
+              </Box>
             </TabPanel>
             {/* <TabPanel>
               <p>Display Options</p>

@@ -23,6 +23,8 @@ const Payment = () => {
   let subTotal = searchparams.get("subTotal");
   let tableNumber = searchparams.get("tableNumber");
   let type = searchparams.get("type");
+  let uniqueOrderId = searchparams.get("uniqueOrderId");
+
   const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -85,6 +87,7 @@ const Payment = () => {
       let paymentData = {
         userId: userId,
         order_Id: orderId,
+        uniqueOrderId: uniqueOrderId,
         email: email,
         phone_Number: phoneNumber,
         payment_method: paymentMethod,
@@ -153,6 +156,7 @@ const Payment = () => {
           userId={userId}
           tableNumber={tableNumber}
           type={type}
+          uniqueOrderId={uniqueOrderId}
         />
       ) : (
         <Row>

@@ -169,4 +169,9 @@ export const API_URL = {
 
   //Payment
   GET_PAYMENT_DETAIL_BY_ORDERID: "payment/V1/paymentDetailByOrderId/",
+
+  //Table
+  CREATE_TABLES: "table/V1/createTables",
+
+  GET_TABLES_BY_USERID: "table/V1/getTablebyUserId",
 };

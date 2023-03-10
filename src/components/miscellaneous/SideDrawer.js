@@ -162,6 +162,12 @@ const SideDrawer = () => {
     });
   };
 
+  const tableCreation = () => {
+    navigate({
+      pathname: "/tableCreation",
+    });
+  };
+
   const {
     isOpen: isOpenDashboardModel,
     onOpen: onOpenDashboardModel,
@@ -282,6 +288,10 @@ const SideDrawer = () => {
               <Button variant="link" onClick={menu}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Menu Management
+              </Button>
+              <Button variant="link" onClick={tableCreation}>
+                <HamburgerIcon fontSize="20px" m={2} />
+                Table Management
               </Button>
               <Button variant="link" onClick={feedbacks}>
                 <HamburgerIcon fontSize="20px" m={2} />

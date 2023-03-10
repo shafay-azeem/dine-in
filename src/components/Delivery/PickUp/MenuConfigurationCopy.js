@@ -60,7 +60,7 @@ const MenuConfigurationCopy = () => {
     setTableNumber(generateRandomNumber());
 
     QRCode.toDataURL(
-      `http://localhost:${port}/menustart?USERID=${USERID}&tableNumber=${tableNumber}&menu=${true}`,
+      `http://localhost:${port}/menustart?USERID=${USERID}&menu=${true}`,
       {
         width: 800,
         margin: 2,
@@ -75,7 +75,7 @@ const MenuConfigurationCopy = () => {
         setQr(url);
 
         setUrl(
-          `http://localhost:${port}/menustart?USERID=${USERID}&tableNumber=${tableNumber}&menu=${"true"}`
+          `http://localhost:${port}/menustart?USERID=${USERID}&menu=${"true"}`
         );
       }
     );
@@ -105,7 +105,7 @@ const MenuConfigurationCopy = () => {
             <TabPanel>
               <Card style={{ width: "48rem" }}>
                 <Card.Body>
-                  <Nav.Link onClick={myfun}>Your Restaurant Menu</Nav.Link>
+                  <Nav.Link>Your Restaurant Menu</Nav.Link>
                   <Card.Title>QR Generator</Card.Title>
 
                   <Card.Text>

@@ -9,6 +9,7 @@ const PaymentSuccessModal = (props) => {
   let USERID = props?.userId;
   let tableNumber = props?.tableNumber;
   let type = props?.type;
+  let uniqueOrderId = props?.uniqueOrderId;
 
   let menu = type != "dinein" ? true : null;
 
@@ -36,6 +37,9 @@ const PaymentSuccessModal = (props) => {
           <br />
           <br />
           <p>Amount : {props.amount}</p>
+          <br />
+          <br />
+          <p>Unique Order Id : {uniqueOrderId}</p>
           <br />
           <br />
 

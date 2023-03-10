@@ -28,7 +28,8 @@ const OrderPage = () => {
   const [instructions, setInstruction] = useState();
   const [customerName, setCustomerName] = useState();
   const [address, setAddress] = useState();
-
+  // const [uniqueOrderId, setUniqueOrderId] = useState();
+  let uniqueOrderId;
   const { adder, setAdder } = MenuState();
 
   let userId = searchparams.get("userId");
@@ -128,6 +129,8 @@ const OrderPage = () => {
     }
   }
   const makeOrder = async (userId, itemDetail) => {
+    uniqueOrderId = await generateRandomNumber();
+
     if (!customerName) {
       toast({
         position: "top",
@@ -150,7 +153,10 @@ const OrderPage = () => {
         paymentStatus: "Pending",
         address: address,
         type: type,
+        uniqueOrderId: uniqueOrderId,
       };
+
+      console.log(orderData, "orderData");
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.CREATE_ORDER + userId, orderData)
         .then((res) => {
@@ -159,6 +165,7 @@ const OrderPage = () => {
 
           if (res.status == 201) {
             console.log(res.data, "response");
+
             toast({
               position: "top",
               title: `Order Confirmed SuccessFully`,
@@ -175,6 +182,7 @@ const OrderPage = () => {
                 subTotal,
                 tableNumber,
                 type,
+                uniqueOrderId,
               }).toString(),
             });
             return true;
@@ -260,6 +268,33 @@ const OrderPage = () => {
       }).toString(),
     });
   };
+
+  // function  generateRandomNumber () {
+  //   let randomNumber = "";
+  //   const characters = "123456789";
+  //   const charactersLength = characters.length;
+  //   for (let i = 0; i < 5; i++) {
+  //     randomNumber += characters.charAt(
+  //       Math.floor(Math.random() * charactersLength)
+  //     );
+  //   }
+  //   // console.log(randomNumber, "rrr");
+  //   return randomNumber;
+  // }
+
+  function generateRandomNumber() {
+    return new Promise((resolve) => {
+      let randomNumber = "";
+      const characters = "123456789";
+      const charactersLength = characters.length;
+      for (let i = 0; i < 5; i++) {
+        randomNumber += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      resolve(randomNumber);
+    });
+  }
 
   return (
     <div className="container">
