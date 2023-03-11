@@ -71,7 +71,7 @@ const SubSecItemCard = (props) => {
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + tableNumber, cartData)
         .then((res) => {
-          if (res.status == 200) {
+          if (res.status == 201) {
             toast({
               position: "top",
               title: `Card Added SuccessFully`,

@@ -17,6 +17,7 @@ import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
 import { useState } from "react";
 import QRCode from "qrcode";
+import { Col, Container, Row } from "react-bootstrap";
 
 const MenuConfigurationCopy = () => {
   const USERID = localStorage.getItem("user_id");
@@ -103,35 +104,41 @@ const MenuConfigurationCopy = () => {
 
           <TabPanels>
             <TabPanel>
-              <Card style={{ width: "48rem" }}>
-                <Card.Body>
-                  <Nav.Link>Your Restaurant Menu</Nav.Link>
-                  <Card.Title>QR Generator</Card.Title>
+              <Container>
+                <Row>
+                  <Col>
+                    <Card style={{ width: "48rem" }}>
+                      <Card.Body>
+                        <Nav.Link>Your Restaurant Menu</Nav.Link>
+                        <Card.Title>QR Generator</Card.Title>
 
-                  <Card.Text>
-                    <text>{url ? url : null}</text>
-                    <Button onClick={GenerateQRCode} variant="info">
-                      Generate
-                    </Button>
-                    <div className="margin-left:auto">
-                      {qr && (
-                        <>
-                          <img
-                            src={qr}
-                            style={{
-                              width: "200px",
-                              height: "200px",
-                            }}
-                          />
-                          <a href={qr} download="qrcode.png">
-                            Download
-                          </a>
-                        </>
-                      )}
-                    </div>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+                        <Card.Text>
+                          <text>{url ? url : null}</text>
+                          <Button onClick={GenerateQRCode} variant="info">
+                            Generate
+                          </Button>
+                          <div className="margin-left:auto">
+                            {qr && (
+                              <>
+                                <img
+                                  src={qr}
+                                  style={{
+                                    width: "200px",
+                                    height: "200px",
+                                  }}
+                                />
+                                <a href={qr} download="qrcode.png">
+                                  Download
+                                </a>
+                              </>
+                            )}
+                          </div>
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                </Row>
+              </Container>
             </TabPanel>
             {/* <TabPanel>
             <p>Display Options</p>

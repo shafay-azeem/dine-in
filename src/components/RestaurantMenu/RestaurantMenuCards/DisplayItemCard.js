@@ -81,7 +81,7 @@ const DisplayItemCard = (props) => {
         .POST_REQUEST(BASE_URL + API_URL.ADD_TO_CART + tableNumber, cartData)
         .then((res) => {
           console.log(res, "add to cart");
-          if (res.status == 200) {
+          if (res.status == 201) {
             toast({
               position: "top",
               title: `Card Added SuccessFully`,

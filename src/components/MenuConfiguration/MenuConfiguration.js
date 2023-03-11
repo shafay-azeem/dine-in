@@ -22,6 +22,9 @@ import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const MenuConfiguration = () => {
   const toast = useToast();
@@ -132,7 +135,7 @@ const MenuConfiguration = () => {
           </TabList>
 
           <TabPanels>
-            <TabPanel>
+            {/* <TabPanel>
               <Box style={{ width: "90rem" }}>
                 <Grid templateColumns="repeat(4, 1fr)" gap={10}>
                   <GridItem colSpan={2} h="10" mb={4}>
@@ -181,7 +184,65 @@ const MenuConfiguration = () => {
                   </GridItem>
                 </Grid>
               </Box>
-            </TabPanel>
+            </TabPanel> */}
+
+            <Container className="mt-4">
+              <Row>
+                {tableList?.map((x, index) => {
+                  return (
+                    <Col md={6} className="py-2">
+                      <Card key={index}>
+                        <Card.Body>
+                          <Card.Title>QR Generator</Card.Title>
+                          <div>
+                            <div className="margin-left:auto">
+                              {qrVisible && selectedQrIndex === index && (
+                                <>
+                                  <img
+                                    src={qr}
+                                    style={{
+                                      width: "150px",
+                                      height: "150px",
+                                    }}
+                                  />
+                                  {/* <a href={qr} download="qrcode.png">
+                                    Download
+                                  </a> */}
+                                  {url ? (
+                                    <Card.Text>
+                                      URL : {url ? url : null}
+                                    </Card.Text>
+                                  ) : null}
+                                </>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="d-flex justify-content-start align-items-center">
+                            <Button
+                              variant="primary"
+                              className="mt-2"
+                              onClick={() => {
+                                GenerateQRCode(index, x.TableNumber);
+                              }}
+                            >
+                              Table {x.TableNumber}
+                            </Button>
+
+                            <Button variant="primary" className="mt-2 ms-2">
+                              <a href={qr} download="qrcode.png">
+                                Download
+                              </a>
+                            </Button>
+                          </div>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  );
+                })}
+              </Row>
+            </Container>
+
             {/* <TabPanel>
               <p>Display Options</p>
             </TabPanel> */}

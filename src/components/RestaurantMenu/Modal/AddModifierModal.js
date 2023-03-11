@@ -62,7 +62,7 @@ const AddModifierModal = (props) => {
           ModifierData
         )
         .then((res) => {
-          if (res.status == 200) {
+          if (res.status == 201) {
             toast({
               position: "top",
               title: `Modifier Added SuccessFully`,

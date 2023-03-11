@@ -35,6 +35,7 @@ const OrderPage = () => {
   let userId = searchparams.get("userId");
   let tableNumber = searchparams.get("tableNumber");
   let TableNumber = searchparams.get("TableNumber");
+
   let resName = searchparams.get("resName");
 
   let index = searchparams.get("menu_index");
@@ -144,19 +145,36 @@ const OrderPage = () => {
     }
 
     try {
-      let orderData = {
-        userId: userId,
-        customerName: customerName,
-        tableNumber: tableNumber,
-        TableNumber: TableNumber,
-        orderedItems: itemDetail,
-        instructions: instructions,
-        subtotal: cartTotal,
-        paymentStatus: "Pending",
-        address: address,
-        type: type,
-        uniqueOrderId: uniqueOrderId,
-      };
+      let orderData;
+      if (TableNumber !== "null") {
+        console.log(TableNumber, "TableNumber");
+        orderData = {
+          userId: userId,
+          customerName: customerName,
+          tableNumber: tableNumber,
+          TableNumber: TableNumber,
+          orderedItems: itemDetail,
+          instructions: instructions,
+          subtotal: cartTotal,
+          paymentStatus: "Pending",
+          address: address,
+          type: type,
+          uniqueOrderId: uniqueOrderId,
+        };
+      } else {
+        orderData = {
+          userId: userId,
+          customerName: customerName,
+          tableNumber: tableNumber,
+          orderedItems: itemDetail,
+          instructions: instructions,
+          subtotal: cartTotal,
+          paymentStatus: "Pending",
+          address: address,
+          type: type,
+          uniqueOrderId: uniqueOrderId,
+        };
+      }
 
       console.log(orderData, "orderData");
       await apiFunctions
