@@ -229,11 +229,13 @@ const MenuConfiguration = () => {
                               Table {x.TableNumber}
                             </Button>
 
-                            <Button variant="primary" className="mt-2 ms-2">
-                              <a href={qr} download="qrcode.png">
-                                Download
-                              </a>
-                            </Button>
+                            {qrVisible && selectedQrIndex === index && (
+                              <Button variant="primary" className="mt-2 ms-2">
+                                <a href={qr} download="qrcode.png">
+                                  Download
+                                </a>
+                              </Button>
+                            )}
                           </div>
                         </Card.Body>
                       </Card>
