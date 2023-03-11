@@ -289,10 +289,20 @@ const SideDrawer = () => {
                 <HamburgerIcon fontSize="20px" m={2} />
                 Menu Management
               </Button>
-              <Button variant="link" onClick={tableCreation}>
+              <Menu>
+                <MenuButton as={Button} variant="link">
+                  <HamburgerIcon fontSize="20px" m={2} />
+                  Table Management
+                </MenuButton>
+                <MenuList>
+                  <MenuItem onClick={UpdateUser}>Restaurant Profile</MenuItem>
+                  <MenuItem onClick={tableCreation}>Table Creation</MenuItem>
+                </MenuList>
+              </Menu>
+              {/* <Button variant="link" onClick={tableCreation}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Table Management
-              </Button>
+              </Button> */}
               <Button variant="link" onClick={feedbacks}>
                 <HamburgerIcon fontSize="20px" m={2} />
                 Feedbacks

@@ -15,6 +15,7 @@ const DisplayItemCard = (props) => {
 
   let section_index = props?.section_index;
   let tableNumber = props?.tableNumber;
+  let TableNumber = props?.TableNumber;
   let resImage = props?.resImage;
   let userId = props?.userId;
   let menu_index = props?.menu_index;
@@ -37,6 +38,7 @@ const DisplayItemCard = (props) => {
       search: createSearchParams({
         index,
         tableNumber,
+        TableNumber,
         resImage,
         menu_index,
         resName,
@@ -301,6 +303,7 @@ const DisplayItemCard = (props) => {
                       className={true ? "display: none" : ""}
                       adder={adder}
                       tableNumber={tableNumber}
+                      TableNumber={TableNumber}
                       type={type}
                       menu={menu}
                     />

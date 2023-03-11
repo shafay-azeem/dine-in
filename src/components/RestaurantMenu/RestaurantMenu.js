@@ -24,6 +24,7 @@ const RestaurantMenu = (props) => {
   let type = props?.type;
 
   let tableNumber = props?.tableNumber;
+  let TableNumber = props?.TableNumber;
   let resName = props?.resName;
   let resImage = props?.resImage;
   let menu = props?.menu;
@@ -121,6 +122,7 @@ const RestaurantMenu = (props) => {
       search: createSearchParams({
         USERID,
         tableNumber,
+        TableNumber,
         menu,
       }).toString(),
     });
@@ -131,6 +133,7 @@ const RestaurantMenu = (props) => {
       <RestaurantHeader
         userId={userId}
         tableNumber={tableNumber}
+        TableNumber={TableNumber}
         resName={resName}
         changer={Math.random()}
         menu_index={menu_index}
@@ -195,6 +198,7 @@ const RestaurantMenu = (props) => {
                   <SubSecItemCard
                     subSection_index={x._id}
                     tableNumber={tableNumber}
+                    TableNumber={TableNumber}
                     resImage={resImage}
                     menu_index={menu_index}
                     resName={resName}
@@ -213,6 +217,7 @@ const RestaurantMenu = (props) => {
         <DisplayItemCard
           section_index={count}
           tableNumber={tableNumber}
+          TableNumber={TableNumber}
           resImage={resImage}
           menu_index={menu_index}
           resName={resName}

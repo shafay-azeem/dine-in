@@ -8,6 +8,7 @@ const PaymentSuccessModal = (props) => {
   const navigate = useNavigate();
   let USERID = props?.userId;
   let tableNumber = props?.tableNumber;
+  let TableNumber = props?.TableNumber;
   let type = props?.type;
   let uniqueOrderId = props?.uniqueOrderId;
 
@@ -46,7 +47,7 @@ const PaymentSuccessModal = (props) => {
           {type != "dinein" ? (
             <p>Type : {type}</p>
           ) : (
-            <p>Table Number : {props.tableNumber}</p>
+            <p>Table Number : {props.TableNumber}</p>
           )}
         </Modal.Body>
 
@@ -59,6 +60,7 @@ const PaymentSuccessModal = (props) => {
                 search: createSearchParams({
                   USERID,
                   tableNumber,
+                  TableNumber,
                   type,
                   menu,
                 }).toString(),

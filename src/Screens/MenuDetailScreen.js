@@ -16,6 +16,7 @@ const MenuDetailScreen = () => {
         item_index={searchparams.get("index")}
         subsectionitem_index={searchparams.get("subsecitemindex")}
         tableNumber={searchparams.get("tableNumber")}
+        TableNumber={searchparams.get("TableNumber")}
         resImage={searchparams.get("resImage")}
         menu_index={searchparams.get("menu_index")}
         resName={searchparams.get("resName")}

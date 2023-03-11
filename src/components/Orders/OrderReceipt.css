@@ -1,0 +1,17 @@
+.Button-Styling button {
+  padding: 10px;
+}
+
+.Box-Styling {
+  max-width: 900px;
+  min-height: 500px;
+}
+
+@media print {
+  /* All your print styles go here */
+  #header,
+  #footer,
+  #nav {
+    display: none !important;
+  }
+}

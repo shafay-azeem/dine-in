@@ -5,6 +5,8 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 import ReactToPdf from "react-to-pdf";
+import "./OrderReceipt.css";
+import { Heading } from "@chakra-ui/react";
 
 const OrderReceipt = () => {
   const [pdfExportComponent, setPdfExportComponent] = useState(null);
@@ -56,6 +58,7 @@ const OrderReceipt = () => {
         BASE_URL + API_URL.GET_SINGLE_ORDER + user_id + `?orderId=${orderId}`
       );
       let res = getSingleOrder.data.order;
+      console.log(res, "orderDetail");
       setOrderDetail(res);
 
       return true;
@@ -66,34 +69,52 @@ const OrderReceipt = () => {
 
   return (
     <>
-      <div className="container mt-5">
+      <div className="Parent container mt-5">
+        <div className="Button-Styling box d-flex justify-content-end align-items-center mb-2">
+          <ReactToPdf targetRef={pdfExportComponent} options={options}>
+            {({ toPdf }) => <button onClick={toPdf}>Export to PDF</button>}
+          </ReactToPdf>
+        </div>
         <div className="Box-Styling row p-5">
-          <div className="col-md-6 mt-3">
+          {/* <div className="col-md-6 mt-3">
             <h6 className="text-black">Order 3 - {orderDetail?.tableNumber}</h6>
-          </div>
+          </div> */}
           <div className="col-md-1"></div>
 
-          <div className="Button-Styling mt-3 col-md-3 d-flex align-items-center justify-content-around">
+          {/* <div className="Button-Styling mt-3 col-md-3 d-flex align-items-center justify-content-around">
             <ReactToPdf targetRef={pdfExportComponent} options={options}>
               {({ toPdf }) => <button onClick={toPdf}>Export to PDF</button>}
             </ReactToPdf>
-            {/* <button type="button" class="btn btn-light">
+            <button type="button" class="btn btn-light">
               Print
-            </button> */}
-            {/* <button type="button" class="btn btn-light">
+            </button>
+            <button type="button" class="btn btn-light">
               Change Status
             </button>
             <button type="button" class="btn btn-light">
               Delete
-            </button> */}
-          </div>
+            </button>
+          </div> */}
           <div className="col-md-2"></div>
 
           <div ref={setPdfExportComponent}>
             {/* Orders Details  */}
             <div className="row">
-              <div className="col-md-6 mt-3">
+              {/* <h6 className="text-black">Order 3 - {orderDetail?.tableNumber}</h6> */}
+              <Heading as="h5">Order 3 - {orderDetail?.tableNumber}</Heading>
+              <div className="col-md-6 mt-4">
                 <h6 className="text-black">Order Details</h6>
+
+                {orderDetail?.TableNumber ? (
+                  <div className="d-flex align-items-start justify-content-between mt-3">
+                    {/* <small className="global text-black">
+                  Sent Time : Mar 7th 2023, 4:14:08 pm
+                </small> */}
+                    <small className="global text-black">
+                      TableNumber: {orderDetail?.TableNumber}
+                    </small>
+                  </div>
+                ) : null}
 
                 <div className="d-flex align-items-start justify-content-between mt-3">
                   {/* <small className="global text-black">
@@ -121,7 +142,7 @@ const OrderReceipt = () => {
                 </div>
               </div>
 
-              <div className="col-md-6 mt-3">
+              <div className="Payment col-md-6 mt-4">
                 <h6 className="text-black">Payments Details</h6>
 
                 <div className="d-flex align-items-start justify-content-between mt-3">
@@ -155,7 +176,7 @@ const OrderReceipt = () => {
             </div>
 
             {/* Customer Details  */}
-            <div className="col-md-6 mt-3">
+            <div className="col-md-6 mt-4">
               <h6 className="text-black">Customer Details</h6>
 
               <div className="d-flex align-items-start justify-content-between mt-3">
@@ -175,6 +196,11 @@ const OrderReceipt = () => {
                 <small className="global text-black">
                   Phone : {payment?.phone_Number}
                 </small>
+                {/* <small className="global text-black">
+                  Email : {payment?.email}
+                </small> */}
+              </div>
+              <div className="d-flex align-items-start justify-content-between mt-3">
                 <small className="global text-black">
                   Email : {payment?.email}
                 </small>

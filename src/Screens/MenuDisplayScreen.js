@@ -12,6 +12,7 @@ const MenuDisplayScreen = (props) => {
         menu_index={searchparams.get("index")}
         userId={searchparams.get("userId")}
         tableNumber={searchparams.get("tableNumber")}
+        TableNumber={searchparams.get("TableNumber")}
         resName={searchparams.get("resName")}
         resImage={searchparams.get("resImage")}
         type={searchparams.get("type")}

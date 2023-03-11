@@ -23,6 +23,7 @@ const MenuPage = (props) => {
   const [type, setType] = useState();
 
   let tableNumber = props?.tableNumber;
+  let TableNumber = props?.TableNumber;
   let menu = props?.menu;
 
   // console.log(menu === "undefined", "menu");
@@ -124,7 +125,7 @@ const MenuPage = (props) => {
 
             {menu === null || menu === "null" ? (
               <Heading size="sm" className="mt-2">
-                YOUR TABLE NUMBER : {tableNumber}
+                YOUR TABLE NUMBER : {TableNumber}
               </Heading>
             ) : null}
 
@@ -194,6 +195,7 @@ const MenuPage = (props) => {
             onHide={() => setModalShow(false)}
             userId={userId}
             tableNumber={tableNumber}
+            TableNumber={TableNumber}
             resName={resName}
             resImage={resImage}
             type={type}

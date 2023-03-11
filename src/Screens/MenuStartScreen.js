@@ -43,6 +43,7 @@ const MenuStartScreen = () => {
       <MenuPage
         userId={searchparams.get("USERID")}
         tableNumber={tableNumber}
+        TableNumber={searchparams.get("TableNumber")}
         menu={searchparams.get("menu")}
       />
     </div>

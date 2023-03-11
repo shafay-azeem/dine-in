@@ -6,6 +6,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
@@ -13,6 +14,11 @@ import apiFunctions from "../../global/GlobalFunction";
 const TableCreation = () => {
   const [number, setNumber] = useState();
   const toast = useToast();
+
+  useEffect(() => {
+    getTableCountbyUserId();
+  }, []);
+
   const createTable = async () => {
     try {
       let data = {
@@ -50,12 +56,26 @@ const TableCreation = () => {
       });
     }
   };
+
+  async function getTableCountbyUserId() {
+    let getTableCountbyUserId = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.GET_TABLE_COUNT_BY_USERID
+    );
+
+    let res = getTableCountbyUserId.data.tables;
+    // console.log(res, "res");
+    setNumber(res);
+
+    return;
+  }
+
   return (
     <div>
       <FormControl style={{ width: "20rem" }}>
         <FormLabel>Enter Number</FormLabel>
         <Input
           placeholder="enter number"
+          value={number}
           onChange={(e) => setNumber(e.target.value)}
         />
       </FormControl>

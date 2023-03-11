@@ -22,6 +22,7 @@ const Payment = () => {
   let orderId = searchparams.get("orderId");
   let subTotal = searchparams.get("subTotal");
   let tableNumber = searchparams.get("tableNumber");
+  let TableNumber = searchparams.get("TableNumber");
   let type = searchparams.get("type");
   let uniqueOrderId = searchparams.get("uniqueOrderId");
 
@@ -155,6 +156,7 @@ const Payment = () => {
           amount={subTotal}
           userId={userId}
           tableNumber={tableNumber}
+          TableNumber={TableNumber}
           type={type}
           uniqueOrderId={uniqueOrderId}
         />

@@ -13,6 +13,7 @@ import { Badge } from "react-bootstrap";
 const RestaurantHeader = (props) => {
   let userId = props?.userId;
   let tableNumber = props?.tableNumber;
+  let TableNumber = props?.TableNumber;
   let resName = props?.resName;
   let resImage = props?.resImage;
   let menu_index = props?.menu_index;
@@ -69,7 +70,7 @@ const RestaurantHeader = (props) => {
                 className="text-center"
                 style={{ color: "white", fontWeight: 400, fontSize: "18px" }}
               >
-                Table # : {tableNumber}
+                Table # : {TableNumber}
               </Navbar.Text>
             )}
           </Navbar.Collapse>
@@ -108,6 +109,7 @@ const RestaurantHeader = (props) => {
         toggleOffcanvas={toggleOffcanvas}
         userId={userId}
         tableNumber={tableNumber}
+        TableNumber={TableNumber}
         resName={resName}
         menu_index={menu_index}
         resImage={resImage}

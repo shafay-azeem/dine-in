@@ -14,6 +14,7 @@ const MenuStartModal = (props) => {
 
   let userId = props?.userId;
   let tableNumber = props?.tableNumber;
+  let TableNumber = props?.TableNumber;
   let resName = props?.resName;
   let resImage = props?.resImage;
   let type = props?.type;
@@ -26,6 +27,7 @@ const MenuStartModal = (props) => {
       search: createSearchParams({
         index,
         tableNumber,
+        TableNumber,
         resName,
         resImage,
         // menuname,

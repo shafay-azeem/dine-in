@@ -13,6 +13,7 @@ import "../RestaurantMenu.css";
 const SubSecItemCard = (props) => {
   const toast = useToast();
   let tableNumber = props?.tableNumber;
+  let TableNumber = props?.TableNumber;
   let resImage = props?.resImage;
   let userId = props?.userId;
   let menu_index = props?.menu_index;
@@ -33,6 +34,7 @@ const SubSecItemCard = (props) => {
       search: createSearchParams({
         subsecitemindex,
         tableNumber,
+        TableNumber,
         resImage,
         menu_index,
         resName,
@@ -277,6 +279,7 @@ const SubSecItemCard = (props) => {
                       className={true ? "display: none" : ""}
                       adder={adder}
                       tableNumber={tableNumber}
+                      TableNumber={TableNumber}
                       type={type}
                     />
                   </Row>

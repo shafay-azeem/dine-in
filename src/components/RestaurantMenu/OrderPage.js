@@ -34,6 +34,7 @@ const OrderPage = () => {
 
   let userId = searchparams.get("userId");
   let tableNumber = searchparams.get("tableNumber");
+  let TableNumber = searchparams.get("TableNumber");
   let resName = searchparams.get("resName");
 
   let index = searchparams.get("menu_index");
@@ -147,6 +148,7 @@ const OrderPage = () => {
         userId: userId,
         customerName: customerName,
         tableNumber: tableNumber,
+        TableNumber: TableNumber,
         orderedItems: itemDetail,
         instructions: instructions,
         subtotal: cartTotal,
@@ -181,6 +183,7 @@ const OrderPage = () => {
                 orderId,
                 subTotal,
                 tableNumber,
+                TableNumber,
                 type,
                 uniqueOrderId,
               }).toString(),
@@ -262,6 +265,7 @@ const OrderPage = () => {
         resImage,
         resName,
         tableNumber,
+        TableNumber,
         userId,
         type,
         menu,
@@ -301,6 +305,7 @@ const OrderPage = () => {
       <RestaurantHeader
         userId={userId}
         tableNumber={tableNumber}
+        TableNumber={TableNumber}
         resName={resName}
         type={type}
         menu={menu}
@@ -663,6 +668,7 @@ const OrderPage = () => {
         className={true ? "display: none" : ""}
         adder={adder}
         tableNumber={tableNumber}
+        TableNumber={TableNumber}
         type={type}
       />
     </div>

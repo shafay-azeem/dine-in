@@ -174,4 +174,6 @@ export const API_URL = {
   CREATE_TABLES: "table/V1/createTables",
 
   GET_TABLES_BY_USERID: "table/V1/getTablebyUserId",
+
+  GET_TABLE_COUNT_BY_USERID: "table/V1/getTableCountbyUserId",
 };

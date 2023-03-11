@@ -17,6 +17,7 @@ import RestaurantHeader from "../RestaurantHeader";
 const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let userId = props?.userId;
   let tableNumber = props?.tableNumber;
+  let TableNumber = props?.TableNumber;
   let resName = props?.resName;
   let menu_index = props?.menu_index;
   let resImage = props?.resImage;
@@ -177,6 +178,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
       search: createSearchParams({
         userId,
         tableNumber,
+        TableNumber,
         resName,
         menu_index,
         resImage,

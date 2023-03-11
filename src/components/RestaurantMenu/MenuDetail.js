@@ -79,6 +79,8 @@ const MenuDetail = (props) => {
 
   let tableNumber = props?.tableNumber;
 
+  let TableNumber = props?.TableNumber;
+
   let resImage = props?.resImage;
 
   let index = props?.menu_index;
@@ -103,6 +105,7 @@ const MenuDetail = (props) => {
       search: createSearchParams({
         index,
         tableNumber,
+        TableNumber,
         resName,
         resImage,
         userId,
@@ -810,6 +813,7 @@ const MenuDetail = (props) => {
               Modifiers={demoModifier}
               ItemId={item_index ? item_index : subsectionitem_index}
               tableNumber={tableNumber}
+              TableNumber={TableNumber}
             />
           ) : null}
         </Col>
