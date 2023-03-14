@@ -13,6 +13,8 @@ const MenuStartModal = (props) => {
   const [change, setChange] = useState(false);
 
   let userId = props?.userId;
+  let resUserName = props?.resUserName;
+
   let tableNumber = props?.tableNumber;
   let TableNumber = props?.TableNumber;
   let resName = props?.resName;
@@ -30,6 +32,7 @@ const MenuStartModal = (props) => {
         TableNumber,
         resName,
         resImage,
+        resUserName,
         // menuname,
         // menuDescription,
         userId,

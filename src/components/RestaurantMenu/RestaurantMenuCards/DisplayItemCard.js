@@ -22,6 +22,7 @@ const DisplayItemCard = (props) => {
   let resName = props?.resName;
   let type = props?.type;
   let menu = props?.menu;
+  let resUserName = props?.resUserName;
 
   console.log(menu, "display item");
 
@@ -45,6 +46,7 @@ const DisplayItemCard = (props) => {
         userId,
         type,
         menu,
+        resUserName,
       }).toString(),
     });
   };

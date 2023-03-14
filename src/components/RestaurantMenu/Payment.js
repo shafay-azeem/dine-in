@@ -19,6 +19,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const [searchparams] = useSearchParams();
   let userId = searchparams.get("userId");
+  let resUserName = searchparams.get("resUserName");
   let orderId = searchparams.get("orderId");
   let subTotal = searchparams.get("subTotal");
   let tableNumber = searchparams.get("tableNumber");
@@ -159,6 +160,7 @@ const Payment = () => {
           TableNumber={TableNumber}
           type={type}
           uniqueOrderId={uniqueOrderId}
+          resUserName={resUserName}
         />
       ) : (
         <Row>

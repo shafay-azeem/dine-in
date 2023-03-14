@@ -17,6 +17,7 @@ const MenuDisplayScreen = (props) => {
         resImage={searchparams.get("resImage")}
         type={searchparams.get("type")}
         menu={searchparams.get("menu")}
+        resUserName={searchparams.get("resUserName")}
       />
     </div>
   );

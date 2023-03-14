@@ -33,6 +33,9 @@ const OrderPage = () => {
   const { adder, setAdder } = MenuState();
 
   let userId = searchparams.get("userId");
+
+  let resUserName = searchparams.get("resUserName");
+
   let tableNumber = searchparams.get("tableNumber");
   let TableNumber = searchparams.get("TableNumber");
 
@@ -204,6 +207,7 @@ const OrderPage = () => {
                 TableNumber,
                 type,
                 uniqueOrderId,
+                resUserName,
               }).toString(),
             });
             return true;
@@ -287,6 +291,7 @@ const OrderPage = () => {
         userId,
         type,
         menu,
+        resUserName,
       }).toString(),
     });
   };
@@ -327,6 +332,7 @@ const OrderPage = () => {
         resName={resName}
         type={type}
         menu={menu}
+        resUserName={resUserName}
       />
 
       {/* <div className="backarrow">
@@ -688,6 +694,7 @@ const OrderPage = () => {
         tableNumber={tableNumber}
         TableNumber={TableNumber}
         type={type}
+        resUserName={resUserName}
       />
     </div>
   );

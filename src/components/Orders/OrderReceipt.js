@@ -101,7 +101,7 @@ const OrderReceipt = () => {
             {/* Orders Details  */}
             <div className="row">
               {/* <h6 className="text-black">Order 3 - {orderDetail?.tableNumber}</h6> */}
-              <Heading as="h5">Order 3 - {orderDetail?.tableNumber}</Heading>
+              <Heading as="h5">Order # {orderDetail?.uniqueOrderId}</Heading>
               <div className="col-md-6 mt-4">
                 <h6 className="text-black">Order Details</h6>
 
@@ -121,7 +121,7 @@ const OrderReceipt = () => {
                   Sent Time : Mar 7th 2023, 4:14:08 pm
                 </small> */}
                   <small className="global text-black">
-                    Req. Payment Method: {payment?.payment_method}
+                    Payment Method: {payment?.payment_method}
                   </small>
                 </div>
 

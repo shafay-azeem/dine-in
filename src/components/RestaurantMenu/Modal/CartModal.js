@@ -23,8 +23,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let resImage = props?.resImage;
   let type = props?.type;
   let menu = props?.menu;
-
-  console.log(menu, "cart modal");
+  let resUserName = props?.resUserName;
 
   const toast = useToast();
   const { adder, setAdder } = MenuState();
@@ -184,6 +183,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
         resImage,
         type,
         menu,
+        resUserName,
       }).toString(),
     });
   };

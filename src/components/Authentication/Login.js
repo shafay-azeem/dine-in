@@ -44,6 +44,7 @@ const Login = () => {
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.LOGIN, userData)
         .then((res) => {
+          console.log(res, "res login");
           if (res.data.success == true) {
             toast({
               position: "top",
@@ -57,6 +58,8 @@ const Login = () => {
             setPassword("");
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user_id", res.data.user._id);
+            localStorage.setItem("resUserName", res.data.user.resUserName);
+
             navigate({
               pathname: "/homeScreen",
             });

@@ -21,6 +21,7 @@ import { Col, Container, Row } from "react-bootstrap";
 
 const MenuConfigurationCopy = () => {
   const USERID = localStorage.getItem("user_id");
+  const resUserName = localStorage.getItem("resUserName");
 
   const [inputList, setInputList] = useState([]);
 
@@ -61,7 +62,7 @@ const MenuConfigurationCopy = () => {
     setTableNumber(generateRandomNumber());
 
     QRCode.toDataURL(
-      `http://localhost:${port}/menustart?USERID=${USERID}&menu=${true}`,
+      `http://localhost:${port}/menustart?resUserName=${resUserName}&menu=${true}`,
       {
         width: 800,
         margin: 2,
@@ -76,7 +77,7 @@ const MenuConfigurationCopy = () => {
         setQr(url);
 
         setUrl(
-          `http://localhost:${port}/menustart?USERID=${USERID}&menu=${"true"}`
+          `http://localhost:${port}/menustart?resUserName=${resUserName}&menu=${"true"}`
         );
       }
     );

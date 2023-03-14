@@ -23,6 +23,7 @@ const MenuDetailScreen = () => {
         userId={searchparams.get("userId")}
         type={searchparams.get("type")}
         menu={searchparams.get("menu")}
+        resUserName={searchparams.get("resUserName")}
 
         // subsection_index={searchparams.get("subsectionIndex")}
       />

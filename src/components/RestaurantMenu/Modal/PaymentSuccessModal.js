@@ -7,6 +7,8 @@ import { createSearchParams } from "react-router-dom";
 const PaymentSuccessModal = (props) => {
   const navigate = useNavigate();
   let USERID = props?.userId;
+  let resUserName = props?.resUserName;
+
   let tableNumber = props?.tableNumber;
   let TableNumber = props?.TableNumber;
   let type = props?.type;
@@ -40,7 +42,7 @@ const PaymentSuccessModal = (props) => {
           <p>Amount : {props.amount}</p>
           <br />
           <br />
-          <p>Unique Order Id : {uniqueOrderId}</p>
+          <p>Order Id : {uniqueOrderId}</p>
           <br />
           <br />
 
@@ -63,6 +65,7 @@ const PaymentSuccessModal = (props) => {
                   TableNumber,
                   type,
                   menu,
+                  resUserName,
                 }).toString(),
               })
             }

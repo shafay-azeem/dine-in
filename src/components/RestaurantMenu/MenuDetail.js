@@ -89,6 +89,8 @@ const MenuDetail = (props) => {
 
   let resName = props?.resName;
 
+  let resUserName = props?.resUserName;
+
   let type = props?.type;
 
   let menu = props?.menu;
@@ -111,6 +113,7 @@ const MenuDetail = (props) => {
         userId,
         type,
         menu,
+        resUserName,
       }).toString(),
     });
   };

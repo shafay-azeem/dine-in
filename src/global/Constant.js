@@ -167,6 +167,9 @@ export const API_URL = {
 
   GET_CART_LENGTH: "cart/V1/getCartLength/",
 
+  GET_RESTURANT_DETAIL_BY_RESTAURANT_NAME:
+    "user/V1/getuserDetailByresUserName/",
+
   //Payment
   GET_PAYMENT_DETAIL_BY_ORDERID: "payment/V1/paymentDetailByOrderId/",
 

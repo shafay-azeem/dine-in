@@ -25,6 +25,9 @@ const SignUp = () => {
   const [password, setPassword] = useState();
   const [resName, setResName] = useState();
   const [resImg, setResImg] = useState();
+
+  const [resUserName, setResUserName] = useState();
+
   const [show, setShow] = useState(false);
 
   const handleClick = () => setShow(!show);
@@ -51,7 +54,7 @@ const SignUp = () => {
   };
 
   const submitHandler = async () => {
-    if (!email || !password || !name || !resName) {
+    if (!email || !password || !name || !resName || !resUserName) {
       //alert("Please Enter All Fields");
       toast({
         position: "top",
@@ -78,6 +81,7 @@ const SignUp = () => {
       password: password,
       resName: resName,
       resImage: resImg,
+      resUserName: resUserName,
     };
 
     await apiFunctions
@@ -95,6 +99,7 @@ const SignUp = () => {
           localStorage.setItem("user_id", res.data.user._id);
 
           localStorage.setItem("token", res.data.token);
+          localStorage.setItem("resUserName", res.data.user.resUserName);
           navigate({
             pathname: "/homeScreen",
           });
@@ -170,6 +175,15 @@ const SignUp = () => {
           onChange={(e) => setResName(e.target.value)}
         />
       </FormControl>
+
+      <FormControl id="resUserName" isRequired>
+        <FormLabel>Restaurant User Name</FormLabel>
+        <Input
+          placeholder="Enter Your Restaurant User Name"
+          onChange={(e) => setResUserName(e.target.value)}
+        />
+      </FormControl>
+
       <FormControl mt={3}>
         <FormLabel fontWeight="400">Upload Your Restaurant Image</FormLabel>
         <Input

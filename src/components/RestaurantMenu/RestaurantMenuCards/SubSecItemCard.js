@@ -20,6 +20,7 @@ const SubSecItemCard = (props) => {
   let resName = props?.resName;
   let type = props?.type;
   let menu = props?.menu;
+  let resUserName = props?.resUserName;
 
   const navigate = useNavigate();
   const { response, setResponse } = MenuState();
@@ -41,6 +42,7 @@ const SubSecItemCard = (props) => {
         userId,
         type,
         menu,
+        resUserName,
       }).toString(),
     });
   };

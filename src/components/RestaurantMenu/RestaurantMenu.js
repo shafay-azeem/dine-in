@@ -21,6 +21,7 @@ const RestaurantMenu = (props) => {
   let menu_index = props?.menu_index;
   let userId = props?.userId;
   let USERID = props?.userId;
+  let resUserName = props?.resUserName;
   let type = props?.type;
 
   let tableNumber = props?.tableNumber;
@@ -124,6 +125,7 @@ const RestaurantMenu = (props) => {
         tableNumber,
         TableNumber,
         menu,
+        resUserName,
       }).toString(),
     });
   };
@@ -140,6 +142,7 @@ const RestaurantMenu = (props) => {
         resImage={resImage}
         type={type}
         menu={menu}
+        resUserName={resUserName}
       />
       <div className="menu">
         <div className="d-flex justify-content-start">
@@ -205,6 +208,7 @@ const RestaurantMenu = (props) => {
                     userId={userId}
                     type={type}
                     menu={menu}
+                    resUserName={resUserName}
                   />
                 </Accordion.Body>
               </Accordion.Item>
@@ -224,6 +228,7 @@ const RestaurantMenu = (props) => {
           userId={userId}
           type={type}
           menu={menu}
+          resUserName={resUserName}
         />
       </div>
     </>

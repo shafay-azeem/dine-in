@@ -45,12 +45,15 @@ const MenuPage = (props) => {
   }
 
   let userId = props?.userId;
+  let resUserName = props?.resUserName;
+  // console.log(userId, "menu pae user");
 
   const menuFeedback = () => {
     navigate({
       pathname: "/menufeedback",
       search: createSearchParams({
         userId,
+        resUserName,
       }).toString(),
     });
   };
@@ -107,8 +110,6 @@ const MenuPage = (props) => {
       console.log("An error occurred while fetching menus", err.message);
     }
   }
-
-  console.log(menu);
 
   return (
     <div>
@@ -200,6 +201,7 @@ const MenuPage = (props) => {
             resImage={resImage}
             type={type}
             menu={menu}
+            resUserName={resUserName}
           />
         </Col>
         <Col

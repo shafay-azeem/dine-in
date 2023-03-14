@@ -28,7 +28,7 @@ import { useNavigate } from "react-router-dom";
 const UpdateUser = () => {
   const toast = useToast();
   const [name, setName] = useState();
-  const [email, setEmail] = useState();
+  // const [email, setEmail] = useState();
   const [resName, setResName] = useState();
   const [resImage, setResImage] = useState();
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const UpdateUser = () => {
   let userId = localStorage.getItem("user_id");
 
   const submitHandler = async () => {
-    if (!name && !email) {
+    if (!name) {
       //alert("Please Enter All Fields");
       toast({
         position: "top",
@@ -60,7 +60,7 @@ const UpdateUser = () => {
     try {
       let userData = {
         name: name,
-        email: email,
+        // email: email,
         resName: resName,
         resImage: resImage,
       };
@@ -77,7 +77,7 @@ const UpdateUser = () => {
               isClosable: true,
             });
             setName("");
-            setEmail("");
+            // setEmail("");
             setResImage("");
             setResName("");
             navigate("/homeScreen");
@@ -132,7 +132,7 @@ const UpdateUser = () => {
 
       setResName(res.resName);
       setResImage(res.resImage);
-      setEmail(res.email);
+      // setEmail(res.email);
       setName(res.name);
     } catch (err) {
       console.log("An error occurred while fetching menus", err.message);
@@ -159,14 +159,14 @@ const UpdateUser = () => {
             />
           </FormControl>
 
-          <FormControl id="email" isRequired>
+          {/* <FormControl id="email" isRequired>
             <FormLabel>Email</FormLabel>
             <Input
               placeholder="Enter Your Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </FormControl>
+          </FormControl> */}
 
           <FormControl id="name" isRequired>
             <FormLabel>Restaurant Name</FormLabel>

@@ -29,6 +29,7 @@ import Col from "react-bootstrap/Col";
 const MenuConfiguration = () => {
   const toast = useToast();
   const USERID = localStorage.getItem("user_id");
+  const resUserName = localStorage.getItem("resUserName");
 
   const [url, setUrl] = useState();
 
@@ -92,7 +93,7 @@ const MenuConfiguration = () => {
     setSelectedQrIndex(index);
     setQrVisible(!qrVisible);
     QRCode.toDataURL(
-      `http://localhost:${port}/menustart?USERID=${USERID}&TableNumber=${y}`,
+      `http://localhost:${port}/menustart?resUserName=${resUserName}&TableNumber=${y}`,
       {
         width: 800,
         margin: 2,
@@ -107,7 +108,7 @@ const MenuConfiguration = () => {
         setQr(url);
 
         setUrl(
-          `http://localhost:${port}/menustart?USERID=${USERID}&TableNumber=${y}`
+          `http://localhost:${port}/menustart?resUserName=${resUserName}&TableNumber=${y}`
         );
       }
     );

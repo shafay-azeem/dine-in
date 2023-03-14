@@ -21,6 +21,8 @@ const HomePage = () => {
   useEffect(() => {
     localStorage.removeItem("token");
     localStorage.removeItem("user_id");
+    localStorage.removeItem("resUserName");
+
     // if (!token && !user_id) {
     //   return navigate("/");
     // }
