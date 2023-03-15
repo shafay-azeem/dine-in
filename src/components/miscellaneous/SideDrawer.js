@@ -292,10 +292,10 @@ const SideDrawer = () => {
               <Menu>
                 <MenuButton as={Button} variant="link">
                   <HamburgerIcon fontSize="20px" m={2} />
-                  Table Management
+                  Restaurant Management
                 </MenuButton>
                 <MenuList>
-                  <MenuItem onClick={UpdateUser}>Restaurant Profile</MenuItem>
+                  <MenuItem onClick={UpdateUser}>Update Profile</MenuItem>
                   <MenuItem onClick={tableCreation}>Table Creation</MenuItem>
                 </MenuList>
               </Menu>

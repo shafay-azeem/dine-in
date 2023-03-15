@@ -40,6 +40,8 @@ export const MenuProvider = ({ children }) => {
 
   const [adder, setAdder] = useState();
 
+  //const [tableChanger, setTableChanger] = useState();
+
   return (
     <MenuContext.Provider
       value={{

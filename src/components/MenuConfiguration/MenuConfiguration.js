@@ -53,7 +53,7 @@ const MenuConfiguration = () => {
     //   setLoading(true);
     // }
 
-    let res = getTables.data.tables;
+    let res = getTables.data.tables.Table;
     setTableList(res);
     console.log(res);
     // setLoading(true);
@@ -93,7 +93,7 @@ const MenuConfiguration = () => {
     setSelectedQrIndex(index);
     setQrVisible(!qrVisible);
     QRCode.toDataURL(
-      `http://localhost:${port}/menustart?resUserName=${resUserName}&TableNumber=${y}`,
+      `https://lifoapp.co.uk/menustart?resUserName=${resUserName}&TableNumber=${y}`,
       {
         width: 800,
         margin: 2,
@@ -108,7 +108,7 @@ const MenuConfiguration = () => {
         setQr(url);
 
         setUrl(
-          `http://localhost:${port}/menustart?resUserName=${resUserName}&TableNumber=${y}`
+          `https://lifoapp.co.uk/menustart?resUserName=${resUserName}&TableNumber=${y}`
         );
       }
     );

@@ -1,4 +1,5 @@
-export const BASE_URL = "http://localhost:3000/api/";
+//export const BASE_URL = "http://localhost:5000/api/";
+export const BASE_URL = "https://lifoapp.co.uk/api/";
 
 export const API_URL = {
   GET_ALL_MENU: "menu/V1/getAllMenu/",
@@ -179,4 +180,6 @@ export const API_URL = {
   GET_TABLES_BY_USERID: "table/V1/getTablebyUserId",
 
   GET_TABLE_COUNT_BY_USERID: "table/V1/getTableCountbyUserId",
+
+  DELETE_TABLE_BY_TABLE_ID: "table/V1/deleteTableDeleteByTableId/",
 };

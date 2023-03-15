@@ -55,8 +55,6 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
       );
       let res = getCartByTableNumber.data.cart;
 
-      console.log(getCartByTableNumber, "get cart");
-
       if (res.cartItems?.length > 0) {
         setLoading1(true);
         setLoading(true);
