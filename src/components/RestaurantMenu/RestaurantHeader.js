@@ -9,6 +9,8 @@ import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useEffect } from "react";
 import { Badge } from "react-bootstrap";
+import DisplayItemCard from "./RestaurantMenuCards/DisplayItemCard";
+import { MenuState } from "../../context/MenuContext";
 
 const RestaurantHeader = (props) => {
   let userId = props?.userId;
@@ -22,31 +24,41 @@ const RestaurantHeader = (props) => {
   let resUserName = props?.resUserName;
 
   const [show, setShow] = useState(false);
+  const [dataFromChild, setDataFromChild] = useState("");
 
   const [cartCount, setCartCount] = useState();
+
+  const { adder, setAdder } = MenuState();
 
   const toggleOffcanvas = () => {
     setShow(!show);
   };
 
   // useEffect(() => {
-  //   getCartLength();
-  // }, [props?.changer]);
+  //   const interval = setInterval(() => {
+  //     getCartLength();
+  //   }, 2000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
-  // async function getCartLength() {
-  //   try {
-  //     let getCartLength = await apiFunctions.GET_REQUEST(
-  //       BASE_URL + API_URL.GET_CART_LENGTH + tableNumber
-  //     );
-  //     let res = getCartLength.data.cartLength;
-  //     // console.log(res, "cartLength");
-  //     setCartCount(res);
-  //     // setState(true);
-  //     return true;
-  //   } catch (err) {
-  //     console.log("An error occurred while fetching sections", err.message);
-  //   }
-  // }
+  useEffect(() => {
+    getCartLength();
+  }, [adder]);
+
+  async function getCartLength() {
+    try {
+      let getCartLength = await apiFunctions.GET_REQUEST(
+        BASE_URL + API_URL.GET_CART_LENGTH + tableNumber
+      );
+      let res = getCartLength.data.cartLength;
+      console.log(res, "cartLength");
+      setCartCount(res);
+      // setState(true);
+      return true;
+    } catch (err) {
+      console.log("An error occurred while fetching sections", err.message);
+    }
+  }
 
   return (
     <>
@@ -80,12 +92,10 @@ const RestaurantHeader = (props) => {
               onClick={toggleOffcanvas}
               style={{ cursor: "pointer" }}
             >
-              {/* <CgShoppingCart size={20} style={{ color: "white" }} /> (
-              {cartCount}) */}
-              {/* <Badge pill bg="primary">
-                {cartCount}
-              </Badge> */}
-              <CgShoppingCart size={20} color="white" />
+              <div className="d-flex justify-content-around align-items-center">
+                <CgShoppingCart size={20} color="white" />
+                <span className="ms-2 text-white">(3)</span>
+              </div>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>

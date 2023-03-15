@@ -179,7 +179,7 @@ const SectionDrawer = (props) => {
         position: "top",
         title: `Section Name Cant be Empty`,
         status: "warning",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
       return;
@@ -196,7 +196,7 @@ const SectionDrawer = (props) => {
             position: "top",
             title: `Sub Section Created Successfully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setCreateSubSection(true);
@@ -208,7 +208,7 @@ const SectionDrawer = (props) => {
           position: "top",
           title: `There Some Error`,
           status: "error",
-          duration: 9000,
+          duration: 1000,
           isClosable: true,
         });
         return false;
@@ -225,7 +225,7 @@ const SectionDrawer = (props) => {
             position: "top",
             title: `Section Created Successfully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setSectionCreated(true);
@@ -240,7 +240,7 @@ const SectionDrawer = (props) => {
           position: "top",
           title: `There Some Error`,
           status: "error",
-          duration: 9000,
+          duration: 1000,
           isClosable: true,
         });
         return false;
@@ -336,7 +336,7 @@ const SectionDrawer = (props) => {
             position: "top",
             title: `Sub Section Created SuccessFully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setCreateSubSection(true);
@@ -349,7 +349,7 @@ const SectionDrawer = (props) => {
               position: "top",
               title: `${deleteRes.data.message}`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return true;
@@ -374,7 +374,7 @@ const SectionDrawer = (props) => {
             position: "top",
             title: `Subsection Updated Successfully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setUpdatedSubSection(true);
@@ -387,7 +387,7 @@ const SectionDrawer = (props) => {
           position: "top",
           title: `There Some Error`,
           status: "error",
-          duration: 9000,
+          duration: 1000,
           isClosable: true,
         });
         return false;
@@ -404,7 +404,7 @@ const SectionDrawer = (props) => {
             position: "top",
             title: `Section Updated Successfully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setUpdatedSection(true);
@@ -418,7 +418,7 @@ const SectionDrawer = (props) => {
           position: "top",
           title: `There Some Error`,
           status: "error",
-          duration: 9000,
+          duration: 1000,
           isClosable: true,
         });
         return false;

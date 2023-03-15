@@ -43,7 +43,7 @@ const ChangeStatusModal = (props) => {
           position: "top",
           title: `Order Status Updated`,
           status: "success",
-          duration: 9000,
+          duration: 1000,
           isClosable: true,
         });
 
@@ -54,7 +54,7 @@ const ChangeStatusModal = (props) => {
           position: "top",
           title: `There Some Error`,
           status: "error",
-          duration: 9000,
+          duration: 1000,
           isClosable: true,
         });
         return false;

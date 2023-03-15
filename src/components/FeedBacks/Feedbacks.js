@@ -105,7 +105,7 @@ const Feedbacks = () => {
             position: "top",
             title: `${res.data.message}`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setDeleteFeedback(true);
@@ -117,7 +117,7 @@ const Feedbacks = () => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -152,7 +152,7 @@ const Feedbacks = () => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;

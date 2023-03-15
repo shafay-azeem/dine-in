@@ -103,7 +103,7 @@ const DisplayCard = () => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
 
@@ -124,7 +124,7 @@ const DisplayCard = () => {
             position: "top",
             title: `Menu Deleted SuccessFully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setMenuDelete(true);
@@ -135,7 +135,7 @@ const DisplayCard = () => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -160,23 +160,21 @@ const DisplayCard = () => {
       .POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData)
       .then((res) => {
         if (res.data.success == true) {
-          // alert(`MENU DUPLICATED SUCCESSFULLY`)
           toast({
             position: "top",
             title: `Menu Duplicated SuccessFully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setMenuDuplicate(true);
           return true;
         } else {
-          // alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -241,7 +239,10 @@ const DisplayCard = () => {
                                   </Badge>
                                 </Text>
                                 <Text>{x.menuDescription}</Text>
-                                <Text>Last Updated on {formatDate(x.createAt.toString())}</Text>
+                                <Text>
+                                  Last Updated on{" "}
+                                  {formatDate(x.createAt.toString())}
+                                </Text>
                                 <Text fontSize="13" fontWeight="400" p={2}>
                                   {/* {x.item} item, last updated on {x.date} */}
                                 </Text>

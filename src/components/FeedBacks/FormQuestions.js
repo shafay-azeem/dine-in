@@ -47,7 +47,7 @@ const FormQuestions = () => {
               position: "top",
               title: `Form Questions Created SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
 
@@ -57,7 +57,7 @@ const FormQuestions = () => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return false;
@@ -75,7 +75,7 @@ const FormQuestions = () => {
               position: "top",
               title: `Updated SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
 
@@ -85,7 +85,7 @@ const FormQuestions = () => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return false;
@@ -107,7 +107,7 @@ const FormQuestions = () => {
         position: "top",
         title: "Question Has Been Removed Press Save",
         status: "success",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       })
     ) {

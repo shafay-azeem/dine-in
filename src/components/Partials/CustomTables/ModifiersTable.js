@@ -27,19 +27,18 @@ import { EditIcon } from "@chakra-ui/icons";
 const ModifiersTable = () => {
   const toast = useToast();
   const { modifier, setModifier } = MenuState();
-  const [update, setUpdate] = useState(true)
+  const [update, setUpdate] = useState(true);
   const [count, setCount] = useState();
   const {
     isOpen: modifierIsOpen,
     onOpen: modifierOnOpen,
     onClose: modifierOnClose,
   } = useDisclosure();
-  let changer = Math.random()
+  let changer = Math.random();
 
   useEffect(() => {
     // setUpdate(false)
     getAllModifiers();
-
   }, [changer]);
 
   async function getAllModifiers() {
@@ -49,7 +48,7 @@ const ModifiersTable = () => {
 
     let res = getModifier.data.modifier;
     // console.log(modifier);
-    setUpdate(true)
+    setUpdate(true);
     setModifier(res);
   }
 
@@ -63,7 +62,7 @@ const ModifiersTable = () => {
             position: "top",
             title: `${res.data.message}`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
 
@@ -74,7 +73,7 @@ const ModifiersTable = () => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -132,15 +131,6 @@ const ModifiersTable = () => {
                       /> */}
                         <EditIcon onClick={modifierOnOpen} cursor="pointer" />
                       </Box>
-
-                      {modifierIsOpen ? (
-                        <MenuModifieModal
-                          isOpen={modifierIsOpen}
-                          onOpen={modifierOnOpen}
-                          onClose={modifierOnClose}
-                          modifier_id={count}
-                        />
-                      ) : null}
                     </div>
                   </Td>
                 </Tr>
@@ -148,6 +138,15 @@ const ModifiersTable = () => {
             })}
           </Tbody>
         </Table>
+
+        {modifierIsOpen ? (
+          <MenuModifieModal
+            isOpen={modifierIsOpen}
+            onOpen={modifierOnOpen}
+            onClose={modifierOnClose}
+            modifier_id={count}
+          />
+        ) : null}
       </TableContainer>
     </>
   );

@@ -9,6 +9,7 @@ import CartModal from "../Modal/CartModal";
 import "../RestaurantMenu.css";
 import "../../../App.css";
 import { MenuState } from "../../../context/MenuContext";
+import RestaurantHeader from "../RestaurantHeader";
 
 const DisplayItemCard = (props) => {
   const toast = useToast();
@@ -91,6 +92,7 @@ const DisplayItemCard = (props) => {
               duration: 1000,
               isClosable: true,
             });
+
             setAdder(Math.random());
             return true;
           } else {

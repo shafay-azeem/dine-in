@@ -12,7 +12,6 @@ import "./RestaurantMenu.css";
 import { useToast } from "@chakra-ui/react";
 import Spinner from "react-bootstrap/Spinner";
 
-
 const MenuFeedBackForm = (props) => {
   let userId = props?.userId;
   const navigate = useNavigate();
@@ -110,7 +109,7 @@ const MenuFeedBackForm = (props) => {
         position: "top",
         title: `Please Answer All fields`,
         status: "warning",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
     }
@@ -140,7 +139,7 @@ const MenuFeedBackForm = (props) => {
             position: "top",
             title: `feedback Submitted`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           navigate(-1);
@@ -150,7 +149,7 @@ const MenuFeedBackForm = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -173,7 +172,7 @@ const MenuFeedBackForm = (props) => {
                     icon={<BsArrowLeftShort />}
                     onClick={() => navigate(-1)}
                     className="d-block"
-                    colorScheme='white'
+                    colorScheme="white"
                   />
                   {/* <button>Submitt Now</button> */}
                 </div>

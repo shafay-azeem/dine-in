@@ -52,7 +52,7 @@ const UpdateUser = () => {
         position: "top",
         title: `You Haven't Updated Any Information`,
         status: "warning",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
       return;
@@ -73,7 +73,7 @@ const UpdateUser = () => {
               position: "top",
               title: `Updated SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setName("");
@@ -93,7 +93,7 @@ const UpdateUser = () => {
         position: "top",
         title: `There Some Error`,
         status: "error",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
     }

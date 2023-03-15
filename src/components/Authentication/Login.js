@@ -31,7 +31,7 @@ const Login = () => {
         position: "top",
         title: `Please Enter All Fields`,
         status: "warning",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
       return;
@@ -50,7 +50,7 @@ const Login = () => {
               position: "top",
               title: `${res.data.message}`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             auth.login(res.data.user.name);
@@ -74,7 +74,7 @@ const Login = () => {
         position: "top",
         title: `There Some Error`,
         status: "error",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
     }

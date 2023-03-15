@@ -67,7 +67,7 @@ const MenuModifieModal = (props) => {
             position: "top",
             title: `${res.data.message}`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
 
@@ -77,7 +77,7 @@ const MenuModifieModal = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -94,7 +94,7 @@ const MenuModifieModal = (props) => {
             position: "top",
             title: `${res.data.message}`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
 
@@ -104,7 +104,7 @@ const MenuModifieModal = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;

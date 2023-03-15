@@ -127,7 +127,7 @@ const ItemCard = (props) => {
               position: "top",
               title: `Item Deleted SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setItemDeleted(true);
@@ -137,7 +137,7 @@ const ItemCard = (props) => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return false;
@@ -155,7 +155,7 @@ const ItemCard = (props) => {
               position: "top",
               title: `Sub Item Deleted`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setSubItemDeleted(true);
@@ -166,7 +166,7 @@ const ItemCard = (props) => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return false;
@@ -227,7 +227,7 @@ const ItemCard = (props) => {
               position: "top",
               title: `Item Duplicated SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setItemDuplicate(true);
@@ -237,7 +237,7 @@ const ItemCard = (props) => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setSubItemDuplicate(true);
@@ -254,7 +254,7 @@ const ItemCard = (props) => {
               position: "top",
               title: `Sub Item Duplicated SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setSubItemDuplicate(true);
@@ -265,7 +265,7 @@ const ItemCard = (props) => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return false;
@@ -304,7 +304,7 @@ const ItemCard = (props) => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setSubItemDuplicate(true);
@@ -324,7 +324,7 @@ const ItemCard = (props) => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return false;

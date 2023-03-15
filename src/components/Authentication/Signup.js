@@ -60,7 +60,7 @@ const SignUp = () => {
         position: "top",
         title: `Please Enter All Fields`,
         status: "warning",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
       return;
@@ -70,7 +70,7 @@ const SignUp = () => {
         position: "top",
         title: `Password donot match`,
         status: "success",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
       return;
@@ -92,7 +92,7 @@ const SignUp = () => {
             position: "top",
             title: `${res.data.message}`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           auth.login(res.data.user.name);
@@ -110,7 +110,7 @@ const SignUp = () => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;

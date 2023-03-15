@@ -145,7 +145,7 @@ const SettingDrawer = (props) => {
             position: "top",
             title: `${res.data.message}`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setUpdateMenu(true);
@@ -156,7 +156,7 @@ const SettingDrawer = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -207,12 +207,11 @@ const SettingDrawer = (props) => {
         position: "top",
         title: `Menu Name Cant be Empty`,
         status: "warning",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
       return;
     }
-
 
     await apiFunctions
       .POST_REQUEST(BASE_URL + API_URL.CREATE_MENU, menuData)
@@ -222,7 +221,7 @@ const SettingDrawer = (props) => {
             position: "top",
             title: `${res.data.message}`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setCreateMenu(true);
@@ -233,7 +232,7 @@ const SettingDrawer = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -435,7 +434,11 @@ const SettingDrawer = (props) => {
                                   onChange={(e) => handleInputChange(e, i)}
                                 >
                                   {weekday?.map((a, index) => {
-                                    return <option value={a} key={index}>{a}</option>;
+                                    return (
+                                      <option value={a} key={index}>
+                                        {a}
+                                      </option>
+                                    );
                                   })}
                                 </Select>
                               </Tooltip>
@@ -452,7 +455,6 @@ const SettingDrawer = (props) => {
                                   onChange={(e) => handleInputChange(e, i)}
                                 />
                               </Tooltip>
-
 
                               <Tooltip label="End Time" placement="top">
                                 <Input

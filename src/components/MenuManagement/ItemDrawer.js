@@ -207,7 +207,7 @@ const ItemDrawer = (props) => {
               position: "top",
               title: ` Item Updated Successfully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setItemUpdater(true);
@@ -217,7 +217,7 @@ const ItemDrawer = (props) => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return false;
@@ -232,7 +232,7 @@ const ItemDrawer = (props) => {
               position: "top",
               title: `Sub Item Updated Successfully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setItemUpdater(true);
@@ -242,7 +242,7 @@ const ItemDrawer = (props) => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return false;
@@ -302,7 +302,7 @@ const ItemDrawer = (props) => {
           position: "top",
           title: `Item Name Cant be Empty`,
           status: "warning",
-          duration: 9000,
+          duration: 1000,
           isClosable: true,
         });
         return;
@@ -315,7 +315,7 @@ const ItemDrawer = (props) => {
               position: "top",
               title: `Item Created SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setItemUpdater(true);
@@ -326,7 +326,7 @@ const ItemDrawer = (props) => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return false;
@@ -338,7 +338,7 @@ const ItemDrawer = (props) => {
           position: "top",
           title: `Please Enter All Fields`,
           status: "warning",
-          duration: 9000,
+          duration: 1000,
           isClosable: true,
         });
         return;
@@ -351,7 +351,7 @@ const ItemDrawer = (props) => {
               position: "top",
               title: `Sub Item Created SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setItemUpdater(true);
@@ -361,7 +361,7 @@ const ItemDrawer = (props) => {
               position: "top",
               title: `There Some Error`,
               status: "error",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return false;

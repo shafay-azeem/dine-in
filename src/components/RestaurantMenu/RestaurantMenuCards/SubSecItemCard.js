@@ -78,7 +78,7 @@ const SubSecItemCard = (props) => {
               position: "top",
               title: `Card Added SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             setAdder(Math.random());
@@ -93,7 +93,7 @@ const SubSecItemCard = (props) => {
         position: "top",
         title: `There Some Error`,
         status: "error",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
     }

@@ -55,6 +55,8 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
       );
       let res = getCartByTableNumber.data.cart;
 
+      // console.log(getCartByTableNumber.data.cartLength, "getCartByTableNumber");
+
       if (res.cartItems?.length > 0) {
         setLoading1(true);
         setLoading(true);
@@ -435,6 +437,11 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
             </div>
           ) : null}
         </Offcanvas>
+
+        {/* <RestaurantHeader
+          className={true ? "display: none" : ""}
+          changer={changer}
+        /> */}
       </div>
     </>
   );

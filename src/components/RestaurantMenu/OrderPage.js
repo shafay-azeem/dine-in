@@ -150,7 +150,6 @@ const OrderPage = () => {
     try {
       let orderData;
       if (TableNumber !== "null") {
-        console.log(TableNumber, "TableNumber");
         orderData = {
           userId: userId,
           customerName: customerName,
@@ -179,7 +178,6 @@ const OrderPage = () => {
         };
       }
 
-      console.log(orderData, "orderData");
       await apiFunctions
         .POST_REQUEST(BASE_URL + API_URL.CREATE_ORDER + userId, orderData)
         .then((res) => {
@@ -187,13 +185,11 @@ const OrderPage = () => {
           let subTotal = res.data.order.subtotal;
 
           if (res.status == 201) {
-            console.log(res.data, "response");
-
             toast({
               position: "top",
               title: `Order Confirmed SuccessFully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
 
@@ -260,7 +256,7 @@ const OrderPage = () => {
             position: "top",
             title: `Modifier Deleted SuccessFully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setChanger(Math.random());
@@ -271,7 +267,7 @@ const OrderPage = () => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;

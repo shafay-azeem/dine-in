@@ -64,7 +64,7 @@ const TableCreation = () => {
           if (res.status == 201) {
             toast({
               position: "top",
-              title: `Table Created SuccessFully`,
+              title: `${res.data.message}`,
               status: "success",
               duration: 1000,
               isClosable: true,
@@ -116,7 +116,7 @@ const TableCreation = () => {
         if (res.data.success == true) {
           toast({
             position: "top",
-            title: `Table Deleted SuccessFully`,
+            title: `${res.data.message}`,
             status: "success",
             duration: 1000,
             isClosable: true,
@@ -131,7 +131,7 @@ const TableCreation = () => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;

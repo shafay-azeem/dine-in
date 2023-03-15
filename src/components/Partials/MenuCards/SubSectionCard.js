@@ -115,7 +115,7 @@ const SubSectionCard = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -154,7 +154,7 @@ const SubSectionCard = (props) => {
             position: "top",
             title: `Sub Section Duplicated Successfully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setSubSectionDuplicate(true);
@@ -164,7 +164,7 @@ const SubSectionCard = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -183,7 +183,7 @@ const SubSectionCard = (props) => {
             position: "top",
             title: `${res.data.message}`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setSubSectionDelete(true);
@@ -193,7 +193,7 @@ const SubSectionCard = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -218,7 +218,7 @@ const SubSectionCard = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;

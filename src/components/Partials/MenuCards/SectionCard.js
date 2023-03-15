@@ -120,7 +120,7 @@ const SectionCard = (props) => {
             position: "top",
             title: `Section Deleted SuccessFully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setSectionDelete(true);
@@ -131,7 +131,7 @@ const SectionCard = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -160,7 +160,7 @@ const SectionCard = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -187,7 +187,7 @@ const SectionCard = (props) => {
             position: "top",
             title: `Section Duplicated SuccessFully`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setSectionDuplicate(true);
@@ -198,7 +198,7 @@ const SectionCard = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;
@@ -222,7 +222,7 @@ const SectionCard = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;

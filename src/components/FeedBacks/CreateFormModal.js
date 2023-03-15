@@ -56,7 +56,7 @@ const CreateFormModal = (props) => {
         position: "top",
         title: `Form Name Is Required`,
         status: "warning",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
       return;
@@ -69,7 +69,7 @@ const CreateFormModal = (props) => {
             position: "top",
             title: `${res.data.message}`,
             status: "success",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           setCreateForm(true);
@@ -79,7 +79,7 @@ const CreateFormModal = (props) => {
             position: "top",
             title: `There Some Error`,
             status: "error",
-            duration: 9000,
+            duration: 1000,
             isClosable: true,
           });
           return false;

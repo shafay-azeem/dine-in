@@ -64,7 +64,7 @@ const Payment = () => {
         position: "top",
         title: `Please Enter All Fields`,
         status: "warning",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
       return;
@@ -79,7 +79,7 @@ const Payment = () => {
         position: "top",
         title: `Please Enter a Valid Phone Number with 11 digits`,
         status: "warning",
-        duration: 9000,
+        duration: 1000,
         isClosable: true,
       });
       return;
@@ -107,7 +107,7 @@ const Payment = () => {
               position: "top",
               title: `Payment Created Successfully`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
 
@@ -119,7 +119,7 @@ const Payment = () => {
               position: "top",
               title: `There some errors`,
               status: "success",
-              duration: 9000,
+              duration: 1000,
               isClosable: true,
             });
             return false;
@@ -191,11 +191,17 @@ const Payment = () => {
               </label>
               <input
                 value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                // onChange={(e) => setPhoneNumber(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value.length <= 11) {
+                    setPhoneNumber(e.target.value);
+                  }
+                }}
                 type="number"
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="+92123456789"
+                maxLength={11}
               />
             </div>
 
