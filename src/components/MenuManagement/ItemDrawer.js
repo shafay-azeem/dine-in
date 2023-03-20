@@ -58,6 +58,7 @@ import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useToast } from "@chakra-ui/react";
 import Spinner from "react-bootstrap/Spinner";
+import { MultiSelect } from "react-multi-select-component";
 
 const ItemDrawer = (props) => {
   let section_index = props?.section_index;
@@ -90,12 +91,8 @@ const ItemDrawer = (props) => {
   const [caloriesConcat, setCaloriesConcat] = useState();
   const [size, setSize] = useState();
   const [push, setPush] = useState(false);
-  const [food, setFood] = useState([
-    "New",
-    "Signature",
-    "Special_Presentation",
-  ]);
-
+  const [itemLabel, setItemLabel] = useState([])
+  const [itemWarning, setItemWarning] = useState([])
   const [modifier, setModifier] = useState([]);
 
   const [title, setTitle] = useState();
@@ -160,9 +157,9 @@ const ItemDrawer = (props) => {
     activeNutritionInfo: activeNut,
     itemCalorie: calorie,
     itemTag: sold,
-    itemLabel: conversion,
+    itemLabel: itemLabel,
     itemRecommendedItems: recommendedItem,
-    itemWarning: conversionWarning,
+    itemWarning: itemWarning,
     itemPrepTime: time,
     itemPrice: itemPrice,
     itemCalories: nutCalories,
@@ -195,6 +192,16 @@ const ItemDrawer = (props) => {
     itemServingSize: servingSize,
     itemModifier: state,
   };
+
+  const options = [
+    { label: 'New', value: 'New' },
+    { label: 'Signature', value: 'Signature' },
+    { label: 'Special Presentation', value: 'Special Presentation' },
+  ]
+  const options1 = [
+    { label: 'Alcohol', value: 'Alcohol' },
+    { label: 'Alcohol Free', value: 'Alcohol Free' },
+  ]
 
   const updateItem = async (id) => {
     if (props?.itemDecider === "item" && id) {
@@ -251,48 +258,7 @@ const ItemDrawer = (props) => {
     }
   };
 
-  let jsonObj = {};
-  let jsonObjWarning = {};
 
-  const selectionMultiSelect = (event) => {
-    setSelect(event);
-
-    for (let i in event) {
-      jsonObj[event[i]] = event[i];
-    }
-    setConversion([]);
-    setConversion([jsonObj]);
-  };
-
-  const removalMultiSelect = (event) => {
-    setSelect(event);
-
-    for (let i in event) {
-      jsonObj[event[i]] = event[i];
-    }
-    setConversion([]);
-    setConversion([jsonObj]);
-  };
-
-  const selectionMultiSelectwarning = (event) => {
-    setWarningState(event);
-
-    for (let i in event) {
-      jsonObjWarning[event[i]] = event[i];
-    }
-    setConversionWarning([]);
-    setConversionWarning([jsonObjWarning]);
-  };
-
-  const removalMultiSelectwarning = (event) => {
-    setWarningState(event);
-
-    for (let i in event) {
-      jsonObjWarning[event[i]] = event[i];
-    }
-    setConversionWarning([]);
-    setConversionWarning([jsonObjWarning]);
-  };
 
   const testfunc = async (secid, subsecid) => {
     if (section_Or_subSection === "section" && secid) {
@@ -404,23 +370,9 @@ const ItemDrawer = (props) => {
     setCalorie(setVar.itemCalorie);
     setSold(setVar.itemTag);
 
-    for (let i in setVar.itemLabel) {
-      propertyNames = Object.keys(setVar.itemLabel[i]);
-    }
-    if (propertyNames) {
-      propertyNames.pop();
-    }
+    setItemLabel(setVar.itemLabel);
 
-    setSelect(propertyNames);
-
-    for (let i in setVar.itemWarning) {
-      propertyNamesWarning = Object.keys(setVar.itemWarning[i]);
-    }
-    if (propertyNamesWarning) {
-      propertyNamesWarning.pop();
-    }
-
-    setWarningState(propertyNamesWarning);
+    setItemWarning(setVar.itemWarning);
 
     setRecommendedItem(setVar.itemRecommendedItems);
     setTime(setVar.itemPrepTime);
@@ -485,23 +437,9 @@ const ItemDrawer = (props) => {
     setCalorie(setVar.itemCalorie);
     setSold(setVar.itemTag);
 
-    for (let i in setVar.itemLabel) {
-      propertyNames = Object.keys(setVar.itemLabel[i]);
-    }
-    if (propertyNames) {
-      propertyNames.pop();
-    }
+    setItemLabel(setVar.itemLabel);
 
-    setSelect(propertyNames);
-
-    for (let i in setVar.itemWarning) {
-      propertyNamesWarning = Object.keys(setVar.itemWarning[i]);
-    }
-    if (propertyNamesWarning) {
-      propertyNamesWarning.pop();
-    }
-
-    setWarningState(propertyNamesWarning);
+    setItemWarning(setVar.itemWarning);
 
     setRecommendedItem(setVar.itemRecommendedItems);
     setTime(setVar.itemPrepTime);
@@ -689,7 +627,7 @@ const ItemDrawer = (props) => {
           <DrawerCloseButton />
 
           {(item_index && props?.itemDecider === "item") ||
-          (item_index && props?.itemDecider === "subItem") ? (
+            (item_index && props?.itemDecider === "subItem") ? (
             <DrawerHeader>{title}</DrawerHeader>
           ) : (
             <DrawerHeader>Add New Item</DrawerHeader>
@@ -871,17 +809,11 @@ const ItemDrawer = (props) => {
 
                     <FormControl mt={3}>
                       <FormLabel fontWeight="400">Labels</FormLabel>
-                      <Multiselect
-                        isObject={false}
-                        onRemove={(event) => {
-                          removalMultiSelect(event);
-                        }}
-                        onSelect={(event) => {
-                          selectionMultiSelect(event);
-                        }}
-                        options={food}
-                        selectedValues={select}
-                        showCheckbox
+                      <MultiSelect
+                        onChange={setItemLabel}
+                        options={options}
+                        value={itemLabel}
+                        labelledBy="Select"
                       />
                     </FormControl>
 
@@ -889,18 +821,11 @@ const ItemDrawer = (props) => {
                       <FormLabel fontWeight="400">
                         Ingredient Warnings
                       </FormLabel>
-                      <Multiselect
-                        isObject={false}
-                        // value={warningState}
-                        onRemove={(event) => {
-                          removalMultiSelectwarning(event);
-                        }}
-                        onSelect={(event) => {
-                          selectionMultiSelectwarning(event);
-                        }}
-                        options={warning}
-                        selectedValues={warningState}
-                        showCheckbox
+                      <MultiSelect
+                        onChange={setItemWarning}
+                        options={options1}
+                        value={itemWarning}
+                        labelledBy="Select"
                       />
                     </FormControl>
 

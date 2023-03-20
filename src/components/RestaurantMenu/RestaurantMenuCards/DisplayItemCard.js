@@ -155,8 +155,8 @@ const DisplayItemCard = (props) => {
 
                       <Card.Text className="pricetext">
                         {x.itemPriceOption[0].price ==
-                        x.itemPriceOption[x.itemPriceOption.length - 1]
-                          .price ? (
+                          x.itemPriceOption[x.itemPriceOption.length - 1]
+                            .price ? (
                           <div
                             className="itemPrice"
                             style={{
@@ -216,7 +216,7 @@ const DisplayItemCard = (props) => {
                               ) : null}
 
                               {y.Special_Presentation ===
-                              "Special_Presentation" ? (
+                                "Special_Presentation" ? (
                                 <div className="me-2">
                                   <Tooltip
                                     label={"Special Presentation"}
@@ -240,9 +240,9 @@ const DisplayItemCard = (props) => {
                         {x.itemWarning?.map((z, index) => {
                           return (
                             <div className="d-flex my-1" key={index}>
-                              {z.Alcohol === "Alcohol" ? (
+                              {z.value === "Alcohol" ? (
                                 <div className="me-2">
-                                  <Tooltip label={z.Alcohol} placement="top">
+                                  <Tooltip label={z.value} placement="top">
                                     <img
                                       src={
                                         require("../../Assets/Alcohol.svg")
@@ -254,10 +254,10 @@ const DisplayItemCard = (props) => {
                                 </div>
                               ) : null}
 
-                              {z.AlcoholFree === "AlcoholFree" ? (
+                              {z.value === "Alcohol Free" ? (
                                 <div>
                                   <Tooltip
-                                    label={z.AlcoholFree}
+                                    label={z.value}
                                     placement="top"
                                   >
                                     <img

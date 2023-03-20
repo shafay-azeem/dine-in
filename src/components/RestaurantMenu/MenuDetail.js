@@ -568,7 +568,7 @@ const MenuDetail = (props) => {
                 {priceOption ? (
                   <div>
                     {priceOption[0].price ==
-                    priceOption[priceOption.length - 1]?.price ? (
+                      priceOption[priceOption.length - 1]?.price ? (
                       <div
                         className="itemPrice"
                         style={{
@@ -611,9 +611,9 @@ const MenuDetail = (props) => {
                 {select?.map((y, index) => {
                   return (
                     <div className="d-flex" key={index}>
-                      {y.New === "New" ? (
+                      {y.value === "New" ? (
                         <div className="me-2">
-                          <Tooltip label={y.New} placement="top">
+                          <Tooltip label={y.value} placement="top">
                             <img
                               src={require("../Assets/new.svg").default}
                               alt="mySvgImage"
@@ -622,9 +622,9 @@ const MenuDetail = (props) => {
                         </div>
                       ) : null}
 
-                      {y.Signature === "Signature" ? (
+                      {y.value === "Signature" ? (
                         <div className="me-2">
-                          <Tooltip label={y.Signature} placement="top">
+                          <Tooltip label={y.value} placement="top">
                             <img
                               src={require("../Assets/signature.svg").default}
                               alt="mySvgImage"
@@ -633,9 +633,9 @@ const MenuDetail = (props) => {
                         </div>
                       ) : null}
 
-                      {y.Special_Presentation === "Special_Presentation" ? (
+                      {y.value === "Special Presentation" ? (
                         <div className="me-2">
-                          <Tooltip label="Special Presentation" placement="top">
+                          <Tooltip label={y.value} placement="top">
                             <img
                               src={require("../Assets/special.svg").default}
                               alt="mySvgImage"
@@ -652,9 +652,9 @@ const MenuDetail = (props) => {
                 {warningState?.map((z, index) => {
                   return (
                     <div className="d-flex my-1" key={index}>
-                      {z.Alcohol === "Alcohol" ? (
+                      {z.value === "Alcohol" ? (
                         <div className="me-2">
-                          <Tooltip label={z.Alcohol} placement="top">
+                          <Tooltip label={z.value} placement="top">
                             <img
                               src={require("../Assets/Alcohol.svg").default}
                               alt="mySvgImage"
@@ -663,9 +663,9 @@ const MenuDetail = (props) => {
                         </div>
                       ) : null}
 
-                      {z.AlcoholFree === "AlcoholFree" ? (
+                      {z.value === "Alcohol Free" ? (
                         <div>
-                          <Tooltip label={z.AlcoholFree} placement="top">
+                          <Tooltip label={z.value} placement="top">
                             <img
                               src={require("../Assets/AlcoholFree.svg").default}
                               alt="mySvgImage"

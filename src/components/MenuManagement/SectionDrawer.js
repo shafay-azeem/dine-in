@@ -36,8 +36,7 @@ import {
 import React from "react";
 import { useState, useRef } from "react";
 import { MenuState } from "../../context/MenuContext";
-import SelectSearch from "react-select-search";
-import Multiselect from "multiselect-react-dropdown";
+import { MultiSelect } from "react-multi-select-component";
 import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
 import ImagePreviewModal from "./ImagePreviewModal";
 import { BsFillTrashFill } from "react-icons/bs";
@@ -46,6 +45,7 @@ import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useToast } from "@chakra-ui/react";
 import Spinner from "react-bootstrap/Spinner";
+
 
 const SectionDrawer = (props) => {
   let menu_index = props.menu_index;
@@ -85,7 +85,7 @@ const SectionDrawer = (props) => {
 
   const [description, setDescription] = useState();
   const [note, setNote] = useState();
-  const [food, setFood] = useState(["New", "Signature"]);
+  // const [food, setFood] = useState(["New", "Signature"]);
   const [checked, setChecked] = useState();
   const [image, setImage] = useState();
   const [blobImage, setBlobImage] = useState();
@@ -111,11 +111,24 @@ const SectionDrawer = (props) => {
 
   const [mId, setMId] = useState(menu_index);
 
+  const [sectionLabel, setSectionLabel] = useState([])
+
+  const handleOnchange = async (val) => {
+    console.log(val)
+    // setSectionLabel(val)
+  }
+
   const {
     isOpen: ModalOpen,
     onOpen: ModalOnOpen,
     onClose: ModalOnClose,
   } = useDisclosure();
+
+
+  const options = [
+    { label: 'New', value: 'New' },
+    { label: 'Signature', value: 'Signature' },
+  ]
 
   const pictureCapture = async (event) => {
     const formData = new FormData();
@@ -140,17 +153,8 @@ const SectionDrawer = (props) => {
     return Math.floor(Date.now() / 1000);
   }
 
-  // let sectionData = {
-  //   sectionId: getTimestampInSeconds(),
-  //   sectionName: name,
-  //   sectionDescription: description,
-  //   sectionNote: note,
-  //   sectionLabel: select,
-  //   sectionStatus: checked,
-  //   image: image,
-  //   item: [],
-  //   subSection: [],
-  // };
+
+
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(
@@ -165,7 +169,7 @@ const SectionDrawer = (props) => {
     sectionName: name,
     sectionDescription: description,
     sectionNote: note,
-    sectionLabel: conversion,
+    sectionLabel: sectionLabel,
     sectionImage: image,
     sectionStatus: checked,
   };
@@ -275,15 +279,7 @@ const SectionDrawer = (props) => {
     setNote(setRes.sectionNote);
     setChecked(setRes.sectionStatus);
     setImage(setRes.sectionImage);
-
-    for (let i in setRes.sectionLabel) {
-      propertyNames = Object.keys(setRes.sectionLabel[i]);
-    }
-    if (propertyNames) {
-      propertyNames.pop();
-    }
-
-    setSelect(propertyNames);
+    setSectionLabel(setRes.sectionLabel);
 
     setLoading(true);
   }
@@ -310,14 +306,7 @@ const SectionDrawer = (props) => {
     setNote(setRes.sectionNote);
     setChecked(setRes.sectionStatus);
     setImage(setRes.sectionImage);
-    for (let i in setRes.sectionLabel) {
-      propertyNames = Object.keys(setRes.sectionLabel[i]);
-    }
-    if (propertyNames) {
-      propertyNames.pop();
-    }
-
-    setSelect(propertyNames);
+    setSectionLabel(setRes.sectionLabel);
     setLoading(true);
   }
 
@@ -424,29 +413,10 @@ const SectionDrawer = (props) => {
     }
   };
 
-  let jsonObj = {};
 
-  const removalMultiSelect = (event) => {
-    setSelect(event);
 
-    for (let i in event) {
-      jsonObj[event[i]] = event[i];
-    }
-    setConversion([]);
-    setConversion([jsonObj]);
-  };
 
-  const selectionMultiSelect = (event) => {
-    setSelect(event);
-
-    for (let i in event) {
-      jsonObj[event[i]] = event[i];
-    }
-    setConversion([]);
-    setConversion([jsonObj]);
-  };
-
-  const handleAlphabetically = (event) => {};
+  const handleAlphabetically = (event) => { };
 
   function deleteimg() {
     setImage(null);
@@ -563,59 +533,7 @@ const SectionDrawer = (props) => {
                         </ModalContent>
                       </Modal>
                     </FormControl>
-                    {/* <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Upload Your Image</FormLabel>
-                    <Input
-                      size="sm"
-                      type="file"
-                      accept=".jpg,.png"
-                      onChange={pictureCapture}
-                      id="img"
-                    />
-                    {image && (
-                      <div>
-                        <img
-                          className="preview mt-4 mx-auto"
-                          src={image}
-                          alt=""
-                          width="200px"
-                          height="200px"
-                          onClick={ModalOnOpen}
-                        />
 
-                        <IconButton
-                          onClick={deleteimg}
-                          variant="outline"
-                          colorScheme="teal"
-                          icon={<BsFillTrashFill />}
-                        />
-                      </div>
-                    )}
-
-                    <Modal isOpen={ModalOpen} onClose={ModalOnClose}>
-                      <ModalOverlay />
-                      <ModalContent>
-                        <ModalCloseButton />
-
-                        <ModalBody>
-                          <Center>
-                            <div>
-                              <img className="preview p-5" src={image} alt="" />
-                            </div>
-                          </Center>
-                        </ModalBody>
-                      </ModalContent>
-                    </Modal>
-                  </FormControl> */}
-
-                    {/* <FormControl mt={3}>
-                    <FormLabel fontWeight="400">Display the section</FormLabel>
-                    <SwitchComponent
-                      id="switch1"
-                      checked={checked}
-                      onChange={(e) => setChecked(e.target.checked)}
-                    />
-                  </FormControl> */}
 
                     <label>
                       <input
@@ -627,26 +545,10 @@ const SectionDrawer = (props) => {
                       Display The Section
                     </label>
 
-                    {/* <label>
-                    <input
-                      type="checkbox"
-                      checked={checkedItems}
-                      onChange={(e) => setCheckedItems(e.target.checked)}
-                    />
-                    Use as a sub-section
-                  </label>
 
-                  <Select
-                    placeholder="Select option"
-                    onChange={(e) => setVal(e.target.value)}
-                  >
-                    {sectionList?.map((x, index) => {
-                      return <option value={x._id}>{x.sectionName}</option>;
-                    })}
-                  </Select> */}
 
                     {arrayDecider.length > 0 &&
-                    props?.subsection_index == undefined ? (
+                      props?.subsection_index == undefined ? (
                       <FormControl>
                         <label>
                           <input
@@ -689,127 +591,19 @@ const SectionDrawer = (props) => {
                       </FormControl>
                     ) : null}
 
-                    {/* {arrayDecider.length > 0 &&
-                    props?.subsection_index == undefined ? (
-                    <FormControl>
-                      <Checkbox
-                        isChecked={checkedItems}
-                        onChange={(e) => setCheckedItems(e.target.checked)}
-                      >
-                        Use as a sub-section
-                      </Checkbox>
-
-                      {checkedItems ? (
-                        <Select
-                          placeholder="Select option"
-                          onChange={(e) => setVal(e.target.value)}
-                        >
-                          {arrayDecider?.map((x, index) => {
-                            return (
-                              <option value={x.sectionName}>
-                                {x.sectionName}
-                              </option>
-                            );
-                          })}
-                        </Select>
-                      ) : (
-                        <Select placeholder="Select option">
-                          {arrayDecider?.map((x, index) => {
-                            return (
-                              <option value={x.sectionName}>
-                                {x.sectionName}
-                              </option>
-                            );
-                          })}
-                        </Select>
-                      )}
-                    </FormControl>
-                  ) : (
-                    <FormControl mt={3}>
-                      <Checkbox isDisabled>Use as a sub-section</Checkbox>
-                      <Input
-                        isDisabled
-                        type="text"
-                        mt={2}
-                        bg="grey.300"
-                        placeholder="Type to search sections"
-                      ></Input>
-                    </FormControl>
-                  )} */}
                   </TabPanel>
                   <TabPanel>
                     <FormControl>
                       <FormLabel fontWeight="400">Labels</FormLabel>
-                      <Multiselect
-                        isObject={false}
-                        onRemove={(event) => {
-                          removalMultiSelect(event);
-                        }}
-                        onSelect={(event) => {
-                          selectionMultiSelect(event);
-                        }}
-                        options={food}
-                        selectedValues={select}
-                        showCheckbox
+                      <MultiSelect
+                        onChange={setSectionLabel}
+                        options={options}
+                        value={sectionLabel}
+                        labelledBy="Select"
                       />
                     </FormControl>
 
-                    {/* <FormControl mt={5}>
-                      <FormLabel fontWeight="400">Alphabetical Order</FormLabel>
-                      <Switch
-                        checked={alphabetical}
-                        onChange={(e) => handleAlphabetically(e.target.checked)}
-                      />
-                    </FormControl> */}
 
-                    {/* <RadioGroup mt={5} onChange={setValue} value={value}>
-                      <Stack direction="row">
-                        <Radio value="1" onChange={enabelDisable}>
-                        List
-                      </Radio>
-                      <Radio value="2" onChange={enabelDisable}>
-                        Grid
-                      </Radio>
-                      </Stack>
-
-                      {valuetrue ? (
-                        <FormControl mt={5}>
-                          <FormLabel fontWeight="400">
-                            Number of Columns
-                          </FormLabel>
-                          <Select>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                          </Select>
-                        </FormControl>
-                      ) : (
-                        <FormControl mt={5}>
-                          <FormLabel fontWeight="400">
-                            Number of Columns
-                          </FormLabel>
-                          <Select isDisabled>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                          </Select>
-                        </FormControl>
-                      )}
-                    </RadioGroup> */}
-
-                    {/* {valuetrue ? (
-                      <FormControl mt={5}>
-                        <FormLabel fontWeight="400">Hide grid titles</FormLabel>
-                        <Switch />
-                      </FormControl>
-                    ) : (
-                      <FormControl mt={5}>
-                        <FormLabel fontWeight="400">Hide grid titles</FormLabel>
-                        <Switch isDisabled />
-                      </FormControl>
-                    )} */}
                   </TabPanel>
                 </TabPanels>
               </Tabs>
@@ -821,9 +615,7 @@ const SectionDrawer = (props) => {
           )}
           {loading ? (
             <DrawerFooter>
-              {/* <Checkbox defaultChecked mr="28%">
-                Save and add more
-              </Checkbox> */}
+
               <Button variant="outline" mr={3} onClick={props.onClose}>
                 Cancel
               </Button>
