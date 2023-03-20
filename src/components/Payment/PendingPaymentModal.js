@@ -19,6 +19,7 @@ const PendingPaymentModal = (props) => {
   let userId = localStorage.getItem("user_id");
   const [pendingAmount, setPendingAmount] = useState();
   const [loading, setLoading] = useState(false);
+  let currencySymbol = localStorage.getItem("currencySymbol");
 
   async function pendingAllAmount() {
     try {
@@ -49,7 +50,9 @@ const PendingPaymentModal = (props) => {
               <ModalHeader>Pending Amount</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={6}>
-                <Text>Amount Rs {pendingAmount}</Text>
+                <Text>
+                  Amount {currencySymbol} {pendingAmount}
+                </Text>
               </ModalBody>
             </Box>
           ) : (

@@ -21,6 +21,7 @@ const SubSecItemCard = (props) => {
   let type = props?.type;
   let menu = props?.menu;
   let resUserName = props?.resUserName;
+  let currency = props?.currency;
 
   const navigate = useNavigate();
   const { response, setResponse } = MenuState();
@@ -43,6 +44,7 @@ const SubSecItemCard = (props) => {
         type,
         menu,
         resUserName,
+        currency,
       }).toString(),
     });
   };
@@ -148,7 +150,7 @@ const SubSecItemCard = (props) => {
                               paddingRight: "5px",
                             }}
                           >
-                            ${x.itemPriceOption[0].price}
+                            {currency} {x.itemPriceOption[0].price}
                           </div>
                         ) : (
                           <div
@@ -158,7 +160,8 @@ const SubSecItemCard = (props) => {
                               paddingRight: "5px",
                             }}
                           >
-                            ${x.itemPriceOption[0].price} ━━━ $
+                            {currency}&nbsp;{x.itemPriceOption[0].price}
+                            &nbsp;━━━&nbsp;{currency}&nbsp;
                             {
                               x.itemPriceOption[x.itemPriceOption.length - 1]
                                 .price
@@ -283,6 +286,7 @@ const SubSecItemCard = (props) => {
                       tableNumber={tableNumber}
                       TableNumber={TableNumber}
                       type={type}
+                      currency={currency}
                     />
                   </Row>
                 </Card.Body>

@@ -46,6 +46,7 @@ const OrderPage = () => {
 
   let type = searchparams.get("type");
   let menu = searchparams.get("menu");
+  let currency = searchparams.get("currency");
 
   const img = {
     KFCcard: require("../Assets/burger.jpg"),
@@ -204,6 +205,7 @@ const OrderPage = () => {
                 type,
                 uniqueOrderId,
                 resUserName,
+                currency,
               }).toString(),
             });
             return true;
@@ -288,6 +290,7 @@ const OrderPage = () => {
         type,
         menu,
         resUserName,
+        currency,
       }).toString(),
     });
   };
@@ -329,6 +332,7 @@ const OrderPage = () => {
         type={type}
         menu={menu}
         resUserName={resUserName}
+        currency={currency}
       />
 
       {/* <div className="backarrow">
@@ -437,7 +441,9 @@ const OrderPage = () => {
                           <p className="lead fw-normal mb-2">
                             {x.item_Name} {x.item_Size}
                           </p>
-                          <p>Rs {x.item_Price}</p>
+                          <p>
+                            {currency} {x.item_Price}
+                          </p>
                         </div>
                         <div className="col-md-2 col-md-2 col-md-2 d-flex">
                           <button className="btn btn-link px-2">
@@ -503,7 +509,9 @@ const OrderPage = () => {
                               <p className="lead fw-normal mb-2">
                                 {s.Modifier_Name}
                               </p>
-                              <p>Rs {s.Modifier_Price}</p>
+                              <p>
+                                {currency} {s.Modifier_Price}
+                              </p>
                             </div>
 
                             <div className="col-md-4 d-flex justify-content-end">
@@ -566,7 +574,7 @@ const OrderPage = () => {
                       {/* Modifier */}
                     </div>
                     <h5 className="pb-2 px-4  text-end text-danger text-xl">
-                      Rs {x.itemPrice_Total}
+                      {currency} {x.itemPrice_Total}
                     </h5>
                   </div>
                 </div>
@@ -672,7 +680,7 @@ const OrderPage = () => {
                     textAlign: "end",
                   }}
                 >
-                  Rs {cartTotal}
+                  {currency} {cartTotal}
                 </span>
               </div>
             </div>

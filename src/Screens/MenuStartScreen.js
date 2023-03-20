@@ -12,8 +12,6 @@ const MenuStartScreen = () => {
   const [loading, setLoading] = useState();
   const [tableNumber, setTableNumber] = useState();
   const [user, setUser] = useState();
-  // setUser(searchparams.get("USERID"));
-  // console.log(typeof user, "user");
 
   useEffect(() => {
     window.history.pushState(null, null, window.location.href);
@@ -23,7 +21,6 @@ const MenuStartScreen = () => {
   }, []);
 
   useEffect(() => {
-    // if(resUserName)
     getRestaurantDetail();
     if (!searchparams.get("tableNumber")) {
       console.log("if run ");

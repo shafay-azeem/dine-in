@@ -21,6 +21,7 @@ const OrderReceipt = () => {
   const [searchparams] = useSearchParams();
   const { orderId } = useParams();
   let user_id = localStorage.getItem("user_id");
+  let currencySymbol = localStorage.getItem("currencySymbol");
 
   const [payment, setPayment] = useState();
   const [orderDetail, setOrderDetail] = useState();
@@ -147,7 +148,7 @@ const OrderReceipt = () => {
 
                 <div className="d-flex align-items-start justify-content-between mt-3">
                   <small className="global text-black">
-                    Total Amount : {payment?.amount}
+                    Total Amount : {currencySymbol} {payment?.amount}
                   </small>
                   {/* <small className="global text-black">Tip : U$$0.00</small> */}
                 </div>

@@ -62,7 +62,7 @@ const MenuConfigurationCopy = () => {
     setTableNumber(generateRandomNumber());
 
     QRCode.toDataURL(
-      `https://lifoapp.co.uk/menustart?resUserName=${resUserName}&menu=${true}`,
+      `http://localhost:${port}/menustart?resUserName=${resUserName}&menu=${true}`,
       {
         width: 800,
         margin: 2,
@@ -77,7 +77,7 @@ const MenuConfigurationCopy = () => {
         setQr(url);
 
         setUrl(
-          `https://lifoapp.co.uk/menustart?resUserName=${resUserName}&menu=${"true"}`
+          `http://localhost:${port}/menustart?resUserName=${resUserName}&menu=${"true"}`
         );
       }
     );
@@ -105,19 +105,17 @@ const MenuConfigurationCopy = () => {
 
           <TabPanels>
             <TabPanel>
-              <Container>
+              <Container className="m-4">
                 <Row>
-                  <Col>
-                    <Card style={{ width: "48rem" }}>
+                  <Col md={6}>
+                    <Card>
                       <Card.Body>
                         <Nav.Link>Your Restaurant Menu</Nav.Link>
                         <Card.Title>QR Generator</Card.Title>
 
                         <Card.Text>
                           <text>{url ? url : null}</text>
-                          <Button onClick={GenerateQRCode} variant="info">
-                            Generate
-                          </Button>
+
                           <div className="margin-left:auto">
                             {qr && (
                               <>
@@ -134,6 +132,13 @@ const MenuConfigurationCopy = () => {
                               </>
                             )}
                           </div>
+                          <Button
+                            onClick={GenerateQRCode}
+                            variant="primary"
+                            className="mt-2 ms-2"
+                          >
+                            Generate
+                          </Button>
                         </Card.Text>
                       </Card.Body>
                     </Card>

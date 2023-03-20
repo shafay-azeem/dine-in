@@ -9,12 +9,13 @@ const RequireAuth = ({ children }) => {
   let token = localStorage.getItem("token");
   let user_id = localStorage.getItem("user_id");
   let resUserName = localStorage.getItem("resUserName");
+  let currencySymbol = localStorage.getItem("currencySymbol");
 
   useEffect(() => {
     // if (!auth.user) {
     //   return navigate("/");
     // }
-    if (!token && !user_id && !resUserName) {
+    if (!token && !user_id && !resUserName && !currencySymbol) {
       return navigate("/");
     }
   }, ["/"]);

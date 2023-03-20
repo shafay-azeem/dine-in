@@ -21,6 +21,7 @@ const PaymentDailyBasisModal = (props) => {
   const [startDate, setStartDate] = useState();
   let userId = localStorage.getItem("user_id");
   const [amount, setAmount] = useState();
+  let currencySymbol = localStorage.getItem("currencySymbol");
 
   async function revenueRange() {
     try {
@@ -62,7 +63,9 @@ const PaymentDailyBasisModal = (props) => {
               />
             </FormControl>
 
-            <Text mt={5}>Amount Rs {amount}</Text>
+            <Text mt={5}>
+              Amount {currencySymbol} {amount}
+            </Text>
           </ModalBody>
         </ModalContent>
       </Modal>

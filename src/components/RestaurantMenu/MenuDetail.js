@@ -95,6 +95,8 @@ const MenuDetail = (props) => {
 
   let menu = props?.menu;
 
+  let currency = props?.currency;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -114,6 +116,7 @@ const MenuDetail = (props) => {
         type,
         menu,
         resUserName,
+        currency,
       }).toString(),
     });
   };
@@ -279,14 +282,9 @@ const MenuDetail = (props) => {
   };
 
   return (
-    <div
-      style={{
-        width: "100%",
-        margin: "0 auto",
-      }}
-    >
-      <Row>
-        <Col lg={4}>
+    <div>
+      <div className="row">
+        <div className="col-md-4">
           {show ? (
             <div className="col-sm-12 px-4">
               <div className="backarrow">
@@ -578,7 +576,7 @@ const MenuDetail = (props) => {
                           paddingRight: "5px",
                         }}
                       >
-                        ${priceOption[0]?.price}
+                        {currency} {priceOption[0]?.price}
                       </div>
                     ) : (
                       <div
@@ -588,7 +586,8 @@ const MenuDetail = (props) => {
                           paddingRight: "5px",
                         }}
                       >
-                        ${priceOption[0].price} ━━━ $
+                        {currency}
+                        {priceOption[0].price} ━━━ {currency}
                         {priceOption[priceOption.length - 1].price}
                       </div>
                     )}
@@ -706,7 +705,10 @@ const MenuDetail = (props) => {
                     ) : null}
 
                     {y.price ? (
-                      <div className="itemPrice">${y.price}</div>
+                      <div className="itemPrice">
+                        {currency}
+                        {y.price}
+                      </div>
                     ) : null}
 
                     {tag ? null : (
@@ -771,7 +773,10 @@ const MenuDetail = (props) => {
                               )}
 
                               {r.Price === undefined ? null : (
-                                <div className="itemPrice">${r.Price}</div>
+                                <div className="itemPrice">
+                                  {currency}
+                                  {r.Price}
+                                </div>
                               )}
 
                               {tag ? null : (
@@ -806,7 +811,6 @@ const MenuDetail = (props) => {
               </div>
             </div>
           )}
-
           {isOpen ? (
             <AddModifierModal
               isOpen={isOpen}
@@ -819,16 +823,14 @@ const MenuDetail = (props) => {
               TableNumber={TableNumber}
             />
           ) : null}
-        </Col>
+        </div>
 
-        <Col lg={8} className=" text-center d-none d-lg-block d-xl-block">
+        <div className="col-md-8 text-center d-none d-lg-block d-xl-block">
           <div className="d-flex align-items-center justify-content-center w-100 vh-100">
-            <div>
-              <img className="preview" src={resImage} alt="" />
-            </div>
+            <img className="preview" src={resImage} alt="" />
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };

@@ -22,6 +22,7 @@ const RevenueRangeModal = (props) => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [amount, setAmount] = useState();
+  let currencySymbol = localStorage.getItem("currencySymbol");
 
   // console.log(startDate);
   async function revenueRange() {
@@ -74,7 +75,9 @@ const RevenueRangeModal = (props) => {
               />
             </FormControl>
 
-            <Text mt={5}>Amount Rs {amount}</Text>
+            <Text mt={5}>
+              Amount {currencySymbol} {amount}
+            </Text>
           </ModalBody>
         </ModalContent>
       </Modal>

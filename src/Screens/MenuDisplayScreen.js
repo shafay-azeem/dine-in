@@ -18,6 +18,7 @@ const MenuDisplayScreen = (props) => {
         type={searchparams.get("type")}
         menu={searchparams.get("menu")}
         resUserName={searchparams.get("resUserName")}
+        currency={searchparams.get("currency")}
       />
     </div>
   );

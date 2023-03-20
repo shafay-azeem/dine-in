@@ -20,6 +20,7 @@ const RevenueModal = (props) => {
   let userId = localStorage.getItem("user_id");
   const [amount, setAmount] = useState();
   const [loading, setLoading] = useState(false);
+  let currencySymbol = localStorage.getItem("currencySymbol");
 
   async function totalRevenue() {
     try {
@@ -49,7 +50,9 @@ const RevenueModal = (props) => {
               <ModalHeader>Total Revenue</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={6}>
-                <Text>Total Revenue Rs {amount}</Text>
+                <Text>
+                  Total Revenue {currencySymbol} {amount}
+                </Text>
               </ModalBody>
             </Box>
           ) : (

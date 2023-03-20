@@ -11,8 +11,6 @@ import { API_URL, BASE_URL } from "../../../global/Constant";
 import apiFunctions from "../../../global/GlobalFunction";
 import "../../../App.css";
 import { MenuState } from "../../../context/MenuContext";
-import { Row } from "react-bootstrap";
-import RestaurantHeader from "../RestaurantHeader";
 
 const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let userId = props?.userId;
@@ -24,6 +22,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   let type = props?.type;
   let menu = props?.menu;
   let resUserName = props?.resUserName;
+  let currency = props?.currency;
 
   const toast = useToast();
   const { adder, setAdder } = MenuState();
@@ -47,15 +46,11 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
   }, [changer, adder]);
 
   async function getAllCartByTableNumber() {
-    // setLoading(false);
-    // setLoading1(false);
     try {
       let getCartByTableNumber = await apiFunctions.GET_REQUEST(
         BASE_URL + API_URL.GET_CART_BY_TABLE_NUMBER + tableNumber
       );
       let res = getCartByTableNumber.data.cart;
-
-      // console.log(getCartByTableNumber.data.cartLength, "getCartByTableNumber");
 
       if (res.cartItems?.length > 0) {
         setLoading1(true);
@@ -126,6 +121,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
             isClosable: true,
           });
           setChanger(Math.random());
+          setAdder(Math.random());
           return true;
         } else {
           toast({
@@ -184,6 +180,7 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
         type,
         menu,
         resUserName,
+        currency,
       }).toString(),
     });
   };
@@ -202,8 +199,11 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                 fontSize: "20px",
               }}
             >
-              {cartTotal ? <div>Rs {cartTotal}</div> : null}
-              {/* <div>Rs {cartTotal}</div> */}
+              {cartTotal ? (
+                <div>
+                  {currency} {cartTotal}
+                </div>
+              ) : null}
             </span>
           </Offcanvas.Header>
           {loading ? (
@@ -286,7 +286,9 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                       </div>
 
                       <div className="col-3">
-                        <span>Rs {x.itemPrice_Total}</span>
+                        <span>
+                          {currency} {x.itemPrice_Total}
+                        </span>
                       </div>
 
                       {/* Modifier */}
@@ -294,7 +296,6 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                         className="row"
                         style={{
                           backgroundColor: "#ffffff",
-                          // padding: "20px 10px",
                           margin: "5px",
                         }}
                       >
@@ -356,58 +357,10 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
                                   </span>
                                 </div>
 
-                                <span>Rs {s.Modifier_Price}</span>
+                                <span>
+                                  {currency} {s.Modifier_Price}
+                                </span>
                               </div>
-
-                              // <div>
-                              //   <span className="me-2">{s.Modifier_Name}</span>
-                              //   <br />
-                              //   <div>
-                              //     <div className="d-flex justify-content-start align-items-center mt-2"></div>
-                              //     <span className="me-2">
-                              //       {s.Modifier_Qty == 1 ? (
-                              //         <AiOutlineDelete
-                              //           size={20}
-                              //           color="#0000FF"
-                              //           onClick={() =>
-                              //             deleteModifierById(x._id, s._id)
-                              //           }
-                              //         />
-                              //       ) : (
-                              //         <MinusIcon
-                              //           size={20}
-                              //           color="#0000FF"
-                              //           onClick={() =>
-                              //             modifierIncrementDecrement(
-                              //               x._id,
-                              //               s._id,
-                              //               "decrement",
-                              //               x.item_Size
-                              //             )
-                              //           }
-                              //         />
-                              //       )}
-                              //     </span>
-                              //     <span className="me-2">{s.Modifier_Qty}</span>
-                              //     <span className="me-2">
-                              //       <AiOutlinePlus
-                              //         size={20}
-                              //         color="#0000FF"
-                              //         onClick={() =>
-                              //           modifierIncrementDecrement(
-                              //             x._id,
-                              //             s._id,
-                              //             "increment",
-                              //             x.item_Size
-                              //           )
-                              //         }
-                              //       />
-                              //     </span>
-                              //     <div className="col-3">
-                              //       <span>Rs {s.Modifier_Price}</span>
-                              //     </div>
-                              //   </div>
-                              // </div>
                             );
                           })}
                         </div>
@@ -437,11 +390,6 @@ const CartModal = ({ show, toggleOffcanvas, ...props }) => {
             </div>
           ) : null}
         </Offcanvas>
-
-        {/* <RestaurantHeader
-          className={true ? "display: none" : ""}
-          changer={changer}
-        /> */}
       </div>
     </>
   );

@@ -68,6 +68,8 @@ const ItemCard = (props) => {
     setCount(index);
   };
 
+  let currencySymbol = localStorage.getItem("currencySymbol");
+
   useEffect(() => {
     if (section_Or_subSection === "section" && secid) {
       setItemDecider("item");
@@ -421,7 +423,8 @@ const ItemCard = (props) => {
                                           paddingRight: "5px",
                                         }}
                                       >
-                                        ${x.itemPriceOption[0].price}
+                                        {currencySymbol}&nbsp;
+                                        {x.itemPriceOption[0].price}
                                       </Box>
                                     ) : (
                                       <Box
@@ -431,7 +434,10 @@ const ItemCard = (props) => {
                                           paddingRight: "5px",
                                         }}
                                       >
-                                        ${x.itemPriceOption[0].price} ━━━ $
+                                        {currencySymbol}&nbsp;
+                                        {x.itemPriceOption[0].price} &nbsp; ━━━
+                                        &nbsp;
+                                        {currencySymbol}&nbsp;
                                         {
                                           x.itemPriceOption[
                                             x.itemPriceOption.length - 1

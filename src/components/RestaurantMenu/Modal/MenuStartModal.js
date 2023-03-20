@@ -21,6 +21,7 @@ const MenuStartModal = (props) => {
   let resImage = props?.resImage;
   let type = props?.type;
   let menu = props?.menu;
+  let currency = props?.currency;
 
   const navigate = useNavigate();
   const myfun = (index, menuname, menuDescription) => {
@@ -38,6 +39,7 @@ const MenuStartModal = (props) => {
         userId,
         type,
         menu,
+        currency,
       }).toString(),
     });
   };

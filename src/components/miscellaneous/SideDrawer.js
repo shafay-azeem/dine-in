@@ -86,6 +86,8 @@ const SideDrawer = () => {
     auth.logout();
     localStorage.removeItem("token");
     localStorage.removeItem("user_id");
+    localStorage.removeItem("currencySymbol");
+    localStorage.removeItem("resUserName");
     navigate({
       pathname: "/",
     });

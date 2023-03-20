@@ -1,5 +1,5 @@
-//export const BASE_URL = "http://localhost:5000/api/";
-export const BASE_URL = "https://lifoapp.co.uk/api/";
+export const BASE_URL = "http://localhost:5000/api/";
+//export const BASE_URL = "https://lifoapp.co.uk/api/";
 
 export const API_URL = {
   GET_ALL_MENU: "menu/V1/getAllMenu/",

@@ -59,6 +59,10 @@ const Login = () => {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("user_id", res.data.user._id);
             localStorage.setItem("resUserName", res.data.user.resUserName);
+            localStorage.setItem(
+              "currencySymbol",
+              res.data.user.currencySymbol.symbol
+            );
 
             navigate({
               pathname: "/homeScreen",

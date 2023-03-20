@@ -220,7 +220,6 @@ const SectionDrawer = (props) => {
           sectionData
         );
         if (putRes.data.success == true) {
-          // alert(`Section Created Successfully`);
           toast({
             position: "top",
             title: `Section Created Successfully`,
@@ -235,7 +234,6 @@ const SectionDrawer = (props) => {
           throw new Error("Error creating section");
         }
       } catch (err) {
-        //alert(`There Some Error: ${err.message}`);
         toast({
           position: "top",
           title: `There Some Error`,

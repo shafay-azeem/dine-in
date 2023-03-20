@@ -24,13 +24,19 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 const UpdateUser = () => {
   const toast = useToast();
   const [name, setName] = useState();
+  const [item, setItem] = useState("Select");
+  console.log(item, "item");
   // const [email, setEmail] = useState();
   const [resName, setResName] = useState();
   const [resImage, setResImage] = useState();
+
+  const [currency, setCurrency] = useState();
+
   const navigate = useNavigate();
 
   const {
@@ -44,6 +50,68 @@ const UpdateUser = () => {
   }, []);
 
   let userId = localStorage.getItem("user_id");
+
+  //--------------------------------------------
+  const options = [
+    {
+      symbol: "$",
+      label: "US Dollar",
+      code: "USD",
+      name_plural: "US dollars",
+    },
+    {
+      symbol: "€",
+      label: "Euro",
+      code: "EUR",
+      name_plural: "euros",
+    },
+    {
+      symbol: "¥",
+      label: "Japanese Yen",
+      code: "JPY",
+      name_plural: "Japanese yen",
+    },
+    {
+      symbol: "£",
+      label: "British Pound Sterling",
+      code: "GBP",
+      name_plural: "British pounds sterling",
+    },
+    {
+      symbol: "AU$",
+      label: "Australian Dollar",
+      code: "AUD",
+      name_plural: "Australian dollars",
+    },
+    {
+      symbol: "CA$",
+      label: "Canadian Dollar",
+      code: "CAD",
+      name_plural: "Canadian dollars",
+    },
+    {
+      symbol: "CHF",
+      label: "Swiss Franc",
+      code: "CHF",
+      name_plural: "Swiss francs",
+    },
+    {
+      symbol: "CHF",
+      label: "Swiss Franc",
+      code: "CHF",
+      name_plural: "Swiss francs",
+    },
+  ];
+
+  const [value, setValue] = useState();
+  // console.log(value, "value");
+  console.log(currency, "currency");
+
+  console.log(options[0], "options[0]");
+
+  // let currSymbol = value;
+
+  //-----------------------------------------------------------
 
   const submitHandler = async () => {
     if (!name) {
@@ -63,6 +131,7 @@ const UpdateUser = () => {
         // email: email,
         resName: resName,
         resImage: resImage,
+        currencySymbol: value,
       };
 
       await apiFunctions
@@ -80,6 +149,7 @@ const UpdateUser = () => {
             // setEmail("");
             setResImage("");
             setResName("");
+            localStorage.setItem("currencySymbol", value?.symbol);
             navigate("/homeScreen");
 
             return true;
@@ -134,6 +204,7 @@ const UpdateUser = () => {
       setResImage(res.resImage);
       // setEmail(res.email);
       setName(res.name);
+      setCurrency(res.currencySymbol);
     } catch (err) {
       console.log("An error occurred while fetching menus", err.message);
     }
@@ -168,6 +239,17 @@ const UpdateUser = () => {
             />
           </FormControl> */}
 
+          {currency ? (
+            <div className="w-100">
+              <FormLabel>Choose Currency</FormLabel>
+              <Select
+                options={options}
+                onChange={setValue}
+                defaultValue={currency}
+              />
+            </div>
+          ) : null}
+
           <FormControl id="name" isRequired>
             <FormLabel>Restaurant Name</FormLabel>
             <Input
@@ -178,7 +260,7 @@ const UpdateUser = () => {
           </FormControl>
 
           <FormControl mt={3}>
-            <FormLabel fontWeight="400">Upload Your Image</FormLabel>
+            <FormLabel>Upload Your Image</FormLabel>
             <Input
               size="sm"
               type="file"

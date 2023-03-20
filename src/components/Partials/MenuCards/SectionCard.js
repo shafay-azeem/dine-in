@@ -80,6 +80,7 @@ const SectionCard = (props) => {
   } = useDisclosure();
 
   useEffect(() => {
+    setLoading(false);
     if (!search) {
       getAllSectionByMenuId();
     }

@@ -29,6 +29,7 @@ const RestaurantMenu = (props) => {
   let resName = props?.resName;
   let resImage = props?.resImage;
   let menu = props?.menu;
+  let currency = props?.currency;
 
   const [sectionList, setSectionList] = useState();
   const [subSectionList, setSubSectionList] = useState();
@@ -126,6 +127,7 @@ const RestaurantMenu = (props) => {
         TableNumber,
         menu,
         resUserName,
+        currency,
       }).toString(),
     });
   };
@@ -143,6 +145,7 @@ const RestaurantMenu = (props) => {
         type={type}
         menu={menu}
         resUserName={resUserName}
+        currency={currency}
       />
       <div className="menu">
         <div className="d-flex justify-content-start">
@@ -209,6 +212,7 @@ const RestaurantMenu = (props) => {
                     type={type}
                     menu={menu}
                     resUserName={resUserName}
+                    currency={currency}
                   />
                 </Accordion.Body>
               </Accordion.Item>
@@ -229,6 +233,7 @@ const RestaurantMenu = (props) => {
           type={type}
           menu={menu}
           resUserName={resUserName}
+          currency={currency}
         />
       </div>
     </>

@@ -22,6 +22,7 @@ const RestaurantHeader = (props) => {
   let type = props?.type;
   let menu = props?.menu;
   let resUserName = props?.resUserName;
+  let currency = props?.currency;
 
   const [show, setShow] = useState(false);
   const [dataFromChild, setDataFromChild] = useState("");
@@ -62,7 +63,7 @@ const RestaurantHeader = (props) => {
 
   return (
     <>
-      <Navbar className="navbar">
+      <Navbar className="navbar" sticky="top">
         <Container>
           <Navbar.Brand
             style={{ color: "white", fontWeight: 600, fontSize: "20px" }}
@@ -94,27 +95,13 @@ const RestaurantHeader = (props) => {
             >
               <div className="d-flex justify-content-around align-items-center">
                 <CgShoppingCart size={20} color="white" />
-                <span className="ms-2 text-white">(3)</span>
+                <span className="ms-2 text-white">({cartCount})</span>
               </div>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* <Navbar sticky="top" bg="light" variant="light" className="px-2">
-        <Navbar.Brand>
-          Table Number : {tableNumber} {resName}
-        </Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          <Nav.Link onClick={toggleOffcanvas} className="text-end">
-            <CgShoppingCart size={20} />
-          </Nav.Link>
 
-          <Nav.Link onClick={toggleOffcanvas} className="text-end ms-2">
-            Cart
-          </Nav.Link>
-        </Navbar.Collapse>
-      </Navbar> */}
       <CartModal
         show={show}
         toggleOffcanvas={toggleOffcanvas}
@@ -127,6 +114,7 @@ const RestaurantHeader = (props) => {
         type={type}
         menu={menu}
         resUserName={resUserName}
+        currency={currency}
       />
     </>
   );

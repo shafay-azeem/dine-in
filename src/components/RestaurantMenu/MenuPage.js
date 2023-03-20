@@ -20,6 +20,7 @@ const MenuPage = (props) => {
   const [loading, setLoading] = useState(true);
   const [resName, setResName] = useState();
   const [resImage, setResImage] = useState();
+  const [currency, setCurrency] = useState();
   const [type, setType] = useState();
 
   let tableNumber = props?.tableNumber;
@@ -73,6 +74,7 @@ const MenuPage = (props) => {
 
       setResName(res.resName);
       setResImage(res.resImage);
+      setCurrency(res.currencySymbol.symbol);
       setLoading(true);
       // setChange(true);
     } catch (err) {
@@ -202,6 +204,7 @@ const MenuPage = (props) => {
             type={type}
             menu={menu}
             resUserName={resUserName}
+            currency={currency}
           />
         </Col>
         <Col

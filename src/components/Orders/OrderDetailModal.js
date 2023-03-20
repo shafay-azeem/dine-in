@@ -31,6 +31,7 @@ const OrderDetailModal = (props) => {
   let orderStatus = orders[props?.index].orderStatus;
   let paymentStatus = orders[props?.index].paymentStatus;
   let tableNumber = orders[props?.index].tableNumber;
+  let currencySymbol = localStorage.getItem("currencySymbol");
 
   // console.log(orderItemResponse);
 
@@ -105,7 +106,7 @@ const OrderDetailModal = (props) => {
                       </Text> */}
 
                       <Text fontWeight="medium" mb="0.5rem">
-                        Price: {x.item_Price}
+                        Price: {currencySymbol} {x.item_Price}
                       </Text>
 
                       <div fontWeight="medium" mb="0.5rem">
@@ -114,7 +115,7 @@ const OrderDetailModal = (props) => {
                       </div>
 
                       <div className="text-danger text-xl">
-                        Total: {x.itemPrice_Total}
+                        Total: {currencySymbol} {x.itemPrice_Total}
                       </div>
                     </div>
                     <div className="col-5">
@@ -134,7 +135,7 @@ const OrderDetailModal = (props) => {
                             </Text>
 
                             <Text fontWeight="medium" mb="0.5rem">
-                              Price: {s.Modifier_Price}
+                              Price: {currencySymbol} {s.Modifier_Price}
                             </Text>
                           </GridItem>
                         );
@@ -160,7 +161,7 @@ const OrderDetailModal = (props) => {
               }}
               className="text-black"
             >
-              Sub Total
+              Total
             </span>
             <span
               style={{
@@ -169,7 +170,8 @@ const OrderDetailModal = (props) => {
                 textAlign: "end",
               }}
             >
-              Rs {subtotal}
+              {currencySymbol}&nbsp;
+              {subtotal}
             </span>
           </div>
         </ModalFooter>

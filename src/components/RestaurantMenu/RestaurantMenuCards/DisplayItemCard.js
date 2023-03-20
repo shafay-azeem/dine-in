@@ -24,8 +24,7 @@ const DisplayItemCard = (props) => {
   let type = props?.type;
   let menu = props?.menu;
   let resUserName = props?.resUserName;
-
-  console.log(menu, "display item");
+  let currency = props?.currency;
 
   const [itemList, setItemList] = useState();
   const [state, setstate] = useState(false);
@@ -48,6 +47,7 @@ const DisplayItemCard = (props) => {
         type,
         menu,
         resUserName,
+        currency,
       }).toString(),
     });
   };
@@ -164,7 +164,7 @@ const DisplayItemCard = (props) => {
                               paddingRight: "5px",
                             }}
                           >
-                            ${x.itemPriceOption[0].price}
+                            {currency} {x.itemPriceOption[0].price}
                           </div>
                         ) : (
                           <div
@@ -174,7 +174,8 @@ const DisplayItemCard = (props) => {
                               paddingRight: "5px",
                             }}
                           >
-                            ${x.itemPriceOption[0].price} ━━━ $
+                            {currency}&nbsp;{x.itemPriceOption[0].price}&nbsp;
+                            ━━━ &nbsp; {currency}&nbsp;
                             {
                               x.itemPriceOption[x.itemPriceOption.length - 1]
                                 .price
@@ -310,6 +311,7 @@ const DisplayItemCard = (props) => {
                       TableNumber={TableNumber}
                       type={type}
                       menu={menu}
+                      currency={currency}
                     />
                   </Row>
                 </Card.Body>

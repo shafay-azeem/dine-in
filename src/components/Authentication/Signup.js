@@ -16,6 +16,7 @@ import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
+import Select from "react-select";
 
 const SignUp = () => {
   const auth = useAuth();
@@ -33,6 +34,61 @@ const SignUp = () => {
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
   const toast = useToast();
+
+  const [value, setValue] = useState();
+
+  let currencySymbol = value?.symbol;
+
+  const options = [
+    {
+      symbol: "$",
+      label: "US Dollar",
+      code: "USD",
+      name_plural: "US dollars",
+    },
+    {
+      symbol: "€",
+      label: "Euro",
+      code: "EUR",
+      name_plural: "euros",
+    },
+    {
+      symbol: "¥",
+      label: "Japanese Yen",
+      code: "JPY",
+      name_plural: "Japanese yen",
+    },
+    {
+      symbol: "£",
+      label: "British Pound Sterling",
+      code: "GBP",
+      name_plural: "British pounds sterling",
+    },
+    {
+      symbol: "AU$",
+      label: "Australian Dollar",
+      code: "AUD",
+      name_plural: "Australian dollars",
+    },
+    {
+      symbol: "CA$",
+      label: "Canadian Dollar",
+      code: "CAD",
+      name_plural: "Canadian dollars",
+    },
+    {
+      symbol: "CHF",
+      label: "Swiss Franc",
+      code: "CHF",
+      name_plural: "Swiss francs",
+    },
+    {
+      symbol: "CHF",
+      label: "Swiss Franc",
+      code: "CHF",
+      name_plural: "Swiss francs",
+    },
+  ];
 
   const pictureCapture = async (event) => {
     const formData = new FormData();
@@ -82,6 +138,7 @@ const SignUp = () => {
       resName: resName,
       resImage: resImg,
       resUserName: resUserName,
+      currencySymbol: currencySymbol,
     };
 
     await apiFunctions
@@ -100,6 +157,10 @@ const SignUp = () => {
 
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("resUserName", res.data.user.resUserName);
+          localStorage.setItem(
+            "currencySymbol",
+            res.data.user.currencySymbol.symbol
+          );
           navigate({
             pathname: "/homeScreen",
           });
@@ -194,6 +255,11 @@ const SignUp = () => {
           id="img"
         />
       </FormControl>
+
+      <div className="w-100">
+        <FormLabel>Choose Currency</FormLabel>
+        <Select options={options} onChange={setValue} />
+      </div>
 
       <Button
         colorScheme="blue"

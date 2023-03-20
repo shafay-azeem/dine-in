@@ -22,6 +22,7 @@ const HomePage = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user_id");
     localStorage.removeItem("resUserName");
+    localStorage.removeItem("currencySymbol");
 
     // if (!token && !user_id) {
     //   return navigate("/");
