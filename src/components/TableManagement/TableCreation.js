@@ -92,7 +92,7 @@ const TableCreation = () => {
     let getTableCountbyUserId = await apiFunctions.GET_REQUEST(
       BASE_URL + API_URL.GET_TABLE_COUNT_BY_USERID
     );
-
+    setLoading(true);
     let res = getTableCountbyUserId.data.tables;
     setNumber(res);
 
@@ -103,10 +103,10 @@ const TableCreation = () => {
     let getTables = await apiFunctions.GET_REQUEST(
       BASE_URL + API_URL.GET_TABLES_BY_USERID
     );
-
+    setLoading(true);
     let res = getTables.data.tables.Table;
     setTableList(res);
-    setLoading(true);
+
   }
 
   const deleteTableDeleteByTableId = async (tableId) => {
