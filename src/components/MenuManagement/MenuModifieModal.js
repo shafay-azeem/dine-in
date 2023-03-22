@@ -27,7 +27,8 @@ import { useToast } from "@chakra-ui/react";
 
 const MenuModifieModal = (props) => {
   let modifier_id = props.modifier_id;
-
+  const { modifierChanger,
+    setModifierChanger } = MenuState();
   const toast = useToast();
   const [loading, setLoading] = useState(true);
 
@@ -70,7 +71,7 @@ const MenuModifieModal = (props) => {
             duration: 1000,
             isClosable: true,
           });
-
+          setModifierChanger(Math.random())
           return true;
         } else {
           toast({
@@ -97,7 +98,7 @@ const MenuModifieModal = (props) => {
             duration: 1000,
             isClosable: true,
           });
-
+          setModifierChanger(Math.random())
           return true;
         } else {
           toast({

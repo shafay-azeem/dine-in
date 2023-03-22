@@ -26,7 +26,8 @@ import { EditIcon } from "@chakra-ui/icons";
 
 const ModifiersTable = () => {
   const toast = useToast();
-  const { modifier, setModifier } = MenuState();
+  const { modifier, setModifier, modifierChanger,
+    setModifierChanger } = MenuState();
   const [update, setUpdate] = useState(true);
   const [count, setCount] = useState();
   const {
@@ -34,12 +35,12 @@ const ModifiersTable = () => {
     onOpen: modifierOnOpen,
     onClose: modifierOnClose,
   } = useDisclosure();
-  let changer = Math.random();
+
 
   useEffect(() => {
     // setUpdate(false)
     getAllModifiers();
-  }, [changer]);
+  }, [modifierChanger]);
 
   async function getAllModifiers() {
     let getModifier = await apiFunctions.GET_REQUEST(
@@ -48,7 +49,7 @@ const ModifiersTable = () => {
 
     let res = getModifier.data.modifier;
     // console.log(modifier);
-    setUpdate(true);
+
     setModifier(res);
   }
 
@@ -65,7 +66,7 @@ const ModifiersTable = () => {
             duration: 1000,
             isClosable: true,
           });
-
+          setModifierChanger(Math.random())
           return true;
         } else {
           //alert(`There Some Error`);
