@@ -54,6 +54,7 @@ const SectionDrawer = (props) => {
   let subSecId = props?.subsection_index;
   let section_Or_subSection = props?.fromSection;
   // console.log(section_Or_subSection);
+
   const toast = useToast();
 
   const {
@@ -95,7 +96,8 @@ const SectionDrawer = (props) => {
 
   let initialArrayFaizy = [...sectionList];
   let initalArrayShafay = sectionList;
-  let initalArrayfaiz = initialArrayFaizy?.splice(props?.new_index, 1);
+  initialArrayFaizy?.splice(props?.new_index, 1);
+
 
   const initalArrayDecider = props?.section_index
     ? initialArrayFaizy

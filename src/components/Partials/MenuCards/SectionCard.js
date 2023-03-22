@@ -243,8 +243,9 @@ const SectionCard = (props) => {
     // );
   };
 
-  const getIndex = (id) => {
+  const getIndex = (id, index) => {
     setCount(id);
+    setSectionIndex(index)
   };
 
   const clearMessage = () => {
@@ -387,7 +388,7 @@ const SectionCard = (props) => {
                                       />
 
                                       <MenuList>
-                                        <Box onClick={() => getIndex(x._id)}>
+                                        <Box onClick={() => getIndex(x._id, index)}>
                                           <MenuItem
                                             icon={<AiFillFileAdd />}
                                             onClick={onOpenItem}
