@@ -37,7 +37,7 @@ const SignUp = () => {
 
   const [value, setValue] = useState();
 
-  let currencySymbol = value?.symbol;
+  // let currencySymbol = value?.symbol;
 
   const options = [
     {
@@ -138,7 +138,7 @@ const SignUp = () => {
       resName: resName,
       resImage: resImg,
       resUserName: resUserName,
-      currencySymbol: currencySymbol,
+      currencySymbol: value,
     };
 
     await apiFunctions
@@ -266,7 +266,7 @@ const SignUp = () => {
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}
-        // isLoading={loading}
+      // isLoading={loading}
       >
         Sign Up
       </Button>
