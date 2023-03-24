@@ -192,4 +192,6 @@ export const API_URL = {
   GET_TABLE_COUNT_BY_USERID: "table/V1/getTableCountbyUserId",
 
   DELETE_TABLE_BY_TABLE_ID: "table/V1/deleteTableDeleteByTableId/",
+
+  UPDATE_TABLE: "table/V1/updateTableByTableId/",
 };

@@ -92,7 +92,9 @@ const ConditionalTable = (props) => {
             {labelList?.map((x, index) => (
               <Tr key={index}>
                 <Td>{x.label}</Td>
-                <Td>{x.svg}</Td>
+                <Td>
+                  <img src={x.svg} style={{ width: "30px", height: "30px" }} />
+                </Td>
                 <Td>
                   <div className="d-flex align-items-center">
                     <Box className="mt-1 me-2">

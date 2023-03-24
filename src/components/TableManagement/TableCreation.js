@@ -18,6 +18,7 @@ import {
   Tr,
   useToast,
   Button,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import { useEffect } from "react";
@@ -30,16 +31,23 @@ import Form from "react-bootstrap/Form";
 
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { MenuState } from "../../context/MenuContext";
+import { BsFillTrashFill } from "react-icons/bs";
+import TableUpdateModal from "./TableUpdateModal";
 
 const TableCreation = () => {
   const [number, setNumber] = useState();
   const [tableList, setTableList] = useState();
   const [count, setCount] = useState();
 
+  const [tableNumber, setTableNumber] = useState();
+
+  const [tableName, setTableName] = useState();
+
   const toast = useToast();
   //const { tableChanger, setTableChanger } = MenuState(Math.random());
   const [tableChanger, setTableChanger] = useState();
   const [loading, setLoading] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     setLoading(false);
@@ -106,7 +114,6 @@ const TableCreation = () => {
     setLoading(true);
     let res = getTables.data.tables.Table;
     setTableList(res);
-
   }
 
   const deleteTableDeleteByTableId = async (tableId) => {
@@ -137,6 +144,12 @@ const TableCreation = () => {
           return false;
         }
       });
+  };
+
+  const getIndex = (id, tableName, tableNumber) => {
+    setCount(id);
+    setTableNumber(tableNumber);
+    setTableName(tableName);
   };
 
   return (
@@ -220,16 +233,25 @@ const TableCreation = () => {
                     <Td>{x._id}</Td>
                     <Td>{x.TableName}</Td>
                     <Td>{x.TableNumber}</Td>
-                    {/* <Td>{formatDate(x.createdAt.toString())}</Td> */}
 
-                    <Td style={{ textAlign: "center", cursor: "pointer" }}>
-                      <HStack>
-                        <Box onClick={() => deleteTableDeleteByTableId(x._id)}>
-                          <Tooltip label="Delete" placement="top">
-                            <Icon as={DeleteIcon} />
-                          </Tooltip>
+                    <Td>
+                      <div className="d-flex align-items-center">
+                        <Box className="mt-1 me-2">
+                          <BsFillTrashFill
+                            cursor="pointer"
+                            onClick={() => deleteTableDeleteByTableId(x._id)}
+                          />
                         </Box>
-                      </HStack>
+
+                        <Box
+                          className="me-2"
+                          onClick={() =>
+                            getIndex(x._id, x.TableName, x.TableNumber)
+                          }
+                        >
+                          <EditIcon cursor="pointer" onClick={onOpen} />
+                        </Box>
+                      </div>
                     </Td>
                   </Tr>
                 ))}
@@ -240,6 +262,17 @@ const TableCreation = () => {
               </div>
             )}
           </Table>
+
+          {isOpen ? (
+            <TableUpdateModal
+              isOpen={isOpen}
+              onOpen={onOpen}
+              onClose={onClose}
+              tableId={count}
+              tableNumber={tableNumber}
+              tableName={tableName}
+            />
+          ) : null}
         </TableContainer>
       </Box>
     </>
