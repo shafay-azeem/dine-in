@@ -46,6 +46,8 @@ export const MenuProvider = ({ children }) => {
 
   const [labelChanger, setLabelChanger] = useState();
 
+  const [options1, setOptions1] = useState([]);
+
   return (
     <MenuContext.Provider
       value={{
@@ -109,6 +111,8 @@ export const MenuProvider = ({ children }) => {
         setModifierChanger,
         labelChanger,
         setLabelChanger,
+        options1,
+        setOptions1,
       }}
     >
       {children}

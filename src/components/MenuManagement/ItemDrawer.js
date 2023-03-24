@@ -75,7 +75,7 @@ const ItemDrawer = (props) => {
     onOpen: ModalOnOpen,
     onClose: ModalOnClose,
   } = useDisclosure();
-  const { response, setResponse, itemUpdater, setItemUpdater } = MenuState();
+  const { setItemUpdater, options1, setOptions1 } = MenuState();
   const [loading, setLoading] = useState(true);
   const [select, setSelect] = useState();
   const [conversion, setConversion] = useState([]);
@@ -91,8 +91,9 @@ const ItemDrawer = (props) => {
   const [caloriesConcat, setCaloriesConcat] = useState();
   const [size, setSize] = useState();
   const [push, setPush] = useState(false);
-  const [itemLabel, setItemLabel] = useState([])
-  const [itemWarning, setItemWarning] = useState([])
+  const [itemLabel, setItemLabel] = useState([]);
+  const [itemWarning, setItemWarning] = useState([]);
+
   const [modifier, setModifier] = useState([]);
 
   const [title, setTitle] = useState();
@@ -194,20 +195,21 @@ const ItemDrawer = (props) => {
   };
 
   const options = [
-    { label: 'New', value: 'New' },
-    { label: 'Signature', value: 'Signature' },
-    { label: 'Special Presentation', value: 'Special Presentation' },
-  ]
-  const options1 = [
-    { label: 'Alcohol', value: 'Alcohol' },
-    { label: 'Alcohol Free', value: 'Alcohol Free' },
-  ]
+    { label: "New", value: "New" },
+    { label: "Signature", value: "Signature" },
+    { label: "Special Presentation", value: "Special Presentation" },
+  ];
+  // const options1 = [
+  //   { label: "Alcohol", value: "Alcohol" },
+  //   { label: "Alcohol Free", value: "Alcohol Free" },
+  // ];
 
   const updateItem = async (id) => {
     if (props?.itemDecider === "item" && id) {
       await apiFunctions
         .PUT_REQUEST(BASE_URL + API_URL.UPDATE_ITEM_BY_ID + id, itemData)
         .then((res) => {
+          console.log(res.data, "ggg");
           if (res.data.success == true) {
             // alert(` ITEM UPDATED SUCCESSFULLY`);
             toast({
@@ -257,8 +259,6 @@ const ItemDrawer = (props) => {
         });
     }
   };
-
-
 
   const testfunc = async (secid, subsecid) => {
     if (section_Or_subSection === "section" && secid) {
@@ -627,7 +627,7 @@ const ItemDrawer = (props) => {
           <DrawerCloseButton />
 
           {(item_index && props?.itemDecider === "item") ||
-            (item_index && props?.itemDecider === "subItem") ? (
+          (item_index && props?.itemDecider === "subItem") ? (
             <DrawerHeader>{title}</DrawerHeader>
           ) : (
             <DrawerHeader>Add New Item</DrawerHeader>

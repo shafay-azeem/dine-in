@@ -25,7 +25,7 @@ const ConditionalTable = (props) => {
   const toast = useToast();
   const [labelList, setLabelList] = useState([]);
   const [count, setCount] = useState();
-  const { labelChanger, setLabelChanger } = MenuState();
+  const { labelChanger, setLabelChanger, options1, setOptions1 } = MenuState();
   const {
     isOpen: labelIsOpen,
     onOpen: labelOnOpen,
@@ -43,6 +43,7 @@ const ConditionalTable = (props) => {
 
     let res = getLabels.data.label.itemLabel;
     setLabelList(res);
+    setOptions1(res);
   }
 
   const getIndex = (id) => {

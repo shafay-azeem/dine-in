@@ -568,7 +568,7 @@ const MenuDetail = (props) => {
                 {priceOption ? (
                   <div>
                     {priceOption[0].price ==
-                      priceOption[priceOption.length - 1]?.price ? (
+                    priceOption[priceOption.length - 1]?.price ? (
                       <div
                         className="itemPrice"
                         style={{
@@ -650,29 +650,18 @@ const MenuDetail = (props) => {
 
               <div className="d-flex justify-content-center gap-2 mt-2">
                 {warningState?.map((z, index) => {
+                  console.log(z.svg, "svg");
                   return (
                     <div className="d-flex my-1" key={index}>
-                      {z.value === "Alcohol" ? (
-                        <div className="me-2">
-                          <Tooltip label={z.value} placement="top">
-                            <img
-                              src={require("../Assets/Alcohol.svg").default}
-                              alt="mySvgImage"
-                            />
-                          </Tooltip>
-                        </div>
-                      ) : null}
-
-                      {z.value === "Alcohol Free" ? (
-                        <div>
-                          <Tooltip label={z.value} placement="top">
-                            <img
-                              src={require("../Assets/AlcoholFree.svg").default}
-                              alt="mySvgImage"
-                            />
-                          </Tooltip>
-                        </div>
-                      ) : null}
+                      <div className="me-2">
+                        <Tooltip label={z.value} placement="top">
+                          <img
+                            src={z.svg}
+                            alt="mySvgImage"
+                            style={{ width: "30px", height: "30px" }}
+                          />
+                        </Tooltip>
+                      </div>
                     </div>
                   );
                 })}

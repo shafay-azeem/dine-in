@@ -155,8 +155,8 @@ const DisplayItemCard = (props) => {
 
                       <Card.Text className="pricetext">
                         {x.itemPriceOption[0].price ==
-                          x.itemPriceOption[x.itemPriceOption.length - 1]
-                            .price ? (
+                        x.itemPriceOption[x.itemPriceOption.length - 1]
+                          .price ? (
                           <div
                             className="itemPrice"
                             style={{
@@ -216,7 +216,7 @@ const DisplayItemCard = (props) => {
                               ) : null}
 
                               {y.Special_Presentation ===
-                                "Special_Presentation" ? (
+                              "Special_Presentation" ? (
                                 <div className="me-2">
                                   <Tooltip
                                     label={"Special Presentation"}
@@ -240,36 +240,15 @@ const DisplayItemCard = (props) => {
                         {x.itemWarning?.map((z, index) => {
                           return (
                             <div className="d-flex my-1" key={index}>
-                              {z.value === "Alcohol" ? (
-                                <div className="me-2">
-                                  <Tooltip label={z.value} placement="top">
-                                    <img
-                                      src={
-                                        require("../../Assets/Alcohol.svg")
-                                          .default
-                                      }
-                                      alt="mySvgImage"
-                                    />
-                                  </Tooltip>
-                                </div>
-                              ) : null}
-
-                              {z.value === "Alcohol Free" ? (
-                                <div>
-                                  <Tooltip
-                                    label={z.value}
-                                    placement="top"
-                                  >
-                                    <img
-                                      src={
-                                        require("../../Assets/AlcoholFree.svg")
-                                          .default
-                                      }
-                                      alt="mySvgImage"
-                                    />
-                                  </Tooltip>
-                                </div>
-                              ) : null}
+                              <div className="me-2">
+                                <Tooltip label={z.value} placement="top">
+                                  <img
+                                    src={z.svg}
+                                    alt="mySvgImage"
+                                    style={{ width: "30px", height: "30px" }}
+                                  />
+                                </Tooltip>
+                              </div>
                             </div>
                           );
                         })}
