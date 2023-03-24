@@ -1,4 +1,6 @@
+import { EditIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Table,
   TableContainer,
   Tbody,
@@ -7,106 +9,117 @@ import {
   Th,
   Thead,
   Tr,
+  useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { BsFillTrashFill } from "react-icons/bs";
+import { MenuState } from "../../../context/MenuContext";
+import { API_URL, BASE_URL } from "../../../global/Constant";
+import apiFunctions from "../../../global/GlobalFunction";
+import LabelModal from "../../MenuManagement/LabelModal";
 
 const ConditionalTable = (props) => {
-  const data = [
-    {
-      ID: 1,
-      DiscountCode: "ABCXYZ",
-      Description: "I am Description",
-      Status: "Approved",
-      Actions: "Promo",
-    },
-    {
-      ID: 2,
-      DiscountCode: "KIYNGS",
-      Description: "I am Description",
-      Status: "Approved",
-      Actions: "Promo",
-    },
-    {
-      ID: 3,
-      DiscountCode: "XYZBDC",
-      Description: "I am Description",
-      Status: "Approved",
-      Actions: "Promo",
-    },
-  ];
-  const data2 = [
-    {
-      ID: 1,
-      PromotionName: "Promo 1",
-      Description: "I am Description",
-      Status: "Approved",
-      Actions: "Promo",
-    },
-    {
-      ID: 3,
-      PromotionName: "Promo 2",
-      Description: "I am Description",
-      Status: "Approved",
-      Actions: "Promo",
-    },
-    {
-      ID: 3,
-      PromotionName: "Promo 3",
-      Description: "I am Description",
-      Status: "Approved",
-      Actions: "Promo",
-    },
-  ];
+  const toast = useToast();
+  const [labelList, setLabelList] = useState([]);
+  const [count, setCount] = useState();
+  const { labelChanger, setLabelChanger } = MenuState();
+  const {
+    isOpen: labelIsOpen,
+    onOpen: labelOnOpen,
+    onClose: labelOnClose,
+  } = useDisclosure();
+
+  useEffect(() => {
+    getLabels();
+  }, [labelChanger]);
+
+  async function getLabels() {
+    let getLabels = await apiFunctions.GET_REQUEST(
+      BASE_URL + API_URL.GET_LABEL
+    );
+
+    let res = getLabels.data.label.itemLabel;
+    setLabelList(res);
+  }
+
+  const getIndex = (id) => {
+    setCount(id);
+  };
+
+  const handleRemove = async (id) => {
+    await apiFunctions
+      .DELETE_REQUEST(BASE_URL + API_URL.DELETE_LABEL_BY_LABELID + id)
+      .then((res) => {
+        if (res.data.success == true) {
+          toast({
+            position: "top",
+            title: `${res.data.message}`,
+            status: "success",
+            duration: 1000,
+            isClosable: true,
+          });
+          setLabelChanger(Math.random());
+          return true;
+        } else {
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 1000,
+            isClosable: true,
+          });
+          return false;
+        }
+      });
+  };
 
   return (
     <>
-      {props.number == 1 ? (
-        <TableContainer>
-          <Table variant="simple">
-            <Thead backgroundColor="#FAFAFA">
-              <Tr>
-                <Th>Discount Code</Th>
-                <Th>Description</Th>
-                <Th>Status</Th>
-                <Th>Actions</Th>
+      <TableContainer>
+        <Table variant="simple">
+          <Thead backgroundColor="#FAFAFA">
+            <Tr>
+              <Th>Label Name</Th>
+              <Th>Svg</Th>
+              <Th>Action</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {labelList?.map((x, index) => (
+              <Tr key={index}>
+                <Td>{x.label}</Td>
+                <Td>{x.svg}</Td>
+                <Td>
+                  <div className="d-flex align-items-center">
+                    <Box className="mt-1 me-2">
+                      <BsFillTrashFill
+                        cursor="pointer"
+                        onClick={() => handleRemove(x._id)}
+                      />
+                    </Box>
+
+                    <Box className="me-2" onClick={() => getIndex(x._id)}>
+                      <EditIcon cursor="pointer" onClick={labelOnOpen} />
+                    </Box>
+                  </div>
+                </Td>
               </Tr>
-            </Thead>
-            <Tbody>
-              {data.map((x, index) => (
-                <Tr key={index}>
-                  <Td>{x.DiscountCode}</Td>
-                  <Td>{x.Description}</Td>
-                  <Td>{x.Status}</Td>
-                  <Td>{x.Actions}</Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
-      ) : (
-        <TableContainer>
-          <Table variant="simple">
-            <Thead backgroundColor="#FAFAFA">
-              <Tr>
-                <Th>Promotion Name</Th>
-                <Th>Description</Th>
-                <Th>Status</Th>
-                <Th>Actions</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {data2.map((x, index) => (
-                <Tr key={index}>
-                  <Td>{x.PromotionName}</Td>
-                  <Td>{x.Description}</Td>
-                  <Td>{x.Status}</Td>
-                  <Td>{x.Actions}</Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
-      )}
+            ))}
+          </Tbody>
+        </Table>
+
+        {labelIsOpen ? (
+          <LabelModal
+            isOpen={labelIsOpen}
+            onOpen={labelOnOpen}
+            onClose={labelOnClose}
+            id={count}
+          />
+        ) : null}
+      </TableContainer>
     </>
   );
 };

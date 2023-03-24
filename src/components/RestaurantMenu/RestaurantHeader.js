@@ -95,7 +95,9 @@ const RestaurantHeader = (props) => {
             >
               <div className="d-flex justify-content-around align-items-center">
                 <CgShoppingCart size={20} color="white" />
-                <span className="ms-2 text-white">({cartCount})</span>
+                <span className="ms-2 text-white">
+                  ({cartCount ? cartCount : 0})
+                </span>
               </div>
             </Navbar.Text>
           </Navbar.Collapse>

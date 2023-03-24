@@ -130,7 +130,13 @@ const PromoModal = (props) => {
           <ModalFooter>
             <CustomButton btnText={"Save Draft"} mr={3} size={"sm"} />
 
-            <CustomButton click={props.onClose} btnText={"Cancel"} variant={"outline"} mr={3} size={"sm"} />
+            <CustomButton
+              click={props.onClose}
+              btnText={"Cancel"}
+              variant={"outline"}
+              mr={3}
+              size={"sm"}
+            />
           </ModalFooter>
         </ModalContent>
       </Modal>

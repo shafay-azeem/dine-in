@@ -66,6 +66,16 @@ export const API_URL = {
 
   UPDATE_MODIFIER: "modifier/V1/updateModifier/",
 
+  CREATE_LABEL: "modifier/V1/createLabel",
+
+  GET_LABEL: "modifier/V1/getLabels",
+
+  DELETE_LABEL_BY_LABELID: "modifier/V1/deleteLabel/",
+
+  UPDATE_LABEL: "modifier/V1/updateLabel/",
+
+  GET_SINGLE_LABEL: "modifier/V1/getSingleLabel/",
+
   //FeedBack
   CREATE_FEEDBACK_FORM: "feedback/V1/createfeedback",
 

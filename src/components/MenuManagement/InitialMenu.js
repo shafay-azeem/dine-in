@@ -20,14 +20,15 @@ import CustomButton from "../../CustomElements/CustomButton";
 import DisplayCard from "../Partials/MenuCards/DisplayCard";
 import SettingDrawer from "./SettingDrawer";
 import CreateMenuDrawer from "./CreateMenuDrawer";
+import LabelModal from "./LabelModal";
 
 const InitialMenu = () => {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
-    isOpen: promoIsOpen,
-    onOpen: promoOnOpen,
-    onClose: promoOnClose,
+    isOpen: labelIsOpen,
+    onOpen: labelOnOpen,
+    onClose: labelOnClose,
   } = useDisclosure();
   const {
     isOpen: purchaseIsOpen,
@@ -56,8 +57,7 @@ const InitialMenu = () => {
           <TabList>
             <Tab>Menu</Tab>
             <Tab>Modifiers</Tab>
-            {/* <Tab>Promo Codes</Tab>
-            <Tab>In-app purchases</Tab> */}
+            <Tab>Label Management</Tab>
           </TabList>
 
           <TabPanels>
@@ -103,19 +103,19 @@ const InitialMenu = () => {
 
             <TabPanel backgroundColor="white" textAlign="right">
               <CustomButton
-                click={promoOnOpen}
-                btnText={"Add a Promo Code"}
+                click={labelOnOpen}
+                btnText={"Add a Label"}
                 size={"sm"}
                 mb={2}
               />
-              {promoIsOpen ? (
-                <PromoModal
-                  isOpen={promoIsOpen}
-                  onOpen={promoOnOpen}
-                  onClose={promoOnClose}
+              {labelIsOpen ? (
+                <LabelModal
+                  isOpen={labelIsOpen}
+                  onOpen={labelOnOpen}
+                  onClose={labelOnClose}
                 />
               ) : null}
-              <ConditionalTable number={1} />
+              <ConditionalTable />
             </TabPanel>
 
             <TabPanel backgroundColor="white" textAlign="right">
