@@ -192,54 +192,56 @@ const MenuConfiguration = () => {
                 {tableList?.map((x, index) => {
                   return (
                     <Col md={6} className="py-2">
-                      <Card key={index}>
-                        <Card.Body>
-                          <Card.Title>QR Generator</Card.Title>
-                          <div>
-                            <div className="margin-left:auto">
-                              {qrVisible && selectedQrIndex === index && (
-                                <>
-                                  <img
-                                    src={qr}
-                                    style={{
-                                      width: "150px",
-                                      height: "150px",
-                                    }}
-                                  />
-                                  {/* <a href={qr} download="qrcode.png">
+                      {x.TableStatus ? (
+                        <Card key={index}>
+                          <Card.Body>
+                            <Card.Title>QR Generator</Card.Title>
+                            <div>
+                              <div className="margin-left:auto">
+                                {qrVisible && selectedQrIndex === index && (
+                                  <>
+                                    <img
+                                      src={qr}
+                                      style={{
+                                        width: "150px",
+                                        height: "150px",
+                                      }}
+                                    />
+                                    {/* <a href={qr} download="qrcode.png">
                                     Download
                                   </a> */}
-                                  {url ? (
-                                    <Card.Text>
-                                      URL : {url ? url : null}
-                                    </Card.Text>
-                                  ) : null}
-                                </>
+                                    {url ? (
+                                      <Card.Text>
+                                        URL : {url ? url : null}
+                                      </Card.Text>
+                                    ) : null}
+                                  </>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="d-flex justify-content-start align-items-center">
+                              <Button
+                                variant="primary"
+                                className="mt-2"
+                                onClick={() => {
+                                  GenerateQRCode(index, x.TableNumber);
+                                }}
+                              >
+                                Table {x.TableNumber}
+                              </Button>
+
+                              {qrVisible && selectedQrIndex === index && (
+                                <Button variant="primary" className="mt-2 ms-2">
+                                  <a href={qr} download="qrcode.png">
+                                    Download
+                                  </a>
+                                </Button>
                               )}
                             </div>
-                          </div>
-
-                          <div className="d-flex justify-content-start align-items-center">
-                            <Button
-                              variant="primary"
-                              className="mt-2"
-                              onClick={() => {
-                                GenerateQRCode(index, x.TableNumber);
-                              }}
-                            >
-                              Table {x.TableNumber}
-                            </Button>
-
-                            {qrVisible && selectedQrIndex === index && (
-                              <Button variant="primary" className="mt-2 ms-2">
-                                <a href={qr} download="qrcode.png">
-                                  Download
-                                </a>
-                              </Button>
-                            )}
-                          </div>
-                        </Card.Body>
-                      </Card>
+                          </Card.Body>
+                        </Card>
+                      ) : null}
                     </Col>
                   );
                 })}

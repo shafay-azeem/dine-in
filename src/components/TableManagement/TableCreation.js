@@ -42,10 +42,13 @@ const TableCreation = () => {
   const [tableNumber, setTableNumber] = useState();
 
   const [tableName, setTableName] = useState();
+  const [checked, setChecked] = useState();
+
+  console.log(typeof checked, "checked value");
 
   const toast = useToast();
-  //const { tableChanger, setTableChanger } = MenuState(Math.random());
-  const [tableChanger, setTableChanger] = useState();
+
+  const { tableChanger, setTableChanger } = MenuState();
   const [loading, setLoading] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -85,7 +88,6 @@ const TableCreation = () => {
           }
         });
     } catch (err) {
-      console.log(err);
       toast({
         position: "top",
         title: `There Some Error`,
@@ -150,6 +152,42 @@ const TableCreation = () => {
     setCount(id);
     setTableNumber(tableNumber);
     setTableName(tableName);
+  };
+
+  // const handleClick = (event, id) => {
+  //   console.log(event.target.checked, id, "fff");
+  // };
+
+  const updateTableStatus = async (event, id) => {
+    let data = {
+      TableStatus: event.target.checked,
+    };
+
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_TABLE_STATUS + id, data)
+      .then((res) => {
+        if (res.data.success == true) {
+          toast({
+            position: "top",
+            title: `${res.data.message}`,
+            status: "success",
+            duration: 1000,
+            isClosable: true,
+          });
+
+          setTableChanger(Math.random());
+          return true;
+        } else {
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 1000,
+            isClosable: true,
+          });
+          return false;
+        }
+      });
   };
 
   return (
@@ -221,8 +259,8 @@ const TableCreation = () => {
                 <Th>ID</Th>
                 <Th>Table Name</Th>
                 <Th>Table Number</Th>
-                {/* <Th>Date</Th> */}
                 <Th>Action</Th>
+                <Th>Status</Th>
               </Tr>
             </Thead>
 
@@ -252,6 +290,14 @@ const TableCreation = () => {
                           <EditIcon cursor="pointer" onClick={onOpen} />
                         </Box>
                       </div>
+                    </Td>
+                    <Td>
+                      <input
+                        style={{ cursor: "pointer" }}
+                        type="checkbox"
+                        checked={x.TableStatus}
+                        onChange={(e) => updateTableStatus(e, x._id)}
+                      />
                     </Td>
                   </Tr>
                 ))}

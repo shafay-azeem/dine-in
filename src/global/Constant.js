@@ -194,4 +194,6 @@ export const API_URL = {
   DELETE_TABLE_BY_TABLE_ID: "table/V1/deleteTableDeleteByTableId/",
 
   UPDATE_TABLE: "table/V1/updateTableByTableId/",
+
+  UPDATE_TABLE_STATUS: "table/V1/updateTableStatus/",
 };

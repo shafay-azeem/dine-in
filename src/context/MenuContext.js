@@ -46,6 +46,7 @@ export const MenuProvider = ({ children }) => {
 
   const [labelChanger, setLabelChanger] = useState();
 
+  const [tableChanger, setTableChanger] = useState();
   const [options1, setOptions1] = useState([]);
 
   return (
@@ -113,6 +114,8 @@ export const MenuProvider = ({ children }) => {
         setLabelChanger,
         options1,
         setOptions1,
+        tableChanger,
+        setTableChanger,
       }}
     >
       {children}

@@ -13,11 +13,13 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
+import { MenuState } from "../../context/MenuContext";
 import CustomButton from "../../CustomElements/CustomButton";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import apiFunctions from "../../global/GlobalFunction";
 
 const TableUpdateModal = (props) => {
+  const { tableChanger, setTableChanger } = MenuState();
   const toast = useToast();
 
   let tableId = props?.tableId;
@@ -41,6 +43,7 @@ const TableUpdateModal = (props) => {
             isClosable: true,
           });
 
+          setTableChanger(Math.random());
           return true;
         } else {
           toast({
