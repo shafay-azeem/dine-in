@@ -21,7 +21,6 @@ const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [show, setShow] = useState(false);
-
   const handleClick = () => setShow(!show);
 
   const submitHandler = async () => {

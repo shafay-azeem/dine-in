@@ -46,7 +46,6 @@ import { API_URL, BASE_URL } from "../../global/Constant";
 import { useToast } from "@chakra-ui/react";
 import Spinner from "react-bootstrap/Spinner";
 
-
 const SectionDrawer = (props) => {
   let menu_index = props.menu_index;
 
@@ -71,6 +70,9 @@ const SectionDrawer = (props) => {
     setUpdatedSubSection,
     updatedSubSection,
     setChanger,
+
+    subChanger,
+    setSubChanger,
   } = MenuState();
 
   const [checkedItems, setCheckedItems] = useState(false);
@@ -98,7 +100,6 @@ const SectionDrawer = (props) => {
   let initalArrayShafay = sectionList;
   initialArrayFaizy?.splice(props?.new_index, 1);
 
-
   const initalArrayDecider = props?.section_index
     ? initialArrayFaizy
     : initalArrayShafay;
@@ -113,12 +114,12 @@ const SectionDrawer = (props) => {
 
   const [mId, setMId] = useState(menu_index);
 
-  const [sectionLabel, setSectionLabel] = useState([])
+  const [sectionLabel, setSectionLabel] = useState([]);
 
   const handleOnchange = async (val) => {
-    console.log(val)
+    console.log(val);
     // setSectionLabel(val)
-  }
+  };
 
   const {
     isOpen: ModalOpen,
@@ -126,11 +127,10 @@ const SectionDrawer = (props) => {
     onClose: ModalOnClose,
   } = useDisclosure();
 
-
   const options = [
-    { label: 'New', value: 'New' },
-    { label: 'Signature', value: 'Signature' },
-  ]
+    { label: "New", value: "New" },
+    { label: "Signature", value: "Signature" },
+  ];
 
   const pictureCapture = async (event) => {
     const formData = new FormData();
@@ -154,9 +154,6 @@ const SectionDrawer = (props) => {
   function getTimestampInSeconds() {
     return Math.floor(Date.now() / 1000);
   }
-
-
-
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(
@@ -329,18 +326,21 @@ const SectionDrawer = (props) => {
             isClosable: true,
           });
           setCreateSubSection(true);
+          setSubChanger(Math.random());
           // setSubSectionList(postRes);
           const deleteRes = await apiFunctions.DELETE_REQUEST(
             BASE_URL + API_URL.DELETE_SECTION_BY_ID + secid
           );
           if (deleteRes.data.success == true) {
-            toast({
-              position: "top",
-              title: `${deleteRes.data.message}`,
-              status: "success",
-              duration: 1000,
-              isClosable: true,
-            });
+            // toast({
+            //   position: "top",
+            //   title: `${deleteRes.data.message}`,
+            //   status: "success",
+            //   duration: 1000,
+            //   isClosable: true,
+            // });
+            setSubChanger(Math.random());
+            window.location.reload();
             return true;
           } else {
             throw new Error("Error deleting section");
@@ -415,10 +415,7 @@ const SectionDrawer = (props) => {
     }
   };
 
-
-
-
-  const handleAlphabetically = (event) => { };
+  const handleAlphabetically = (event) => {};
 
   function deleteimg() {
     setImage(null);
@@ -536,7 +533,6 @@ const SectionDrawer = (props) => {
                       </Modal>
                     </FormControl>
 
-
                     <label>
                       <input
                         type="checkbox"
@@ -547,10 +543,8 @@ const SectionDrawer = (props) => {
                       Display The Section
                     </label>
 
-
-
                     {arrayDecider.length > 0 &&
-                      props?.subsection_index == undefined ? (
+                    props?.subsection_index == undefined ? (
                       <FormControl>
                         <label>
                           <input
@@ -592,7 +586,6 @@ const SectionDrawer = (props) => {
                         )}
                       </FormControl>
                     ) : null}
-
                   </TabPanel>
                   <TabPanel>
                     <FormControl>
@@ -604,8 +597,6 @@ const SectionDrawer = (props) => {
                         labelledBy="Select"
                       />
                     </FormControl>
-
-
                   </TabPanel>
                 </TabPanels>
               </Tabs>
@@ -617,7 +608,6 @@ const SectionDrawer = (props) => {
           )}
           {loading ? (
             <DrawerFooter>
-
               <Button variant="outline" mr={3} onClick={props.onClose}>
                 Cancel
               </Button>

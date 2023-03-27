@@ -55,6 +55,8 @@ const SectionCard = (props) => {
     setSectionCreated,
     sectionCreated,
     setChanger,
+    subChanger,
+    setSubChanger,
   } = MenuState();
   const [loading, setLoading] = useState(false);
   const [status, setSatus] = useState();
@@ -245,7 +247,7 @@ const SectionCard = (props) => {
 
   const getIndex = (id, index) => {
     setCount(id);
-    setSectionIndex(index)
+    setSectionIndex(index);
   };
 
   const clearMessage = () => {
@@ -388,7 +390,9 @@ const SectionCard = (props) => {
                                       />
 
                                       <MenuList>
-                                        <Box onClick={() => getIndex(x._id, index)}>
+                                        <Box
+                                          onClick={() => getIndex(x._id, index)}
+                                        >
                                           <MenuItem
                                             icon={<AiFillFileAdd />}
                                             onClick={onOpenItem}

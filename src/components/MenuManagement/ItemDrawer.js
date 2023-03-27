@@ -855,77 +855,74 @@ const ItemDrawer = (props) => {
                   </TabPanel>
                   <TabPanel>
                     <Box>
-                      {inputList?.map((x, index) => {
-                        return (
-                          <Box key={index} mt={5}>
-                            <HStack>
-                              <Tooltip label="Name" placement="top">
-                                <Input
-                                  borderRadius="8px"
-                                  placeholder="Name"
-                                  name="name"
-                                  size="sm"
-                                  type="text"
-                                  value={x.name}
-                                  width="30%"
-                                  onChange={(e) => handleChange(e, index)}
-                                />
-                              </Tooltip>
-                              <Tooltip label="Price" placement="top">
-                                <Input
-                                  borderRadius="8px"
-                                  placeholder="Price"
-                                  size="sm"
-                                  name="price"
-                                  type="text"
-                                  value={x.price}
-                                  width="30%"
-                                  onChange={(e) => handleChange(e, index)}
-                                />
-                              </Tooltip>
+                      {itemPrice ? (
+                        <div>
+                          {inputList?.map((x, index) => {
+                            return (
+                              <Box key={index} mt={5}>
+                                <HStack>
+                                  <Tooltip label="Name" placement="top">
+                                    <Input
+                                      borderRadius="8px"
+                                      placeholder="Name"
+                                      name="name"
+                                      size="sm"
+                                      type="text"
+                                      value={x.name}
+                                      width="30%"
+                                      onChange={(e) => handleChange(e, index)}
+                                    />
+                                  </Tooltip>
+                                  <Tooltip label="Price" placement="top">
+                                    <Input
+                                      borderRadius="8px"
+                                      placeholder="Price"
+                                      size="sm"
+                                      name="price"
+                                      type="text"
+                                      value={x.price}
+                                      width="30%"
+                                      onChange={(e) => handleChange(e, index)}
+                                    />
+                                  </Tooltip>
 
-                              <Tooltip label="Calories" placement="top">
-                                <Input
-                                  borderRadius="8px"
-                                  placeholder="Calories"
-                                  size="sm"
-                                  name="calories"
-                                  type="text"
-                                  width="30%"
-                                  value={x.calories}
-                                  onChange={(e) => handleChange(e, index)}
-                                />
-                              </Tooltip>
-                              {inputList.length !== 1 && (
-                                <IconButton
-                                  size="xs"
-                                  variant="outline"
-                                  colorScheme="blue"
-                                  onClick={() => handleRemoveInput(index)}
-                                  icon={<CloseIcon />}
-                                />
-                              )}
-                              {inputList.length - 1 === index && (
-                                <IconButton
-                                  size="xs"
-                                  variant="outline"
-                                  colorScheme="blue"
-                                  onClick={() => handleAddInput(index)}
-                                  icon={<AddIcon />}
-                                />
-                              )}
-                            </HStack>
-                          </Box>
-                        );
-                      })}
+                                  <Tooltip label="Calories" placement="top">
+                                    <Input
+                                      borderRadius="8px"
+                                      placeholder="Calories"
+                                      size="sm"
+                                      name="calories"
+                                      type="text"
+                                      width="30%"
+                                      value={x.calories}
+                                      onChange={(e) => handleChange(e, index)}
+                                    />
+                                  </Tooltip>
+                                  {inputList.length !== 1 && (
+                                    <IconButton
+                                      size="xs"
+                                      variant="outline"
+                                      colorScheme="blue"
+                                      onClick={() => handleRemoveInput(index)}
+                                      icon={<CloseIcon />}
+                                    />
+                                  )}
+                                  {inputList.length - 1 === index && (
+                                    <IconButton
+                                      size="xs"
+                                      variant="outline"
+                                      colorScheme="blue"
+                                      onClick={() => handleAddInput(index)}
+                                      icon={<AddIcon />}
+                                    />
+                                  )}
+                                </HStack>
+                              </Box>
+                            );
+                          })}
+                        </div>
+                      ) : null}
                     </Box>
-
-                    {/* <Box>
-                    <Text>
-                      {JSON.stringify(inputList, null, 2)}
-                    </Text>
-
-                  </Box> */}
                   </TabPanel>
                   <TabPanel>
                     <Box>

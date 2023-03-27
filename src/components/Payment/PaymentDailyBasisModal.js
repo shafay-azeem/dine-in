@@ -45,6 +45,7 @@ const PaymentDailyBasisModal = (props) => {
       revenueRange();
     }
   }, [startDate]);
+
   return (
     <>
       <Modal isOpen={props.isOpen} onClose={props.onClose}>
