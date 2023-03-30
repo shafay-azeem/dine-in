@@ -98,6 +98,7 @@ const SectionCard = (props) => {
     UpdatedSection,
     sectionCreated,
     menu_index,
+    subChanger,
   ]);
 
   async function getAllSectionByMenuId() {

@@ -92,6 +92,7 @@ const LabelModal = (props) => {
             isClosable: true,
           });
           setLabelChanger(Math.random());
+          props.onClose();
           return true;
         } else {
           toast({

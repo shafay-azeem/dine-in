@@ -203,6 +203,7 @@ const SectionDrawer = (props) => {
             isClosable: true,
           });
           setCreateSubSection(true);
+          props.onClose();
         } else {
           throw new Error("Error creating sub-section");
         }
@@ -232,6 +233,8 @@ const SectionDrawer = (props) => {
           });
           setSectionCreated(true);
           setChanger(Math.random());
+          props.onClose();
+
           return true;
         } else {
           throw new Error("Error creating section");
@@ -327,6 +330,7 @@ const SectionDrawer = (props) => {
           });
           setCreateSubSection(true);
           setSubChanger(Math.random());
+          props.onClose();
           // setSubSectionList(postRes);
           const deleteRes = await apiFunctions.DELETE_REQUEST(
             BASE_URL + API_URL.DELETE_SECTION_BY_ID + secid
@@ -340,7 +344,7 @@ const SectionDrawer = (props) => {
             //   isClosable: true,
             // });
             setSubChanger(Math.random());
-            window.location.reload();
+            // window.location.reload();
             return true;
           } else {
             throw new Error("Error deleting section");

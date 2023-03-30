@@ -8,6 +8,7 @@ const apiFunctions = {
       config = {
         headers: {
           "Content-type": "application/json",
+          "Cache-Control": "no-cache",
           // "Content-type": "application/x-www-form-urlencoded",
           Authorization: `Bearer ${token}`,
         },
@@ -59,6 +60,7 @@ const apiFunctions = {
         headers: {
           "Content-type": "application/json",
           // "Content-type": "application/x-www-form-urlencoded",
+
           Authorization: `Bearer ${token}`,
         },
       };

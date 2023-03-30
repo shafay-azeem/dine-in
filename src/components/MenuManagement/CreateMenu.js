@@ -33,7 +33,15 @@ const CreateMenu = () => {
   const [searchparams] = useSearchParams();
   let menu_index = searchparams.get("id");
 
-  const { section, setSection, sectionList, setSectionList, changer } = MenuState();
+  const {
+    section,
+    setSection,
+    sectionList,
+    setSectionList,
+    changer,
+    subChanger,
+    setSubChanger,
+  } = MenuState();
 
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
@@ -48,10 +56,9 @@ const CreateMenu = () => {
     onClose: onCloseSection,
   } = useDisclosure();
 
-
   useEffect(() => {
-    getAllSectionByMenuId()
-  }, [menu_index, changer]);
+    getAllSectionByMenuId();
+  }, [menu_index, changer, subChanger]);
 
   async function getAllSectionByMenuId() {
     let getSection = await apiFunctions.GET_REQUEST(
