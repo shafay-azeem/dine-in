@@ -68,7 +68,7 @@ const SectionCard = (props) => {
   const [sectionDelete, setSectionDelete] = useState(false);
   const [sectionDuplicate, setSectionDuplicate] = useState(false);
   const [sectionUpdate, setSectionUpdate] = useState(false);
-
+  const [toggler, setToggler] = useState();
   const {
     isOpen: isOpenSection,
     onOpen: onOpenSection,
@@ -82,10 +82,13 @@ const SectionCard = (props) => {
   } = useDisclosure();
 
   useEffect(() => {
-    setLoading(false);
-    if (!search) {
+    if (!search && !toggler) {
+      setLoading(false);
       getAllSectionByMenuId();
+    } else {
+      setSectionList(sectionList);
     }
+
     setSectionDelete(false);
     setSectionDuplicate(false);
     setSectionUpdate(false);
@@ -99,6 +102,7 @@ const SectionCard = (props) => {
     sectionCreated,
     menu_index,
     subChanger,
+    toggler,
   ]);
 
   async function getAllSectionByMenuId() {
@@ -113,6 +117,7 @@ const SectionCard = (props) => {
     let res = getSection.data.section;
     setSectionList(res);
     setLoading(true);
+    setToggler(false);
   }
 
   const handleRemove = async (id) => {
@@ -211,27 +216,34 @@ const SectionCard = (props) => {
   };
 
   const sectionClick = async (x, id) => {
-    let sectionData = {
-      sectionToggle: !x.sectionToggle,
-    };
+    let ind = sectionList.findIndex((element) => {
+      return element._id == id;
+    });
+    sectionList[ind].sectionToggle = !x.sectionToggle;
+    setSectionList(sectionList);
+    setToggler(Math.random());
 
-    await apiFunctions
-      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
-      .then((res) => {
-        if (res.data.success == true) {
-          setSectionUpdate(true);
-          return true;
-        } else {
-          toast({
-            position: "top",
-            title: `There Some Error`,
-            status: "error",
-            duration: 1000,
-            isClosable: true,
-          });
-          return false;
-        }
-      });
+    // let sectionData = {
+    //   sectionToggle: !x.sectionToggle,
+    // };
+
+    // await apiFunctions
+    //   .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
+    //   .then((res) => {
+    //     if (res.data.success == true) {
+    //       setSectionUpdate(true);
+    //       return true;
+    //     } else {
+    //       toast({
+    //         position: "top",
+    //         title: `There Some Error`,
+    //         status: "error",
+    //         duration: 1000,
+    //         isClosable: true,
+    //       });
+    //       return false;
+    //     }
+    //   });
   };
   const handleDrop = (droppedItem) => {
     // if (!droppedItem.destination) return;

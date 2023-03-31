@@ -41,13 +41,16 @@ const SubSectionCard = (props) => {
     updatedSubSection,
     setCreateSubSection,
     createSubSection,
+    sectionList,
+    setSectionList,
   } = MenuState();
   const toast = useToast();
-  const [subSectionList, setSubSectionList] = useState();
+  const [subSectionList, setSubSectionList] = useState([]);
   const [subSectionUpdate, setSubSectionUpdate] = useState(false);
 
   const [subSectionDuplicate, setSubSectionDuplicate] = useState(false);
   const [subSectionDelete, setSubSectionDelete] = useState(false);
+  const [toggler, setToggler] = useState(false);
 
   let menu_index = props.menu_index;
   let section_index = props?.section_index;
@@ -74,7 +77,11 @@ const SubSectionCard = (props) => {
   const [status, setSatus] = useState();
 
   useEffect(() => {
-    getAllSubSectionBySectionId();
+    if (!toggler) {
+      getAllSubSectionBySectionId();
+    } else {
+      return;
+    }
     setSubSectionUpdate(false);
     setSubSectionDuplicate(false);
     setSubSectionDelete(false);
@@ -87,6 +94,7 @@ const SubSectionCard = (props) => {
     createSubSection,
     updatedSubSection,
     section_index,
+    toggler,
   ]);
 
   async function getAllSubSectionBySectionId() {
@@ -95,8 +103,9 @@ const SubSectionCard = (props) => {
     );
 
     let res = getSubSection.data.subSection;
-    // console.log(res);
+
     setSubSectionList(res);
+    setToggler(false);
   }
 
   const switchStatus = async (x, id) => {
@@ -202,34 +211,16 @@ const SubSectionCard = (props) => {
   };
 
   const sectionClick = async (x, id) => {
-    let sectionData = {
-      sectionToggle: !x.sectionToggle,
-    };
+    let ind = sectionList.findIndex((element) => {
+      return element._id == section_index;
+    });
+    let subInd = sectionList[ind].subSection.findIndex((elementSub) => {
+      return elementSub._id == id;
+    });
 
-    await apiFunctions
-      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + id, sectionData)
-      .then((res) => {
-        if (res.data.success == true) {
-          // console.log("SubSetion Toggle Updated");
-          setSubSectionUpdate(true);
-          return true;
-        } else {
-          toast({
-            position: "top",
-            title: `There Some Error`,
-            status: "error",
-            duration: 1000,
-            isClosable: true,
-          });
-          return false;
-        }
-      });
-
-    // setSatus(index);
-    // response[props.menu_index].section[section_index].subSection[index].active =
-    //   !response[props.menu_index].section[section_index].subSection[index]
-    //     .active;
-    // setResponse([...response]);
+    sectionList[ind].subSection[subInd].sectionToggle = !x.sectionToggle;
+    setSubSectionList(sectionList[ind].subSection);
+    setToggler(Math.random());
   };
 
   return (
