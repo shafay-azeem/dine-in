@@ -73,6 +73,7 @@ const CreateFormModal = (props) => {
             isClosable: true,
           });
           setCreateForm(true);
+          props.onClose();
           return true;
         } else {
           toast({

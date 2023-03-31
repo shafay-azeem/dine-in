@@ -278,10 +278,16 @@ const Feedbacks = () => {
                             <EditIcon
                               mr={4}
                               onClick={() => editForm(x._id)}
-                              style={{ marginLeft: "15px" }}
+                              style={{ marginLeft: "15px", cursor: "pointer" }}
                             />
                           </Tooltip>
-                          <DeleteIcon onClick={() => handleRemove(x._id)} />
+
+                          <Tooltip label="Delete">
+                            <DeleteIcon
+                              onClick={() => handleRemove(x._id)}
+                              style={{ cursor: "pointer" }}
+                            />
+                          </Tooltip>
                         </GridItem>
                       </Grid>
                     </Box>

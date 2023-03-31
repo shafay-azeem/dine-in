@@ -27,12 +27,12 @@ import { useToast } from "@chakra-ui/react";
 
 const MenuModifieModal = (props) => {
   let modifier_id = props.modifier_id;
-  const { modifierChanger,
-    setModifierChanger } = MenuState();
+  const { modifierChanger, setModifierChanger } = MenuState();
   const toast = useToast();
   const [loading, setLoading] = useState(true);
 
   const [groupName, setGroupName] = useState();
+  const [title, setTitle] = useState();
   const [inputList, setInputList] = useState([
     { Name: "", Price: "", Calorie: "" },
   ]);
@@ -71,7 +71,8 @@ const MenuModifieModal = (props) => {
             duration: 1000,
             isClosable: true,
           });
-          setModifierChanger(Math.random())
+          setModifierChanger(Math.random());
+          props.onClose();
           return true;
         } else {
           toast({
@@ -98,7 +99,8 @@ const MenuModifieModal = (props) => {
             duration: 1000,
             isClosable: true,
           });
-          setModifierChanger(Math.random())
+          setModifierChanger(Math.random());
+          props.onClose();
           return true;
         } else {
           toast({
@@ -133,6 +135,8 @@ const MenuModifieModal = (props) => {
     let setVar = getModifier.data.modifier;
 
     setGroupName(setVar.Groupname);
+    setTitle(setVar.Groupname);
+
     setInputList(setVar.modifiers);
     setLoading(true);
   }
@@ -143,7 +147,7 @@ const MenuModifieModal = (props) => {
         <ModalOverlay />
         <ModalContent>
           {props?.modifier_id ? (
-            <ModalHeader>Edit {groupName}</ModalHeader>
+            <ModalHeader>Edit {title}</ModalHeader>
           ) : (
             <ModalHeader>Add a Modifier Group</ModalHeader>
           )}

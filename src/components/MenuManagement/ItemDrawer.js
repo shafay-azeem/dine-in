@@ -63,9 +63,7 @@ import { MultiSelect } from "react-multi-select-component";
 const ItemDrawer = (props) => {
   let section_index = props?.section_index;
   let subSection_index = props?.subSection_index;
-
   let section_Or_subSection = props?.fromSection;
-
   let item_index = props?.item_index;
 
   const toast = useToast();
@@ -77,38 +75,18 @@ const ItemDrawer = (props) => {
   } = useDisclosure();
   const { setItemUpdater, options1, setOptions1 } = MenuState();
   const [loading, setLoading] = useState(true);
-  const [select, setSelect] = useState();
-  const [conversion, setConversion] = useState([]);
 
   const [demoModifier, setDemoModifier] = useState([{ min: "", max: "" }]);
-
-  const [price, setPrice] = useState([]);
-  const [rrr, setRrr] = useState([]);
-
   const [video, setVideo] = useState();
-
-  const [priceConcat, setPriceConcat] = useState();
-  const [caloriesConcat, setCaloriesConcat] = useState();
-  const [size, setSize] = useState();
-  const [push, setPush] = useState(false);
   const [itemLabel, setItemLabel] = useState([]);
   const [itemWarning, setItemWarning] = useState([]);
-
   const [modifier, setModifier] = useState([]);
-
   const [title, setTitle] = useState();
-
-  const [warning, setWarning] = useState(["Alcohol", "AlcoholFree"]);
-
-  const [conversionWarning, setConversionWarning] = useState([]);
-  const [warningState, setWarningState] = useState();
   const [image, setImage] = useState();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [checked, setChecked] = useState();
-
   const [activeNut, setActiveNut] = useState();
-
   const [calorie, setCalorie] = useState();
   const [sold, setSold] = useState();
   const [time, setTime] = useState();
@@ -199,10 +177,6 @@ const ItemDrawer = (props) => {
     { label: "Signature", value: "Signature" },
     { label: "Special Presentation", value: "Special Presentation" },
   ];
-  // const options1 = [
-  //   { label: "Alcohol", value: "Alcohol" },
-  //   { label: "Alcohol Free", value: "Alcohol Free" },
-  // ];
 
   const updateItem = async (id) => {
     if (props?.itemDecider === "item" && id) {
@@ -220,6 +194,7 @@ const ItemDrawer = (props) => {
               isClosable: true,
             });
             setItemUpdater(true);
+            props.onClose();
             return true;
           } else {
             toast({
@@ -245,6 +220,7 @@ const ItemDrawer = (props) => {
               isClosable: true,
             });
             setItemUpdater(true);
+            props.onClose();
             return true;
           } else {
             toast({
@@ -263,7 +239,6 @@ const ItemDrawer = (props) => {
   const testfunc = async (secid, subsecid) => {
     if (section_Or_subSection === "section" && secid) {
       if (!name) {
-        //alert("Please Enter All Fields");
         toast({
           position: "top",
           title: `Item Name Cant be Empty`,
@@ -285,9 +260,9 @@ const ItemDrawer = (props) => {
               isClosable: true,
             });
             setItemUpdater(true);
+            props.onClose();
             return true;
           } else {
-            // alert(`There Some Error`);
             toast({
               position: "top",
               title: `There Some Error`,
@@ -321,6 +296,7 @@ const ItemDrawer = (props) => {
               isClosable: true,
             });
             setItemUpdater(true);
+            props.onClose();
             return true;
           } else {
             toast({
@@ -337,7 +313,6 @@ const ItemDrawer = (props) => {
   };
 
   useEffect(() => {
-    // console.log(props.itemDecider);
     if (item_index && props?.itemDecider === "item") {
       getSingleItemByID();
     } else if (item_index && props?.itemDecider === "subItem") {
@@ -358,8 +333,6 @@ const ItemDrawer = (props) => {
     }
 
     let setVar = getSingleItem.data.item;
-    let propertyNames;
-    let propertyNamesWarning;
 
     setName(setVar.itemName);
     setTitle(setVar.itemName);
@@ -369,11 +342,8 @@ const ItemDrawer = (props) => {
     setActiveNut(setVar.activeNutritionInfo);
     setCalorie(setVar.itemCalorie);
     setSold(setVar.itemTag);
-
     setItemLabel(setVar.itemLabel);
-
     setItemWarning(setVar.itemWarning);
-
     setRecommendedItem(setVar.itemRecommendedItems);
     setTime(setVar.itemPrepTime);
     setItemPrice(setVar.itemPrice);
@@ -425,8 +395,6 @@ const ItemDrawer = (props) => {
     }
 
     let setVar = getSingleItem.data.item;
-    let propertyNames;
-    let propertyNamesWarning;
 
     setName(setVar.itemName);
     setTitle(setVar.itemName);
@@ -436,11 +404,8 @@ const ItemDrawer = (props) => {
     setActiveNut(setVar.activeNutritionInfo);
     setCalorie(setVar.itemCalorie);
     setSold(setVar.itemTag);
-
     setItemLabel(setVar.itemLabel);
-
     setItemWarning(setVar.itemWarning);
-
     setRecommendedItem(setVar.itemRecommendedItems);
     setTime(setVar.itemPrepTime);
     setItemPrice(setVar.itemPrice);

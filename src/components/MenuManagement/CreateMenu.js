@@ -103,11 +103,6 @@ const CreateMenu = () => {
     setFilter(filterSec);
   };
 
-  const hitMe = (x) => {
-    // setHit(true);
-    // setToggle(x);
-  };
-
   return (
     <>
       <Grid

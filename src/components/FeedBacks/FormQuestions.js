@@ -3,7 +3,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { useState } from "react";
 import { MenuState } from "../../context/MenuContext";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { BsFillTrashFill } from "react-icons/bs";
 import CustomButton from "../../CustomElements/CustomButton";
 import { Button } from "@chakra-ui/react";
@@ -207,14 +207,33 @@ const FormQuestions = () => {
           })}
 
           <div>
-            <Button
-              colorScheme="teal"
-              size="sm"
-              onClick={() => testfunc(feedback_index)}
-              style={{ marginLeft: "76%", marginTop: "1%", marginBottom: "2%" }}
-            >
-              Save
-            </Button>
+            {sdf ? (
+              <Button
+                colorScheme="teal"
+                size="sm"
+                onClick={() => testfunc(feedback_index)}
+                style={{
+                  marginLeft: "76%",
+                  marginTop: "1%",
+                  marginBottom: "2%",
+                }}
+              >
+                Update
+              </Button>
+            ) : (
+              <Button
+                colorScheme="teal"
+                size="sm"
+                onClick={() => testfunc(feedback_index)}
+                style={{
+                  marginLeft: "76%",
+                  marginTop: "1%",
+                  marginBottom: "2%",
+                }}
+              >
+                Save
+              </Button>
+            )}
           </div>
         </div>
       ) : (

@@ -44,6 +44,7 @@ const TableUpdateModal = (props) => {
           });
 
           setTableChanger(Math.random());
+          props.onClose();
           return true;
         } else {
           toast({

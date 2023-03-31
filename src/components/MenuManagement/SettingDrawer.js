@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   Drawer,
   DrawerBody,
@@ -17,33 +17,24 @@ import {
   FormControl,
   FormLabel,
   Textarea,
-  Switch,
-  SimpleGrid,
   Box,
   Text,
-  FormHelperText,
   Checkbox,
   HStack,
   VStack,
-  Radio,
-  ButtonGroup,
-  RadioGroup,
-  useDisclosure,
   Select,
   IconButton,
   Tooltip,
 } from "@chakra-ui/react";
-import CustomButton from "../../CustomElements/CustomButton";
+
 import { MenuState } from "../../context/MenuContext";
 import { useState } from "react";
-import { SwitchComponent } from "@syncfusion/ej2-react-buttons";
-import { Alert, Col, Form, FormCheck, Row } from "react-bootstrap";
+
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 import apiFunctions from "../../global/GlobalFunction";
 import { API_URL, BASE_URL } from "../../global/Constant";
 import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
-import Spinner from "react-bootstrap/Spinner";
 
 const SettingDrawer = (props) => {
   // DATA AND TIME
@@ -93,7 +84,6 @@ const SettingDrawer = (props) => {
   const [endDate, setEndDate] = useState();
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
-  // const [avail, setEndTime] = useState();
   const [value, setValue] = useState();
 
   const conditonMade = props?.menuCreate ? "menuCreate" : "section";
@@ -122,9 +112,6 @@ const SettingDrawer = (props) => {
     setFormChecked(e.target.checked);
   };
 
-  // if (!props?.index) {
-
-  // }
   const [active, setActive] = useState();
 
   const updatedMenu = async () => {
@@ -140,7 +127,6 @@ const SettingDrawer = (props) => {
       .PUT_REQUEST(BASE_URL + API_URL.UPDATE_MENU_BY_ID + props.index, menuData)
       .then((res) => {
         if (res.data.success == true) {
-          // alert(`${res.data.message}`);
           toast({
             position: "top",
             title: `${res.data.message}`,
@@ -149,9 +135,9 @@ const SettingDrawer = (props) => {
             isClosable: true,
           });
           setUpdateMenu(true);
+          props.onClose();
           return true;
         } else {
-          //alert(`There Some Error`);
           toast({
             position: "top",
             title: `There Some Error`,
@@ -225,6 +211,7 @@ const SettingDrawer = (props) => {
             isClosable: true,
           });
           setCreateMenu(true);
+          props.onClose();
           return true;
         } else {
           // alert(`There Some Error`);

@@ -48,6 +48,7 @@ const ChangeStatusModal = (props) => {
         });
 
         setStatusUpdate(Math.random());
+        props.onClose();
         return true;
       } else {
         toast({
@@ -66,8 +67,6 @@ const ChangeStatusModal = (props) => {
 
   return (
     <>
-      <Button onClick={props.onOpen}>Open Modal</Button>
-
       <Modal isOpen={props.isOpen} onClose={props.onClose} size="2xl">
         <ModalOverlay />
         <ModalContent>

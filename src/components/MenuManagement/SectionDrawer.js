@@ -371,6 +371,7 @@ const SectionDrawer = (props) => {
             isClosable: true,
           });
           setUpdatedSubSection(true);
+          props.onClose();
           return true;
         } else {
           throw new Error("Error updating section");
@@ -401,6 +402,7 @@ const SectionDrawer = (props) => {
             isClosable: true,
           });
           setUpdatedSection(true);
+          props.onClose();
           return true;
         } else {
           throw new Error("Error updating section");
