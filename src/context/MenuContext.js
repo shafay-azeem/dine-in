@@ -51,6 +51,8 @@ export const MenuProvider = ({ children }) => {
 
   const [subChanger, setSubChanger] = useState();
 
+  const [newChanger, setNewChanger] = useState();
+
   return (
     <MenuContext.Provider
       value={{
@@ -121,6 +123,9 @@ export const MenuProvider = ({ children }) => {
 
         subChanger,
         setSubChanger,
+
+        newChanger,
+        setNewChanger,
       }}
     >
       {children}

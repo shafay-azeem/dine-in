@@ -18,57 +18,59 @@ const MenuDetail = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [name, setName] = useState();
   const [image, setImage] = useState();
-  const [video, setVideo] = useState();
-  const [description, setDescription] = useState();
-  const [calorie, setCalorie] = useState();
-  const [time, setTime] = useState();
-  const [select, setSelect] = useState();
-  const [warningState, setWarningState] = useState();
-  const [demoModifier, setDemoModifier] = useState();
+  // const [video, setVideo] = useState();
+  // const [description, setDescription] = useState();
+  // const [calorie, setCalorie] = useState();
+  // const [time, setTime] = useState();
+  // const [select, setSelect] = useState();
+  // const [warningState, setWarningState] = useState();
+  // const [demoModifier, setDemoModifier] = useState();
   const [priceOption, setPriceOption] = useState();
-  const [activeNut, setActiveNut] = useState();
+  // const [activeNut, setActiveNut] = useState();
 
-  const [servingSize, setServingSize] = useState();
-  const [nutCalories, setNutCalories] = useState();
+  // const [servingSize, setServingSize] = useState();
+  // const [nutCalories, setNutCalories] = useState();
 
-  const [totalFat, setTotalFat] = useState();
-  const [totalFatPercentage, setTotalFatPercentage] = useState();
+  // const [totalFat, setTotalFat] = useState();
+  // const [totalFatPercentage, setTotalFatPercentage] = useState();
 
-  const [saturatedFat, setSaturatedFat] = useState();
-  const [saturatedFatPercentage, setSaturatedFatPercentage] = useState();
+  // const [saturatedFat, setSaturatedFat] = useState();
+  // const [saturatedFatPercentage, setSaturatedFatPercentage] = useState();
 
-  const [transFat, setTransFat] = useState();
-  const [transFatPercentage, setTransFatPercentage] = useState();
+  // const [transFat, setTransFat] = useState();
+  // const [transFatPercentage, setTransFatPercentage] = useState();
 
-  const [cholesterol, setCholesterol] = useState();
-  const [cholesterolPercentage, setCholesterolPercentage] = useState();
+  // const [cholesterol, setCholesterol] = useState();
+  // const [cholesterolPercentage, setCholesterolPercentage] = useState();
   const toast = useToast();
-  const [sodium, setSodium] = useState();
-  const [sodiumPercentage, setSodiumPercentage] = useState();
+  // const [sodium, setSodium] = useState();
+  // const [sodiumPercentage, setSodiumPercentage] = useState();
 
-  const [dietaryFiber, setDietaryFiber] = useState();
-  const [dietaryFiberPercentage, setDietaryFiberPercentage] = useState();
+  // const [dietaryFiber, setDietaryFiber] = useState();
+  // const [dietaryFiberPercentage, setDietaryFiberPercentage] = useState();
 
-  const [sugar, setSugar] = useState();
-  const [sugarPercentage, setSugarPercentage] = useState();
+  // const [sugar, setSugar] = useState();
+  // const [sugarPercentage, setSugarPercentage] = useState();
 
-  const [protein, setProtein] = useState();
-  const [proteinPercentage, setProteinPercentage] = useState();
+  // const [protein, setProtein] = useState();
+  // const [proteinPercentage, setProteinPercentage] = useState();
 
-  const [vitaminA, setVitaminA] = useState();
-  const [vitaminC, setVitaminC] = useState();
+  // const [vitaminA, setVitaminA] = useState();
+  // const [vitaminC, setVitaminC] = useState();
 
-  const [calcium, setCalcium] = useState();
-  const [iron, setIron] = useState();
+  // const [calcium, setCalcium] = useState();
+  // const [iron, setIron] = useState();
 
-  const [totalCarbs, setTotalCarbs] = useState();
-  const [totalCarbsPercentage, setTotalCarbsPercentage] = useState();
+  // const [totalCarbs, setTotalCarbs] = useState();
+  // const [totalCarbsPercentage, setTotalCarbsPercentage] = useState();
 
   const [show, setShow] = useState(false);
 
-  const [itemid, setItemId] = useState();
+  // const [itemid, setItemId] = useState();
 
   const [tag, setTag] = useState();
+
+  const [res, setRes] = useState();
 
   const handleClick = () => setShow(true);
   const handleClick2 = () => setShow(false);
@@ -129,112 +131,117 @@ const MenuDetail = (props) => {
         );
 
         let setVar = getSingleItem.data.item;
-
-        setTag(setVar.itemTag);
-        setName(setVar.itemName);
-        setImage(setVar.itemImage);
-        setVideo(setVar.video);
-        setDescription(setVar.itemDescription);
-        setCalorie(setVar.itemCalorie);
-        setTime(setVar.itemPrepTime);
-        setSelect(setVar.itemLabel);
-        setWarningState(setVar.itemWarning);
-        setDemoModifier(setVar.itemModifier);
+        setRes(setVar);
         setPriceOption(setVar.itemPriceOption);
-        setActiveNut(setVar.activeNutritionInfo);
 
-        setServingSize(setVar.itemServingSize);
-        setNutCalories(setVar.itemNutritionCalories);
+        // setTag(setVar.itemTag);
+        // setName(setVar.itemName);
+        // setImage(setVar.itemImage);
+        // setVideo(setVar.video);
+        // setDescription(setVar.itemDescription);
+        // setCalorie(setVar.itemCalorie);
+        // setTime(setVar.itemPrepTime);
+        // setSelect(setVar.itemLabel);
+        // setWarningState(setVar.itemWarning);
+        // setDemoModifier(setVar.itemModifier);
 
-        setTotalFat(setVar.itemTotalFat);
-        setTotalFatPercentage(setVar.itemTotalFatPercentage);
+        // setActiveNut(setVar.activeNutritionInfo);
 
-        setSaturatedFatPercentage(setVar.itemSaturatedFatPercentage);
-        setSaturatedFat(setVar.itemSaturatedFat);
+        // setServingSize(setVar.itemServingSize);
+        // setNutCalories(setVar.itemNutritionCalories);
 
-        setTransFat(setVar.itemTransFat);
-        setTransFatPercentage(setVar.itemTransFatPercentage);
+        // setTotalFat(setVar.itemTotalFat);
+        // setTotalFatPercentage(setVar.itemTotalFatPercentage);
 
-        setCholesterol(setVar.itemCholesterol);
-        setCholesterolPercentage(setVar.itemCholesterolPercentage);
+        // setSaturatedFatPercentage(setVar.itemSaturatedFatPercentage);
+        // setSaturatedFat(setVar.itemSaturatedFat);
 
-        setSodium(setVar.itemSodium);
-        setSodiumPercentage(setVar.itemSodiumPercentage);
+        // setTransFat(setVar.itemTransFat);
+        // setTransFatPercentage(setVar.itemTransFatPercentage);
 
-        setDietaryFiber(setVar.itemDietaryFiber);
-        setDietaryFiberPercentage(setVar.itemDietaryFiberPercentage);
+        // setCholesterol(setVar.itemCholesterol);
+        // setCholesterolPercentage(setVar.itemCholesterolPercentage);
 
-        setSugar(setVar.itemSugar);
-        setSugarPercentage(setVar.itemSugarPercentage);
+        // setSodium(setVar.itemSodium);
+        // setSodiumPercentage(setVar.itemSodiumPercentage);
 
-        setProtein(setVar.itemProtein);
-        setProteinPercentage(setVar.itemProteinPercentage);
+        // setDietaryFiber(setVar.itemDietaryFiber);
+        // setDietaryFiberPercentage(setVar.itemDietaryFiberPercentage);
 
-        setVitaminA(setVar.itemVitaminA);
-        setVitaminC(setVar.itemVitaminC);
+        // setSugar(setVar.itemSugar);
+        // setSugarPercentage(setVar.itemSugarPercentage);
 
-        setIron(setVar.itemIron);
-        setCalcium(setVar.itemCalcium);
+        // setProtein(setVar.itemProtein);
+        // setProteinPercentage(setVar.itemProteinPercentage);
 
-        setTotalCarbs(setVar.itemTotalCarbs);
-        setTotalCarbsPercentage(setVar.itemTotalCarbsPercentage);
+        // setVitaminA(setVar.itemVitaminA);
+        // setVitaminC(setVar.itemVitaminC);
+
+        // setIron(setVar.itemIron);
+        // setCalcium(setVar.itemCalcium);
+
+        // setTotalCarbs(setVar.itemTotalCarbs);
+        // setTotalCarbsPercentage(setVar.itemTotalCarbsPercentage);
       } else {
         let getSingleItem = await apiFunctions.GET_REQUEST_BY_ID(
           BASE_URL + API_URL.GET_ITEMS_BY_ITEMID_QR + item_index
         );
 
         let setVar = getSingleItem.data.item;
-
-        setTag(setVar.itemTag);
-        setItemId(setVar._id);
-
-        setName(setVar.itemName);
-        setImage(setVar.itemImage);
-        setVideo(setVar.video);
-        setDescription(setVar.itemDescription);
-        setCalorie(setVar.itemCalorie);
-        setTime(setVar.itemPrepTime);
-        setSelect(setVar.itemLabel);
-        setWarningState(setVar.itemWarning);
-        setDemoModifier(setVar.itemModifier);
+        // console.log(setVar, "setVar");
+        setRes(setVar);
         setPriceOption(setVar.itemPriceOption);
-        setActiveNut(setVar.activeNutritionInfo);
 
-        setServingSize(setVar.itemServingSize);
-        setNutCalories(setVar.itemNutritionCalories);
+        // setTag(setVar.itemTag);
+        // setItemId(setVar._id);
 
-        setTotalFat(setVar.itemTotalFat);
-        setTotalFatPercentage(setVar.itemTotalFatPercentage);
+        // setName(setVar.itemName);
+        // setImage(setVar.itemImage);
+        // setVideo(setVar.video);
+        // setDescription(setVar.itemDescription);
+        // setCalorie(setVar.itemCalorie);
+        // setTime(setVar.itemPrepTime);
+        // setSelect(setVar.itemLabel);
+        // setWarningState(setVar.itemWarning);
+        // setDemoModifier(setVar.itemModifier);
 
-        setSaturatedFatPercentage(setVar.itemSaturatedFatPercentage);
-        setSaturatedFat(setVar.itemSaturatedFat);
+        // setActiveNut(setVar.activeNutritionInfo);
 
-        setTransFat(setVar.itemTransFat);
-        setTransFatPercentage(setVar.itemTransFatPercentage);
+        // setServingSize(setVar.itemServingSize);
+        // setNutCalories(setVar.itemNutritionCalories);
 
-        setCholesterol(setVar.itemCholesterol);
-        setCholesterolPercentage(setVar.itemCholesterolPercentage);
+        // setTotalFat(setVar.itemTotalFat);
+        // setTotalFatPercentage(setVar.itemTotalFatPercentage);
 
-        setSodium(setVar.itemSodium);
-        setSodiumPercentage(setVar.itemSodiumPercentage);
+        // setSaturatedFatPercentage(setVar.itemSaturatedFatPercentage);
+        // setSaturatedFat(setVar.itemSaturatedFat);
 
-        setDietaryFiber(setVar.itemDietaryFiber);
-        setDietaryFiberPercentage(setVar.itemDietaryFiberPercentage);
+        // setTransFat(setVar.itemTransFat);
+        // setTransFatPercentage(setVar.itemTransFatPercentage);
 
-        setSugar(setVar.itemSugar);
-        setSugarPercentage(setVar.itemSugarPercentage);
+        // setCholesterol(setVar.itemCholesterol);
+        // setCholesterolPercentage(setVar.itemCholesterolPercentage);
 
-        setProtein(setVar.itemProtein);
-        setProteinPercentage(setVar.itemProteinPercentage);
+        // setSodium(setVar.itemSodium);
+        // setSodiumPercentage(setVar.itemSodiumPercentage);
 
-        setVitaminA(setVar.itemVitaminA);
-        setVitaminC(setVar.itemVitaminC);
+        // setDietaryFiber(setVar.itemDietaryFiber);
+        // setDietaryFiberPercentage(setVar.itemDietaryFiberPercentage);
 
-        setIron(setVar.itemIron);
-        setCalcium(setVar.itemCalcium);
+        // setSugar(setVar.itemSugar);
+        // setSugarPercentage(setVar.itemSugarPercentage);
 
-        setTotalCarbs(setVar.itemTotalCarbs);
-        setTotalCarbsPercentage(setVar.itemTotalCarbsPercentage);
+        // setProtein(setVar.itemProtein);
+        // setProteinPercentage(setVar.itemProteinPercentage);
+
+        // setVitaminA(setVar.itemVitaminA);
+        // setVitaminC(setVar.itemVitaminC);
+
+        // setIron(setVar.itemIron);
+        // setCalcium(setVar.itemCalcium);
+
+        // setTotalCarbs(setVar.itemTotalCarbs);
+        // setTotalCarbsPercentage(setVar.itemTotalCarbsPercentage);
       }
     } catch (error) {
       console.error(error);
@@ -304,8 +311,8 @@ const MenuDetail = (props) => {
 
               <div className="d-flex justify-content-between p-2">
                 <span className="serving">Serving Size</span>
-                {servingSize ? (
-                  <span className="size">{servingSize}</span>
+                {res?.itemServingSize ? (
+                  <span className="size">{res?.itemServingSize}</span>
                 ) : (
                   <span className="size">-</span>
                 )}
@@ -316,8 +323,8 @@ const MenuDetail = (props) => {
 
               <div className="d-flex justify-content-between p-2">
                 <span className="serving">Calories</span>
-                {nutCalories ? (
-                  <span className="size">{nutCalories}</span>
+                {res?.itemNutritionCalories ? (
+                  <span className="size">{res?.itemNutritionCalories}</span>
                 ) : (
                   <span className="size">-</span>
                 )}
@@ -330,9 +337,10 @@ const MenuDetail = (props) => {
               </div>
 
               <div className="d-flex justify-content-between p-2">
-                {totalFat ? (
+                {res?.itemTotalFat ? (
                   <span className="serving">
-                    Total Fat <span className="light ms-2">{totalFat}g</span>
+                    Total Fat{" "}
+                    <span className="light ms-2">{res?.itemTotalFat}g</span>
                   </span>
                 ) : (
                   <span className="serving">
@@ -340,17 +348,18 @@ const MenuDetail = (props) => {
                   </span>
                 )}
 
-                {totalFatPercentage ? (
-                  <span className="size">{totalFatPercentage}%</span>
+                {res?.itemTotalFatPercentage ? (
+                  <span className="size">{res?.itemTotalFatPercentage}%</span>
                 ) : (
                   <span className="size">-</span>
                 )}
               </div>
 
               <div className="d-flex justify-content-between px-2">
-                {saturatedFat ? (
+                {res?.itemSaturatedFat ? (
                   <span className="ms-3">
-                    Saturated Fat <span className="ms-2">{saturatedFat}g</span>
+                    Saturated Fat{" "}
+                    <span className="ms-2">{res?.itemSaturatedFat}g</span>
                   </span>
                 ) : (
                   <span className="ms-3">
@@ -358,17 +367,19 @@ const MenuDetail = (props) => {
                   </span>
                 )}
 
-                {saturatedFatPercentage ? (
-                  <span className="size">{saturatedFatPercentage}%</span>
+                {res?.itemSaturatedFatPercentage ? (
+                  <span className="size">
+                    {res?.itemSaturatedFatPercentage}%
+                  </span>
                 ) : (
                   <span className="size">-</span>
                 )}
               </div>
 
               <div className="d-flex justify-content-between px-2 pb-2">
-                {transFat ? (
+                {res?.itemTransFat ? (
                   <span className="ms-3">
-                    Trans Fat <span className="ms-2">{transFat}g</span>
+                    Trans Fat <span className="ms-2">{res?.itemTransFat}g</span>
                   </span>
                 ) : (
                   <span className="ms-3">
@@ -376,8 +387,8 @@ const MenuDetail = (props) => {
                   </span>
                 )}
 
-                {transFatPercentage ? (
-                  <span className="size">{transFatPercentage}%</span>
+                {res?.itemTransFatPercentage ? (
+                  <span className="size">{res?.itemTransFatPercentage}%</span>
                 ) : (
                   <span className="size">-</span>
                 )}
@@ -385,10 +396,10 @@ const MenuDetail = (props) => {
               <hr />
 
               <div className="d-flex justify-content-between p-2">
-                {cholesterol ? (
+                {res?.itemCholesterol ? (
                   <span className="serving">
                     Cholesterol
-                    <span className="light ms-2">{cholesterol}mg</span>
+                    <span className="light ms-2">{res?.itemCholesterol}mg</span>
                   </span>
                 ) : (
                   <span className="serving">
@@ -397,8 +408,10 @@ const MenuDetail = (props) => {
                   </span>
                 )}
 
-                {cholesterolPercentage ? (
-                  <span className="size">{cholesterolPercentage}%</span>
+                {res?.itemCholesterolPercentage ? (
+                  <span className="size">
+                    {res?.itemCholesterolPercentage}%
+                  </span>
                 ) : (
                   <span className="size">-</span>
                 )}
@@ -406,9 +419,10 @@ const MenuDetail = (props) => {
               <hr />
 
               <div className="d-flex justify-content-between p-2">
-                {sodium ? (
+                {res?.itemSodium ? (
                   <span className="serving">
-                    Sodium <span className="light ms-2">{sodium}mg</span>
+                    Sodium{" "}
+                    <span className="light ms-2">{res?.itemSodium}mg</span>
                   </span>
                 ) : (
                   <span className="serving">
@@ -416,8 +430,8 @@ const MenuDetail = (props) => {
                   </span>
                 )}
 
-                {sodiumPercentage ? (
-                  <span className="size">{sodiumPercentage}%</span>
+                {res?.itemSodiumPercentage ? (
+                  <span className="size">{res?.itemSodiumPercentage}%</span>
                 ) : (
                   <span className="size">-</span>
                 )}
@@ -425,10 +439,10 @@ const MenuDetail = (props) => {
               <hr />
 
               <div className="d-flex justify-content-between p-2">
-                {totalCarbs ? (
+                {res?.itemTotalCarbs ? (
                   <span className="serving">
                     Total Carbonhydrate
-                    <span className="light ms-2">{totalCarbs}g</span>
+                    <span className="light ms-2">{res?.itemTotalCarbs}g</span>
                   </span>
                 ) : (
                   <span className="serving">
@@ -437,17 +451,18 @@ const MenuDetail = (props) => {
                   </span>
                 )}
 
-                {totalCarbsPercentage ? (
-                  <span className="size">{totalCarbsPercentage}%</span>
+                {res?.itemTotalCarbsPercentage ? (
+                  <span className="size">{res?.itemTotalCarbsPercentage}%</span>
                 ) : (
                   <span className="size">-</span>
                 )}
               </div>
 
               <div className="d-flex justify-content-between px-2">
-                {dietaryFiber ? (
+                {res?.itemDietaryFiber ? (
                   <span className="ms-3">
-                    Dietary Fiber <span className="ms-2">{dietaryFiber}g</span>
+                    Dietary Fiber{" "}
+                    <span className="ms-2">{res?.itemDietaryFiber}g</span>
                   </span>
                 ) : (
                   <span className="ms-3">
@@ -455,17 +470,19 @@ const MenuDetail = (props) => {
                   </span>
                 )}
 
-                {dietaryFiberPercentage ? (
-                  <span className="size">{dietaryFiberPercentage}%</span>
+                {res?.itemDietaryFiberPercentage ? (
+                  <span className="size">
+                    {res?.itemDietaryFiberPercentage}%
+                  </span>
                 ) : (
                   <span className="size">-</span>
                 )}
               </div>
 
               <div className="d-flex justify-content-between px-2 pb-2">
-                {sugar ? (
+                {res?.itemSugar ? (
                   <span className="ms-3">
-                    Sugars <span className="ms-2">{sugar}g</span>
+                    Sugars <span className="ms-2">{res?.itemSugar}g</span>
                   </span>
                 ) : (
                   <span className="ms-3">
@@ -473,8 +490,8 @@ const MenuDetail = (props) => {
                   </span>
                 )}
 
-                {sugarPercentage ? (
-                  <span className="size">{sugarPercentage}%</span>
+                {res?.itemSugarPercentage ? (
+                  <span className="size">{res?.itemSugarPercentage}%</span>
                 ) : (
                   <span className="size">-</span>
                 )}
@@ -482,9 +499,10 @@ const MenuDetail = (props) => {
               <hr />
 
               <div className="d-flex justify-content-between p-2">
-                {protein ? (
+                {res?.itemProtein ? (
                   <span className="serving">
-                    Protien <span className="light ms-2">{protein}g</span>
+                    Protien{" "}
+                    <span className="light ms-2">{res?.itemProtein}g</span>
                   </span>
                 ) : (
                   <span className="serving">
@@ -492,8 +510,8 @@ const MenuDetail = (props) => {
                   </span>
                 )}
 
-                {proteinPercentage ? (
-                  <span className="size">{proteinPercentage}%</span>
+                {res?.itemProteinPercentage ? (
+                  <span className="size">{res?.itemProteinPercentage}%</span>
                 ) : (
                   <span className="size">-</span>
                 )}
@@ -502,8 +520,8 @@ const MenuDetail = (props) => {
 
               <div className="d-flex justify-content-between p-2">
                 <span className="serving">Vitamin A</span>
-                {vitaminA ? (
-                  <span className="size">{vitaminA}%</span>
+                {res?.itemVitaminA ? (
+                  <span className="size">{res?.itemVitaminA}%</span>
                 ) : (
                   <span className="size">-</span>
                 )}
@@ -511,8 +529,8 @@ const MenuDetail = (props) => {
 
               <div className="d-flex justify-content-between p-2">
                 <span className="serving">Vitamin C</span>
-                {vitaminC ? (
-                  <span className="size">{vitaminC}%</span>
+                {res?.itemVitaminC ? (
+                  <span className="size">{res?.itemVitaminC}%</span>
                 ) : (
                   <span className="size">-</span>
                 )}
@@ -520,8 +538,8 @@ const MenuDetail = (props) => {
 
               <div className="d-flex justify-content-between p-2">
                 <span className="serving">Calcium</span>
-                {calcium ? (
-                  <span className="size">{calcium}%</span>
+                {res?.itemCalcium ? (
+                  <span className="size">{res?.itemCalcium}%</span>
                 ) : (
                   <span className="size">-</span>
                 )}
@@ -529,8 +547,8 @@ const MenuDetail = (props) => {
 
               <div className="d-flex justify-content-between p-2">
                 <span className="serving">Iron</span>
-                {iron ? (
-                  <span className="size">{iron}%</span>
+                {res?.itemIron ? (
+                  <span className="size">{res?.itemIron}%</span>
                 ) : (
                   <span className="size">-</span>
                 )}
@@ -546,17 +564,17 @@ const MenuDetail = (props) => {
                 />
               </div>
 
-              {video ? (
+              {res?.video ? (
                 <div>
                   <video width="100%" height="240" controls autoPlay>
-                    <source src={video} type="video/mp4"></source>
+                    <source src={res?.video} type="video/mp4"></source>
                   </video>
                 </div>
               ) : (
                 <div
                   className="item-image"
                   style={{
-                    backgroundImage: `url(${image})`,
+                    backgroundImage: `url(${res?.itemImage})`,
                     backgroundPosition: "center",
                   }}
                 ></div>
@@ -594,21 +612,23 @@ const MenuDetail = (props) => {
                   </div>
                 ) : null}
 
-                {calorie == undefined ? null : (
+                {res?.itemCalorie == undefined ? null : (
                   <div className="d-flex align-items-center calorie">
-                    <p className="itemCalorie">{calorie} Calories</p>
+                    <p className="itemCalorie">{res?.itemCalorie} Calories</p>
                   </div>
                 )}
 
-                {time == undefined ? null : (
-                  <div className="d-flex align-items-center">{time} Min</div>
+                {res?.itemPrepTime == undefined ? null : (
+                  <div className="d-flex align-items-center">
+                    {res?.itemPrepTime} Min
+                  </div>
                 )}
               </div>
 
-              <p className="text-center"> {description}</p>
+              <p className="text-center"> {res?.itemDescription}</p>
 
               <div className="d-flex justify-content-center gap-2 mt-2">
-                {select?.map((y, index) => {
+                {res?.itemLabel?.map((y, index) => {
                   return (
                     <div className="d-flex" key={index}>
                       {y.value === "New" ? (
@@ -649,7 +669,7 @@ const MenuDetail = (props) => {
               </div>
 
               <div className="d-flex justify-content-center gap-2 mt-2">
-                {warningState?.map((z, index) => {
+                {res?.itemWarning?.map((z, index) => {
                   console.log(z.svg, "svg");
                   return (
                     <div className="d-flex my-1" key={index}>
@@ -667,7 +687,7 @@ const MenuDetail = (props) => {
                 })}
               </div>
 
-              {activeNut ? (
+              {res?.activeNutritionInfo ? (
                 <p
                   className="d-flex justify-content-center nutInfo-Txt"
                   onClick={handleClick}
@@ -681,7 +701,7 @@ const MenuDetail = (props) => {
                 </p>
               ) : null}
 
-              {priceOption?.map((y, index) => {
+              {res?.itemPriceOption?.map((y, index) => {
                 return (
                   <div
                     className="d-flex justify-content-between mt-2 py-1 px-2 border-bottom mb-3"
@@ -700,7 +720,7 @@ const MenuDetail = (props) => {
                       </div>
                     ) : null}
 
-                    {tag ? null : (
+                    {res?.itemTag ? null : (
                       <Button
                         variant="outline"
                         size="sm"
@@ -714,7 +734,7 @@ const MenuDetail = (props) => {
                             item_index ? item_index : subsectionitem_index,
                             name,
                             y.price,
-                            image,
+                            res?.itemImage,
                             y.name
                           )
                         }
@@ -743,7 +763,7 @@ const MenuDetail = (props) => {
               })}
 
               <div>
-                {demoModifier?.map((s, index) => {
+                {res?.itemModifier?.map((s, index) => {
                   return (
                     <div key={index}>
                       <p className="title text-center">{s.groupname}</p>
@@ -806,7 +826,7 @@ const MenuDetail = (props) => {
               onOpen={onOpen}
               onClose={onClose}
               PriceOption={priceOption}
-              Modifiers={demoModifier}
+              Modifiers={res?.itemModifier}
               ItemId={item_index ? item_index : subsectionitem_index}
               tableNumber={tableNumber}
               TableNumber={TableNumber}

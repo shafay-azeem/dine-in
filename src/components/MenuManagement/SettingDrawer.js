@@ -277,7 +277,7 @@ const SettingDrawer = (props) => {
               <TabList>
                 <Tab>Overview</Tab>
                 {/* <Tab>Customize View</Tab> */}
-                <Tab>Visibility</Tab>
+                {/* <Tab>Visibility</Tab> */}
                 <Tab>Availability</Tab>
               </TabList>
 
@@ -379,7 +379,7 @@ const SettingDrawer = (props) => {
                 {/* Customize View */}
 
                 {/* Visibility */}
-
+                {/* 
                 <TabPanel>
                   <Text>
                     The menu will be visible on the products selected below.
@@ -391,14 +391,14 @@ const SettingDrawer = (props) => {
                     <Checkbox defaultChecked pt={2}>
                       QR / Dine-In Menu
                     </Checkbox>
-                    {/* <Checkbox defaultChecked pt={2}>
+                    <Checkbox defaultChecked pt={2}>
                       Pick-Up Menu
                     </Checkbox>
                     <Checkbox defaultChecked pt={2}>
                       Delivery Menu
-                    </Checkbox> */}
+                    </Checkbox>
                   </VStack>
-                </TabPanel>
+                </TabPanel> */}
                 {/* Visibility */}
 
                 {/* Availability */}

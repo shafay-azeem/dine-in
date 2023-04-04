@@ -62,7 +62,8 @@ const MenuConfigurationCopy = () => {
     setTableNumber(generateRandomNumber());
 
     QRCode.toDataURL(
-      `https://lifoapp.co.uk/menustart?resUserName=${resUserName}&menu=${true}`,
+      `http://localhost:${port}/menustart?resUserName=${resUserName}&menu=${true}`,
+
       {
         width: 800,
         margin: 2,
@@ -77,7 +78,7 @@ const MenuConfigurationCopy = () => {
         setQr(url);
 
         setUrl(
-          `https://lifoapp.co.uk/menustart?resUserName=${resUserName}&menu=${"true"}`
+          `http://localhost:${port}/menustart?resUserName=${resUserName}&menu=${true}`
         );
       }
     );

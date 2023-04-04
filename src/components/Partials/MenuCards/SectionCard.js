@@ -43,6 +43,7 @@ import { API_URL, BASE_URL } from "../../../global/Constant";
 import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
 import Spinner from "react-bootstrap/Spinner";
+import image from "../../Assets/image.png";
 
 const SectionCard = (props) => {
   const toast = useToast();
@@ -82,13 +83,10 @@ const SectionCard = (props) => {
   } = useDisclosure();
 
   useEffect(() => {
-    if (!search && !toggler) {
-      setLoading(false);
+    setLoading(false);
+    if (!search) {
       getAllSectionByMenuId();
-    } else {
-      setSectionList(sectionList);
     }
-
     setSectionDelete(false);
     setSectionDuplicate(false);
     setSectionUpdate(false);
@@ -102,7 +100,6 @@ const SectionCard = (props) => {
     sectionCreated,
     menu_index,
     subChanger,
-    toggler,
   ]);
 
   async function getAllSectionByMenuId() {
@@ -216,34 +213,34 @@ const SectionCard = (props) => {
   };
 
   const sectionClick = async (x, id) => {
-    let ind = sectionList.findIndex((element) => {
-      return element._id == id;
-    });
-    sectionList[ind].sectionToggle = !x.sectionToggle;
-    setSectionList(sectionList);
-    setToggler(Math.random());
+    // let ind = sectionList.findIndex((element) => {
+    //   return element._id == id;
+    // });
+    // sectionList[ind].sectionToggle = !x.sectionToggle;
+    // setSectionList(sectionList);
+    // setToggler(Math.random());
 
-    // let sectionData = {
-    //   sectionToggle: !x.sectionToggle,
-    // };
+    let sectionData = {
+      sectionToggle: !x.sectionToggle,
+    };
 
-    // await apiFunctions
-    //   .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
-    //   .then((res) => {
-    //     if (res.data.success == true) {
-    //       setSectionUpdate(true);
-    //       return true;
-    //     } else {
-    //       toast({
-    //         position: "top",
-    //         title: `There Some Error`,
-    //         status: "error",
-    //         duration: 1000,
-    //         isClosable: true,
-    //       });
-    //       return false;
-    //     }
-    //   });
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SECTION_BY_ID + id, sectionData)
+      .then((res) => {
+        if (res.data.success == true) {
+          setSectionUpdate(true);
+          return true;
+        } else {
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 1000,
+            isClosable: true,
+          });
+          return false;
+        }
+      });
   };
   const handleDrop = (droppedItem) => {
     // if (!droppedItem.destination) return;
@@ -337,12 +334,22 @@ const SectionCard = (props) => {
                             <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                               <GridItem colSpan={2} h="10">
                                 <HStack>
-                                  <Image
-                                    boxSize="43px"
-                                    objectFit="cover"
-                                    borderRadius={3}
-                                    src={x.sectionImage}
-                                  />
+                                  {x.sectionImage ? (
+                                    <Image
+                                      boxSize="43px"
+                                      objectFit="cover"
+                                      borderRadius={3}
+                                      src={x.sectionImage}
+                                    />
+                                  ) : (
+                                    <Image
+                                      boxSize="43px"
+                                      objectFit="cover"
+                                      borderRadius={3}
+                                      src={image}
+                                    />
+                                  )}
+
                                   {sectionList?.length == 0 ? (
                                     <Text>"NO DATA FOUND"</Text>
                                   ) : (

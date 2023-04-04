@@ -357,12 +357,21 @@ const ItemCard = (props) => {
                           <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                             <GridItem colSpan={2} h="10">
                               <HStack>
-                                <Image
-                                  boxSize="43px"
-                                  objectFit="cover"
-                                  borderRadius={3}
-                                  src={x.itemImage}
-                                />
+                                {x.itemImage ? (
+                                  <Image
+                                    boxSize="43px"
+                                    objectFit="cover"
+                                    borderRadius={3}
+                                    src={x.itemImage}
+                                  />
+                                ) : (
+                                  <Image
+                                    boxSize="43px"
+                                    objectFit="cover"
+                                    borderRadius={3}
+                                    src={require("../../Assets/image.png")}
+                                  />
+                                )}
 
                                 <Text pl={2}>
                                   {x.active ? (

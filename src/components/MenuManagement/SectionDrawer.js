@@ -330,6 +330,7 @@ const SectionDrawer = (props) => {
           });
           setCreateSubSection(true);
           setSubChanger(Math.random());
+          // setSubChanger(Math.random());
           props.onClose();
           // setSubSectionList(postRes);
           const deleteRes = await apiFunctions.DELETE_REQUEST(

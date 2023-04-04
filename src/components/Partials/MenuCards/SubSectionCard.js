@@ -43,6 +43,8 @@ const SubSectionCard = (props) => {
     createSubSection,
     sectionList,
     setSectionList,
+    newChanger,
+    setNewChanger,
   } = MenuState();
   const toast = useToast();
   const [subSectionList, setSubSectionList] = useState([]);
@@ -77,11 +79,7 @@ const SubSectionCard = (props) => {
   const [status, setSatus] = useState();
 
   useEffect(() => {
-    if (!toggler) {
-      getAllSubSectionBySectionId();
-    } else {
-      return;
-    }
+    getAllSubSectionBySectionId();
     setSubSectionUpdate(false);
     setSubSectionDuplicate(false);
     setSubSectionDelete(false);
@@ -94,7 +92,6 @@ const SubSectionCard = (props) => {
     createSubSection,
     updatedSubSection,
     section_index,
-    toggler,
   ]);
 
   async function getAllSubSectionBySectionId() {
@@ -182,6 +179,7 @@ const SubSectionCard = (props) => {
   };
 
   const handleRemove = async (id) => {
+    setToggler();
     await apiFunctions
       .DELETE_REQUEST(BASE_URL + API_URL.DELETE_SUBSECTION_BY_ID + id)
       .then((res) => {
@@ -196,6 +194,7 @@ const SubSectionCard = (props) => {
             isClosable: true,
           });
           setSubSectionDelete(true);
+          setNewChanger(Math.random());
           return true;
         } else {
           toast({
@@ -211,16 +210,32 @@ const SubSectionCard = (props) => {
   };
 
   const sectionClick = async (x, id) => {
-    let ind = sectionList.findIndex((element) => {
-      return element._id == section_index;
-    });
-    let subInd = sectionList[ind].subSection.findIndex((elementSub) => {
-      return elementSub._id == id;
-    });
-
-    sectionList[ind].subSection[subInd].sectionToggle = !x.sectionToggle;
-    setSubSectionList(sectionList[ind].subSection);
-    setToggler(Math.random());
+    let sectionData = {
+      sectionToggle: !x.sectionToggle,
+    };
+    await apiFunctions
+      .PUT_REQUEST(BASE_URL + API_URL.UPDATE_SUBSECTION_BY_ID + id, sectionData)
+      .then((res) => {
+        if (res.data.success == true) {
+          // console.log("SubSetion Toggle Updated");
+          setSubSectionUpdate(true);
+          return true;
+        } else {
+          toast({
+            position: "top",
+            title: `There Some Error`,
+            status: "error",
+            duration: 1000,
+            isClosable: true,
+          });
+          return false;
+        }
+      });
+    // setSatus(index);
+    // response[props.menu_index].section[section_index].subSection[index].active =
+    //   !response[props.menu_index].section[section_index].subSection[index]
+    //     .active;
+    // setResponse([...response]);
   };
 
   return (
@@ -232,12 +247,21 @@ const SubSectionCard = (props) => {
               <Grid templateColumns="repeat(5, 1fr)" gap={4}>
                 <GridItem colSpan={2} h="10">
                   <HStack>
-                    <Image
-                      boxSize="43px"
-                      objectFit="cover"
-                      borderRadius={3}
-                      src={x.sectionImage}
-                    />
+                    {x.sectionImage ? (
+                      <Image
+                        boxSize="43px"
+                        objectFit="cover"
+                        borderRadius={3}
+                        src={x.sectionImage}
+                      />
+                    ) : (
+                      <Image
+                        boxSize="43px"
+                        objectFit="cover"
+                        borderRadius={3}
+                        src={require("../../Assets/image.png")}
+                      />
+                    )}
 
                     <Text pl={2}>
                       {x.sectionName}

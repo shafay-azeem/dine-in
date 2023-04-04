@@ -193,6 +193,7 @@ const ItemDrawer = (props) => {
               duration: 1000,
               isClosable: true,
             });
+            console.log(res.data, "sectionItem");
             setItemUpdater(true);
             props.onClose();
             return true;
@@ -219,6 +220,7 @@ const ItemDrawer = (props) => {
               duration: 1000,
               isClosable: true,
             });
+            console.log(res.data, "resdata");
             setItemUpdater(true);
             props.onClose();
             return true;
